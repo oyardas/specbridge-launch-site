@@ -597,3 +597,32 @@ html[dir="rtl"] .sample-box ul {
 }
 /* R-LAUNCH.7-A-BRAND-IDENTITY-FOUNDATION:END */
 
+/* R-LAUNCH.7-C APPROVED BRAND ASSET ALIGNMENT START */
+:root {
+  --specbridge-navy: #061A57;
+  --specbridge-signal-blue: #0968F5;
+  --specbridge-bridge-cyan: #12B8F2;
+  --specbridge-dark-ui: #071229;
+  --specbridge-soft-surface: #F7FAFC;
+}
+
+.site-header img[src*="specbridge_ai_"],
+header img[src*="specbridge_ai_"] {
+  height: clamp(32px, 4vw, 44px);
+  width: auto;
+  max-width: min(280px, 70vw);
+  object-fit: contain;
+}
+
+.site-footer img[src*="specbridge_ai_"],
+footer img[src*="specbridge_ai_"] {
+  height: clamp(28px, 3vw, 40px);
+  width: auto;
+  max-width: min(260px, 72vw);
+  object-fit: contain;
+}
+
+img[src*="specbridge_ai_icon_color.png"] {
+  object-fit: contain;
+}
+/* R-LAUNCH.7-C APPROVED BRAND ASSET ALIGNMENT END */

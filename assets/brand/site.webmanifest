@@ -1,18 +1,18 @@
 {
-  "name": "SpecBridge AI",
-  "short_name": "SpecBridge",
-  "description": "Tender intelligence and presales decision support for complex tender documents.",
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
-  "background_color": "#f6f7fb",
-  "theme_color": "#173da1",
-  "icons": [
-    {
-      "src": "/assets/brand/app-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+    "name":  "SpecBridge AI",
+    "short_name":  "SpecBridge AI",
+    "description":  "Tender Intelligence and Presales Decision Support",
+    "start_url":  "/",
+    "scope":  "/",
+    "display":  "standalone",
+    "background_color":  "#F7FAFC",
+    "theme_color":  "#061A57",
+    "icons":  [
+                  {
+                      "src":  "/assets/brand/specbridge_ai_icon_color.png",
+                      "sizes":  "1024x1024",
+                      "type":  "image/png",
+                      "purpose":  "any maskable"
+                  }
+              ]
 }
