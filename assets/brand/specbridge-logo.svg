@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">SpecBridge AI logo</title>
+  <desc id="desc">A bridge-inspired SpecBridge AI brand mark.</desc>
+  <defs>
+    <linearGradient id="specbridgeGradient" x1="40" y1="40" x2="280" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="0.58" stop-color="#173da1"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" rx="72" fill="#0f172a"/>
+  <path d="M72 198c25-58 62-87 111-87 28 0 52 9 72 27" fill="none" stroke="url(#specbridgeGradient)" stroke-width="24" stroke-linecap="round"/>
+  <path d="M72 216h176" fill="none" stroke="#e0f2fe" stroke-width="18" stroke-linecap="round"/>
+  <path d="M108 216v-54M160 216v-84M212 216v-54" fill="none" stroke="#93c5fd" stroke-width="14" stroke-linecap="round"/>
+  <text x="160" y="267" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" fill="#ffffff">SB</text>
+</svg>
