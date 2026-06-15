@@ -1,0 +1,32 @@
+﻿{
+  "project": "specbridge-launch-site",
+  "purpose": "Launch readiness website and GTM preparation for SpecBridge AI",
+  "language": "tr-TR",
+  "owner": "Önder Yardaş",
+  "core_repo": "C:\\Dev\\specbridge-ai-clean",
+  "core_repo_touch_allowed": false,
+  "product_status": {
+    "stage": "local_demo_ready_mvp_approaching",
+    "production_saas": false,
+    "db_read": false,
+    "external_openai": false,
+    "live_evidence_lookup": false,
+    "llm_provider": "mock_dry_run",
+    "authoritative_output": "json_file_output"
+  },
+  "launch_tracks": [
+    "domain_brand_website",
+    "legal_kvkk_security",
+    "demo_sample_report_pilot",
+    "gtm_sales_customer_discovery"
+  ],
+  "website_mvp_pages": [
+    "home",
+    "product",
+    "use_cases",
+    "sample_reports",
+    "security_privacy",
+    "pilot_access",
+    "contact"
+  ]
+}
