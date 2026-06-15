@@ -1,0 +1,7 @@
+Clause,Area,Status,Risk Level,SpecBridge AI Sample Finding,Recommended Action
+1,Submission format,Partial,Medium,"Signed and stamped offer is requested, but package structure is unclear.","Ask buyer to confirm file format and required annex list."
+2,Delivery,Risk,High,"Delivery deadline exists, but milestone acceptance is undefined.","Clarify delivery milestones, dependencies and acceptance owner."
+3,Support,Partial,Medium,"Support is requested, but severity, response and restore targets are missing.","Request SLA table and warranty support boundary."
+4,Network management,Partial,Medium,"Centralized management is required, but reporting scope is vague.","Clarify reporting, audit, inventory and role-based access needs."
+5,Vendor-specific wording,Risk,High,"Wording references vendor-style architecture and may create lock-in risk.","Request acceptance of functionally equivalent solutions."
+6,Acceptance,Risk,High,"Final test and sign-off procedure are not defined.","Define acceptance test checklist before final bid."
