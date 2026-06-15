@@ -1,0 +1,6 @@
+Product,Question ID,Topic,Question,Risk Addressed
+SpecBridge AI,CQ-001,Vendor bias,"Can the buyer confirm that vendor-specific terminology is illustrative and that functionally equivalent solutions will be accepted?","Vendor bias / lock-in"
+SpecBridge AI,CQ-002,Acceptance,"What acceptance tests, success criteria and sign-off owners will be used?","Delivery and acceptance risk"
+SpecBridge AI,CQ-003,SLA,"What severity levels, response targets and restore targets are required?","SLA / warranty / support risk"
+SpecBridge AI,CQ-004,Submission,"Which exact file format, annexes and signature requirements are mandatory?","Legal / administrative risk"
+SpecBridge AI,CQ-005,Reporting,"Which reporting, inventory, audit and monitoring views are expected?","Technical fit risk"

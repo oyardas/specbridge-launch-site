@@ -1,0 +1,13 @@
+{
+  "product": "SpecBridge AI",
+  "package": "Anonymized Sample Report Package",
+  "status": "public_sample",
+  "data_type": "synthetic_anonymized",
+  "fictional_customer": "Anatolia Digital Campus",
+  "fictional_tender": "Network Modernization and Smart Classroom Infrastructure RFP",
+  "contains_real_customer_data": false,
+  "contains_real_tender_documents": false,
+  "contains_personal_data": false,
+  "contains_confidential_vendor_pricing": false,
+  "advisory_boundary": "Demonstration only. Not legal advice, procurement approval, commercial guarantee or binding bid/no-bid determination."
+}
