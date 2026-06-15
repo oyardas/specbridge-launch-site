@@ -584,6 +584,20 @@
       description.setAttribute("content", dictionary.description);
     }
 
+    const metadataTargets = [
+      { selector: 'meta[property="og:title"]', value: dictionary.title },
+      { selector: 'meta[property="og:description"]', value: dictionary.description },
+      { selector: 'meta[name="twitter:title"]', value: dictionary.title },
+      { selector: 'meta[name="twitter:description"]', value: dictionary.description }
+    ];
+
+    metadataTargets.forEach(function (target) {
+      const element = document.querySelector(target.selector);
+      if (element) {
+        element.setAttribute("content", target.value);
+      }
+    });
+
     document.querySelectorAll("[data-i18n]").forEach(function (node) {
       const key = node.getAttribute("data-i18n");
       if (dictionary[key]) {
@@ -632,3 +646,4 @@
     setLanguage(getInitialLanguage());
   });
 }());
+
