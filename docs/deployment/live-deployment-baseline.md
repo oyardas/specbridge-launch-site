@@ -40,3 +40,31 @@ The public downloadable sample package uses synthetic / anonymized content only.
 3. DNS and HTTPS verification.
 4. Email alias setup.
 5. Privacy/KVKK/legal review before real pilot documents.
+
+<!-- R-LAUNCH.5-C-CUSTOM-DOMAIN-HTTPS-BASELINE:START -->
+## R-LAUNCH.5-C Custom Domain HTTPS Verification
+
+Status: Closed
+
+The GitHub Pages custom domain migration is verified and active.
+
+Current public baseline:
+
+- Canonical URL: https://specbridge.co/
+- Alias: https://www.specbridge.co/ redirects to https://specbridge.co/
+- GitHub Pages custom domain: specbridge.co
+- Enforce HTTPS: enabled
+- CNAME file: specbridge.co
+- Local and remote branch: main
+- Local and remote HEAD at verification time: 972554307faa929f0d7186cf0917078d570b917a
+
+Verification outcome:
+
+- HTTPS core: PASS
+- Plain HTTP redirect to HTTPS: PASS
+- Cache-bypass HTTP redirect to HTTPS: PASS
+- Sample HTML over HTTPS: PASS
+- Sample ZIP over HTTPS: PASS
+
+No application code, product repo code, database integration, external AI integration, or live evidence lookup was changed during this milestone.
+<!-- R-LAUNCH.5-C-CUSTOM-DOMAIN-HTTPS-BASELINE:END -->

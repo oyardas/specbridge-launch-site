@@ -36,3 +36,22 @@ It is separate from the core technical product repository.
 - ZIP sample package: https://oyardas.github.io/specbridge-launch-site/assets/downloads/specbridge-ai-anonymized-sample-report-package.zip
 
 Public status: controlled demo and pilot preparation website. Not a production SaaS service yet.
+
+<!-- R-LAUNCH.5-C-LIVE-DOMAIN-BASELINE:START -->
+## Live domain baseline
+
+The public launch website is served from GitHub Pages with the following production domain baseline:
+
+- Canonical URL: https://specbridge.co/
+- Alias: https://www.specbridge.co/ redirects to https://specbridge.co/
+- GitHub Pages custom domain: specbridge.co
+- Enforce HTTPS: enabled
+- Public upload: closed
+- Controlled demo / pilot boundary: active
+- Anonymous sample package: public
+
+Sample package URLs:
+
+- HTML sample: https://specbridge.co/samples/downloads/specbridge-ai-anonymized-sample-report-package/
+- ZIP package: https://specbridge.co/assets/downloads/specbridge-ai-anonymized-sample-report-package.zip
+<!-- R-LAUNCH.5-C-LIVE-DOMAIN-BASELINE:END -->
