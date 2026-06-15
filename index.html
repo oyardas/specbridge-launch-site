@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpecBridge AI | Tender Intelligence</title>
-  <meta name="description" content="SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports.">
+  <title>SpecBridge AI | Tender Intelligence & Presales Decision Support</title>
+  <meta name="description" content="SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports for sales, presales, technical and executive teams.">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <header class="site-header">
-    <div class="brand">SpecBridge AI</div>
-    <nav>
+    <a class="brand" href="#">SpecBridge AI</a>
+    <nav aria-label="Main navigation">
       <a href="#product">Product</a>
+      <a href="#reports">Reports</a>
       <a href="#use-cases">Use Cases</a>
       <a href="#security">Security</a>
       <a href="#pilot">Pilot Access</a>
@@ -20,65 +21,202 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">Tender Intelligence & Presales Decision Support</p>
-      <h1>Smarter tender decisions before you commit.</h1>
-      <p class="lead">
-        SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports for sales, presales, technical and executive teams.
-      </p>
-      <div class="cta-row">
-        <a class="button primary" href="#pilot">Request Pilot Access</a>
-        <a class="button secondary" href="#sample-reports">View Sample Report</a>
+      <div class="hero-copy">
+        <p class="eyebrow">Tender Intelligence & Presales Decision Support</p>
+        <h1>Smarter tender decisions before you commit.</h1>
+        <p class="lead">
+          SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports for sales, presales, technical and executive teams.
+        </p>
+        <p class="sublead">
+          It is not only a technical compliance matrix tool. It helps teams evaluate technical fit, bid/no-bid readiness, commercial risk, legal/admin risk, vendor bias, clarification questions and action plans.
+        </p>
+        <div class="cta-row">
+          <a class="button primary" href="#pilot">Request Pilot Access</a>
+          <a class="button secondary" href="#sample-reports">View Sample Report</a>
+        </div>
+        <p class="pilot-note">
+          Controlled demo and pilot preparation stage. Not a production SaaS service yet.
+        </p>
       </div>
+
+      <aside class="hero-panel" aria-label="Decision report package preview">
+        <div class="panel-header">
+          <span>Decision Report Package</span>
+          <strong>Demo-ready MVP</strong>
+        </div>
+        <div class="score-card">
+          <span>Bid / No-Bid Signal</span>
+          <strong>Review Required</strong>
+        </div>
+        <ul class="signal-list">
+          <li><span>Technical Fit</span><strong>Structured</strong></li>
+          <li><span>Compliance Matrix</span><strong>Included</strong></li>
+          <li><span>Vendor Bias</span><strong>Flagged</strong></li>
+          <li><span>Commercial Risk</span><strong>Reviewed</strong></li>
+          <li><span>Clarification Questions</span><strong>Generated</strong></li>
+        </ul>
+      </aside>
     </section>
 
     <section id="product" class="section">
-      <h2>From tender document to decision surface</h2>
+      <div class="section-head">
+        <p class="eyebrow">Product Flow</p>
+        <h2>From tender document to decision surface</h2>
+        <p>
+          SpecBridge AI converts fragmented tender review work into a structured, repeatable and reviewable decision package.
+        </p>
+      </div>
+
       <div class="cards four">
-        <article><h3>Upload</h3><p>Upload the tender, RFP or specification document.</p></article>
-        <article><h3>Analyze</h3><p>Review technical, commercial, legal/admin and delivery risks.</p></article>
-        <article><h3>Decide</h3><p>Evaluate bid/no-bid readiness, gaps, compliance and clarification questions.</p></article>
-        <article><h3>Download</h3><p>Generate executive, technical and sales/presales report packages.</p></article>
+        <article>
+          <span class="step">01</span>
+          <h3>Upload</h3>
+          <p>Upload a tender, RFP or technical specification document into a controlled demo workflow.</p>
+        </article>
+        <article>
+          <span class="step">02</span>
+          <h3>Analyze</h3>
+          <p>Review technical, commercial, legal/admin, delivery and support-related risks.</p>
+        </article>
+        <article>
+          <span class="step">03</span>
+          <h3>Decide</h3>
+          <p>Evaluate bid/no-bid readiness, gaps, compliance signals and clarification questions.</p>
+        </article>
+        <article>
+          <span class="step">04</span>
+          <h3>Download</h3>
+          <p>Generate executive, technical and sales/presales report packages for review.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-head">
+        <p class="eyebrow">Analysis Coverage</p>
+        <h2>Beyond technical compliance</h2>
+      </div>
+
+      <div class="feature-grid">
+        <div>Executive Summary</div>
+        <div>Document Classification</div>
+        <div>Bid / No-Bid Recommendation</div>
+        <div>Technical Fit</div>
+        <div>Clause Compliance Matrix</div>
+        <div>Gap Analysis</div>
+        <div>Vendor Bias / Lock-in Review</div>
+        <div>Neutral Rewrite Suggestions</div>
+        <div>Evidence / Product Mapping</div>
+        <div>Clarification Questions</div>
+        <div>Commercial Risk</div>
+        <div>Legal / Administrative Risk</div>
+        <div>Delivery / Acceptance Risk</div>
+        <div>SLA / Warranty / Support Review</div>
+        <div>BOM / Product Mapping</div>
+        <div>Risk Heatmap & Action Plan</div>
+      </div>
+    </section>
+
+    <section id="reports" class="section">
+      <div class="section-head">
+        <p class="eyebrow">Report Profiles</p>
+        <h2>Different reports for different decision roles</h2>
+      </div>
+
+      <div class="cards three">
+        <article>
+          <h3>Executive Report</h3>
+          <p>Decision summary, bid/no-bid signal, top risks, key gaps and action plan for management review.</p>
+        </article>
+        <article>
+          <h3>Technical Report</h3>
+          <p>Clause-level compliance, technical fit, product mapping, evidence requirements and architecture risks.</p>
+        </article>
+        <article>
+          <h3>Sales / Presales Report</h3>
+          <p>Opportunity qualification, customer questions, commercial risk, positioning risks and presales actions.</p>
+        </article>
       </div>
     </section>
 
     <section id="use-cases" class="section alt">
-      <h2>Use cases</h2>
+      <div class="section-head">
+        <p class="eyebrow">Use Cases</p>
+        <h2>Designed for teams reviewing complex tenders</h2>
+      </div>
+
       <div class="cards three">
-        <article><h3>Bid / No-Bid Support</h3><p>Make opportunity decisions earlier with visible risk signals.</p></article>
-        <article><h3>Compliance Review</h3><p>Structure technical and administrative requirements into reviewable outputs.</p></article>
-        <article><h3>Vendor Bias Detection</h3><p>Detect lock-in language and prepare neutral rewrite suggestions.</p></article>
+        <article>
+          <h3>Bid / No-Bid Support</h3>
+          <p>Make opportunity decisions earlier with visible technical, commercial and delivery risk signals.</p>
+        </article>
+        <article>
+          <h3>Compliance Review</h3>
+          <p>Structure technical and administrative requirements into reviewable outputs and action items.</p>
+        </article>
+        <article>
+          <h3>Vendor Bias Detection</h3>
+          <p>Detect lock-in language and prepare neutral rewrite suggestions for objection and clarification workflows.</p>
+        </article>
       </div>
     </section>
 
     <section id="sample-reports" class="section">
-      <h2>Sample reports</h2>
-      <p>
-        Sample executive, technical and sales/presales reports will be shared using anonymized demo scenarios only.
-      </p>
+      <div class="section-head">
+        <p class="eyebrow">Sample Reports</p>
+        <h2>Anonymized demo outputs</h2>
+        <p>
+          Sample reports will be published using anonymized demo scenarios only. Real customer documents must not be used without explicit approval and legal/security readiness.
+        </p>
+      </div>
+
+      <div class="sample-box">
+        <div>
+          <h3>Upcoming sample package</h3>
+          <ul>
+            <li>Sample Executive Report</li>
+            <li>Sample Technical Report</li>
+            <li>Sample Sales / Presales Report</li>
+            <li>Before / after vendor-bias rewrite example</li>
+          </ul>
+        </div>
+        <a class="button secondary disabled" href="#" aria-disabled="true">Samples pending</a>
+      </div>
     </section>
 
     <section id="security" class="section alt">
-      <h2>Security and privacy</h2>
-      <p>
-        Tender and RFP documents may contain sensitive commercial, technical and legal information. SpecBridge AI pilot use requires controlled data handling, clear retention rules and explicit deletion policy.
-      </p>
-      <p class="disclaimer">
-        SpecBridge AI outputs are advisory only and do not replace legal advice, final compliance approval or binding bid/no-bid decisions.
-      </p>
+      <div class="section-head">
+        <p class="eyebrow">Security & Privacy</p>
+        <h2>Built around sensitive tender document handling</h2>
+        <p>
+          Tender and RFP documents may contain sensitive commercial, technical and legal information. Pilot use requires controlled data handling, clear retention rules and explicit deletion policy.
+        </p>
+      </div>
+
+      <div class="security-callout">
+        <strong>Advisory output only.</strong>
+        <span>
+          SpecBridge AI outputs do not replace legal advice, final compliance approval, official procurement opinion or binding bid/no-bid decisions.
+        </span>
+      </div>
     </section>
 
     <section id="pilot" class="section">
-      <h2>Pilot access</h2>
-      <p>
-        SpecBridge AI is currently in controlled demo and pilot preparation stage.
-      </p>
+      <div class="section-head">
+        <p class="eyebrow">Pilot Access</p>
+        <h2>Controlled pilot preparation</h2>
+        <p>
+          SpecBridge AI is currently in controlled demo and pilot preparation stage. This form is a static website mockup until privacy, KVKK and backend handling are finalized.
+        </p>
+      </div>
+
       <form class="pilot-form">
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Company">
-        <input type="email" placeholder="Email">
-        <input type="text" placeholder="Role">
+        <input type="text" placeholder="Name" autocomplete="off">
+        <input type="text" placeholder="Company" autocomplete="off">
+        <input type="email" placeholder="Email" autocomplete="off">
+        <input type="text" placeholder="Role" autocomplete="off">
         <textarea placeholder="Interested use case"></textarea>
-        <button type="button">Submit Pilot Interest</button>
+        <button type="button">Static form preview only</button>
       </form>
     </section>
   </main>
