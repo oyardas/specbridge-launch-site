@@ -1,238 +1,252 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpecBridge AI | Tender Intelligence & Presales Decision Support</title>
-  <meta name="description" content="SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports for sales, presales, technical and executive teams.">
+  <title>SpecBridge AI | İhale Zekâsı ve Presales Karar Desteği</title>
+  <meta name="description" content="SpecBridge AI; ihale, şartname ve RFP dokümanlarını analiz ederek satış, presales, teknik ve yönetici ekipleri için yapılandırılmış karar destek raporları üretir.">
   <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/i18n.js" defer></script>
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#">SpecBridge AI</a>
-    <nav aria-label="Main navigation">
-      <a href="#product">Product</a>
-      <a href="#reports">Reports</a>
-      <a href="#use-cases">Use Cases</a>
-      <a href="#security">Security</a>
-      <a href="#pilot">Controlled Pilot</a>
-    </nav>
+    <div class="header-actions">
+      <nav aria-label="Main navigation">
+        <a href="#product" data-i18n="nav_product">Ürün</a>
+        <a href="#reports" data-i18n="nav_reports">Raporlar</a>
+        <a href="#use-cases" data-i18n="nav_use_cases">Kullanım Alanları</a>
+        <a href="#security" data-i18n="nav_security">Güvenlik</a>
+        <a href="#pilot" data-i18n="nav_pilot">Kontrollü Pilot</a>
+      </nav>
+      <div class="language-switcher" aria-label="Language selector">
+        <button type="button" class="language-option" data-lang="tr" lang="tr">Türkçe</button>
+        <button type="button" class="language-option" data-lang="en" lang="en">English</button>
+        <button type="button" class="language-option" data-lang="zh" lang="zh-Hans">中文</button>
+        <button type="button" class="language-option" data-lang="ru" lang="ru">Русский</button>
+        <button type="button" class="language-option" data-lang="ar" lang="ar">العربية</button>
+      </div>
+    </div>
   </header>
 
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Tender Intelligence & Presales Decision Support</p>
-        <h1>Smarter tender decisions before you commit.</h1>
-        <p class="lead">
-          SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports for sales, presales, technical and executive teams.
+        <p class="eyebrow" data-i18n="hero_eyebrow">İhale Zekâsı ve Presales Karar Desteği</p>
+        <h1 data-i18n="hero_title">Teklif vermeden önce daha akıllı ihale kararları.</h1>
+        <p class="lead" data-i18n="hero_lead">
+          SpecBridge AI; ihale, şartname ve RFP dokümanlarını analiz ederek satış, presales, teknik ve yönetici ekipleri için yapılandırılmış karar destek raporları üretir.
         </p>
-        <p class="sublead">
-          It is not only a technical compliance matrix tool. It helps teams evaluate technical fit, bid/no-bid readiness, commercial risk, legal/admin risk, vendor bias, clarification questions and action plans.
+        <p class="sublead" data-i18n="hero_sublead">
+          Sadece teknik uyumluluk matrisi üretmez. Teknik uyum, teklif ver / verme hazırlığı, ticari risk, hukuki/idari risk, vendor bias, açıklama soruları ve aksiyon planlarını değerlendirmeye yardımcı olur.
         </p>
         <div class="cta-row">
-          <a class="button primary" href="#pilot">Request Controlled Pilot Discussion</a>
-          <a class="button secondary" href="#sample-reports">View Sample Report</a>
+          <a class="button primary" href="#pilot" data-i18n="hero_cta_primary">Kontrollü Pilot Görüşmesi Talep Et</a>
+          <a class="button secondary" href="#sample-reports" data-i18n="hero_cta_secondary">Örnek Raporu Gör</a>
         </div>
-        <p class="pilot-note">
-          Controlled demo and pilot preparation stage. Not a production SaaS service yet.
+        <p class="pilot-note" data-i18n="hero_note">
+          Kontrollü demo ve pilot hazırlık aşaması. Henüz production SaaS servisi değildir.
         </p>
       </div>
 
       <aside class="hero-panel" aria-label="Decision report package preview">
         <div class="panel-header">
-          <span>Decision Report Package</span>
-          <strong>Demo-ready MVP</strong>
+          <span data-i18n="panel_title">Karar Rapor Paketi</span>
+          <strong data-i18n="panel_badge">Demo-ready MVP</strong>
         </div>
         <div class="score-card">
-          <span>Bid / No-Bid Signal</span>
-          <strong>Review Required</strong>
+          <span data-i18n="panel_signal_label">Teklif Ver / Verme Sinyali</span>
+          <strong data-i18n="panel_signal_value">İnceleme Gerekli</strong>
         </div>
         <ul class="signal-list">
-          <li><span>Technical Fit</span><strong>Structured</strong></li>
-          <li><span>Compliance Matrix</span><strong>Included</strong></li>
-          <li><span>Vendor Bias</span><strong>Flagged</strong></li>
-          <li><span>Commercial Risk</span><strong>Reviewed</strong></li>
-          <li><span>Clarification Questions</span><strong>Generated</strong></li>
+          <li><span data-i18n="signal_technical_fit">Teknik Uyum</span><strong data-i18n="signal_structured">Yapılandırılmış</strong></li>
+          <li><span data-i18n="signal_compliance">Uyumluluk Matrisi</span><strong data-i18n="signal_included">Dahil</strong></li>
+          <li><span data-i18n="signal_vendor_bias">Vendor Bias</span><strong data-i18n="signal_flagged">İşaretlenir</strong></li>
+          <li><span data-i18n="signal_commercial_risk">Ticari Risk</span><strong data-i18n="signal_reviewed">Değerlendirilir</strong></li>
+          <li><span data-i18n="signal_clarifications">Açıklama Soruları</span><strong data-i18n="signal_generated">Üretilir</strong></li>
         </ul>
       </aside>
     </section>
 
     <section id="product" class="section">
       <div class="section-head">
-        <p class="eyebrow">Product Flow</p>
-        <h2>From tender document to decision surface</h2>
-        <p>
-          SpecBridge AI converts fragmented tender review work into a structured, repeatable and reviewable decision package.
+        <p class="eyebrow" data-i18n="product_eyebrow">Ürün Akışı</p>
+        <h2 data-i18n="product_title">İhale dokümanından karar yüzeyine</h2>
+        <p data-i18n="product_intro">
+          SpecBridge AI, parçalı ihale inceleme işlerini yapılandırılmış, tekrarlanabilir ve gözden geçirilebilir bir karar paketine dönüştürür.
         </p>
       </div>
 
       <div class="cards four">
         <article>
           <span class="step">01</span>
-          <h3>Controlled document intake</h3>
-          <p>Use anonymized or pre-approved tender, RFP or technical specification content in a controlled demo workflow. Public file upload is not enabled.</p>
+          <h3 data-i18n="flow_1_title">Kontrollü doküman alımı</h3>
+          <p data-i18n="flow_1_text">Kontrollü demo akışında anonimleştirilmiş veya önceden onaylanmış ihale, RFP veya teknik şartname içeriği kullanılır. Public dosya yükleme açık değildir.</p>
         </article>
         <article>
           <span class="step">02</span>
-          <h3>Analyze</h3>
-          <p>Review technical, commercial, legal/admin, delivery and support-related risks.</p>
+          <h3 data-i18n="flow_2_title">Analiz</h3>
+          <p data-i18n="flow_2_text">Teknik, ticari, hukuki/idari, teslimat ve destekle ilgili riskler incelenir.</p>
         </article>
         <article>
           <span class="step">03</span>
-          <h3>Decide</h3>
-          <p>Evaluate bid/no-bid readiness, gaps, compliance signals and clarification questions.</p>
+          <h3 data-i18n="flow_3_title">Karar</h3>
+          <p data-i18n="flow_3_text">Teklif ver / verme hazırlığı, gap’ler, uyumluluk sinyalleri ve açıklama soruları değerlendirilir.</p>
         </article>
         <article>
           <span class="step">04</span>
-          <h3>Download</h3>
-          <p>Generate executive, technical and sales/presales report packages for review.</p>
+          <h3 data-i18n="flow_4_title">İndirme</h3>
+          <p data-i18n="flow_4_text">Yönetici, teknik ve satış/presales rapor paketleri inceleme için üretilir.</p>
         </article>
       </div>
     </section>
 
     <section class="section alt">
       <div class="section-head">
-        <p class="eyebrow">Analysis Coverage</p>
-        <h2>Beyond technical compliance</h2>
+        <p class="eyebrow" data-i18n="coverage_eyebrow">Analiz Kapsamı</p>
+        <h2 data-i18n="coverage_title">Teknik uyumluluğun ötesinde</h2>
       </div>
 
       <div class="feature-grid">
-        <div>Executive Summary</div>
-        <div>Document Classification</div>
-        <div>Bid / No-Bid Recommendation</div>
-        <div>Technical Fit</div>
-        <div>Clause Compliance Matrix</div>
-        <div>Gap Analysis</div>
-        <div>Vendor Bias / Lock-in Review</div>
-        <div>Neutral Rewrite Suggestions</div>
-        <div>Evidence / Product Mapping</div>
-        <div>Clarification Questions</div>
-        <div>Commercial Risk</div>
-        <div>Legal / Administrative Risk</div>
-        <div>Delivery / Acceptance Risk</div>
-        <div>SLA / Warranty / Support Review</div>
-        <div>BOM / Product Mapping</div>
-        <div>Risk Heatmap & Action Plan</div>
+        <div data-i18n="feature_executive_summary">Yönetici Özeti</div>
+        <div data-i18n="feature_document_classification">Doküman Sınıflandırması</div>
+        <div data-i18n="feature_bid_no_bid">Teklif Ver / Verme Önerisi</div>
+        <div data-i18n="feature_technical_fit">Teknik Uyum</div>
+        <div data-i18n="feature_compliance_matrix">Madde Bazlı Uyumluluk Matrisi</div>
+        <div data-i18n="feature_gap_analysis">Gap Analizi</div>
+        <div data-i18n="feature_vendor_bias">Vendor Bias / Lock-in İncelemesi</div>
+        <div data-i18n="feature_rewrite">Tarafsız Yeniden Yazım Önerileri</div>
+        <div data-i18n="feature_evidence">Kanıt / Ürün Eşleştirme</div>
+        <div data-i18n="feature_clarifications">Açıklama Soruları</div>
+        <div data-i18n="feature_commercial_risk">Ticari Risk</div>
+        <div data-i18n="feature_legal_risk">Hukuki / İdari Risk</div>
+        <div data-i18n="feature_delivery_risk">Teslimat / Kabul Riski</div>
+        <div data-i18n="feature_sla">SLA / Garanti / Destek İncelemesi</div>
+        <div data-i18n="feature_bom">BOM / Ürün Eşleştirme</div>
+        <div data-i18n="feature_heatmap">Risk Isı Haritası ve Aksiyon Planı</div>
       </div>
     </section>
 
     <section id="reports" class="section">
       <div class="section-head">
-        <p class="eyebrow">Report Profiles</p>
-        <h2>Different reports for different decision roles</h2>
+        <p class="eyebrow" data-i18n="reports_eyebrow">Rapor Profilleri</p>
+        <h2 data-i18n="reports_title">Farklı karar rolleri için farklı raporlar</h2>
       </div>
 
       <div class="cards three">
         <article>
-          <h3>Executive Report</h3>
-          <p>Decision summary, bid/no-bid signal, top risks, key gaps and action plan for management review.</p>
+          <h3 data-i18n="report_exec_title">Yönetici Raporu</h3>
+          <p data-i18n="report_exec_text">Yönetim incelemesi için karar özeti, teklif ver / verme sinyali, ana riskler, temel gap’ler ve aksiyon planı.</p>
         </article>
         <article>
-          <h3>Technical Report</h3>
-          <p>Clause-level compliance, technical fit, product mapping, evidence requirements and architecture risks.</p>
+          <h3 data-i18n="report_tech_title">Teknik Rapor</h3>
+          <p data-i18n="report_tech_text">Madde bazlı uyumluluk, teknik uyum, ürün eşleştirme, kanıt gereksinimleri ve mimari riskler.</p>
         </article>
         <article>
-          <h3>Sales / Presales Report</h3>
-          <p>Opportunity qualification, customer questions, commercial risk, positioning risks and presales actions.</p>
+          <h3 data-i18n="report_sales_title">Satış / Presales Raporu</h3>
+          <p data-i18n="report_sales_text">Fırsat yeterliliği, müşteri soruları, ticari risk, konumlandırma riskleri ve presales aksiyonları.</p>
         </article>
       </div>
     </section>
 
     <section id="use-cases" class="section alt">
       <div class="section-head">
-        <p class="eyebrow">Use Cases</p>
-        <h2>Designed for teams reviewing complex tenders</h2>
+        <p class="eyebrow" data-i18n="use_cases_eyebrow">Kullanım Alanları</p>
+        <h2 data-i18n="use_cases_title">Karmaşık ihaleleri inceleyen ekipler için tasarlandı</h2>
       </div>
 
       <div class="cards three">
         <article>
-          <h3>Bid / No-Bid Support</h3>
-          <p>Make opportunity decisions earlier with visible technical, commercial and delivery risk signals.</p>
+          <h3 data-i18n="case_bid_title">Teklif Ver / Verme Desteği</h3>
+          <p data-i18n="case_bid_text">Görünür teknik, ticari ve teslimat risk sinyalleriyle fırsat kararlarını daha erken verin.</p>
         </article>
         <article>
-          <h3>Compliance Review</h3>
-          <p>Structure technical and administrative requirements into reviewable outputs and action items.</p>
+          <h3 data-i18n="case_compliance_title">Uyumluluk İncelemesi</h3>
+          <p data-i18n="case_compliance_text">Teknik ve idari isterleri incelenebilir çıktılara ve aksiyon kalemlerine dönüştürün.</p>
         </article>
         <article>
-          <h3>Vendor Bias Detection</h3>
-          <p>Detect lock-in language and prepare neutral rewrite suggestions for objection and clarification workflows.</p>
+          <h3 data-i18n="case_bias_title">Vendor Bias Tespiti</h3>
+          <p data-i18n="case_bias_text">Lock-in dilini tespit edin; itiraz ve açıklama süreçleri için tarafsız yeniden yazım önerileri hazırlayın.</p>
         </article>
       </div>
     </section>
 
     <section id="sample-reports" class="section">
       <div class="section-head">
-        <p class="eyebrow">Sample Reports</p>
-        <h2>Anonymized demo outputs</h2>
-        <p>
-          Sample reports will be published using anonymized demo scenarios only. Real customer documents must not be used without explicit approval and legal/security readiness.
+        <p class="eyebrow" data-i18n="sample_eyebrow">Örnek Raporlar</p>
+        <h2 data-i18n="sample_title">Anonimleştirilmiş demo çıktıları</h2>
+        <p data-i18n="sample_intro">
+          Örnek raporlar yalnızca anonimleştirilmiş demo senaryoları ile yayınlanır. Gerçek müşteri dokümanları açık onay ve hukuki/güvenlik hazırlığı olmadan kullanılmamalıdır.
         </p>
       </div>
 
-                  <div class="sample-box">
-                <p class="status">Public anonymized sample</p>
-                <h3>Downloadable sample package</h3>
-                <ul>
-                    <li>Executive, technical and sales/presales sample report views</li>
-                    <li>Compliance and risk matrix CSV</li>
-                    <li>Clarification questions CSV</li>
-                    <li>Bid / No-Bid decision card</li>
-                </ul>
-                <p>This package uses a synthetic scenario only. It does not include real customer data, real tender documents, personal data or confidential vendor pricing.</p>
-                <a class="button secondary" href="assets/downloads/specbridge-ai-anonymized-sample-report-package.zip">Download Sample Package</a>
-                <a class="button secondary" href="samples/downloads/specbridge-ai-anonymized-sample-report-package/">View HTML Sample</a>
-            </div>
+      <div class="sample-box">
+        <div>
+          <p class="status" data-i18n="sample_status">Public anonim örnek</p>
+          <h3 data-i18n="sample_box_title">İndirilebilir örnek paket</h3>
+          <ul>
+            <li data-i18n="sample_li_1">Yönetici, teknik ve satış/presales örnek rapor görünümleri</li>
+            <li data-i18n="sample_li_2">Uyumluluk ve risk matrisi CSV</li>
+            <li data-i18n="sample_li_3">Açıklama soruları CSV</li>
+            <li data-i18n="sample_li_4">Teklif Ver / Verme karar kartı</li>
+          </ul>
+          <p data-i18n="sample_disclaimer">Bu paket yalnızca sentetik bir senaryo kullanır. Gerçek müşteri verisi, gerçek ihale dokümanı, kişisel veri veya gizli vendor fiyatı içermez.</p>
+        </div>
+        <div class="sample-actions">
+          <a class="button secondary" href="assets/downloads/specbridge-ai-anonymized-sample-report-package.zip" data-i18n="sample_download">Örnek Paketi İndir</a>
+          <a class="button secondary" href="samples/downloads/specbridge-ai-anonymized-sample-report-package/" data-i18n="sample_view">HTML Örneği Gör</a>
+        </div>
+      </div>
     </section>
 
     <section id="security" class="section alt">
       <div class="section-head">
-        <p class="eyebrow">Security & Privacy</p>
-        <h2>Built around sensitive tender document handling</h2>
-        <p>
-          Tender and RFP documents may contain sensitive commercial, technical and legal information. Pilot use requires controlled data handling, clear retention rules and explicit deletion policy.
+        <p class="eyebrow" data-i18n="security_eyebrow">Güvenlik ve Gizlilik</p>
+        <h2 data-i18n="security_title">Hassas ihale dokümanı yönetimi etrafında tasarlandı</h2>
+        <p data-i18n="security_intro">
+          İhale ve RFP dokümanları hassas ticari, teknik ve hukuki bilgiler içerebilir. Pilot kullanım kontrollü veri yönetimi, açık saklama kuralları ve net silme politikası gerektirir.
         </p>
       </div>
 
       <div class="security-callout">
-        <strong>Advisory output only.</strong>
-        <span>
-          SpecBridge AI outputs do not replace legal advice, final compliance approval, official procurement opinion or binding bid/no-bid decisions.
+        <strong data-i18n="security_callout_title">Yalnızca danışma amaçlı çıktı.</strong>
+        <span data-i18n="security_callout_text">
+          SpecBridge AI çıktıları hukuki danışmanlık, nihai uyumluluk onayı, resmi satın alma görüşü veya bağlayıcı teklif ver / verme kararlarının yerine geçmez.
         </span>
       </div>
     </section>
 
     <section id="pilot" class="section">
       <div class="section-head">
-        <p class="eyebrow">Controlled Pilot</p>
-        <h2>Controlled pilot preparation</h2>
-        <p>
-          SpecBridge AI is currently in controlled demo and pilot preparation stage. This contact area is static until privacy, KVKK and backend handling are finalized; please do not submit confidential files through the website.
+        <p class="eyebrow" data-i18n="pilot_eyebrow">Kontrollü Pilot</p>
+        <h2 data-i18n="pilot_title">Kontrollü pilot hazırlığı</h2>
+        <p data-i18n="pilot_intro">
+          SpecBridge AI şu anda kontrollü demo ve pilot hazırlık aşamasındadır. Bu iletişim alanı, gizlilik, KVKK ve backend süreçleri tamamlanana kadar statiktir; lütfen web sitesi üzerinden gizli dosya göndermeyin.
         </p>
       </div>
 
       <form class="pilot-form">
-        <input type="text" placeholder="Name" autocomplete="off">
-        <input type="text" placeholder="Company" autocomplete="off">
-        <input type="email" placeholder="Email" autocomplete="off">
-        <input type="text" placeholder="Role" autocomplete="off">
-        <textarea placeholder="Interested use case"></textarea>
-        <button type="button">Static form preview only</button>
+        <input type="text" data-i18n-placeholder="form_name" placeholder="Ad Soyad" autocomplete="off">
+        <input type="text" data-i18n-placeholder="form_company" placeholder="Şirket" autocomplete="off">
+        <input type="email" data-i18n-placeholder="form_email" placeholder="E-posta" autocomplete="off">
+        <input type="text" data-i18n-placeholder="form_role" placeholder="Rol" autocomplete="off">
+        <textarea data-i18n-placeholder="form_use_case" placeholder="İlgilenilen kullanım alanı"></textarea>
+        <button type="button" data-i18n="form_button">Sadece statik form önizlemesi</button>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>© SpecBridge AI. Controlled demo and pilot preparation stage.</p>
+    <p data-i18n="footer_stage">© SpecBridge AI. Kontrollü demo ve pilot hazırlık aşaması.</p>
     <nav class="footer-links" aria-label="Legal and launch links">
-        <a href="legal/privacy-policy/">Privacy Policy</a>
-        <a href="legal/terms-of-use/">Terms of Use</a>
-        <a href="legal/kvkk-aydinlatma-metni/">KVKK Aydınlatma Metni</a>
-        <a href="legal/data-retention-policy/">Data Retention</a>
-        <a href="legal/file-deletion-policy/">File Deletion</a>
-        <a href="#pilot">Contact / Pilot</a>
+      <a href="legal/privacy-policy/" data-i18n="footer_privacy">Privacy Policy</a>
+      <a href="legal/terms-of-use/" data-i18n="footer_terms">Terms of Use</a>
+      <a href="legal/kvkk-aydinlatma-metni/" data-i18n="footer_kvkk">KVKK Aydınlatma Metni</a>
+      <a href="legal/data-retention-policy/" data-i18n="footer_retention">Data Retention</a>
+      <a href="legal/file-deletion-policy/" data-i18n="footer_deletion">File Deletion</a>
+      <a href="#pilot" data-i18n="footer_contact">İletişim / Pilot</a>
     </nav>
-    <p class="footer-note">Please do not send confidential tender documents, personal data, commercial secrets or production files before a pilot agreement and data handling process are confirmed.</p>
-</footer>
+    <p class="footer-note" data-i18n="footer_note">Lütfen pilot sözleşmesi ve veri işleme süreci netleşmeden gizli ihale dokümanları, kişisel veri, ticari sırlar veya production dosyaları göndermeyin.</p>
+  </footer>
 </body>
 </html>
