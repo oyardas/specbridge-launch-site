@@ -9,8 +9,14 @@
   "theme_color": "#061A57",
   "icons": [
     {
-      "src": "/assets/brand/specbridge_ai_app_icon_v20260616.png",
-      "sizes": "1024x1024",
+      "src": "/assets/brand/specbridge_ai_pwa_transparent_192_v20260616.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/brand/specbridge_ai_pwa_transparent_512_v20260616.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
