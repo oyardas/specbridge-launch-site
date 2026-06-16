@@ -1,18 +1,18 @@
 {
-    "name":  "SpecBridge AI",
-    "short_name":  "SpecBridge AI",
-    "description":  "Tender Intelligence and Presales Decision Support",
-    "start_url":  "/",
-    "scope":  "/",
-    "display":  "standalone",
-    "background_color":  "#F7FAFC",
-    "theme_color":  "#061A57",
-    "icons":  [
-                  {
-                      "src":  "/assets/brand/specbridge_ai_icon_color.png",
-                      "sizes":  "1024x1024",
-                      "type":  "image/png",
-                      "purpose":  "any maskable"
-                  }
-              ]
+  "name": "SpecBridge AI",
+  "short_name": "SpecBridge",
+  "description": "Tender intelligence and presales decision support for RFP and specification analysis.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F7FAFC",
+  "theme_color": "#061A57",
+  "icons": [
+    {
+      "src": "/assets/brand/specbridge_ai_app_icon_v20260616.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
