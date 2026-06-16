@@ -685,3 +685,142 @@ footer img[src*="specbridge_ai_"] {
   }
 }
 /* R-LAUNCH.7-D LANGUAGE SELECTOR READABILITY END */
+/* R-LAUNCH.8-A VISUAL TRUST CONVERSION POLISH START */
+.trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.trust-strip span {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.visual-proof {
+  padding-top: 72px;
+}
+
+.preview-grid,
+.security-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.preview-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.security-grid {
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 22px;
+}
+
+.preview-card,
+.security-grid article {
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-card {
+  min-height: 210px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--soft) 100%);
+}
+
+.preview-label {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.preview-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.security-grid article {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg);
+}
+
+.security-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.security-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.final-cta {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: center;
+  margin-top: 32px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--soft) 0%, #ffffff 100%);
+  box-shadow: var(--shadow);
+}
+
+.final-cta h3 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.final-cta p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.final-cta .eyebrow {
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.final-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 960px) {
+  .preview-grid,
+  .security-grid,
+  .final-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .final-cta-actions {
+    justify-content: flex-start;
+  }
+}
+/* R-LAUNCH.8-A VISUAL TRUST CONVERSION POLISH END */
