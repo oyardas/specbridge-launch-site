@@ -22,6 +22,24 @@
       hero_sublead: "Sadece teknik uyumluluk matrisi üretmez. Teknik uyum, teklif ver / verme hazırlığı, ticari risk, hukuki/idari risk, vendor bias, açıklama soruları ve aksiyon planlarını değerlendirmeye yardımcı olur.",
       hero_cta_primary: "Kontrollü Pilot Görüşmesi Talep Et",
       hero_cta_secondary: "Örnek Raporu Gör",
+      motion_ecosystem_eyebrow: "Karar Ekosistemi",
+      motion_ecosystem_title: "Karar y\u00fczeyindeki sinyalleri birlikte inceleyin",
+      motion_ecosystem_intro: "Sakin etkile\u015fim katman\u0131, teklif eforu ba\u015flamadan \u00f6nce ekiplerin g\u00f6zden ge\u00e7irmesi gereken alanlar\u0131 \u00f6ne \u00e7\u0131kar\u0131r.",
+      motion_faq_eyebrow: "Pilot Sorular\u0131",
+      motion_faq_title: "Ger\u00e7ek ihale dosyalar\u0131ndan \u00f6nce net s\u0131n\u0131rlar",
+      motion_faq_1_q: "Bu web sitesine ger\u00e7ek ve gizli ihale dosyalar\u0131 y\u00fcklenebilir mi?",
+      motion_faq_1_a: "Hay\u0131r. Public web sitesi statik bir lansman y\u00fczeyidir. Ger\u00e7ek dosyalar i\u00e7in mutab\u0131k kal\u0131nm\u0131\u015f pilot s\u00fcreci ve veri y\u00f6netim s\u0131n\u0131r\u0131 gerekir.",
+      motion_faq_2_q: "Pilot inceleme ilk olarak neye bakar?",
+      motion_faq_2_a: "\u0130lk inceleme, rapor yap\u0131s\u0131n\u0131, karar faydas\u0131n\u0131 ve i\u015f ak\u0131\u015f\u0131 uyumunu de\u011ferlendirmek i\u00e7in sentetik veya onayl\u0131 \u00f6rnek materyalle ba\u015flamal\u0131d\u0131r.",
+      motion_faq_3_q: "SpecBridge AI hukuki veya ticari onay\u0131n yerine ge\u00e7er mi?",
+      motion_faq_3_a: "Hay\u0131r. \u0130nceleme haz\u0131rl\u0131\u011f\u0131n\u0131 destekler. Nihai uyum, hukuk, ticari ve teklif kararlar\u0131 insan sorumlulu\u011fundad\u0131r.",
+      motion_faq_4_q: "Presales ekipleri i\u00e7in hangi \u00e7\u0131kt\u0131lar faydal\u0131d\u0131r?",
+      motion_faq_4_a: "Teklif ver / verme sinyalleri, gap g\u00f6r\u00fcn\u00fcrl\u00fc\u011f\u00fc, a\u00e7\u0131klama sorular\u0131, vendor-bias notlar\u0131, risk \u0131s\u0131 haritas\u0131 ve aksiyon plan\u0131 temel presales y\u00fczeyleridir.",
+      motion_assistant_button: "Karar asistan\u0131",
+      motion_assistant_eyebrow: "Rahats\u0131z etmeyen rehber",
+      motion_assistant_title: "\u00d6rnek paketle ba\u015flay\u0131n",
+      motion_assistant_text: "Sentetik rapor paketini \u00f6nce inceleyin; gizli materyal kullan\u0131lmadan \u00f6nce pilot veri y\u00f6netimi s\u0131n\u0131r\u0131n\u0131 netle\u015ftirin.",
+      motion_assistant_cta: "\u00d6rnek \u00e7\u0131kt\u0131lar\u0131 g\u00f6r",
       hero_note: "Kontrollü demo ve pilot hazırlık aşaması. Henüz production SaaS servisi değildir.",
       trust_controlled_pilot: "Yalnızca kontrollü pilot",
       trust_no_public_upload: "Public doküman yükleme yok",
@@ -161,6 +179,24 @@
       hero_sublead: "It is not only a technical compliance matrix tool. It helps teams evaluate technical fit, bid/no-bid readiness, commercial risk, legal/admin risk, vendor bias, clarification questions and action plans.",
       hero_cta_primary: "Request Controlled Pilot Discussion",
       hero_cta_secondary: "View Sample Report",
+      motion_ecosystem_eyebrow: "Decision Ecosystem",
+      motion_ecosystem_title: "Review signals across the tender decision surface",
+      motion_ecosystem_intro: "A calm interaction layer highlights the areas teams usually need to inspect before proposal effort starts.",
+      motion_faq_eyebrow: "Pilot Questions",
+      motion_faq_title: "Clear boundaries before real tender files",
+      motion_faq_1_q: "Can real confidential tender files be uploaded on this website?",
+      motion_faq_1_a: "No. The public website is a static launch surface. Real files require an agreed pilot process and data handling boundary.",
+      motion_faq_2_q: "What does the pilot review first?",
+      motion_faq_2_a: "The first review should use synthetic or approved sample material to evaluate report structure, decision usefulness and workflow fit.",
+      motion_faq_3_q: "Does SpecBridge AI replace legal or commercial approval?",
+      motion_faq_3_a: "No. It supports review preparation. Final compliance, legal, commercial and bid decisions remain human-owned.",
+      motion_faq_4_q: "Which outputs are useful for presales teams?",
+      motion_faq_4_a: "Bid/no-bid signals, gap visibility, clarification questions, vendor-bias notes, risk heatmap and action planning are the primary presales surfaces.",
+      motion_assistant_button: "Decision assistant",
+      motion_assistant_eyebrow: "Non-intrusive guide",
+      motion_assistant_title: "Start with a sample package",
+      motion_assistant_text: "Review the synthetic report package first, then define pilot data handling before any confidential material is used.",
+      motion_assistant_cta: "View sample outputs",
       hero_note: "Controlled demo and pilot preparation stage. Not a production SaaS service yet.",
       trust_controlled_pilot: "Controlled pilot only",
       trust_no_public_upload: "No public document upload",
@@ -300,6 +336,24 @@
       hero_sublead: "它不仅是技术合规矩阵工具，还帮助团队评估技术匹配、投标/不投标准备度、商业风险、法律/行政风险、供应商倾向、澄清问题和行动计划。",
       hero_cta_primary: "申请受控试点沟通",
       hero_cta_secondary: "查看样例报告",
+      motion_ecosystem_eyebrow: "Decision Ecosystem",
+      motion_ecosystem_title: "Review signals across the tender decision surface",
+      motion_ecosystem_intro: "A calm interaction layer highlights the areas teams usually need to inspect before proposal effort starts.",
+      motion_faq_eyebrow: "Pilot Questions",
+      motion_faq_title: "Clear boundaries before real tender files",
+      motion_faq_1_q: "Can real confidential tender files be uploaded on this website?",
+      motion_faq_1_a: "No. The public website is a static launch surface. Real files require an agreed pilot process and data handling boundary.",
+      motion_faq_2_q: "What does the pilot review first?",
+      motion_faq_2_a: "The first review should use synthetic or approved sample material to evaluate report structure, decision usefulness and workflow fit.",
+      motion_faq_3_q: "Does SpecBridge AI replace legal or commercial approval?",
+      motion_faq_3_a: "No. It supports review preparation. Final compliance, legal, commercial and bid decisions remain human-owned.",
+      motion_faq_4_q: "Which outputs are useful for presales teams?",
+      motion_faq_4_a: "Bid/no-bid signals, gap visibility, clarification questions, vendor-bias notes, risk heatmap and action planning are the primary presales surfaces.",
+      motion_assistant_button: "Decision assistant",
+      motion_assistant_eyebrow: "Non-intrusive guide",
+      motion_assistant_title: "Start with a sample package",
+      motion_assistant_text: "Review the synthetic report package first, then define pilot data handling before any confidential material is used.",
+      motion_assistant_cta: "View sample outputs",
       hero_note: "当前处于受控演示和试点准备阶段，尚不是生产级 SaaS 服务。",
       trust_controlled_pilot: "仅限受控试点",
       trust_no_public_upload: "无公开文档上传",
@@ -439,6 +493,24 @@
       hero_sublead: "Это не только инструмент технической матрицы соответствия. Он помогает оценивать техническое соответствие, готовность bid/no-bid, коммерческий риск, юридический/административный риск, vendor bias, вопросы для уточнения и план действий.",
       hero_cta_primary: "Запросить обсуждение пилота",
       hero_cta_secondary: "Посмотреть пример отчета",
+      motion_ecosystem_eyebrow: "Decision Ecosystem",
+      motion_ecosystem_title: "Review signals across the tender decision surface",
+      motion_ecosystem_intro: "A calm interaction layer highlights the areas teams usually need to inspect before proposal effort starts.",
+      motion_faq_eyebrow: "Pilot Questions",
+      motion_faq_title: "Clear boundaries before real tender files",
+      motion_faq_1_q: "Can real confidential tender files be uploaded on this website?",
+      motion_faq_1_a: "No. The public website is a static launch surface. Real files require an agreed pilot process and data handling boundary.",
+      motion_faq_2_q: "What does the pilot review first?",
+      motion_faq_2_a: "The first review should use synthetic or approved sample material to evaluate report structure, decision usefulness and workflow fit.",
+      motion_faq_3_q: "Does SpecBridge AI replace legal or commercial approval?",
+      motion_faq_3_a: "No. It supports review preparation. Final compliance, legal, commercial and bid decisions remain human-owned.",
+      motion_faq_4_q: "Which outputs are useful for presales teams?",
+      motion_faq_4_a: "Bid/no-bid signals, gap visibility, clarification questions, vendor-bias notes, risk heatmap and action planning are the primary presales surfaces.",
+      motion_assistant_button: "Decision assistant",
+      motion_assistant_eyebrow: "Non-intrusive guide",
+      motion_assistant_title: "Start with a sample package",
+      motion_assistant_text: "Review the synthetic report package first, then define pilot data handling before any confidential material is used.",
+      motion_assistant_cta: "View sample outputs",
       hero_note: "Стадия контролируемой демонстрации и подготовки пилота. Пока не является production SaaS-сервисом.",
       trust_controlled_pilot: "Только контролируемый пилот",
       trust_no_public_upload: "Нет публичной загрузки документов",
@@ -578,6 +650,24 @@
       hero_sublead: "لا يقتصر على مصفوفة الامتثال الفني. يساعد الفرق على تقييم الملاءمة الفنية، جاهزية التقديم أو عدمه، المخاطر التجارية، المخاطر القانونية/الإدارية، تحيز المورد، أسئلة التوضيح وخطط العمل.",
       hero_cta_primary: "طلب مناقشة تجربة مضبوطة",
       hero_cta_secondary: "عرض تقرير نموذجي",
+      motion_ecosystem_eyebrow: "Decision Ecosystem",
+      motion_ecosystem_title: "Review signals across the tender decision surface",
+      motion_ecosystem_intro: "A calm interaction layer highlights the areas teams usually need to inspect before proposal effort starts.",
+      motion_faq_eyebrow: "Pilot Questions",
+      motion_faq_title: "Clear boundaries before real tender files",
+      motion_faq_1_q: "Can real confidential tender files be uploaded on this website?",
+      motion_faq_1_a: "No. The public website is a static launch surface. Real files require an agreed pilot process and data handling boundary.",
+      motion_faq_2_q: "What does the pilot review first?",
+      motion_faq_2_a: "The first review should use synthetic or approved sample material to evaluate report structure, decision usefulness and workflow fit.",
+      motion_faq_3_q: "Does SpecBridge AI replace legal or commercial approval?",
+      motion_faq_3_a: "No. It supports review preparation. Final compliance, legal, commercial and bid decisions remain human-owned.",
+      motion_faq_4_q: "Which outputs are useful for presales teams?",
+      motion_faq_4_a: "Bid/no-bid signals, gap visibility, clarification questions, vendor-bias notes, risk heatmap and action planning are the primary presales surfaces.",
+      motion_assistant_button: "Decision assistant",
+      motion_assistant_eyebrow: "Non-intrusive guide",
+      motion_assistant_title: "Start with a sample package",
+      motion_assistant_text: "Review the synthetic report package first, then define pilot data handling before any confidential material is used.",
+      motion_assistant_cta: "View sample outputs",
       hero_note: "مرحلة عرض تجريبي وتحضير تجربة مضبوطة. ليس خدمة SaaS إنتاجية بعد.",
       trust_controlled_pilot: "تجربة مضبوطة فقط",
       trust_no_public_upload: "لا يوجد رفع عام للوثائق",
@@ -782,3 +872,168 @@
   });
 }());
 
+/* R-LAUNCH.8-B-MOTION-INTERACTION-POLISH:START */
+(function () {
+  var ASSISTANT_DISMISS_KEY = "specbridge-assistant-dismissed-r-launch-8-b";
+
+  function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function setHeaderState() {
+    var header = document.querySelector(".site-header");
+    if (!header) {
+      return;
+    }
+
+    var update = function () {
+      header.classList.toggle("is-scrolled", window.scrollY > 16);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
+  function setRevealState() {
+    var targets = document.querySelectorAll(".hero-copy, .hero-panel, .trust-strip, .section, .flow-step, .proof-card, .report-card, .use-case-card, .security-card, .sample-box, .final-cta, .faq-item, .ecosystem-pill");
+    if (!targets.length) {
+      return;
+    }
+
+    document.body.classList.add("motion-enabled");
+
+    targets.forEach(function (target) {
+      target.setAttribute("data-motion-reveal", "");
+    });
+
+    if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+      targets.forEach(function (target) {
+        target.classList.add("is-visible");
+      });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -8% 0px"
+    });
+
+    targets.forEach(function (target) {
+      observer.observe(target);
+    });
+  }
+
+  function setEcosystemPills() {
+    var pills = document.querySelectorAll("[data-ecosystem-pill]");
+    if (!pills.length) {
+      return;
+    }
+
+    pills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        pills.forEach(function (item) {
+          item.classList.remove("is-selected");
+          item.setAttribute("aria-pressed", "false");
+        });
+
+        pill.classList.add("is-selected");
+        pill.setAttribute("aria-pressed", "true");
+      });
+    });
+  }
+
+  function setFaqBehavior() {
+    var faqItems = document.querySelectorAll(".faq-item");
+    if (!faqItems.length) {
+      return;
+    }
+
+    faqItems.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        if (!item.open) {
+          return;
+        }
+
+        faqItems.forEach(function (other) {
+          if (other !== item) {
+            other.open = false;
+          }
+        });
+      });
+    });
+  }
+
+  function setAssistantLauncher() {
+    var launcher = document.querySelector("[data-assistant-launcher]");
+    var toggle = document.querySelector("[data-assistant-toggle]");
+    var panel = document.querySelector("[data-assistant-panel]");
+    var close = document.querySelector("[data-assistant-close]");
+
+    if (!launcher || !toggle || !panel || !close) {
+      return;
+    }
+
+    var dismissed = false;
+    try {
+      dismissed = localStorage.getItem(ASSISTANT_DISMISS_KEY) === "1";
+    } catch (error) {
+      dismissed = false;
+    }
+
+    var showLauncher = function () {
+      if (dismissed) {
+        return;
+      }
+
+      if (window.scrollY > 420) {
+        launcher.hidden = false;
+        window.requestAnimationFrame(function () {
+          launcher.classList.add("is-visible");
+        });
+      }
+    };
+
+    var hidePanel = function () {
+      panel.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    };
+
+    var dismissLauncher = function () {
+      dismissed = true;
+      hidePanel();
+      launcher.classList.remove("is-visible");
+
+      try {
+        localStorage.setItem(ASSISTANT_DISMISS_KEY, "1");
+      } catch (error) {
+        return;
+      }
+    };
+
+    toggle.addEventListener("click", function () {
+      var willOpen = panel.hidden;
+      panel.hidden = !willOpen;
+      toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+
+    close.addEventListener("click", dismissLauncher);
+    window.addEventListener("scroll", showLauncher, { passive: true });
+    showLauncher();
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setHeaderState();
+    setRevealState();
+    setEcosystemPills();
+    setFaqBehavior();
+    setAssistantLauncher();
+  });
+}());
+/* R-LAUNCH.8-B-MOTION-INTERACTION-POLISH:END */
