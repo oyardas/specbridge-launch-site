@@ -374,14 +374,40 @@
         </p>
       </div>
 
-      <form class="pilot-form">
-        <input type="text" data-i18n-placeholder="form_name" placeholder="Ad Soyad" autocomplete="off">
-        <input type="text" data-i18n-placeholder="form_company" placeholder="Ãƒâ€¦Ã‚Âirket" autocomplete="off">
-        <input type="email" data-i18n-placeholder="form_email" placeholder="E-posta" autocomplete="off">
-        <input type="text" data-i18n-placeholder="form_role" placeholder="Rol" autocomplete="off">
-        <textarea data-i18n-placeholder="form_use_case" placeholder="Ãƒâ€Ã‚Â°lgilenilen kullanÃƒâ€Ã‚Â±m alanÃƒâ€Ã‚Â±"></textarea>
-        <button type="button" data-i18n="form_button">Sadece statik form ÃƒÆ’Ã‚Â¶nizlemesi</button>
+            <!-- R-LAUNCH.8-F-LEAD-CAPTURE-READINESS:START -->
+      <form class="pilot-form" id="pilot-intent-form" aria-describedby="pilot-form-note" novalidate>
+        <div class="form-field">
+          <label for="pilot-name" data-i18n="form_name_label">Ad Soyad</label>
+          <input id="pilot-name" name="name" type="text" data-i18n-placeholder="form_name" placeholder="Ad Soyad" autocomplete="name" required>
+        </div>
+        <div class="form-field">
+          <label for="pilot-company" data-i18n="form_company_label">Şirket</label>
+          <input id="pilot-company" name="company" type="text" data-i18n-placeholder="form_company" placeholder="Şirket" autocomplete="organization" required>
+        </div>
+        <div class="form-field">
+          <label for="pilot-email" data-i18n="form_email_label">E-posta</label>
+          <input id="pilot-email" name="email" type="email" data-i18n-placeholder="form_email" placeholder="E-posta" autocomplete="email" required>
+        </div>
+        <div class="form-field">
+          <label for="pilot-role" data-i18n="form_role_label">Rol</label>
+          <input id="pilot-role" name="role" type="text" data-i18n-placeholder="form_role" placeholder="Rol" autocomplete="organization-title">
+        </div>
+        <div class="form-field form-field--full">
+          <label for="pilot-use-case" data-i18n="form_use_case_label">İlgilenilen kullanım alanı</label>
+          <textarea id="pilot-use-case" name="use_case" data-i18n-placeholder="form_use_case" placeholder="İlgilenilen kullanım alanı" required></textarea>
+        </div>
+        <div class="form-field form-field--hidden" aria-hidden="true">
+          <label for="pilot-website">Website</label>
+          <input id="pilot-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label class="consent-row">
+          <input type="checkbox" name="pilot_consent" required>
+          <span data-i18n="form_consent">KVKK Aydınlatma Metni, Privacy Policy ve Terms of Use bağlantılarını inceledim; demo/pilot talebim için tarafımla iletişime geçilmesini kabul ediyorum.</span>
+        </label>
+        <p class="form-note" id="pilot-form-note" data-i18n="form_static_note">Bu form şu anda statik önizlemedir. Backend, otomatik kayıt ve e-posta gönderimi etkin değildir; gizli dosya veya kişisel veri göndermeyin.</p>
+        <button type="button" class="form-submit-disabled" disabled aria-disabled="true" data-i18n="form_button">Teslimat hedefi doğrulanana kadar gönderim kapalı</button>
       </form>
+      <!-- R-LAUNCH.8-F-LEAD-CAPTURE-READINESS:END -->
         <!-- R-LAUNCH.8-D-TRUST-CTA-READINESS:START -->
         <div class="pilot-readiness" aria-labelledby="pilot-readiness-title">
           <div class="pilot-readiness__header">
@@ -452,5 +478,6 @@
   <!-- R-LAUNCH.8-B-MOTION-INTERACTION-POLISH:ASSISTANT-END -->
 </body>
 </html>
+
 
 

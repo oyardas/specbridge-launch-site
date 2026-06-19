@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   "use strict";
 
   const STORAGE_KEY = "specbridge-language";
@@ -162,6 +162,13 @@
       form_role: "Rol",
       form_use_case: "İlgilenilen kullanım alanı",
       form_button: "Sadece statik form önizlemesi",
+    form_name_label: "Ad Soyad",
+    form_company_label: "Şirket",
+    form_email_label: "E-posta",
+    form_role_label: "Rol",
+    form_use_case_label: "İlgilenilen kullanım alanı",
+    form_consent: "KVKK Aydınlatma Metni, Privacy Policy ve Terms of Use bağlantılarını inceledim; demo/pilot talebim için tarafımla iletişime geçilmesini kabul ediyorum.",
+    form_static_note: "Bu form şu anda statik önizlemedir. Backend, otomatik kayıt ve e-posta gönderimi etkin değildir; gizli dosya veya kişisel veri göndermeyin.",
       footer_stage: "© SpecBridge AI. Kontrollü demo ve pilot hazırlık aşaması.",
       footer_privacy: "Privacy Policy",
       footer_terms: "Terms of Use",
@@ -328,6 +335,13 @@
       form_role: "Role",
       form_use_case: "Interested use case",
       form_button: "Static form preview only",
+    form_name_label: "Full name",
+    form_company_label: "Company",
+    form_email_label: "Email",
+    form_role_label: "Role",
+    form_use_case_label: "Use case of interest",
+    form_consent: "I have reviewed the KVKK Clarification Notice, Privacy Policy and Terms of Use links, and I agree to be contacted about my demo/pilot request.",
+    form_static_note: "This form is currently a static preview. Backend delivery, automated storage and email sending are not enabled; do not submit confidential files or personal data.",
       footer_stage: "© SpecBridge AI. Controlled demo and pilot preparation stage.",
       footer_privacy: "Privacy Policy",
       footer_terms: "Terms of Use",
@@ -494,6 +508,13 @@
       form_role: "角色",
       form_use_case: "感兴趣的应用场景",
       form_button: "仅静态表单预览",
+    form_name_label: "姓名",
+    form_company_label: "公司",
+    form_email_label: "电子邮件",
+    form_role_label: "职位",
+    form_use_case_label: "关注的使用场景",
+    form_consent: "我已查看 KVKK 说明、隐私政策和使用条款链接，并同意就我的演示/试点请求与我联系。",
+    form_static_note: "此表单目前仅为静态预览。后端提交、自动存储和邮件发送尚未启用；请勿提交机密文件或个人数据。",
       footer_stage: "© SpecBridge AI。受控演示和试点准备阶段。",
       footer_privacy: "隐私政策",
       footer_terms: "使用条款",
@@ -660,6 +681,13 @@
       form_role: "Роль",
       form_use_case: "Интересующий сценарий",
       form_button: "Только статический предпросмотр формы",
+    form_name_label: "Имя и фамилия",
+    form_company_label: "Компания",
+    form_email_label: "Эл. почта",
+    form_role_label: "Роль",
+    form_use_case_label: "Интересующий сценарий использования",
+    form_consent: "Я ознакомился с уведомлением KVKK, Privacy Policy и Terms of Use и согласен, чтобы со мной связались по моему запросу на демо/пилот.",
+    form_static_note: "Эта форма сейчас является статическим предпросмотром. Backend-доставка, автоматическое хранение и отправка email не включены; не отправляйте конфиденциальные файлы или персональные данные.",
       footer_stage: "© SpecBridge AI. Стадия контролируемой демонстрации и подготовки пилота.",
       footer_privacy: "Privacy Policy",
       footer_terms: "Terms of Use",
@@ -826,6 +854,13 @@
       form_role: "الدور",
       form_use_case: "حالة الاستخدام محل الاهتمام",
       form_button: "معاينة نموذج ثابت فقط",
+    form_name_label: "الاسم الكامل",
+    form_company_label: "الشركة",
+    form_email_label: "البريد الإلكتروني",
+    form_role_label: "الدور",
+    form_use_case_label: "حالة الاستخدام محل الاهتمام",
+    form_consent: "لقد راجعت روابط إشعار KVKK وسياسة الخصوصية وشروط الاستخدام، وأوافق على التواصل معي بخصوص طلب العرض التجريبي/المرحلة التجريبية.",
+    form_static_note: "هذا النموذج حاليًا معاينة ثابتة فقط. لم يتم تفعيل التسليم الخلفي أو التخزين الآلي أو إرسال البريد الإلكتروني؛ لا ترسل ملفات سرية أو بيانات شخصية.",
       footer_stage: "© SpecBridge AI. مرحلة عرض تجريبي وتحضير تجربة مضبوطة.",
       footer_privacy: "سياسة الخصوصية",
       footer_terms: "شروط الاستخدام",
@@ -1082,3 +1117,4 @@
   });
 }());
 /* R-LAUNCH.8-B-MOTION-INTERACTION-POLISH:END */
+
