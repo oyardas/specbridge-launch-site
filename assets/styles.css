@@ -1331,6 +1331,11 @@ body.motion-enabled [data-motion-reveal].is-visible {
   box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
 }
 
+
+.sb-positioning-wide-card {
+  margin-top: 18px;
+}
+
 .sb-positioning-card h3 {
   margin: 0 0 12px;
   font-size: 20px;
@@ -1386,4 +1391,21 @@ body.motion-enabled [data-motion-reveal].is-visible {
     padding: 52px 18px;
   }
 }
+
+/* SPECBRIDGE_POSITIONING_BLOCK_V1_PRINT_START */
+@media print {
+  .sb-positioning-section {
+    break-before: auto;
+    break-after: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+
+  .sb-positioning-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+/* SPECBRIDGE_POSITIONING_BLOCK_V1_PRINT_END */
+
 /* SPECBRIDGE_POSITIONING_BLOCK_V1_CSS_END */
