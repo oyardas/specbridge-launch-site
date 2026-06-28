@@ -1682,3 +1682,133 @@ body.motion-enabled [data-motion-reveal].is-visible {
   }
 }
 /* SPECBRIDGE_PRINT_PDF_FLOW_HARDENING_R6_END */
+
+/* SPECBRIDGE_PRINT_PDF_VISUAL_POLISH_R7_START */
+@media print {
+  /*
+   * R7 print polish:
+   * R6 fixed the blank-page problem. R7 keeps the same compact handout scope,
+   * but improves printable margins, inner padding, heading fit, and footer density.
+   */
+
+  @page {
+    margin: 8mm 10mm;
+  }
+
+  header {
+    padding: 4px 0 6px 0 !important;
+    margin: 0 0 6px 0 !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.12) !important;
+  }
+
+  header nav,
+  header .nav,
+  header .nav-links,
+  header .language-switcher,
+  header .language-selector,
+  header .locale-switcher,
+  header .lang-switcher,
+  header .language-tabs,
+  header [data-language-switcher],
+  header [aria-label*="language" i],
+  header [aria-label*="dil" i] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .sb-positioning-section {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 16px 18px 20px 18px !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+
+  .sb-positioning-section .container,
+  .sb-positioning-section .wrap {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .sb-positioning-section h1,
+  .sb-positioning-section .hero-title,
+  .sb-positioning-section .title {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: visible !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.12 !important;
+  }
+
+  .sb-positioning-section p,
+  .sb-positioning-section li,
+  .sb-positioning-section .eyebrow,
+  .sb-positioning-section .kicker,
+  .sb-positioning-section .badge,
+  .sb-positioning-section .pill {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .sb-positioning-card,
+  .sb-positioning-wide-card {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 8px 0 !important;
+    padding: 12px 14px !important;
+    overflow: visible !important;
+  }
+
+  .sb-positioning-wide-card ul {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    padding-left: 18px !important;
+  }
+
+  .sb-positioning-wide-card li {
+    margin-bottom: 5px !important;
+  }
+
+  footer,
+  .footer {
+    box-sizing: border-box !important;
+    margin: 8px 0 0 0 !important;
+    padding: 8px 0 0 0 !important;
+    font-size: 9pt !important;
+    line-height: 1.35 !important;
+  }
+
+  footer img,
+  .footer img {
+    max-width: 42px !important;
+    height: auto !important;
+  }
+
+  .footer-links,
+  .legal-links {
+    margin-top: 4px !important;
+    line-height: 1.3 !important;
+  }
+}
+/* SPECBRIDGE_PRINT_PDF_VISUAL_POLISH_R7_END */
