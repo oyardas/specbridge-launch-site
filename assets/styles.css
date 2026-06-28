@@ -1409,3 +1409,74 @@ body.motion-enabled [data-motion-reveal].is-visible {
 /* SPECBRIDGE_POSITIONING_BLOCK_V1_PRINT_END */
 
 /* SPECBRIDGE_POSITIONING_BLOCK_V1_CSS_END */
+
+/* SPECBRIDGE_PRINT_PDF_COMPACTION_R5_START */
+@media print {
+  html,
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  body {
+    background: #ffffff !important;
+  }
+
+  main,
+  header,
+  footer,
+  section,
+  main > *,
+  .hero,
+  .section,
+  .sb-positioning-section,
+  .sb-positioning-card,
+  .sb-positioning-wide-card,
+  .container,
+  .wrap,
+  .panel,
+  .card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    break-before: auto !important;
+    break-after: auto !important;
+  }
+
+  section,
+  .section,
+  .hero,
+  .sb-positioning-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .sb-positioning-section {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  .sb-positioning-card,
+  .card,
+  .panel,
+  .report-card,
+  .profile-card,
+  .step-card,
+  .decision-card {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .footer,
+  footer {
+    margin-top: 24px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+}
+/* SPECBRIDGE_PRINT_PDF_COMPACTION_R5_END */
