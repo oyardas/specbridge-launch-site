@@ -1480,3 +1480,205 @@ body.motion-enabled [data-motion-reveal].is-visible {
   }
 }
 /* SPECBRIDGE_PRINT_PDF_COMPACTION_R5_END */
+
+/* SPECBRIDGE_PRINT_PDF_FLOW_HARDENING_R6_START */
+@media print {
+  @page {
+    margin: 10mm;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    scroll-behavior: auto !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    page-break-inside: auto !important;
+    break-before: auto !important;
+    break-after: auto !important;
+    break-inside: auto !important;
+  }
+
+  html,
+  body {
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header,
+  main,
+  footer {
+    display: block !important;
+    position: static !important;
+    float: none !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  header {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /*
+   * R6 print policy:
+   * Print/PDF is a compact positioning handout, not a full scrolling website export.
+   * Keep the audited positioning block and footer/legal area; suppress all later homepage sections
+   * that were producing blank PDF pages in Chromium/Edge print rendering.
+   */
+  main > :not(.sb-positioning-section) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .sb-positioning-section {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    float: none !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 14px 0 18px 0 !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    break-before: auto !important;
+    break-after: auto !important;
+  }
+
+  .sb-positioning-section *,
+  .sb-positioning-section *::before,
+  .sb-positioning-section *::after {
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-height: none !important;
+  }
+
+  .sb-positioning-section .container,
+  .sb-positioning-section .wrap {
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: visible !important;
+  }
+
+  .sb-positioning-grid,
+  .sb-positioning-cards,
+  .sb-positioning-card-grid {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+  }
+
+  .sb-positioning-card,
+  .sb-positioning-wide-card {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 0 10px 0 !important;
+    padding: 14px !important;
+    overflow: visible !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .sb-positioning-wide-card ul,
+  .sb-positioning-wide-card li {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .hero,
+  .section,
+  .panel,
+  .card,
+  .report-card,
+  .profile-card,
+  .step-card,
+  .decision-card,
+  .reveal,
+  [data-reveal] {
+    position: static !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  footer,
+  .footer {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    float: none !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 12px 0 0 0 !important;
+    padding: 10px 0 0 0 !important;
+    page-break-before: auto !important;
+    break-before: auto !important;
+  }
+
+  footer *,
+  .footer * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-height: none !important;
+  }
+
+  .footer-links,
+  .legal-links {
+    display: block !important;
+  }
+}
+/* SPECBRIDGE_PRINT_PDF_FLOW_HARDENING_R6_END */
