@@ -1969,3 +1969,47 @@ body.motion-enabled [data-motion-reveal].is-visible {
   text-transform: none !important;
   letter-spacing: 0.18em;
 }
+
+
+/* R-LAUNCH.9-G-P1 Hero and Navigation */
+
+.hero-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.hero-trust-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.46);
+  color: inherit;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.hero-trust-strip span::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.72;
+}
+
+@media (max-width: 720px) {
+  .hero-trust-strip {
+    gap: 0.5rem;
+  }
+
+  .hero-trust-strip span {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
