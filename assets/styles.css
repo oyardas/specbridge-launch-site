@@ -2013,3 +2013,97 @@ body.motion-enabled [data-motion-reveal].is-visible {
     justify-content: flex-start;
   }
 }
+
+/* R-LAUNCH.9-G-P2 Command Center Preview */
+.command-center-preview {
+  margin-top: 1.15rem;
+  padding: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.76)),
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), transparent 38%);
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
+}
+
+.command-preview-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.command-preview-kicker {
+  color: rgba(226, 232, 240, 0.92);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.command-preview-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(125, 211, 252, 0.34);
+  border-radius: 999px;
+  padding: 0.28rem 0.62rem;
+  color: rgba(186, 230, 253, 0.96);
+  background: rgba(14, 165, 233, 0.12);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.command-preview-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.command-preview-card {
+  min-height: 8.25rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 1rem;
+  background: rgba(15, 23, 42, 0.58);
+}
+
+.command-preview-card span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: rgba(148, 163, 184, 0.98);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.command-preview-card strong {
+  display: block;
+  color: #f8fafc;
+  font-size: 0.98rem;
+  line-height: 1.32;
+}
+
+.command-preview-card p {
+  margin: 0.58rem 0 0;
+  color: rgba(203, 213, 225, 0.86);
+  font-size: 0.82rem;
+  line-height: 1.48;
+}
+
+@media (max-width: 760px) {
+  .command-preview-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .command-preview-board {
+    grid-template-columns: 1fr;
+  }
+
+  .command-preview-card {
+    min-height: auto;
+  }
+}
