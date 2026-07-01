@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   "use strict";
 
   const STORAGE_KEY = "specbridge-language";
@@ -8,6 +8,39 @@
     tr: {
       language_label: "Türkçe",
       lang: "tr",
+      p4b_nav_login: "Giriş",
+      p4b_nav_signup: "Üye Ol",
+      p4b_eyebrow: "Şartname ve ihale karar destek merkezi",
+      p4b_title: "Şartnameden rapora, her karar kanıtlı ve insan onaylı.",
+      p4b_lead: "SpecBridge AI, teknik şartname ve ihale dokümanlarını kaynak madde, gerekçe, risk seviyesi ve insan onay durumu ile birlikte yapılandırır.",
+      p4b_sublead: "AI önerir. Ekibiniz inceler, düzeltir ve onaylar.",
+      p4b_cta_primary: "Demo Talep Et",
+      p4b_cta_secondary: "Örnek Raporu Gör",
+      p4b_trust_controlled: "Kontrollü pilot",
+      p4b_trust_no_upload: "Public upload yok",
+      p4b_trust_synthetic: "Sentetik demo raporlar",
+      p4b_trust_human: "İnsan onaylı karar desteği",
+      p4b_board_title: "SpecBridge Komuta Paneli",
+      p4b_board_subtitle: "İnceleme paketi · Kontrollü pilot",
+      p4b_board_status: "İnsan onayı gerekli",
+      p4b_card_clause_label: "Madde inceleme kuyruğu",
+      p4b_card_clause_value: "14 bulgu",
+      p4b_card_clause_note: "Risk işaretleri kaynak maddelerle bağlı kalır.",
+      p4b_card_evidence_label: "Kanıt izi",
+      p4b_card_evidence_value: "Madde + gerekçe",
+      p4b_card_evidence_note: "Her öneri inceleme bağlamını korur.",
+      p4b_card_signal_label: "Marka / ürün sinyalleri",
+      p4b_card_signal_value: "Şartname dilinden tespit",
+      p4b_card_signal_note: "Sinyaller otomatik ürün değişimi olmadan görünür olur.",
+      p4b_card_approval_label: "Onay durumu",
+      p4b_card_approval_value: "3 bekleyen karar",
+      p4b_card_approval_note: "Nihai karar ekibinizde kalır.",
+      p4b_flow_1_title: "Şartname ayrıştırıldı",
+      p4b_flow_1_note: "Kaynak maddeler indekslendi",
+      p4b_flow_2_title: "Riskler görünür",
+      p4b_flow_2_note: "Manuel inceleme kuyruğu hazır",
+      p4b_flow_3_title: "Rapor paketi",
+      p4b_flow_3_note: "İnsan onayı bekliyor",
       dir: "ltr",
       title: "SpecBridge AI | İhale Zekâsı ve Presales Karar Desteği",
       description: "SpecBridge AI; ihale, şartname ve RFP dokümanlarını analiz ederek satış, presales, teknik ve yönetici ekipleri için yapılandırılmış karar destek raporları üretir.",
@@ -198,6 +231,39 @@
     en: {
       language_label: "English",
       lang: "en",
+      p4b_nav_login: "Sign in",
+      p4b_nav_signup: "Sign up",
+      p4b_eyebrow: "Tender and specification decision support center",
+      p4b_title: "From specification to report, every decision is evidence-linked and human-approved.",
+      p4b_lead: "SpecBridge AI structures technical specifications and tender documents with source clauses, rationale, risk level and human approval status.",
+      p4b_sublead: "AI proposes. Your team reviews, edits and approves.",
+      p4b_cta_primary: "Request demo",
+      p4b_cta_secondary: "View example report",
+      p4b_trust_controlled: "Controlled pilot",
+      p4b_trust_no_upload: "No public upload",
+      p4b_trust_synthetic: "Synthetic demo reports",
+      p4b_trust_human: "Human-approved decision support",
+      p4b_board_title: "SpecBridge Command Board",
+      p4b_board_subtitle: "Review package · Controlled pilot",
+      p4b_board_status: "Human approval required",
+      p4b_card_clause_label: "Clause review queue",
+      p4b_card_clause_value: "14 findings",
+      p4b_card_clause_note: "Risk flags remain tied to source clauses.",
+      p4b_card_evidence_label: "Evidence trail",
+      p4b_card_evidence_value: "Clause + rationale",
+      p4b_card_evidence_note: "Every recommendation keeps its review context.",
+      p4b_card_signal_label: "Brand / product signals",
+      p4b_card_signal_value: "Detected from specification wording",
+      p4b_card_signal_note: "Signals are surfaced without automatic substitution.",
+      p4b_card_approval_label: "Approval status",
+      p4b_card_approval_value: "3 pending decisions",
+      p4b_card_approval_note: "The final decision remains with your team.",
+      p4b_flow_1_title: "Specification parsed",
+      p4b_flow_1_note: "Source clauses indexed",
+      p4b_flow_2_title: "Risks surfaced",
+      p4b_flow_2_note: "Manual review queue ready",
+      p4b_flow_3_title: "Report package",
+      p4b_flow_3_note: "Awaiting human approval",
       dir: "ltr",
       title: "SpecBridge AI | Tender Intelligence & Presales Decision Support",
       description: "SpecBridge AI analyzes tender, specification and RFP documents to generate structured decision-support reports for sales, presales, technical and executive teams.",
@@ -388,6 +454,39 @@
     zh: {
       language_label: "中文",
       lang: "zh-Hans",
+      p4b_nav_login: "登录",
+      p4b_nav_signup: "注册",
+      p4b_eyebrow: "招标与技术规格决策支持中心",
+      p4b_title: "从规格到报告，每个决策都有证据链并经过人工确认。",
+      p4b_lead: "SpecBridge AI 将技术规格和招标文件按来源条款、理由、风险等级和人工审批状态进行结构化。",
+      p4b_sublead: "AI 提出建议，团队审阅、修改并批准。",
+      p4b_cta_primary: "申请演示",
+      p4b_cta_secondary: "查看示例报告",
+      p4b_trust_controlled: "受控试点",
+      p4b_trust_no_upload: "无公开上传",
+      p4b_trust_synthetic: "合成演示报告",
+      p4b_trust_human: "人工审批的决策支持",
+      p4b_board_title: "SpecBridge 指挥面板",
+      p4b_board_subtitle: "审阅包 · 受控试点",
+      p4b_board_status: "需要人工审批",
+      p4b_card_clause_label: "条款审阅队列",
+      p4b_card_clause_value: "14 项发现",
+      p4b_card_clause_note: "风险标记始终关联来源条款。",
+      p4b_card_evidence_label: "证据链",
+      p4b_card_evidence_value: "条款 + 理由",
+      p4b_card_evidence_note: "每项建议都保留审阅上下文。",
+      p4b_card_signal_label: "品牌 / 产品信号",
+      p4b_card_signal_value: "从规格措辞中识别",
+      p4b_card_signal_note: "显示信号，但不自动替换产品。",
+      p4b_card_approval_label: "审批状态",
+      p4b_card_approval_value: "3 个待决事项",
+      p4b_card_approval_note: "最终决策仍由您的团队负责。",
+      p4b_flow_1_title: "规格已解析",
+      p4b_flow_1_note: "来源条款已索引",
+      p4b_flow_2_title: "风险已呈现",
+      p4b_flow_2_note: "人工审阅队列已就绪",
+      p4b_flow_3_title: "报告包",
+      p4b_flow_3_note: "等待人工审批",
       dir: "ltr",
       title: "SpecBridge AI | 招标情报与售前决策支持",
       description: "SpecBridge AI 分析招标、技术规范和 RFP 文档，为销售、售前、技术和管理团队生成结构化决策支持报告。",
@@ -578,6 +677,39 @@
     ru: {
       language_label: "Русский",
       lang: "ru",
+      p4b_nav_login: "Вход",
+      p4b_nav_signup: "Регистрация",
+      p4b_eyebrow: "Центр поддержки решений по тендерам и спецификациям",
+      p4b_title: "От спецификации до отчета: каждое решение связано с доказательствами и подтверждается человеком.",
+      p4b_lead: "SpecBridge AI структурирует технические спецификации и тендерные документы по исходным пунктам, обоснованию, уровню риска и статусу человеческого одобрения.",
+      p4b_sublead: "AI предлагает. Ваша команда проверяет, редактирует и утверждает.",
+      p4b_cta_primary: "Запросить демо",
+      p4b_cta_secondary: "Посмотреть пример отчета",
+      p4b_trust_controlled: "Контролируемый пилот",
+      p4b_trust_no_upload: "Нет публичной загрузки",
+      p4b_trust_synthetic: "Синтетические демо-отчеты",
+      p4b_trust_human: "Поддержка решений с одобрением человека",
+      p4b_board_title: "Панель управления SpecBridge",
+      p4b_board_subtitle: "Пакет проверки · Контролируемый пилот",
+      p4b_board_status: "Требуется одобрение человека",
+      p4b_card_clause_label: "Очередь проверки пунктов",
+      p4b_card_clause_value: "14 находок",
+      p4b_card_clause_note: "Риски остаются связанными с исходными пунктами.",
+      p4b_card_evidence_label: "След доказательств",
+      p4b_card_evidence_value: "Пункт + обоснование",
+      p4b_card_evidence_note: "Каждая рекомендация сохраняет контекст проверки.",
+      p4b_card_signal_label: "Сигналы бренда / продукта",
+      p4b_card_signal_value: "Выявлено из текста спецификации",
+      p4b_card_signal_note: "Сигналы показываются без автоматической замены.",
+      p4b_card_approval_label: "Статус одобрения",
+      p4b_card_approval_value: "3 решения ожидают",
+      p4b_card_approval_note: "Окончательное решение остается за вашей командой.",
+      p4b_flow_1_title: "Спецификация разобрана",
+      p4b_flow_1_note: "Исходные пункты индексированы",
+      p4b_flow_2_title: "Риски выявлены",
+      p4b_flow_2_note: "Очередь ручной проверки готова",
+      p4b_flow_3_title: "Пакет отчета",
+      p4b_flow_3_note: "Ожидает одобрения человека",
       dir: "ltr",
       title: "SpecBridge AI | Тендерная аналитика и поддержка пресейлз-решений",
       description: "SpecBridge AI анализирует тендерные документы, спецификации и RFP, создавая структурированные отчеты поддержки решений для продаж, пресейлз, технических и руководящих команд.",
@@ -768,6 +900,39 @@
     ar: {
       language_label: "العربية",
       lang: "ar",
+      p4b_nav_login: "تسجيل الدخول",
+      p4b_nav_signup: "إنشاء حساب",
+      p4b_eyebrow: "مركز دعم قرارات المناقصات والمواصفات",
+      p4b_title: "من المواصفة إلى التقرير، كل قرار مرتبط بالدليل ومعتمد بشريا.",
+      p4b_lead: "ينظم SpecBridge AI المواصفات الفنية ووثائق المناقصات حسب البنود المصدرية والمبررات ومستوى المخاطر وحالة الاعتماد البشري.",
+      p4b_sublead: "الذكاء الاصطناعي يقترح. فريقك يراجع ويعدل ويعتمد.",
+      p4b_cta_primary: "طلب عرض",
+      p4b_cta_secondary: "عرض تقرير نموذجي",
+      p4b_trust_controlled: "تجربة مضبوطة",
+      p4b_trust_no_upload: "لا يوجد رفع عام",
+      p4b_trust_synthetic: "تقارير عرض تركيبية",
+      p4b_trust_human: "دعم قرار باعتماد بشري",
+      p4b_board_title: "لوحة قيادة SpecBridge",
+      p4b_board_subtitle: "حزمة مراجعة · تجربة مضبوطة",
+      p4b_board_status: "يتطلب اعتمادا بشريا",
+      p4b_card_clause_label: "قائمة مراجعة البنود",
+      p4b_card_clause_value: "14 ملاحظة",
+      p4b_card_clause_note: "تبقى إشارات المخاطر مرتبطة بالبند المصدر.",
+      p4b_card_evidence_label: "مسار الأدلة",
+      p4b_card_evidence_value: "بند + مبرر",
+      p4b_card_evidence_note: "كل توصية تحتفظ بسياق المراجعة.",
+      p4b_card_signal_label: "إشارات العلامة / المنتج",
+      p4b_card_signal_value: "مستخرجة من صياغة المواصفة",
+      p4b_card_signal_note: "تظهر الإشارات دون استبدال تلقائي.",
+      p4b_card_approval_label: "حالة الاعتماد",
+      p4b_card_approval_value: "3 قرارات معلقة",
+      p4b_card_approval_note: "يبقى القرار النهائي لدى فريقك.",
+      p4b_flow_1_title: "تم تحليل المواصفة",
+      p4b_flow_1_note: "تمت فهرسة البنود المصدرية",
+      p4b_flow_2_title: "تم إظهار المخاطر",
+      p4b_flow_2_note: "قائمة المراجعة اليدوية جاهزة",
+      p4b_flow_3_title: "حزمة التقرير",
+      p4b_flow_3_note: "بانتظار الاعتماد البشري",
       dir: "rtl",
       title: "SpecBridge AI | ذكاء المناقصات ودعم قرارات ما قبل البيع",
       description: "يحلل SpecBridge AI وثائق المناقصات والمواصفات وطلبات العروض RFP لإنتاج تقارير منظمة لدعم قرارات فرق المبيعات وما قبل البيع والفرق الفنية والتنفيذية.",
@@ -1200,5 +1365,61 @@
     setFaqBehavior();
     setAssistantLauncher();
   });
+
+  /* R-LAUNCH.9-P4B-FC3R2-LANGUAGE-LOCK:START */
+  const SPECBRIDGE_LAUNCH_LANGUAGE_LOCK = "tr";
+
+  function enforceSpecBridgeLaunchLanguageLock() {
+    const lockedLanguage = SPECBRIDGE_LAUNCH_LANGUAGE_LOCK;
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, lockedLanguage);
+    } catch (error) {
+      // Ignore storage failures in restricted browser contexts.
+    }
+
+    try {
+      if (typeof applyLanguage === "function") {
+        applyLanguage(lockedLanguage);
+        return;
+      }
+    } catch (error) {
+      // Fall back to direct rendering below.
+    }
+
+    if (typeof translations !== "undefined" && translations[lockedLanguage]) {
+      const selected = translations[lockedLanguage];
+
+      document.documentElement.lang = selected.lang || "tr";
+      document.documentElement.dir = selected.dir || "ltr";
+
+      if (selected.title) {
+        document.title = selected.title;
+      }
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (key && Object.prototype.hasOwnProperty.call(selected, key)) {
+          element.textContent = selected[key];
+        }
+      });
+
+      document.querySelectorAll("[data-lang]").forEach((element) => {
+        const isActive = element.getAttribute("data-lang") === lockedLanguage;
+        element.classList.toggle("is-active", isActive);
+        element.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    }
+  }
+
+  enforceSpecBridgeLaunchLanguageLock();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", enforceSpecBridgeLaunchLanguageLock, { once: true });
+  } else {
+    enforceSpecBridgeLaunchLanguageLock();
+  }
+  /* R-LAUNCH.9-P4B-FC3R2-LANGUAGE-LOCK:END */
+
 }());
 /* R-LAUNCH.8-B-MOTION-INTERACTION-POLISH:END */
