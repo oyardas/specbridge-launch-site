@@ -1,0 +1,24 @@
+# SpecBridge AI GitHub Pages publication boundary
+# Only approved public website files may be emitted by Jekyll.
+exclude:
+  - README.md
+  - launch.config.json
+  - content
+  - docs
+  - gtm
+  - tools
+  - legal/data-retention-policy-draft.md
+  - legal/disclaimer-placeholder.md
+  - legal/file-deletion-policy-draft.md
+  - legal/kvkk-aydinlatma-metni-draft.md
+  - legal/legal-source-notes.md
+  - legal/privacy-policy-draft.md
+  - legal/terms-of-use-draft.md
+  - samples/demo-package-index.md
+  - samples/demo-rfp-scenario.md
+  - samples/five-minute-demo-script.md
+  - samples/pilot-feedback-form.md
+  - samples/sample-executive-report-outline.md
+  - samples/sample-sales-presales-report-outline.md
+  - samples/sample-technical-report-outline.md
+  - samples/vendor-bias-before-after-example.md
