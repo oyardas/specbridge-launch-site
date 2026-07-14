@@ -1,0 +1,318 @@
+{
+  "schema_version": "1.0",
+  "route": "/actions/",
+  "updated_at": "2026-07-14",
+  "refresh_seconds": 300,
+  "sections": [
+    {
+      "id": "proven",
+      "status": "proven",
+      "order": 10,
+      "title": {
+        "en": "Proven workflow and outputs",
+        "tr": "Kanıtlanmış iş akışı ve çıktılar"
+      },
+      "description": {
+        "en": "Public-safe capabilities demonstrated through controlled product workflows and export packages.",
+        "tr": "Kontrollü ürün iş akışları ve çıktı paketleriyle gösterilmiş public-safe kabiliyetler."
+      },
+      "items": [
+        {
+          "id": "structured-review",
+          "status": "proven",
+          "order": 10,
+          "title": {
+            "en": "Structured Specification and RFP Review",
+            "tr": "Yapılandırılmış Şartname ve RFP İncelemesi"
+          },
+          "description": {
+            "en": "Organizes specification and RFP content into structured review areas for technical and commercial assessment.",
+            "tr": "Şartname ve RFP içeriğini teknik ve ticari değerlendirme için yapılandırılmış inceleme alanlarına ayırır."
+          },
+          "link": {
+            "label_en": "Explore the platform",
+            "label_tr": "Platformu incele",
+            "href": "/#product-modules"
+          }
+        },
+        {
+          "id": "clause-traceability",
+          "status": "proven",
+          "order": 20,
+          "title": {
+            "en": "Clause-Level Traceability",
+            "tr": "Madde Bazlı İzlenebilirlik"
+          },
+          "description": {
+            "en": "Connects findings, gaps and recommended actions to identifiable document clauses or source references.",
+            "tr": "Bulguları, boşlukları ve önerilen aksiyonları tanımlanabilir doküman maddeleri veya kaynak referanslarıyla ilişkilendirir."
+          },
+          "link": {
+            "label_en": "Review the workflow",
+            "label_tr": "İş akışını incele",
+            "href": "/#product-modules"
+          }
+        },
+        {
+          "id": "xlsx-compliance-matrix",
+          "status": "proven",
+          "order": 30,
+          "title": {
+            "en": "XLSX Compliance Matrix",
+            "tr": "XLSX Uyum Matrisi"
+          },
+          "description": {
+            "en": "Produces a structured spreadsheet matrix for clause-level compliance review, risk assessment and human validation.",
+            "tr": "Madde bazlı uyum incelemesi, risk değerlendirmesi ve insan doğrulaması için yapılandırılmış bir Excel matrisi üretir."
+          },
+          "link": {
+            "label_en": "View report outputs",
+            "label_tr": "Rapor çıktılarını incele",
+            "href": "/#reports"
+          }
+        },
+        {
+          "id": "json-output",
+          "status": "proven",
+          "order": 40,
+          "title": {
+            "en": "JSON Output",
+            "tr": "JSON Çıktısı"
+          },
+          "description": {
+            "en": "Provides structured machine-readable output for controlled downstream processing and auditability.",
+            "tr": "Kontrollü sonraki işlemler ve denetlenebilirlik için yapılandırılmış, makine tarafından okunabilir çıktı sağlar."
+          },
+          "link": {
+            "label_en": "Explore reports",
+            "label_tr": "Raporları incele",
+            "href": "/#reports"
+          }
+        },
+        {
+          "id": "html-output",
+          "status": "proven",
+          "order": 50,
+          "title": {
+            "en": "HTML Output",
+            "tr": "HTML Çıktısı"
+          },
+          "description": {
+            "en": "Provides a browser-readable representation of structured review results.",
+            "tr": "Yapılandırılmış inceleme sonuçlarının tarayıcı üzerinden okunabilir bir gösterimini sağlar."
+          },
+          "link": {
+            "label_en": "Explore reports",
+            "label_tr": "Raporları incele",
+            "href": "/#reports"
+          }
+        },
+        {
+          "id": "zip-export",
+          "status": "proven",
+          "order": 60,
+          "title": {
+            "en": "ZIP Export Package",
+            "tr": "ZIP Çıktı Paketi"
+          },
+          "description": {
+            "en": "Packages approved public output formats into a portable export archive.",
+            "tr": "Onaylı public çıktı formatlarını taşınabilir bir dışa aktarma paketi içinde birleştirir."
+          },
+          "link": {
+            "label_en": "View sample reports",
+            "label_tr": "Örnek raporları incele",
+            "href": "/#sample-reports"
+          }
+        },
+        {
+          "id": "export-manifest",
+          "status": "proven",
+          "order": 70,
+          "title": {
+            "en": "Export Manifest",
+            "tr": "Export Manifest"
+          },
+          "description": {
+            "en": "Lists the files and relevant package-level information included in an export.",
+            "tr": "Dışa aktarma paketine dahil edilen dosyaları ve ilgili paket bilgilerini listeler."
+          },
+          "link": {
+            "label_en": "View sample reports",
+            "label_tr": "Örnek raporları incele",
+            "href": "/#sample-reports"
+          }
+        },
+        {
+          "id": "human-approval",
+          "status": "proven",
+          "order": 80,
+          "title": {
+            "en": "Human Approval Checkpoint",
+            "tr": "İnsan Onay Noktası"
+          },
+          "description": {
+            "en": "Keeps review, interpretation and final business decisions under the control of users and their teams.",
+            "tr": "İnceleme, yorumlama ve nihai iş kararlarının kullanıcıların ve ekiplerinin kontrolünde kalmasını sağlar."
+          },
+          "link": {
+            "label_en": "Review the trust model",
+            "label_tr": "Güven modelini incele",
+            "href": "/#security"
+          }
+        }
+      ]
+    },
+    {
+      "id": "controlled-pilot",
+      "status": "controlled",
+      "order": 20,
+      "title": {
+        "en": "Available through controlled pilots",
+        "tr": "Kontrollü pilot kapsamında"
+      },
+      "description": {
+        "en": "Capabilities provided through guided demonstrations and scoped pilot engagements.",
+        "tr": "Yönlendirmeli demolar ve sınırları belirlenmiş pilot çalışmalar kapsamında sunulan kabiliyetler."
+      },
+      "items": [
+        {
+          "id": "synthetic-demo",
+          "status": "controlled",
+          "order": 10,
+          "title": {
+            "en": "Synthetic Demo",
+            "tr": "Sentetik Demo"
+          },
+          "description": {
+            "en": "A guided product demonstration using synthetic content rather than confidential tender data.",
+            "tr": "Gizli ihale verisi yerine sentetik içerik kullanılan yönlendirmeli ürün demosu."
+          },
+          "link": {
+            "label_en": "Request a demonstration",
+            "label_tr": "Demo talep et",
+            "href": "/#pilot"
+          }
+        },
+        {
+          "id": "controlled-pilot-access",
+          "status": "controlled",
+          "order": 20,
+          "title": {
+            "en": "Controlled Pilot Access",
+            "tr": "Kontrollü Pilot Erişimi"
+          },
+          "description": {
+            "en": "A scoped evaluation environment for qualified pilot use cases, subject to agreed access and review boundaries.",
+            "tr": "Mutabık kalınan erişim ve inceleme sınırları kapsamında, uygun pilot kullanım senaryoları için kontrollü değerlendirme ortamı."
+          },
+          "link": {
+            "label_en": "Request pilot access",
+            "label_tr": "Pilot erişimi talep et",
+            "href": "/#pilot"
+          }
+        },
+        {
+          "id": "guided-review",
+          "status": "controlled",
+          "order": 30,
+          "title": {
+            "en": "Guided Review Workflow",
+            "tr": "Yönlendirmeli İnceleme İş Akışı"
+          },
+          "description": {
+            "en": "A supervised workflow for reviewing document findings, outputs and approval checkpoints with the pilot team.",
+            "tr": "Doküman bulgularının, çıktıların ve onay noktalarının pilot ekiple birlikte incelendiği kontrollü iş akışı."
+          },
+          "link": {
+            "label_en": "Discuss a pilot",
+            "label_tr": "Pilot görüşmesi talep et",
+            "href": "/#pilot"
+          }
+        }
+      ]
+    },
+    {
+      "id": "planned",
+      "status": "planned",
+      "order": 30,
+      "title": {
+        "en": "Planned outputs",
+        "tr": "Planlanan çıktılar"
+      },
+      "description": {
+        "en": "These formats are planned and are not current public capabilities.",
+        "tr": "Bu formatlar planlanmaktadır ve mevcut public kabiliyetler değildir."
+      },
+      "items": [
+        {
+          "id": "docx-export",
+          "status": "planned",
+          "order": 10,
+          "title": {
+            "en": "DOCX Report Export",
+            "tr": "DOCX Rapor Çıktısı"
+          },
+          "description": {
+            "en": "Planned document-format reporting option. It is not currently presented as an available public capability.",
+            "tr": "Planlanan doküman formatında raporlama seçeneği. Şu anda kullanılabilir bir public kabiliyet olarak sunulmamaktadır."
+          }
+        },
+        {
+          "id": "pdf-export",
+          "status": "planned",
+          "order": 20,
+          "title": {
+            "en": "PDF Report Export",
+            "tr": "PDF Rapor Çıktısı"
+          },
+          "description": {
+            "en": "Planned fixed-format reporting option. It is not currently presented as an available public capability.",
+            "tr": "Planlanan sabit formatta raporlama seçeneği. Şu anda kullanılabilir bir public kabiliyet olarak sunulmamaktadır."
+          }
+        }
+      ]
+    },
+    {
+      "id": "future",
+      "status": "future",
+      "order": 40,
+      "title": {
+        "en": "Future direction",
+        "tr": "Gelecek yönü"
+      },
+      "description": {
+        "en": "Future product direction without availability or delivery commitments.",
+        "tr": "Erişilebilirlik veya teslim taahhüdü içermeyen gelecek ürün yönü."
+      },
+      "items": [
+        {
+          "id": "pptx-export",
+          "status": "future",
+          "order": 10,
+          "title": {
+            "en": "PPTX Executive Presentation Export",
+            "tr": "PPTX Yönetici Sunumu Çıktısı"
+          },
+          "description": {
+            "en": "Future presentation-format output intended for executive communication. Scope and availability may change.",
+            "tr": "Yönetici iletişimi için gelecekte değerlendirilmesi planlanan sunum formatı. Kapsam ve erişilebilirlik değişebilir."
+          }
+        },
+        {
+          "id": "production-portal",
+          "status": "future",
+          "order": 20,
+          "title": {
+            "en": "Production Portal Experience",
+            "tr": "Production Portal Deneyimi"
+          },
+          "description": {
+            "en": "Future authenticated portal direction. Scope and availability may change.",
+            "tr": "Geleceğe yönelik kimlik doğrulamalı portal yönü. Kapsam ve erişilebilirlik değişebilir."
+          }
+        }
+      ]
+    }
+  ]
+}
