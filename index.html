@@ -33,10 +33,11 @@
   <link rel="manifest" href="assets/brand/site.webmanifest?v=r-launch-7-f-transparent-icons-20260616">
   <link rel="stylesheet" href="assets/styles.css">
   <script src="assets/i18n.js" defer></script>
+  <script src="assets/product-experience.js" defer></script>
 
 
 </head>
-<body>
+<body class="home-page rc1-visual-preview">
   <header class="site-header p4b-site-header p4b-header-compact">
     <a class="brand p4b-brand p4b-brand-final" href="./" aria-label="SpecBridge AI home">
       <img class="p4b-brand-symbol-final" src="assets/brand/specbridge_ai_icon_color.png" alt="" width="52" height="52" aria-hidden="true">
@@ -89,49 +90,67 @@
       </div>
     </div>
 
-    <aside class="p4b-command-board" aria-label="SpecBridge Command Board mockup">
-      <div class="p4b-board-top">
+        <aside class="p4b-command-board rc1-dashboard" aria-label="SpecBridge compliance and risk preview">
+      <div class="rc1-dashboard-top">
         <div>
-          <p data-i18n="p4b_board_title">SpecBridge Komuta Paneli</p>
-          <strong data-i18n="p4b_board_subtitle">İnceleme paketi · Kontrollü pilot</strong>
+          <p data-i18n="rc1_board_eyebrow">Kontrollü karar yüzeyi</p>
+          <strong data-i18n="rc1_board_title">Uyumluluk ve risk görünümü</strong>
         </div>
-        <span data-i18n="p4b_board_status">İnsan onayı gerekli</span>
+        <span data-i18n="rc1_board_status">İnsan incelemesi gerekli</span>
       </div>
-
-      <div class="p4b-board-grid">
-        <article>
-          <span data-i18n="p4b_card_clause_label">Madde inceleme kuyruğu</span>
-          <strong data-i18n="p4b_card_clause_value">14 bulgu</strong>
-          <p data-i18n="p4b_card_clause_note">Risk işaretleri kaynak maddelerle bağlı kalır.</p>
-        </article>
-        <article>
-          <span data-i18n="p4b_card_evidence_label">Kanıt izi</span>
-          <strong data-i18n="p4b_card_evidence_value">Madde + gerekçe</strong>
-          <p data-i18n="p4b_card_evidence_note">Her öneri inceleme bağlamını korur.</p>
-        </article>
-        <article>
-          <span data-i18n="p4b_card_signal_label">Marka / ürün sinyalleri</span>
-          <strong data-i18n="p4b_card_signal_value">Şartname dilinden tespit</strong>
-          <p data-i18n="p4b_card_signal_note">Sinyaller otomatik ürün değişimi olmadan görünür olur.</p>
-        </article>
-        <article>
-          <span data-i18n="p4b_card_approval_label">Onay durumu</span>
-          <strong data-i18n="p4b_card_approval_value">3 bekleyen karar</strong>
-          <p data-i18n="p4b_card_approval_note">Nihai karar ekibinizde kalır.</p>
-        </article>
+      <div class="rc1-dashboard-metrics">
+        <article><span data-i18n="rc1_board_metric_1_label">İncelenen maddeler</span><strong data-i18n="rc1_board_metric_1_value">128</strong></article>
+        <article><span data-i18n="rc1_board_metric_2_label">Açık inceleme</span><strong data-i18n="rc1_board_metric_2_value">14</strong></article>
+        <article><span data-i18n="rc1_board_metric_3_label">Kanıt izi</span><strong data-i18n="rc1_board_metric_3_value">Madde bazlı</strong></article>
       </div>
-
-      <div class="p4b-board-flow" aria-label="SpecBridge workflow status">
-        <div><span>01</span><strong data-i18n="p4b_flow_1_title">Şartname ayrıştırıldı</strong><em data-i18n="p4b_flow_1_note">Kaynak maddeler indekslendi</em></div>
-        <div><span>02</span><strong data-i18n="p4b_flow_2_title">Riskler görünür</strong><em data-i18n="p4b_flow_2_note">Manuel inceleme kuyruğu hazır</em></div>
-        <div><span>03</span><strong data-i18n="p4b_flow_3_title">Rapor paketi</strong><em data-i18n="p4b_flow_3_note">İnsan onayı bekliyor</em></div>
+      <div class="rc1-dashboard-table" role="table" aria-label="Synthetic compliance matrix preview">
+        <div class="rc1-dashboard-row rc1-dashboard-head" role="row"><span role="columnheader" data-i18n="rc1_board_table_clause">Madde</span><span role="columnheader" data-i18n="rc1_board_table_requirement">Gereksinim</span><span role="columnheader" data-i18n="rc1_board_table_status">Durum</span></div>
+        <div class="rc1-dashboard-row" role="row"><span role="cell" data-i18n="rc1_board_row_1_clause">4.2</span><span role="cell" data-i18n="rc1_board_row_1_req">Garanti süresi</span><span role="cell" class="rc1-state-review" data-i18n="rc1_board_row_1_status">İncele</span></div>
+        <div class="rc1-dashboard-row" role="row"><span role="cell" data-i18n="rc1_board_row_2_clause">7.1</span><span role="cell" data-i18n="rc1_board_row_2_req">Teslimat planı</span><span role="cell" class="rc1-state-aligned" data-i18n="rc1_board_row_2_status">Uyumlu</span></div>
+        <div class="rc1-dashboard-row" role="row"><span role="cell" data-i18n="rc1_board_row_3_clause">9.4</span><span role="cell" data-i18n="rc1_board_row_3_req">SLA kanıtı</span><span role="cell" class="rc1-state-evidence" data-i18n="rc1_board_row_3_status">Kanıt gerekli</span></div>
       </div>
     </aside>
   </div>
 </section>
 <!-- SPECBRIDGE_POSITIONING_BLOCK_V1_END -->
 
-<section id="product-modules" class="section product-modules-section" aria-labelledby="product-modules-title">
+<section class="rc1-process-ribbon" aria-label="SpecBridge controlled workflow">
+  <ol>
+    <li><span>01</span><strong data-i18n="rc1_process_1">Dokümanı yapılandır</strong></li>
+    <li><span>02</span><strong data-i18n="rc1_process_2">Gereksinimleri çıkar</strong></li>
+    <li><span>03</span><strong data-i18n="rc1_process_3">Riskleri ve kanıtı eşleştir</strong></li>
+    <li><span>04</span><strong data-i18n="rc1_process_4">Ekibinizle inceleyin</strong></li>
+    <li><span>05</span><strong data-i18n="rc1_process_5">Kontrollü çıktıyı onaylayın</strong></li>
+  </ol>
+</section>
+
+<section id="product-story" class="section rc1-section rc1-product-story" aria-labelledby="rc1-story-title" data-rc1-story>
+  <div class="rc1-section-shell">
+    <div class="rc1-section-head">
+      <p class="eyebrow" data-i18n="rc1_story_eyebrow">Ürün deneyimi</p>
+      <h2 id="rc1-story-title" data-i18n="rc1_story_title">Şartnameyi karar akışına dönüştürün</h2>
+      <p data-i18n="rc1_story_intro">Her aşama kaynak maddeyi, yorumu, riski ve insan onayını aynı inceleme zincirinde tutar.</p>
+    </div>
+    <div class="rc1-story-frame">
+      <div class="rc1-tabs" role="tablist" aria-label="Product story stages">
+        <button type="button" role="tab" aria-selected="true" aria-controls="rc1-story-panel-1" id="rc1-story-tab-1" data-rc1-tab="story-1" data-i18n="rc1_story_tab_1">Yapılandır</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-story-panel-2" id="rc1-story-tab-2" data-rc1-tab="story-2" data-i18n="rc1_story_tab_2">İncele</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-story-panel-3" id="rc1-story-tab-3" data-rc1-tab="story-3" data-i18n="rc1_story_tab_3">Karşılaştır</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-story-panel-4" id="rc1-story-tab-4" data-rc1-tab="story-4" data-i18n="rc1_story_tab_4">Onayla</button>
+      </div>
+      <div class="rc1-story-panels">
+        <article id="rc1-story-panel-1" role="tabpanel" aria-labelledby="rc1-story-tab-1" data-rc1-panel="story-1"><span class="rc1-panel-index">01</span><h3 data-i18n="rc1_story_panel_1_title">Doküman yapısını görünür hale getirin</h3><p data-i18n="rc1_story_panel_1_text">Başlıklar, maddeler ve gereksinimler kontrollü inceleme için ayrıştırılır.</p></article>
+        <article id="rc1-story-panel-2" role="tabpanel" aria-labelledby="rc1-story-tab-2" data-rc1-panel="story-2"><span class="rc1-panel-index">02</span><h3 data-i18n="rc1_story_panel_2_title">Risk ve belirsizlikleri erkenden işaretleyin</h3><p data-i18n="rc1_story_panel_2_text">Teknik, ticari ve idari inceleme noktaları kaynak bağlamıyla birlikte gösterilir.</p></article>
+        <article id="rc1-story-panel-3" role="tabpanel" aria-labelledby="rc1-story-tab-3" data-rc1-panel="story-3"><span class="rc1-panel-index">03</span><h3 data-i18n="rc1_story_panel_3_title">Uyumluluk görünümünü ekipçe değerlendirin</h3><p data-i18n="rc1_story_panel_3_text">Eşleşmeler, gap notları ve kanıt ihtiyaçları aynı karar yüzeyinde karşılaştırılır.</p></article>
+        <article id="rc1-story-panel-4" role="tabpanel" aria-labelledby="rc1-story-tab-4" data-rc1-panel="story-4"><span class="rc1-panel-index">04</span><h3 data-i18n="rc1_story_panel_4_title">AI önerisini insan kararıyla ayırın</h3><p data-i18n="rc1_story_panel_4_text">Nihai yorum, düzeltme ve onay kullanıcılarınız ve ekibinizde kalır.</p></article>
+      </div>
+      <button type="button" class="rc1-pause-control" data-rc1-pause aria-pressed="false"><span data-rc1-pause-label data-i18n="rc1_story_pause">Otomatik akışı duraklat</span><span data-rc1-resume-label data-i18n="rc1_story_resume" hidden>Otomatik akışı sürdür</span></button>
+    </div>
+  </div>
+</section>
+
+
+<section id="product-modules" class="section product-modules-section rc1-product-modules" aria-labelledby="product-modules-title">
   <div class="section-shell product-modules-shell">
     <div class="section-eyebrow">Ürün modülleri</div>
 
@@ -202,6 +221,49 @@
         <h3>İnsan Onayı ve Rapor Paketi</h3>
         <p>AI önerileri ile onaylanmış çıktıları ayırır; incelenmiş sonucu kontrollü bir rapor paketi haline getirir.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+
+<section id="demo-flow" class="section rc1-section rc1-demo-flow" aria-labelledby="rc1-demo-title">
+  <div class="rc1-section-shell">
+    <div class="rc1-section-head rc1-section-head-light"><p class="eyebrow" data-i18n="rc1_demo_eyebrow">Sentetik demo akışı</p><h2 id="rc1-demo-title" data-i18n="rc1_demo_title">Beş adımda kontrollü inceleme</h2><p data-i18n="rc1_demo_intro">Bu görsel akış public dosya yükleme veya production işlem kanalı değildir.</p></div>
+    <div class="rc1-demo-layout">
+      <div class="rc1-demo-tabs" role="tablist" aria-label="Synthetic demo steps">
+        <button type="button" role="tab" aria-selected="true" aria-controls="rc1-demo-panel-1" id="rc1-demo-tab-1" data-rc1-tab="demo-1" data-i18n="rc1_demo_step_1">1. Doküman</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-demo-panel-2" id="rc1-demo-tab-2" data-rc1-tab="demo-2" data-i18n="rc1_demo_step_2">2. Ayrıştırma</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-demo-panel-3" id="rc1-demo-tab-3" data-rc1-tab="demo-3" data-i18n="rc1_demo_step_3">3. Analiz</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-demo-panel-4" id="rc1-demo-tab-4" data-rc1-tab="demo-4" data-i18n="rc1_demo_step_4">4. İnsan incelemesi</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-demo-panel-5" id="rc1-demo-tab-5" data-rc1-tab="demo-5" data-i18n="rc1_demo_step_5">5. Çıktı paketi</button>
+      </div>
+      <div class="rc1-demo-panels">
+        <article id="rc1-demo-panel-1" role="tabpanel" aria-labelledby="rc1-demo-tab-1" data-rc1-panel="demo-1"><span>01</span><h3 data-i18n="rc1_demo_panel_1_title">Sentetik veya onaylı içerikle başlayın</h3><p data-i18n="rc1_demo_panel_1_text">Public web sitesi gerçek veya gizli ihale dosyalarını kabul etmez.</p></article>
+        <article id="rc1-demo-panel-2" role="tabpanel" aria-labelledby="rc1-demo-tab-2" data-rc1-panel="demo-2"><span>02</span><h3 data-i18n="rc1_demo_panel_2_title">Maddeleri ve gereksinimleri yapılandırın</h3><p data-i18n="rc1_demo_panel_2_text">Doküman, inceleme için izlenebilir madde ve alanlara ayrılır.</p></article>
+        <article id="rc1-demo-panel-3" role="tabpanel" aria-labelledby="rc1-demo-tab-3" data-rc1-panel="demo-3"><span>03</span><h3 data-i18n="rc1_demo_panel_3_title">Risk, gap ve kanıt sinyallerini üretin</h3><p data-i18n="rc1_demo_panel_3_text">Çıktılar karar desteğidir; nihai uyumluluk veya hukuki görüş değildir.</p></article>
+        <article id="rc1-demo-panel-4" role="tabpanel" aria-labelledby="rc1-demo-tab-4" data-rc1-panel="demo-4"><span>04</span><h3 data-i18n="rc1_demo_panel_4_title">Ekibiniz bulguları incelesin</h3><p data-i18n="rc1_demo_panel_4_text">Öneriler düzenlenir, gerekçeler kontrol edilir ve açık noktalar sahiplenilir.</p></article>
+        <article id="rc1-demo-panel-5" role="tabpanel" aria-labelledby="rc1-demo-tab-5" data-rc1-panel="demo-5"><span>05</span><h3 data-i18n="rc1_demo_panel_5_title">Kontrollü rapor paketini oluşturun</h3><p data-i18n="rc1_demo_panel_5_text">Onaylanan görünüm JSON, HTML, XLSX, ZIP ve manifest formatlarıyla sunulabilir.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roles" class="section rc1-section rc1-roles" aria-labelledby="rc1-roles-title">
+  <div class="rc1-section-shell">
+    <div class="rc1-section-head"><p class="eyebrow" data-i18n="rc1_roles_eyebrow">Rol bazlı karar desteği</p><h2 id="rc1-roles-title" data-i18n="rc1_roles_title">Her ekip aynı kaynaktan farklı bir görünüm alır</h2></div>
+    <div class="rc1-role-layout">
+      <div class="rc1-role-tabs" role="tablist" aria-label="Decision support roles">
+        <button type="button" role="tab" aria-selected="true" aria-controls="rc1-role-panel-1" id="rc1-role-tab-1" data-rc1-tab="role-1" data-i18n="rc1_role_tab_1">Yönetici</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-role-panel-2" id="rc1-role-tab-2" data-rc1-tab="role-2" data-i18n="rc1_role_tab_2">Presales</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-role-panel-3" id="rc1-role-tab-3" data-rc1-tab="role-3" data-i18n="rc1_role_tab_3">Teknik</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="rc1-role-panel-4" id="rc1-role-tab-4" data-rc1-tab="role-4" data-i18n="rc1_role_tab_4">Uyumluluk</button>
+      </div>
+      <div class="rc1-role-panels">
+        <article id="rc1-role-panel-1" role="tabpanel" aria-labelledby="rc1-role-tab-1" data-rc1-panel="role-1"><h3 data-i18n="rc1_role_panel_1_title">Karar özeti ve ana riskler</h3><p data-i18n="rc1_role_panel_1_text">Teklif hazırlığı, temel engeller ve önerilen sonraki aksiyonlar öne çıkarılır.</p></article>
+        <article id="rc1-role-panel-2" role="tabpanel" aria-labelledby="rc1-role-tab-2" data-rc1-panel="role-2"><h3 data-i18n="rc1_role_panel_2_title">Gap, soru ve konumlandırma görünümü</h3><p data-i18n="rc1_role_panel_2_text">Presales ekibi açıklama sorularını, ürün sinyallerini ve kanıt ihtiyaçlarını izler.</p></article>
+        <article id="rc1-role-panel-3" role="tabpanel" aria-labelledby="rc1-role-tab-3" data-rc1-panel="role-3"><h3 data-i18n="rc1_role_panel_3_title">Madde bazlı teknik inceleme</h3><p data-i18n="rc1_role_panel_3_text">Gereksinimler, teknik uyum ve doğrulama ihtiyacı kaynak maddelerle bağlı kalır.</p></article>
+        <article id="rc1-role-panel-4" role="tabpanel" aria-labelledby="rc1-role-tab-4" data-rc1-panel="role-4"><h3 data-i18n="rc1_role_panel_4_title">İstisna ve onay takibi</h3><p data-i18n="rc1_role_panel_4_text">Açık maddeler, inceleme sahipleri ve insan onay durumu görünür tutulur.</p></article>
+      </div>
     </div>
   </div>
 </section>
@@ -398,6 +460,25 @@
           <p data-i18n="report_sales_text">Fırsat yeterliliği, müşteri soruları, ticari risk, konumlandırma riskleri ve presales aksiyonları.</p>
         </article>
       </div>
+
+      <div class="rc1-output-explorer" aria-labelledby="rc1-output-title">
+        <div class="rc1-output-heading"><p class="eyebrow" data-i18n="rc1_output_eyebrow">Kontrollü çıktı paketi</p><h3 id="rc1-output-title" data-i18n="rc1_output_title">Aynı incelemenin farklı teslim formatları</h3><p data-i18n="rc1_output_intro">Format seçimi yalnızca tarayıcı içi görsel önizlemeyi değiştirir; ağ çağrısı veya dosya üretimi yapmaz.</p></div>
+        <div class="rc1-output-tabs" role="tablist" aria-label="Report output formats">
+          <button type="button" role="tab" aria-selected="true" aria-controls="rc1-output-panel-json" id="rc1-output-tab-json" data-rc1-tab="output-json" data-i18n="rc1_output_tab_json">JSON</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="rc1-output-panel-html" id="rc1-output-tab-html" data-rc1-tab="output-html" data-i18n="rc1_output_tab_html">HTML</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="rc1-output-panel-xlsx" id="rc1-output-tab-xlsx" data-rc1-tab="output-xlsx" data-i18n="rc1_output_tab_xlsx">XLSX</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="rc1-output-panel-zip" id="rc1-output-tab-zip" data-rc1-tab="output-zip" data-i18n="rc1_output_tab_zip">ZIP</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="rc1-output-panel-manifest" id="rc1-output-tab-manifest" data-rc1-tab="output-manifest" data-i18n="rc1_output_tab_manifest">Manifest</button>
+        </div>
+        <div class="rc1-output-panels">
+          <article id="rc1-output-panel-json" role="tabpanel" aria-labelledby="rc1-output-tab-json" data-rc1-panel="output-json"><span>{ }</span><div><h4 data-i18n="rc1_output_json_title">Makine tarafından okunabilir yapı</h4><p data-i18n="rc1_output_json_text">Kontrollü sonraki işlemler ve denetlenebilirlik için yapılandırılmış sonuç görünümü.</p></div></article>
+          <article id="rc1-output-panel-html" role="tabpanel" aria-labelledby="rc1-output-tab-html" data-rc1-panel="output-html"><span>&lt;/&gt;</span><div><h4 data-i18n="rc1_output_html_title">Tarayıcıda okunabilir rapor</h4><p data-i18n="rc1_output_html_text">Yönetici ve ekip incelemesi için erişilebilir, paylaşılabilir statik görünüm.</p></div></article>
+          <article id="rc1-output-panel-xlsx" role="tabpanel" aria-labelledby="rc1-output-tab-xlsx" data-rc1-panel="output-xlsx"><span>XL</span><div><h4 data-i18n="rc1_output_xlsx_title">Madde bazlı uyumluluk matrisi</h4><p data-i18n="rc1_output_xlsx_text">Durum, risk, kanıt ve insan inceleme alanlarını tablo biçiminde taşır.</p></div></article>
+          <article id="rc1-output-panel-zip" role="tabpanel" aria-labelledby="rc1-output-tab-zip" data-rc1-panel="output-zip"><span>ZIP</span><div><h4 data-i18n="rc1_output_zip_title">Taşınabilir çıktı paketi</h4><p data-i18n="rc1_output_zip_text">Onaylı formatları tek kontrollü arşiv altında birleştirir.</p></div></article>
+          <article id="rc1-output-panel-manifest" role="tabpanel" aria-labelledby="rc1-output-tab-manifest" data-rc1-panel="output-manifest"><span>✓</span><div><h4 data-i18n="rc1_output_manifest_title">Paket envanteri ve bütünlük izi</h4><p data-i18n="rc1_output_manifest_text">Dosya listesi ve paket seviyesi doğrulama bilgileri için manifest görünümü.</p></div></article>
+        </div>
+      </div>
+
     </section>
 
     <section id="use-cases" class="section alt">
@@ -579,6 +660,14 @@
         </div>
       </div>
     </section>
+
+<section id="pilot-next-step" class="section rc1-section rc1-next-step" aria-labelledby="rc1-next-title">
+  <div class="rc1-next-shell">
+    <div><p class="eyebrow" data-i18n="rc1_next_eyebrow">Kontrollü sonraki adım</p><h2 id="rc1-next-title" data-i18n="rc1_next_title">Gerçek dokümanlardan önce sentetik karar paketini inceleyin</h2><p data-i18n="rc1_next_text">Demo görüşmesinde kapsam, veri yönetimi, saklama ve insan inceleme sınırları birlikte netleştirilir.</p></div>
+    <div class="rc1-next-actions"><a class="button primary" href="#pilot" data-i18n="rc1_next_primary">Demo talep et</a><a class="button secondary" href="samples/downloads/specbridge-ai-anonymized-sample-report-package/" data-i18n="rc1_next_secondary">Örnek paketi gör</a></div>
+  </div>
+</section>
+
 </main>
 
   <footer>
