@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
 <meta name="theme-color" content="#071425">
 <link rel="icon" href="../assets/brand/specbridge_ai_favicon_transparent_32_v20260616.png" sizes="32x32" type="image/png">
-<link rel="stylesheet" href="assets/kayas.css?v=20260802-2">
+<link rel="stylesheet" href="assets/kayas.css?v=20260802-3">
 </head>
 <body>
 <div id="loginView">
@@ -37,7 +37,7 @@
     <div class="h3c-wordmark" aria-label="H3C">H3C</div>
   </div>
   <div class="nav-actions">
-    <nav class="nav"><a href="#overview">Özet</a><a href="#gantt">Gantt</a><a href="#visuals">Görseller</a><a href="#requirements">Gereksinimler</a><a href="#risks">Riskler</a><a href="#commissioning">Commissioning</a></nav>
+    <nav class="nav"><a href="#overview">Özet</a><a href="#gantt">Gantt</a><a href="#visuals">Görseller</a><a href="#documents">Raporlar</a><a href="#requirements">Gereksinimler</a><a href="#risks">Riskler</a><a href="#commissioning">Commissioning</a></nav>
     <button class="icon-btn" id="themeBtn" title="Tema değiştir">◐</button>
     <button class="icon-btn" id="logoutBtn" title="Çıkış">Çıkış</button>
   </div>
@@ -86,7 +86,7 @@
 
  <section id="visuals">
   <div class="wrap">
-   <div class="section-head"><div><h2>Konsept görseller ve 3D deneyim</h2><p>Veri salonu, ziyaretçi deneyimi, güç odaları ve doğu terası için hazırlanan konsept çalışma. Görseller nihai IFC tasarım yerine geçmez.</p></div></div>
+   <div class="section-head"><div><h2>Konsept görseller ve 3D deneyim</h2><p>Veri salonu, ziyaretçi deneyimi, güç odaları ve doğu terası için hazırlanan konsept çalışma. Görseller nihai IFC tasarım yerine geçmez.</p></div><div class="section-tools"><a class="btn small" href="https://drive.google.com/drive/folders/10ivsA-uBpfoU8Vh9VHZ-BLtbeetRzbZq" target="_blank" rel="noopener">24 Görselin Tamamı</a><button class="btn small" onclick="openExistingWalkthrough()">Walkthrough Tam Ekran</button></div></div>
    <div class="visual-grid" id="galleryGrid"></div>
    <div class="media-grid" style="margin-top:16px">
     <article class="card three-card">
@@ -138,6 +138,23 @@
   </div>
  </section>
 
+ <section id="documents" class="page-break">
+  <div class="wrap">
+   <div class="section-head"><div><h2>Walkthrough ve sonuç raporu</h2><p>Yatırımcı incelemesi için interaktif 3D model, profesyonel proje raporu ve temel çalışma dosyalarına tek noktadan erişim.</p></div><span class="pill ready">Yatırımcı Paketi</span></div>
+   <div class="document-grid">
+    <article class="card document-card walkthrough-doc">
+      <div class="document-preview"><div class="doc-visual walkthrough-visual"><span>3D</span><strong>KAYAS Walkthrough</strong><small>Giriş · Data Hall · IC8000 · NOC · Üst görünüm</small></div></div>
+      <div class="document-copy"><span class="pill plan">İnteraktif</span><h3>3D Walkthrough ve alan modeli</h3><p>Oluşturulan tek dosyalı H3C markalı modeli portal içinde tam ekran açın. Fare, dokunmatik ekran ve mobil cihaz hareketleriyle gezilebilir.</p><div class="doc-actions"><button class="btn primary" onclick="openExistingWalkthrough()">Walkthrough’u Aç</button><a class="btn" href="https://drive.google.com/file/d/1Y_P2iS8zqqKVtrXHY2ZteyBxSPGMjHCz/view" target="_blank" rel="noopener">Yeni Sekmede</a></div></div>
+    </article>
+    <article class="card document-card report-doc">
+      <div class="document-preview"><div class="doc-visual report-visual"><span>PDF</span><strong>Profesyonel Proje Raporu</strong><small>Yönetici özeti · Teknik çerçeve · Program · Riskler</small></div></div>
+      <div class="document-copy"><span class="pill ready">Sonuç Raporu</span><h3>KAYAS Data Center Professional Project Report v1</h3><p>Yatırımcı ve karar vericiler için hazırlanan profesyonel sonuç raporunu portal içinde görüntüleyin veya PDF olarak indirin.</p><div class="doc-actions"><button class="btn primary" onclick="openPortalFrame('https://drive.google.com/file/d/1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E/preview','KAYAS Sonuç Raporu')">Raporu Görüntüle</button><a class="btn" href="https://drive.google.com/uc?export=download&id=1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E" target="_blank" rel="noopener">PDF İndir</a></div></div>
+    </article>
+   </div>
+   <div class="card file-register"><div><strong>Kaynak dosyalar</strong><span>Master Requirements & Gantt, rapor, 3D model ve konsept görsel paketi</span></div><div class="file-links"><a class="btn small" href="https://drive.google.com/file/d/1ciaxMO898524TlnsRpRkgnKJ-6S1Ajzz/view" target="_blank" rel="noopener">Master Gantt XLSX</a><a class="btn small" href="https://drive.google.com/drive/folders/10ivsA-uBpfoU8Vh9VHZ-BLtbeetRzbZq" target="_blank" rel="noopener">Görsel Paketi</a></div></div>
+  </div>
+ </section>
+
  <section id="requirements" class="page-break">
   <div class="wrap">
    <div class="section-head"><div><h2>Modüler veri merkezi dışı gereksinimler</h2><p>Bina, elektrik, mekanik, fiber, yangın, güvenlik, operasyon ve yönetişim dahil 156 maddelik gereksinim matrisi.</p></div><div class="section-tools"><button class="btn small" onclick="downloadRequirements()">Gereksinim CSV</button></div></div>
@@ -184,15 +201,11 @@
 <div class="toast" id="toast"></div>
 
 
-<script src="assets/payload-init.js?v=20260802-2"></script>
-<script src="assets/payload-00.js?v=20260802-2"></script>
-<script src="assets/payload-01.js?v=20260802-2"></script>
-<script src="assets/payload-02.js?v=20260802-2"></script>
-<script src="assets/payload-03.js?v=20260802-2"></script>
-<script src="assets/payload-04.js?v=20260802-2"></script>
-<script src="assets/payload-05.js?v=20260802-2"></script>
-<script src="assets/payload-06.js?v=20260802-2"></script>
-<script src="assets/payload-07.js?v=20260802-2"></script>
-<script src="assets/kayas-app.js?v=20260802-2"></script>
+<script src="assets/payload-init.js?v=20260802-5"></script>
+<script src="assets/payload-c00.js?v=20260802-5"></script>
+<script src="assets/payload-c01.js?v=20260802-5"></script>
+<script src="assets/payload-c02.js?v=20260802-5"></script>
+<script src="assets/payload-c03.js?v=20260802-5"></script>
+<script src="assets/kayas-app-gzip.js?v=20260802-5"></script>
 </body>
 </html>
