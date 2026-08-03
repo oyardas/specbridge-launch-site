@@ -1,12 +1,11 @@
 {
-  "pass": true,
+  "pass": false,
   "version": "v19",
-  "timestamp": "2026-08-03T13:14:35.584Z",
+  "timestamp": "2026-08-03T13:23:16.897Z",
   "pageErrors": [
-    "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n\n    at /tmp/kayas-v19-smoke/smoke.js:66:16"
+    "locator.hover: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#scene')\n    - locator resolved to <canvas id=\"scene\" width=\"1536\" height=\"960\" data-engine=\"three.js r166\" aria-label=\"KAYAS OSB görsel katmanlı 3D gezilebilir veri merkezi modeli\"></canvas>\n  - attempting hover action\n    - waiting for element to be visible and stable\n    - element is visible and stable\n    - scrolling into view if needed\n    - done scrolling\n    - performing hover action\n\n    at /tmp/kayas-v19-smoke/smoke.js:48:18"
   ],
   "consoleErrors": [
-    "Failed to load resource: the server responded with a status of 404 (File not found)",
     "Failed to load resource: the server responded with a status of 404 (File not found)",
     "Failed to load resource: the server responded with a status of 404 (File not found)",
     "Failed to load resource: the server responded with a status of 404 (File not found)",
@@ -19,7 +18,7 @@
       "error": "net::ERR_ABORTED"
     },
     {
-      "url": "blob:http://127.0.0.1:8000/50077320-4426-45ee-a40a-89f3e52b1e7b",
+      "url": "blob:http://127.0.0.1:8000/c94f249b-0dc9-416c-a544-8352aa2a8a36",
       "error": "net::ERR_ABORTED"
     },
     {
@@ -30,27 +29,5 @@
       "url": "https://drive.google.com/uc?export=view&id=1TKKF1NsETSk68T0xbZa86DThc4dJ2gwT",
       "error": "net::ERR_BLOCKED_BY_ORB"
     }
-  ],
-  "before": {
-    "collapsed": false,
-    "scale": "0.5 m",
-    "lineWidth": "127.4px",
-    "counts": {
-      "racks": 200,
-      "leds": 1400,
-      "screens": 28
-    },
-    "visualError": null,
-    "ready": true,
-    "modelMode": "authoritative-v8-geometry-locked-v19"
-  },
-  "afterPanel": {
-    "collapsed": true,
-    "ariaHidden": "true",
-    "edgeText": "›"
-  },
-  "afterZoom": {
-    "scale": "0.5 m",
-    "lineWidth": "127.4px"
-  }
+  ]
 }
