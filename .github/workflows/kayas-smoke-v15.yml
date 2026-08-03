@@ -1,0 +1,132 @@
+name: Validate KAYAS Offline Walkthrough v15
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-smoke-v15.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-smoke-v15
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify published assets exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s kayas/walkthrough/vendor/three.global.r166.js
+          test -s kayas/walkthrough/model-loader.js
+          for n in 01 02 03 04 05 06 07; do test -s "kayas/walkthrough/src/chunks/model-$n.txt"; done
+          grep -q 'model-loader.js?v=20260803-v15' kayas/walkthrough/index.html
+          grep -q "const ASSET_VERSION = '20260803-v15'" kayas/walkthrough/model-loader.js
+          grep -q 'window.THREE = THREE;' kayas/walkthrough/vendor/three.global.r166.js
+          node --check kayas/walkthrough/vendor/three.global.r166.js
+          node --check kayas/walkthrough/model-loader.js
+
+      - name: Install Playwright Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-smoke
+          cd /tmp/kayas-smoke
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run local HTTP and WebGL smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-smoke/smoke.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const result = { pass: false, timestamp: new Date().toISOString(), errors: [], consoleErrors: [] };
+            let browser;
+            try {
+              browser = await chromium.launch({
+                headless: true,
+                args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist', '--disable-dev-shm-usage']
+              });
+              const page = await browser.newPage({ viewport: { width: 1536, height: 960 } });
+              page.on('console', msg => {
+                if (msg.type() === 'error') result.consoleErrors.push(msg.text());
+              });
+              page.on('pageerror', error => result.errors.push(error.message));
+              page.on('requestfailed', request => result.errors.push('REQUEST_FAILED ' + request.url() + ' :: ' + (request.failure()?.errorText || 'unknown')));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?smoke=20260803-v15', { waitUntil: 'domcontentloaded', timeout: 30000 });
+              await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true || window.__KAYAS_LOADER_ERROR, null, { timeout: 120000 });
+              const state = await page.evaluate(() => ({
+                ready: window.__KAYAS_MODEL_READY === true,
+                mode: window.__KAYAS_MODEL_MODE || null,
+                loaderError: window.__KAYAS_LOADER_ERROR || null,
+                threeRevision: window.THREE && window.THREE.REVISION,
+                canvas: (() => { const c = document.getElementById('scene'); return c ? { width: c.width, height: c.height } : null; })(),
+                loadStatus: (() => { const s = document.getElementById('loadStatus'); return s ? { hidden: s.hidden, title: s.querySelector('strong')?.textContent, message: s.querySelector('span')?.textContent } : null; })()
+              }));
+              Object.assign(result, state);
+              result.pass = state.ready === true && !!state.threeRevision && state.canvas && state.canvas.width > 0 && state.canvas.height > 0;
+              await page.screenshot({ path: '/tmp/kayas-smoke/kayas-v15-smoke.png', fullPage: true });
+            } catch (error) {
+              result.errors.push(error.stack || error.message || String(error));
+            } finally {
+              if (browser) await browser.close();
+              fs.writeFileSync('/tmp/kayas-smoke/status.json', JSON.stringify(result, null, 2));
+              console.log(JSON.stringify(result, null, 2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-smoke
+          node smoke.js
+
+      - name: Publish smoke result in repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/kayas-smoke/status.json kayas/walkthrough/smoke-status-v15.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kayas/walkthrough/smoke-status-v15.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record KAYAS walkthrough v15 browser smoke result [skip ci]'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload screenshot and status
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v15-smoke
+          path: |
+            /tmp/kayas-smoke/status.json
+            /tmp/kayas-smoke/kayas-v15-smoke.png
+          if-no-files-found: warn
+
+      - name: Enforce smoke result
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path('/tmp/kayas-smoke/status.json').read_text())
+          if not result.get('pass'):
+              raise SystemExit('KAYAS browser smoke failed: ' + json.dumps(result, ensure_ascii=False))
+          print('KAYAS_BROWSER_SMOKE=PASS')
+          PY
