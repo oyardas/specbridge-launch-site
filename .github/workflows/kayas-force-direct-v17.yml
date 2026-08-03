@@ -1,0 +1,50 @@
+name: Force Direct Authoritative KAYAS Loader v17
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-force-direct-v17.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Replace model loader cache key
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('kayas/walkthrough/index.html')
+          text = p.read_text(encoding='utf-8')
+          text, count = re.subn(
+              r'model-loader\.js\?v=[^"<]+',
+              'model-loader.js?v=20260803-direct-v17',
+              text,
+          )
+          if count != 1:
+              raise SystemExit(f'Expected one loader reference, found {count}')
+          p.write_text(text, encoding='utf-8')
+          PY
+          grep -q 'model-loader.js?v=20260803-direct-v17' kayas/walkthrough/index.html
+      - name: Commit updated HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kayas/walkthrough/index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Force direct authoritative KAYAS loader v17 [skip ci]'
+          git push origin HEAD:main
