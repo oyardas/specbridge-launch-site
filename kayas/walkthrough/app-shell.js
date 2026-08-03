@@ -2,13 +2,40 @@
   'use strict';
   const AUTH_KEY='kayas_walkthrough_auth_until';
   const EXPECTED='13a9e92799eaf7515a82f73b4a2b3026a568dae3db4e35b5f4f4562b1d67bef7';
+  const DOCUMENTS={
+    field:{preview:'https://drive.google.com/file/d/1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E/preview',download:'https://drive.google.com/uc?export=download&id=1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E'},
+    professional:{preview:'https://drive.google.com/file/d/1aeKUOlvBk8St3v2bBzZ1muS_RoleiQR6/preview',download:'https://drive.google.com/uc?export=download&id=1aeKUOlvBk8St3v2bBzZ1muS_RoleiQR6'},
+    gantt:{preview:'https://docs.google.com/spreadsheets/d/1PsE1cOZDZsKGeXKBAFRRpCilVaHSxABm/edit',download:'https://drive.google.com/uc?export=download&id=1PsE1cOZDZsKGeXKBAFRRpCilVaHSxABm'}
+  };
+
+  function configureDocuments(){
+    const items=document.querySelectorAll('.report-item[data-report-title]');
+    items.forEach(item=>{
+      const title=item.getAttribute('data-report-title')||'';
+      let doc=null;
+      if(title==='Saha Fizibilite Raporu')doc=DOCUMENTS.field;
+      else if(title==='Modüler Veri Merkezi Dışı Gereksinimler'||title==='Açılış Hazırlık Planı')doc=DOCUMENTS.professional;
+      else if(title==='Master Uygulama Takvimi')doc=DOCUMENTS.gantt;
+      if(!doc)return;
+      item.setAttribute('data-report-src',doc.preview);
+      item.setAttribute('data-report-download',doc.download);
+    });
+    const frame=document.getElementById('reportFrame');
+    const open=document.getElementById('reportOpen');
+    const download=document.getElementById('reportDownload');
+    if(frame)frame.src=DOCUMENTS.field.preview;
+    if(open)open.href=DOCUMENTS.field.preview;
+    if(download)download.href=DOCUMENTS.field.download;
+  }
+  configureDocuments();
+
   const gate=document.getElementById('loginGate');
   const user=document.getElementById('loginUser');
   const pass=document.getElementById('loginPass');
   const error=document.getElementById('loginError');
   async function sha256(value){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}
   function unlock(){if(gate)gate.classList.add('is-hidden');setTimeout(()=>window.dispatchEvent(new Event('resize')),120);}
-  if(Number(localStorage.getItem(AUTH_KEY)||0)>Date.now()) unlock();
+  if(Number(localStorage.getItem(AUTH_KEY)||0)>Date.now())unlock();
   const loginButton=document.getElementById('loginButton');
   if(loginButton){loginButton.addEventListener('click',async()=>{error.textContent='';const ok=await sha256(user.value.trim()+':'+pass.value);if(ok===EXPECTED){localStorage.setItem(AUTH_KEY,String(Date.now()+8*60*60*1000));unlock();}else{error.textContent='Kullanıcı adı veya şifre hatalı.';pass.select();}});}
   [user,pass].filter(Boolean).forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='Enter'&&loginButton)loginButton.click();}));
@@ -34,8 +61,8 @@
   function show(index){
     current=(index+steps.length)%steps.length;
     const [view,no,label]=steps[current];
-    const b=document.querySelector('[data-view="'+view+'"]');
-    if(b)b.click();
+    const button=document.querySelector('[data-view="'+view+'"]');
+    if(button)button.click();
     if(step)step.textContent=no;
     if(title)title.textContent=label;
     if(progress)progress.style.width=((current+1)/steps.length*100)+'%';
@@ -53,12 +80,12 @@
   const activeKeys=new Set();
   function keyDown(code,button){if(activeKeys.has(code))return;activeKeys.add(code);button&&button.classList.add('is-pressed');window.dispatchEvent(new KeyboardEvent('keydown',{code,key:code,bubbles:true}));}
   function keyUp(code,button){activeKeys.delete(code);button&&button.classList.remove('is-pressed');window.dispatchEvent(new KeyboardEvent('keyup',{code,key:code,bubbles:true}));}
-  document.querySelectorAll('[data-key]').forEach(btn=>{
-    const code=btn.dataset.key;
-    ['pointerdown','touchstart'].forEach(type=>btn.addEventListener(type,e=>{e.preventDefault();keyDown(code,btn);},{passive:false}));
-    ['pointerup','pointercancel','pointerleave','touchend','touchcancel'].forEach(type=>btn.addEventListener(type,e=>{e.preventDefault();keyUp(code,btn);},{passive:false}));
+  document.querySelectorAll('[data-key]').forEach(button=>{
+    const code=button.dataset.key;
+    ['pointerdown','touchstart'].forEach(type=>button.addEventListener(type,event=>{event.preventDefault();keyDown(code,button);},{passive:false}));
+    ['pointerup','pointercancel','pointerleave','touchend','touchcancel'].forEach(type=>button.addEventListener(type,event=>{event.preventDefault();keyUp(code,button);},{passive:false}));
   });
-  window.addEventListener('blur',()=>document.querySelectorAll('[data-key]').forEach(btn=>keyUp(btn.dataset.key,btn)));
+  window.addEventListener('blur',()=>document.querySelectorAll('[data-key]').forEach(button=>keyUp(button.dataset.key,button)));
 
-  setTimeout(()=>{const s=document.getElementById('loadStatus');if(s&&!s.hidden)s.hidden=true;},14000);
+  setTimeout(()=>{const loading=document.getElementById('loadStatus');if(loading&&!loading.hidden)loading.hidden=true;},14000);
 })();
