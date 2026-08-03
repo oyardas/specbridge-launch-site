@@ -1,0 +1,97 @@
+name: Install Verified KAYAS v20.1 Runtime
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-install-v20-1-runtime.yml
+      - kayas/walkthrough/install-v20-1-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-install-v20-1-runtime
+  cancel-in-progress: false
+
+jobs:
+  install:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify v20.1 runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET=/tmp/KAYAS_v20_1_Cinematic_Runtime.js
+          EXPECTED_SIZE=34682
+          EXPECTED_SHA=cff5cf706d44dc9aaf05765b4abaf1bdfcd35c6e845dd7eae4d8ae308c4eab3b
+          download() {
+            rm -f "$TARGET"
+            curl -L --fail --retry 5 --retry-delay 2 --connect-timeout 20 --max-time 180 "$1" -o "$TARGET"
+          }
+          validate() {
+            test -s "$TARGET" || return 1
+            test "$(wc -c < "$TARGET")" -eq "$EXPECTED_SIZE" || return 1
+            test "$(sha256sum "$TARGET" | awk '{print $1}')" = "$EXPECTED_SHA" || return 1
+            node --check "$TARGET" >/dev/null || return 1
+            grep -q "20260803-v20-1-cinematic" "$TARGET" || return 1
+            grep -q "modelStable" "$TARGET" || return 1
+          }
+          download 'https://drive.usercontent.google.com/download?id=1VeXDQ-t7zd37N-J8H_psXbp0kB-A632E&export=download&authuser=0&confirm=t' || true
+          if ! validate; then
+            download 'https://drive.google.com/uc?export=download&id=1VeXDQ-t7zd37N-J8H_psXbp0kB-A632E&confirm=t'
+            validate
+          fi
+          echo "RUNTIME_BYTES=$(wc -c < "$TARGET")"
+          echo "RUNTIME_SHA256=$(sha256sum "$TARGET" | awk '{print $1}')"
+
+      - name: Install stable runtime and rotate cache keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/KAYAS_v20_1_Cinematic_Runtime.js kayas/walkthrough/v20-runtime.js
+          cp /tmp/KAYAS_v20_1_Cinematic_Runtime.js kayas/walkthrough/v19-runtime.js
+          node --check kayas/walkthrough/v20-runtime.js
+          cmp kayas/walkthrough/v20-runtime.js kayas/walkthrough/v19-runtime.js
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          shell = Path('kayas/walkthrough/app-shell.js')
+          text = shell.read_text(encoding='utf-8')
+          text = text.replace('v20-enhancements.css?v=20260803-v20-cinematic', 'v20-enhancements.css?v=20260803-v20-1-cinematic')
+          text = text.replace('v20-runtime.js?v=20260803-v20-cinematic', 'v20-runtime.js?v=20260803-v20-1-cinematic')
+          if 'v20-runtime.js?v=20260803-v20-1-cinematic' not in text:
+              raise SystemExit('v20.1 runtime reference missing in app-shell.js')
+          shell.write_text(text, encoding='utf-8')
+
+          index = Path('kayas/walkthrough/index.html')
+          html = index.read_text(encoding='utf-8')
+          html = re.sub(r'v20-enhancements\.css\?v=[^"\']+', 'v20-enhancements.css?v=20260803-v20-1-cinematic', html)
+          html = re.sub(r'app-shell\.js\?v=[^"\']+', 'app-shell.js?v=20260803-v20-1-cinematic', html)
+          index.write_text(html, encoding='utf-8')
+          PY
+          node --check kayas/walkthrough/app-shell.js
+          grep -q 'v20-runtime.js?v=20260803-v20-1-cinematic' kayas/walkthrough/app-shell.js
+          grep -q 'app-shell.js?v=20260803-v20-1-cinematic' kayas/walkthrough/index.html
+
+      - name: Commit v20.1 runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/v20-runtime.js kayas/walkthrough/v19-runtime.js kayas/walkthrough/index.html kayas/walkthrough/app-shell.js
+          if git diff --cached --quiet; then
+            echo 'KAYAS v20.1 already installed.'
+            exit 0
+          fi
+          git commit -m 'Install KAYAS v20.1 after authoritative model readiness [skip ci]'
+          git push origin HEAD:main
