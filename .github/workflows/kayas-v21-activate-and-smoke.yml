@@ -1,0 +1,178 @@
+name: Activate and Validate KAYAS v21 Professional Layer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v21-activate-and-smoke.yml
+      - kayas/walkthrough/v21-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v21-professional
+  cancel-in-progress: false
+
+jobs:
+  activate-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Activate V21 cache keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('kayas/walkthrough/index.html')
+          text = p.read_text(encoding='utf-8')
+          text, count = re.subn(
+              r'app-shell\.js\?v=[^"<]+',
+              'app-shell.js?v=20260803-v21-professional',
+              text,
+          )
+          if count != 1:
+              raise SystemExit(f'Expected one app-shell reference, found {count}')
+          p.write_text(text, encoding='utf-8')
+          PY
+          grep -q 'app-shell.js?v=20260803-v21-professional' kayas/walkthrough/index.html
+          node --check kayas/walkthrough/app-shell.js
+          node --check kayas/walkthrough/v21-runtime.js
+          test -s kayas/walkthrough/v21-fixes.css
+
+      - name: Install Playwright Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v21-smoke
+          cd /tmp/kayas-v21-smoke
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run local V21 acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v21-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v21-smoke/smoke.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const result = {
+              pass: false,
+              version: 'v21-professional',
+              errors: [],
+              failedRequests: [],
+              timestamp: new Date().toISOString()
+            };
+            let browser;
+            try {
+              browser = await chromium.launch({
+                headless: true,
+                args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist', '--disable-dev-shm-usage']
+              });
+              const page = await browser.newPage({ viewport: { width: 1536, height: 960 } });
+              page.on('pageerror', e => result.errors.push(e.message));
+              page.on('requestfailed', r => result.failedRequests.push({ url: r.url(), error: r.failure()?.errorText || 'unknown' }));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?smoke=v21', { waitUntil: 'domcontentloaded', timeout: 30000 });
+              await page.evaluate(() => {
+                localStorage.setItem('kayas_walkthrough_auth_until', String(Date.now() + 3600000));
+              });
+              await page.reload({ waitUntil: 'domcontentloaded' });
+              await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true && window.__KAYAS_V21_STATE__, null, { timeout: 120000 });
+              await page.waitForTimeout(2500);
+
+              const themeButton = page.locator('#themeButton');
+              const initialTheme = await page.locator('html').getAttribute('data-theme');
+              await themeButton.click();
+              await page.waitForTimeout(300);
+              const toggledTheme = await page.locator('html').getAttribute('data-theme');
+
+              await page.locator('[data-panel="gallery"]').click();
+              await page.waitForTimeout(200);
+              const galleryState = await page.evaluate(() => ({
+                view: document.body.dataset.activeView,
+                drawerHidden: document.getElementById('customerDrawer').hidden,
+                galleryHidden: document.querySelector('[data-content="gallery"]').hidden,
+                reportsHidden: document.querySelector('[data-content="reports"]').hidden
+              }));
+
+              await page.locator('[data-panel="reports"]').click();
+              await page.waitForTimeout(200);
+              const reportsState = await page.evaluate(() => ({
+                view: document.body.dataset.activeView,
+                drawerHidden: document.getElementById('customerDrawer').hidden,
+                galleryHidden: document.querySelector('[data-content="gallery"]').hidden,
+                reportsHidden: document.querySelector('[data-content="reports"]').hidden
+              }));
+
+              const runtime = await page.evaluate(() => ({
+                modelReady: window.__KAYAS_MODEL_READY === true,
+                activeView: window.__KAYAS_ACTIVE_VIEW__,
+                v21: window.__KAYAS_V21_STATE__ ? {
+                  installed: window.__KAYAS_V21_STATE__.installed,
+                  replacedPeople: window.__KAYAS_V21_STATE__.replacedPeople,
+                  replacedPlants: window.__KAYAS_V21_STATE__.replacedPlants,
+                  enhancedRacks: window.__KAYAS_V21_STATE__.enhancedRacks
+                } : null,
+                canvas: (() => { const c = document.getElementById('scene'); return c ? { width: c.width, height: c.height } : null; })()
+              }));
+
+              result.initialTheme = initialTheme;
+              result.toggledTheme = toggledTheme;
+              result.galleryState = galleryState;
+              result.reportsState = reportsState;
+              result.runtime = runtime;
+              result.pass = initialTheme !== toggledTheme &&
+                galleryState.view === 'gallery' && galleryState.drawerHidden === false && galleryState.galleryHidden === false && galleryState.reportsHidden === true &&
+                reportsState.view === 'reports' && reportsState.drawerHidden === false && reportsState.galleryHidden === true && reportsState.reportsHidden === false &&
+                runtime.modelReady === true && runtime.v21 && runtime.v21.installed === true &&
+                runtime.canvas && runtime.canvas.width > 300 && runtime.canvas.height > 150 &&
+                result.errors.length === 0;
+              await page.screenshot({ path: '/tmp/kayas-v21-smoke/screenshot.png', fullPage: true });
+            } catch (error) {
+              result.errors.push(error.stack || error.message || String(error));
+            } finally {
+              if (browser) await browser.close();
+              fs.writeFileSync('/tmp/kayas-v21-smoke/status.json', JSON.stringify(result, null, 2));
+              console.log(JSON.stringify(result, null, 2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-v21-smoke
+          node smoke.js
+
+      - name: Enforce and publish result
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/kayas-v21-smoke/status.json kayas/walkthrough/smoke-status-v21.json
+          node -e "const r=require('/tmp/kayas-v21-smoke/status.json'); if(!r.pass){console.error(r); process.exit(1)}"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v21.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Activate KAYAS v21 professional layer and record smoke PASS [skip ci]'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v21-professional-acceptance
+          path: |
+            /tmp/kayas-v21-smoke/status.json
+            /tmp/kayas-v21-smoke/screenshot.png
+          if-no-files-found: warn
