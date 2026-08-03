@@ -1,0 +1,38 @@
+{
+  "pass": false,
+  "version": "direct-v17",
+  "timestamp": "2026-08-03T10:40:01.403Z",
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "[KAYAS] Tam v8 model dosyası yüklenemedi: Kaynak 1 ağ veya MIME hatası | Kaynak 2 ağ veya MIME hatası",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ],
+  "failedRequests": [
+    {
+      "url": "https://drive.usercontent.google.com/download?id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&export=download&authuser=0&confirm=t",
+      "error": "net::ERR_BLOCKED_BY_ORB"
+    },
+    {
+      "url": "https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&confirm=t",
+      "error": "net::ERR_BLOCKED_BY_ORB"
+    }
+  ],
+  "ready": false,
+  "mode": null,
+  "source": null,
+  "loaderError": {
+    "stage": "authoritative-direct-script",
+    "message": "Tam v8 model dosyası yüklenemedi: Kaynak 1 ağ veya MIME hatası | Kaynak 2 ağ veya MIME hatası"
+  },
+  "canvas": {
+    "width": 300,
+    "height": 150
+  },
+  "status": {
+    "hidden": false,
+    "title": "3D deneyim açılamadı",
+    "message": "Tam v8 model dosyası yüklenemedi: Kaynak 1 ağ veya MIME hatası | Kaynak 2 ağ veya MIME hatası"
+  }
+}
