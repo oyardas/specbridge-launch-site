@@ -1,4 +1,4 @@
-trigger=2026-08-03T16:05:00+03:00
+trigger=2026-08-03T16:12:00+03:00
 acceptance=panel-hide,dynamic-leds,live-screens,dynamic-scale
-engine-capture=pre-model-gallery-manifest
-attempt=2
+script-order=engine-capture,model,v19-runtime,app-shell
+attempt=3
