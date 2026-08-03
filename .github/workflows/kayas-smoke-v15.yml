@@ -1,4 +1,4 @@
-name: Install KAYAS Authoritative Same-Origin Bundle
+name: Validate KAYAS Same-Origin v18 in Chromium
 
 on:
   push:
@@ -11,93 +11,151 @@ permissions:
   contents: write
 
 concurrency:
-  group: kayas-authoritative-bundle-install
+  group: kayas-same-origin-v18-smoke
   cancel-in-progress: false
 
 jobs:
-  install:
+  smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Download, verify, install and record result
-        shell: bash
-        run: |
-          set -u
-          mkdir -p /tmp/kayas-install kayas/walkthrough/src
-          EXPECTED_SIZE=1371713
-          EXPECTED_SHA=003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d
-          TARGET=/tmp/kayas-install/source.js
-          LOG=/tmp/kayas-install/attempts.log
-          VALID=false
-          : > "$LOG"
-
-          for URL in \
-            'https://drive.usercontent.google.com/download?id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&export=download&authuser=0&confirm=t' \
-            'https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&confirm=t'
-          do
-            rm -f "$TARGET" /tmp/kayas-install/headers.txt
-            echo "URL=$URL" >> "$LOG"
-            curl -L -sS --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 180 \
-              -D /tmp/kayas-install/headers.txt "$URL" -o "$TARGET"
-            RC=$?
-            SIZE=$(wc -c < "$TARGET" 2>/dev/null || echo 0)
-            SHA=$(sha256sum "$TARGET" 2>/dev/null | awk '{print $1}')
-            TYPE=$(file -b --mime-type "$TARGET" 2>/dev/null || echo unknown)
-            echo "curl_rc=$RC size=$SIZE sha=$SHA type=$TYPE" >> "$LOG"
-            cat /tmp/kayas-install/headers.txt >> "$LOG" 2>/dev/null || true
-            echo >> "$LOG"
-            if [ "$RC" -eq 0 ] && [ "$SIZE" -eq "$EXPECTED_SIZE" ] && [ "$SHA" = "$EXPECTED_SHA" ] && node --check "$TARGET" >/tmp/kayas-install/node.log 2>&1; then
-              VALID=true
-              break
-            fi
-          done
-
-          if [ "$VALID" = true ]; then
-            cp "$TARGET" kayas/walkthrough/src/kayas-v8-safe.bundle.js
-            printf '\n%s\n%s\n%s\n%s\n' \
-              "window.__KAYAS_MODEL_READY = true;" \
-              "window.__KAYAS_MODEL_MODE = 'authoritative-v8-same-origin-v18';" \
-              "window.__KAYAS_MODEL_SOURCE = 'same-origin';" \
-              "window.dispatchEvent(new Event('resize'));" \
-              >> kayas/walkthrough/src/kayas-v8-safe.bundle.js
-            node --check kayas/walkthrough/src/kayas-v8-safe.bundle.js
-            perl -0pi -e 's#<script defer src="(?:model-loader\.js|src/kayas-v8-safe\.bundle\.js|src/kayas-v10-enhanced\.bundle\.js)\?v=[^"]+"></script>#<script defer src="src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18"></script>#g' kayas/walkthrough/index.html
-          fi
-
-          ACTUAL_SIZE=$(wc -c < "$TARGET" 2>/dev/null || echo 0)
-          ACTUAL_SHA=$(sha256sum "$TARGET" 2>/dev/null | awk '{print $1}')
-          ATTEMPTS=$(tail -c 10000 "$LOG" | jq -Rs .)
-          jq -n \
-            --argjson valid "$VALID" \
-            --arg expected_sha256 "$EXPECTED_SHA" \
-            --arg actual_sha256 "$ACTUAL_SHA" \
-            --argjson expected_size "$EXPECTED_SIZE" \
-            --argjson actual_size "$ACTUAL_SIZE" \
-            --argjson attempts "$ATTEMPTS" \
-            --arg installed_path_exists "$(test -s kayas/walkthrough/src/kayas-v8-safe.bundle.js && echo true || echo false)" \
-            --arg index_uses_same_origin "$(grep -q 'src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18' kayas/walkthrough/index.html && echo true || echo false)" \
-            '{valid:$valid, expected_sha256:$expected_sha256, actual_sha256:$actual_sha256, expected_size:$expected_size, actual_size:$actual_size, attempts:$attempts, installed_path_exists:($installed_path_exists=="true"), index_uses_same_origin:($index_uses_same_origin=="true")}' \
-            > kayas/walkthrough/authoritative-install-diagnostic.json
-          cat kayas/walkthrough/authoritative-install-diagnostic.json
-
-      - name: Commit diagnostic and runtime
+      - name: Verify installed runtime
         shell: bash
         run: |
           set -euo pipefail
+          test -s kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          test "$(wc -c < kayas/walkthrough/src/kayas-v8-safe.bundle.js)" -gt 1371713
+          grep -q 'src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18' kayas/walkthrough/index.html
+          grep -q "window.__KAYAS_MODEL_MODE = 'authoritative-v8-same-origin-v18'" kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          node --check kayas/walkthrough/src/kayas-v8-safe.bundle.js
+
+      - name: Install Chromium test runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v18-smoke
+          cd /tmp/kayas-v18-smoke
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Execute local browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v18-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v18-smoke/smoke.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const result = {
+              pass: false,
+              version: 'same-origin-v18',
+              timestamp: new Date().toISOString(),
+              pageErrors: [],
+              consoleErrors: [],
+              failedRequests: []
+            };
+            let browser;
+            try {
+              browser = await chromium.launch({
+                headless: true,
+                args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist', '--disable-dev-shm-usage']
+              });
+              const page = await browser.newPage({ viewport: { width: 1536, height: 960 } });
+              page.on('pageerror', error => result.pageErrors.push(error.message));
+              page.on('console', msg => {
+                if (msg.type() === 'error') result.consoleErrors.push(msg.text());
+              });
+              page.on('requestfailed', request => {
+                result.failedRequests.push({ url: request.url(), error: request.failure()?.errorText || 'unknown' });
+              });
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?acceptance=same-origin-v18', {
+                waitUntil: 'domcontentloaded',
+                timeout: 30000
+              });
+              await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true, null, { timeout: 120000 });
+              await page.waitForTimeout(5000);
+              Object.assign(result, await page.evaluate(() => {
+                const canvas = document.getElementById('scene');
+                const gl = canvas && (canvas.getContext('webgl2') || canvas.getContext('webgl'));
+                return {
+                  ready: window.__KAYAS_MODEL_READY === true,
+                  mode: window.__KAYAS_MODEL_MODE || null,
+                  source: window.__KAYAS_MODEL_SOURCE || null,
+                  threeRevision: window.THREE && window.THREE.REVISION,
+                  canvas: canvas ? { width: canvas.width, height: canvas.height, clientWidth: canvas.clientWidth, clientHeight: canvas.clientHeight } : null,
+                  webglContext: !!gl,
+                  rendererCanvasCount: document.querySelectorAll('canvas').length,
+                  loadStatus: (() => {
+                    const node = document.getElementById('loadStatus');
+                    return node ? {
+                      hidden: node.hidden,
+                      title: node.querySelector('strong')?.textContent || null,
+                      message: node.querySelector('span')?.textContent || null
+                    } : null;
+                  })()
+                };
+              }));
+              const fatalErrors = result.pageErrors.filter(message => /SyntaxError|ReferenceError|TypeError|WebGL|THREE/i.test(message));
+              result.fatalErrors = fatalErrors;
+              result.pass = result.ready === true &&
+                result.mode === 'authoritative-v8-same-origin-v18' &&
+                !!result.threeRevision &&
+                result.webglContext === true &&
+                result.canvas && result.canvas.width > 300 && result.canvas.height > 150 &&
+                fatalErrors.length === 0;
+              await page.screenshot({ path: '/tmp/kayas-v18-smoke/screenshot.png', fullPage: true });
+            } catch (error) {
+              result.pageErrors.push(error.stack || error.message || String(error));
+            } finally {
+              if (browser) await browser.close();
+              fs.writeFileSync('/tmp/kayas-v18-smoke/status.json', JSON.stringify(result, null, 2));
+              console.log(JSON.stringify(result, null, 2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-v18-smoke
+          node smoke.js
+
+      - name: Commit acceptance result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v18-smoke/status.json; then
+            cp /tmp/kayas-v18-smoke/status.json kayas/walkthrough/smoke-status-v18.json
+          else
+            printf '%s\n' '{"pass":false,"version":"same-origin-v18","error":"status file was not produced"}' > kayas/walkthrough/smoke-status-v18.json
+          fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add kayas/walkthrough/authoritative-install-diagnostic.json kayas/walkthrough/index.html
-          if test -s kayas/walkthrough/src/kayas-v8-safe.bundle.js; then
-            git add kayas/walkthrough/src/kayas-v8-safe.bundle.js
-          fi
+          git add kayas/walkthrough/smoke-status-v18.json
           if git diff --cached --quiet; then
-            echo 'No changes to commit.'
             exit 0
           fi
-          git commit -m 'Install authoritative KAYAS same-origin runtime and diagnostic [skip ci]'
+          git commit -m 'Record KAYAS same-origin v18 Chromium acceptance [skip ci]'
           git push origin HEAD:main
+
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-same-origin-v18-acceptance
+          path: |
+            /tmp/kayas-v18-smoke/status.json
+            /tmp/kayas-v18-smoke/screenshot.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v18-smoke/status.json'); if(!r.pass){console.error(r); process.exit(1)}; console.log('KAYAS_SAME_ORIGIN_V18_ACCEPTANCE=PASS')"
