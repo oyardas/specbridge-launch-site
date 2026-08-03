@@ -9,6 +9,25 @@
     gantt:{preview:'https://docs.google.com/spreadsheets/d/1EZEXAmANDyrx3SdmzWCiCZb5feKEqTF4/edit',download:'https://drive.google.com/uc?export=download&id=1EZEXAmANDyrx3SdmzWCiCZb5feKEqTF4'}
   };
 
+  function ensureV19Assets(){
+    if(!document.getElementById('kayas-v19-css')){
+      const link=document.createElement('link');
+      link.id='kayas-v19-css';
+      link.rel='stylesheet';
+      link.href='v19-enhancements.css?v=20260803-v19';
+      document.head.appendChild(link);
+    }
+    if(!document.getElementById('kayas-v19-runtime')){
+      const script=document.createElement('script');
+      script.id='kayas-v19-runtime';
+      script.src='v19-runtime.js?v=20260803-v19';
+      script.defer=true;
+      script.onerror=()=>console.error('[KAYAS v19] runtime yüklenemedi');
+      document.body.appendChild(script);
+    }
+  }
+  ensureV19Assets();
+
   const brandStyle=document.createElement('style');
   brandStyle.textContent='body.is-night .specbridge-icon,body.is-night .specbridge-login-logo,body.is-night .loading-brand{filter:grayscale(1) brightness(0) invert(1);opacity:.98}body:not(.is-night) .specbridge-icon,body:not(.is-night) .specbridge-login-logo,body:not(.is-night) .loading-brand{filter:none;opacity:1}';
   document.head.appendChild(brandStyle);
@@ -55,6 +74,7 @@
     const collapsed=document.body.classList.contains('panel-collapsed');
     if(panelToggleHeader){
       panelToggleHeader.setAttribute('aria-expanded',String(!collapsed));
+      panelToggleHeader.setAttribute('aria-pressed',String(collapsed));
       panelToggleHeader.setAttribute('title',collapsed?'Kontrol panelini aç':'Kontrol panelini gizle');
     }
     if(panelEdgeToggle){
@@ -73,9 +93,12 @@
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
     setTimeout(()=>window.dispatchEvent(new Event('resize')),310);
   }
-  function togglePanel(){setPanelCollapsed(!document.body.classList.contains('panel-collapsed'));}
-  if(panelToggleHeader)panelToggleHeader.addEventListener('click',togglePanel);
-  if(panelEdgeToggle)panelEdgeToggle.addEventListener('click',togglePanel);
+  function togglePanel(event){
+    if(event){event.preventDefault();event.stopPropagation();}
+    setPanelCollapsed(!document.body.classList.contains('panel-collapsed'));
+  }
+  if(panelToggleHeader)panelToggleHeader.addEventListener('click',togglePanel,{capture:true});
+  if(panelEdgeToggle)panelEdgeToggle.addEventListener('click',togglePanel,{capture:true});
   document.addEventListener('keydown',event=>{
     if(event.key==='Escape'&&!document.body.classList.contains('panel-collapsed'))setPanelCollapsed(true);
   });
