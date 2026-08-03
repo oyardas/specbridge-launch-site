@@ -1,0 +1,321 @@
+--- kayas-3d.bundle.js
++++ kayas-3d.bundle.js
+@@ -54161,6 +54161,18 @@
+ const lightboxCategory = document.getElementById("lightboxCategory");
+ const lightboxOpenOriginal = document.getElementById("lightboxOpenOriginal");
+ const lightboxClose = document.getElementById("lightboxClose");
++const controlPanel = document.getElementById("controlPanel");
++const panelEdgeToggle = document.getElementById("panelEdgeToggle");
++const panelToggleHeader = document.getElementById("panelToggleHeader");
++const themeButton = document.getElementById("themeButton");
++const scaleControl = document.getElementById("scaleControl");
++const scaleLine = document.getElementById("scaleLine");
++const scaleMid = document.getElementById("scaleMid");
++const scaleMax = document.getElementById("scaleMax");
++const reportFrame = document.getElementById("reportFrame");
++const reportViewerTitle = document.getElementById("reportViewerTitle");
++const reportOpen = document.getElementById("reportOpen");
++const reportDownload = document.getElementById("reportDownload");
+ 
+ const floor = {
+   length: 110,
+@@ -54452,6 +54464,11 @@
+ let activeZoneId = "";
+ let walkMode = true;
+ let selectedGalleryItem = null;
++let lastScaleUpdate = 0;
++const scaleRaycaster = new THREE.Raycaster();
++const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
++const scaleGroundA = new THREE.Vector3();
++const scaleGroundB = new THREE.Vector3();
+ 
+ const materials = {
+   floor: new THREE.MeshStandardMaterial({ color: 0xe8edf3, roughness: 0.74, metalness: 0.03 }),
+@@ -54494,7 +54511,9 @@
+   black: new THREE.MeshStandardMaterial({ color: 0x1a202b, roughness: 0.45, metalness: 0.2 }),
+   metal: new THREE.MeshStandardMaterial({ color: 0x9aa5b2, roughness: 0.34, metalness: 0.62 }),
+   screen: new THREE.MeshStandardMaterial({ color: 0x071324, emissive: 0x063b82, emissiveIntensity: 0.55 }),
+-  blueLed: new THREE.MeshStandardMaterial({ color: 0x3aa7ff, emissive: 0x1d7dff, emissiveIntensity: 1.35 }),
++  blueLed: new THREE.MeshStandardMaterial({ color: 0x3aa7ff, emissive: 0x1d7dff, emissiveIntensity: 1.55 }),
++  greenLed: new THREE.MeshStandardMaterial({ color: 0x45e58c, emissive: 0x00b957, emissiveIntensity: 1.65 }),
++  amberLed: new THREE.MeshStandardMaterial({ color: 0xffc75a, emissive: 0xe28a00, emissiveIntensity: 1.3 }),
+   whiteLed: new THREE.MeshStandardMaterial({ color: 0xf7fbff, emissive: 0xd6efff, emissiveIntensity: 1.1 }),
+   yellowCable: new THREE.MeshStandardMaterial({ color: 0xf6cb35, roughness: 0.35, metalness: 0.1 }),
+   blueCable: new THREE.MeshStandardMaterial({ color: 0x1f7aff, roughness: 0.35, metalness: 0.1 }),
+@@ -55140,6 +55159,26 @@
+   addDashboardPanel(root, "datahall-ic8000-dashboard", hall.x - hall.w / 2 + 0.245, 2.05, hall.z - 10.5, 3.9, 1.18, -Math.PI / 2, "ic8000_datahall", "ic8000");
+ }
+ 
++let rackBadgeMaterial = null;
++function getRackBadgeMaterial() {
++  if (rackBadgeMaterial) return rackBadgeMaterial;
++  const badgeCanvas = document.createElement("canvas");
++  badgeCanvas.width = 320;
++  badgeCanvas.height = 96;
++  const ctx = badgeCanvas.getContext("2d");
++  ctx.clearRect(0, 0, badgeCanvas.width, badgeCanvas.height);
++  ctx.fillStyle = "#d71920";
++  ctx.font = "900 64px Arial Black, Arial, sans-serif";
++  ctx.textAlign = "center";
++  ctx.textBaseline = "middle";
++  ctx.fillText("H3C", badgeCanvas.width / 2, badgeCanvas.height / 2 + 2);
++  const texture = new THREE.CanvasTexture(badgeCanvas);
++  texture.colorSpace = THREE.SRGBColorSpace;
++  texture.anisotropy = 4;
++  rackBadgeMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true, toneMapped: false, side: THREE.DoubleSide });
++  return rackBadgeMaterial;
++}
++
+ function addIC8000Pod(pod) {
+   const group = new THREE.Group();
+   const c = rectCenter({ x: pod.x, y: pod.y, w: pod.w, h: pod.h });
+@@ -55159,8 +55198,8 @@
+   addBox(group, `${pod.id}-cold-aisle-roof`, 0, 2.45, 0, c.w - 0.1, 0.12, 1.05, materials.wall, "ic8000_datahall");
+   addBox(group, `${pod.id}-cold-aisle-led`, 0, 2.36, 0, c.w - 0.4, 0.045, 0.08, materials.blueLed, "ic8000_datahall");
+   addBrandPanel(group, `${pod.id}-h3c-badge`, 0, 2.72, -0.64, 1.85, 0.48, 0, "ic8000_datahall", {
+-    headline: `IC8000-${pod.label}`,
+-    subline: "20 cabinets",
++    headline: `H3C IC8000-${pod.label}`,
++    subline: "20 cabinets / powered-on",
+     compact: true,
+     variant: "dark"
+   });
+@@ -55168,15 +55207,28 @@
+ }
+ 
+ function addRack(parent, x, z, zoneId) {
+-  addBox(parent, "rack-body", x, 1.1, z, 0.58, 2.2, 1.08, materials.rack, zoneId);
+-  addBox(parent, "rack-front", x, 1.1, z - 0.56, 0.49, 1.86, 0.045, materials.rackMesh, zoneId);
+-  for (let i = 0; i < 5; i += 1) {
+-    addBox(parent, "rack-vent-line", x, 0.42 + i * 0.31, z - 0.59, 0.43, 0.012, 0.026, materials.rackHandle, zoneId);
++  addBox(parent, "rack-body", x, 1.1, z, 0.6, 2.2, 1.08, materials.rack, zoneId);
++  addBox(parent, "rack-front-frame", x, 1.1, z - 0.565, 0.53, 1.94, 0.05, materials.rackFront, zoneId);
++  addBox(parent, "rack-front-mesh", x, 1.08, z - 0.595, 0.47, 1.78, 0.025, materials.rackMesh, zoneId);
++  for (let i = 0; i < 12; i += 1) {
++    const y = 0.31 + i * 0.135;
++    addBox(parent, "rack-u-slot", x - 0.01, y, z - 0.615, 0.40, 0.014, 0.018, materials.rackHandle, zoneId);
++    if (i % 2 === 0) {
++      const ledMaterial = i % 4 === 0 ? materials.greenLed : materials.blueLed;
++      addBox(parent, "server-status-led", x + 0.17, y + 0.018, z - 0.632, 0.024, 0.024, 0.018, ledMaterial, zoneId);
++    }
++    if (i === 7) {
++      addBox(parent, "server-warning-led", x + 0.13, y + 0.018, z - 0.633, 0.018, 0.018, 0.018, materials.amberLed, zoneId);
++    }
+   }
+-  addBox(parent, "rack-door-handle", x + 0.21, 1.12, z - 0.61, 0.026, 1.35, 0.026, materials.rackHandle, zoneId);
+-  addBox(parent, "rack-h3c-badge", x - 0.13, 1.92, z - 0.615, 0.18, 0.055, 0.026, materials.h3cRed, zoneId);
+-  addBox(parent, "rack-led-left", x - 0.17, 1.08, z - 0.585, 0.032, 1.6, 0.032, materials.blueLed, zoneId);
+-  addBox(parent, "rack-led-right", x + 0.17, 1.08, z - 0.585, 0.032, 1.6, 0.032, materials.blueLed, zoneId);
++  addBox(parent, "rack-door-handle", x + 0.235, 1.12, z - 0.625, 0.025, 1.35, 0.025, materials.rackHandle, zoneId);
++  const badge = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 0.065), getRackBadgeMaterial());
++  badge.position.set(x - 0.105, 1.96, z - 0.642);
++  badge.userData.zoneId = zoneId;
++  parent.add(badge);
++  raycastTargets.push(badge);
++  addBox(parent, "rack-led-left", x - 0.205, 1.08, z - 0.622, 0.018, 1.65, 0.018, materials.blueLed, zoneId);
++  addBox(parent, "rack-led-right", x + 0.205, 1.08, z - 0.622, 0.018, 1.65, 0.018, materials.greenLed, zoneId);
+ }
+ 
+ function buildTechnicalRooms() {
+@@ -55704,6 +55756,7 @@
+     camera.getWorldDirection(forward);
+     camera.position.addScaledVector(forward, -event.deltaY * 0.018);
+     clampCamera();
++    updateScaleBar(true);
+   }, { passive: false });
+ 
+   window.addEventListener("keydown", (event) => {
+@@ -55774,6 +55827,23 @@
+       setWalkMode(walkModeToggle.checked);
+     });
+   }
++
++  const togglePanel = () => {
++    document.body.classList.toggle("panel-collapsed");
++    const collapsed = document.body.classList.contains("panel-collapsed");
++    if (panelEdgeToggle) panelEdgeToggle.textContent = collapsed ? "›" : "‹";
++    if (panelToggleHeader) panelToggleHeader.setAttribute("aria-pressed", collapsed ? "true" : "false");
++    window.setTimeout(() => { resize(); updateScaleBar(true); }, 300);
++  };
++  if (panelEdgeToggle) panelEdgeToggle.addEventListener("click", togglePanel);
++  if (panelToggleHeader) panelToggleHeader.addEventListener("click", togglePanel);
++  if (themeButton) {
++    themeButton.addEventListener("click", () => {
++      const nextNight = !document.body.classList.contains("is-night");
++      if (nightToggle) nightToggle.checked = nextNight;
++      setNightMode(nextNight);
++    });
++  }
+ }
+ 
+ function setWalkMode(enabled) {
+@@ -55790,7 +55860,7 @@
+   const panelTitles = {
+     model: "3D Model",
+     gallery: "Konsept Görseller",
+-    report: "Saha Fizibilite Raporu"
++    reports: "Raporlar ve Dokümanlar"
+   };
+ 
+   const tabs = Array.from(document.querySelectorAll("[data-panel]"));
+@@ -55833,6 +55903,39 @@
+   }
+ 
+   buildGallery();
++  setupReportViewer();
++}
++
++function setupReportViewer() {
++  const items = Array.from(document.querySelectorAll(".report-item[data-report-src]"));
++  items.forEach((item) => {
++    item.addEventListener("click", () => {
++      const src = item.getAttribute("data-report-src");
++      const downloadSrc = item.getAttribute("data-report-download") || src;
++      const title = item.getAttribute("data-report-title") || "Rapor";
++      const downloadOnly = item.getAttribute("data-download") === "true";
++      if (downloadOnly) {
++        const link = document.createElement("a");
++        link.href = downloadSrc;
++        link.download = "";
++        document.body.appendChild(link);
++        link.click();
++        link.remove();
++        return;
++      }
++      items.forEach((button) => button.classList.toggle("is-selected", button === item));
++      if (reportViewerTitle) reportViewerTitle.textContent = title;
++      if (reportFrame) {
++        reportFrame.src = src;
++        reportFrame.title = title;
++      }
++      if (reportOpen) reportOpen.href = src;
++      if (reportDownload) {
++        reportDownload.href = downloadSrc;
++        reportDownload.setAttribute("download", "");
++      }
++    });
++  });
+ }
+ 
+ function buildGallery() {
+@@ -55902,8 +56005,12 @@
+     light.intensity = enabled ? light.userData.nightIntensity : light.userData.dayIntensity;
+   });
+   materials.screen.emissiveIntensity = enabled ? 1.05 : 0.55;
+-  materials.blueLed.emissiveIntensity = enabled ? 2.3 : 1.35;
++  materials.blueLed.emissiveIntensity = enabled ? 2.55 : 1.55;
++  materials.greenLed.emissiveIntensity = enabled ? 2.4 : 1.65;
++  materials.amberLed.emissiveIntensity = enabled ? 1.9 : 1.3;
+   materials.whiteLed.emissiveIntensity = enabled ? 1.75 : 1.1;
++  if (themeButton) themeButton.title = enabled ? "Açık temaya geç" : "Koyu temaya geç";
++  updateScaleBar(true);
+ }
+ 
+ function moveCamera(dt) {
+@@ -55971,12 +56078,82 @@
+   if (hit) setZone(hit.object.userData.zoneId);
+ }
+ 
++function screenPointToGround(px, py, target) {
++  const rect = canvas.getBoundingClientRect();
++  if (!rect.width || !rect.height) return null;
++  const ndc = new THREE.Vector2((px / rect.width) * 2 - 1, -(py / rect.height) * 2 + 1);
++  scaleRaycaster.setFromCamera(ndc, camera);
++  return scaleRaycaster.ray.intersectPlane(groundPlane, target);
++}
++
++function chooseNiceScale(metersPerPixel, idealPixels) {
++  const target = Math.max(0.05, metersPerPixel * idealPixels);
++  const exponent = Math.floor(Math.log10(target));
++  const candidates = [];
++  for (let exp = exponent - 1; exp <= exponent + 1; exp += 1) {
++    const power = Math.pow(10, exp);
++    [1, 2, 5].forEach((factor) => candidates.push(factor * power));
++  }
++  let best = candidates[0];
++  let bestScore = Infinity;
++  candidates.forEach((value) => {
++    const px = value / metersPerPixel;
++    if (px < 62 || px > 190) return;
++    const score = Math.abs(px - idealPixels);
++    if (score < bestScore) { best = value; bestScore = score; }
++  });
++  return best;
++}
++
++function formatScaleValue(value) {
++  if (value >= 10) return Math.round(value).toString();
++  if (value >= 1) return (Math.round(value * 10) / 10).toString().replace(".", ",");
++  return (Math.round(value * 100) / 100).toString().replace(".", ",");
++}
++
++function updateScaleBar(force = false) {
++  if (!scaleControl || !scaleLine || !scaleMid || !scaleMax) return;
++  const now = performance.now();
++  if (!force && now - lastScaleUpdate < 120) return;
++  lastScaleUpdate = now;
++  const rect = canvas.getBoundingClientRect();
++  if (rect.width < 120 || rect.height < 120) return;
++  const samplePixels = Math.min(140, Math.max(90, rect.width * 0.11));
++  const x = Math.max(50, rect.width - Math.min(320, rect.width * 0.24));
++  const sampleRows = [rect.height * 0.78, rect.height * 0.68, rect.height * 0.58];
++  let metersPerPixel = NaN;
++  for (const y of sampleRows) {
++    const a = screenPointToGround(x, y, scaleGroundA);
++    const b = screenPointToGround(x + samplePixels, y, scaleGroundB);
++    if (a && b) {
++      const distance = a.distanceTo(b);
++      if (Number.isFinite(distance) && distance > 0.001 && distance < 1000) {
++        metersPerPixel = distance / samplePixels;
++        break;
++      }
++    }
++  }
++  if (!Number.isFinite(metersPerPixel)) {
++    const fovRadians = THREE.MathUtils.degToRad(camera.fov);
++    const visibleHeight = 2 * Math.max(camera.position.y, 1.68) * Math.tan(fovRadians / 2);
++    metersPerPixel = visibleHeight / Math.max(rect.height, 1);
++  }
++  const idealPixels = rect.width < 600 ? 92 : 126;
++  const meters = chooseNiceScale(metersPerPixel, idealPixels);
++  const width = THREE.MathUtils.clamp(meters / metersPerPixel, 62, 190);
++  scaleLine.style.width = `${width.toFixed(1)}px`;
++  scaleMid.textContent = formatScaleValue(meters / 2);
++  scaleMax.textContent = `${formatScaleValue(meters)} m`;
++  scaleControl.title = `Dinamik ölçek: ${formatScaleValue(meters)} metre = ${Math.round(width)} piksel`;
++}
++
+ function resize() {
+   const width = canvas.clientWidth || window.innerWidth;
+   const height = canvas.clientHeight || window.innerHeight;
+   renderer.setSize(width, height, false);
+   camera.aspect = width / Math.max(height, 1);
+   camera.updateProjectionMatrix();
++  updateScaleBar(true);
+ }
+ 
+ function animate() {
+@@ -55990,6 +56167,7 @@
+     pulse.mesh.position.lerpVectors(pulse.start, pulse.end, t);
+   });
+   updateHover();
++  updateScaleBar();
+   renderer.render(scene, camera);
+   requestAnimationFrame(animate);
+ }
+@@ -56009,11 +56187,14 @@
+ setupControls();
+ setupCustomerPresentation();
+ setZone("ic8000_datahall");
+-setPose(new THREE.Vector3(toX(-4), 2.0, toZ(49.5)), new THREE.Vector3(toX(13), 1.6, toZ(49.5)));
++setWalkMode(false);
++setNightMode(true);
++setPose(new THREE.Vector3(toX(61), 34, toZ(22)), new THREE.Vector3(toX(22.8), 0.8, toZ(60)));
+ resize();
+ window.addEventListener("resize", resize);
+ animate();
+ const loadStatus = document.getElementById("loadStatus");
+ if (loadStatus) loadStatus.hidden = true;
++window.KAYAS_APP = { camera, renderer, scene, floor, zones, pods, updateScaleBar, setPose, setNightMode };
+ 
+ })();
