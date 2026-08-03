@@ -1,0 +1,4 @@
+trigger=2026-08-03T17:42:00+03:00
+runtime_bytes=34682
+runtime_sha256=cff5cf706d44dc9aaf05765b4abaf1bdfcd35c6e845dd7eae4d8ae308c4eab3b
+model_start=after-authoritative-v8-ready
