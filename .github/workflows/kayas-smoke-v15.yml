@@ -1,4 +1,4 @@
-name: Validate KAYAS Direct Authoritative Loader v17
+name: Install and Validate KAYAS Authoritative v8 Same-Origin Runtime
 
 on:
   push:
@@ -11,114 +11,163 @@ permissions:
   contents: write
 
 concurrency:
-  group: kayas-smoke-direct-v17
+  group: kayas-authoritative-v18
   cancel-in-progress: false
 
 jobs:
-  smoke:
+  install-and-smoke:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Verify direct loader configuration
+      - name: Download and verify authoritative v8 bundle
         shell: bash
         run: |
           set -euo pipefail
-          test -s kayas/walkthrough/model-loader.js
-          grep -q 'model-loader.js?v=20260803-direct-v17' kayas/walkthrough/index.html
-          grep -q '19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc' kayas/walkthrough/model-loader.js
-          node --check kayas/walkthrough/model-loader.js
+          TARGET=/tmp/kayas-v8-safe.bundle.js
+          download() {
+            local url="$1"
+            rm -f "$TARGET"
+            curl -L --fail --retry 4 --retry-delay 2 --connect-timeout 20 --max-time 180 "$url" -o "$TARGET"
+          }
+          validate() {
+            test -s "$TARGET" || return 1
+            test "$(wc -c < "$TARGET")" -eq 1371713 || return 1
+            test "$(sha256sum "$TARGET" | awk '{print $1}')" = '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d' || return 1
+            grep -q 'KAYAS OSB 3D Walkthrough file-safe bundle' "$TARGET" || return 1
+            grep -q 'window.THREE = THREE;' "$TARGET" || return 1
+            node --check "$TARGET" >/dev/null
+          }
+          download 'https://drive.usercontent.google.com/download?id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&export=download&authuser=0&confirm=t' || true
+          if ! validate; then
+            download 'https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&confirm=t'
+            validate
+          fi
+          echo "AUTHORITATIVE_BYTES=$(wc -c < "$TARGET")"
+          echo "AUTHORITATIVE_SHA256=$(sha256sum "$TARGET" | awk '{print $1}')"
+
+      - name: Install same-origin single-file runtime in worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kayas/walkthrough/src
+          cp /tmp/kayas-v8-safe.bundle.js kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          cat >> kayas/walkthrough/src/kayas-v8-safe.bundle.js <<'JS'
+
+window.__KAYAS_MODEL_READY = true;
+window.__KAYAS_MODEL_MODE = 'authoritative-v8-same-origin-v18';
+window.__KAYAS_MODEL_SOURCE = 'same-origin';
+window.dispatchEvent(new Event('resize'));
+JS
+          node --check kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('kayas/walkthrough/index.html')
+          text = p.read_text(encoding='utf-8')
+          text, count = re.subn(
+              r'<script defer src="(?:model-loader\.js|src/kayas-v8-safe\.bundle\.js|src/kayas-v10-enhanced\.bundle\.js)\?v=[^"]+"></script>',
+              '<script defer src="src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18"></script>',
+              text,
+          )
+          if count != 1:
+              raise SystemExit(f'Expected exactly one model script reference, found {count}')
+          p.write_text(text, encoding='utf-8')
+          PY
+          grep -q 'src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18' kayas/walkthrough/index.html
 
       - name: Install Playwright Chromium
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/kayas-smoke-v17
-          cd /tmp/kayas-smoke-v17
+          mkdir -p /tmp/kayas-smoke-v18
+          cd /tmp/kayas-smoke-v18
           npm init -y >/dev/null 2>&1
           npm install --no-audit --no-fund playwright@1.54.2
           npx playwright install --with-deps chromium
 
-      - name: Run browser smoke test
+      - name: Run local Chromium WebGL smoke test
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-http-v17.log 2>&1 &
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-http-v18.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 2
-          cat > /tmp/kayas-smoke-v17/smoke.js <<'JS'
+          cat > /tmp/kayas-smoke-v18/smoke.js <<'JS'
           const { chromium } = require('playwright');
           const fs = require('fs');
           (async () => {
-            const result = { pass: false, version: 'direct-v17', timestamp: new Date().toISOString(), errors: [], consoleErrors: [], failedRequests: [] };
+            const result = { pass: false, version: 'same-origin-v18', timestamp: new Date().toISOString(), errors: [], consoleErrors: [], failedRequests: [] };
             let browser;
             try {
-              browser = await chromium.launch({
-                headless: true,
-                args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist', '--disable-dev-shm-usage']
-              });
+              browser = await chromium.launch({ headless: true, args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist', '--disable-dev-shm-usage'] });
               const page = await browser.newPage({ viewport: { width: 1536, height: 960 } });
               page.on('console', msg => { if (msg.type() === 'error') result.consoleErrors.push(msg.text()); });
               page.on('pageerror', error => result.errors.push(error.message));
               page.on('requestfailed', request => result.failedRequests.push({ url: request.url(), error: request.failure()?.errorText || 'unknown' }));
-              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?smoke=direct-v17', { waitUntil: 'domcontentloaded', timeout: 30000 });
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?smoke=same-origin-v18', { waitUntil: 'domcontentloaded', timeout: 30000 });
               await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true || !!window.__KAYAS_LOADER_ERROR, null, { timeout: 120000 });
+              await page.waitForTimeout(4000);
               Object.assign(result, await page.evaluate(() => ({
                 ready: window.__KAYAS_MODEL_READY === true,
                 mode: window.__KAYAS_MODEL_MODE || null,
                 source: window.__KAYAS_MODEL_SOURCE || null,
                 loaderError: window.__KAYAS_LOADER_ERROR || null,
+                threeRevision: window.THREE && window.THREE.REVISION,
                 canvas: (() => { const c = document.getElementById('scene'); return c ? { width: c.width, height: c.height } : null; })(),
+                webgl: (() => { const c = document.getElementById('scene'); if (!c) return false; return !!(c.getContext('webgl2') || c.getContext('webgl')); })(),
                 status: (() => { const s = document.getElementById('loadStatus'); return s ? { hidden: s.hidden, title: s.querySelector('strong')?.textContent, message: s.querySelector('span')?.textContent } : null; })()
               })));
-              result.pass = result.ready === true && result.canvas && result.canvas.width > 300 && result.canvas.height > 150;
-              await page.screenshot({ path: '/tmp/kayas-smoke-v17/screenshot.png', fullPage: true });
+              result.pass = result.ready === true && result.mode === 'authoritative-v8-same-origin-v18' && !!result.threeRevision && result.webgl === true && result.canvas && result.canvas.width > 300 && result.canvas.height > 150 && result.errors.length === 0;
+              await page.screenshot({ path: '/tmp/kayas-smoke-v18/screenshot.png', fullPage: true });
             } catch (error) {
               result.errors.push(error.stack || error.message || String(error));
             } finally {
               if (browser) await browser.close();
-              fs.writeFileSync('/tmp/kayas-smoke-v17/status.json', JSON.stringify(result, null, 2));
+              fs.writeFileSync('/tmp/kayas-smoke-v18/status.json', JSON.stringify(result, null, 2));
               console.log(JSON.stringify(result, null, 2));
             }
           })();
           JS
-          cd /tmp/kayas-smoke-v17
+          cd /tmp/kayas-smoke-v18
           node smoke.js
 
-      - name: Commit smoke result
-        shell: bash
-        run: |
-          set -euo pipefail
-          cp /tmp/kayas-smoke-v17/status.json kayas/walkthrough/smoke-status-v17.json
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add kayas/walkthrough/smoke-status-v17.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Record KAYAS direct-v17 browser smoke result [skip ci]'
-            git push origin HEAD:main
-          fi
-
-      - name: Upload smoke evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: kayas-direct-v17-smoke
-          path: |
-            /tmp/kayas-smoke-v17/status.json
-            /tmp/kayas-smoke-v17/screenshot.png
-
-      - name: Enforce result
+      - name: Enforce smoke result before publish
         shell: bash
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          result = json.loads(Path('/tmp/kayas-smoke-v17/status.json').read_text())
+          result = json.loads(Path('/tmp/kayas-smoke-v18/status.json').read_text())
           if not result.get('pass'):
-              raise SystemExit('KAYAS direct-v17 smoke failed: ' + json.dumps(result, ensure_ascii=False))
-          print('KAYAS_DIRECT_V17_SMOKE=PASS')
+              raise SystemExit('KAYAS same-origin v18 smoke failed: ' + json.dumps(result, ensure_ascii=False))
+          print('KAYAS_SAME_ORIGIN_V18_SMOKE=PASS')
           PY
+
+      - name: Commit validated runtime and evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/kayas-smoke-v18/status.json kayas/walkthrough/smoke-status-v18.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kayas/walkthrough/index.html kayas/walkthrough/src/kayas-v8-safe.bundle.js kayas/walkthrough/smoke-status-v18.json
+          if git diff --cached --quiet; then
+            echo 'Validated runtime already published.'
+            exit 0
+          fi
+          git commit -m 'Publish validated authoritative KAYAS v8 same-origin runtime [skip ci]'
+          git push origin HEAD:main
+
+      - name: Upload smoke evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-same-origin-v18-smoke
+          path: |
+            /tmp/kayas-smoke-v18/status.json
+            /tmp/kayas-smoke-v18/screenshot.png
