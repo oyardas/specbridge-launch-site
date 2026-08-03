@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const VERSION = '20260803-v20-cinematic';
+  const VERSION = '20260803-v20-1-cinematic';
   const CONFIG = {
     maxScreensDesktop: 32,
     maxScreensMobile: 16,
@@ -845,8 +845,11 @@
 
   function bootstrap(remaining) {
     const engine = resolveEngine();
-    if (engine.THREE && engine.scene && engine.renderer && engine.camera && engine.canvas) {
-      preloadDashboardImages().finally(function () { install(engine); });
+    const modelStable = window.__KAYAS_MODEL_READY === true && window.__KAYAS_MODEL_LOADING_V19 !== true;
+    if (engine.THREE && engine.scene && engine.renderer && engine.camera && engine.canvas && modelStable) {
+      window.setTimeout(function () {
+        preloadDashboardImages().finally(function () { install(resolveEngine()); });
+      }, 120);
       return;
     }
     if (remaining <= 0) {
