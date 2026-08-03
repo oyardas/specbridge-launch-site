@@ -1,7 +1,7 @@
 (async function () {
   'use strict';
 
-  const SOURCE_URL = 'src/kayas-v8-safe.bundle.js?v=20260803-v19-source2';
+  const SOURCE_URL = 'src/kayas-v8-safe.bundle.js?v=20260803-v19-source3';
   const SOURCE_BYTES = 1371713;
   const SOURCE_SHA256 = '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d';
   const status = document.getElementById('loadStatus');
@@ -54,7 +54,7 @@
     }
 
     const source = new TextDecoder('utf-8', { fatal: true }).decode(sourceBytes);
-    const marker = "const camera = new PerspectiveCamera(50, 1, .1, 1000);";
+    const marker = "const camera = new THREE.PerspectiveCamera(64, 1, 0.1, 260);";
     const count = source.split(marker).length - 1;
     if (count !== 1) {
       throw new Error('Kamera başlangıç sözleşmesi bulunamadı: ' + count);
