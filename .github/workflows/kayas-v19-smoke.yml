@@ -1,0 +1,160 @@
+name: Validate KAYAS v19 Professional Runtime
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v19-smoke.yml
+      - kayas/walkthrough/v19-smoke-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify v19 assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s kayas/walkthrough/v19-runtime.js
+          test -s kayas/walkthrough/v19-enhancements.css
+          node --check kayas/walkthrough/app-shell.js
+          node --check kayas/walkthrough/v19-runtime.js
+          grep -q 'app-shell.js?v=20260803-v19' kayas/walkthrough/index.html
+
+      - name: Install Playwright Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v19-smoke
+          cd /tmp/kayas-v19-smoke
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v19-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v19-smoke/smoke.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const result = {
+              pass: false,
+              version: 'v19',
+              timestamp: new Date().toISOString(),
+              pageErrors: [],
+              consoleErrors: [],
+              failedRequests: []
+            };
+            let browser;
+            try {
+              browser = await chromium.launch({
+                headless: true,
+                args: ['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']
+              });
+              const page = await browser.newPage({ viewport: { width: 1536, height: 960 } });
+              page.on('pageerror', error => result.pageErrors.push(error.message));
+              page.on('console', msg => { if (msg.type() === 'error') result.consoleErrors.push(msg.text()); });
+              page.on('requestfailed', request => result.failedRequests.push({url:request.url(),error:request.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?acceptance=v19', {waitUntil:'domcontentloaded',timeout:30000});
+              await page.evaluate(() => localStorage.setItem('kayas_walkthrough_auth_until', String(Date.now()+3600000)));
+              await page.reload({waitUntil:'domcontentloaded'});
+              await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true, null, {timeout:120000});
+              await page.waitForFunction(() => window.__KAYAS_V19_VISUAL_READY === true || !!window.__KAYAS_V19_VISUAL_ERROR, null, {timeout:30000});
+              await page.waitForTimeout(1500);
+
+              const before = await page.evaluate(() => ({
+                collapsed: document.body.classList.contains('panel-collapsed'),
+                scale: document.getElementById('scaleMax')?.textContent || null,
+                lineWidth: document.getElementById('scaleLine')?.style.width || null,
+                counts: window.__KAYAS_V19_COUNTS || null,
+                visualError: window.__KAYAS_V19_VISUAL_ERROR || null,
+                ready: window.__KAYAS_V19_VISUAL_READY === true,
+                modelMode: window.__KAYAS_MODEL_MODE || null
+              }));
+
+              await page.click('#panelToggleHeader');
+              await page.waitForTimeout(450);
+              const afterPanel = await page.evaluate(() => ({
+                collapsed: document.body.classList.contains('panel-collapsed'),
+                ariaHidden: document.getElementById('controlPanel')?.getAttribute('aria-hidden'),
+                edgeText: document.getElementById('panelEdgeToggle')?.textContent
+              }));
+
+              const canvas = page.locator('#scene');
+              await canvas.hover();
+              await page.mouse.wheel(0, -1100);
+              await page.waitForTimeout(650);
+              const afterZoom = await page.evaluate(() => ({
+                scale: document.getElementById('scaleMax')?.textContent || null,
+                lineWidth: document.getElementById('scaleLine')?.style.width || null
+              }));
+
+              Object.assign(result,{before,afterPanel,afterZoom});
+              const counts=before.counts||{};
+              result.pass = before.ready === true &&
+                !before.visualError &&
+                afterPanel.collapsed === !before.collapsed &&
+                afterPanel.ariaHidden === String(afterPanel.collapsed) &&
+                Number(counts.leds||0) > 0 &&
+                Number(counts.screens||0) > 0 &&
+                Boolean(afterZoom.scale) &&
+                result.pageErrors.filter(message=>/SyntaxError|ReferenceError|TypeError/i.test(message)).length === 0;
+              await page.screenshot({path:'/tmp/kayas-v19-smoke/screenshot.png',fullPage:true});
+            } catch (error) {
+              result.pageErrors.push(error.stack || error.message || String(error));
+            } finally {
+              if (browser) await browser.close();
+              fs.writeFileSync('/tmp/kayas-v19-smoke/status.json',JSON.stringify(result,null,2));
+              console.log(JSON.stringify(result,null,2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-v19-smoke
+          node smoke.js
+
+      - name: Commit acceptance result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v19-smoke/status.json; then
+            cp /tmp/kayas-v19-smoke/status.json kayas/walkthrough/smoke-status-v19.json
+          else
+            printf '%s\n' '{"pass":false,"version":"v19","error":"status file missing"}' > kayas/walkthrough/smoke-status-v19.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v19.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record KAYAS v19 Chromium acceptance [skip ci]'
+          git push origin HEAD:main
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v19-acceptance
+          path: |
+            /tmp/kayas-v19-smoke/status.json
+            /tmp/kayas-v19-smoke/screenshot.png
+          if-no-files-found: warn
+
+      - name: Enforce result
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v19-smoke/status.json'); if(!r.pass){console.error(r);process.exit(1)}; console.log('KAYAS_V19_ACCEPTANCE=PASS')"
