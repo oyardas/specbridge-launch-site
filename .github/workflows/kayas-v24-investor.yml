@@ -1,0 +1,272 @@
+name: Activate and Validate KAYAS V24 Investor Presentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v24-investor.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v24-investor
+  cancel-in-progress: false
+
+jobs:
+  activate-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Activate deterministic V24 resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('kayas/walkthrough/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          # Remove superseded presentation layers/controllers. The authoritative
+          # model loader and V20 live dashboard/LED runtime remain untouched.
+          text = re.sub(r'\s*<link[^>]+href="v23-investor\.css\?v=[^"]+"[^>]*>', '', text)
+          text = re.sub(r'\s*<link[^>]+href="v24-investor\.css\?v=[^"]+"[^>]*>', '', text)
+          text = re.sub(r'\s*<script[^>]+src="v23-investor\.js\?v=[^"]+"[^>]*></script>', '', text)
+          text = re.sub(r'\s*<script[^>]+src="v24-investor\.js\?v=[^"]+"[^>]*></script>', '', text)
+          text = re.sub(r'\s*<script[^>]+src="v24-brand\.js\?v=[^"]+"[^>]*></script>', '', text)
+          text = re.sub(r'\s*<script[^>]+id="kayas-v21-runtime"[^>]*></script>', '', text)
+
+          css = '  <link id="kayas-v24-css" rel="stylesheet" href="v24-investor.css?v=20260803-v24-investor-v1" />\n'
+          text = text.replace('</head>', css + '</head>')
+
+          text = re.sub(
+              r'<div><strong>10</strong><span>IC8000 pod · 20 kabinet/pod</span></div>',
+              '<div><strong>20</strong><span>IC8000 pod · 10 kabinet/pod</span></div>',
+              text,
+          )
+          text = text.replace(
+              'id="galleryHero" src="assets/gallery/kayas_concept_contact_sheet.webp"',
+              'id="galleryHero" src="assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v24-investor-v1"',
+          )
+          text = re.sub(
+              r'assets/gallery/gallery_manifest\.js\?v=[^"]+',
+              'assets/gallery/gallery_manifest.js?v=20260803-v24-investor-v1',
+              text,
+          )
+
+          scripts = (
+              '  <script defer src="v24-brand.js?v=20260803-v24-investor-v1"></script>\n'
+              '  <script defer src="v24-investor.js?v=20260803-v24-investor-v1"></script>\n'
+          )
+          app_shell = re.search(r'\s*<script defer src="app-shell\.js\?v=[^"]+"></script>', text)
+          if not app_shell:
+              raise SystemExit('app-shell script anchor was not found')
+          text = text[:app_shell.start()] + '\n' + scripts + text[app_shell.start():]
+
+          if text.count('v24-investor.js?v=20260803-v24-investor-v1') != 1:
+              raise SystemExit('V24 JS reference count is not one')
+          if text.count('v24-investor.css?v=20260803-v24-investor-v1') != 1:
+              raise SystemExit('V24 CSS reference count is not one')
+          if 'kayas-v21-runtime' in text:
+              raise SystemExit('Superseded V21 primitive runtime remains active')
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          test -s kayas/walkthrough/v24-brand.js
+          test -s kayas/walkthrough/v24-investor.js
+          test -s kayas/walkthrough/v24-investor.css
+          test -s kayas/walkthrough/assets/gallery/kayas_concept_contact_sheet.webp
+          node --check kayas/walkthrough/v24-brand.js
+          node --check kayas/walkthrough/v24-investor.js
+          grep -q '20</strong><span>IC8000 pod · 10 kabinet/pod' kayas/walkthrough/index.html
+          grep -q 'v24-investor.js?v=20260803-v24-investor-v1' kayas/walkthrough/index.html
+          ! grep -q 'kayas-v21-runtime' kayas/walkthrough/index.html
+
+      - name: Install Chromium acceptance runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v24
+          cd /tmp/kayas-v24
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run local Chromium WebGL acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v24-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+
+          cat > /tmp/kayas-v24/acceptance.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+
+          (async () => {
+            const result = {
+              version: '20260803-v24-investor-v1',
+              pass: false,
+              timestamp: new Date().toISOString(),
+              pageErrors: [],
+              consoleErrors: [],
+              failedRequests: []
+            };
+            let browser;
+            try {
+              browser = await chromium.launch({
+                headless: true,
+                args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist', '--disable-dev-shm-usage']
+              });
+              const page = await browser.newPage({ viewport: { width: 1536, height: 960 } });
+              page.on('pageerror', e => result.pageErrors.push(e.message));
+              page.on('console', m => { if (m.type() === 'error') result.consoleErrors.push(m.text()); });
+              page.on('requestfailed', r => result.failedRequests.push({ url: r.url(), error: r.failure()?.errorText || 'unknown' }));
+
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260803-v24-investor-v1', {
+                waitUntil: 'domcontentloaded', timeout: 30000
+              });
+
+              if (await page.locator('#loginGate').isVisible().catch(() => false)) {
+                await page.fill('#loginUser', 'kayas');
+                await page.fill('#loginPass', 'verimerkezi');
+                await page.click('#loginButton');
+              }
+
+              await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true, null, { timeout: 120000 });
+              await page.waitForFunction(() => window.__KAYAS_V24_STATUS?.ready === true, null, { timeout: 30000 });
+              await page.waitForTimeout(2500);
+
+              const initialTheme = await page.evaluate(() => document.documentElement.dataset.theme);
+              await page.click('#themeButton');
+              await page.waitForTimeout(250);
+              const changedTheme = await page.evaluate(() => document.documentElement.dataset.theme);
+
+              await page.click('[data-panel="gallery"]');
+              await page.waitForTimeout(350);
+              const gallery = await page.evaluate(() => ({
+                view: document.body.dataset.activeView,
+                drawerHidden: document.getElementById('customerDrawer').hidden,
+                galleryHidden: document.querySelector('[data-content="gallery"]').hidden,
+                reportsHidden: document.querySelector('[data-content="reports"]').hidden,
+                heroLoaded: (() => { const i=document.getElementById('galleryHero'); return !!(i && i.complete && i.naturalWidth > 0); })()
+              }));
+
+              await page.click('[data-panel="reports"]');
+              await page.waitForTimeout(250);
+              const reports = await page.evaluate(() => ({
+                view: document.body.dataset.activeView,
+                galleryHidden: document.querySelector('[data-content="gallery"]').hidden,
+                reportsHidden: document.querySelector('[data-content="reports"]').hidden
+              }));
+
+              await page.click('[data-panel="model"]');
+              await page.click('#panelToggleHeader');
+              await page.waitForTimeout(300);
+
+              Object.assign(result, await page.evaluate(() => {
+                const scene = window.__KAYAS_SCENE__;
+                let visiblePrimitivePeoplePlants = 0;
+                let visibleDebugObjects = 0;
+                if (scene?.traverse) scene.traverse(o => {
+                  if (!o?.visible) return;
+                  const n = String(o.name || '').toLowerCase();
+                  if (/kayas-v21-professional-(person|plant)|person|human|visitor|avatar|figure|plant|tree|shrub|foliage|greenery/.test(n)) visiblePrimitivePeoplePlants++;
+                  if (/route-arrow|visitor-route|waypoint|debug|gizmo|axis-helper|camera-helper/.test(n)) visibleDebugObjects++;
+                });
+                const logoImages = [...document.querySelectorAll('.h3c-wordmark-logo img')];
+                const visibleQualityBadges = [...document.querySelectorAll('.render-quality-badge,.v21-render-badge,.v20-quality-badge,.cinematic-badge,[data-render-quality-badge]')]
+                  .filter(n => getComputedStyle(n).display !== 'none').length;
+                const metric = document.querySelectorAll('.metric-grid>div')[4];
+                const canvas = document.getElementById('scene');
+                return {
+                  status: window.__KAYAS_V24_STATUS,
+                  metricText: metric?.innerText || '',
+                  logoCount: logoImages.length,
+                  logoLoadedCount: logoImages.filter(i => i.complete && i.naturalWidth > 0).length,
+                  panelCollapsed: document.body.classList.contains('panel-collapsed'),
+                  activeView: document.body.dataset.activeView,
+                  visiblePrimitivePeoplePlants,
+                  visibleDebugObjects,
+                  visibleQualityBadges,
+                  canvas: canvas ? { width: canvas.width, height: canvas.height } : null,
+                  webgl: !!(canvas && (canvas.getContext('webgl2') || canvas.getContext('webgl')))
+                };
+              }));
+
+              result.initialTheme = initialTheme;
+              result.changedTheme = changedTheme;
+              result.gallery = gallery;
+              result.reports = reports;
+              result.fatalErrors = result.pageErrors.filter(e => /SyntaxError|ReferenceError|TypeError|WebGL/i.test(e));
+              result.pass =
+                result.status?.ready === true &&
+                /20/.test(result.metricText) && /10 kabinet/.test(result.metricText) &&
+                result.logoCount >= 3 && result.logoLoadedCount === result.logoCount &&
+                initialTheme !== changedTheme &&
+                gallery.view === 'gallery' && gallery.drawerHidden === false && gallery.galleryHidden === false && gallery.reportsHidden === true && gallery.heroLoaded === true &&
+                reports.view === 'reports' && reports.galleryHidden === true && reports.reportsHidden === false &&
+                result.activeView === 'model' && result.panelCollapsed === true &&
+                result.visiblePrimitivePeoplePlants === 0 && result.visibleDebugObjects === 0 && result.visibleQualityBadges === 0 &&
+                result.canvas?.width > 500 && result.canvas?.height > 300 && result.webgl === true &&
+                result.fatalErrors.length === 0;
+
+              await page.screenshot({ path: '/tmp/kayas-v24/acceptance.png', fullPage: true });
+            } catch (error) {
+              result.pageErrors.push(error.stack || error.message || String(error));
+            } finally {
+              if (browser) await browser.close();
+              fs.writeFileSync('/tmp/kayas-v24/status.json', JSON.stringify(result, null, 2));
+              console.log(JSON.stringify(result, null, 2));
+            }
+          })();
+          JS
+
+          cd /tmp/kayas-v24
+          node acceptance.js
+
+      - name: Record activation and acceptance result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v24/status.json; then
+            cp /tmp/kayas-v24/status.json kayas/walkthrough/smoke-status-v24.json
+          else
+            printf '%s\n' '{"version":"20260803-v24-investor-v1","pass":false,"error":"acceptance status was not produced"}' > kayas/walkthrough/smoke-status-v24.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v24.json
+          if git diff --cached --quiet; then
+            echo 'No activation changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Activate KAYAS V24 investor presentation and record acceptance [skip ci]'
+          git push origin HEAD:main
+
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v24-investor-acceptance
+          path: |
+            /tmp/kayas-v24/status.json
+            /tmp/kayas-v24/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v24/status.json'); if(!r.pass){console.error(r); process.exit(1)} console.log('KAYAS_V24_INVESTOR_ACCEPTANCE=PASS')"
