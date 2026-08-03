@@ -1,0 +1,30 @@
+{
+  "version": "v24-investor-model",
+  "pass": false,
+  "errors": [
+    "page.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('[data-panel=\"gallery\"]')\n    - locator resolved to <button type=\"button\" tabindex=\"-1\" data-panel=\"gallery\" aria-selected=\"false\">Görseller</button>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n\n    at /tmp/kayas-v24-test/test.js:24:16"
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ],
+  "failedRequests": [],
+  "model": {
+    "status": {
+      "version": "20260803-v24-investor-model",
+      "installed": true,
+      "racks": 200,
+      "screens": 30,
+      "leds": 2000,
+      "suppressed": 17
+    },
+    "visualVersion": "v24",
+    "canvas": {
+      "width": 1536,
+      "height": 960
+    },
+    "h3c": []
+  }
+}
