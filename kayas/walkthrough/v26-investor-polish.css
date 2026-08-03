@@ -1,0 +1,23 @@
+/* KAYAS V26 — investor presentation polish; no layout geometry changes. */
+body.k26-investor-polish .technical-details:not([open]){opacity:.82}
+body.k26-investor-polish .zone-card{max-width:360px;background:linear-gradient(155deg,rgba(6,22,38,.96),rgba(12,34,54,.92))!important}
+body.k26-investor-polish .tour-dock{max-width:420px}
+body.k26-investor-polish .panel{box-shadow:0 24px 70px rgba(0,0,0,.28)!important}
+body.k26-investor-polish #scene{filter:saturate(1.02) contrast(1.055) brightness(1.015)!important}
+html[data-theme="light"] body.k26-investor-polish #scene{filter:saturate(.98) contrast(1.025) brightness(1.02)!important}
+body.k26-investor-polish .render-quality-badge,
+body.k26-investor-polish .cinematic-badge,
+body.k26-investor-polish [class*="quality-badge"],
+body.k26-investor-polish [data-render-quality-badge]{display:none!important}
+body.k26-investor-polish .gallery-hero-image img,
+body.k26-investor-polish .gallery-grid img{image-rendering:auto!important;object-fit:contain!important}
+body.k26-investor-polish .drawer-panel[hidden],
+body.k26-investor-polish .customer-drawer[hidden]{display:none!important}
+body.k26-investor-polish[data-active-view="gallery"] .drawer-panel[data-content="gallery"]{display:block!important}
+body.k26-investor-polish[data-active-view="gallery"] .drawer-panel[data-content="reports"]{display:none!important}
+body.k26-investor-polish[data-active-view="reports"] .drawer-panel[data-content="gallery"]{display:none!important}
+body.k26-investor-polish[data-active-view="reports"] .drawer-panel[data-content="reports"]{display:grid!important}
+@media(max-width:900px){
+ body.k26-investor-polish .zone-card{max-width:min(82vw,340px)}
+ body.k26-investor-polish .tour-dock{max-width:min(88vw,420px)}
+}
