@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/kayas-restore-v8-safe.yml
+      - kayas/walkthrough/trigger-v8-safe.txt
   workflow_dispatch:
 
 permissions:
@@ -56,7 +57,7 @@ JS
           p = Path('kayas/walkthrough/index.html')
           text = p.read_text(encoding='utf-8')
           text = re.sub(
-              r'<script defer src="(?:model-loader\.js|src/kayas-v10-enhanced\.bundle\.js)\?v=[^"]+"></script>',
+              r'<script defer src="(?:model-loader\.js|src/kayas-v10-enhanced\.bundle\.js|src/kayas-v8-safe\.bundle\.js)\?v=[^"]+"></script>',
               '<script defer src="src/kayas-v8-safe.bundle.js?v=20260803-v16-safe"></script>',
               text,
           )
@@ -77,6 +78,5 @@ JS
             echo 'Safe runtime already installed.'
             exit 0
           fi
-          git pull --rebase origin main
           git commit -m 'Restore authoritative KAYAS v8 single-file runtime [skip ci]'
           git push origin HEAD:main
