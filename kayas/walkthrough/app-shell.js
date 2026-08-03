@@ -8,6 +8,10 @@
     gantt:{preview:'https://docs.google.com/spreadsheets/d/1EZEXAmANDyrx3SdmzWCiCZb5feKEqTF4/edit',download:'https://drive.google.com/uc?export=download&id=1EZEXAmANDyrx3SdmzWCiCZb5feKEqTF4'}
   };
 
+  const brandStyle=document.createElement('style');
+  brandStyle.textContent='body.is-night .specbridge-icon,body.is-night .specbridge-login-logo,body.is-night .loading-brand{filter:grayscale(1) brightness(0) invert(1);opacity:.98}body:not(.is-night) .specbridge-icon,body:not(.is-night) .specbridge-login-logo,body:not(.is-night) .loading-brand{filter:none;opacity:1}';
+  document.head.appendChild(brandStyle);
+
   function configureDocuments(){
     const items=document.querySelectorAll('.report-item[data-report-title]');
     items.forEach(item=>{
