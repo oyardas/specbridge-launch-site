@@ -1,0 +1,95 @@
+name: Build and Validate KAYAS Walkthrough v11
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-build-v11.yml
+      - kayas/walkthrough/src/chunks/**
+      - kayas/walkthrough/kayas-v10.patch
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-walkthrough-v11
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify authoritative v8 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import base64, gzip, hashlib, json
+
+          root = Path('kayas/walkthrough/src/chunks')
+          manifest = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
+          files = manifest.get('files') or []
+          if manifest.get('count') != len(files):
+              raise SystemExit('Manifest count mismatch')
+          if files != [f'model-{i:02}.txt' for i in range(1, 8)]:
+              raise SystemExit(f'Unexpected chunk set: {files}')
+
+          encoded = ''.join((root / name).read_text(encoding='ascii').strip() for name in files)
+          source = gzip.decompress(base64.b64decode(encoded))
+          digest = hashlib.sha256(source).hexdigest()
+          expected = '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d'
+          if digest != expected:
+              raise SystemExit(f'Authoritative v8 SHA mismatch: {digest}')
+
+          Path('/tmp/kayas-3d.bundle.js').write_bytes(source)
+          print(f'V8_SOURCE_BYTES={len(source)}')
+          print(f'V8_SOURCE_SHA256={digest}')
+          PY
+
+      - name: Apply approved v10 visual and interaction patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp
+          patch --batch --forward -p0 < "$GITHUB_WORKSPACE/kayas/walkthrough/kayas-v10.patch"
+          node --check /tmp/kayas-3d.bundle.js
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          path = Path('/tmp/kayas-3d.bundle.js')
+          digest = hashlib.sha256(path.read_bytes()).hexdigest()
+          expected = '3d31f4ec24f4554a742ca7de7a53d34de5dfdb812ad102a929c6967aa96e34b5'
+          if digest != expected:
+              raise SystemExit(f'Patched bundle SHA mismatch: {digest}')
+          print(f'PATCHED_BYTES={path.stat().st_size}')
+          print(f'PATCHED_SHA256={digest}')
+          PY
+
+      - name: Install validated bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/kayas-3d.bundle.js kayas/walkthrough/src/kayas-3d.bundle.js
+
+      - name: Commit validated bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kayas/walkthrough/src/kayas-3d.bundle.js
+          if git diff --cached --quiet; then
+            echo "Validated bundle is already current."
+            exit 0
+          fi
+          git commit -m "Build validated KAYAS v11 walkthrough bundle [skip ci]"
+          git push origin HEAD:main
