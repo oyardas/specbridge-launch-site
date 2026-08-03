@@ -8,7 +8,7 @@
     'model-01.txt', 'model-02.txt', 'model-03.txt', 'model-04.txt',
     'model-05.txt', 'model-06.txt', 'model-07.txt'
   ];
-  const ASSET_VERSION = '20260803-v13';
+  const ASSET_VERSION = '20260803-v14';
 
   function setStatus(title, message) {
     if (!status) return;
@@ -21,9 +21,18 @@
 
   function fail(message, error) {
     console.error('[KAYAS loader]', message, error || '');
-    window.__KAYAS_LOADER_ERROR = { message, stage: window.__KAYAS_LOADER_STAGE || 'unknown' };
+    window.__KAYAS_LOADER_ERROR = {
+      message,
+      stage: window.__KAYAS_LOADER_STAGE || 'unknown'
+    };
     setStatus('3D deneyim açılamadı', message);
   }
+
+  window.addEventListener('unhandledrejection', function (event) {
+    const reason = event.reason;
+    const message = reason && reason.message ? reason.message : String(reason || 'Bilinmeyen modül hatası');
+    if (!window.__KAYAS_MODEL_READY) fail('3D modül hatası: ' + message, reason);
+  });
 
   async function sha256(text) {
     const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
@@ -36,7 +45,6 @@
       xhr.open('GET', url, true);
       xhr.responseType = 'text';
       xhr.timeout = 45000;
-      xhr.setRequestHeader('Cache-Control', 'no-cache');
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) resolve(xhr.responseText);
         else reject(new Error('HTTP ' + xhr.status + ' · ' + url));
@@ -49,12 +57,19 @@
 
   async function loadText(url) {
     try {
-      const response = await fetch(url, { cache: 'no-store', credentials: 'same-origin' });
+      const response = await fetch(url, {
+        cache: 'no-store',
+        credentials: 'same-origin'
+      });
       if (!response.ok) throw new Error('HTTP ' + response.status + ' · ' + url);
       return await response.text();
     } catch (fetchError) {
       console.warn('[KAYAS loader] fetch başarısız, XHR deneniyor:', url, fetchError);
-      return xhrText(url);
+      try {
+        return await xhrText(url);
+      } catch (xhrError) {
+        throw new Error(url + ' alınamadı; fetch=' + (fetchError.message || fetchError) + '; xhr=' + (xhrError.message || xhrError));
+      }
     }
   }
 
@@ -118,10 +133,7 @@
     const parts = [];
     for (let index = 0; index < MODEL_PARTS.length; index += 1) {
       const file = MODEL_PARTS[index];
-      setStatus(
-        'Orijinal v8 modeli hazırlanıyor…',
-        (index + 1) + ' / ' + MODEL_PARTS.length + ' · ' + file
-      );
+      setStatus('Orijinal v8 modeli hazırlanıyor…', (index + 1) + ' / ' + MODEL_PARTS.length + ' · ' + file);
       try {
         parts.push(await loadText('src/chunks/' + file + '?v=' + ASSET_VERSION));
       } catch (error) {
@@ -148,28 +160,44 @@
     if (window.crypto && crypto.subtle) {
       window.__KAYAS_LOADER_STAGE = 'source-integrity';
       const actual = await sha256(source);
-      if (actual !== ORIGINAL_SHA256) {
-        throw new Error('v8 bütünlük kontrolü başarısız: ' + actual.slice(0, 12));
-      }
+      if (actual !== ORIGINAL_SHA256) throw new Error('v8 bütünlük kontrolü başarısız: ' + actual.slice(0, 12));
     }
+    return source;
+  }
+
+  function prepareRuntimeSource(source) {
+    const importPattern = /import\s+\*\s+as\s+THREE\s+from\s+['"]https:\/\/cdn\.jsdelivr\.net\/npm\/three@0\.180\.0\/\+esm['"]\s*;?/;
+    const fallbackBootstrap = `let THREE;\nconst __threeCandidates = [\n  new URL('vendor/three.module.min.js?v=${ASSET_VERSION}', window.location.href).href,\n  'https://unpkg.com/three@0.180.0/build/three.module.js',\n  'https://esm.sh/three@0.180.0',\n  'https://cdn.jsdelivr.net/npm/three@0.180.0/+esm'\n];\nconst __threeErrors = [];\nfor (const __url of __threeCandidates) {\n  try {\n    THREE = await import(__url);\n    console.info('[KAYAS] Three.js loaded from', __url);\n    break;\n  } catch (__error) {\n    __threeErrors.push(__url + ' => ' + (__error && __error.message ? __error.message : String(__error)));\n  }\n}\nif (!THREE) throw new Error('Three.js yüklenemedi: ' + __threeErrors.join(' | '));`;
+
+    if (importPattern.test(source)) return source.replace(importPattern, fallbackBootstrap);
+
+    const dynamicPattern = /import\(['"]https:\/\/cdn\.jsdelivr\.net\/npm\/three@0\.180\.0\/\+esm['"]\)/g;
+    if (dynamicPattern.test(source)) {
+      return source.replace(dynamicPattern, `(async()=>{for(const u of [new URL('vendor/three.module.min.js?v=${ASSET_VERSION}',window.location.href).href,'https://unpkg.com/three@0.180.0/build/three.module.js','https://esm.sh/three@0.180.0','https://cdn.jsdelivr.net/npm/three@0.180.0/+esm']){try{return await import(u)}catch(e){console.warn('[KAYAS] Three.js source failed',u,e)}}throw new Error('Three.js kaynaklarının tümü başarısız')})()`);
+    }
+
+    console.warn('[KAYAS loader] Three.js import satırı bulunamadı; kaynak olduğu gibi yürütülüyor.');
     return source;
   }
 
   function execute(source, mode) {
     window.__KAYAS_LOADER_STAGE = 'execution';
-    const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+    const runtimeSource = prepareRuntimeSource(source) + '\nwindow.__KAYAS_MODEL_READY = true;';
+    const url = URL.createObjectURL(new Blob([runtimeSource], { type: 'text/javascript' }));
     const script = document.createElement('script');
+    script.type = 'module';
     script.src = url;
     script.onload = () => {
       URL.revokeObjectURL(url);
       if (status) status.hidden = true;
       window.__KAYAS_MODEL_MODE = mode;
+      window.__KAYAS_MODEL_READY = true;
       window.dispatchEvent(new Event('resize'));
       console.info('[KAYAS loader] 3D motor aktif:', mode);
     };
-    script.onerror = () => {
+    script.onerror = (event) => {
       URL.revokeObjectURL(url);
-      fail('3D JavaScript motoru başlatılamadı. Konsol kaydını kontrol edin.');
+      fail('3D JavaScript modülü başlatılamadı. Harici Three.js kaynakları erişilemiyor olabilir.', event);
     };
     document.body.appendChild(script);
   }
