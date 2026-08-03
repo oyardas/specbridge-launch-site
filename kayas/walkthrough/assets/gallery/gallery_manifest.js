@@ -1,52 +1,44 @@
 window.KAYAS_GALLERY_DATA={
   project:"KAYAS OSB Data Center Investor Visuals",
-  version:"v22_same_origin_gallery",
+  version:"20260803-v23-investor-v1",
   count:2,
   items:[
-    {number:1,category:"Concept Portfolio",title:"KAYAS Yerleşim ve Konsept Görseli",full:"assets/gallery/kayas_concept_board.svg?v=20260803-v22",thumb:"assets/gallery/kayas_concept_board.svg?v=20260803-v22",original:"assets/gallery/kayas_concept_board.svg?v=20260803-v22",notes:"Authoritative v8 yerleşimini temel alan, aynı origin üzerinden sunulan yatırımcı konsept görseli."},
-    {number:2,category:"Product Video",title:"H3C IC8000 Video Önizlemesi",full:"https://img.youtube.com/vi/gxWI5p_MH3E/maxresdefault.jpg",thumb:"https://img.youtube.com/vi/gxWI5p_MH3E/hqdefault.jpg",original:"https://youtu.be/gxWI5p_MH3E?t=5",notes:"H3C IC8000 ürün videosu. Yeni sekmede video açılır."}
+    {
+      number:1,
+      category:"Concept Portfolio",
+      title:"24 Görsellik KAYAS Konsept Panosu",
+      full:"assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v23",
+      thumb:"assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v23",
+      original:"assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v23",
+      notes:"Giriş, fuaye, güvenlik, NOC, veri salonu, teknik alanlar, teras ve ziyaretçi rotasını kapsayan konsept görsel seti."
+    },
+    {
+      number:2,
+      category:"Product Video",
+      title:"H3C IC8000 Video Önizlemesi",
+      full:"https://img.youtube.com/vi/gxWI5p_MH3E/maxresdefault.jpg",
+      thumb:"https://img.youtube.com/vi/gxWI5p_MH3E/hqdefault.jpg",
+      original:"https://youtu.be/gxWI5p_MH3E?t=5",
+      notes:"H3C IC8000 ürün videosu. Yeni sekmede video açılır."
+    }
   ]
 };
 
 (function(){
   'use strict';
-  var css=document.getElementById('kayas-v21-css');
-  if(css)css.href='v21-fixes.css?v=20260803-v22-brand-cleanup';
-
-  var overlays=['labelsToggle','routeToggle','zoningToggle','futureToggle','coolingToggle','powerToggle','fiberToggle','safetyToggle'];
-  function setProfessionalDefaults(){
-    overlays.forEach(function(id){
-      var input=document.getElementById(id);
-      if(!input||!input.checked)return;
-      input.checked=false;
-      input.dispatchEvent(new Event('change',{bubbles:true}));
-    });
+  var version='20260803-v23-investor-v1';
+  if(!document.getElementById('kayas-v23-css')){
+    var link=document.createElement('link');
+    link.id='kayas-v23-css';
+    link.rel='stylesheet';
+    link.href='v23-investor.css?v='+version;
+    document.head.appendChild(link);
   }
-  function suppressPrimitiveDecor(){
-    var scene=window.__KAYAS_SCENE__;
-    if(!scene||!scene.traverse)return false;
-    scene.traverse(function(object){
-      if(!object||!object.visible)return;
-      var name=String(object.name||'').toLowerCase();
-      if(!name)return;
-      if(/screen|dashboard|monitor|rack|cabinet|ic8000|door|wall|floor|glass|table|chair|reception|mantrap|battery|fiber|hvac|chiller|cooler/.test(name))return;
-      if(/person|human|visitor|avatar|figure|receptionist|staff|plant|tree|shrub|foliage|greenery|potted/.test(name)){
-        object.visible=false;
-        object.userData=object.userData||{};
-        object.userData.kayasV22Suppressed=true;
-      }
-    });
-    return true;
+  if(!document.getElementById('kayas-v23-js')){
+    var script=document.createElement('script');
+    script.id='kayas-v23-js';
+    script.src='v23-investor.js?v='+version;
+    script.defer=true;
+    document.head.appendChild(script);
   }
-  function install(){
-    setProfessionalDefaults();
-    var attempts=0;
-    var timer=setInterval(function(){
-      attempts+=1;
-      setProfessionalDefaults();
-      if(suppressPrimitiveDecor()||attempts>120)clearInterval(timer);
-    },250);
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
-  else install();
 })();
