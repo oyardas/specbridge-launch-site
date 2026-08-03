@@ -1,0 +1,335 @@
+name: Build KAYAS Professional Walkthrough v19
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-build-v19.yml
+      - kayas/walkthrough/build-v19-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-build-v19
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Recover authoritative v8 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          test -s "$SRC"
+          head -c 1371713 "$SRC" > /tmp/kayas-3d.bundle.js
+          test "$(wc -c < /tmp/kayas-3d.bundle.js)" -eq 1371713
+          printf '%s  %s\n' \
+            '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d' \
+            '/tmp/kayas-3d.bundle.js' | sha256sum -c -
+          node --check /tmp/kayas-3d.bundle.js
+
+      - name: Apply geometry-preserving v10 detail patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp
+          patch --batch --forward -p0 < "$GITHUB_WORKSPACE/kayas/walkthrough/kayas-v10.patch"
+          node --check /tmp/kayas-3d.bundle.js
+
+      - name: Add non-static LEDs, live screens and premium render layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >> /tmp/kayas-3d.bundle.js <<'JS'
+
+/* KAYAS v19 professional visual layer.
+   The architectural coordinates and object placement are not modified. */
+window.__KAYAS_ENHANCED_UI_HANDLES_PANEL = true;
+
+(function installKayasV19VisualLayer(){
+  const REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MOBILE = window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+  const LED_PATTERN = /(server-status-led|server-warning-led|rack-led|cold-aisle-led)/i;
+  const SCREEN_PATTERN = /(screen|dashboard|display|monitor|presentation)/i;
+  const ledNodes = [];
+  const liveScreens = [];
+
+  function seededValue(text){
+    let value=2166136261;
+    for(let i=0;i<text.length;i+=1){value^=text.charCodeAt(i);value=Math.imul(value,16777619);}
+    return (value>>>0)/4294967295;
+  }
+
+  function tuneRenderer(){
+    if(typeof renderer==='undefined'||!renderer)return;
+    const maxRatio=MOBILE?1.35:2;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,maxRatio));
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure=document.body.classList.contains('is-night')?1.08:1.0;
+    renderer.shadowMap.enabled=!MOBILE;
+    if(!MOBILE)renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  }
+
+  function tuneMaterialsAndShadows(){
+    if(typeof scene==='undefined'||!scene)return;
+    let shadowCasters=0;
+    scene.traverse((object)=>{
+      if(!object||!object.isMesh)return;
+      const name=String(object.name||'').toLowerCase();
+      const materialsList=Array.isArray(object.material)?object.material:[object.material];
+      materialsList.filter(Boolean).forEach((material)=>{
+        if(typeof material.roughness==='number'){
+          if(/rack|cabinet|metal|chiller|cooler|unit/.test(name)){
+            material.roughness=Math.min(material.roughness,.34);
+            material.metalness=Math.max(material.metalness||0,.48);
+          }else if(/floor|tile|terrace/.test(name)){
+            material.roughness=Math.min(Math.max(material.roughness,.42),.62);
+          }else if(/wall|room|partition/.test(name)){
+            material.roughness=Math.max(material.roughness,.68);
+          }
+          material.needsUpdate=true;
+        }
+      });
+      if(!MOBILE){
+        object.receiveShadow=/floor|wall|terrace|roof|table|desk/.test(name);
+        if(shadowCasters<900&&/rack|cabinet|wall|door|table|chair|unit|chiller|cooler/.test(name)){
+          object.castShadow=true;
+          shadowCasters+=1;
+        }
+      }
+    });
+
+    if(!scene.getObjectByName('kayas-v19-hemisphere')){
+      const hemi=new THREE.HemisphereLight(0xcce8ff,0x08111c,document.body.classList.contains('is-night')?.58:.72);
+      hemi.name='kayas-v19-hemisphere';
+      scene.add(hemi);
+    }
+    if(!scene.getObjectByName('kayas-v19-key-light')){
+      const key=new THREE.DirectionalLight(0xfff4df,document.body.classList.contains('is-night')?1.15:.92);
+      key.name='kayas-v19-key-light';
+      key.position.set(-28,46,-18);
+      key.castShadow=!MOBILE;
+      if(key.shadow){
+        key.shadow.mapSize.set(MOBILE?512:2048,MOBILE?512:2048);
+        key.shadow.camera.near=2;
+        key.shadow.camera.far=150;
+        key.shadow.bias=-0.00035;
+      }
+      scene.add(key);
+    }
+    if(!scene.getObjectByName('kayas-v19-fill-light')){
+      const fill=new THREE.DirectionalLight(0x7ec8ff,.48);
+      fill.name='kayas-v19-fill-light';
+      fill.position.set(38,24,30);
+      scene.add(fill);
+    }
+  }
+
+  function installLedAnimation(){
+    if(typeof scene==='undefined'||!scene)return;
+    scene.traverse((object)=>{
+      if(!object||!object.isMesh||!LED_PATTERN.test(String(object.name||'')))return;
+      if(!object.material||Array.isArray(object.material))return;
+      const cloned=object.material.clone();
+      object.material=cloned;
+      const key=String(object.name||'led')+'|'+object.id;
+      const seed=seededValue(key);
+      const amber=/warning|amber/i.test(key)||cloned.emissive&&cloned.emissive.r>.6&&cloned.emissive.g>.15&&cloned.emissive.g<.8;
+      ledNodes.push({
+        material:cloned,
+        phase:seed*Math.PI*2,
+        speed:.55+seed*1.75,
+        minimum:amber?.18:.42,
+        maximum:amber?2.7:2.35,
+        amber
+      });
+    });
+  }
+
+  function createDashboard(screen,index){
+    const width=512,height=256;
+    const canvas=document.createElement('canvas');
+    canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d');
+    const texture=new THREE.CanvasTexture(canvas);
+    texture.colorSpace=THREE.SRGBColorSpace;
+    texture.anisotropy=4;
+    texture.minFilter=THREE.LinearFilter;
+    texture.magFilter=THREE.LinearFilter;
+    const original=screen.material;
+    const material=original&&original.clone?original.clone():new THREE.MeshStandardMaterial();
+    material.map=texture;
+    material.emissiveMap=texture;
+    material.emissive=new THREE.Color(0x4aa6ff);
+    material.emissiveIntensity=1.0;
+    material.toneMapped=false;
+    material.needsUpdate=true;
+    screen.material=material;
+    const seed=seededValue(String(screen.name||'screen')+'|'+screen.id);
+    liveScreens.push({screen,canvas,ctx,texture,seed,index,lastFrame:-1});
+  }
+
+  function installLiveScreens(){
+    if(typeof scene==='undefined'||!scene)return;
+    let count=0;
+    scene.traverse((object)=>{
+      if(count>=28||!object||!object.isMesh||!SCREEN_PATTERN.test(String(object.name||'')))return;
+      if(!object.geometry||!object.material||Array.isArray(object.material))return;
+      const type=String(object.geometry.type||'');
+      const likelyPanel=/PlaneGeometry/.test(type)||(/BoxGeometry/.test(type)&&object.scale&&Math.min(object.scale.x,object.scale.y,object.scale.z)<1.2);
+      if(!likelyPanel)return;
+      createDashboard(object,count);
+      count+=1;
+    });
+  }
+
+  function drawDashboard(item,time){
+    const frame=Math.floor(time/180);
+    if(item.lastFrame===frame)return;
+    item.lastFrame=frame;
+    const {ctx,canvas,seed,index}=item;
+    const w=canvas.width,h=canvas.height;
+    const phase=time*.001*(.6+seed*.8)+seed*10;
+    const hue=index%3===0?'#48d5d1':index%3===1?'#5b9cff':'#72e39b';
+    const title=index%3===0?'LIVE OPERATIONS':index%3===1?'CAPACITY & PUE':'ROOM SCHEDULE';
+
+    const gradient=ctx.createLinearGradient(0,0,w,h);
+    gradient.addColorStop(0,'#061321');
+    gradient.addColorStop(1,'#0b2741');
+    ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(255,255,255,.055)';
+    for(let x=0;x<w;x+=32)ctx.fillRect(x,0,1,h);
+    for(let y=0;y<h;y+=32)ctx.fillRect(0,y,w,1);
+
+    ctx.font='700 22px Arial';ctx.fillStyle='#eef7ff';ctx.fillText(title,24,36);
+    ctx.font='600 13px Arial';ctx.fillStyle=hue;ctx.fillText('KAYAS · H3C IC8000',24,60);
+    ctx.textAlign='right';ctx.fillStyle='#9fb5c8';
+    ctx.fillText(new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),w-24,34);
+    ctx.textAlign='left';
+
+    ctx.strokeStyle=hue;ctx.lineWidth=4;ctx.beginPath();
+    for(let x=24;x<=w-24;x+=8){
+      const ratio=(x-24)/(w-48);
+      const y=154-Math.sin(phase+ratio*8)*24-Math.sin(phase*.47+ratio*17)*11-seed*8;
+      if(x===24)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(24,182);ctx.lineTo(w-24,182);ctx.stroke();
+
+    const values=[62+Math.round(Math.sin(phase)*8),128+Math.round(Math.sin(phase*.7)*6),99.99];
+    const labels=['ORT. YÜK','PUE ×100','ERİŞİLEBİLİRLİK'];
+    for(let i=0;i<3;i+=1){
+      const x=24+i*158;
+      ctx.fillStyle='rgba(91,156,255,.12)';ctx.fillRect(x,196,142,42);
+      ctx.font='700 10px Arial';ctx.fillStyle='#8fa9bf';ctx.fillText(labels[i],x+10,212);
+      ctx.font='800 17px Arial';ctx.fillStyle=i===2?'#72e39b':'#ffffff';ctx.fillText(String(values[i])+(i===0?'%':i===1?'':''),x+10,232);
+    }
+
+    ctx.fillStyle=(Math.sin(phase*2.1)>-.35)?'#4bd08b':'#ffc75a';
+    ctx.beginPath();ctx.arc(w-26,57,5,0,Math.PI*2);ctx.fill();
+    item.texture.needsUpdate=true;
+  }
+
+  function installQualityBadge(){
+    if(document.querySelector('.render-quality-badge'))return;
+    const badge=document.createElement('div');
+    badge.className='render-quality-badge';
+    badge.innerHTML='<i></i><span>Canlı 3D · PBR · Dinamik ekranlar</span>';
+    document.getElementById('app')?.appendChild(badge);
+  }
+
+  function animateVisualLayer(now){
+    if(!REDUCED_MOTION){
+      const seconds=now*.001;
+      for(const led of ledNodes){
+        let wave=.5+.5*Math.sin(seconds*led.speed+led.phase);
+        if(led.amber)wave=Math.pow(Math.max(0,wave-.38)/.62,3);
+        const intensity=led.minimum+(led.maximum-led.minimum)*wave;
+        if(typeof led.material.emissiveIntensity==='number')led.material.emissiveIntensity=intensity;
+      }
+      for(const screen of liveScreens)drawDashboard(screen,now);
+    }
+    requestAnimationFrame(animateVisualLayer);
+  }
+
+  function install(){
+    try{
+      tuneRenderer();
+      tuneMaterialsAndShadows();
+      installLedAnimation();
+      installLiveScreens();
+      installQualityBadge();
+      requestAnimationFrame(animateVisualLayer);
+      window.__KAYAS_V19_VISUAL_READY=true;
+      window.__KAYAS_V19_COUNTS={leds:ledNodes.length,screens:liveScreens.length};
+      window.dispatchEvent(new Event('resize'));
+      console.info('[KAYAS v19] Premium visual layer active',window.__KAYAS_V19_COUNTS);
+    }catch(error){
+      window.__KAYAS_V19_VISUAL_ERROR=String(error&&error.stack||error);
+      console.error('[KAYAS v19] Visual layer failed',error);
+    }
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(install,120));
+  else setTimeout(install,120);
+})();
+
+window.__KAYAS_MODEL_READY = true;
+window.__KAYAS_MODEL_MODE = 'authoritative-v8-geometry-v19-professional';
+window.__KAYAS_MODEL_SOURCE = 'same-origin-v19';
+window.dispatchEvent(new Event('resize'));
+JS
+          node --check /tmp/kayas-3d.bundle.js
+          test "$(wc -c < /tmp/kayas-3d.bundle.js)" -gt 1371713
+
+      - name: Publish v19 assets and update cache keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/kayas-3d.bundle.js kayas/walkthrough/src/kayas-v19-enhanced.bundle.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          path=Path('kayas/walkthrough/index.html')
+          text=path.read_text(encoding='utf-8')
+          text=re.sub(r'<link rel="stylesheet" href="styles\.css\?v=[^"]+" />',
+                      '<link rel="stylesheet" href="styles.css?v=20260803-v19" />\n  <link rel="stylesheet" href="v19-enhancements.css?v=20260803-v19" />',text)
+          text=re.sub(r'<script defer src="src/kayas-v8-safe\.bundle\.js\?v=[^"]+"></script>',
+                      '<script defer src="src/kayas-v19-enhanced.bundle.js?v=20260803-v19"></script>',text)
+          text=re.sub(r'<script defer src="src/kayas-v10-enhanced\.bundle\.js\?v=[^"]+"></script>',
+                      '<script defer src="src/kayas-v19-enhanced.bundle.js?v=20260803-v19"></script>',text)
+          text=re.sub(r'<script defer src="app-shell\.js\?v=[^"]+"></script>',
+                      '<script defer src="app-shell.js?v=20260803-v19"></script>',text)
+          if text.count('v19-enhancements.css')!=1: raise SystemExit('v19 CSS reference count mismatch')
+          if text.count('kayas-v19-enhanced.bundle.js')!=1: raise SystemExit('v19 bundle reference count mismatch')
+          if text.count('app-shell.js?v=20260803-v19')!=1: raise SystemExit('v19 shell reference count mismatch')
+          path.write_text(text,encoding='utf-8')
+          PY
+          node --check kayas/walkthrough/src/kayas-v19-enhanced.bundle.js
+          grep -q 'kayas-v19-enhanced.bundle.js?v=20260803-v19' kayas/walkthrough/index.html
+          grep -q 'v19-enhancements.css?v=20260803-v19' kayas/walkthrough/index.html
+
+      - name: Commit generated v19 runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/src/kayas-v19-enhanced.bundle.js
+          if git diff --cached --quiet; then
+            echo 'v19 runtime already current.'
+            exit 0
+          fi
+          git commit -m 'Publish KAYAS professional walkthrough v19 [skip ci]'
+          git push origin HEAD:main
