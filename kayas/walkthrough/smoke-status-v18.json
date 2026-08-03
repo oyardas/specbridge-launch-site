@@ -1,0 +1,36 @@
+{
+  "pass": true,
+  "version": "same-origin-v18",
+  "timestamp": "2026-08-03T11:01:06.051Z",
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ],
+  "failedRequests": [
+    {
+      "url": "https://drive.google.com/uc?export=view&id=1TKKF1NsETSk68T0xbZa86DThc4dJ2gwT",
+      "error": "net::ERR_BLOCKED_BY_ORB"
+    }
+  ],
+  "ready": true,
+  "mode": "authoritative-v8-same-origin-v18",
+  "source": "same-origin",
+  "threeRevision": "166",
+  "canvas": {
+    "width": 1536,
+    "height": 960,
+    "clientWidth": 1536,
+    "clientHeight": 960
+  },
+  "webglContext": true,
+  "rendererCanvasCount": 1,
+  "loadStatus": {
+    "hidden": true,
+    "title": "3D yatırımcı deneyimi yükleniyor…",
+    "message": "Model gerçek metre birimleriyle hazırlanmıştır. Masaüstünde W/A/S/D, mobilde dokunmatik gezinme kullanılabilir."
+  },
+  "fatalErrors": []
+}
