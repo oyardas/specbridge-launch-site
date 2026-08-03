@@ -8,7 +8,7 @@
     'model-01.txt', 'model-02.txt', 'model-03.txt', 'model-04.txt',
     'model-05.txt', 'model-06.txt', 'model-07.txt'
   ];
-  const ASSET_VERSION = '20260803-v14';
+  const ASSET_VERSION = '20260803-v15';
 
   function setStatus(title, message) {
     if (!status) return;
@@ -29,9 +29,10 @@
   }
 
   window.addEventListener('unhandledrejection', function (event) {
+    if (window.__KAYAS_MODEL_READY) return;
     const reason = event.reason;
-    const message = reason && reason.message ? reason.message : String(reason || 'Bilinmeyen modül hatası');
-    if (!window.__KAYAS_MODEL_READY) fail('3D modül hatası: ' + message, reason);
+    const message = reason && reason.message ? reason.message : String(reason || 'Bilinmeyen hata');
+    fail('3D çalışma zamanı hatası: ' + message, reason);
   });
 
   async function sha256(text) {
@@ -57,20 +58,37 @@
 
   async function loadText(url) {
     try {
-      const response = await fetch(url, {
-        cache: 'no-store',
-        credentials: 'same-origin'
-      });
+      const response = await fetch(url, { cache: 'no-store', credentials: 'same-origin' });
       if (!response.ok) throw new Error('HTTP ' + response.status + ' · ' + url);
       return await response.text();
     } catch (fetchError) {
-      console.warn('[KAYAS loader] fetch başarısız, XHR deneniyor:', url, fetchError);
       try {
         return await xhrText(url);
       } catch (xhrError) {
         throw new Error(url + ' alınamadı; fetch=' + (fetchError.message || fetchError) + '; xhr=' + (xhrError.message || xhrError));
       }
     }
+  }
+
+  function loadClassicScript(url, expectedGlobal) {
+    return new Promise((resolve, reject) => {
+      if (expectedGlobal && window[expectedGlobal]) {
+        resolve(window[expectedGlobal]);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = url;
+      script.async = false;
+      script.onload = () => {
+        if (expectedGlobal && !window[expectedGlobal]) {
+          reject(new Error(url + ' yüklendi ancak window.' + expectedGlobal + ' oluşmadı.'));
+          return;
+        }
+        resolve(expectedGlobal ? window[expectedGlobal] : true);
+      };
+      script.onerror = () => reject(new Error(url + ' yüklenemedi.'));
+      document.head.appendChild(script);
+    });
   }
 
   function applyUnifiedPatch(source, patchText) {
@@ -166,18 +184,19 @@
   }
 
   function prepareRuntimeSource(source) {
-    const importPattern = /import\s+\*\s+as\s+THREE\s+from\s+['"]https:\/\/cdn\.jsdelivr\.net\/npm\/three@0\.180\.0\/\+esm['"]\s*;?/;
-    const fallbackBootstrap = `let THREE;\nconst __threeCandidates = [\n  new URL('vendor/three.module.min.js?v=${ASSET_VERSION}', window.location.href).href,\n  'https://unpkg.com/three@0.180.0/build/three.module.js',\n  'https://esm.sh/three@0.180.0',\n  'https://cdn.jsdelivr.net/npm/three@0.180.0/+esm'\n];\nconst __threeErrors = [];\nfor (const __url of __threeCandidates) {\n  try {\n    THREE = await import(__url);\n    console.info('[KAYAS] Three.js loaded from', __url);\n    break;\n  } catch (__error) {\n    __threeErrors.push(__url + ' => ' + (__error && __error.message ? __error.message : String(__error)));\n  }\n}\nif (!THREE) throw new Error('Three.js yüklenemedi: ' + __threeErrors.join(' | '));`;
+    const staticImport = /import\s+\*\s+as\s+THREE\s+from\s+['"][^'"]*three[^'"]*['"]\s*;?/;
+    const dynamicThreeImport = /import\((['"])[^'"]*three[^'"]*\1\)/g;
+    let runtime = source;
 
-    if (importPattern.test(source)) return source.replace(importPattern, fallbackBootstrap);
-
-    const dynamicPattern = /import\(['"]https:\/\/cdn\.jsdelivr\.net\/npm\/three@0\.180\.0\/\+esm['"]\)/g;
-    if (dynamicPattern.test(source)) {
-      return source.replace(dynamicPattern, `(async()=>{for(const u of [new URL('vendor/three.module.min.js?v=${ASSET_VERSION}',window.location.href).href,'https://unpkg.com/three@0.180.0/build/three.module.js','https://esm.sh/three@0.180.0','https://cdn.jsdelivr.net/npm/three@0.180.0/+esm']){try{return await import(u)}catch(e){console.warn('[KAYAS] Three.js source failed',u,e)}}throw new Error('Three.js kaynaklarının tümü başarısız')})()`);
+    if (staticImport.test(runtime)) {
+      runtime = runtime.replace(staticImport, 'const THREE = window.THREE;');
     }
+    runtime = runtime.replace(dynamicThreeImport, 'Promise.resolve(window.THREE)');
 
-    console.warn('[KAYAS loader] Three.js import satırı bulunamadı; kaynak olduğu gibi yürütülüyor.');
-    return source;
+    if (!/\bTHREE\b/.test(runtime)) {
+      console.warn('[KAYAS loader] Kaynak içinde THREE referansı bulunamadı.');
+    }
+    return runtime;
   }
 
   function execute(source, mode) {
@@ -185,24 +204,28 @@
     const runtimeSource = prepareRuntimeSource(source) + '\nwindow.__KAYAS_MODEL_READY = true;';
     const url = URL.createObjectURL(new Blob([runtimeSource], { type: 'text/javascript' }));
     const script = document.createElement('script');
-    script.type = 'module';
     script.src = url;
+    script.async = false;
     script.onload = () => {
       URL.revokeObjectURL(url);
       if (status) status.hidden = true;
       window.__KAYAS_MODEL_MODE = mode;
       window.__KAYAS_MODEL_READY = true;
       window.dispatchEvent(new Event('resize'));
-      console.info('[KAYAS loader] 3D motor aktif:', mode);
+      console.info('[KAYAS loader] 3D motor aktif:', mode, 'Three.js r' + (window.THREE && window.THREE.REVISION));
     };
     script.onerror = (event) => {
       URL.revokeObjectURL(url);
-      fail('3D JavaScript modülü başlatılamadı. Harici Three.js kaynakları erişilemiyor olabilir.', event);
+      fail('3D JavaScript motoru başlatılamadı. Yerel runtime yüklendi ancak model kodu çalışmadı.', event);
     };
     document.body.appendChild(script);
   }
 
   try {
+    window.__KAYAS_LOADER_STAGE = 'offline-three';
+    setStatus('Yerel 3D motor hazırlanıyor…', 'Three.js site içinden yükleniyor; harici CDN kullanılmıyor.');
+    await loadClassicScript('vendor/three.global.r166.js?v=' + ASSET_VERSION, 'THREE');
+
     setStatus('3D model yükleniyor…', 'Yedi parçalı v8 kaynak paketi hazırlanıyor.');
     const original = await reconstructV8Source();
 
@@ -215,11 +238,11 @@
         const actual = await sha256(patched);
         if (actual !== PATCHED_SHA256) throw new Error('Patch bütünlük kontrolü: ' + actual.slice(0, 12));
       }
-      execute(patched, 'v8-geometry-v10-enhanced');
+      execute(patched, 'v8-geometry-v10-enhanced-offline-three');
     } catch (patchError) {
-      console.warn('[KAYAS loader] Geliştirme patch’i yüklenemedi; orijinal v8 sahne açılıyor.', patchError);
-      setStatus('Orijinal v8 model açılıyor…', 'Geliştirme katmanı alınamadı; bina modeli güvenli modda başlatılıyor.');
-      execute(original, 'v8-safe-fallback');
+      console.warn('[KAYAS loader] Geliştirme patch’i uygulanamadı; orijinal v8 sahne açılıyor.', patchError);
+      setStatus('Orijinal v8 model açılıyor…', 'Geliştirme katmanı uygulanamadı; bina modeli güvenli modda başlatılıyor.');
+      execute(original, 'v8-safe-fallback-offline-three');
     }
   } catch (error) {
     fail(error && error.message ? error.message : String(error), error);
