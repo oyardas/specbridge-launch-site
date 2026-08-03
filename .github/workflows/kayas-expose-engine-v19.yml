@@ -1,0 +1,113 @@
+name: Expose KAYAS v8 Engine Handles for v19
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-expose-engine-v19.yml
+      - kayas/walkthrough/expose-engine-v19-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-expose-engine-v19
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Recover and verify authoritative v8 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          test -s "$SRC"
+          head -c 1371713 "$SRC" > /tmp/kayas-v8-source.js
+          test "$(wc -c < /tmp/kayas-v8-source.js)" -eq 1371713
+          printf '%s  %s\n' \
+            '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d' \
+            '/tmp/kayas-v8-source.js' | sha256sum -c -
+          node --check /tmp/kayas-v8-source.js
+
+      - name: Expose renderer scene and camera only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          source_path = Path('/tmp/kayas-v8-source.js')
+          source = source_path.read_text(encoding='utf-8')
+          needle = """const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+          renderer.setPixelRatio(Math.min(devicePixelRatio, 1.65));
+          renderer.shadowMap.enabled = false;
+          renderer.outputColorSpace = SRGBColorSpace;
+          renderer.toneMapping = ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1;
+          const scene = new Scene();
+          const camera = new PerspectiveCamera(50, 1, .1, 1000);"""
+          replacement = needle + """
+          window.__KAYAS_RENDERER__ = renderer;
+          window.__KAYAS_SCENE__ = scene;
+          window.__KAYAS_CAMERA__ = camera;"""
+          count = source.count(needle)
+          if count != 1:
+              raise SystemExit(f'Expected renderer bootstrap exactly once, found {count}')
+          source = source.replace(needle, replacement, 1)
+          source += """
+
+          window.__KAYAS_MODEL_READY = true;
+          window.__KAYAS_MODEL_MODE = 'authoritative-v8-geometry-exposed-v19';
+          window.__KAYAS_MODEL_SOURCE = 'same-origin-exposed-v19';
+          window.dispatchEvent(new Event('resize'));
+          """
+          target = Path('kayas/walkthrough/src/kayas-v8-exposed-v19.bundle.js')
+          target.write_text(source, encoding='utf-8')
+          print(f'EXPOSED_BUNDLE_BYTES={target.stat().st_size}')
+          PY
+          node --check kayas/walkthrough/src/kayas-v8-exposed-v19.bundle.js
+          grep -q 'window.__KAYAS_RENDERER__ = renderer' kayas/walkthrough/src/kayas-v8-exposed-v19.bundle.js
+          grep -q 'window.__KAYAS_SCENE__ = scene' kayas/walkthrough/src/kayas-v8-exposed-v19.bundle.js
+          grep -q 'window.__KAYAS_CAMERA__ = camera' kayas/walkthrough/src/kayas-v8-exposed-v19.bundle.js
+
+      - name: Activate exposed geometry-locked runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          path = Path('kayas/walkthrough/index.html')
+          text = path.read_text(encoding='utf-8')
+          pattern = r'<script defer src="src/(?:kayas-v8-safe|kayas-v8-exposed-v19|kayas-v19-enhanced|kayas-v10-enhanced)\.bundle\.js\?v=[^"]+"></script>'
+          replacement = '<script defer src="src/kayas-v8-exposed-v19.bundle.js?v=20260803-v19-engine"></script>'
+          text, count = re.subn(pattern, replacement, text)
+          if count != 1:
+              raise SystemExit(f'Expected exactly one model bundle reference, found {count}')
+          path.write_text(text, encoding='utf-8')
+          PY
+          grep -q 'src/kayas-v8-exposed-v19.bundle.js?v=20260803-v19-engine' kayas/walkthrough/index.html
+          grep -q 'app-shell.js?v=20260803-v19' kayas/walkthrough/index.html
+
+      - name: Commit exposed runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/src/kayas-v8-exposed-v19.bundle.js
+          if git diff --cached --quiet; then
+            echo 'Exposed runtime already current.'
+            exit 0
+          fi
+          git commit -m 'Publish geometry-locked KAYAS v19 engine bridge [skip ci]'
+          git push origin HEAD:main
