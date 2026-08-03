@@ -1,0 +1,33 @@
+/* KAYAS v24 investor model presentation layer */
+html[data-kayas-visual-version="v24"] #scene{
+  image-rendering:auto!important;
+  filter:saturate(1.06) contrast(1.045) brightness(1.015)!important;
+}
+html[data-theme="light"][data-kayas-visual-version="v24"] #scene{
+  filter:saturate(1.01) contrast(1.025) brightness(1.035)!important;
+}
+html[data-kayas-visual-version="v24"] .zone-card{
+  max-width:350px;
+  border-left:4px solid #5b9cff!important;
+}
+html[data-kayas-visual-version="v24"] .panel .subtitle::after{
+  content:' · V24 profesyonel görsel katman';
+  color:#63d9df;
+}
+html[data-kayas-visual-version="v24"] .technical-details:not([open]){
+  opacity:.84;
+}
+html[data-kayas-visual-version="v24"] .render-quality-badge,
+html[data-kayas-visual-version="v24"] .v21-render-badge,
+html[data-kayas-visual-version="v24"] .v20-quality-badge,
+html[data-kayas-visual-version="v24"] .cinematic-badge,
+html[data-kayas-visual-version="v24"] [data-render-quality-badge]{display:none!important}
+html[data-kayas-visual-version="v24"] .gallery-hero-image img,
+html[data-kayas-visual-version="v24"] .gallery-grid img{
+  image-rendering:auto!important;
+  object-fit:contain!important;
+}
+@media(max-width:900px){
+  html[data-kayas-visual-version="v24"] .panel .subtitle::after{display:none}
+  html[data-kayas-visual-version="v24"] .zone-card{max-width:calc(100vw - 24px)}
+}
