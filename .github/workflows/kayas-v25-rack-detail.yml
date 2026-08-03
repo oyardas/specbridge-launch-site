@@ -1,0 +1,166 @@
+name: Activate and Validate KAYAS V25 Rack Detail
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v25-rack-detail.yml
+  workflow_run:
+    workflows: ["Activate and Validate KAYAS V24 Investor Presentation"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v25-rack-detail
+  cancel-in-progress: true
+
+jobs:
+  activate-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Wait for accepted V24 baseline and refresh main
+        shell: bash
+        run: |
+          set -euo pipefail
+          STATUS_URL='https://raw.githubusercontent.com/oyardas/specbridge-launch-site/main/kayas/walkthrough/smoke-status-v24.json'
+          READY=0
+          for i in $(seq 1 72); do
+            if curl -fsSL "$STATUS_URL?attempt=$i" -o /tmp/v24-status.json; then
+              if node -e "const r=require('/tmp/v24-status.json'); process.exit(r.pass===true?0:2)"; then
+                READY=1
+                break
+              fi
+            fi
+            sleep 10
+          done
+          test "$READY" -eq 1
+          git fetch origin main
+          git reset --hard origin/main
+          grep -q 'v24-investor.js?v=20260803-v24-investor-v1' kayas/walkthrough/index.html
+          node -e "const r=require('./kayas/walkthrough/smoke-status-v24.json'); if(!r.pass)process.exit(1)"
+
+      - name: Activate V25 rack detail layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          path=Path('kayas/walkthrough/index.html')
+          text=path.read_text(encoding='utf-8')
+          text=re.sub(r'\s*<script[^>]+src="v25-rack-detail\.js\?v=[^"]+"[^>]*></script>','',text)
+          anchor=re.search(r'\s*<script defer src="app-shell\.js\?v=[^"]+"></script>',text)
+          if not anchor:
+              raise SystemExit('app-shell anchor was not found')
+          script='  <script defer src="v25-rack-detail.js?v=20260803-v25-rack-detail"></script>\n'
+          text=text[:anchor.start()]+'\n'+script+text[anchor.start():]
+          if text.count('v25-rack-detail.js?v=20260803-v25-rack-detail')!=1:
+              raise SystemExit('V25 reference count is not one')
+          path.write_text(text,encoding='utf-8')
+          PY
+          test -s kayas/walkthrough/v25-rack-detail.js
+          node --check kayas/walkthrough/v25-rack-detail.js
+          grep -q 'v25-rack-detail.js?v=20260803-v25-rack-detail' kayas/walkthrough/index.html
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v25
+          cd /tmp/kayas-v25
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run V25 browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v25-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v25/test.js <<'JS'
+          const { chromium }=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={version:'20260803-v25-rack-detail',pass:false,timestamp:new Date().toISOString(),pageErrors:[],consoleErrors:[],failedRequests:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.pageErrors.push(e.message));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push(m.text())});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260803-v25-rack-detail',{waitUntil:'domcontentloaded',timeout:30000});
+              if(await page.locator('#loginGate').isVisible().catch(()=>false)){
+                await page.fill('#loginUser','kayas');await page.fill('#loginPass','verimerkezi');await page.click('#loginButton');
+              }
+              await page.waitForFunction(()=>window.__KAYAS_V24_STATUS?.ready===true,null,{timeout:120000});
+              await page.waitForFunction(()=>window.__KAYAS_V25_STATUS?.ready===true,null,{timeout:45000});
+              await page.waitForTimeout(2500);
+              Object.assign(result,await page.evaluate(()=>{
+                const s=window.__KAYAS_SCENE__;
+                let detailGroups=0,facades=0,visiblePrimitive=0;
+                s?.traverse(o=>{
+                  if(o.name==='kayas-v25-rack-detail')detailGroups++;
+                  if(o.name==='kayas-v25-perforated-front-door')facades++;
+                  if(o.visible&&/kayas-v21-professional-(person|plant)|person|human|visitor|avatar|figure|plant|tree|shrub|foliage|greenery/i.test(String(o.name||'')))visiblePrimitive++;
+                });
+                const canvas=document.getElementById('scene');
+                return {
+                  v24:window.__KAYAS_V24_STATUS,
+                  v25:window.__KAYAS_V25_STATUS,
+                  detailGroups,facades,visiblePrimitive,
+                  logoLoaded:[...document.querySelectorAll('.h3c-wordmark-logo img')].every(i=>i.complete&&i.naturalWidth>0),
+                  canvas:{width:canvas?.width||0,height:canvas?.height||0},
+                  webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl')))
+                };
+              }));
+              result.fatalErrors=result.pageErrors.filter(e=>/SyntaxError|ReferenceError|TypeError|WebGL/i.test(e));
+              result.pass=result.v24?.ready===true&&result.v25?.ready===true&&result.v25.racks>=100&&result.detailGroups===result.v25.racks&&result.facades===result.v25.facades&&result.visiblePrimitive===0&&result.logoLoaded===true&&result.canvas.width>500&&result.canvas.height>300&&result.webgl===true&&result.fatalErrors.length===0;
+              await page.screenshot({path:'/tmp/kayas-v25/acceptance.png',fullPage:true});
+            }catch(error){result.pageErrors.push(error.stack||error.message||String(error));}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v25/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          cd /tmp/kayas-v25
+          node test.js
+
+      - name: Record V25 result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v25/status.json; then cp /tmp/kayas-v25/status.json kayas/walkthrough/smoke-status-v25.json; else printf '%s\n' '{"version":"20260803-v25-rack-detail","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v25.json; fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v25.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Activate KAYAS V25 rack detail and record acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload V25 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v25-rack-detail-acceptance
+          path: |
+            /tmp/kayas-v25/status.json
+            /tmp/kayas-v25/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce V25 acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v25/status.json'); if(!r.pass){console.error(r);process.exit(1)} console.log('KAYAS_V25_RACK_DETAIL_ACCEPTANCE=PASS')"
