@@ -1,0 +1,113 @@
+name: Install Verified KAYAS v20 Runtime
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-install-v20-runtime.yml
+      - kayas/walkthrough/install-v20-runtime-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-install-v20-runtime
+  cancel-in-progress: false
+
+jobs:
+  install:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify complete runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET=/tmp/KAYAS_v20_Cinematic_Runtime.js
+          EXPECTED_SIZE=34495
+          EXPECTED_SHA=2e1156cbf7d1b76d82d556865ee0147e6b46293da8f94c8eb910d3aab815f28b
+          download() {
+            rm -f "$TARGET"
+            curl -L --fail --retry 5 --retry-delay 2 --connect-timeout 20 --max-time 180 "$1" -o "$TARGET"
+          }
+          validate() {
+            test -s "$TARGET" || return 1
+            test "$(wc -c < "$TARGET")" -eq "$EXPECTED_SIZE" || return 1
+            test "$(sha256sum "$TARGET" | awk '{print $1}')" = "$EXPECTED_SHA" || return 1
+            node --check "$TARGET" >/dev/null || return 1
+            grep -q "20260803-v20-cinematic" "$TARGET" || return 1
+            grep -q "h3c-dashboard-3d.webp" "$TARGET" || return 1
+            grep -q "h3c-dashboard-2d.webp" "$TARGET" || return 1
+          }
+          download 'https://drive.usercontent.google.com/download?id=1VeXDQ-t7zd37N-J8H_psXbp0kB-A632E&export=download&authuser=0&confirm=t' || true
+          if ! validate; then
+            download 'https://drive.google.com/uc?export=download&id=1VeXDQ-t7zd37N-J8H_psXbp0kB-A632E&confirm=t'
+            validate
+          fi
+          echo "RUNTIME_BYTES=$(wc -c < "$TARGET")"
+          echo "RUNTIME_SHA256=$(sha256sum "$TARGET" | awk '{print $1}')"
+
+      - name: Install full runtime and activate v20
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/KAYAS_v20_Cinematic_Runtime.js kayas/walkthrough/v20-runtime.js
+          cp /tmp/KAYAS_v20_Cinematic_Runtime.js kayas/walkthrough/v19-runtime.js
+          node --check kayas/walkthrough/v20-runtime.js
+          node --check kayas/walkthrough/v19-runtime.js
+          cmp kayas/walkthrough/v20-runtime.js kayas/walkthrough/v19-runtime.js
+          test -s kayas/walkthrough/v20-enhancements.css
+          cp kayas/walkthrough/v20-enhancements.css kayas/walkthrough/v19-enhancements.css
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          shell = Path('kayas/walkthrough/app-shell.js')
+          text = shell.read_text(encoding='utf-8')
+          text = text.replace('kayas-v19-css', 'kayas-v20-css')
+          text = text.replace('v19-enhancements.css?v=20260803-v19', 'v20-enhancements.css?v=20260803-v20-cinematic')
+          text = text.replace('kayas-v19-runtime', 'kayas-v20-runtime')
+          text = text.replace('v19-runtime.js?v=20260803-v19', 'v20-runtime.js?v=20260803-v20-cinematic')
+          text = text.replace('[KAYAS v19] runtime yüklenemedi', '[KAYAS v20] runtime yüklenemedi')
+          if 'v20-runtime.js?v=20260803-v20-cinematic' not in text:
+              raise SystemExit('v20 runtime reference missing from app-shell.js')
+          shell.write_text(text, encoding='utf-8')
+
+          index = Path('kayas/walkthrough/index.html')
+          html = index.read_text(encoding='utf-8')
+          html = re.sub(r'v19-enhancements\.css\?v=[^"\']+', 'v20-enhancements.css?v=20260803-v20-cinematic', html)
+          html = re.sub(r'v20-enhancements\.css\?v=[^"\']+', 'v20-enhancements.css?v=20260803-v20-cinematic', html)
+          html = re.sub(r'app-shell\.js\?v=[^"\']+', 'app-shell.js?v=20260803-v20-cinematic', html)
+          if 'v20-enhancements.css?v=20260803-v20-cinematic' not in html:
+              raise SystemExit('v20 stylesheet reference missing from index.html')
+          if 'app-shell.js?v=20260803-v20-cinematic' not in html:
+              raise SystemExit('v20 app-shell cache key missing from index.html')
+          index.write_text(html, encoding='utf-8')
+          PY
+          node --check kayas/walkthrough/app-shell.js
+
+      - name: Commit verified runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            kayas/walkthrough/v20-runtime.js \
+            kayas/walkthrough/v19-runtime.js \
+            kayas/walkthrough/v19-enhancements.css \
+            kayas/walkthrough/index.html \
+            kayas/walkthrough/app-shell.js
+          if git diff --cached --quiet; then
+            echo 'Verified KAYAS v20 runtime already installed.'
+            exit 0
+          fi
+          git commit -m 'Install verified full KAYAS v20 cinematic runtime [skip ci]'
+          git push origin HEAD:main
