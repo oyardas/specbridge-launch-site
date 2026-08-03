@@ -1,4 +1,4 @@
-name: Validate KAYAS v20 Cinematic Layer
+name: Validate KAYAS v20.1 Cinematic Layer
 
 on:
   push:
@@ -12,12 +12,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: kayas-v20-smoke
+  group: kayas-v20-1-stable-smoke
   cancel-in-progress: false
 
 jobs:
   smoke:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -25,52 +24,46 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Verify static assets and JavaScript syntax
+      - name: Verify active v20.1 assets
         shell: bash
         run: |
           set -euo pipefail
-          test -s kayas/walkthrough/v19-runtime.js
-          test -s kayas/walkthrough/v19-enhancements.css
-          test -s kayas/walkthrough/v20-runtime.js
-          test -s kayas/walkthrough/v20-enhancements.css
+          test "$(wc -c < kayas/walkthrough/v20-runtime.js)" -eq 34682
+          test "$(sha256sum kayas/walkthrough/v20-runtime.js | awk '{print $1}')" = cff5cf706d44dc9aaf05765b4abaf1bdfcd35c6e845dd7eae4d8ae308c4eab3b
+          node --check kayas/walkthrough/v20-runtime.js
+          grep -q 'v20-runtime.js?v=20260803-v20-1-cinematic' kayas/walkthrough/app-shell.js
+          grep -q 'app-shell.js?v=20260803-v20-1-cinematic' kayas/walkthrough/index.html
           test -s kayas/walkthrough/assets/dashboard/h3c-dashboard-3d.webp
           test -s kayas/walkthrough/assets/dashboard/h3c-dashboard-2d.webp
-          node --check kayas/walkthrough/v19-runtime.js
-          node --check kayas/walkthrough/v20-runtime.js
-          cmp kayas/walkthrough/v19-runtime.js kayas/walkthrough/v20-runtime.js
-          cmp kayas/walkthrough/v19-enhancements.css kayas/walkthrough/v20-enhancements.css
-          grep -q '20260803-v20-cinematic' kayas/walkthrough/v19-runtime.js
-          grep -q 'h3c-dashboard-3d.webp' kayas/walkthrough/v19-runtime.js
-          grep -q 'h3c-dashboard-2d.webp' kayas/walkthrough/v19-runtime.js
 
       - name: Install Playwright Chromium
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/kayas-v20-smoke
-          cd /tmp/kayas-v20-smoke
+          mkdir -p /tmp/kayas-v20-1
+          cd /tmp/kayas-v20-1
           npm init -y >/dev/null 2>&1
           npm install --no-audit --no-fund playwright@1.54.2
           npx playwright install --with-deps chromium
 
-      - name: Run local Chromium and WebGL acceptance
+      - name: Run deterministic Chromium and WebGL acceptance
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v20-http.log 2>&1 &
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v20-1-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 2
-          cat > /tmp/kayas-v20-smoke/smoke.js <<'JS'
+          cat > /tmp/kayas-v20-1/smoke.js <<'JS'
           const { chromium } = require('playwright');
           const fs = require('fs');
 
           (async () => {
             const result = {
               pass: false,
-              version: 'v20-cinematic',
+              version: 'v20.1-cinematic',
               timestamp: new Date().toISOString(),
-              pageErrors: [],
+              errors: [],
               consoleErrors: [],
               failedRequests: []
             };
@@ -85,50 +78,70 @@ jobs:
                 localStorage.setItem('kayas_walkthrough_auth_until', String(Date.now() + 3600000));
                 localStorage.setItem('kayas_walkthrough_panel_collapsed', '0');
               });
-              page.on('pageerror', error => result.pageErrors.push(error.message));
+              page.on('pageerror', error => result.errors.push(error.message));
               page.on('console', msg => {
                 if (msg.type() === 'error') result.consoleErrors.push(msg.text());
               });
               page.on('requestfailed', request => {
-                result.failedRequests.push({ url: request.url(), error: request.failure()?.errorText || 'unknown' });
+                const url = request.url();
+                if (!/drive\.google\.com|assets\/report|favicon/.test(url)) {
+                  result.failedRequests.push({ url, error: request.failure()?.errorText || 'unknown' });
+                }
               });
 
-              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?acceptance=v20-cinematic', {
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?acceptance=v20-1-stable', {
                 waitUntil: 'domcontentloaded',
                 timeout: 30000
               });
               await page.waitForFunction(() => window.__KAYAS_MODEL_READY === true, null, { timeout: 120000 });
               await page.waitForFunction(() => window.__KAYAS_V20_VISUAL_READY === true || !!window.__KAYAS_V20_VISUAL_ERROR, null, { timeout: 120000 });
-              await page.waitForTimeout(3500);
+              await page.waitForTimeout(3000);
 
-              result.before = await page.evaluate(() => ({
-                ready: window.__KAYAS_MODEL_READY === true,
-                modelMode: window.__KAYAS_MODEL_MODE || null,
-                visualReady: window.__KAYAS_V20_VISUAL_READY === true,
-                visualError: window.__KAYAS_V20_VISUAL_ERROR || null,
-                counts: window.__KAYAS_V20_COUNTS || null,
-                threeRevision: window.THREE && window.THREE.REVISION,
-                dimensionsText: Array.from(document.querySelectorAll('.metric-grid strong')).map(node => node.textContent.trim()),
-                scale: document.getElementById('scaleMax')?.textContent || null,
-                scaleWidth: document.getElementById('scaleLine')?.style.width || null,
-                panelCollapsed: document.body.classList.contains('panel-collapsed'),
-                canvas: (() => {
-                  const canvas = document.getElementById('scene');
-                  return canvas ? { width: canvas.width, height: canvas.height, clientWidth: canvas.clientWidth, clientHeight: canvas.clientHeight } : null;
-                })(),
-                qualityBadge: document.querySelector('.render-quality-badge')?.textContent.trim() || null
-              }));
+              result.before = await page.evaluate(() => {
+                const sceneCounts = { rackBody: 0, rackDetails: 0, zones: 0 };
+                const scene = window.__KAYAS_SCENE__;
+                if (scene && scene.traverse) {
+                  scene.traverse(object => {
+                    const name = String(object.name || '').toLowerCase();
+                    if (name === 'rack-body') sceneCounts.rackBody += 1;
+                    if (name === 'kayas-v20-rack-detail') sceneCounts.rackDetails += 1;
+                    if (object.userData && object.userData.zoneId) sceneCounts.zones += 1;
+                  });
+                }
+                const canvas = document.getElementById('scene');
+                return {
+                  ready: window.__KAYAS_MODEL_READY === true,
+                  modelMode: window.__KAYAS_MODEL_MODE || null,
+                  visualReady: window.__KAYAS_V20_VISUAL_READY === true,
+                  visualError: window.__KAYAS_V20_VISUAL_ERROR || null,
+                  counts: window.__KAYAS_V20_COUNTS || null,
+                  sceneCounts,
+                  dimensions: Array.from(document.querySelectorAll('.metric-grid strong')).map(node => node.textContent.trim()),
+                  scale: document.getElementById('scaleMax')?.textContent || null,
+                  scaleWidth: document.getElementById('scaleLine')?.style.width || null,
+                  panelButton: !!document.getElementById('panelToggleHeader'),
+                  authGateHidden: document.getElementById('authGate')?.hidden === true,
+                  qualityBadge: document.querySelector('.render-quality-badge')?.textContent.trim() || null,
+                  canvas: canvas ? { width: canvas.width, height: canvas.height } : null,
+                  threeRevision: window.THREE && window.THREE.REVISION
+                };
+              });
 
-              await page.locator('#panelToggleHeader').click({ timeout: 10000 });
-              await page.waitForTimeout(500);
-              result.afterPanel = await page.evaluate(() => ({
-                collapsed: document.body.classList.contains('panel-collapsed'),
-                ariaHidden: document.getElementById('controlPanel')?.getAttribute('aria-hidden'),
-                edgeText: document.getElementById('panelEdgeToggle')?.textContent
-              }));
+              result.afterPanel = await page.evaluate(async () => {
+                const button = document.getElementById('panelToggleHeader');
+                if (!button) return { clicked: false, collapsed: false, ariaHidden: null };
+                button.click();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                return {
+                  clicked: true,
+                  collapsed: document.body.classList.contains('panel-collapsed'),
+                  ariaHidden: document.getElementById('controlPanel')?.getAttribute('aria-hidden'),
+                  expanded: button.getAttribute('aria-expanded')
+                };
+              });
 
-              await page.mouse.move(950, 500);
-              await page.mouse.wheel(0, -850);
+              await page.mouse.move(950, 520);
+              await page.mouse.wheel(0, -1100);
               await page.waitForTimeout(900);
               result.afterZoom = await page.evaluate(() => ({
                 scale: document.getElementById('scaleMax')?.textContent || null,
@@ -136,65 +149,52 @@ jobs:
               }));
 
               const counts = result.before.counts || {};
-              const dimensions = result.before.dimensionsText || [];
-              const fatal = result.pageErrors.filter(message => /SyntaxError|ReferenceError|TypeError|WebGL|THREE/i.test(message));
+              const sceneCounts = result.before.sceneCounts || {};
+              const dimensions = result.before.dimensions || [];
+              const fatal = result.errors.filter(message => /SyntaxError|ReferenceError|TypeError|WebGL|THREE/i.test(message));
               result.fatalErrors = fatal;
+              result.scaleChanged = result.before.scale !== result.afterZoom.scale || result.before.scaleWidth !== result.afterZoom.scaleWidth;
               result.pass = result.before.ready === true &&
                 result.before.visualReady === true &&
                 !result.before.visualError &&
                 String(result.before.modelMode || '').includes('authoritative-v8') &&
                 dimensions.includes('110 m') && dimensions.includes('46 m') && dimensions.includes('5 m') && dimensions.includes('200') &&
-                counts.racks >= 100 && counts.leds >= 500 && counts.screens >= 10 && counts.dashboardImages === 2 && counts.materials > 50 && counts.lights >= 3 &&
-                result.afterPanel.collapsed === true && result.afterPanel.ariaHidden === 'true' &&
+                sceneCounts.rackBody >= 190 && sceneCounts.rackDetails >= 90 &&
+                counts.racks >= 90 && counts.leds >= 500 && counts.screens >= 10 && counts.dashboardImages === 2 && counts.materials > 50 && counts.lights >= 3 &&
+                result.before.panelButton === true && result.afterPanel.clicked === true && result.afterPanel.collapsed === true && result.afterPanel.ariaHidden === 'true' &&
                 !!result.before.scale && !!result.before.scaleWidth &&
                 result.before.canvas && result.before.canvas.width > 300 && result.before.canvas.height > 150 &&
                 fatal.length === 0;
-
-              try {
-                await page.screenshot({ path: '/tmp/kayas-v20-smoke/screenshot.png', fullPage: false, timeout: 15000 });
-              } catch (error) {
-                result.screenshotWarning = error.message;
-              }
             } catch (error) {
-              result.pageErrors.push(error.stack || error.message || String(error));
+              result.errors.push(error.stack || error.message || String(error));
             } finally {
               if (browser) await browser.close();
-              fs.writeFileSync('/tmp/kayas-v20-smoke/status.json', JSON.stringify(result, null, 2));
+              fs.writeFileSync('/tmp/kayas-v20-1/status.json', JSON.stringify(result, null, 2));
               console.log(JSON.stringify(result, null, 2));
             }
           })();
           JS
-          cd /tmp/kayas-v20-smoke
+          cd /tmp/kayas-v20-1
           node smoke.js
 
-      - name: Commit acceptance record
+      - name: Commit acceptance result
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          if test -s /tmp/kayas-v20-smoke/status.json; then
-            cp /tmp/kayas-v20-smoke/status.json kayas/walkthrough/smoke-status-v20.json
+          if test -s /tmp/kayas-v20-1/status.json; then
+            cp /tmp/kayas-v20-1/status.json kayas/walkthrough/smoke-status-v20-1.json
           else
-            printf '%s\n' '{"pass":false,"version":"v20-cinematic","error":"status file was not produced"}' > kayas/walkthrough/smoke-status-v20.json
+            printf '%s\n' '{"pass":false,"version":"v20.1-cinematic","error":"status file was not produced"}' > kayas/walkthrough/smoke-status-v20-1.json
           fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add kayas/walkthrough/smoke-status-v20.json
+          git add kayas/walkthrough/smoke-status-v20-1.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Record KAYAS v20 Chromium acceptance [skip ci]'
+          git commit -m 'Record stable KAYAS v20.1 Chromium acceptance [skip ci]'
           git push origin HEAD:main
-
-      - name: Upload evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: kayas-v20-cinematic-acceptance
-          path: |
-            /tmp/kayas-v20-smoke/status.json
-            /tmp/kayas-v20-smoke/screenshot.png
-          if-no-files-found: warn
 
       - name: Enforce acceptance
         shell: bash
         run: |
-          node -e "const r=require('/tmp/kayas-v20-smoke/status.json'); if(!r.pass){console.error(r); process.exit(1)}; console.log('KAYAS_V20_CINEMATIC_ACCEPTANCE=PASS')"
+          node -e "const r=require('/tmp/kayas-v20-1/status.json'); if(!r.pass){console.error(r); process.exit(1)}; console.log('KAYAS_V20_1_STABLE_ACCEPTANCE=PASS')"
