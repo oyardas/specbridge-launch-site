@@ -1,0 +1,93 @@
+name: Repair KAYAS V26 Activation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v26-activation-repair.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v26-activation-repair
+  cancel-in-progress: false
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refresh authoritative main
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Activate V25 and V26 deterministically
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('kayas/walkthrough/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'\s*<link[^>]+href="v26-investor-polish\.css\?v=[^"]+"[^>]*>','',s)
+          s=re.sub(r'\s*<script[^>]+src="v25-rack-detail\.js\?v=[^"]+"[^>]*></script>','',s)
+          s=re.sub(r'\s*<script[^>]+src="v26-investor-polish\.js\?v=[^"]+"[^>]*></script>','',s)
+          head='  <link id="kayas-v26-css" rel="stylesheet" href="v26-investor-polish.css?v=20260803-v26-investor-polish" />\n'
+          s=s.replace('</head>',head+'</head>')
+          anchor=re.search(r'\s*<script defer src="app-shell\.js\?v=[^"]+"></script>',s)
+          if not anchor: raise SystemExit('APP_SHELL_ANCHOR_MISSING')
+          scripts=('  <script defer src="v25-rack-detail.js?v=20260803-v25-rack-detail"></script>\n'
+                   '  <script defer src="v26-investor-polish.js?v=20260803-v26-investor-polish"></script>\n')
+          s=s[:anchor.start()]+'\n'+scripts+s[anchor.start():]
+          checks={
+            'v26_css':s.count('v26-investor-polish.css?v=20260803-v26-investor-polish'),
+            'v25_js':s.count('v25-rack-detail.js?v=20260803-v25-rack-detail'),
+            'v26_js':s.count('v26-investor-polish.js?v=20260803-v26-investor-polish')}
+          if any(v!=1 for v in checks.values()): raise SystemExit(f'REFERENCE_COUNT_INVALID:{checks}')
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Static acceptance
+        run: |
+          set -euo pipefail
+          test -s kayas/walkthrough/v25-rack-detail.js
+          test -s kayas/walkthrough/v26-investor-polish.js
+          test -s kayas/walkthrough/v26-investor-polish.css
+          node --check kayas/walkthrough/v25-rack-detail.js
+          node --check kayas/walkthrough/v26-investor-polish.js
+          grep -q '20</strong><span>IC8000 pod · 10 kabinet/pod' kayas/walkthrough/index.html
+          grep -q 'v25-rack-detail.js?v=20260803-v25-rack-detail' kayas/walkthrough/index.html
+          grep -q 'v26-investor-polish.js?v=20260803-v26-investor-polish' kayas/walkthrough/index.html
+          grep -q 'v26-investor-polish.css?v=20260803-v26-investor-polish' kayas/walkthrough/index.html
+          python3 - <<'PY'
+          import json, pathlib, datetime
+          result={
+            'version':'20260803-v26-investor-polish',
+            'pass':True,
+            'validation':'STATIC_ACTIVATION_ACCEPTANCE',
+            'chromiumWebGL':'NOT_EXECUTED_IN_REPAIR_GATE',
+            'layoutMutation':False,
+            'activated':['v25-rack-detail.js','v26-investor-polish.js','v26-investor-polish.css'],
+            'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat()
+          }
+          pathlib.Path('kayas/walkthrough/smoke-status-v26.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+          PY
+
+      - name: Commit activation evidence
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v26.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Activate KAYAS V26 and record static acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
