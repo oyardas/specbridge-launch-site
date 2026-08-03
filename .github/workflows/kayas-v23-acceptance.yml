@@ -1,0 +1,147 @@
+name: Validate KAYAS Investor V23
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - kayas/walkthrough/v23-investor.js
+      - kayas/walkthrough/v23-investor.css
+      - kayas/walkthrough/assets/gallery/gallery_manifest.js
+      - .github/workflows/kayas-v23-acceptance.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-investor-v23
+  cancel-in-progress: false
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Static validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/walkthrough/v23-investor.js
+          node --check kayas/walkthrough/assets/gallery/gallery_manifest.js
+          test -s kayas/walkthrough/v23-investor.css
+          grep -q 'kayas_concept_contact_sheet.webp' kayas/walkthrough/assets/gallery/gallery_manifest.js
+          grep -q '20' kayas/walkthrough/v23-investor.js
+
+      - name: Install Playwright Chromium
+        shell: bash
+        run: |
+          mkdir -p /tmp/kayas-v23
+          cd /tmp/kayas-v23
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v23-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v23/smoke.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const result={pass:false,version:'20260803-v23-investor-v1',errors:[],failedRequests:[],consoleErrors:[]};
+            let browser;
+            try {
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.errors.push(e.message));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push(m.text());});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=v23-acceptance',{waitUntil:'domcontentloaded',timeout:30000});
+              const gate=page.locator('#loginGate');
+              if(await gate.isVisible().catch(()=>false)){
+                await page.fill('#loginUser','kayas');
+                await page.fill('#loginPass','verimerkezi');
+                await page.click('#loginButton');
+              }
+              await page.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,{timeout:120000});
+              await page.waitForFunction(()=>window.__KAYAS_V23__&&window.__KAYAS_V23__.ready===true,{timeout:120000});
+              await page.waitForTimeout(2500);
+
+              const themeBefore=await page.evaluate(()=>document.documentElement.dataset.theme);
+              await page.click('#themeButton');
+              await page.waitForTimeout(300);
+              const themeAfter=await page.evaluate(()=>document.documentElement.dataset.theme);
+
+              await page.click('[data-panel="gallery"]');
+              await page.waitForTimeout(500);
+              const galleryState=await page.evaluate(()=>({
+                active:document.body.dataset.activeView,
+                drawerHidden:document.getElementById('customerDrawer').hidden,
+                galleryHidden:document.querySelector('.drawer-panel[data-content="gallery"]').hidden,
+                reportsHidden:document.querySelector('.drawer-panel[data-content="reports"]').hidden,
+                broken:Array.from(document.querySelectorAll('.drawer-panel[data-content="gallery"] img')).filter(i=>i.complete&&i.naturalWidth===0).length
+              }));
+
+              result.details=await page.evaluate(()=>({
+                v23:window.__KAYAS_V23__,
+                metric:Array.from(document.querySelectorAll('.metric-grid>div')).slice(4,5).map(n=>n.innerText.trim()),
+                h3cBackground:getComputedStyle(document.querySelector('.h3c-wordmark-logo')).backgroundImage,
+                sceneCanvas:(()=>{const c=document.getElementById('scene');return {width:c.width,height:c.height};})(),
+                activeView:document.body.dataset.activeView
+              }));
+              result.theme={before:themeBefore,after:themeAfter};
+              result.gallery=galleryState;
+              result.pass=themeBefore!==themeAfter && galleryState.active==='gallery' && galleryState.drawerHidden===false && galleryState.galleryHidden===false && galleryState.reportsHidden===true && galleryState.broken===0 && /data:image\/png/.test(result.details.h3cBackground) && /20/.test(result.details.metric[0]) && result.details.sceneCanvas.width>300;
+              await page.screenshot({path:'/tmp/kayas-v23/screenshot.png',fullPage:true});
+            } catch(e){result.errors.push(e.stack||e.message||String(e));}
+            finally {
+              if(browser)await browser.close();
+              fs.writeFileSync('/tmp/kayas-v23/status.json',JSON.stringify(result,null,2));
+              console.log(JSON.stringify(result,null,2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-v23
+          node smoke.js
+
+      - name: Commit acceptance result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v23/status.json; then
+            cp /tmp/kayas-v23/status.json kayas/walkthrough/v23-smoke-status.json
+          else
+            printf '%s\n' '{"pass":false,"version":"20260803-v23-investor-v1","error":"status not produced"}' > kayas/walkthrough/v23-smoke-status.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/v23-smoke-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record KAYAS investor v23 acceptance [skip ci]'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-investor-v23-acceptance
+          path: |
+            /tmp/kayas-v23/status.json
+            /tmp/kayas-v23/screenshot.png
+          if-no-files-found: warn
+
+      - name: Enforce result
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v23/status.json'); if(!r.pass){console.error(r); process.exit(1)}"
