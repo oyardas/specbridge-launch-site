@@ -1,0 +1,2 @@
+trigger=2026-08-03T18:39:00+03:00
+version=20260803-v21-professional
