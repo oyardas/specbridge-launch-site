@@ -1,18 +1,17 @@
 {
-  "pass": false,
+  "pass": true,
   "version": "v19",
-  "timestamp": "2026-08-03T13:08:33.113Z",
+  "timestamp": "2026-08-03T13:14:35.584Z",
   "pageErrors": [
-    "page.waitForFunction: Timeout 120000ms exceeded.\n    at /tmp/kayas-v19-smoke/smoke.js:25:16"
+    "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n\n    at /tmp/kayas-v19-smoke/smoke.js:66:16"
   ],
   "consoleErrors": [
     "Failed to load resource: the server responded with a status of 404 (File not found)",
     "Failed to load resource: the server responded with a status of 404 (File not found)",
-    "[KAYAS v19 loader] Kamera başlangıç sözleşmesi bulunamadı: 0 Error: Kamera başlangıç sözleşmesi bulunamadı: 0\n    at http://127.0.0.1:8000/kayas/walkthrough/model-loader-v19.js?v=20260803-v19-loader:60:13",
     "Failed to load resource: the server responded with a status of 404 (File not found)",
-    "[KAYAS v19 loader] Kamera başlangıç sözleşmesi bulunamadı: 0 Error: Kamera başlangıç sözleşmesi bulunamadı: 0\n    at http://127.0.0.1:8000/kayas/walkthrough/model-loader-v19.js?v=20260803-v19-loader:60:13",
-    "Failed to load resource: the server responded with a status of 401 ()",
-    "[KAYAS v19] 3D motor bağlamı dış görsel katmana açılmadı. {THREE: undefined, scene: canvas#scene, renderer: undefined, camera: undefined, canvas: canvas#scene}"
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 401 ()"
   ],
   "failedRequests": [
     {
@@ -20,8 +19,38 @@
       "error": "net::ERR_ABORTED"
     },
     {
+      "url": "blob:http://127.0.0.1:8000/50077320-4426-45ee-a40a-89f3e52b1e7b",
+      "error": "net::ERR_ABORTED"
+    },
+    {
       "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf",
       "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://drive.google.com/uc?export=view&id=1TKKF1NsETSk68T0xbZa86DThc4dJ2gwT",
+      "error": "net::ERR_BLOCKED_BY_ORB"
     }
-  ]
+  ],
+  "before": {
+    "collapsed": false,
+    "scale": "0.5 m",
+    "lineWidth": "127.4px",
+    "counts": {
+      "racks": 200,
+      "leds": 1400,
+      "screens": 28
+    },
+    "visualError": null,
+    "ready": true,
+    "modelMode": "authoritative-v8-geometry-locked-v19"
+  },
+  "afterPanel": {
+    "collapsed": true,
+    "ariaHidden": "true",
+    "edgeText": "›"
+  },
+  "afterZoom": {
+    "scale": "0.5 m",
+    "lineWidth": "127.4px"
+  }
 }
