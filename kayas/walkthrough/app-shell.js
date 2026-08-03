@@ -1,6 +1,7 @@
 (function(){
   'use strict';
   const AUTH_KEY='kayas_walkthrough_auth_until';
+  const PANEL_KEY='kayas_walkthrough_panel_collapsed';
   const EXPECTED='13a9e92799eaf7515a82f73b4a2b3026a568dae3db4e35b5f4f4562b1d67bef7';
   const DOCUMENTS={
     field:{preview:'https://drive.google.com/file/d/1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve/preview',download:'https://drive.google.com/uc?export=download&id=1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve'},
@@ -47,6 +48,44 @@
   const fullscreenButton=document.getElementById('fullscreenButton');
   if(fullscreenButton){fullscreenButton.addEventListener('click',()=>{const el=document.documentElement;if(!document.fullscreenElement){el.requestFullscreen&&el.requestFullscreen();}else{document.exitFullscreen&&document.exitFullscreen();}});}
 
+  const panel=document.getElementById('controlPanel');
+  const panelToggleHeader=document.getElementById('panelToggleHeader');
+  const panelEdgeToggle=document.getElementById('panelEdgeToggle');
+  function syncPanelControls(){
+    const collapsed=document.body.classList.contains('panel-collapsed');
+    if(panelToggleHeader){
+      panelToggleHeader.setAttribute('aria-expanded',String(!collapsed));
+      panelToggleHeader.setAttribute('title',collapsed?'Kontrol panelini aç':'Kontrol panelini gizle');
+    }
+    if(panelEdgeToggle){
+      panelEdgeToggle.setAttribute('aria-expanded',String(!collapsed));
+      panelEdgeToggle.textContent=collapsed?'›':'‹';
+      panelEdgeToggle.setAttribute('title',collapsed?'Kontrol panelini aç':'Kontrol panelini gizle');
+    }
+    if(panel)panel.setAttribute('aria-hidden',String(collapsed));
+  }
+  function setPanelCollapsed(collapsed,{persist=true}={}){
+    document.body.classList.toggle('panel-collapsed',Boolean(collapsed));
+    if(persist){
+      try{localStorage.setItem(PANEL_KEY,collapsed?'1':'0');}catch(_error){}
+    }
+    syncPanelControls();
+    requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
+    setTimeout(()=>window.dispatchEvent(new Event('resize')),310);
+  }
+  function togglePanel(){setPanelCollapsed(!document.body.classList.contains('panel-collapsed'));}
+  if(panelToggleHeader)panelToggleHeader.addEventListener('click',togglePanel);
+  if(panelEdgeToggle)panelEdgeToggle.addEventListener('click',togglePanel);
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&!document.body.classList.contains('panel-collapsed'))setPanelCollapsed(true);
+  });
+  let initialCollapsed=innerWidth<900;
+  try{
+    const saved=localStorage.getItem(PANEL_KEY);
+    if(saved==='1'||saved==='0')initialCollapsed=saved==='1';
+  }catch(_error){}
+  setPanelCollapsed(initialCollapsed,{persist:false});
+
   const steps=[
     ['entrance','01 / 08','Batı giriş, resepsiyon ve mantrap'],
     ['foyer','02 / 08','Yatırımcı fuayesi ve büyük toplantı alanı'],
@@ -70,9 +109,7 @@
     if(step)step.textContent=no;
     if(title)title.textContent=label;
     if(progress)progress.style.width=((current+1)/steps.length*100)+'%';
-    if(innerWidth<760&&!document.body.classList.contains('panel-collapsed')){
-      const toggle=document.getElementById('panelToggleHeader');if(toggle)toggle.click();
-    }
+    if(innerWidth<760&&!document.body.classList.contains('panel-collapsed'))setPanelCollapsed(true);
   }
   function stop(){playing=false;clearInterval(timer);timer=null;if(tourButton)tourButton.innerHTML='▶ <span>Rehberli Tur</span>';}
   function start(){playing=true;show(current<0?0:current);clearInterval(timer);timer=setInterval(()=>{if(current===steps.length-1){stop();return;}show(current+1);},6500);if(tourButton)tourButton.innerHTML='Ⅱ <span>Turu Durdur</span>';}
