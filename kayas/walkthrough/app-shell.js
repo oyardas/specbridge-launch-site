@@ -14,13 +14,13 @@
       const link=document.createElement('link');
       link.id='kayas-v20-css';
       link.rel='stylesheet';
-      link.href='v20-enhancements.css?v=20260803-v20-1-cinematic';
+      link.href='v20-enhancements.css?v=20260803-v20-2-cinematic';
       document.head.appendChild(link);
     }
     if(!document.getElementById('kayas-v20-runtime')){
       const script=document.createElement('script');
       script.id='kayas-v20-runtime';
-      script.src='v20-runtime.js?v=20260803-v20-1-cinematic';
+      script.src='v20-runtime.js?v=20260803-v20-2-cinematic';
       script.defer=true;
       script.onerror=()=>console.error('[KAYAS v20] runtime yüklenemedi');
       document.body.appendChild(script);
