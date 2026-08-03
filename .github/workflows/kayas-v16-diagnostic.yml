@@ -1,0 +1,74 @@
+name: KAYAS v16 Install Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v16-diagnostic.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run non-blocking diagnostics
+        shell: bash
+        run: |
+          set +e
+          mkdir -p /tmp/kayas-diag
+          URL='https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc'
+          curl -L -sS -D /tmp/kayas-diag/headers.txt -w '%{http_code}' "$URL" -o /tmp/kayas-diag/source.js > /tmp/kayas-diag/http_code.txt
+          CURL_RC=$?
+          SIZE=$(wc -c < /tmp/kayas-diag/source.js 2>/dev/null || echo 0)
+          SHA=$(sha256sum /tmp/kayas-diag/source.js 2>/dev/null | awk '{print $1}')
+          HEAD=$(head -c 120 /tmp/kayas-diag/source.js 2>/dev/null | base64 -w0)
+          cp /tmp/kayas-diag/source.js /tmp/kayas-diag/kayas-3d.bundle.js 2>/dev/null
+          cd /tmp/kayas-diag
+          patch --batch --forward -p0 < "$GITHUB_WORKSPACE/kayas/walkthrough/kayas-v10.patch" > patch.log 2>&1
+          PATCH_RC=$?
+          PATCH_SHA=$(sha256sum kayas-3d.bundle.js 2>/dev/null | awk '{print $1}')
+          NODE_OUT=$(node --check kayas-3d.bundle.js 2>&1)
+          NODE_RC=$?
+          cd "$GITHUB_WORKSPACE"
+          python - <<PY
+          import json
+          from pathlib import Path
+          data = {
+            'curl_rc': int('${CURL_RC:-999}'),
+            'http_code': Path('/tmp/kayas-diag/http_code.txt').read_text(errors='replace').strip(),
+            'download_size': int('${SIZE:-0}'),
+            'download_sha256': '${SHA}',
+            'expected_source_sha256': '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d',
+            'head_base64': '${HEAD}',
+            'patch_rc': int('${PATCH_RC:-999}'),
+            'patched_sha256': '${PATCH_SHA}',
+            'expected_patched_sha256': '3d31f4ec24f4554a742ca7de7a53d34de5dfdb812ad102a929c6967aa96e34b5',
+            'node_rc': int('${NODE_RC:-999}'),
+            'node_output': '''${NODE_OUT}''',
+            'patch_log': Path('/tmp/kayas-diag/patch.log').read_text(errors='replace')[-4000:],
+            'headers': Path('/tmp/kayas-diag/headers.txt').read_text(errors='replace')[-4000:],
+          }
+          Path('kayas/walkthrough/v16-install-diagnostic.json').write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
+          print(json.dumps(data, indent=2, ensure_ascii=False))
+          PY
+
+      - name: Commit diagnostic result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kayas/walkthrough/v16-install-diagnostic.json
+          if git diff --cached --quiet; then exit 0; fi
+          git pull --rebase origin main
+          git commit -m 'Record KAYAS v16 install diagnostic [skip ci]'
+          git push origin HEAD:main
