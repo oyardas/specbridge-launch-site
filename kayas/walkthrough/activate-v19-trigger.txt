@@ -1,3 +1,4 @@
-trigger=2026-08-03T15:33:00+03:00
+trigger=2026-08-03T15:58:00+03:00
 runtime=v19-runtime.js
-shell=app-shell.js?v=20260803-v19
+shell=app-shell.js?v=20260803-v19-engine2
+engine=renderer,scene,camera
