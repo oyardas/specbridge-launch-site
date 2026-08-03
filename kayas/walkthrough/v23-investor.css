@@ -1,0 +1,20 @@
+/* KAYAS v23 investor-facing cleanup */
+.h3c-wordmark-logo{display:grid!important;place-items:center!important;width:76px!important;height:26px!important;background:none!important;text-indent:0!important;overflow:visible!important}
+.h3c-wordmark-logo img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
+.h3c-badge,.panel-h3c,.drawer-h3c{background:#fff!important;border:1px solid rgba(226,20,45,.18)!important;box-shadow:0 10px 28px rgba(5,17,29,.14)!important}
+.render-quality-badge,.v21-render-badge,.v20-quality-badge,.cinematic-badge,[data-render-quality-badge]{display:none!important}
+body[data-active-view="model"] #customerDrawer{display:none!important}
+body[data-active-view="gallery"] #customerDrawer,body[data-active-view="reports"] #customerDrawer{display:grid!important}
+body[data-active-view="gallery"] .drawer-panel[data-content="reports"],body[data-active-view="reports"] .drawer-panel[data-content="gallery"]{display:none!important}
+body[data-active-view="gallery"] .drawer-panel[data-content="gallery"]{display:block!important}
+body[data-active-view="reports"] .drawer-panel[data-content="reports"]{display:grid!important}
+.asset-error{display:grid;place-items:center;min-height:180px;padding:24px;color:var(--v21-muted,#91a5b8);background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(0,0,0,.08));font-weight:700}
+.gallery-hero-image img,.gallery-grid img{object-fit:contain!important;background:#0b1724!important}
+html[data-theme="light"] .gallery-hero-image img,html[data-theme="light"] .gallery-grid img{background:#edf3f7!important}
+#scene{image-rendering:auto!important;filter:saturate(1.04) contrast(1.04) brightness(1.015)!important}
+.panel,.customer-drawer,.zone-card,.tour-dock,.scale-control{backdrop-filter:blur(18px) saturate(1.14);-webkit-backdrop-filter:blur(18px) saturate(1.14)}
+body.panel-collapsed .panel{transform:translateX(calc(-100% - 48px))!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+body.panel-collapsed .panel-edge-toggle{left:0!important;display:grid!important}
+html[data-theme="light"]{color-scheme:light}
+html[data-theme="dark"]{color-scheme:dark}
+@media(max-width:900px){.h3c-wordmark-logo{width:62px!important;height:22px!important}.h3c-badge,.panel-h3c,.drawer-h3c{min-width:76px!important}.customer-drawer{inset:calc(var(--top) + 6px) 6px 6px!important}}
