@@ -1,4 +1,4 @@
-trigger=2026-08-03T16:36:00+03:00
+trigger=2026-08-03T16:52:00+03:00
 acceptance=panel-hide,dynamic-leds,live-screens,dynamic-scale
-camera-signature=THREE.PerspectiveCamera-64-0.1-260
-attempt=6
+assets=20260803-v19-final
+attempt=7
