@@ -1,0 +1,97 @@
+name: Deploy KAYAS Investor Assets v10
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-investor-assets-v10.yml
+      - kayas/walkthrough/kayas-v10.patch
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-assets:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install asset tools
+        run: |
+          python -m pip install --disable-pip-version-check gdown
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq patch
+
+      - name: Download authoritative KAYAS v8 source
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/kayas-v8
+          mkdir -p /tmp/kayas-v8
+          gdown --folder --remaining-ok "https://drive.google.com/drive/folders/1V0LLZOKwf2dFJO3rKdRGuLTvC8H0eckJ" -O /tmp/kayas-v8
+          find /tmp/kayas-v8 -maxdepth 6 -type f | sort
+
+      - name: Patch model without changing the v8 floor plan
+        run: |
+          set -euo pipefail
+          BUNDLE="$(find /tmp/kayas-v8 -type f -path '*/src/kayas-3d.bundle.js' | head -n 1)"
+          test -n "$BUNDLE"
+          ROOT="$(dirname "$(dirname "$BUNDLE")")"
+          cp "$BUNDLE" /tmp/kayas-3d.bundle.js
+          cd /tmp
+          patch --batch --forward -p0 < "$GITHUB_WORKSPACE/kayas/walkthrough/kayas-v10.patch"
+          node --check /tmp/kayas-3d.bundle.js
+          echo "KAYAS_ROOT=$ROOT" >> "$GITHUB_ENV"
+
+      - name: Download investor reports
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-reports
+          gdown "https://drive.google.com/uc?id=1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E" -O /tmp/kayas-reports/KAYAS_Data_Center_Professional_Project_Report_v1.pdf
+          gdown "https://drive.google.com/uc?id=1ciaxMO898524TlnsRpRkgnKJ-6S1Ajzz" -O /tmp/kayas-reports/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx
+          FIELD_REPORT="$(find "$KAYAS_ROOT/assets/report" -type f -iname '*.pdf' | head -n 1)"
+          test -n "$FIELD_REPORT"
+          cp "$FIELD_REPORT" /tmp/kayas-reports/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf
+          test -s /tmp/kayas-reports/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf
+          test -s /tmp/kayas-reports/KAYAS_Data_Center_Professional_Project_Report_v1.pdf
+          test -s /tmp/kayas-reports/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx
+
+      - name: Install model, visuals, logos and reports
+        run: |
+          set -euo pipefail
+          mkdir -p kayas/walkthrough/src
+          mkdir -p kayas/walkthrough/assets/gallery/original_png
+          mkdir -p kayas/walkthrough/assets/reference
+          mkdir -p kayas/walkthrough/assets/logos
+          mkdir -p kayas/walkthrough/assets/report
+
+          cp /tmp/kayas-3d.bundle.js kayas/walkthrough/src/kayas-3d.bundle.js
+          cp "$KAYAS_ROOT/assets/gallery/gallery_manifest.js" kayas/walkthrough/assets/gallery/gallery_manifest.js
+          cp "$KAYAS_ROOT/assets/gallery/gallery_manifest.json" kayas/walkthrough/assets/gallery/gallery_manifest.json
+          cp "$KAYAS_ROOT"/assets/gallery/*.webp kayas/walkthrough/assets/gallery/
+          cp "$KAYAS_ROOT"/assets/gallery/original_png/*.png kayas/walkthrough/assets/gallery/original_png/
+          cp "$KAYAS_ROOT"/assets/reference/* kayas/walkthrough/assets/reference/
+          cp "$KAYAS_ROOT"/assets/logos/* kayas/walkthrough/assets/logos/
+          cp /tmp/kayas-reports/* kayas/walkthrough/assets/report/
+
+      - name: Commit generated assets
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kayas/walkthrough/src/kayas-3d.bundle.js \
+                  kayas/walkthrough/assets/gallery \
+                  kayas/walkthrough/assets/reference \
+                  kayas/walkthrough/assets/logos \
+                  kayas/walkthrough/assets/report
+          if git diff --cached --quiet; then
+            echo "No generated asset changes."
+            exit 0
+          fi
+          git commit -m "Deploy KAYAS walkthrough v10 model and investor assets [skip ci]"
+          git push origin HEAD:main
