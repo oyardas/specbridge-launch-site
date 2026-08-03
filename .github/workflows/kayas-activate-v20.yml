@@ -1,0 +1,99 @@
+name: Activate KAYAS v20 Cinematic Layer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-activate-v20.yml
+      - kayas/walkthrough/activate-v20-trigger.txt
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-activate-v20
+  cancel-in-progress: false
+
+jobs:
+  activate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate cinematic assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s kayas/walkthrough/v20-runtime.js
+          test -s kayas/walkthrough/v20-enhancements.css
+          test -s kayas/walkthrough/assets/dashboard/h3c-dashboard-3d.webp
+          test -s kayas/walkthrough/assets/dashboard/h3c-dashboard-2d.webp
+          node --check kayas/walkthrough/v20-runtime.js
+          grep -q "20260803-v20-cinematic" kayas/walkthrough/v20-runtime.js
+          grep -q "authoritative v8 geometry is untouched" kayas/walkthrough/v20-enhancements.css
+
+      - name: Activate v20 cache keys and runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          shell = Path('kayas/walkthrough/app-shell.js')
+          text = shell.read_text(encoding='utf-8')
+          replacements = {
+              "kayas-v19-css": "kayas-v20-css",
+              "v19-enhancements.css?v=20260803-v19": "v20-enhancements.css?v=20260803-v20-cinematic",
+              "kayas-v19-runtime": "kayas-v20-runtime",
+              "v19-runtime.js?v=20260803-v19": "v20-runtime.js?v=20260803-v20-cinematic",
+              "[KAYAS v19] runtime yüklenemedi": "[KAYAS v20] runtime yüklenemedi",
+          }
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+          if "v20-runtime.js?v=20260803-v20-cinematic" not in text:
+              raise SystemExit('v20 runtime reference was not installed in app-shell.js')
+          if "v19-runtime.js?v=20260803-v19" in text:
+              raise SystemExit('legacy v19 runtime reference remains in app-shell.js')
+          shell.write_text(text, encoding='utf-8')
+
+          index = Path('kayas/walkthrough/index.html')
+          html = index.read_text(encoding='utf-8')
+          html = re.sub(
+              r'v19-enhancements\.css\?v=[^"\']+',
+              'v20-enhancements.css?v=20260803-v20-cinematic',
+              html,
+          )
+          html = re.sub(
+              r'app-shell\.js\?v=[^"\']+',
+              'app-shell.js?v=20260803-v20-cinematic',
+              html,
+          )
+          if 'v20-enhancements.css?v=20260803-v20-cinematic' not in html:
+              raise SystemExit('v20 stylesheet reference was not installed in index.html')
+          if 'app-shell.js?v=20260803-v20-cinematic' not in html:
+              raise SystemExit('v20 app-shell cache key was not installed in index.html')
+          index.write_text(html, encoding='utf-8')
+          PY
+          node --check kayas/walkthrough/app-shell.js
+          grep -q 'v20-enhancements.css?v=20260803-v20-cinematic' kayas/walkthrough/index.html
+          grep -q 'app-shell.js?v=20260803-v20-cinematic' kayas/walkthrough/index.html
+
+      - name: Commit activation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/app-shell.js
+          if git diff --cached --quiet; then
+            echo 'KAYAS v20 already active.'
+            exit 0
+          fi
+          git commit -m 'Activate KAYAS v20 cinematic layer [skip ci]'
+          git push origin HEAD:main
