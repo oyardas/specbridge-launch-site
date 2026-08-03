@@ -1,4 +1,4 @@
-name: Diagnose and Install KAYAS Authoritative Same-Origin Bundle
+name: Install KAYAS Authoritative Same-Origin Bundle
 
 on:
   push:
@@ -11,109 +11,93 @@ permissions:
   contents: write
 
 concurrency:
-  group: kayas-authoritative-install-diagnostic
+  group: kayas-authoritative-bundle-install
   cancel-in-progress: false
 
 jobs:
-  diagnose-install:
+  install:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Download, inspect and install when valid
+      - name: Download, verify, install and record result
         shell: bash
         run: |
-          set +e
+          set -u
           mkdir -p /tmp/kayas-install kayas/walkthrough/src
           EXPECTED_SIZE=1371713
-          EXPECTED_SHA='003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d'
-          URL1='https://drive.usercontent.google.com/download?id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&export=download&authuser=0&confirm=t'
-          URL2='https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&confirm=t'
+          EXPECTED_SHA=003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d
           TARGET=/tmp/kayas-install/source.js
-          : > /tmp/kayas-install/attempts.log
-          VALID=0
-          for URL in "$URL1" "$URL2"; do
+          LOG=/tmp/kayas-install/attempts.log
+          VALID=false
+          : > "$LOG"
+
+          for URL in \
+            'https://drive.usercontent.google.com/download?id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&export=download&authuser=0&confirm=t' \
+            'https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc&confirm=t'
+          do
             rm -f "$TARGET" /tmp/kayas-install/headers.txt
-            echo "URL=$URL" >> /tmp/kayas-install/attempts.log
+            echo "URL=$URL" >> "$LOG"
             curl -L -sS --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 180 \
               -D /tmp/kayas-install/headers.txt "$URL" -o "$TARGET"
             RC=$?
             SIZE=$(wc -c < "$TARGET" 2>/dev/null || echo 0)
             SHA=$(sha256sum "$TARGET" 2>/dev/null | awk '{print $1}')
             TYPE=$(file -b --mime-type "$TARGET" 2>/dev/null || echo unknown)
-            echo "curl_rc=$RC size=$SIZE sha=$SHA type=$TYPE" >> /tmp/kayas-install/attempts.log
-            cat /tmp/kayas-install/headers.txt >> /tmp/kayas-install/attempts.log 2>/dev/null
-            echo >> /tmp/kayas-install/attempts.log
-            if [ "$RC" -eq 0 ] && [ "$SIZE" -eq "$EXPECTED_SIZE" ] && [ "$SHA" = "$EXPECTED_SHA" ]; then
-              if node --check "$TARGET" >/tmp/kayas-install/node.log 2>&1; then
-                VALID=1
-                break
-              fi
+            echo "curl_rc=$RC size=$SIZE sha=$SHA type=$TYPE" >> "$LOG"
+            cat /tmp/kayas-install/headers.txt >> "$LOG" 2>/dev/null || true
+            echo >> "$LOG"
+            if [ "$RC" -eq 0 ] && [ "$SIZE" -eq "$EXPECTED_SIZE" ] && [ "$SHA" = "$EXPECTED_SHA" ] && node --check "$TARGET" >/tmp/kayas-install/node.log 2>&1; then
+              VALID=true
+              break
             fi
           done
 
-          if [ "$VALID" -eq 1 ]; then
+          if [ "$VALID" = true ]; then
             cp "$TARGET" kayas/walkthrough/src/kayas-v8-safe.bundle.js
-            cat >> kayas/walkthrough/src/kayas-v8-safe.bundle.js <<'JS'
-
-window.__KAYAS_MODEL_READY = true;
-window.__KAYAS_MODEL_MODE = 'authoritative-v8-same-origin-v18';
-window.__KAYAS_MODEL_SOURCE = 'same-origin';
-window.dispatchEvent(new Event('resize'));
-JS
+            printf '\n%s\n%s\n%s\n%s\n' \
+              "window.__KAYAS_MODEL_READY = true;" \
+              "window.__KAYAS_MODEL_MODE = 'authoritative-v8-same-origin-v18';" \
+              "window.__KAYAS_MODEL_SOURCE = 'same-origin';" \
+              "window.dispatchEvent(new Event('resize'));" \
+              >> kayas/walkthrough/src/kayas-v8-safe.bundle.js
             node --check kayas/walkthrough/src/kayas-v8-safe.bundle.js
-            python - <<'PY'
-          from pathlib import Path
-          import re
-          p = Path('kayas/walkthrough/index.html')
-          text = p.read_text(encoding='utf-8')
-          text, count = re.subn(
-              r'<script defer src="(?:model-loader\.js|src/kayas-v8-safe\.bundle\.js|src/kayas-v10-enhanced\.bundle\.js)\?v=[^"]+"></script>',
-              '<script defer src="src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18"></script>',
-              text,
-          )
-          if count != 1:
-              raise SystemExit(f'Expected one model reference, found {count}')
-          p.write_text(text, encoding='utf-8')
-          PY
+            perl -0pi -e 's#<script defer src="(?:model-loader\.js|src/kayas-v8-safe\.bundle\.js|src/kayas-v10-enhanced\.bundle\.js)\?v=[^"]+"></script>#<script defer src="src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18"></script>#g' kayas/walkthrough/index.html
           fi
 
-          export VALID EXPECTED_SIZE EXPECTED_SHA
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          target = Path('/tmp/kayas-install/source.js')
-          data = {
-              'valid': os.environ.get('VALID') == '1',
-              'expected_size': int(os.environ['EXPECTED_SIZE']),
-              'expected_sha256': os.environ['EXPECTED_SHA'],
-              'actual_size': target.stat().st_size if target.exists() else 0,
-              'actual_sha256': __import__('hashlib').sha256(target.read_bytes()).hexdigest() if target.exists() else None,
-              'attempts': Path('/tmp/kayas-install/attempts.log').read_text(errors='replace')[-12000:],
-              'node_output': Path('/tmp/kayas-install/node.log').read_text(errors='replace')[-4000:] if Path('/tmp/kayas-install/node.log').exists() else None,
-              'installed_path_exists': Path('kayas/walkthrough/src/kayas-v8-safe.bundle.js').exists(),
-              'index_uses_same_origin': 'src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18' in Path('kayas/walkthrough/index.html').read_text(encoding='utf-8'),
-          }
-          Path('kayas/walkthrough/authoritative-install-diagnostic.json').write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
-          print(json.dumps(data, indent=2, ensure_ascii=False))
-          PY
+          ACTUAL_SIZE=$(wc -c < "$TARGET" 2>/dev/null || echo 0)
+          ACTUAL_SHA=$(sha256sum "$TARGET" 2>/dev/null | awk '{print $1}')
+          ATTEMPTS=$(tail -c 10000 "$LOG" | jq -Rs .)
+          jq -n \
+            --argjson valid "$VALID" \
+            --arg expected_sha256 "$EXPECTED_SHA" \
+            --arg actual_sha256 "$ACTUAL_SHA" \
+            --argjson expected_size "$EXPECTED_SIZE" \
+            --argjson actual_size "$ACTUAL_SIZE" \
+            --argjson attempts "$ATTEMPTS" \
+            --arg installed_path_exists "$(test -s kayas/walkthrough/src/kayas-v8-safe.bundle.js && echo true || echo false)" \
+            --arg index_uses_same_origin "$(grep -q 'src/kayas-v8-safe.bundle.js?v=20260803-same-origin-v18' kayas/walkthrough/index.html && echo true || echo false)" \
+            '{valid:$valid, expected_sha256:$expected_sha256, actual_sha256:$actual_sha256, expected_size:$expected_size, actual_size:$actual_size, attempts:$attempts, installed_path_exists:($installed_path_exists=="true"), index_uses_same_origin:($index_uses_same_origin=="true")}' \
+            > kayas/walkthrough/authoritative-install-diagnostic.json
+          cat kayas/walkthrough/authoritative-install-diagnostic.json
 
-      - name: Commit diagnostic and valid runtime if available
+      - name: Commit diagnostic and runtime
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add kayas/walkthrough/authoritative-install-diagnostic.json kayas/walkthrough/index.html
           if test -s kayas/walkthrough/src/kayas-v8-safe.bundle.js; then
             git add kayas/walkthrough/src/kayas-v8-safe.bundle.js
           fi
           if git diff --cached --quiet; then
-            echo 'No diagnostic change.'
+            echo 'No changes to commit.'
             exit 0
           fi
-          git commit -m 'Record KAYAS authoritative install diagnostic and runtime [skip ci]'
+          git commit -m 'Install authoritative KAYAS same-origin runtime and diagnostic [skip ci]'
           git push origin HEAD:main
