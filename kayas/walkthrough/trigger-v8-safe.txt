@@ -1,0 +1,2 @@
+trigger=2026-08-03T12:51:00+03:00
+mode=authoritative-v8-single-file-safe
