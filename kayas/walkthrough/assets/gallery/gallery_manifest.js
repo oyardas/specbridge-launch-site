@@ -3,13 +3,16 @@ window.KAYAS_GALLERY_DATA={
   version:"v22_same_origin_gallery",
   count:2,
   items:[
-    {number:1,category:"Concept Portfolio",title:"KAYAS Yerleşim ve Konsept Görseli",full:"assets/gallery/kayas_concept_board.svg",thumb:"assets/gallery/kayas_concept_board.svg",original:"assets/gallery/kayas_concept_board.svg",notes:"Authoritative v8 yerleşimini temel alan, aynı origin üzerinden sunulan yatırımcı konsept görseli."},
+    {number:1,category:"Concept Portfolio",title:"KAYAS Yerleşim ve Konsept Görseli",full:"assets/gallery/kayas_concept_board.svg?v=20260803-v22",thumb:"assets/gallery/kayas_concept_board.svg?v=20260803-v22",original:"assets/gallery/kayas_concept_board.svg?v=20260803-v22",notes:"Authoritative v8 yerleşimini temel alan, aynı origin üzerinden sunulan yatırımcı konsept görseli."},
     {number:2,category:"Product Video",title:"H3C IC8000 Video Önizlemesi",full:"https://img.youtube.com/vi/gxWI5p_MH3E/maxresdefault.jpg",thumb:"https://img.youtube.com/vi/gxWI5p_MH3E/hqdefault.jpg",original:"https://youtu.be/gxWI5p_MH3E?t=5",notes:"H3C IC8000 ürün videosu. Yeni sekmede video açılır."}
   ]
 };
 
 (function(){
   'use strict';
+  var css=document.getElementById('kayas-v21-css');
+  if(css)css.href='v21-fixes.css?v=20260803-v22-brand-cleanup';
+
   var overlays=['labelsToggle','routeToggle','zoningToggle','futureToggle','coolingToggle','powerToggle','fiberToggle','safetyToggle'];
   function setProfessionalDefaults(){
     overlays.forEach(function(id){
