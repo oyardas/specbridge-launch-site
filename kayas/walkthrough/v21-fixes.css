@@ -1,4 +1,4 @@
-/* KAYAS v21 — deterministic UI state, true dual theme and professional visual polish. */
+/* KAYAS v22 — deterministic UI state, authoritative branding and presentation cleanup. */
 :root{
   --v21-bg:#071321;
   --v21-bg-2:#0b1f33;
@@ -10,6 +10,7 @@
   --v21-accent:#5b9cff;
   --v21-cyan:#55d8e2;
   --v21-shadow:0 24px 70px rgba(0,0,0,.34);
+  --h3c-wordmark:url("assets/brand/h3c_wordmark_red.svg");
 }
 html[data-theme="light"]{
   --v21-bg:#dfe9f2;
@@ -35,6 +36,10 @@ html,body,#app{background:var(--v21-bg)!important;color:var(--v21-text)}
   background:var(--v21-panel)!important;
   box-shadow:var(--v21-shadow)!important;
 }
+.app-bar{z-index:80!important}
+.panel{z-index:50!important}
+.customer-drawer{z-index:70!important}
+.zone-card,.tour-dock,.scale-control,.compass{z-index:35!important}
 .subtitle,.section-row span,.metric-grid span,.button-group button,.controls,.drawer-note,.gallery-hero p,.report-item small,.app-title-block span,.specbridge-wordmark span{
   color:var(--v21-muted)!important;
 }
@@ -60,25 +65,55 @@ body[data-active-view="reports"] .drawer-panel[data-content="reports"]{display:b
 body[data-active-view="reports"] .drawer-panel[data-content="reports"]{display:grid!important}
 #themeButton{font-size:18px;line-height:1}
 #scene{
-  filter:saturate(1.04) contrast(1.035) brightness(1.01)!important;
+  filter:saturate(1.01) contrast(1.025) brightness(1.01)!important;
   transition:filter .28s ease,opacity .28s ease!important;
 }
-html[data-theme="light"] #scene{filter:saturate(.98) contrast(1.015) brightness(1.055)!important}
-html[data-theme="light"] #app::after{opacity:.08!important;mix-blend-mode:multiply}
-html[data-theme="dark"] #app::after{opacity:.48!important}
+html[data-theme="light"] #scene{filter:saturate(.98) contrast(1.01) brightness(1.035)!important}
+html[data-theme="light"] #app::after{opacity:.06!important;mix-blend-mode:multiply}
+html[data-theme="dark"] #app::after{opacity:.35!important}
 .panel,.customer-drawer{backdrop-filter:blur(20px) saturate(1.18);-webkit-backdrop-filter:blur(20px) saturate(1.18)}
 .panel-edge-toggle{color:var(--v21-text)!important;border-color:var(--v21-line)!important;background:var(--v21-panel)!important}
 body.panel-collapsed .panel{transform:translate3d(calc(-100% - 42px),0,0)!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 body.panel-collapsed .panel-edge-toggle{left:0!important;transform:none!important;display:grid!important}
 .report-frame{background:#fff}
-.gallery-grid img,.gallery-hero-image img{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.10))}
-.v21-render-badge{
-  position:absolute;right:17px;top:calc(var(--top) + 13px);z-index:4;
-  display:flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid var(--v21-line);
-  border-radius:999px;background:var(--v21-panel);color:var(--v21-muted);box-shadow:var(--v21-shadow);
-  backdrop-filter:blur(14px);font-size:9px;font-weight:750;letter-spacing:.065em;text-transform:uppercase;pointer-events:none
+.gallery-grid img,.gallery-hero-image img{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(0,0,0,.10));object-fit:cover}
+
+/* Authoritative H3C wordmark supplied for the project. */
+.h3c-wordmark-logo{
+  display:block!important;
+  width:76px!important;
+  height:25px!important;
+  overflow:hidden!important;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:0!important;
+  text-indent:-9999px!important;
+  background-image:var(--h3c-wordmark)!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:contain!important;
 }
-.v21-render-badge i{width:7px;height:7px;border-radius:50%;background:#4bd08b;box-shadow:0 0 13px rgba(75,208,139,.86);animation:v21-pulse 2.4s ease-in-out infinite}
-@keyframes v21-pulse{0%,100%{opacity:.45;transform:scale(.84)}50%{opacity:1;transform:scale(1.16)}}
-@media(max-width:900px){.v21-render-badge{display:none}.customer-drawer{inset:calc(var(--top) + 7px) 7px 7px!important}}
+.h3c-badge,.panel-h3c,.drawer-h3c{
+  display:grid!important;
+  place-items:center!important;
+  min-width:94px!important;
+  min-height:44px!important;
+  padding:8px 10px!important;
+  border:1px solid rgba(225,18,45,.24)!important;
+  border-radius:13px!important;
+  background:#fff!important;
+  box-shadow:0 10px 26px rgba(10,24,38,.14)!important;
+}
+.h3c-badge.compact{min-width:80px!important;min-height:38px!important;padding:6px 8px!important}
+.panel-h3c .h3c-wordmark-logo,.drawer-h3c .h3c-wordmark-logo{width:68px!important;height:23px!important}
+
+/* Remove duplicated/overlapping quality pills. Status remains available in technical details. */
+.render-quality-badge,.v21-render-badge,.v20-quality-badge,.cinematic-badge,[data-render-quality-badge]{display:none!important}
+
+.v21-render-badge{display:none!important}
+@media(max-width:900px){
+  .customer-drawer{inset:calc(var(--top) + 7px) 7px 7px!important}
+  .h3c-badge{min-width:78px!important;min-height:40px!important;padding:6px 8px!important}
+  .h3c-wordmark-logo{width:62px!important;height:21px!important}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
