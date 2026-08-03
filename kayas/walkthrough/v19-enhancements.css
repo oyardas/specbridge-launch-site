@@ -1,0 +1,92 @@
+/* KAYAS v19 — premium visual layer. Geometry is not changed. */
+:root{
+  --v19-glow:0 0 0 1px rgba(89,165,255,.08),0 18px 60px rgba(0,0,0,.28);
+}
+#scene{
+  transition:filter .28s ease,opacity .28s ease;
+  filter:saturate(1.04) contrast(1.025);
+}
+body.is-night #scene{filter:saturate(1.08) contrast(1.04) brightness(.98)}
+.app-bar,.panel,.customer-drawer,.zone-card,.tour-dock,.scale-control,.compass{
+  box-shadow:var(--v19-glow);
+}
+.panel{
+  will-change:transform,opacity;
+  transform:translate3d(0,0,0);
+}
+body.panel-collapsed .panel{
+  transform:translate3d(calc(-100% - 34px),0,0)!important;
+  opacity:0!important;
+  visibility:hidden;
+}
+.panel-edge-toggle{
+  z-index:18!important;
+  display:grid!important;
+  place-items:center;
+  box-shadow:0 10px 34px rgba(0,0,0,.28);
+  will-change:left,transform;
+}
+body.panel-collapsed .panel-edge-toggle{
+  left:0!important;
+  transform:none!important;
+  border-left:1px solid var(--line);
+  border-radius:0 12px 12px 0;
+}
+body.panel-collapsed .panel-edge-toggle::after{content:""}
+body.panel-collapsed .zone-card{right:17px}
+.icon-button[aria-expanded="false"]{
+  border-color:rgba(69,213,210,.42);
+  background:rgba(69,213,210,.11);
+}
+.metric-grid>div,.button-group button,.technical-details,.presentation-tabs button{
+  transition:border-color .18s ease,background .18s ease,transform .18s ease;
+}
+.button-group button:hover,.presentation-tabs button:hover,.metric-grid>div:hover{
+  border-color:var(--line2);
+  transform:translateY(-1px);
+}
+.scale-control{
+  min-width:128px;
+  padding:9px 12px;
+  border-radius:12px;
+  background:rgba(5,17,29,.86);
+}
+body:not(.is-night) .scale-control{background:rgba(255,255,255,.9)}
+.scale-line{transition:width .18s ease}
+.zone-card{max-width:360px;background:linear-gradient(145deg,var(--panel),rgba(8,27,46,.96))}
+body:not(.is-night) .zone-card{background:linear-gradient(145deg,var(--panel),rgba(255,255,255,.98))}
+.app-title-block strong,.panel h1{letter-spacing:-.02em}
+.render-quality-badge{
+  position:absolute;
+  right:17px;
+  top:calc(var(--top) + 13px);
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--panel);
+  color:var(--muted);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+  font-size:9px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+.render-quality-badge i{
+  width:7px;height:7px;border-radius:50%;
+  background:#4bd08b;
+  box-shadow:0 0 12px rgba(75,208,139,.9);
+  animation:v19-status-pulse 2.4s ease-in-out infinite;
+}
+@keyframes v19-status-pulse{0%,100%{opacity:.45;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+@media(max-width:900px){
+  .render-quality-badge{display:none}
+  body.panel-collapsed .panel-edge-toggle{top:calc(var(--top) + 14px);height:46px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
