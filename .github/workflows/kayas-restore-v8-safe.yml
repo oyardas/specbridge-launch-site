@@ -1,0 +1,82 @@
+name: Restore KAYAS Authoritative v8 Safe Runtime
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-restore-v8-safe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-restore-v8-safe
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify authoritative v8
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 5 --retry-delay 2 \
+            'https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc' \
+            -o /tmp/kayas-v8-safe.bundle.js
+          test "$(wc -c < /tmp/kayas-v8-safe.bundle.js)" -eq 1371713
+          printf '%s  %s\n' \
+            '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d' \
+            '/tmp/kayas-v8-safe.bundle.js' | sha256sum -c -
+          node --check /tmp/kayas-v8-safe.bundle.js
+          cat >> /tmp/kayas-v8-safe.bundle.js <<'JS'
+
+window.__KAYAS_MODEL_READY = true;
+window.__KAYAS_MODEL_MODE = 'authoritative-v8-static-safe';
+window.dispatchEvent(new Event('resize'));
+JS
+          node --check /tmp/kayas-v8-safe.bundle.js
+
+      - name: Install direct same-origin runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kayas/walkthrough/src
+          cp /tmp/kayas-v8-safe.bundle.js kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('kayas/walkthrough/index.html')
+          text = p.read_text(encoding='utf-8')
+          text = re.sub(
+              r'<script defer src="(?:model-loader\.js|src/kayas-v10-enhanced\.bundle\.js)\?v=[^"]+"></script>',
+              '<script defer src="src/kayas-v8-safe.bundle.js?v=20260803-v16-safe"></script>',
+              text,
+          )
+          if 'src/kayas-v8-safe.bundle.js?v=20260803-v16-safe' not in text:
+              raise SystemExit('Safe direct runtime reference not installed')
+          p.write_text(text, encoding='utf-8')
+          PY
+          grep -q 'src/kayas-v8-safe.bundle.js?v=20260803-v16-safe' kayas/walkthrough/index.html
+
+      - name: Commit safe runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kayas/walkthrough/index.html kayas/walkthrough/src/kayas-v8-safe.bundle.js
+          if git diff --cached --quiet; then
+            echo 'Safe runtime already installed.'
+            exit 0
+          fi
+          git pull --rebase origin main
+          git commit -m 'Restore authoritative KAYAS v8 single-file runtime [skip ci]'
+          git push origin HEAD:main
