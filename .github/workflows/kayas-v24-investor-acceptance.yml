@@ -1,0 +1,142 @@
+name: Validate KAYAS v24 Investor Model
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - kayas/walkthrough/v24-investor-model.js
+      - kayas/walkthrough/v24-investor-model.css
+      - kayas/walkthrough/assets/gallery/gallery_manifest.js
+      - kayas/walkthrough/assets/gallery/kayas_concept_board.svg
+      - .github/workflows/kayas-v24-investor-acceptance.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v24-investor-acceptance
+  cancel-in-progress: true
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Static validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/walkthrough/v24-investor-model.js
+          grep -q '20260803-v24-investor-model' kayas/walkthrough/assets/gallery/gallery_manifest.js
+          grep -q 'kayas_concept_board.svg' kayas/walkthrough/assets/gallery/gallery_manifest.js
+          grep -q 'Authoritative v8 layout preserved' kayas/walkthrough/assets/gallery/kayas_concept_board.svg
+
+      - name: Install browser runtime
+        shell: bash
+        run: |
+          mkdir -p /tmp/kayas-v24-test
+          cd /tmp/kayas-v24-test
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run Chromium acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v24-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v24-test/test.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async()=>{
+            const result={version:'v24-investor-model',pass:false,errors:[],consoleErrors:[],failedRequests:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.errors.push(e.message));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push(m.text())});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=v24-acceptance',{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,null,{timeout:120000});
+              await page.waitForFunction(()=>window.__KAYAS_V24_STATUS__&&window.__KAYAS_V24_STATUS__.installed===true,null,{timeout:120000});
+              await page.waitForTimeout(1800);
+              const model=await page.evaluate(()=>({
+                status:window.__KAYAS_V24_STATUS__,
+                visualVersion:document.documentElement.dataset.kayasVisualVersion,
+                canvas:{width:document.getElementById('scene')?.width||0,height:document.getElementById('scene')?.height||0},
+                h3c:Array.from(document.querySelectorAll('.h3c-wordmark-logo img')).map(i=>({complete:i.complete,width:i.naturalWidth,src:i.src.slice(0,30)}))
+              }));
+              result.model=model;
+
+              await page.click('[data-panel="gallery"]');
+              await page.waitForTimeout(800);
+              result.gallery=await page.evaluate(()=>({
+                view:document.body.dataset.activeView,
+                drawerHidden:document.getElementById('customerDrawer').hidden,
+                galleryHidden:document.querySelector('[data-content="gallery"]').hidden,
+                reportsHidden:document.querySelector('[data-content="reports"]').hidden,
+                hero:{complete:document.getElementById('galleryHero').complete,width:document.getElementById('galleryHero').naturalWidth,src:document.getElementById('galleryHero').currentSrc}
+              }));
+
+              await page.click('[data-panel="reports"]');
+              await page.waitForTimeout(300);
+              result.reports=await page.evaluate(()=>({
+                view:document.body.dataset.activeView,
+                galleryHidden:document.querySelector('[data-content="gallery"]').hidden,
+                reportsHidden:document.querySelector('[data-content="reports"]').hidden
+              }));
+
+              const before=await page.evaluate(()=>document.documentElement.dataset.theme);
+              await page.click('#themeButton');
+              await page.waitForTimeout(350);
+              const after=await page.evaluate(()=>document.documentElement.dataset.theme);
+              result.theme={before,after};
+
+              await page.click('[data-panel="model"]');
+              await page.click('#panelToggleHeader');
+              await page.waitForTimeout(350);
+              result.panelCollapsed=await page.evaluate(()=>document.body.classList.contains('panel-collapsed'));
+
+              const fatal=result.errors.filter(x=>/SyntaxError|ReferenceError|TypeError|WebGL/i.test(x));
+              result.fatalErrors=fatal;
+              result.pass=model.visualVersion==='v24'&&model.status.racks>0&&model.status.leds>0&&model.status.screens>0&&model.canvas.width>300&&model.canvas.height>150&&model.h3c.length>0&&model.h3c.every(x=>x.complete&&x.width>20)&&result.gallery.view==='gallery'&&!result.gallery.drawerHidden&&!result.gallery.galleryHidden&&result.gallery.reportsHidden&&result.gallery.hero.complete&&result.gallery.hero.width>100&&result.reports.view==='reports'&&result.reports.galleryHidden&&!result.reports.reportsHidden&&before!==after&&result.panelCollapsed&&fatal.length===0;
+              await page.screenshot({path:'/tmp/kayas-v24-test/screenshot.png',fullPage:true});
+            }catch(e){result.errors.push(e.stack||String(e));}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v24-test/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          cd /tmp/kayas-v24-test
+          node test.js
+
+      - name: Commit result
+        if: always()
+        shell: bash
+        run: |
+          if test -s /tmp/kayas-v24-test/status.json; then cp /tmp/kayas-v24-test/status.json kayas/walkthrough/smoke-status-v24.json; else echo '{"version":"v24-investor-model","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v24.json; fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v24.json
+          if ! git diff --cached --quiet; then git commit -m 'Record KAYAS v24 Chromium acceptance [skip ci]' && git push origin HEAD:main; fi
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v24-investor-acceptance
+          path: |
+            /tmp/kayas-v24-test/status.json
+            /tmp/kayas-v24-test/screenshot.png
+          if-no-files-found: warn
+
+      - name: Enforce result
+        shell: bash
+        run: node -e "const r=require('/tmp/kayas-v24-test/status.json');if(!r.pass){console.error(r);process.exit(1)}console.log('KAYAS_V24_INVESTOR_ACCEPTANCE=PASS')"
