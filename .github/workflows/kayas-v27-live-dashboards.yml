@@ -1,0 +1,143 @@
+name: Activate and Validate KAYAS V27 Live Dashboards
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v27-live-dashboards.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v27-live-dashboards
+  cancel-in-progress: true
+
+jobs:
+  activate-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refresh accepted V26 baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
+          node -e "const r=require('./kayas/walkthrough/smoke-status-v26.json');if(r.pass!==true)process.exit(1)"
+          grep -q 'v26-investor-polish.js?v=20260803-v26-investor-polish' kayas/walkthrough/index.html
+          node --check kayas/walkthrough/v27-live-dashboards.js
+
+      - name: Activate V27 dashboard runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          path=Path('kayas/walkthrough/index.html')
+          text=path.read_text(encoding='utf-8')
+          text=re.sub(r'\s*<script[^>]+src="v27-live-dashboards\.js\?v=[^"]+"[^>]*></script>','',text)
+          anchor=re.search(r'\s*<script defer src="app-shell\.js\?v=[^"]+"></script>',text)
+          if not anchor:
+              raise SystemExit('app-shell anchor not found')
+          script='  <script defer src="v27-live-dashboards.js?v=20260804-v27-live-dashboards"></script>\n'
+          text=text[:anchor.start()]+'\n'+script+text[anchor.start():]
+          if text.count('v27-live-dashboards.js?v=20260804-v27-live-dashboards')!=1:
+              raise SystemExit('V27 reference count is not one')
+          path.write_text(text,encoding='utf-8')
+          PY
+          grep -q '20</strong><span>IC8000 pod · 10 kabinet/pod' kayas/walkthrough/index.html
+          test "$(grep -o 'v27-live-dashboards.js?v=20260804-v27-live-dashboards' kayas/walkthrough/index.html | wc -l)" -eq 1
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v27
+          cd /tmp/kayas-v27
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run Chromium WebGL acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v27-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v27/test.js <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={version:'20260804-v27-live-dashboards',pass:false,timestamp:new Date().toISOString(),pageErrors:[],consoleErrors:[],failedRequests:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.pageErrors.push(e.message));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push(m.text())});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v27-live-dashboards',{waitUntil:'domcontentloaded',timeout:30000});
+              if(await page.locator('#loginGate').isVisible().catch(()=>false)){
+                await page.fill('#loginUser','kayas');await page.fill('#loginPass','verimerkezi');await page.click('#loginButton');
+              }
+              await page.waitForFunction(()=>window.__KAYAS_V26_STATUS?.ready===true,null,{timeout:120000});
+              await page.waitForFunction(()=>window.__KAYAS_V27_STATUS?.ready===true,null,{timeout:60000});
+              await page.waitForTimeout(2500);
+              Object.assign(result,await page.evaluate(()=>{
+                const canvas=document.getElementById('scene');
+                let dashboards=0,primitiveVisible=0;
+                window.__KAYAS_SCENE__?.traverse(o=>{
+                  if(o.userData?.kayasV27Dashboard)dashboards++;
+                  if(o.visible&&/kayas-v21-professional-(person|plant)|route-arrow|debug|gizmo|axis-helper/i.test(String(o.name||'')))primitiveVisible++;
+                });
+                const tabs=[...document.querySelectorAll('[data-panel]')];
+                return {v26:window.__KAYAS_V26_STATUS,v27:window.__KAYAS_V27_STATUS,dashboards,primitiveVisible,webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl'))),canvas:{width:canvas?.width||0,height:canvas?.height||0},tabCount:tabs.length};
+              }));
+              result.fatalErrors=result.pageErrors.filter(e=>/SyntaxError|ReferenceError|TypeError|WebGL/i.test(e));
+              result.pass=result.v26?.ready===true&&result.v27?.ready===true&&result.v27.screens>=1&&result.dashboards===result.v27.screens&&result.primitiveVisible===0&&result.webgl===true&&result.canvas.width>500&&result.canvas.height>300&&result.tabCount===3&&result.fatalErrors.length===0;
+              await page.screenshot({path:'/tmp/kayas-v27/acceptance.png',fullPage:true});
+            }catch(error){result.pageErrors.push(error.stack||error.message||String(error));}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v27/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          cd /tmp/kayas-v27
+          node test.js
+
+      - name: Record activation and acceptance
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v27/status.json; then cp /tmp/kayas-v27/status.json kayas/walkthrough/smoke-status-v27.json; else printf '%s\n' '{"version":"20260804-v27-live-dashboards","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v27.json; fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v27.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Activate KAYAS V27 dashboards and record acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v27-live-dashboards-acceptance
+          path: |
+            /tmp/kayas-v27/status.json
+            /tmp/kayas-v27/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v27/status.json');if(!r.pass){console.error(r);process.exit(1)}console.log('KAYAS_V27_LIVE_DASHBOARDS_ACCEPTANCE=PASS')"
