@@ -13,7 +13,7 @@
     if(span)span.textContent=message;
   }
   function fail(message){
-    console.error('[KAYAS v10]',message);
+    console.error('[KAYAS v11]',message);
     setStatus('3D deneyim açılamadı',message);
   }
   async function sha256(text){
@@ -54,12 +54,13 @@
   }
   async function reconstructV8Source(){
     if(typeof DecompressionStream!=='function')throw new Error('Tam v8 modeli için güncel Chrome, Edge veya Safari gereklidir.');
-    setStatus('Orijinal v8 modeli hazırlanıyor…','Bina yerleşimi değiştirilmeden tam 3D kaynak paketi birleştiriliyor.');
-    const manifestResponse=await fetch('src/chunks/manifest.json?v=20260803-v8',{cache:'no-store'});
+    setStatus('Orijinal v8 modeli hazırlanıyor…','Bina yerleşimi değiştirilmeden yedi parçalı tam 3D kaynak paketi birleştiriliyor.');
+    const cacheKey='20260803-v8-7part';
+    const manifestResponse=await fetch('src/chunks/manifest.json?v='+cacheKey,{cache:'no-store'});
     if(!manifestResponse.ok)throw new Error('v8 model manifesti alınamadı: HTTP '+manifestResponse.status);
     const manifest=await manifestResponse.json();
     if(!manifest||!Array.isArray(manifest.files)||!manifest.files.length)throw new Error('v8 model manifesti geçersiz.');
-    const parts=await Promise.all(manifest.files.map((file,index)=>fetch('src/chunks/'+file+'?v=20260803-v8',{cache:'force-cache'}).then(response=>{
+    const parts=await Promise.all(manifest.files.map((file,index)=>fetch('src/chunks/'+file+'?v='+cacheKey,{cache:'no-store'}).then(response=>{
       if(!response.ok)throw new Error('v8 model parçası eksik: '+file);
       setStatus('Orijinal v8 modeli hazırlanıyor…',(index+1)+' / '+manifest.files.length+' model parçası doğrulanıyor.');
       return response.text();
@@ -84,7 +85,7 @@
       URL.revokeObjectURL(url);
       if(status)status.hidden=true;
       window.dispatchEvent(new Event('resize'));
-      console.info('[KAYAS v10] Authoritative v8 geometry and v10 features active.');
+      console.info('[KAYAS v11] Authoritative v8 geometry and v10 features active.');
     };
     script.onerror=()=>{
       URL.revokeObjectURL(url);
@@ -95,8 +96,8 @@
 
   try{
     const [patchResponse,directResponse]=await Promise.all([
-      fetch('kayas-v10.patch?v=20260803-10',{cache:'no-store'}),
-      fetch('src/kayas-3d.bundle.js?v=20260803-direct-check',{cache:'no-store'}).catch(()=>null)
+      fetch('kayas-v10.patch?v=20260803-11',{cache:'no-store'}),
+      fetch('src/kayas-3d.bundle.js?v=20260803-direct-check-11',{cache:'no-store'}).catch(()=>null)
     ]);
     if(!patchResponse.ok)throw new Error('v10 model patch dosyası alınamadı: HTTP '+patchResponse.status);
     let original='';
