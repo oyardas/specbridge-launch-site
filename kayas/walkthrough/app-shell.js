@@ -10,19 +10,19 @@
   };
 
   function ensureV19Assets(){
-    if(!document.getElementById('kayas-v19-css')){
+    if(!document.getElementById('kayas-v20-css')){
       const link=document.createElement('link');
-      link.id='kayas-v19-css';
+      link.id='kayas-v20-css';
       link.rel='stylesheet';
-      link.href='v19-enhancements.css?v=20260803-v19';
+      link.href='v20-enhancements.css?v=20260803-v20-cinematic';
       document.head.appendChild(link);
     }
-    if(!document.getElementById('kayas-v19-runtime')){
+    if(!document.getElementById('kayas-v20-runtime')){
       const script=document.createElement('script');
-      script.id='kayas-v19-runtime';
-      script.src='v19-runtime.js?v=20260803-v19';
+      script.id='kayas-v20-runtime';
+      script.src='v20-runtime.js?v=20260803-v20-cinematic';
       script.defer=true;
-      script.onerror=()=>console.error('[KAYAS v19] runtime yüklenemedi');
+      script.onerror=()=>console.error('[KAYAS v20] runtime yüklenemedi');
       document.body.appendChild(script);
     }
   }
