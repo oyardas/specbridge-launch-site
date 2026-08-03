@@ -1,0 +1,148 @@
+name: Repair KAYAS V27 Browser Acceptance
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v27-acceptance-repair.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v27-acceptance-repair
+  cancel-in-progress: true
+
+jobs:
+  repair-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify activated runtime syntax and references
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in \
+            kayas/walkthrough/model-loader-v19.js \
+            kayas/walkthrough/v20-runtime.js \
+            kayas/walkthrough/v24-brand.js \
+            kayas/walkthrough/v24-investor.js \
+            kayas/walkthrough/v25-rack-detail.js \
+            kayas/walkthrough/v26-investor-polish.js \
+            kayas/walkthrough/v27-live-dashboards.js \
+            kayas/walkthrough/app-shell.js; do
+            test -s "$f"
+            node --check "$f"
+          done
+          test "$(grep -o 'v27-live-dashboards.js?v=20260804-v27-live-dashboards' kayas/walkthrough/index.html | wc -l)" -eq 1
+          grep -q '<strong>20</strong><span>IC8000 pod · 10 kabinet/pod</span>' kayas/walkthrough/index.html
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v27-repair
+          cd /tmp/kayas-v27-repair
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run repaired browser acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v27-repair-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v27-repair/test.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async()=>{
+            const result={version:'20260804-v27-acceptance-repair',pass:false,timestamp:new Date().toISOString(),pageErrors:[],consoleErrors:[],failedRequests:[],syntaxVerified:true};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.pageErrors.push({message:e.message,stack:e.stack||'',name:e.name||''}));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push({text:m.text(),location:m.location()})});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v27-acceptance-repair',{waitUntil:'domcontentloaded',timeout:30000});
+              const gate=page.locator('#loginGate');
+              const user=page.locator('#loginUser');
+              const pass=page.locator('#loginPass');
+              const button=page.locator('#loginButton');
+              if(await gate.isVisible().catch(()=>false) && await user.isVisible().catch(()=>false) && await pass.isVisible().catch(()=>false) && await button.isVisible().catch(()=>false)){
+                await user.fill('kayas');
+                await pass.fill('verimerkezi');
+                await button.click();
+              }
+              await page.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,null,{timeout:120000});
+              await page.waitForFunction(()=>window.__KAYAS_V26_STATUS?.ready===true,null,{timeout:45000});
+              await page.waitForFunction(()=>window.__KAYAS_V27_STATUS!==undefined,null,{timeout:45000});
+              await page.waitForTimeout(2500);
+              Object.assign(result,await page.evaluate(()=>{
+                const canvas=document.getElementById('scene');
+                let dashboards=0,visiblePrimitive=0;
+                window.__KAYAS_SCENE__?.traverse(o=>{
+                  if(o.userData?.kayasV27Dashboard)dashboards++;
+                  if(o.visible&&/kayas-v21-professional-(person|plant)|person|human|visitor|avatar|figure|plant|tree|shrub|foliage|greenery/i.test(String(o.name||'')))visiblePrimitive++;
+                });
+                return {
+                  v26:window.__KAYAS_V26_STATUS,
+                  v27:window.__KAYAS_V27_STATUS,
+                  dashboards,
+                  visiblePrimitive,
+                  logoLoaded:[...document.querySelectorAll('.h3c-wordmark-logo img')].every(i=>i.complete&&i.naturalWidth>0),
+                  canvas:{width:canvas?.width||0,height:canvas?.height||0},
+                  webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl'))),
+                  activeView:document.body.dataset.activeView,
+                  theme:document.documentElement.dataset.theme
+                };
+              }));
+              const fatal=result.pageErrors.filter(e=>/SyntaxError|ReferenceError|Invalid or unexpected token/i.test(e.message));
+              result.pass=result.v26?.ready===true&&result.v27?.ready===true&&result.dashboards>0&&result.visiblePrimitive===0&&result.logoLoaded===true&&result.canvas.width>500&&result.canvas.height>300&&result.webgl===true&&result.activeView==='model'&&fatal.length===0;
+              await page.screenshot({path:'/tmp/kayas-v27-repair/acceptance.png',fullPage:true});
+            }catch(error){result.pageErrors.push({message:error.message||String(error),stack:error.stack||'',name:error.name||''});}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v27-repair/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          node /tmp/kayas-v27-repair/test.js
+
+      - name: Record repaired acceptance result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v27-repair/status.json; then
+            cp /tmp/kayas-v27-repair/status.json kayas/walkthrough/smoke-status-v27-repair.json
+          else
+            printf '%s\n' '{"version":"20260804-v27-acceptance-repair","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v27-repair.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v27-repair.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record repaired KAYAS V27 browser acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v27-acceptance-repair
+          path: |
+            /tmp/kayas-v27-repair/status.json
+            /tmp/kayas-v27-repair/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v27-repair/status.json'); if(!r.pass){console.error(r);process.exit(1)} console.log('KAYAS_V27_ACCEPTANCE_REPAIR=PASS')"
