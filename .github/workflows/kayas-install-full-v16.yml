@@ -1,0 +1,102 @@
+name: Install Authoritative KAYAS Full Bundle v16
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-install-full-v16.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-install-full-v16
+  cancel-in-progress: false
+
+jobs:
+  install:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download authoritative full v8 bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 4 --retry-delay 2 \
+            'https://drive.google.com/uc?export=download&id=19zW6DgqhSjWrRFnxDjs58NhTa5aykdGc' \
+            -o /tmp/kayas-v8-authoritative.bundle.js
+          test -s /tmp/kayas-v8-authoritative.bundle.js
+          test "$(wc -c < /tmp/kayas-v8-authoritative.bundle.js)" -eq 1371713
+          printf '%s  %s\n' \
+            '003d42f6fa45b0d30edb7c20f59512b3455ceacc00783795b3c8196a3fa5227d' \
+            '/tmp/kayas-v8-authoritative.bundle.js' | sha256sum -c -
+          grep -q 'KAYAS OSB 3D Walkthrough file-safe bundle' /tmp/kayas-v8-authoritative.bundle.js
+          grep -q 'window.THREE = THREE;' /tmp/kayas-v8-authoritative.bundle.js
+          node --check /tmp/kayas-v8-authoritative.bundle.js
+
+      - name: Apply approved visual and interaction patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/kayas-v8-authoritative.bundle.js /tmp/kayas-v10-enhanced.bundle.js
+          cd /tmp
+          patch --batch --forward -p0 < "$GITHUB_WORKSPACE/kayas/walkthrough/kayas-v10.patch"
+          test -s /tmp/kayas-3d.bundle.js
+          printf '%s  %s\n' \
+            '3d31f4ec24f4554a742ca7de7a53d34de5dfdb812ad102a929c6967aa96e34b5' \
+            '/tmp/kayas-3d.bundle.js' | sha256sum -c -
+          cat >> /tmp/kayas-3d.bundle.js <<'JS'
+
+window.__KAYAS_MODEL_READY = true;
+window.__KAYAS_MODEL_MODE = 'v8-geometry-v10-enhanced-static-v16';
+window.dispatchEvent(new Event('resize'));
+JS
+          node --check /tmp/kayas-3d.bundle.js
+
+      - name: Install single same-origin runtime and update HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kayas/walkthrough/src
+          cp /tmp/kayas-v8-authoritative.bundle.js kayas/walkthrough/src/kayas-v8-authoritative.bundle.js
+          cp /tmp/kayas-3d.bundle.js kayas/walkthrough/src/kayas-v10-enhanced.bundle.js
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('kayas/walkthrough/index.html')
+          text = p.read_text(encoding='utf-8')
+          import re
+          text = re.sub(
+              r'<script defer src="model-loader\.js\?v=[^"]+"></script>',
+              '<script defer src="src/kayas-v10-enhanced.bundle.js?v=20260803-v16"></script>',
+              text,
+          )
+          if 'src/kayas-v10-enhanced.bundle.js?v=20260803-v16' not in text:
+              raise SystemExit('Direct v16 model script was not installed')
+          p.write_text(text, encoding='utf-8')
+          PY
+          grep -q 'src/kayas-v10-enhanced.bundle.js?v=20260803-v16' kayas/walkthrough/index.html
+          node --check kayas/walkthrough/src/kayas-v10-enhanced.bundle.js
+
+      - name: Commit validated single-file runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            kayas/walkthrough/index.html \
+            kayas/walkthrough/src/kayas-v8-authoritative.bundle.js \
+            kayas/walkthrough/src/kayas-v10-enhanced.bundle.js
+          if git diff --cached --quiet; then
+            echo 'Authoritative v16 bundle is already installed.'
+            exit 0
+          fi
+          git commit -m 'Publish authoritative single-file KAYAS walkthrough v16 [skip ci]'
+          git push origin HEAD:main
