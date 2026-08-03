@@ -1,4 +1,4 @@
-name: Vendor Three.js for KAYAS Walkthrough
+name: Vendor Offline Three.js for KAYAS Walkthrough
 
 on:
   push:
@@ -9,6 +9,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: kayas-vendor-three
+  cancel-in-progress: false
 
 jobs:
   vendor:
@@ -21,38 +25,54 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install exact Three.js release
+      - name: Download verified single-file KAYAS source
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/kayas-three
-          mkdir -p /tmp/kayas-three
-          cd /tmp/kayas-three
-          npm init -y >/dev/null 2>&1
-          npm install --ignore-scripts --no-audit --no-fund three@0.180.0
-          test -s node_modules/three/build/three.module.min.js
+          curl -L --fail --retry 3 --retry-delay 2 \
+            'https://drive.google.com/uc?export=download&id=1Y_P2iS8zqqKVtrXHY2ZteyBxSPGMjHCz' \
+            -o /tmp/KAYAS_3D_Model_v5_Single_File_H3C.html
+          test -s /tmp/KAYAS_3D_Model_v5_Single_File_H3C.html
+          grep -q 'window.THREE = THREE;' /tmp/KAYAS_3D_Model_v5_Single_File_H3C.html
+          wc -c /tmp/KAYAS_3D_Model_v5_Single_File_H3C.html
 
-      - name: Copy local browser module
+      - name: Extract offline Three.js global runtime
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p kayas/walkthrough/vendor
-          cp /tmp/kayas-three/node_modules/three/build/three.module.min.js kayas/walkthrough/vendor/three.module.min.js
-          cp /tmp/kayas-three/node_modules/three/build/three.core.min.js kayas/walkthrough/vendor/three.core.min.js
-          printf '%s\n' 'Three.js r180 · npm package three@0.180.0 · MIT License' > kayas/walkthrough/vendor/README.txt
-          node --check kayas/walkthrough/vendor/three.module.min.js
-          sha256sum kayas/walkthrough/vendor/three.module.min.js kayas/walkthrough/vendor/three.core.min.js
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('/tmp/KAYAS_3D_Model_v5_Single_File_H3C.html').read_text(encoding='utf-8')
+          start_marker = '/* KAYAS OSB 3D Walkthrough file-safe bundle. */'
+          end_marker = 'window.THREE = THREE;'
+          start = source.index(start_marker)
+          end = source.index(end_marker, start) + len(end_marker)
+          runtime = source[start:end] + '\n})();\n'
+          target = Path('kayas/walkthrough/vendor/three.global.r166.js')
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_text(runtime, encoding='utf-8')
+          if target.stat().st_size < 1_000_000:
+              raise SystemExit('Extracted Three.js runtime is unexpectedly small')
+          print(f'OFFLINE_THREE_BYTES={target.stat().st_size}')
+          PY
+          node --check kayas/walkthrough/vendor/three.global.r166.js
+          sha256sum kayas/walkthrough/vendor/three.global.r166.js
+          printf '%s\n' \
+            'Three.js r166 extracted from KAYAS_3D_Model_v5_Single_File_H3C.html.' \
+            'Original source is a public, verified, self-contained offline KAYAS model.' \
+            'Three.js is licensed under MIT.' \
+            > kayas/walkthrough/vendor/README.txt
 
-      - name: Commit vendored runtime
+      - name: Commit offline runtime
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kayas/walkthrough/vendor/three.module.min.js kayas/walkthrough/vendor/three.core.min.js kayas/walkthrough/vendor/README.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kayas/walkthrough/vendor/three.global.r166.js kayas/walkthrough/vendor/README.txt
           if git diff --cached --quiet; then
-            echo 'Vendored Three.js is already current.'
+            echo 'Offline Three.js runtime is already current.'
             exit 0
           fi
-          git commit -m "Vendor Three.js r180 for KAYAS walkthrough [skip ci]"
+          git commit -m 'Vendor offline Three.js runtime for KAYAS walkthrough [skip ci]'
           git push origin HEAD:main
