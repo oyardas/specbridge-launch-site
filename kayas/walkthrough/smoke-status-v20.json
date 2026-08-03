@@ -1,1 +1,57 @@
-{"pass":false,"version":"v20-cinematic","error":"status file was not produced"}
+{
+  "pass": false,
+  "version": "v20-cinematic",
+  "timestamp": "2026-08-03T14:30:50.442Z",
+  "pageErrors": [
+    "locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator('#panelToggleHeader')\n\n    at /tmp/kayas-v20-smoke/smoke.js:58:46"
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://drive.google.com/uc?export=view&id=1TKKF1NsETSk68T0xbZa86DThc4dJ2gwT",
+      "error": "net::ERR_BLOCKED_BY_ORB"
+    }
+  ],
+  "before": {
+    "ready": true,
+    "modelMode": "authoritative-v8-geometry-locked-v19",
+    "visualReady": true,
+    "visualError": null,
+    "counts": {
+      "racks": 0,
+      "leds": 0,
+      "screens": 32,
+      "materials": 58,
+      "lights": 0,
+      "dashboardImages": 2
+    },
+    "threeRevision": "166",
+    "dimensionsText": [
+      "110 m",
+      "46 m",
+      "5 m",
+      "200",
+      "10",
+      "Tier III"
+    ],
+    "scale": "0.5 m",
+    "scaleWidth": "127.4px",
+    "panelCollapsed": false,
+    "canvas": {
+      "width": 1536,
+      "height": 960,
+      "clientWidth": 1536,
+      "clientHeight": 960
+    },
+    "qualityBadge": "Cinematic PBR · H3C canlı ekranlar"
+  }
+}
