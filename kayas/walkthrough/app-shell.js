@@ -3,9 +3,9 @@
   const AUTH_KEY='kayas_walkthrough_auth_until';
   const EXPECTED='13a9e92799eaf7515a82f73b4a2b3026a568dae3db4e35b5f4f4562b1d67bef7';
   const DOCUMENTS={
-    field:{preview:'https://drive.google.com/file/d/1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E/preview',download:'https://drive.google.com/uc?export=download&id=1TKC5oYRlm7KZfAzpAHf2CeVHOv4wAX8E'},
-    professional:{preview:'https://drive.google.com/file/d/1aeKUOlvBk8St3v2bBzZ1muS_RoleiQR6/preview',download:'https://drive.google.com/uc?export=download&id=1aeKUOlvBk8St3v2bBzZ1muS_RoleiQR6'},
-    gantt:{preview:'https://docs.google.com/spreadsheets/d/1PsE1cOZDZsKGeXKBAFRRpCilVaHSxABm/edit',download:'https://drive.google.com/uc?export=download&id=1PsE1cOZDZsKGeXKBAFRRpCilVaHSxABm'}
+    field:{preview:'https://drive.google.com/file/d/1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve/preview',download:'https://drive.google.com/uc?export=download&id=1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve'},
+    professional:{preview:'https://drive.google.com/file/d/1Hm0wu8zRUpKadyibZ33xpG8hAQ24B9kg/preview',download:'https://drive.google.com/uc?export=download&id=1Hm0wu8zRUpKadyibZ33xpG8hAQ24B9kg'},
+    gantt:{preview:'https://docs.google.com/spreadsheets/d/1EZEXAmANDyrx3SdmzWCiCZb5feKEqTF4/edit',download:'https://drive.google.com/uc?export=download&id=1EZEXAmANDyrx3SdmzWCiCZb5feKEqTF4'}
   };
 
   function configureDocuments(){
@@ -38,7 +38,7 @@
   if(Number(localStorage.getItem(AUTH_KEY)||0)>Date.now())unlock();
   const loginButton=document.getElementById('loginButton');
   if(loginButton){loginButton.addEventListener('click',async()=>{error.textContent='';const ok=await sha256(user.value.trim()+':'+pass.value);if(ok===EXPECTED){localStorage.setItem(AUTH_KEY,String(Date.now()+8*60*60*1000));unlock();}else{error.textContent='Kullanıcı adı veya şifre hatalı.';pass.select();}});}
-  [user,pass].filter(Boolean).forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='Enter'&&loginButton)loginButton.click();}));
+  [user,pass].filter(Boolean).forEach(el=>el.addEventListener('keydown',event=>{if(event.key==='Enter'&&loginButton)loginButton.click();}));
 
   const fullscreenButton=document.getElementById('fullscreenButton');
   if(fullscreenButton){fullscreenButton.addEventListener('click',()=>{const el=document.documentElement;if(!document.fullscreenElement){el.requestFullscreen&&el.requestFullscreen();}else{document.exitFullscreen&&document.exitFullscreen();}});}
