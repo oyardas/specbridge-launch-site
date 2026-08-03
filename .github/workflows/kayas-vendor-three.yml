@@ -1,0 +1,58 @@
+name: Vendor Three.js for KAYAS Walkthrough
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-vendor-three.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install exact Three.js release
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/kayas-three
+          mkdir -p /tmp/kayas-three
+          cd /tmp/kayas-three
+          npm init -y >/dev/null 2>&1
+          npm install --ignore-scripts --no-audit --no-fund three@0.180.0
+          test -s node_modules/three/build/three.module.min.js
+
+      - name: Copy local browser module
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kayas/walkthrough/vendor
+          cp /tmp/kayas-three/node_modules/three/build/three.module.min.js kayas/walkthrough/vendor/three.module.min.js
+          cp /tmp/kayas-three/node_modules/three/build/three.core.min.js kayas/walkthrough/vendor/three.core.min.js
+          printf '%s\n' 'Three.js r180 · npm package three@0.180.0 · MIT License' > kayas/walkthrough/vendor/README.txt
+          node --check kayas/walkthrough/vendor/three.module.min.js
+          sha256sum kayas/walkthrough/vendor/three.module.min.js kayas/walkthrough/vendor/three.core.min.js
+
+      - name: Commit vendored runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kayas/walkthrough/vendor/three.module.min.js kayas/walkthrough/vendor/three.core.min.js kayas/walkthrough/vendor/README.txt
+          if git diff --cached --quiet; then
+            echo 'Vendored Three.js is already current.'
+            exit 0
+          fi
+          git commit -m "Vendor Three.js r180 for KAYAS walkthrough [skip ci]"
+          git push origin HEAD:main
