@@ -1,3 +1,4 @@
-trigger=2026-08-03T17:02:00+03:00
-acceptance=chromium-webgl-v20-cinematic
+trigger=2026-08-03T17:34:00+03:00
+acceptance=chromium-webgl-v20-cinematic-rerun
+runtime_sha256=2e1156cbf7d1b76d82d556865ee0147e6b46293da8f94c8eb910d3aab815f28b
 geometry=authoritative-v8-locked
