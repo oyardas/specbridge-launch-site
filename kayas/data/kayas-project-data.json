@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "KAYAS_PROJECT_DATA_V1",
+  "revision": "R3-200IT-6CDU",
+  "revisionDate": "2026-08-04",
+  "status": "WORKING ASSUMPTION - H3C CONFIRMATION REQUIRED",
+  "project": {
+    "name": "KAYAS",
+    "location": "Kahramanmaraş / Türkoğlu / Ceceli",
+    "site": "KAYAS Ambalaj facility, 3rd floor"
+  },
+  "capacity": {
+    "ic8000Pods": 20,
+    "itCabinetsPerPod": 10,
+    "itCabinetsTotal": 200,
+    "cduCabinets": 6,
+    "auxiliaryCabinets": 6,
+    "physicalEquipmentCabinetsTotal": 206,
+    "countingRule": "206 physical equipment positions = 200 IT/sellable cabinets + 6 CDU cabinets. CDU cabinets are auxiliary liquid-cooling infrastructure and must not be counted as sellable IT cabinets.",
+    "displayLine": "20 IC8000 pods × 10 IT cabinets + 6 CDU",
+    "headerLine": "20 IC8000 pods × 10 IT cabinets + 6 CDU · 110 m × 46 m",
+    "itLoadRule": "IT load must be calculated from the final air/liquid IT cabinet mix, not from 206 physical equipment positions.",
+    "designLoadStatus": "OPEN-CONFIRMATION REQUIRED"
+  },
+  "dimensions": {
+    "lengthM": 110,
+    "depthM": 46,
+    "eastTerraceM": 5
+  },
+  "schedule": {
+    "commercialApprovalPO": "17 August 2026",
+    "targetOpening": "February 2027"
+  },
+  "revisionNote": "Previous customer materials used a 200-cabinet baseline without separating auxiliary CDU cabinets. Current working structure preserves 200 IT cabinets and adds 6 CDU cabinets as non-sellable auxiliary equipment."
+}
