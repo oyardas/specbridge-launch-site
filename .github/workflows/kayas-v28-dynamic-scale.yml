@@ -1,0 +1,139 @@
+name: Activate and Validate KAYAS V28 Dynamic Scale
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v28-dynamic-scale.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v28-dynamic-scale
+  cancel-in-progress: true
+
+jobs:
+  activate-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Activate V28 and run static checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/walkthrough/v28-dynamic-scale.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('kayas/walkthrough/index.html')
+          text=p.read_text(encoding='utf-8')
+          text=re.sub(r'\s*<script[^>]+src="v28-dynamic-scale\.js\?v=[^"]+"[^>]*></script>','',text)
+          anchor=re.search(r'\s*<script defer src="app-shell\.js\?v=[^"]+"></script>',text)
+          if not anchor: raise SystemExit('APP_SHELL_ANCHOR_NOT_FOUND')
+          tag='  <script defer src="v28-dynamic-scale.js?v=20260804-v28-dynamic-scale"></script>\n'
+          text=text[:anchor.start()]+'\n'+tag+text[anchor.start():]
+          if text.count('v28-dynamic-scale.js?v=20260804-v28-dynamic-scale') != 1:
+              raise SystemExit('V28_REFERENCE_NOT_UNIQUE')
+          p.write_text(text,encoding='utf-8')
+          PY
+          grep -q "const VERSION='20260804-v28-dynamic-scale'" kayas/walkthrough/v28-dynamic-scale.js
+          grep -q 'cameraMetersPerPixel' kayas/walkthrough/v28-dynamic-scale.js
+          grep -q 'niceDistance' kayas/walkthrough/v28-dynamic-scale.js
+          grep -q 'v28-dynamic-scale.js?v=20260804-v28-dynamic-scale' kayas/walkthrough/index.html
+          grep -q '<strong>20</strong><span>IC8000 pod · 10 kabinet/pod</span>' kayas/walkthrough/index.html
+
+      - name: Install Chromium acceptance dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v28 && cd /tmp/kayas-v28
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run Chromium WebGL acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v28-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v28/test.js <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={version:'20260804-v28-dynamic-scale',pass:false,timestamp:new Date().toISOString(),errors:[],consoleErrors:[],failedRequests:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.errors.push(e.message));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push(m.text())});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v28-dynamic-scale',{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForFunction(()=>window.__KAYAS_V28_STATUS?.ready===true,null,{timeout:120000});
+              await page.waitForTimeout(800);
+              Object.assign(result,await page.evaluate(()=>{
+                const canvas=document.getElementById('scene');
+                const status=window.__KAYAS_V28_STATUS;
+                const scale=document.getElementById('scaleControl');
+                const max=document.getElementById('scaleMax');
+                const line=document.getElementById('scaleLine');
+                return {
+                  status,
+                  scaleVisible:!!scale&&!scale.hidden,
+                  maxLabel:max?.textContent||'',
+                  lineWidth:parseFloat(line?.style.width||'0'),
+                  canvas:{width:canvas?.width||0,height:canvas?.height||0},
+                  webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl'))),
+                  activeView:document.body.dataset.activeView||''
+                };
+              }));
+              result.pass=result.status?.ready===true&&result.status.updates>0&&result.status.lastMeters>0&&result.lineWidth>=64&&result.lineWidth<=220&&/m|km/.test(result.maxLabel)&&result.scaleVisible===true&&result.canvas.width>500&&result.canvas.height>300&&result.webgl===true&&result.activeView==='model'&&result.errors.length===0;
+              await page.screenshot({path:'/tmp/kayas-v28/acceptance.png',fullPage:true});
+            }catch(error){result.errors.push(error.stack||error.message||String(error));}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v28/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          cd /tmp/kayas-v28
+          node test.js
+
+      - name: Record exact result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v28/status.json; then
+            cp /tmp/kayas-v28/status.json kayas/walkthrough/smoke-status-v28.json
+          else
+            printf '%s\n' '{"version":"20260804-v28-dynamic-scale","pass":false,"error":"STATUS_NOT_PRODUCED"}' > kayas/walkthrough/smoke-status-v28.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v28.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Activate KAYAS V28 dynamic scale and record acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v28-dynamic-scale-acceptance
+          path: |
+            /tmp/kayas-v28/status.json
+            /tmp/kayas-v28/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v28/status.json');if(!r.pass){console.error(r);process.exit(1)}console.log('KAYAS_V28_DYNAMIC_SCALE_ACCEPTANCE=PASS')"
