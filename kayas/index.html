@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex,nofollow,noarchive" />
   <title>KAYAS 3D Walkthrough | SpecBridge AI & H3C</title>
   <link rel="icon" type="image/png" href="assets/logos/specbridge_icon_colored.png" />
-  <link rel="stylesheet" href="styles.css?v=20260804-walkthrough-rc1" />
+  <link rel="stylesheet" href="styles.css?v=20260804-reports-presentations-r1" />
   <meta name="kayas-walkthrough-release" content="KAYAS_3D_Walkthrough_RC1_20260804" />
 </head>
 <body class="is-night">
@@ -53,7 +53,7 @@
         <a class="back-button" href="../" aria-label="Return to the KAYAS investor portal">←</a>
         <div class="specbridge-brand"><span class="specbridge-brand-inline"><span class="theme-logo-stack"><img class="specbridge-icon theme-logo theme-logo-night" src="assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" /><img class="specbridge-icon theme-logo theme-logo-day" src="assets/logos/specbridge_icon_colored.png" alt="SpecBridge AI" /></span><span class="specbridge-wordmark"><strong>SpecBridge AI</strong><span>KAYAS Investor Portal</span></span></span></div>
         <span class="app-divider" aria-hidden="true"></span>
-        <div class="app-title-block"><strong>KAYAS 3D Walkthrough</strong><span>20 IC8000 pods × 10 cabinets · 110 m × 46 m</span></div>
+        <div class="app-title-block"><strong>KAYAS 3D Walkthrough</strong><span>20 IC8000 pods × 10 IT cabinets + 6 CDU · 110 m × 46 m</span></div>
       </div>
       <div class="app-bar-actions">
         <span class="h3c-badge"><img class="h3c-wordmark-image" src="assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
@@ -73,19 +73,20 @@
       <div class="presentation-tabs" aria-label="Presentation sections">
         <button type="button" data-panel="model" class="is-active">3D Model</button>
         <button type="button" data-panel="gallery">Visuals</button>
-        <button type="button" data-panel="reports">Reports</button>
+        <button type="button" data-panel="reports">Reports &amp; Presentations</button>
       </div>
 
       <div class="metric-grid">
         <div><strong>110 m</strong><span>Uzunluk</span></div>
         <div><strong>46 m</strong><span>Toplam derinlik</span></div>
         <div><strong>5 m</strong><span>East terrace</span></div>
-        <div><strong>200</strong><span>Kabinet hedefi</span></div>
-        <div><strong>20</strong><span>IC8000 pod · 10 kabinet/pod</span></div>
+        <div><strong>200</strong><span>IT cabinet target</span></div>
+        <div><strong>6</strong><span>CDU cabinets · auxiliary</span></div>
         <div><strong>Tier III</strong><span>Design target</span></div>
         <div class="schedule-metric"><strong>17 August 2026</strong><span>Target commercial approval and PO date</span></div>
         <div class="schedule-metric"><strong>February 2027</strong><span>Target opening</span></div>
       </div>
+      <p class="subtitle cdu-scope-note"><strong>Counting rule:</strong> 206 physical equipment positions = 200 IT cabinets + 6 CDU cabinets. CDU cabinets are auxiliary and not sellable IT cabinets.</p>
 
       <div class="section-row"><p class="section-label">Camera viewpoints</p><span>Select a scene</span></div>
       <div class="button-group" aria-label="Kamera presetleri">
@@ -174,7 +175,12 @@
       </section>
 
       <section class="drawer-panel reports-layout" data-content="reports" hidden>
-        <nav class="report-list" aria-label="Report list">
+        <nav class="report-list" aria-label="Reports and presentations list">
+          <p class="report-group-label">Presentations</p>
+          <button class="report-item presentation-item" data-presentation-id="competitive" data-presentation-script="assets/presentations/competitive.js" data-report-title="H3C Uçtan Uca Çözüm ve Rekabet Analizi"><span class="report-icon presentation-icon">PPT</span><span><strong>H3C Uçtan Uca Çözüm ve Rekabet Analizi</strong><small>14 slides · IC8000, UIS, CAS, CloudOS and competition</small></span><b>›</b></button>
+          <button class="report-item presentation-item" data-presentation-id="interior" data-presentation-script="assets/presentations/interior.js" data-report-title="KAYAS Investor Concept Brief"><span class="report-icon presentation-icon">PPT</span><span><strong>KAYAS Investor Concept Brief</strong><small>27 slides · Interior visual concept and investor route</small></span><b>›</b></button>
+          <button class="report-item presentation-item" data-presentation-id="fullstack" data-presentation-script="assets/presentations/fullstack.js" data-report-title="KAYAS Full-Stack Investor Presentation"><span class="report-icon presentation-icon">PPT</span><span><strong>KAYAS Full-Stack Investor Presentation</strong><small>41 slides · Facility, cloud platform, operations and revenue</small></span><b>›</b></button>
+          <p class="report-group-label">Reports</p>
           <button class="report-item is-selected" data-report-src="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" data-report-download="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" data-report-title="Site Feasibility Report"><span class="report-icon">PDF</span><span><strong>Site Feasibility Report</strong><small>KAYAS OSB on-site feasibility · 15 pages</small></span><b>›</b></button>
           <button class="report-item" data-report-src="assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf" data-report-download="assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf" data-report-title="Non-Modular Data Center Requirements"><span class="report-icon orange">PDF</span><span><strong>Non-Modular Data Center Requirements</strong><small>Civil, power, mechanical, fiber and operations</small></span><b>›</b></button>
           <button class="report-item" data-report-src="assets/report/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx" data-report-download="assets/report/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx" data-report-title="Master Implementation Schedule" data-download="true"><span class="report-icon blue">XLSX</span><span><strong>Master Implementation Schedule</strong><small>109 tasks, critical path and long-lead procurement</small></span><b>↓</b></button>
@@ -182,10 +188,18 @@
           <button class="report-item is-pending" data-report-title="Competitive Analysis" disabled><span class="report-icon green">RPT</span><span><strong>Competitive Analysis</strong><small>Data Center, UIS, CAS and CloudOS · separate decision-support appendix</small></span><b>•</b></button>
           <a class="report-item video-link" href="https://youtu.be/gxWI5p_MH3E?t=5" target="_blank" rel="noopener"><span class="report-icon red">▶</span><span><strong>H3C IC8000 Video</strong><small>Product introduction · starts at second 5</small></span><b>↗</b></a>
         </nav>
-        <div class="report-viewer">
-          <div class="report-toolbar"><strong id="reportViewerTitle">Site Feasibility Report</strong><div><a id="reportOpen" class="action-link ghost" href="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" target="_blank" rel="noopener">Open in new tab</a><a id="reportDownload" class="action-link" href="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" download>Download</a></div></div>
+        <div class="report-viewer" id="reportViewer">
+          <div class="report-toolbar"><strong id="reportViewerTitle">Site Feasibility Report</strong><div id="reportToolbarActions"><a id="reportOpen" class="action-link ghost" href="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" target="_blank" rel="noopener">Open in new tab</a><a id="reportDownload" class="action-link" href="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" download>Download</a></div></div>
           <iframe class="report-frame" id="reportFrame" src="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" title="KAYAS OSB Site Feasibility Report"></iframe>
-          <p class="drawer-note">If the browser does not show a preview, use “Open in new tab” or “Download”.</p>
+          <p class="drawer-note">Reports open inside the portal. The presentation viewer below is display-oriented and does not expose a download control.</p>
+        </div>
+        <div class="presentation-viewer" id="presentationViewer" hidden>
+          <div class="presentation-toolbar">
+            <div><p class="eyebrow">Presentation viewer</p><strong id="presentationTitle">KAYAS Presentation</strong></div>
+            <div class="presentation-controls"><button type="button" id="presentationPrev" aria-label="Previous slide">‹</button><span id="presentationCounter">1 / 1</span><button type="button" id="presentationNext" aria-label="Next slide">›</button><button type="button" id="presentationFullscreen">⛶ Full screen</button></div>
+          </div>
+          <div class="presentation-stage" id="presentationStage" tabindex="0" aria-label="Presentation slide viewer"><div class="presentation-loading" id="presentationLoading">Loading presentation…</div><img id="presentationImage" alt="KAYAS presentation slide" /></div>
+          <p class="drawer-note">Use the arrow buttons, keyboard arrow keys or swipe on mobile. No download control is provided.</p>
         </div>
       </section>
     </aside>
@@ -197,8 +211,8 @@
   </main>
 
   <script>window.addEventListener("error",function(event){var s=document.getElementById("loadStatus");if(!s)return;s.hidden=false;s.querySelector("strong").textContent="3D scene could not be loaded";s.querySelector("span").textContent=event.message||"The browser could not initialize WebGL.";});</script>
-  <script defer src="assets/gallery/gallery_manifest.js?v=20260804-walkthrough-rc1"></script>
-  <script defer src="model-loader.js?v=20260804-walkthrough-rc1"></script>
-  <script defer src="app-shell.js?v=20260804-walkthrough-rc1"></script>
+  <script defer src="assets/gallery/gallery_manifest.js?v=20260804-reports-presentations-r1"></script>
+  <script defer src="model-loader.js?v=20260804-reports-presentations-r1"></script>
+  <script defer src="app-shell.js?v=20260804-reports-presentations-r1"></script>
 </body>
 </html>

@@ -54173,6 +54173,17 @@ const reportFrame = document.getElementById("reportFrame");
 const reportViewerTitle = document.getElementById("reportViewerTitle");
 const reportOpen = document.getElementById("reportOpen");
 const reportDownload = document.getElementById("reportDownload");
+const reportViewer = document.getElementById("reportViewer");
+const reportToolbarActions = document.getElementById("reportToolbarActions");
+const presentationViewer = document.getElementById("presentationViewer");
+const presentationTitle = document.getElementById("presentationTitle");
+const presentationCounter = document.getElementById("presentationCounter");
+const presentationImage = document.getElementById("presentationImage");
+const presentationLoading = document.getElementById("presentationLoading");
+const presentationPrev = document.getElementById("presentationPrev");
+const presentationNext = document.getElementById("presentationNext");
+const presentationFullscreen = document.getElementById("presentationFullscreen");
+const presentationStage = document.getElementById("presentationStage");
 
 const floor = {
   length: 110,
@@ -54296,7 +54307,7 @@ const zones = [
   {
     id: "ic8000_datahall",
     title: "H3C IC8000 Data Hall",
-    text: "Representation of 20 pods × 10 cabinets within the enclosed volume, targeting 200 cabinets in total. This area is not part of the 5 m terrace band.",
+    text: "Representation of 20 IC8000 pods × 10 IT cabinets within the enclosed volume, preserving 200 IT cabinets. Six CDU cabinets are auxiliary liquid-cooling infrastructure and are not counted as sellable IT cabinets.",
     label: "H3C IC8000 Data Hall",
     x: 18.4,
     y: 58,
@@ -54970,7 +54981,7 @@ function createDashboardCanvas(kind = "overview") {
 
   const cards = [
     ["PUE", "1.32", palette[1]],
-    ["RACKS", "200", palette[2]],
+    ["IT RACKS", "200", palette[2]],
     ["LOAD", "68%", palette[3]],
     ["ALARM", "0", kind === "noc" ? palette[2] : "#35c8ff"]
   ];
@@ -55236,10 +55247,10 @@ function buildDataHall() {
     addBox(root, "cooling-led", hall.x + hall.w / 2 - 1.78, 1.25, hall.z - 17.5 + i * 5.6, 0.05, 1.5, 0.82, materials.blueLed, "ic8000_datahall");
   }
 
-  addLabel("200-cabinet target / 20 IC8000 pods", hall.x, 4.75, hall.z + 21.2, 0.68);
+  addLabel("200 IT cabinets + 6 CDU / 20 IC8000 pods", hall.x, 4.75, hall.z + 21.2, 0.68);
   addBrandPanel(root, "datahall-h3c-header", hall.x, 2.72, hall.z - hall.d / 2 + 0.18, 6.2, 1.18, 0, "ic8000_datahall", {
     headline: "IC8000 Data Hall",
-    subline: "200-cabinet target / 20 pods",
+    subline: "200 IT cabinets + 6 CDU",
     variant: "dark"
   });
   addBrandPanel(root, "datahall-east-h3c-wall", hall.x + hall.w / 2 - 0.08, 2.15, hall.z, 4.8, 1.0, Math.PI / 2, "ic8000_datahall", {
@@ -55292,7 +55303,7 @@ function addIC8000Pod(pod) {
   addBox(group, `${pod.id}-cold-aisle-led`, 0, 2.36, 0, c.w - 0.4, 0.045, 0.08, materials.blueLed, "ic8000_datahall");
   addBrandPanel(group, `${pod.id}-h3c-badge`, 0, 2.72, -0.64, 1.85, 0.48, 0, "ic8000_datahall", {
     headline: `H3C IC8000-${pod.label}`,
-    subline: "10 cabinets / active",
+    subline: "10 IT cabinets / pod",
     compact: true,
     variant: "dark"
   });
@@ -56114,7 +56125,7 @@ function setupCustomerPresentation() {
   const panelTitles = {
     model: "3D Model",
     gallery: "Concept Visuals",
-    reports: "Reports & Documents"
+    reports: "Reports & Presentations"
   };
 
   const tabs = Array.from(document.querySelectorAll("[data-panel]"));
@@ -56161,12 +56172,92 @@ function setupCustomerPresentation() {
 }
 
 function setupReportViewer() {
-  const items = Array.from(document.querySelectorAll(".report-item[data-report-src]"));
+  const items = Array.from(document.querySelectorAll(".report-item[data-report-src], .report-item[data-presentation-id]"));
+  let activeDeck = null;
+  let activeIndex = 0;
+  let touchStartX = null;
+
+  function selectListItem(selected) {
+    items.forEach((item) => item.classList.toggle("is-selected", item === selected));
+  }
+
+  function showReportViewer() {
+    if (reportViewer) reportViewer.hidden = false;
+    if (presentationViewer) presentationViewer.hidden = true;
+  }
+
+  function showPresentationViewer() {
+    if (reportViewer) reportViewer.hidden = true;
+    if (presentationViewer) presentationViewer.hidden = false;
+  }
+
+  function renderSlide(nextIndex) {
+    if (!activeDeck || !Array.isArray(activeDeck.slides) || !activeDeck.slides.length) return;
+    activeIndex = (nextIndex + activeDeck.slides.length) % activeDeck.slides.length;
+    if (presentationImage) {
+      presentationImage.src = activeDeck.slides[activeIndex];
+      presentationImage.alt = `${activeDeck.title} - slide ${activeIndex + 1}`;
+    }
+    if (presentationCounter) presentationCounter.textContent = `${activeIndex + 1} / ${activeDeck.slides.length}`;
+    if (presentationTitle) presentationTitle.textContent = activeDeck.title || "KAYAS Presentation";
+    if (presentationLoading) presentationLoading.hidden = true;
+  }
+
+  function loadDeck(id, scriptSrc) {
+    window.KAYAS_PRESENTATIONS = window.KAYAS_PRESENTATIONS || {};
+    if (window.KAYAS_PRESENTATIONS[id]) return Promise.resolve(window.KAYAS_PRESENTATIONS[id]);
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[data-kayas-deck="${id}"]`);
+      if (existing) {
+        existing.addEventListener("load", () => resolve(window.KAYAS_PRESENTATIONS[id]), { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = scriptSrc;
+      script.async = true;
+      script.dataset.kayasDeck = id;
+      script.onload = () => {
+        const deck = window.KAYAS_PRESENTATIONS[id];
+        if (deck) resolve(deck);
+        else reject(new Error("Presentation data not found"));
+      };
+      script.onerror = () => reject(new Error("Presentation could not be loaded"));
+      document.head.appendChild(script);
+    });
+  }
+
   items.forEach((item) => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", async () => {
+      const presentationId = item.getAttribute("data-presentation-id");
+      if (presentationId) {
+        selectListItem(item);
+        showPresentationViewer();
+        activeDeck = null;
+        activeIndex = 0;
+        if (presentationTitle) presentationTitle.textContent = item.getAttribute("data-report-title") || "KAYAS Presentation";
+        if (presentationCounter) presentationCounter.textContent = "- / -";
+        if (presentationImage) presentationImage.removeAttribute("src");
+        if (presentationLoading) {
+          presentationLoading.hidden = false;
+          presentationLoading.textContent = "Loading presentation…";
+        }
+        try {
+          activeDeck = await loadDeck(presentationId, item.getAttribute("data-presentation-script"));
+          renderSlide(0);
+          if (presentationStage) presentationStage.focus({ preventScroll: true });
+        } catch (error) {
+          if (presentationLoading) {
+            presentationLoading.hidden = false;
+            presentationLoading.textContent = "Presentation could not be loaded.";
+          }
+        }
+        return;
+      }
+
       const src = item.getAttribute("data-report-src");
       const downloadSrc = item.getAttribute("data-report-download") || src;
-      const title = item.getAttribute("data-report-title") || "Rapor";
+      const title = item.getAttribute("data-report-title") || "Report";
       const downloadOnly = item.getAttribute("data-download") === "true";
       if (downloadOnly) {
         const link = document.createElement("a");
@@ -56177,7 +56268,8 @@ function setupReportViewer() {
         link.remove();
         return;
       }
-      items.forEach((button) => button.classList.toggle("is-selected", button === item));
+      selectListItem(item);
+      showReportViewer();
       if (reportViewerTitle) reportViewerTitle.textContent = title;
       if (reportFrame) {
         reportFrame.src = src;
@@ -56188,8 +56280,35 @@ function setupReportViewer() {
         reportDownload.href = downloadSrc;
         reportDownload.setAttribute("download", "");
       }
+      if (reportToolbarActions) reportToolbarActions.hidden = false;
     });
   });
+
+  if (presentationPrev) presentationPrev.addEventListener("click", () => renderSlide(activeIndex - 1));
+  if (presentationNext) presentationNext.addEventListener("click", () => renderSlide(activeIndex + 1));
+  if (presentationFullscreen) {
+    presentationFullscreen.addEventListener("click", () => {
+      if (!presentationStage) return;
+      if (document.fullscreenElement === presentationStage) document.exitFullscreen && document.exitFullscreen();
+      else presentationStage.requestFullscreen && presentationStage.requestFullscreen();
+    });
+  }
+  if (presentationStage) {
+    presentationStage.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") { event.preventDefault(); renderSlide(activeIndex - 1); }
+      if (event.key === "ArrowRight") { event.preventDefault(); renderSlide(activeIndex + 1); }
+    });
+    presentationStage.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientX : null;
+    }, { passive: true });
+    presentationStage.addEventListener("touchend", (event) => {
+      if (touchStartX === null || !event.changedTouches || !event.changedTouches[0]) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(delta) < 45) return;
+      renderSlide(activeIndex + (delta < 0 ? 1 : -1));
+    }, { passive: true });
+  }
 }
 
 function buildGallery() {

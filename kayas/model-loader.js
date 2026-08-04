@@ -133,7 +133,7 @@
   });
 
   var s=document.createElement('script');
-  s.src='src/kayas-3d.bundle.js?v=20260804-walkthrough-rc1';
+  s.src='src/kayas-3d.bundle.js?v=20260804-reports-presentations-r1';
   s.onload=function(){
     var e=document.getElementById('loadStatus');
     if(e)e.hidden=true;
