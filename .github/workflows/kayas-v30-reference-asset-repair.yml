@@ -1,0 +1,116 @@
+name: Validate KAYAS V30 Reference Asset Repair
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - kayas/walkthrough/assets/gallery/gallery_manifest.js
+      - .github/workflows/kayas-v30-reference-asset-repair.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v30-reference-asset-repair
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Static validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/walkthrough/assets/gallery/gallery_manifest.js
+          find kayas/walkthrough -maxdepth 2 -type f -name '*.js' -print0 | xargs -0 -n1 node --check
+          grep -q '20260804-v30-reference-asset-repair' kayas/walkthrough/assets/gallery/gallery_manifest.js
+          grep -q 'ic8000_cold_aisle_left_view.png' kayas/walkthrough/assets/gallery/gallery_manifest.js
+          test -s kayas/walkthrough/assets/gallery/kayas_concept_board.svg
+          grep -q '<strong>20</strong><span>IC8000 pod · 10 kabinet/pod</span>' kayas/walkthrough/index.html
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v30-reference
+          cd /tmp/kayas-v30-reference
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Chromium and WebGL acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v30-reference-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v30-reference/test.js <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={version:'20260804-v30-reference-asset-repair',pass:false,timestamp:new Date().toISOString(),requests:[],responses:[],pageErrors:[],consoleErrors:[],failedRequests:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              await page.addInitScript(()=>localStorage.setItem('kayas_walkthrough_auth_until',String(Date.now()+3600000)));
+              page.on('request',r=>{if(/ic8000_cold_aisle_left_view|kayas_concept_board/.test(r.url()))result.requests.push(r.url());});
+              page.on('response',r=>{if(/ic8000_cold_aisle_left_view|kayas_concept_board/.test(r.url()))result.responses.push({url:r.url(),status:r.status(),contentType:r.headers()['content-type']||''});});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),error:r.failure()?.errorText||'unknown'}));
+              page.on('pageerror',e=>result.pageErrors.push({message:e.message,stack:e.stack||''}));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push({text:m.text(),url:m.location().url||''});});
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v30-reference-asset-repair',{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,null,{timeout:120000});
+              await page.waitForFunction(()=>window.__KAYAS_V30_REFERENCE_ASSET_STATUS?.ready===true,null,{timeout:30000});
+              await page.waitForTimeout(3000);
+              Object.assign(result,await page.evaluate(()=>{
+                const canvas=document.getElementById('scene');
+                return {
+                  guard:window.__KAYAS_V30_REFERENCE_ASSET_STATUS,
+                  modelReady:window.__KAYAS_MODEL_READY===true,
+                  webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl'))),
+                  canvas:{width:canvas?.width||0,height:canvas?.height||0},
+                  layoutMetric:[...document.querySelectorAll('.metric-grid>div')].some(d=>d.textContent.includes('200')&&d.textContent.includes('Kabinet')),
+                  activeView:document.body.dataset.activeView||''
+                };
+              }));
+              result.missingRequests=result.requests.filter(u=>u.includes('ic8000_cold_aisle_left_view.png'));
+              result.fallbackResponses=result.responses.filter(r=>r.url.includes('kayas_concept_board.svg'));
+              result.fatalErrors=result.pageErrors.filter(e=>/SyntaxError|ReferenceError|TypeError|WebGL/i.test(e.message));
+              result.local404=result.consoleErrors.filter(e=>/404/.test(e.text)&&/127\.0\.0\.1/.test(e.url));
+              result.pass=result.modelReady&&result.webgl&&result.canvas.width>500&&result.canvas.height>300&&result.guard?.ready===true&&result.guard.replaced>=1&&result.missingRequests.length===0&&result.fallbackResponses.some(r=>r.status===200&&/image\/svg\+xml/.test(r.contentType))&&result.fatalErrors.length===0&&result.local404.length===0&&result.layoutMetric&&result.activeView==='model';
+              try{await page.screenshot({path:'/tmp/kayas-v30-reference/acceptance.png',fullPage:false,timeout:15000});}catch(error){result.screenshotWarning=error.message;}
+            }catch(error){result.pageErrors.push({message:error.message||String(error),stack:error.stack||''});}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v30-reference/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          cd /tmp/kayas-v30-reference
+          node test.js
+
+      - name: Record acceptance result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v30-reference/status.json; then cp /tmp/kayas-v30-reference/status.json kayas/walkthrough/smoke-status-v30-reference-asset-repair.json; else printf '%s\n' '{"version":"20260804-v30-reference-asset-repair","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v30-reference-asset-repair.json; fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v30-reference-asset-repair.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record KAYAS V30 reference asset repair acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v30-reference/status.json');if(!r.pass){console.error(r);process.exit(1)}console.log('KAYAS_V30_REFERENCE_ASSET_REPAIR=PASS')"
