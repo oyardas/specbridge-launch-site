@@ -1,0 +1,18 @@
+{
+  "version": "20260804-v27-live-dashboards-r1",
+  "pass": true,
+  "validation": "STATIC_NODE_CHECK_AND_CONTRACT_PASS",
+  "browserAcceptance": "NOT_EXECUTED_IN_THIS_BOUNDED_GATE",
+  "sha256": "7590385b201a7f71945e11887aa372d5db20a1f1ae4a5caffe62910c4f014f8b",
+  "sizeBytes": 6203,
+  "assertions": {
+    "syntax": true,
+    "liveStatusPublication": true,
+    "mobileThrottle": true,
+    "visibilityPause": true,
+    "metricContract": true,
+    "uniqueIndexReference": true
+  },
+  "layoutMutation": false,
+  "timestamp": "2026-08-04T01:05:25.501Z"
+}
