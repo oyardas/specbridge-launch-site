@@ -1,0 +1,93 @@
+name: Localize KAYAS V27 Runtime Syntax Failure
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v27-syntax-localization.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v27-syntax-localization
+  cancel-in-progress: true
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run deterministic per-file syntax localization
+        shell: bash
+        run: |
+          set -u
+          mkdir -p /tmp/kayas-v27-syntax
+          FILES=(
+            kayas/walkthrough/model-loader-v19.js
+            kayas/walkthrough/v20-runtime.js
+            kayas/walkthrough/v24-brand.js
+            kayas/walkthrough/v24-investor.js
+            kayas/walkthrough/v25-rack-detail.js
+            kayas/walkthrough/v26-investor-polish.js
+            kayas/walkthrough/v27-live-dashboards.js
+            kayas/walkthrough/app-shell.js
+          )
+          printf '{"version":"20260804-v27-syntax-localization","pass":true,"files":[' > /tmp/kayas-v27-syntax/status.json
+          FIRST=1
+          OVERALL=0
+          for f in "${FILES[@]}"; do
+            OUT=/tmp/kayas-v27-syntax/$(basename "$f").log
+            if test ! -s "$f"; then
+              CODE=2
+              printf 'FILE_MISSING_OR_EMPTY\n' > "$OUT"
+            else
+              node --check "$f" > "$OUT" 2>&1
+              CODE=$?
+            fi
+            if test "$CODE" -ne 0; then OVERALL=1; fi
+            if test "$FIRST" -eq 0; then printf ',' >> /tmp/kayas-v27-syntax/status.json; fi
+            FIRST=0
+            node -e "const fs=require('fs');const p=process.argv[1],c=Number(process.argv[2]),o=fs.readFileSync(process.argv[3],'utf8');process.stdout.write(JSON.stringify({path:p,pass:c===0,exitCode:c,output:o.slice(0,4000)}));" "$f" "$CODE" "$OUT" >> /tmp/kayas-v27-syntax/status.json
+          done
+          printf '],"indexReferences":{' >> /tmp/kayas-v27-syntax/status.json
+          node - <<'NODE' >> /tmp/kayas-v27-syntax/status.json
+          const fs=require('fs');
+          const html=fs.readFileSync('kayas/walkthrough/index.html','utf8');
+          const refs=['v25-rack-detail.js','v26-investor-polish.js','v27-live-dashboards.js'];
+          const result={};
+          for(const ref of refs) result[ref]=(html.match(new RegExp(ref.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'))||[]).length;
+          process.stdout.write(JSON.stringify(result).slice(1,-1));
+NODE
+          printf '},"metricTruth":' >> /tmp/kayas-v27-syntax/status.json
+          if grep -q '<strong>20</strong><span>IC8000 pod · 10 kabinet/pod</span>' kayas/walkthrough/index.html; then printf 'true' >> /tmp/kayas-v27-syntax/status.json; else printf 'false' >> /tmp/kayas-v27-syntax/status.json; OVERALL=1; fi
+          printf ',"overallExitCode":%s}' "$OVERALL" >> /tmp/kayas-v27-syntax/status.json
+          node -e "const fs=require('fs');const p='/tmp/kayas-v27-syntax/status.json';const r=JSON.parse(fs.readFileSync(p));r.pass=r.overallExitCode===0&&Object.values(r.indexReferences).every(v=>v===1)&&r.metricTruth===true;fs.writeFileSync(p,JSON.stringify(r,null,2));console.log(JSON.stringify(r,null,2));"
+
+      - name: Record localization result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v27-syntax/status.json; then
+            cp /tmp/kayas-v27-syntax/status.json kayas/walkthrough/smoke-status-v27-syntax.json
+          else
+            printf '%s\n' '{"version":"20260804-v27-syntax-localization","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v27-syntax.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v27-syntax.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record KAYAS V27 syntax localization [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Enforce syntax gate
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v27-syntax/status.json'); if(!r.pass){console.error(r);process.exit(1)} console.log('KAYAS_V27_SYNTAX_LOCALIZATION=PASS')"
