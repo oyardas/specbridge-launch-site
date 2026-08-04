@@ -1,10 +1,27 @@
 (function(){
   'use strict';
-  var VERSION='20260804-v30-reference-asset-repair';
+  var VERSION='20260804-v30-reference-asset-repair-r1';
   var MISSING='assets/reference/ic8000_cold_aisle_left_view.png';
   var FALLBACK='assets/gallery/kayas_concept_board.svg?v='+VERSION;
   var state={ready:false,replaced:0,missing:MISSING,fallback:FALLBACK,errors:[]};
+  var latestSnapshot=null;
   function shouldReplace(value){return String(value||'').indexOf(MISSING)!==-1;}
+  function publish(){
+    latestSnapshot=Object.assign({},state,{version:VERSION});
+    try{
+      Object.defineProperty(window,'__KAYAS_V30_REFERENCE_ASSET_STATUS',{
+        configurable:true,
+        enumerable:false,
+        get:function(){return latestSnapshot;}
+      });
+    }catch(error){
+      window.__KAYAS_V30_REFERENCE_ASSET_STATUS=latestSnapshot;
+    }
+    if(document.documentElement){
+      document.documentElement.dataset.kayasV30ReferenceAssetReady=state.ready?'true':'false';
+      document.documentElement.dataset.kayasV30ReferenceAssetReplaced=String(state.replaced);
+    }
+  }
   try{
     var descriptor=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src');
     if(descriptor&&descriptor.get&&descriptor.set&&!HTMLImageElement.prototype.__kayasV30ReferenceGuard){
@@ -29,7 +46,6 @@
     }
     state.ready=true;
   }catch(error){state.errors.push(error&&error.stack||error&&error.message||String(error));}
-  function publish(){window.__KAYAS_V30_REFERENCE_ASSET_STATUS=Object.assign({},state,{version:VERSION});}
   publish();
 })();
 
