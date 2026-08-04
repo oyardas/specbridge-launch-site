@@ -3,6 +3,10 @@
 
   var DATA_URL='data/kayas-project-data.json?v=20260804-dynamic-r1';
   var data=null;
+  var observer=null;
+  var observerConfig={subtree:true,childList:true,characterData:true};
+  var applyQueued=false;
+  var isApplying=false;
 
   function readProjectData(){
     try{
@@ -40,12 +44,13 @@
 
   function replaceTextNode(node,map){
     if(!node||node.nodeType!==3)return;
-    var value=node.nodeValue;
-    if(!value)return;
+    var original=node.nodeValue;
+    if(!original)return;
+    var next=original;
     Object.keys(map).forEach(function(from){
-      if(value.indexOf(from)!==-1)value=value.split(from).join(map[from]);
+      if(next.indexOf(from)!==-1)next=next.split(from).join(map[from]);
     });
-    node.nodeValue=value;
+    if(next!==original)node.nodeValue=next;
   }
 
   function walkAndReplace(root){
@@ -56,39 +61,57 @@
     while((node=walker.nextNode()))replaceTextNode(node,map);
   }
 
+  function setTextIfChanged(element,value){
+    if(element&&element.textContent!==value)element.textContent=value;
+  }
+
   function applyMetrics(){
     var c=capacity();
     if(!c.itCabinetsTotal)return;
 
     var titleLine=document.querySelector('.app-title-block span');
-    if(titleLine)titleLine.textContent=c.headerLine||replacements()['20 IC8000 pods × 10 cabinets · 110 m × 46 m'];
+    setTextIfChanged(titleLine,c.headerLine||replacements()['20 IC8000 pods × 10 cabinets · 110 m × 46 m']);
 
     var metricGrid=document.querySelector('.metric-grid');
     if(metricGrid){
       var cards=metricGrid.querySelectorAll(':scope > div');
+      var existingCduCard=null;
+
       Array.prototype.forEach.call(cards,function(card){
         var label=card.querySelector('span');
         var value=card.querySelector('strong');
         if(!label||!value)return;
-        if(label.textContent.indexOf('Kabinet hedefi')!==-1){
-          value.textContent=String(c.itCabinetsTotal);
-          label.textContent='IT kabinet hedefi';
+        var labelText=label.textContent||'';
+
+        if(labelText.indexOf('Kabinet hedefi')!==-1||labelText.indexOf('IT cabinet target')!==-1||labelText.indexOf('IT kabinet hedefi')!==-1){
+          setTextIfChanged(value,String(c.itCabinetsTotal));
+          setTextIfChanged(label,'IT cabinet target');
         }
-        if(label.textContent.indexOf('IC8000 pod')!==-1){
-          value.textContent=String(c.ic8000Pods);
-          label.textContent='IC8000 pod · '+c.itCabinetsPerPod+' IT kabinet/pod';
+
+        if(labelText.indexOf('IC8000 pod')!==-1){
+          setTextIfChanged(value,String(c.ic8000Pods));
+          setTextIfChanged(label,'IC8000 pod · '+c.itCabinetsPerPod+' IT cabinets/pod');
+        }
+
+        if(labelText.toLowerCase().indexOf('cdu')!==-1){
+          existingCduCard=card;
         }
       });
 
-      if(!metricGrid.querySelector('[data-kayas-dynamic="cdu"]')){
+      if(existingCduCard){
+        existingCduCard.setAttribute('data-kayas-dynamic','cdu');
+        setTextIfChanged(existingCduCard.querySelector('strong'),String(c.cduCabinets));
+        setTextIfChanged(existingCduCard.querySelector('span'),'CDU cabinets · auxiliary');
+      }else{
         var cduCard=document.createElement('div');
         cduCard.setAttribute('data-kayas-dynamic','cdu');
-        cduCard.innerHTML='<strong>'+c.cduCabinets+'</strong><span>CDU kabineti · yardımcı altyapı</span>';
-        var podCard=Array.prototype.find.call(metricGrid.children,function(card){
-          var label=card.querySelector&&card.querySelector('span');
-          return label&&label.textContent.indexOf('IC8000 pod')!==-1;
-        });
-        if(podCard&&podCard.nextSibling)metricGrid.insertBefore(cduCard,podCard.nextSibling);else metricGrid.appendChild(cduCard);
+        cduCard.innerHTML='<strong>'+c.cduCabinets+'</strong><span>CDU cabinets · auxiliary</span>';
+        metricGrid.appendChild(cduCard);
+      }
+
+      var duplicateCduCards=metricGrid.querySelectorAll('[data-kayas-dynamic="cdu"]');
+      for(var i=1;i<duplicateCduCards.length;i++){
+        duplicateCduCards[i].parentNode.removeChild(duplicateCduCards[i]);
       }
 
       if(!document.querySelector('.cdu-scope-note')){
@@ -103,6 +126,27 @@
   function applyAll(){
     walkAndReplace(document.body);
     applyMetrics();
+  }
+
+  function applyAllSafely(){
+    if(isApplying)return;
+    isApplying=true;
+    if(observer)observer.disconnect();
+    try{
+      applyAll();
+    }finally{
+      isApplying=false;
+      if(observer&&document.body)observer.observe(document.body,observerConfig);
+    }
+  }
+
+  function scheduleApply(){
+    if(applyQueued)return;
+    applyQueued=true;
+    window.setTimeout(function(){
+      applyQueued=false;
+      applyAllSafely();
+    },50);
   }
 
   function patchSpeech(){
@@ -126,18 +170,20 @@
   patchSpeech();
 
   document.addEventListener('DOMContentLoaded',function(){
-    applyAll();
-    var observer=new MutationObserver(function(){applyAll();});
-    observer.observe(document.body,{subtree:true,childList:true,characterData:true});
-    window.KAYAS_applyProjectData=applyAll;
+    applyAllSafely();
+    observer=new MutationObserver(function(){
+      if(!isApplying)scheduleApply();
+    });
+    observer.observe(document.body,observerConfig);
+    window.KAYAS_applyProjectData=applyAllSafely;
   });
 
   var s=document.createElement('script');
-  s.src='src/kayas-3d.bundle.js?v=20260804-reports-presentations-r1';
+  s.src='src/kayas-3d.bundle.js?v=20260804-reports-presentations-r1-repair1';
   s.onload=function(){
     var e=document.getElementById('loadStatus');
     if(e)e.hidden=true;
-    applyAll();
+    applyAllSafely();
     window.dispatchEvent(new Event('resize'));
   };
   s.onerror=function(){
