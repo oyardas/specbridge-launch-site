@@ -1,3 +1,38 @@
+(function(){
+  'use strict';
+  var VERSION='20260804-v30-reference-asset-repair';
+  var MISSING='assets/reference/ic8000_cold_aisle_left_view.png';
+  var FALLBACK='assets/gallery/kayas_concept_board.svg?v='+VERSION;
+  var state={ready:false,replaced:0,missing:MISSING,fallback:FALLBACK,errors:[]};
+  function shouldReplace(value){return String(value||'').indexOf(MISSING)!==-1;}
+  try{
+    var descriptor=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src');
+    if(descriptor&&descriptor.get&&descriptor.set&&!HTMLImageElement.prototype.__kayasV30ReferenceGuard){
+      Object.defineProperty(HTMLImageElement.prototype,'src',{
+        configurable:descriptor.configurable,
+        enumerable:descriptor.enumerable,
+        get:descriptor.get,
+        set:function(value){
+          if(shouldReplace(value)){value=FALLBACK;state.replaced+=1;publish();}
+          return descriptor.set.call(this,value);
+        }
+      });
+      HTMLImageElement.prototype.__kayasV30ReferenceGuard=true;
+    }
+    var nativeSetAttribute=HTMLImageElement.prototype.setAttribute;
+    if(!HTMLImageElement.prototype.__kayasV30ReferenceAttributeGuard){
+      HTMLImageElement.prototype.setAttribute=function(name,value){
+        if(String(name).toLowerCase()==='src'&&shouldReplace(value)){value=FALLBACK;state.replaced+=1;publish();}
+        return nativeSetAttribute.call(this,name,value);
+      };
+      HTMLImageElement.prototype.__kayasV30ReferenceAttributeGuard=true;
+    }
+    state.ready=true;
+  }catch(error){state.errors.push(error&&error.stack||error&&error.message||String(error));}
+  function publish(){window.__KAYAS_V30_REFERENCE_ASSET_STATUS=Object.assign({},state,{version:VERSION});}
+  publish();
+})();
+
 window.KAYAS_GALLERY_DATA={
   project:"KAYAS OSB Data Center Investor Visuals",
   version:"20260803-v24-investor-model",
