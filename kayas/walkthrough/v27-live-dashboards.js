@@ -1,13 +1,14 @@
 (function(){
 'use strict';
 
-const VERSION='20260804-v27-live-dashboards';
-const state={ready:false,screens:0,textures:0,frames:0,errors:[]};
+const VERSION='20260804-v27-live-dashboards-r1';
+const state={ready:false,screens:0,textures:0,frames:0,lastFrameAt:0,errors:[]};
 const dashboards=[];
 let raf=0;
 
 function engine(){return {THREE:window.THREE,scene:window.__KAYAS_SCENE__};}
 function nameOf(o){return String(o&&o.name||'').toLowerCase();}
+function publish(){window.__KAYAS_V27_STATUS={...state,version:VERSION};}
 
 function drawDashboard(entry,time){
   const {canvas,ctx,index,texture}=entry;
@@ -54,6 +55,7 @@ function drawDashboard(entry,time){
 function makeTexture(THREE,index){
   const canvas=document.createElement('canvas');canvas.width=768;canvas.height=480;
   const ctx=canvas.getContext('2d');
+  if(!ctx)throw new Error('DASHBOARD_2D_CONTEXT_UNAVAILABLE');
   const texture=new THREE.CanvasTexture(canvas);
   if(THREE.SRGBColorSpace)texture.colorSpace=THREE.SRGBColorSpace;
   texture.anisotropy=8;texture.needsUpdate=true;
@@ -77,12 +79,12 @@ function applyToScreen(THREE,mesh,index){
   if(mesh.userData&&mesh.userData.kayasV27Dashboard)return false;
   const texture=makeTexture(THREE,index);
   const materials=Array.isArray(mesh.material)?mesh.material:[mesh.material];
-  mesh.material=materials.map(old=>{
-    const m=new THREE.MeshStandardMaterial({map:texture,color:0xffffff,roughness:.16,metalness:.08,emissive:0xffffff,emissiveMap:texture,emissiveIntensity:.72,toneMapped:true});
-    if(old&&old.side!==undefined)m.side=old.side;
-    return m;
+  const replacements=materials.map(old=>{
+    const material=new THREE.MeshStandardMaterial({map:texture,color:0xffffff,roughness:.16,metalness:.08,emissive:0xffffff,emissiveMap:texture,emissiveIntensity:.72,toneMapped:true});
+    if(old&&old.side!==undefined)material.side=old.side;
+    return material;
   });
-  if(mesh.material.length===1)mesh.material=mesh.material[0];
+  mesh.material=replacements.length===1?replacements[0]:replacements;
   mesh.userData=mesh.userData||{};mesh.userData.kayasV27Dashboard=true;
   state.screens++;
   return true;
@@ -90,7 +92,11 @@ function applyToScreen(THREE,mesh,index){
 
 function animate(time){
   state.frames++;
-  if(state.frames%3===0)dashboards.forEach(entry=>drawDashboard(entry,time));
+  state.lastFrameAt=Math.round(time);
+  const mobile=window.matchMedia&&window.matchMedia('(max-width: 900px)').matches;
+  const redrawEvery=mobile?8:3;
+  if(!document.hidden&&state.frames%redrawEvery===0)dashboards.forEach(entry=>drawDashboard(entry,time));
+  if(state.frames%30===0)publish();
   raf=requestAnimationFrame(animate);
 }
 
@@ -99,7 +105,7 @@ function install(){
   const timer=setInterval(()=>{
     attempts++;
     if(window.__KAYAS_MODEL_READY!==true||window.__KAYAS_V26_STATUS?.ready!==true){
-      if(attempts>600){clearInterval(timer);state.errors.push('MODEL_OR_V26_TIMEOUT');window.__KAYAS_V27_STATUS={...state,version:VERSION};}
+      if(attempts>600){clearInterval(timer);state.errors.push('MODEL_OR_V26_TIMEOUT');publish();}
       return;
     }
     const {THREE,scene}=engine();if(!THREE||!scene)return;
@@ -108,9 +114,8 @@ function install(){
       const screens=collectScreens(scene);
       screens.slice(0,48).forEach((screen,index)=>applyToScreen(THREE,screen,index));
       if(state.screens===0)state.errors.push('NO_SCREEN_MESHES_FOUND');
-      else{state.ready=true;animate(performance.now());}
-    }catch(error){state.errors.push(error.stack||error.message||String(error));}
-    window.__KAYAS_V27_STATUS={...state,version:VERSION};
+      else{state.ready=true;publish();animate(performance.now());}
+    }catch(error){state.errors.push(error.stack||error.message||String(error));publish();}
   },250);
 }
 
