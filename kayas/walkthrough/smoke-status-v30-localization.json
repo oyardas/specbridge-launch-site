@@ -1,0 +1,546 @@
+{
+  "version": "20260804-v30-browser-error-localization",
+  "pass": false,
+  "timestamp": "2026-08-04T06:33:28.997Z",
+  "pageErrors": [
+    {
+      "message": "Invalid or unexpected token",
+      "stack": ""
+    },
+    {
+      "message": "page.screenshot: Timeout 60000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n",
+      "stack": "page.screenshot: Timeout 60000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n\n    at /tmp/kayas-v30/localize.js:74:16"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v24-investor-v1",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_contact_sheet.webp",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/reference/ic8000_cold_aisle_left_view.png",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "location": {
+        "url": "https://drive.google.com/file/d/1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve/preview",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "runtimeExceptions": [
+    {
+      "text": "Uncaught",
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/v24-brand.js?v=20260803-v24-investor-v1",
+      "lineNumber": 2,
+      "columnNumber": 11,
+      "scriptId": "8",
+      "exception": "SyntaxError: Invalid or unexpected token",
+      "stackTrace": null
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v24-investor-v1",
+      "status": 404,
+      "resourceType": "image",
+      "contentType": "text/html;charset=utf-8"
+    },
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf",
+      "status": 404,
+      "resourceType": "document",
+      "contentType": "text/html;charset=utf-8"
+    },
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_contact_sheet.webp",
+      "status": 404,
+      "resourceType": "image",
+      "contentType": "text/html;charset=utf-8"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve/preview",
+      "status": 401,
+      "resourceType": "document",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/reference/ic8000_cold_aisle_left_view.png",
+      "status": 404,
+      "resourceType": "image",
+      "contentType": "text/html;charset=utf-8"
+    }
+  ],
+  "failedRequests": [],
+  "login": {
+    "gateExists": true,
+    "userExists": true,
+    "passExists": true,
+    "buttonExists": true,
+    "gateHidden": false,
+    "gateDisplay": "grid",
+    "gateVisibility": "visible",
+    "gateOpacity": "1",
+    "userRect": {
+      "x": 582,
+      "y": 449.578125,
+      "width": 372,
+      "height": 45.390625,
+      "top": 449.578125,
+      "right": 954,
+      "bottom": 494.96875,
+      "left": 582
+    },
+    "passRect": {
+      "x": 582,
+      "y": 533.359375,
+      "width": 372,
+      "height": 45.390625,
+      "top": 533.359375,
+      "right": 954,
+      "bottom": 578.75,
+      "left": 582
+    }
+  },
+  "document": {
+    "readyState": "complete",
+    "bodyClass": "is-night k24-investor-mode k26-investor-polish",
+    "activeView": "model",
+    "theme": "dark",
+    "loginHidden": false,
+    "loadStatusHidden": true,
+    "loadStatusText": "\n      \n      3D sahne yüklenemedi\n      Uncaught SyntaxError: Invalid or unexpected token\n    ",
+    "canvas": {
+      "width": 1536,
+      "height": 960
+    },
+    "webgl": true
+  },
+  "scripts": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v23-investor.js?v=20260803-v23-investor-v1",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v24-investor-model.js?v=20260803-v24-investor-model",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 2,
+      "src": "",
+      "type": "",
+      "length": 267
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/gallery_manifest.js?v=20260803-v24-investor-v1",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/model-loader-v19.js?v=20260803-v19-final",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v20-runtime.js?v=20260803-v20-2-cinematic",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v24-brand.js?v=20260803-v24-investor-v1",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 7,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v24-investor.js?v=20260803-v24-investor-v1",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 8,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v25-rack-detail.js?v=20260803-v25-rack-detail",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 9,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v26-investor-polish.js?v=20260803-v26-investor-polish",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 10,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v27-live-dashboards.js?v=20260804-v27-live-dashboards-r1",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 11,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v28-dynamic-scale.js?v=20260804-v28-dynamic-scale",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 12,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v29-asset-resilience.js?v=20260804-v29-asset-resilience",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 13,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/app-shell.js?v=20260803-v21-professional",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 14,
+      "src": "http://127.0.0.1:8000/kayas/walkthrough/v21-runtime.js?v=20260803-v21-professional",
+      "type": "",
+      "length": 0
+    },
+    {
+      "index": 15,
+      "src": "blob:http://127.0.0.1:8000/7164e685-d9a6-4481-8fcc-928bbc57fe41",
+      "type": "",
+      "length": 0
+    }
+  ],
+  "statusObjects": {
+    "modelReady": true,
+    "v24": {
+      "ready": true,
+      "view": "model",
+      "theme": "dark",
+      "hiddenObjects": 52,
+      "treatedMaterials": 1039,
+      "logoImages": 0,
+      "errors": [],
+      "version": "20260803-v24-investor-v1"
+    },
+    "v25": {
+      "ready": true,
+      "racks": 200,
+      "facades": 200,
+      "logos": 200,
+      "errors": [],
+      "version": "20260803-v25-rack-detail"
+    },
+    "v26": {
+      "ready": true,
+      "hiddenPrimitive": 38,
+      "hiddenDebug": 23,
+      "topViewApplied": false,
+      "errors": [],
+      "version": "20260803-v26-investor-polish"
+    },
+    "v27": {
+      "ready": true,
+      "screens": 48,
+      "textures": 48,
+      "frames": 30,
+      "lastFrameAt": 145584,
+      "errors": [],
+      "version": "20260804-v27-live-dashboards-r1"
+    },
+    "v28": {
+      "ready": true,
+      "updates": 2,
+      "lastMeters": 20,
+      "lastPixels": 167,
+      "errors": [],
+      "version": "20260804-v28-dynamic-scale"
+    },
+    "v29": {
+      "ready": true,
+      "observed": 6,
+      "recovered": 1,
+      "healthy": 4,
+      "errors": [],
+      "version": "20260804-v29-asset-resilience"
+    }
+  },
+  "static": {
+    "version": "20260804-v30-browser-error-localization",
+    "files": [
+      {
+        "path": "kayas/walkthrough/app-shell.js",
+        "size": 17146,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/engine-capture-v19.js",
+        "size": 3748,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/model-loader-v19.js",
+        "size": 3902,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/model-loader.js",
+        "size": 2619,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v19-runtime.js",
+        "size": 34682,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v20-runtime.js",
+        "size": 34682,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v21-runtime.js",
+        "size": 15867,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v23-investor.js",
+        "size": 10726,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v24-brand.js",
+        "size": 193794,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": false,
+          "exitCode": 1,
+          "output": "/home/runner/work/specbridge-launch-site/specbridge-launch-site/kayas/walkthrough/v24-brand.js:3\nconst DATA='data:image/png;base64,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"
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v24-investor-model.js",
+        "size": 11936,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v24-investor.js",
+        "size": 12267,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v25-rack-detail.js",
+        "size": 5999,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v26-investor-polish.js",
+        "size": 4732,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v27-live-dashboards.js",
+        "size": 6203,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v28-dynamic-scale.js",
+        "size": 2896,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "path": "kayas/walkthrough/v29-asset-resilience.js",
+        "size": 3238,
+        "nulBytes": 0,
+        "utf8": true,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      }
+    ],
+    "inline": [
+      {
+        "index": 0,
+        "src": null,
+        "inline": true,
+        "length": 267,
+        "syntax": {
+          "pass": true,
+          "exitCode": 0,
+          "output": ""
+        }
+      },
+      {
+        "index": 1,
+        "src": "assets/gallery/gallery_manifest.js?v=20260803-v24-investor-v1",
+        "inline": false
+      },
+      {
+        "index": 2,
+        "src": "model-loader-v19.js?v=20260803-v19-final",
+        "inline": false
+      },
+      {
+        "index": 3,
+        "src": "v20-runtime.js?v=20260803-v20-2-cinematic",
+        "inline": false
+      },
+      {
+        "index": 4,
+        "src": "v24-brand.js?v=20260803-v24-investor-v1",
+        "inline": false
+      },
+      {
+        "index": 5,
+        "src": "v24-investor.js?v=20260803-v24-investor-v1",
+        "inline": false
+      },
+      {
+        "index": 6,
+        "src": "v25-rack-detail.js?v=20260803-v25-rack-detail",
+        "inline": false
+      },
+      {
+        "index": 7,
+        "src": "v26-investor-polish.js?v=20260803-v26-investor-polish",
+        "inline": false
+      },
+      {
+        "index": 8,
+        "src": "v27-live-dashboards.js?v=20260804-v27-live-dashboards-r1",
+        "inline": false
+      },
+      {
+        "index": 9,
+        "src": "v28-dynamic-scale.js?v=20260804-v28-dynamic-scale",
+        "inline": false
+      },
+      {
+        "index": 10,
+        "src": "v29-asset-resilience.js?v=20260804-v29-asset-resilience",
+        "inline": false
+      },
+      {
+        "index": 11,
+        "src": "app-shell.js?v=20260803-v21-professional",
+        "inline": false
+      }
+    ]
+  }
+}
