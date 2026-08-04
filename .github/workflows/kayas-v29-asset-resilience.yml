@@ -1,0 +1,97 @@
+name: Activate and Validate KAYAS V29 Asset Resilience
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - kayas/walkthrough/v29-asset-resilience.js
+      - .github/workflows/kayas-v29-asset-resilience.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v29-asset-resilience
+  cancel-in-progress: true
+
+jobs:
+  activate-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Activate V29 and run static contract checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/walkthrough/v29-asset-resilience.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('kayas/walkthrough/index.html')
+          t=p.read_text(encoding='utf-8')
+          t=re.sub(r'\s*<script[^>]+src="v29-asset-resilience\.js\?v=[^"]+"[^>]*></script>','',t)
+          anchor=re.search(r'\s*<script defer src="app-shell\.js\?v=[^"]+"></script>',t)
+          if not anchor: raise SystemExit('app-shell anchor missing')
+          s='  <script defer src="v29-asset-resilience.js?v=20260804-v29-asset-resilience"></script>\n'
+          t=t[:anchor.start()]+'\n'+s+t[anchor.start():]
+          if t.count('v29-asset-resilience.js?v=20260804-v29-asset-resilience') != 1: raise SystemExit('V29 reference count invalid')
+          if '20</strong><span>IC8000 pod · 10 kabinet/pod' not in t: raise SystemExit('authoritative pod metric changed')
+          p.write_text(t,encoding='utf-8')
+          PY
+          grep -q 'MutationObserver' kayas/walkthrough/v29-asset-resilience.js
+          grep -q 'data:image/svg+xml' kayas/walkthrough/v29-asset-resilience.js
+          grep -q '__KAYAS_V29_STATUS' kayas/walkthrough/v29-asset-resilience.js
+
+      - name: Install browser
+        shell: bash
+        run: |
+          mkdir -p /tmp/kayas-v29 && cd /tmp/kayas-v29
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run Chromium WebGL acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v29-http.log 2>&1 &
+          pid=$!; trap 'kill $pid || true' EXIT; sleep 2
+          cat >/tmp/kayas-v29/test.js <<'JS'
+          const {chromium}=require('playwright');const fs=require('fs');
+          (async()=>{const r={version:'20260804-v29-asset-resilience',pass:false,timestamp:new Date().toISOString(),pageErrors:[],consoleErrors:[]};let b;
+          try{b=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});const p=await b.newPage({viewport:{width:1366,height:768}});p.on('pageerror',e=>r.pageErrors.push({message:e.message,stack:e.stack||''}));p.on('console',m=>{if(m.type()==='error')r.consoleErrors.push(m.text())});await p.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v29-asset-resilience',{waitUntil:'domcontentloaded',timeout:30000});if(await p.locator('#loginGate').isVisible().catch(()=>false)){await p.fill('#loginUser','kayas');await p.fill('#loginPass','verimerkezi');await p.click('#loginButton');}await p.waitForFunction(()=>window.__KAYAS_V29_STATUS?.ready===true,null,{timeout:60000});await p.waitForTimeout(1500);Object.assign(r,await p.evaluate(()=>{const s=window.__KAYAS_V29_STATUS;const c=document.getElementById('scene');return {status:s,activeView:document.body.dataset.activeView,webgl:!!(c&&(c.getContext('webgl2')||c.getContext('webgl'))),broken:[...document.querySelectorAll('.h3c-wordmark-logo img,.gallery-hero-image img,.gallery-grid img')].filter(i=>i.complete&&i.naturalWidth===0).length,fallbacks:document.querySelectorAll('[data-asset-state="fallback"]').length};}));r.pass=r.status?.ready===true&&r.status.errors.length===0&&r.broken===0&&r.webgl===true&&r.activeView==='model';await p.screenshot({path:'/tmp/kayas-v29/acceptance.png',timeout:10000});}catch(e){r.pageErrors.push({message:e.message,stack:e.stack||''});}finally{if(b)await b.close();fs.writeFileSync('/tmp/kayas-v29/status.json',JSON.stringify(r,null,2));console.log(JSON.stringify(r,null,2));}})();
+          JS
+          cd /tmp/kayas-v29 && node test.js
+
+      - name: Record exact result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v29/status.json; then cp /tmp/kayas-v29/status.json kayas/walkthrough/smoke-status-v29.json; else printf '%s\n' '{"version":"20260804-v29-asset-resilience","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v29.json; fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v29.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Activate KAYAS V29 asset resilience and record acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v29-asset-resilience-acceptance
+          path: |
+            /tmp/kayas-v29/status.json
+            /tmp/kayas-v29/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: node -e "const r=require('/tmp/kayas-v29/status.json');if(!r.pass)process.exit(1)"
