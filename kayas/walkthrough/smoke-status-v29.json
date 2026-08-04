@@ -1,0 +1,22 @@
+{
+  "version": "20260804-v29-asset-resilience",
+  "pass": false,
+  "timestamp": "2026-08-04T03:02:33.566Z",
+  "pageErrors": [
+    {
+      "message": "Invalid or unexpected token",
+      "stack": ""
+    },
+    {
+      "message": "page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#loginPass')\n    - locator resolved to <input id=\"loginPass\" type=\"password\" autocomplete=\"current-password\"/>\n",
+      "stack": "page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#loginPass')\n    - locator resolved to <input id=\"loginPass\" type=\"password\" autocomplete=\"current-password\"/>\n\n    at /tmp/kayas-v29/test.js:3:600"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ]
+}
