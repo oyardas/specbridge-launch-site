@@ -1,0 +1,148 @@
+name: Repair and Validate KAYAS V30 Gallery Asset
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v30-gallery-asset-repair.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v30-gallery-asset-repair
+  cancel-in-progress: true
+
+jobs:
+  repair-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply bounded gallery reference repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('kayas/walkthrough/index.html')
+          text=p.read_text(encoding='utf-8')
+          old_a='assets/gallery/kayas_concept_contact_sheet.webp?v=20260803-v24-investor-v1'
+          old_b='assets/gallery/kayas_concept_contact_sheet.webp'
+          new='assets/gallery/kayas_concept_board.svg?v=20260804-v30-gallery-repair'
+          before=text.count('kayas_concept_contact_sheet.webp')
+          text=text.replace(old_a,new).replace(old_b,new)
+          after=text.count('kayas_concept_contact_sheet.webp')
+          if before != 2 or after != 0:
+              raise SystemExit(f'UNEXPECTED_GALLERY_REFERENCE_COUNT before={before} after={after}')
+          if text.count(new) != 2:
+              raise SystemExit('REPAIRED_REFERENCE_COUNT_NOT_TWO')
+          p.write_text(text,encoding='utf-8')
+          PY
+          test -s kayas/walkthrough/assets/gallery/kayas_concept_board.svg
+          grep -q 'kayas_concept_board.svg?v=20260804-v30-gallery-repair' kayas/walkthrough/index.html
+          ! grep -q 'kayas_concept_contact_sheet.webp' kayas/walkthrough/index.html
+
+      - name: Run static syntax checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          find kayas/walkthrough -maxdepth 2 -type f -name '*.js' -print0 | while IFS= read -r -d '' file; do
+            node --check "$file"
+          done
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v30-gallery
+          cd /tmp/kayas-v30-gallery
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run Chromium WebGL acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v30-gallery-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v30-gallery/test.js <<'JS'
+          const { chromium }=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={version:'20260804-v30-gallery-repair',pass:false,timestamp:new Date().toISOString(),pageErrors:[],consoleErrors:[],responses:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.pageErrors.push({message:e.message,stack:e.stack||''}));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push({text:m.text(),location:m.location()})});
+              page.on('response',async r=>{const u=r.url();if(/kayas_concept_(contact_sheet|board)/.test(u))result.responses.push({url:u,status:r.status(),contentType:r.headers()['content-type']||''});});
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v30-gallery-repair',{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,null,{timeout:120000});
+              await page.waitForTimeout(1500);
+              Object.assign(result,await page.evaluate(()=>{
+                const canvas=document.getElementById('scene');
+                const hero=document.getElementById('galleryHero');
+                const lightbox=document.getElementById('lightboxImage');
+                return {
+                  modelReady:window.__KAYAS_MODEL_READY===true,
+                  webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl'))),
+                  canvas:{width:canvas?.width||0,height:canvas?.height||0},
+                  hero:{src:hero?.currentSrc||hero?.src||'',loaded:!!(hero&&hero.complete&&hero.naturalWidth>0)},
+                  lightbox:{src:lightbox?.currentSrc||lightbox?.src||'',loaded:!!(lightbox&&lightbox.complete&&lightbox.naturalWidth>0)},
+                  syntaxErrors:result?.pageErrors||[]
+                };
+              }));
+              const galleryResponses=result.responses.filter(r=>/kayas_concept_board/.test(r.url));
+              const legacyResponses=result.responses.filter(r=>/contact_sheet/.test(r.url));
+              const fatal=result.pageErrors.filter(e=>/SyntaxError|Invalid or unexpected token|ReferenceError|TypeError/i.test(e.message));
+              result.pass=result.modelReady&&result.webgl&&result.canvas.width>500&&result.canvas.height>300&&result.hero.loaded&&result.lightbox.loaded&&galleryResponses.length>=1&&galleryResponses.every(r=>r.status===200&&/image\/svg\+xml/.test(r.contentType))&&legacyResponses.length===0&&fatal.length===0;
+              await page.screenshot({path:'/tmp/kayas-v30-gallery/acceptance.png',fullPage:true});
+            }catch(error){result.pageErrors.push({message:error.message||String(error),stack:error.stack||''});}
+            finally{if(browser)await browser.close();fs.writeFileSync('/tmp/kayas-v30-gallery/status.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}
+          })();
+          JS
+          cd /tmp/kayas-v30-gallery
+          node test.js
+
+      - name: Record exact evidence and activate repair
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v30-gallery/status.json; then
+            cp /tmp/kayas-v30-gallery/status.json kayas/walkthrough/smoke-status-v30-gallery-repair.json
+          else
+            printf '%s\n' '{"version":"20260804-v30-gallery-repair","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v30-gallery-repair.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v30-gallery-repair.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Repair KAYAS V30 gallery asset references and record acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v30-gallery/status.json');if(!r.pass){console.error(r);process.exit(1)}console.log('KAYAS_V30_GALLERY_REPAIR=PASS')"
+
+      - name: Upload acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v30-gallery-repair-evidence
+          path: |
+            /tmp/kayas-v30-gallery/status.json
+            /tmp/kayas-v30-gallery/acceptance.png
+          if-no-files-found: warn
