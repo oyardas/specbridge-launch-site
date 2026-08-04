@@ -1,0 +1,217 @@
+name: Localize KAYAS V30 Browser Error
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kayas-v30-browser-error-localization.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v30-browser-error-localization
+  cancel-in-progress: true
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate local JavaScript and inline scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v30/static
+          find kayas/walkthrough -maxdepth 2 -type f -name '*.js' -print0 | sort -z | while IFS= read -r -d '' file; do
+            out="/tmp/kayas-v30/static/$(echo "$file" | tr '/' '_').log"
+            node --check "$file" >"$out" 2>&1 || true
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import json, subprocess
+
+          root=Path('kayas/walkthrough')
+          html=(root/'index.html').read_text(encoding='utf-8')
+
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.in_script=False
+                  self.attrs={}
+                  self.buf=[]
+                  self.scripts=[]
+              def handle_starttag(self,tag,attrs):
+                  if tag=='script':
+                      self.in_script=True
+                      self.attrs=dict(attrs)
+                      self.buf=[]
+              def handle_data(self,data):
+                  if self.in_script:self.buf.append(data)
+              def handle_endtag(self,tag):
+                  if tag=='script' and self.in_script:
+                      self.scripts.append({'attrs':self.attrs,'content':''.join(self.buf)})
+                      self.in_script=False
+
+          p=Parser();p.feed(html)
+          result={'version':'20260804-v30-browser-error-localization','files':[],'inline':[]}
+          for path in sorted(root.glob('*.js')):
+              raw=path.read_bytes()
+              entry={'path':str(path),'size':len(raw),'nulBytes':raw.count(b'\x00'),'utf8':True,'syntax':None}
+              try: raw.decode('utf-8')
+              except UnicodeDecodeError as e:
+                  entry['utf8']=False;entry['utf8Error']=str(e)
+              proc=subprocess.run(['node','--check',str(path)],capture_output=True,text=True)
+              entry['syntax']={'pass':proc.returncode==0,'exitCode':proc.returncode,'output':(proc.stdout+proc.stderr)[:4000]}
+              result['files'].append(entry)
+          for i,s in enumerate(p.scripts):
+              src=s['attrs'].get('src')
+              if src:
+                  result['inline'].append({'index':i,'src':src,'inline':False})
+                  continue
+              content=s['content']
+              target=Path(f'/tmp/kayas-v30/inline-{i}.js')
+              target.write_text(content,encoding='utf-8')
+              proc=subprocess.run(['node','--check',str(target)],capture_output=True,text=True)
+              result['inline'].append({'index':i,'src':None,'inline':True,'length':len(content),'syntax':{'pass':proc.returncode==0,'exitCode':proc.returncode,'output':(proc.stdout+proc.stderr)[:4000]}})
+          Path('/tmp/kayas-v30/static.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+          print(json.dumps(result,indent=2))
+          PY
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/kayas-v30
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run CDP browser localization
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v30-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v30/localize.js <<'JS'
+          const { chromium }=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={
+              version:'20260804-v30-browser-error-localization',
+              pass:false,
+              timestamp:new Date().toISOString(),
+              pageErrors:[],consoleErrors:[],runtimeExceptions:[],responses:[],failedRequests:[],
+              login:{},document:{},scripts:[],statusObjects:{},static:null
+            };
+            let browser;
+            try{
+              result.static=JSON.parse(fs.readFileSync('/tmp/kayas-v30/static.json','utf8'));
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              const cdp=await page.context().newCDPSession(page);
+              await cdp.send('Runtime.enable');
+              cdp.on('Runtime.exceptionThrown',event=>{
+                const d=event.exceptionDetails||{};
+                result.runtimeExceptions.push({
+                  text:d.text||'',url:d.url||'',lineNumber:d.lineNumber,columnNumber:d.columnNumber,
+                  scriptId:d.scriptId||'',exception:d.exception?.description||d.exception?.value||'',stackTrace:d.stackTrace||null
+                });
+              });
+              page.on('pageerror',e=>result.pageErrors.push({message:e.message,stack:e.stack||''}));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push({text:m.text(),location:m.location()})});
+              page.on('requestfailed',r=>result.failedRequests.push({url:r.url(),resourceType:r.resourceType(),error:r.failure()?.errorText||'unknown'}));
+              page.on('response',r=>{
+                const status=r.status();
+                if(status>=400)result.responses.push({url:r.url(),status,resourceType:r.request().resourceType(),contentType:r.headers()['content-type']||''});
+              });
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v30-localize',{waitUntil:'domcontentloaded',timeout:45000});
+              await page.waitForTimeout(4000);
+              result.login=await page.evaluate(()=>{
+                const gate=document.getElementById('loginGate');
+                const user=document.getElementById('loginUser');
+                const pass=document.getElementById('loginPass');
+                const button=document.getElementById('loginButton');
+                const style=gate?getComputedStyle(gate):null;
+                return {
+                  gateExists:!!gate,userExists:!!user,passExists:!!pass,buttonExists:!!button,
+                  gateHidden:gate?.hidden??null,gateDisplay:style?.display||'',gateVisibility:style?.visibility||'',gateOpacity:style?.opacity||'',
+                  userRect:user?user.getBoundingClientRect().toJSON():null,passRect:pass?pass.getBoundingClientRect().toJSON():null
+                };
+              });
+              await page.evaluate(()=>{
+                const user=document.getElementById('loginUser');
+                const pass=document.getElementById('loginPass');
+                const button=document.getElementById('loginButton');
+                if(user)user.value='kayas';
+                if(pass)pass.value='verimerkezi';
+                if(button)button.click();
+              });
+              await page.waitForTimeout(8000);
+              result.document=await page.evaluate(()=>({
+                readyState:document.readyState,
+                bodyClass:document.body.className,
+                activeView:document.body.dataset.activeView||'',
+                theme:document.body.dataset.theme||document.documentElement.dataset.theme||'',
+                loginHidden:document.getElementById('loginGate')?.hidden??null,
+                loadStatusHidden:document.getElementById('loadStatus')?.hidden??null,
+                loadStatusText:document.getElementById('loadStatus')?.innerText||'',
+                canvas:{width:document.getElementById('scene')?.width||0,height:document.getElementById('scene')?.height||0},
+                webgl:(()=>{const c=document.getElementById('scene');return !!(c&&(c.getContext('webgl2')||c.getContext('webgl')))})()
+              }));
+              result.scripts=await page.evaluate(()=>Array.from(document.scripts).map((s,index)=>({index,src:s.src||'',type:s.type||'',length:s.src?0:(s.textContent||'').length})));
+              result.statusObjects=await page.evaluate(()=>({
+                modelReady:window.__KAYAS_MODEL_READY,
+                v24:window.__KAYAS_V24_STATUS||null,v25:window.__KAYAS_V25_STATUS||null,v26:window.__KAYAS_V26_STATUS||null,
+                v27:window.__KAYAS_V27_STATUS||null,v28:window.__KAYAS_V28_STATUS||null,v29:window.__KAYAS_V29_STATUS||null
+              }));
+              const staticPass=result.static.files.every(f=>f.utf8&&f.nulBytes===0&&f.syntax.pass)&&result.static.inline.filter(i=>i.inline).every(i=>i.syntax.pass);
+              result.pass=staticPass&&result.runtimeExceptions.length===0&&result.pageErrors.length===0&&result.document.webgl===true;
+              await page.screenshot({path:'/tmp/kayas-v30/localization.png',fullPage:true,timeout:60000}).catch(e=>result.pageErrors.push({message:e.message,stack:e.stack||''}));
+            }catch(error){result.pageErrors.push({message:error.message||String(error),stack:error.stack||''});}
+            finally{
+              if(browser)await browser.close();
+              fs.writeFileSync('/tmp/kayas-v30/status.json',JSON.stringify(result,null,2));
+              console.log(JSON.stringify(result,null,2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-v30
+          node localize.js
+
+      - name: Record localization result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v30/status.json; then
+            cp /tmp/kayas-v30/status.json kayas/walkthrough/smoke-status-v30-localization.json
+          else
+            printf '%s\n' '{"version":"20260804-v30-browser-error-localization","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v30-localization.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v30-localization.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record KAYAS V30 browser error localization [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload localization evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v30-browser-error-localization
+          path: |
+            /tmp/kayas-v30/status.json
+            /tmp/kayas-v30/static.json
+            /tmp/kayas-v30/localization.png
+          if-no-files-found: warn
