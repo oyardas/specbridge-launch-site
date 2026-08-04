@@ -1,10 +1,10 @@
 {
   "version": "20260804-v30-reference-asset-repair",
   "pass": false,
-  "timestamp": "2026-08-04T11:05:16.059Z",
+  "timestamp": "2026-08-04T12:05:37.654Z",
   "requests": [
     "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260804-v30-gallery-repair",
-    "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260804-v30-reference-asset-repair",
+    "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260804-v30-reference-asset-repair-r1",
     "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260803-v24"
   ],
   "responses": [
@@ -14,7 +14,7 @@
       "contentType": "image/svg+xml"
     },
     {
-      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260804-v30-reference-asset-repair",
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260804-v30-reference-asset-repair-r1",
       "status": 200,
       "contentType": "image/svg+xml"
     },
