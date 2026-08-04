@@ -1,0 +1,130 @@
+name: Validate KAYAS V30 Brand Syntax Repair
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - kayas/walkthrough/v24-brand.js
+      - .github/workflows/kayas-v30-brand-repair-validation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-v30-brand-repair-validation
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Static syntax gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/walkthrough/v24-brand.js
+          for file in kayas/walkthrough/*.js kayas/walkthrough/assets/gallery/*.js; do
+            test -f "$file" && node --check "$file"
+          done
+
+      - name: Install Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kayas-v30-brand
+          cd /tmp/kayas-v30-brand
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Run Chromium WebGL validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v30-brand-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          cat > /tmp/kayas-v30-brand/test.js <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          (async()=>{
+            const result={version:'20260804-v30-brand-syntax-repair',pass:false,timestamp:new Date().toISOString(),pageErrors:[],consoleErrors:[],responses:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});
+              const page=await browser.newPage({viewport:{width:1536,height:960}});
+              page.on('pageerror',e=>result.pageErrors.push({message:e.message,stack:e.stack||''}));
+              page.on('console',m=>{if(m.type()==='error')result.consoleErrors.push({text:m.text(),location:m.location()})});
+              page.on('response',r=>{if(/v24-brand\.js|\.webp|\.pdf|ic8000_cold_aisle/.test(r.url()))result.responses.push({url:r.url(),status:r.status(),contentType:r.headers()['content-type']||''})});
+              await page.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=20260804-v30-brand-syntax-repair',{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForFunction(()=>window.__KAYAS_V24_BRAND_STATUS?.ready===true,null,{timeout:30000});
+              await page.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,null,{timeout:120000});
+              await page.waitForTimeout(2500);
+              Object.assign(result,await page.evaluate(()=>{
+                const canvas=document.getElementById('scene');
+                const logos=[...document.querySelectorAll('.h3c-wordmark-logo img')];
+                return {
+                  brand:window.__KAYAS_V24_BRAND_STATUS||null,
+                  modelReady:window.__KAYAS_MODEL_READY===true,
+                  canvas:{width:canvas?.width||0,height:canvas?.height||0},
+                  webgl:!!(canvas&&(canvas.getContext('webgl2')||canvas.getContext('webgl'))),
+                  logoCount:logos.length,
+                  logosLoaded:logos.length>0&&logos.every(i=>i.complete&&i.naturalWidth>0),
+                  activeView:document.body.dataset.activeView||'',
+                  theme:document.documentElement.dataset.theme||document.body.dataset.theme||''
+                };
+              }));
+              result.syntaxErrors=result.pageErrors.filter(e=>/Invalid or unexpected token|SyntaxError/i.test(e.message));
+              result.brandResponse=result.responses.find(r=>/v24-brand\.js/.test(r.url()))||null;
+              result.pass=result.syntaxErrors.length===0&&result.brand?.ready===true&&result.modelReady===true&&result.webgl===true&&result.canvas.width>500&&result.canvas.height>300&&result.logoCount>0&&result.logosLoaded===true&&result.brandResponse?.status===200&&/javascript|text\/plain/.test(result.brandResponse.contentType||'');
+              await page.screenshot({path:'/tmp/kayas-v30-brand/acceptance.png',fullPage:false,timeout:30000}).catch(e=>result.pageErrors.push({message:e.message,stack:e.stack||''}));
+            }catch(error){result.pageErrors.push({message:error.message||String(error),stack:error.stack||''});}
+            finally{
+              if(browser)await browser.close();
+              fs.writeFileSync('/tmp/kayas-v30-brand/status.json',JSON.stringify(result,null,2));
+              console.log(JSON.stringify(result,null,2));
+            }
+          })();
+          JS
+          cd /tmp/kayas-v30-brand
+          node test.js
+
+      - name: Record validation evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -s /tmp/kayas-v30-brand/status.json; then
+            cp /tmp/kayas-v30-brand/status.json kayas/walkthrough/smoke-status-v30-brand-repair.json
+          else
+            printf '%s\n' '{"version":"20260804-v30-brand-syntax-repair","pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v30-brand-repair.json
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/smoke-status-v30-brand-repair.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record KAYAS V30 brand syntax repair acceptance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kayas-v30-brand-repair-acceptance
+          path: |
+            /tmp/kayas-v30-brand/status.json
+            /tmp/kayas-v30-brand/acceptance.png
+          if-no-files-found: warn
+
+      - name: Enforce acceptance
+        shell: bash
+        run: |
+          node -e "const r=require('/tmp/kayas-v30-brand/status.json');if(!r.pass){console.error(r);process.exit(1)}console.log('KAYAS_V30_BRAND_REPAIR_ACCEPTANCE=PASS')"
