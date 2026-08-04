@@ -1,3 +1,0 @@
-trigger=2026-08-03T15:25:00+03:00
-scope=geometry-locked-professional-render
-features=dynamic-leds,live-meeting-screens,premium-render,panel-hide,dynamic-scale

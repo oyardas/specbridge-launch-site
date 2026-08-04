@@ -1,1 +1,0 @@
-import('./kayas-3d.js?v=20260803-10').catch(function(error){console.error('KAYAS 3D engine failed to start',error);var status=document.getElementById('loadStatus');if(status){status.hidden=false;status.querySelector('strong').textContent='3D deneyim başlatılamadı';status.querySelector('span').textContent='Sayfayı yenileyin veya güncel Chrome, Edge ya da Safari kullanın.';}});

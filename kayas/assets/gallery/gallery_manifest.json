@@ -1,0 +1,225 @@
+{
+  "project": "KAYAS OSB Data Center Customer Presentation Visuals",
+  "version": "recovery_v1_complete_20260804",
+  "count": 24,
+  "items": [
+    {
+      "number": 1,
+      "category": "Entrance",
+      "title": "West Entrance Existing Access Point",
+      "full": "assets/gallery/kayas_concept_01_entrance.webp",
+      "thumb": "assets/gallery/kayas_concept_01_entrance_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_01_Entrance_West_Entrance_Existing_Access_Point.png"
+    },
+    {
+      "number": 2,
+      "category": "Reception",
+      "title": "Reception And Security Desk",
+      "full": "assets/gallery/kayas_concept_02_reception.webp",
+      "thumb": "assets/gallery/kayas_concept_02_reception_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_02_Reception_Reception_And_Security_Desk.png"
+    },
+    {
+      "number": 3,
+      "category": "Security",
+      "title": "Mantrap Controlled Access Corridor",
+      "full": "assets/gallery/kayas_concept_03_security.webp",
+      "thumb": "assets/gallery/kayas_concept_03_security_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_03_Security_Mantrap_Controlled_Access_Corridor.png"
+    },
+    {
+      "number": 4,
+      "category": "Foyer",
+      "title": "Foyer And Future Expansion Showroom",
+      "full": "assets/gallery/kayas_concept_04_foyer.webp",
+      "thumb": "assets/gallery/kayas_concept_04_foyer_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_04_Foyer_Foyer_And_Future_Expansion_Showroom.png"
+    },
+    {
+      "number": 5,
+      "category": "Meeting",
+      "title": "Large Investor Briefing Area",
+      "full": "assets/gallery/kayas_concept_05_meeting.webp",
+      "thumb": "assets/gallery/kayas_concept_05_meeting_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_05_Meeting_Large_Investor_Briefing_Area.png"
+    },
+    {
+      "number": 6,
+      "category": "Operator",
+      "title": "Small Operator Rooms Opposite IC8000",
+      "full": "assets/gallery/kayas_concept_06_operator.webp",
+      "thumb": "assets/gallery/kayas_concept_06_operator_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_06_Operator_Small_Operator_Rooms_Opposite_IC8000.png"
+    },
+    {
+      "number": 7,
+      "category": "Management",
+      "title": "NOC Management Center View",
+      "full": "assets/gallery/kayas_concept_07_management.webp",
+      "thumb": "assets/gallery/kayas_concept_07_management_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_07_Management_NOC_Management_Center_View.png"
+    },
+    {
+      "number": 8,
+      "category": "Carrier",
+      "title": "Carrier Meet Me Room",
+      "full": "assets/gallery/kayas_concept_08_carrier.webp",
+      "thumb": "assets/gallery/kayas_concept_08_carrier_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_08_Carrier_Carrier_Meet_Me_Room.png"
+    },
+    {
+      "number": 9,
+      "category": "DataHall",
+      "title": "Main IC8000 Data Hall East Side",
+      "full": "assets/gallery/kayas_concept_09_datahall.webp",
+      "thumb": "assets/gallery/kayas_concept_09_datahall_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_09_DataHall_Main_IC8000_Data_Hall_East_Side.png"
+    },
+    {
+      "number": 10,
+      "category": "DataHall",
+      "title": "IC8000 Cold Aisle Entrance",
+      "full": "assets/gallery/kayas_concept_10_datahall.webp",
+      "thumb": "assets/gallery/kayas_concept_10_datahall_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_10_DataHall_IC8000_Cold_Aisle_Entrance.png"
+    },
+    {
+      "number": 11,
+      "category": "DataHall",
+      "title": "IC8000 Rear Service Corridor",
+      "full": "assets/gallery/kayas_concept_11_datahall.webp",
+      "thumb": "assets/gallery/kayas_concept_11_datahall_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_11_DataHall_IC8000_Rear_Service_Corridor.png"
+    },
+    {
+      "number": 12,
+      "category": "Expansion",
+      "title": "North Future Expansion Area",
+      "full": "assets/gallery/kayas_concept_12_expansion.webp",
+      "thumb": "assets/gallery/kayas_concept_12_expansion_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_12_Expansion_North_Future_Expansion_Area.png"
+    },
+    {
+      "number": 13,
+      "category": "Fiber",
+      "title": "South Fiber Room",
+      "full": "assets/gallery/kayas_concept_13_fiber.webp",
+      "thumb": "assets/gallery/kayas_concept_13_fiber_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_13_Fiber_South_Fiber_Room.png"
+    },
+    {
+      "number": 14,
+      "category": "Battery",
+      "title": "South Battery Room With Ventilation",
+      "full": "assets/gallery/kayas_concept_14_battery.webp",
+      "thumb": "assets/gallery/kayas_concept_14_battery_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_14_Battery_South_Battery_Room_With_Ventilation.png"
+    },
+    {
+      "number": 15,
+      "category": "Electrical",
+      "title": "Electrical Distribution And Bypass Room",
+      "full": "assets/gallery/kayas_concept_15_electrical.webp",
+      "thumb": "assets/gallery/kayas_concept_15_electrical_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_15_Electrical_Electrical_Distribution_And_Bypass_Room.png"
+    },
+    {
+      "number": 16,
+      "category": "Terrace",
+      "title": "East Terrace Cooling Plant",
+      "full": "assets/gallery/kayas_concept_16_terrace.webp",
+      "thumb": "assets/gallery/kayas_concept_16_terrace_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_16_Terrace_East_Terrace_Cooling_Plant.png"
+    },
+    {
+      "number": 17,
+      "category": "Terrace",
+      "title": "East Terrace Maintenance Walkway",
+      "full": "assets/gallery/kayas_concept_17_terrace.webp",
+      "thumb": "assets/gallery/kayas_concept_17_terrace_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_17_Terrace_East_Terrace_Maintenance_Walkway.png"
+    },
+    {
+      "number": 18,
+      "category": "Terrace",
+      "title": "Separated Open Terrace Lounge",
+      "full": "assets/gallery/kayas_concept_18_terrace.webp",
+      "thumb": "assets/gallery/kayas_concept_18_terrace_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_18_Terrace_Separated_Open_Terrace_Lounge.png"
+    },
+    {
+      "number": 19,
+      "category": "Support",
+      "title": "Kitchen Lounge And WC Support Area",
+      "full": "assets/gallery/kayas_concept_19_support.webp",
+      "thumb": "assets/gallery/kayas_concept_19_support_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_19_Support_Kitchen_Lounge_And_WC_Support_Area.png"
+    },
+    {
+      "number": 20,
+      "category": "VisitorRoute",
+      "title": "Visitor Observation Corridor To Data Hall",
+      "full": "assets/gallery/kayas_concept_20_visitorroute.webp",
+      "thumb": "assets/gallery/kayas_concept_20_visitorroute_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_20_VisitorRoute_Visitor_Observation_Corridor_To_Data_Hall.png"
+    },
+    {
+      "number": 21,
+      "category": "Management",
+      "title": "Executive Management Office",
+      "full": "assets/gallery/kayas_concept_21_management.webp",
+      "thumb": "assets/gallery/kayas_concept_21_management_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_21_Management_Executive_Management_Office.png"
+    },
+    {
+      "number": 22,
+      "category": "Management",
+      "title": "NOC Operations Center Alternate View",
+      "full": "assets/gallery/kayas_concept_22_management.webp",
+      "thumb": "assets/gallery/kayas_concept_22_management_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_22_Management_NOC_Operations_Center_Alternate_View.png"
+    },
+    {
+      "number": 23,
+      "category": "Meeting",
+      "title": "Executive Boardroom Investor Meeting",
+      "full": "assets/gallery/kayas_concept_23_meeting.webp",
+      "thumb": "assets/gallery/kayas_concept_23_meeting_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_23_Meeting_Executive_Boardroom_Investor_Meeting.png"
+    },
+    {
+      "number": 24,
+      "category": "Entrance",
+      "title": "West Entrance Exterior Evening View",
+      "full": "assets/gallery/kayas_concept_24_entrance.webp",
+      "thumb": "assets/gallery/kayas_concept_24_entrance_thumb.webp",
+      "notes": "Concept visualization; final architectural, MEP and certification documentation required before implementation.",
+      "original": "assets/gallery/original_png/KAYAS_Concept_24_Entrance_West_Entrance_Exterior_Evening_View.png"
+    }
+  ],
+  "contactSheet": "assets/gallery/kayas_concept_contact_sheet.webp",
+  "originalFormat": "PNG"
+}

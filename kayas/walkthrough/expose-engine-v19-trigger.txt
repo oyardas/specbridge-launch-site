@@ -1,4 +1,0 @@
-trigger=2026-08-03T15:52:00+03:00
-geometry=authoritative-v8-locked
-expose=renderer,scene,camera
-attempt=2

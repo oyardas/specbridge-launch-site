@@ -1,2 +1,0 @@
-trigger=2026-08-03T16:55:00+03:00
-mode=v20-cinematic-authoritative-v8-geometry-locked

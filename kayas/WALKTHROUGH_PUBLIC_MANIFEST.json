@@ -1,0 +1,759 @@
+{
+  "release": "Final Customer",
+  "mode": "Professional Presentation Mode + Technical 3D Mode",
+  "language": "English",
+  "audio_sync": "Scene progression waits for speechSynthesis onend with bounded failsafe",
+  "tour_scenes": 12,
+  "capacity": "20 IC8000 pods x 10 cabinets = 200 cabinets",
+  "geometry": "110 m x 46 m; 41 m enclosed; 5 m east terrace",
+  "files": [
+    {
+      "path": "app-shell.js",
+      "size_bytes": 19244,
+      "sha256": "0679b89fdff671654de8a641edb001f0093aee3e32742fd9b1525a3f87590e84"
+    },
+    {
+      "path": "assets/dashboard/h3c_air_conditioner.png",
+      "size_bytes": 966425,
+      "sha256": "c856f0b2f254a63d25969ae82e0f8caf1a687f7672bdd7b1339cbcbaa7430ae6"
+    },
+    {
+      "path": "assets/dashboard/h3c_capacity_3d.png",
+      "size_bytes": 1566674,
+      "sha256": "1e2aad849ad8c536737debf94f04d327f0040af25677078d2c70668111ae1ad5"
+    },
+    {
+      "path": "assets/dashboard/h3c_environment_1.png",
+      "size_bytes": 1498346,
+      "sha256": "7b3965b2a73fda55cdb35f93df05032c54d38b5fde553f09c9e68f0374fb5187"
+    },
+    {
+      "path": "assets/dashboard/h3c_environment_2.png",
+      "size_bytes": 500703,
+      "sha256": "e52cee0d6556aeaedf0aed1f74b4726edcde62c0c383fd8c800ea2db3aa657b0"
+    },
+    {
+      "path": "assets/dashboard/h3c_overview_main.png",
+      "size_bytes": 1027869,
+      "sha256": "05d5c27b4b1aeb19ee839e04ee4db0d89472412d282b0f18f92e586ac8a49aee"
+    },
+    {
+      "path": "assets/dashboard/h3c_security.png",
+      "size_bytes": 950215,
+      "sha256": "61c60f4948b0d049818314a572b33ab2e08d4b0d61280fddc3437b2a1c9058d1"
+    },
+    {
+      "path": "assets/dashboard/h3c_storage_battery.png",
+      "size_bytes": 242029,
+      "sha256": "a1d5247c1d0387c53aa7ff1eb02519e02050572c5f5da275df3b013799459bd5"
+    },
+    {
+      "path": "assets/dashboard/h3c_ups.png",
+      "size_bytes": 1614250,
+      "sha256": "bcfbee4be84e9f9f3d802faa530ffea8aa3f4ab3f3327747f67ae1ca962dcf3b"
+    },
+    {
+      "path": "assets/dashboard_gif/01_IC8000_Genel_Dashboard.gif",
+      "size_bytes": 484368,
+      "sha256": "a626cff792bec1e2067eb70fdcb7e46ed25e7161a4fe6d8294405885e739ebbc"
+    },
+    {
+      "path": "assets/dashboard_gif/02_Kabinet_Yerlesim_Yonetimi.gif",
+      "size_bytes": 452228,
+      "sha256": "270669a5968eb0c8e9f44ded6e9858896fa23cd2f259434625a3a1be7160887d"
+    },
+    {
+      "path": "assets/dashboard_gif/03_Topoloji_ve_Baglanti_Yonetimi.gif",
+      "size_bytes": 273410,
+      "sha256": "cebcfd2f5b4b7e753c8d47329eb130618f73e2665be3d473d9602ab2eb93e7e1"
+    },
+    {
+      "path": "assets/dashboard_gif/04_Sogutma_Sistemi_Yonetimi.gif",
+      "size_bytes": 526550,
+      "sha256": "4b4882947a5b03e1c0ea3986ecff02efa46336bf933ff592d8a54010b1e0d7ea"
+    },
+    {
+      "path": "assets/dashboard_gif/05_Elektrik_ve_Guc_Dagitim_Topolojisi.gif",
+      "size_bytes": 811004,
+      "sha256": "c35efffa6aa4a1a4a37eda37568706c9cf66f797d78349b8eca08fb8a608652c"
+    },
+    {
+      "path": "assets/dashboard_gif/06_Operasyon_ve_Performans_Metrikleri.gif",
+      "size_bytes": 284760,
+      "sha256": "d45378d4e3e2fa678a7c8139784959b223f79270816cdd493952a380a032de79"
+    },
+    {
+      "path": "assets/dashboard_gif/07_Kamera_Izleme_Birinci_Bolum.gif",
+      "size_bytes": 370850,
+      "sha256": "ea54c09539bdc1cbd81d770abba5af4a7b6f7a41571078ca3f8c6b50ac94f71a"
+    },
+    {
+      "path": "assets/dashboard_gif/08_Kamera_Izleme_Ikinci_Bolum.gif",
+      "size_bytes": 171777,
+      "sha256": "e7523b4951064717f91f22edfe48bd5af676e24accb98fb575f3e1f58ba65b01"
+    },
+    {
+      "path": "assets/dashboard_gif/09_Kapasite_ve_Kaynak_Yonetimi.gif",
+      "size_bytes": 274224,
+      "sha256": "f6112a44312811f3fe756f2430fc5a5804472c8535f76a3e9b7c167aa5640419"
+    },
+    {
+      "path": "assets/dashboard_video/01_IC8000_Genel_Dashboard.mp4",
+      "size_bytes": 1278225,
+      "sha256": "38c7745f920034893002d9958451afa05656520c80dcc601bcd1529df56189d2"
+    },
+    {
+      "path": "assets/dashboard_video/02_Kabinet_Yerlesim_Yonetimi.mp4",
+      "size_bytes": 1272372,
+      "sha256": "ca53e90694e2149923c26697d8d1a2f0ccdb27d757f25debc30e62eda7657cc2"
+    },
+    {
+      "path": "assets/dashboard_video/03_Topoloji_ve_Baglanti_Yonetimi.mp4",
+      "size_bytes": 481689,
+      "sha256": "28c6810b59a67364ec1e9b16789c3010a010f34666b48ceb4d3d167282f0dcd3"
+    },
+    {
+      "path": "assets/dashboard_video/04_Sogutma_Sistemi_Yonetimi.mp4",
+      "size_bytes": 1863806,
+      "sha256": "2fa9e9c2cd7c101ee32eb046c5d0323ddc4bae2994101b381661cde12d4bfe86"
+    },
+    {
+      "path": "assets/dashboard_video/05_Elektrik_ve_Guc_Dagitim_Topolojisi.mp4",
+      "size_bytes": 2070119,
+      "sha256": "341e1ca78dc6bc7510058c7754e4b0e317bfb6f56828b953a6b769502c3956c6"
+    },
+    {
+      "path": "assets/dashboard_video/06_Operasyon_ve_Performans_Metrikleri.mp4",
+      "size_bytes": 564589,
+      "sha256": "f7ebd43f94600ac8947eb7759b53f2b8406b86eef8db9e05d5c040d98c11092c"
+    },
+    {
+      "path": "assets/dashboard_video/07_Kamera_Izleme_Birinci_Bolum.mp4",
+      "size_bytes": 963214,
+      "sha256": "f0556a5e3259a138fde6d7b366812ba728e50ddc9166ad13c2282f0c06bcc4e8"
+    },
+    {
+      "path": "assets/dashboard_video/08_Kamera_Izleme_Ikinci_Bolum.mp4",
+      "size_bytes": 349649,
+      "sha256": "dde87a844102c43af475122e3ba8848c5b547f417bc28a95b64704693491a09e"
+    },
+    {
+      "path": "assets/dashboard_video/09_Kapasite_ve_Kaynak_Yonetimi.mp4",
+      "size_bytes": 688891,
+      "sha256": "b37a93ffbc129bd88c414f0a4c619277e1dcccf017b3baff0bc10c8db086eb7d"
+    },
+    {
+      "path": "assets/gallery/gallery_manifest.js",
+      "size_bytes": 11919,
+      "sha256": "a4a219ccc6a237b9b24ed109e0a1b39fab29c9c409c12462f8e6ef09371986dd"
+    },
+    {
+      "path": "assets/gallery/gallery_manifest.json",
+      "size_bytes": 11890,
+      "sha256": "8c98e8f78f6d7c282e206c26db971e104abb320e83fe302337e4b06278301690"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_01_entrance.webp",
+      "size_bytes": 122372,
+      "sha256": "80fcf3da12d5173b220d44006f6de754d48dd10123087c7f115648987fb9cf16"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_01_entrance_thumb.webp",
+      "size_bytes": 10620,
+      "sha256": "aec42f77f5738a0321591552ded60fed9195330cb5903630426291f68b6633da"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_02_reception.webp",
+      "size_bytes": 100756,
+      "sha256": "2f82c6bac008e0bb6864156f2cbd6470fabb41806bbd78bc1cb0a0f44c3bb9f0"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_02_reception_thumb.webp",
+      "size_bytes": 9630,
+      "sha256": "4bc09b2e706f5ca9d12ce3b4e2aa764051dd58eb1c7956f6a6b3e1b519b7ae51"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_03_security.webp",
+      "size_bytes": 81798,
+      "sha256": "1a4f04a1b7904540b70622c929b0d8ee2bed3480fb14b57e638e2bd65c046eeb"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_03_security_thumb.webp",
+      "size_bytes": 8494,
+      "sha256": "9b1114f3575ba3d0a198a450bbb2a2f12064d57cf5c58a56538f90b6be774e29"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_04_foyer.webp",
+      "size_bytes": 100306,
+      "sha256": "3787077743f999f9e5e1d8a7c6ca94f6f0cec88ac931548e434263e2d0260b6e"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_04_foyer_thumb.webp",
+      "size_bytes": 10804,
+      "sha256": "e10029ce0bed23ca14d270a0d475865a4a4f915bd5050ade3385b0b504fc9954"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_05_meeting.webp",
+      "size_bytes": 189814,
+      "sha256": "11dd77b7b3b8b9d2e52fffaa6372a12255ea75a99ff800919f8191bee8833401"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_05_meeting_thumb.webp",
+      "size_bytes": 15390,
+      "sha256": "c3f9db232c096589d062d3a166e4fb179a13fa684764660ae49097a6cbc2585b"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_06_operator.webp",
+      "size_bytes": 124932,
+      "sha256": "1d918095b3457b26b0a7b932f503172ec70e29431338fb1f0b253ecd0d4db4b6"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_06_operator_thumb.webp",
+      "size_bytes": 10878,
+      "sha256": "e00355763515fc7e1f8d8e96e11f792696dfbc35cb31c41b779e61a397712cd9"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_07_management.webp",
+      "size_bytes": 156932,
+      "sha256": "9ad087534b1d2be03b5b76970b8b34e704150fa148cf0b22575996a3ab4dfdb3"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_07_management_thumb.webp",
+      "size_bytes": 14818,
+      "sha256": "70e1d00edae99acded519a5976ba418836a4e529b9d421694e428f66223961dd"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_08_carrier.webp",
+      "size_bytes": 196538,
+      "sha256": "4bf42b52e2990d9ee35e025fc29c75abdf9d189478c9dac0a359b3d5898a70f3"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_08_carrier_thumb.webp",
+      "size_bytes": 12764,
+      "sha256": "4e676e3089af60434aaa556ba6a9e8b636ffcb65e451aaed43d24dd3f2e51af7"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_09_datahall.webp",
+      "size_bytes": 152918,
+      "sha256": "a66f81205ae73d9090fb91fedb75517abf2f9843ee752c5e3bd79d258bd189a4"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_09_datahall_thumb.webp",
+      "size_bytes": 10098,
+      "sha256": "47bb7d63e2a47a2d75a0f59c3c8421f852d333f92188db594b10fc5ef44c1a15"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_10_datahall.webp",
+      "size_bytes": 107254,
+      "sha256": "482d374b876b1799d7e2a6d5ddcc792b1e413f6f09454dac83b9e8aa74186638"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_10_datahall_thumb.webp",
+      "size_bytes": 8448,
+      "sha256": "6c0fd9a6ac54458b824f550d59166caf86b314d99809d050322098858a24f648"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_11_datahall.webp",
+      "size_bytes": 148980,
+      "sha256": "3ff4487b2eb306e23e1d825ab8a4e932b6a5fdae03253ab76ed7b189c5872054"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_11_datahall_thumb.webp",
+      "size_bytes": 11012,
+      "sha256": "a631b8f4e923f739f706ab0ede56afdc348e67afe0b66279d9c99845f97de707"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_12_expansion.webp",
+      "size_bytes": 152058,
+      "sha256": "db57d8e3b3217acd66b8fed0cce01495e8ccae3655fa71f73f21e48181923daa"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_12_expansion_thumb.webp",
+      "size_bytes": 11520,
+      "sha256": "76ef300c3b04a0a53cb574a4e454c1f96cf356f52ba79791a3bdb7aa66c0fd8d"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_13_fiber.webp",
+      "size_bytes": 163592,
+      "sha256": "48c86fad8f66f11404a454e55a47fa777895ba6a9223e1c541271499a5047453"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_13_fiber_thumb.webp",
+      "size_bytes": 12640,
+      "sha256": "ce3f461605dbc85ce73bbad7f8cebf14216daf3d956bf29b1fcb2ff6b6c8a23e"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_14_battery.webp",
+      "size_bytes": 111590,
+      "sha256": "8eda236c8ddbeeabba6a892c93cfc5d4ba5a5e13b828a10348c4e3880601f70f"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_14_battery_thumb.webp",
+      "size_bytes": 9818,
+      "sha256": "3928544e51fa4e4a08a2396c611aff94ab4346fef217bf982a82713abc02562e"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_15_electrical.webp",
+      "size_bytes": 116320,
+      "sha256": "0e028964897562d5fbfc89f29240d389dacab504fe41f4484f162558054c8a03"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_15_electrical_thumb.webp",
+      "size_bytes": 12212,
+      "sha256": "e3ee6f0cea494797df1fb6a576da81e4e9367528ca0a27dba8ef8baaef7d7000"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_16_terrace.webp",
+      "size_bytes": 161576,
+      "sha256": "39597b051dcb0b78fc2c8d20a33e4f7ce57ec543a2a2192ae9c8aac325f1aea1"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_16_terrace_thumb.webp",
+      "size_bytes": 16652,
+      "sha256": "44c74e3a55f812480cd73a5eead2ef51ae2045738d79b2ed4fb1e69600d98b9d"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_17_terrace.webp",
+      "size_bytes": 106068,
+      "sha256": "72987a712425516a116ec1f3f7343a18e87276ad4bbb193218835feed29ecfee"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_17_terrace_thumb.webp",
+      "size_bytes": 13140,
+      "sha256": "a688f4e34c4b2c28cefe59dd0baceacd026c28eb816987970567491c629c77fe"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_18_terrace.webp",
+      "size_bytes": 235238,
+      "sha256": "2f61b7ab7b883bd97dd7ead1399a3f39e51ded56f771410097465efea9660e49"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_18_terrace_thumb.webp",
+      "size_bytes": 19540,
+      "sha256": "217350ae2775e7003960ea91eaa19f2d422c830eacf6e2c5d8925b0564910172"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_19_support.webp",
+      "size_bytes": 115032,
+      "sha256": "b31d91d0ae16660246f01c3f465e7567a8be7b4ed4a0ba8f5ca9755633f9489f"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_19_support_thumb.webp",
+      "size_bytes": 8626,
+      "sha256": "2571a93bde0d3721013bf29f9b723b9a43232215a665758a281fb007d013db4a"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_20_visitorroute.webp",
+      "size_bytes": 125004,
+      "sha256": "2157c989bf7a08042f31fe96afe9050f0ea40dee84afe6ef05182a978ed84e03"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_20_visitorroute_thumb.webp",
+      "size_bytes": 12994,
+      "sha256": "6f7098a5c921f075dc9171c052cc7f6adfbe7352fe4206352b74b9fbc675c168"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_21_management.webp",
+      "size_bytes": 126784,
+      "sha256": "ff06326fd2fcc9164a70a6a3de55590c23b38c9110cf433fb6b526f2133463a6"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_21_management_thumb.webp",
+      "size_bytes": 11926,
+      "sha256": "c279e92d33c15ff3d379fe5ee8d3113529163da6d2c9e04b340c71feb47e9732"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_22_management.webp",
+      "size_bytes": 127558,
+      "sha256": "cde679c7f0a5168f36e4d8b775fdbe6f2b71d5db23ee253583ed75521dc35cac"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_22_management_thumb.webp",
+      "size_bytes": 12364,
+      "sha256": "90ee88b10100169cf77752ce3ab7add843e02f7c2471cda4c42f04dd2eb9803f"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_23_meeting.webp",
+      "size_bytes": 160112,
+      "sha256": "c18bc9dea2b7684573926c0c85f7aab06c7ce0229a118b193885fb8f193528f2"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_23_meeting_thumb.webp",
+      "size_bytes": 13346,
+      "sha256": "94d35f8f4fd49180047d44e2d06cec331b9076a96c3d949b4ad465740323e95c"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_24_entrance.webp",
+      "size_bytes": 118824,
+      "sha256": "46b364c17aadb040baabc8521e2199bd7bf42603f60bd6fcc922f48e95a0a736"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_24_entrance_thumb.webp",
+      "size_bytes": 12162,
+      "sha256": "c58bd1e32ce988b2bdeb6f0365e4938146b1a50e822b2b74871371294510c83a"
+    },
+    {
+      "path": "assets/gallery/kayas_concept_contact_sheet.webp",
+      "size_bytes": 217100,
+      "sha256": "a8b17319b39ed4ecbe6f6cb30a90c9d411f66bc339674e4175fc3644b417a3cd"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_01_Entrance_West_Entrance_Existing_Access_Point.png",
+      "size_bytes": 2167328,
+      "sha256": "12bdc3125aef87f759b5bb77a2d61905e030c20b264e61ebcbd88894602dfdfb"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_02_Reception_Reception_And_Security_Desk.png",
+      "size_bytes": 2050890,
+      "sha256": "29c2378798eacea4b627cc6dc70462f9c89720d6f8fc3a3ad6db54c0898e30dd"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_03_Security_Mantrap_Controlled_Access_Corridor.png",
+      "size_bytes": 1976804,
+      "sha256": "1a9a8641496f724b461fd65163137a38672d796bc002702745be1603fad04732"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_04_Foyer_Foyer_And_Future_Expansion_Showroom.png",
+      "size_bytes": 2001060,
+      "sha256": "2f73275005e810974d18aba9c8bfd26fabc785ab869d4f5bd81700ccf7421bd2"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_05_Meeting_Large_Investor_Briefing_Area.png",
+      "size_bytes": 2396506,
+      "sha256": "0cab0cbddb634166c8a2df08f16d56de9ba8b4a6d96b71a88b8dbaa17aa2e323"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_06_Operator_Small_Operator_Rooms_Opposite_IC8000.png",
+      "size_bytes": 2232142,
+      "sha256": "a9a89a89abe2be7e96ffc50ca988a39fc6174b2b29e395f3eec1117361208269"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_07_Management_NOC_Management_Center_View.png",
+      "size_bytes": 2310812,
+      "sha256": "877e8189ff5b4661da4406225548dfd40d3ca7f5dc20a7555d887e08ffeeed85"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_08_Carrier_Carrier_Meet_Me_Room.png",
+      "size_bytes": 2558509,
+      "sha256": "b57a57ce6b39dcd045a6e81fe5b7733fb4cceb84fc2aa3b85591a5649eaf56b9"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_09_DataHall_Main_IC8000_Data_Hall_East_Side.png",
+      "size_bytes": 2420838,
+      "sha256": "eabaa04db436a99eb305f221545f982b2516d5f678b2e5272c97688aeaeaf3e6"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_10_DataHall_IC8000_Cold_Aisle_Entrance.png",
+      "size_bytes": 2095704,
+      "sha256": "14bd01bdf870103fe83e0bba1da0191304131547ed830d037d50c40fa56e2b07"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_11_DataHall_IC8000_Rear_Service_Corridor.png",
+      "size_bytes": 2287077,
+      "sha256": "005bb1ecfff6162500dc24ce18855827d56e0e639bd175f056d4fc2f72deea16"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_12_Expansion_North_Future_Expansion_Area.png",
+      "size_bytes": 2442201,
+      "sha256": "452e55cc484d78d7ce58fd233ba201f6a0d7b018c77b20cfd4c789031c57cd10"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_13_Fiber_South_Fiber_Room.png",
+      "size_bytes": 2288723,
+      "sha256": "c93084ed9c62896473f590da1422a3d5c853128e1b427a0d02d69fa1c18e0db6"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_14_Battery_South_Battery_Room_With_Ventilation.png",
+      "size_bytes": 2226826,
+      "sha256": "b986f59e363dfdb1833266f384edba8617b56d111fb46dce16e9993c3f6193a3"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_15_Electrical_Electrical_Distribution_And_Bypass_Room.png",
+      "size_bytes": 2152736,
+      "sha256": "21167cbdc407d8f73edb4c9d492b0cd97f60c96595d25d273de811edec2fef09"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_16_Terrace_East_Terrace_Cooling_Plant.png",
+      "size_bytes": 2306598,
+      "sha256": "910d3343c9fc9220675b35c23bfa30e9e2780746f2201d4eee00d446efe23e2a"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_17_Terrace_East_Terrace_Maintenance_Walkway.png",
+      "size_bytes": 1915387,
+      "sha256": "0aa7da72a7952bf8cfc70e9d6f01e5fccd85621f7c399aa43751322cb6a67aad"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_18_Terrace_Separated_Open_Terrace_Lounge.png",
+      "size_bytes": 2608967,
+      "sha256": "e9af4f569cf41dde5363d8a94c9aa703b8c2898479efd9d6700d933409d42f31"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_19_Support_Kitchen_Lounge_And_WC_Support_Area.png",
+      "size_bytes": 2067581,
+      "sha256": "65250b5d2f3722216d1588ba6b1bc8a1a879c012dfbbda50cb82b437ee3ce901"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_20_VisitorRoute_Visitor_Observation_Corridor_To_Data_Hall.png",
+      "size_bytes": 2127400,
+      "sha256": "1d60d8d6d83df91cc43dd7d96fbb6242a56eb479888ab4132c8d79dfda3c1c40"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_21_Management_Executive_Management_Office.png",
+      "size_bytes": 2096912,
+      "sha256": "ee99c385bfbca55be12057d4a5ce6d33ff5e4e1f5b1dcfa7aaa9a2aac7998d29"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_22_Management_NOC_Operations_Center_Alternate_View.png",
+      "size_bytes": 2037276,
+      "sha256": "1ea959bf136a670b36a1a36510f4d19feab7297d0cba4eeda773984e26802de4"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_23_Meeting_Executive_Boardroom_Investor_Meeting.png",
+      "size_bytes": 2456688,
+      "sha256": "4e1e96858d7b123a74a6e189fd46466393f63853a5c5e62ec609a6e19f8268f4"
+    },
+    {
+      "path": "assets/gallery/original_png/KAYAS_Concept_24_Entrance_West_Entrance_Exterior_Evening_View.png",
+      "size_bytes": 2007978,
+      "sha256": "fe95baa840a5943ac13c8ba4fba25da426350850ca5848388a2298d91f6fcef8"
+    },
+    {
+      "path": "assets/logos/h3c_logo_red_circle_wide.png",
+      "size_bytes": 24706,
+      "sha256": "095e470bfaba413b293245535a93832b1fd894289a9abd9df8a7b7e07db0955f"
+    },
+    {
+      "path": "assets/logos/h3c_logo_red_transparent.png",
+      "size_bytes": 32744,
+      "sha256": "fc6e3e9afb86e96d2e4f3c3c3f934e6b9745bde964c9522b7a3d9fe5dda843a6"
+    },
+    {
+      "path": "assets/logos/h3c_logo_small_badge.png",
+      "size_bytes": 5411,
+      "sha256": "ab6869595ac2f952048a899e3476df24cc2274348cfcc80abc96c675779ebf19"
+    },
+    {
+      "path": "assets/logos/h3c_logo_square_transparent.png",
+      "size_bytes": 32744,
+      "sha256": "fc6e3e9afb86e96d2e4f3c3c3f934e6b9745bde964c9522b7a3d9fe5dda843a6"
+    },
+    {
+      "path": "assets/logos/specbridge_horizontal_black.png",
+      "size_bytes": 436375,
+      "sha256": "3747f4f099253c8bdefda751da497f2179edbb73eb94e1b34936256df064dd17"
+    },
+    {
+      "path": "assets/logos/specbridge_horizontal_colored.png",
+      "size_bytes": 439124,
+      "sha256": "9f98543c8d964cee9cfb07487c18f32e4a8024fb2bbdea85e6f2adc7f9ff3c9c"
+    },
+    {
+      "path": "assets/logos/specbridge_horizontal_white.png",
+      "size_bytes": 407759,
+      "sha256": "3f1e0f82b84df879492398231dde268953966e4fff9e34bb639a4c1095f17d9b"
+    },
+    {
+      "path": "assets/logos/specbridge_icon_colored.png",
+      "size_bytes": 1002946,
+      "sha256": "de030c1cb105943fadec7cebf4b986c83c2e22416e8f1888fe55d24b4f6d5bf1"
+    },
+    {
+      "path": "assets/logos/specbridge_icon_white.png",
+      "size_bytes": 663580,
+      "sha256": "63bb6dbbd71ca23a80d3e52b8604f936d07497654bb8b3717fd3b4e25d1aae00"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_01_0-15.6s.mp4",
+      "size_bytes": 1287366,
+      "sha256": "accc07efd9146bee87266232fb5d58082168c06e11029a4a8983ec0a91a8022c"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_02_15.6-28.1s.mp4",
+      "size_bytes": 1327075,
+      "sha256": "57087d0560858db7f6b53fcd40a74f541f0873c463975e3d69bf5e159586f2f4"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_03_28.1-29.1s.mp4",
+      "size_bytes": 184567,
+      "sha256": "980986366de81d0f181cf5ad273920b8370fa4d4c64f915f1f8be926161fe2a0"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_04_29.1-30.5s.mp4",
+      "size_bytes": 335689,
+      "sha256": "25eb0cd00b0f4cd60709e01cf002b5b8a4e4ba80846d2cea404f380dd974ecbd"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_05_30.5-37.6s.mp4",
+      "size_bytes": 551184,
+      "sha256": "143739314cea1c6fa4693df224e0b42e39390fe263f842c9d50da644edde71d9"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_06_37.6-38.5s.mp4",
+      "size_bytes": 154309,
+      "sha256": "e204b9aa3a9e5ac6fdf02f06370b93bd8d5c30a784c6de171e75303193a64f71"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_07_38.5-40.3s.mp4",
+      "size_bytes": 361832,
+      "sha256": "184e15bc67400ccf8cba3597174e92c0395fc78a1714bffe5bff1f012aaa8957"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_08_40.3-53.8s.mp4",
+      "size_bytes": 1950994,
+      "sha256": "496ab5617411eeaf72f04a66983858271594c6b20448d6888acc6538335c27f1"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_09_53.8-54.6s.mp4",
+      "size_bytes": 174600,
+      "sha256": "95ecd520c76331c65dc9dcf7172cd7dbd3992a64590871383961889bfaa1984e"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_10_54.6-56.1s.mp4",
+      "size_bytes": 298466,
+      "sha256": "4d35d115772f6221597a0066de857d0e2c5da89eb5835ff95aaff0c6ae98ae41"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_11_56.1-71.0s.mp4",
+      "size_bytes": 2177701,
+      "sha256": "b86f36fa5dc53c157e04bee0ee487fdbbe6135fb554fc8bb685d0ad36e9c9e0b"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_12_71.0-71.8s.mp4",
+      "size_bytes": 179722,
+      "sha256": "1454cbb285685fb567d8dc3d1315e75c8bf68853f5f8f6b4459f567daa917cf0"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_13_71.8-73.3s.mp4",
+      "size_bytes": 353455,
+      "sha256": "391d12f06fb2409ed472a25f19ff00f4c474ee290f924cb36626bc789e30b062"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_14_73.3-81.9s.mp4",
+      "size_bytes": 804826,
+      "sha256": "2fff1a3885afaf477a363e666bdda155d7c2b964c064c37fbea65374dbc99618"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_15_81.9-82.8s.mp4",
+      "size_bytes": 178626,
+      "sha256": "f11f27bf6da1e91b4ce18e660fc005a8c9ffaf5dfc12a14a14e8a4d8df3be91c"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_16_82.8-85.1s.mp4",
+      "size_bytes": 423510,
+      "sha256": "47280908998880ec19228f134019e2fe0c82d8a27e8ef076aadb3fe221bd91f5"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_17_85.1-94.1s.mp4",
+      "size_bytes": 1054798,
+      "sha256": "fdb29734e93c67a9036316ed6b50cd36f8aade43f2cd7075411ae851834681c5"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_18_94.1-95.0s.mp4",
+      "size_bytes": 177128,
+      "sha256": "2a83b89649220615658b9a5330e50a1199607204b675fbd75a1aacdb429d6e2d"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_19_95.0-97.4s.mp4",
+      "size_bytes": 342252,
+      "sha256": "1e0760b8f59251eeb03798d073a44730bb8453d5a65259e1571d62371f50e610"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_20_97.4-100.0s.mp4",
+      "size_bytes": 390520,
+      "sha256": "382a49b9fde9aec546fd277d33ff410bc237781ff615850971dc19ae5e1d9cb0"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_21_100.0-101.0s.mp4",
+      "size_bytes": 163692,
+      "sha256": "2b0bf4f577c48f0c3bbeb6e0a77610fa6ae5305cfb155dc33b84b7218b1479d4"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_22_101.0-101.9s.mp4",
+      "size_bytes": 241079,
+      "sha256": "c64755aa46de4ff079ee24d2de8581b107c7c60cb28324315b312f850dd5b1e7"
+    },
+    {
+      "path": "assets/presentation_video/Sahne_23_101.9-112.234646s.mp4",
+      "size_bytes": 713279,
+      "sha256": "339dd3f18f8faa3f2fde771b912b4c232509d781efd92ae6562573620635b57c"
+    },
+    {
+      "path": "assets/reference/floorplan_zones_v7_5m_terrace.json",
+      "size_bytes": 9618,
+      "sha256": "96b444b4a642451a434e4fe2349a7a796708625dd75e0533a8b96f505bdd1fbf"
+    },
+    {
+      "path": "assets/reference/ic8000_cold_aisle_left_view.png",
+      "size_bytes": 1171413,
+      "sha256": "6e58451d9115e1b926e52e355011128a4ad5785c8582b34c5e2c2647bc935b96"
+    },
+    {
+      "path": "assets/report/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx",
+      "size_bytes": 73067,
+      "sha256": "619326b9e1c7de9f4487df8cb57b649f885e4b3a27e9a95f89377897e20002d7"
+    },
+    {
+      "path": "assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf",
+      "size_bytes": 250407,
+      "sha256": "d05d7ea78c069122381ae53fb1da41d1b7954f748ee7aaefa2fa2bab09bb76e6"
+    },
+    {
+      "path": "assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf",
+      "size_bytes": 5613655,
+      "sha256": "01813d3085e5d120a80e4e59f5c1d0ba23df500039308464295263b457861818"
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 17414,
+      "sha256": "14456b432939e9a82a32f6a3d0c3c0002da5d4004355c26b2b298f530240e7b2"
+    },
+    {
+      "path": "model-loader.js",
+      "size_bytes": 516,
+      "sha256": "42ab5709fe61b3f4de4654edb862b568fc39ebd7be825c43b4ccfde08d9cfa90"
+    },
+    {
+      "path": "robots.txt",
+      "size_bytes": 23,
+      "sha256": "16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95"
+    },
+    {
+      "path": "src/kayas-3d.bundle.js",
+      "size_bytes": 1393910,
+      "sha256": "bc3fd2aa981aa10791a0afe98597a87518a4c7dc250c1819839144d1488ec0cd"
+    },
+    {
+      "path": "styles.css",
+      "size_bytes": 26466,
+      "sha256": "fcb34fda8915924b62dc7b427b9cc1270d5e831c0dc6b35d75014c8e54d148e4"
+    },
+    {
+      "path": "walkthrough/README.md",
+      "size_bytes": 619,
+      "sha256": "bf48f5d83e5c394aeafa29cc287b5d59535d660a9fabad9f4b02c0ce73671479"
+    },
+    {
+      "path": "walkthrough/WALKTHROUGH_STORYBOARD.json",
+      "size_bytes": 1825,
+      "sha256": "5b02352adc6aab76d32443108b89f628f52047e550185643e0abde74c29ec4d7"
+    }
+  ],
+  "screen_media": "customer-provided MP4 dashboard scenes integrated as live screen content",
+  "server_led_animation": "individualized per-fixture emissive animation",
+  "user_friendly_mode": "presentation-first with Interactive 3D secondary",
+  "notes": [
+    "Automatic tour exit after completion with left panel restored",
+    "Drawer panels strictly isolate Visuals and Reports",
+    "Animated dashboard fallback uses GIF when opened from file:// and MP4 when served over HTTP",
+    "Server LED animation refined"
+  ],
+  "narration_default": "enabled",
+  "tour_modes": [
+    "Cinematic View",
+    "Interactive 3D"
+  ],
+  "mode_switch": "persistent in tour control dock",
+  "tour_end": "automatic exit with left menu restored",
+  "visuals_reports": "strictly isolated panels",
+  "dashboard_media": "MP4 over HTTP with GIF fallback for file protocol"
+}

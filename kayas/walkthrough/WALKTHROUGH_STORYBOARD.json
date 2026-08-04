@@ -1,0 +1,82 @@
+{
+  "release": "KAYAS_3D_Walkthrough_RC1_20260804",
+  "geometry": {
+    "length_m": 110,
+    "total_width_m": 46,
+    "enclosed_width_m": 41,
+    "east_terrace_m": 5
+  },
+  "capacity": {
+    "pods": 20,
+    "cabinets_per_pod": 10,
+    "total_cabinets": 200
+  },
+  "tour": {
+    "scene_count": 12,
+    "autoplay_query": "?autoplay=1",
+    "voice": "optional browser speech synthesis tr-TR",
+    "external_dependencies": false
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "view": "overview",
+      "title": "KAYAS veri merkezi yatırım vizyonu"
+    },
+    {
+      "index": 2,
+      "view": "entrance",
+      "title": "Batı giriş, resepsiyon ve marka karşılama alanı"
+    },
+    {
+      "index": 3,
+      "view": "security",
+      "title": "Mantrap ve camlı gözlem koridoru"
+    },
+    {
+      "index": 4,
+      "view": "foyer",
+      "title": "Fuaye, showroom ve büyük toplantı alanı"
+    },
+    {
+      "index": 5,
+      "view": "walk",
+      "title": "Ziyaretçi güzergâhı ve operasyonel ayrışma"
+    },
+    {
+      "index": 6,
+      "view": "datahall",
+      "title": "20 H3C IC8000 pod ve toplam 200 kabinet"
+    },
+    {
+      "index": 7,
+      "view": "datahallAisle",
+      "title": "IC8000 soğuk koridor deneyimi"
+    },
+    {
+      "index": 8,
+      "view": "noc",
+      "title": "NOC, yönetim ve operatör alanları"
+    },
+    {
+      "index": 9,
+      "view": "technical",
+      "title": "Fiber, akü ve elektrik dağıtım bandı"
+    },
+    {
+      "index": 10,
+      "view": "terrace",
+      "title": "5 metre doğu terası ve dış üniteler"
+    },
+    {
+      "index": 11,
+      "view": "layers",
+      "title": "Enerji, fiber ve soğutma omurgaları"
+    },
+    {
+      "index": 12,
+      "view": "top",
+      "title": "Ölçeklenebilir bölgesel dijital hizmet platformu"
+    }
+  ]
+}

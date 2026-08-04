@@ -1,5 +1,0 @@
-trigger=2026-08-03T16:48:00+03:00
-runtime=v19-runtime.js?v=20260803-v19-final
-shell=app-shell.js?v=20260803-v19-final
-model-loader=model-loader-v19.js?v=20260803-v19-final
-acceptance=chromium-pass
