@@ -1,0 +1,49 @@
+{
+  "version": "20260804-v30-gallery-repair",
+  "pass": false,
+  "timestamp": "2026-08-04T08:02:25.183Z",
+  "pageErrors": [
+    {
+      "message": "page.evaluate: ReferenceError: result is not defined\n    at eval (eval at evaluate (:291:30), <anonymous>:11:22)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "stack": "page.evaluate: ReferenceError: result is not defined\n    at eval (eval at evaluate (:291:30), <anonymous>:11:22)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /tmp/kayas-v30-gallery/test.js:15:37"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/reference/ic8000_cold_aisle_left_view.png",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "location": {
+        "url": "https://drive.google.com/file/d/1F1yVDXgLKkmBB6pjOvssrsbANlOCQYve/preview",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260804-v30-gallery-repair",
+      "status": 200,
+      "contentType": "image/svg+xml"
+    },
+    {
+      "url": "http://127.0.0.1:8000/kayas/walkthrough/assets/gallery/kayas_concept_board.svg?v=20260803-v24",
+      "status": 200,
+      "contentType": "image/svg+xml"
+    }
+  ]
+}
