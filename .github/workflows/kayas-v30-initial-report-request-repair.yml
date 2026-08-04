@@ -1,0 +1,59 @@
+name: KAYAS V30 Initial Report Request Repair
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/kayas-v30-initial-report-request-repair.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Refresh main and repair initial markup
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main && git reset --hard origin/main
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('kayas/walkthrough/index.html');t=p.read_text(encoding='utf-8')
+          m='assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf'
+          t=t.replace(f'<button class="report-item is-selected" data-report-src="{m}" data-report-download="{m}" data-report-title="Saha Fizibilite Raporu"><span class="report-icon">PDF</span><span><strong>Saha Fizibilite Raporu</strong><small>KAYAŞ OSB yerinde fizibilite · 15 sayfa</small></span><b>›</b></button>','<button class="report-item is-selected is-pending" data-report-title="Saha Fizibilite Raporu" data-report-unavailable="true" disabled aria-disabled="true"><span class="report-icon">PDF</span><span><strong>Saha Fizibilite Raporu</strong><small>Doküman henüz portala yüklenmedi</small></span><b>•</b></button>')
+          t=t.replace(f'<div class="report-toolbar"><strong id="reportViewerTitle">Saha Fizibilite Raporu</strong><div><a id="reportOpen" class="action-link ghost" href="{m}" target="_blank" rel="noopener">Yeni sekmede aç</a><a id="reportDownload" class="action-link" href="{m}" download>İndir</a></div></div>','<div class="report-toolbar"><strong id="reportViewerTitle">Saha Fizibilite Raporu</strong><div><a id="reportOpen" class="action-link ghost is-disabled" href="#" aria-disabled="true" tabindex="-1">Yeni sekmede aç</a><a id="reportDownload" class="action-link is-disabled" href="#" aria-disabled="true" tabindex="-1">İndir</a></div></div>')
+          t=t.replace(f'<iframe class="report-frame" id="reportFrame" src="{m}" title="KAYAŞ OSB Saha Fizibilite Raporu"></iframe>','<iframe class="report-frame" id="reportFrame" data-report-state="unavailable" title="KAYAŞ OSB Saha Fizibilite Raporu" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;tr&quot;&gt;&lt;body style=&quot;margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1724;color:#dbe7ef;font:600 16px Arial;text-align:center&quot;&gt;&lt;p&gt;Saha Fizibilite Raporu henüz portala yüklenmedi.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>')
+          if m in t: raise SystemExit('MISSING_REPORT_REFERENCE_REMAINS')
+          if t.count('data-report-state="unavailable"')!=1: raise SystemExit('FRAME_REPAIR_NOT_UNIQUE')
+          p.write_text(t,encoding='utf-8')
+          PY
+          find kayas/walkthrough -maxdepth 1 -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Install Chromium
+        run: |
+          mkdir -p /tmp/kayas-v30-report && cd /tmp/kayas-v30-report
+          npm init -y >/dev/null 2>&1
+          npm install --no-audit --no-fund playwright@1.54.2
+          npx playwright install --with-deps chromium
+      - name: Browser acceptance
+        shell: bash
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/kayas-v30-report-http.log 2>&1 &
+          trap 'kill $!' EXIT
+          sleep 2
+          cat >/tmp/kayas-v30-report/test.js <<'JS'
+          const{chromium}=require('playwright'),fs=require('fs');(async()=>{const n='KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf',r={version:'20260804-v30-initial-report-request-repair',pass:false,timestamp:new Date().toISOString(),requests:[],pageErrors:[],consoleErrors:[]};let b;try{b=await chromium.launch({headless:true,args:['--use-gl=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--disable-dev-shm-usage']});const p=await b.newPage({viewport:{width:1536,height:960}});p.on('request',q=>{if(q.url().includes(n))r.requests.push(q.url())});p.on('pageerror',e=>r.pageErrors.push(e.message));p.on('console',m=>{if(m.type()==='error')r.consoleErrors.push({text:m.text(),url:m.location().url})});await p.goto('http://127.0.0.1:8000/kayas/walkthrough/?build=v30-report-request-repair',{waitUntil:'domcontentloaded',timeout:30000});await p.waitForFunction(()=>window.__KAYAS_MODEL_READY===true,null,{timeout:120000});Object.assign(r,await p.evaluate(()=>{const c=document.getElementById('scene'),f=document.getElementById('reportFrame'),i=document.querySelector('[data-report-title="Saha Fizibilite Raporu"]');return{modelReady:window.__KAYAS_MODEL_READY===true,webgl:!!(c&&(c.getContext('webgl2')||c.getContext('webgl'))),canvas:{width:c?.width||0,height:c?.height||0},frameSrc:f?.getAttribute('src'),frameHasSrcdoc:!!f?.getAttribute('srcdoc'),frameState:f?.dataset.reportState||'',itemDisabled:!!i?.disabled,itemUnavailable:i?.dataset.reportUnavailable||'',layoutMetric:[...document.querySelectorAll('.metric-grid strong')].some(x=>x.textContent.trim()==='200')}}));r.fatalErrors=r.pageErrors.filter(x=>/SyntaxError|ReferenceError|TypeError|Invalid or unexpected token/i.test(x));r.pass=r.requests.length===0&&r.modelReady&&r.webgl&&r.canvas.width>500&&r.canvas.height>300&&r.frameSrc===null&&r.frameHasSrcdoc&&r.frameState==='unavailable'&&r.itemDisabled&&r.itemUnavailable==='true'&&r.layoutMetric&&r.fatalErrors.length===0;try{await p.screenshot({path:'/tmp/kayas-v30-report/acceptance.png',animations:'disabled',timeout:10000})}catch(e){r.screenshotWarning=e.message}}catch(e){r.pageErrors.push(e.stack||e.message)}finally{if(b)await b.close();fs.writeFileSync('/tmp/kayas-v30-report/status.json',JSON.stringify(r,null,2));console.log(JSON.stringify(r,null,2))}})();
+          JS
+          cd /tmp/kayas-v30-report && node test.js
+      - name: Record evidence
+        if: always()
+        shell: bash
+        run: |
+          test -s /tmp/kayas-v30-report/status.json && cp /tmp/kayas-v30-report/status.json kayas/walkthrough/smoke-status-v30-initial-report-request-repair.json || printf '%s\n' '{"pass":false,"error":"status missing"}' > kayas/walkthrough/smoke-status-v30-initial-report-request-repair.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kayas/walkthrough/index.html kayas/walkthrough/smoke-status-v30-initial-report-request-repair.json
+          git diff --cached --quiet || (git commit -m 'Remove initial missing KAYAS report request and record acceptance [skip ci]' && git pull --rebase origin main && git push origin HEAD:main)
+      - name: Enforce
+        run: node -e "const r=require('/tmp/kayas-v30-report/status.json');if(!r.pass){console.error(r);process.exit(1)}"
