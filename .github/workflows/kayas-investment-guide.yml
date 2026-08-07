@@ -44,6 +44,19 @@ jobs:
           test "$(stat -c%s /tmp/kayas-guide-docs/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.pdf)" -gt 1000000
           test "$(stat -c%s /tmp/kayas-guide-docs/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.docx)" -gt 1000000
 
+      - name: Verify pinned source integrity
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' \
+            'f3a63481252b077fc02c015c105f5fc4ebddbb93cb0fe5b75caa45f841596c1a' '/tmp/kayas-guide-src/index.html' \
+            'e933c6be030c51ee9e300f640be369f93c4404c794cfdd829c0dfa29ae3087b7' '/tmp/kayas-guide-src/styles.css' \
+            '56287b55fddab2b82a8098a1c1cc53539de44f0a4bc4d65c11e10dab2136c22e' '/tmp/kayas-guide-src/app.js' \
+            '629a84118d08cd4dd33a20cde904c8ce2c41aaf141e45afe2293bea2ef3791d9' '/tmp/kayas-guide-src/build_guide_data.py' \
+            '7353cd7418e01c33d0804170720d98e3522fcdbdab4c565b7070424605f9700b' '/tmp/kayas-guide-src/guide-data.js' \
+            '5f2e86b0b3a9e9e695f9e3d95e197368a5ccb579de2ea99889158964b77a0b85' '/tmp/kayas-guide-src/model-loader.js' \
+            '42c61892d5c9ba80f829db74d03195aa39f4a3b84835dddaa1ba343595a8f595' '/tmp/kayas-guide-docs/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.pdf' \
+            '45c52ac80c899fc12b69c9ba090d55055f11bbcbbf54732e6eff6e852d41c6cf' '/tmp/kayas-guide-docs/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.docx' | sha256sum -c -
+
       - name: Materialize dynamic guide
         run: |
           set -euo pipefail
