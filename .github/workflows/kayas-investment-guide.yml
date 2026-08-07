@@ -4,10 +4,12 @@ on:
   pull_request:
     paths:
       - .github/workflows/kayas-investment-guide.yml
+      - kayas/.guide-deploy-trigger
   push:
     branches: [main]
     paths:
       - .github/workflows/kayas-investment-guide.yml
+      - kayas/.guide-deploy-trigger
   workflow_dispatch:
 
 permissions:
