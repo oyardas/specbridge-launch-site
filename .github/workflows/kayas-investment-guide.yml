@@ -71,7 +71,8 @@ jobs:
           grep -q "196 hava" "$DEST/index.html"
           grep -q "1.972 MW" "$DEST/index.html"
           grep -q "yatirim_ve_teknoloji_rehberi/" kayas/model-loader.js
-          test "$(grep -o '"'"'"id":"'"'"' "$DEST/guide-data.js" | wc -l)" -ge 29
+          count=$(grep -o '"id":"' "$DEST/guide-data.js" | wc -l)
+          test "$count" -ge 29
 
       - name: Commit publication to main
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
