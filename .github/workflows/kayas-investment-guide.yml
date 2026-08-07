@@ -5,11 +5,13 @@ on:
     paths:
       - .github/workflows/kayas-investment-guide.yml
       - kayas/.guide-deploy-trigger
+      - kayas/guide-enhancements/**
   push:
     branches: [main]
     paths:
       - .github/workflows/kayas-investment-guide.yml
       - kayas/.guide-deploy-trigger
+      - kayas/guide-enhancements/**
   workflow_dispatch:
 
 permissions:
@@ -69,7 +71,21 @@ jobs:
           cp /tmp/kayas-guide-src/guide-data.js "$DEST/guide-data.js"
           cp /tmp/kayas-guide-src/model-loader.js kayas/model-loader.js
           cp /tmp/kayas-guide-docs/* "$DEST/assets/"
+          cp kayas/guide-enhancements/executive-visuals.css "$DEST/executive-visuals.css"
+          cp kayas/guide-enhancements/executive-visuals.js "$DEST/executive-visuals.js"
           python "$DEST/tools/build_guide_data.py" "$DEST/assets/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.docx" "$DEST/guide-data.js"
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('kayas/yatirim_ve_teknoloji_rehberi/index.html')
+          s=p.read_text(encoding='utf-8')
+          css='  <link rel="stylesheet" href="executive-visuals.css?v=20260808-exec1" />\n'
+          js='  <script src="executive-visuals.js?v=20260808-exec1"></script>\n'
+          if 'executive-visuals.css' not in s:
+              s=s.replace('</head>',css+'</head>')
+          if 'executive-visuals.js' not in s:
+              s=s.replace('</body>',js+'</body>')
+          p.write_text(s,encoding='utf-8')
+          PY
 
       - name: Validate publication contract
         run: |
@@ -77,6 +93,7 @@ jobs:
           DEST=kayas/yatirim_ve_teknoloji_rehberi
           node --check "$DEST/app.js"
           node --check "$DEST/guide-data.js"
+          node --check "$DEST/executive-visuals.js"
           node --check kayas/model-loader.js
           grep -q "Yatırım ve Teknoloji Rehberi" "$DEST/index.html"
           grep -q '"itCabinetsTotal":206' "$DEST/guide-data.js"
@@ -84,6 +101,9 @@ jobs:
           grep -q "196 hava" "$DEST/index.html"
           grep -q "1.972 MW" "$DEST/index.html"
           grep -q "yatirim_ve_teknoloji_rehberi/" kayas/model-loader.js
+          grep -q "executive-visuals.css" "$DEST/index.html"
+          grep -q "executive-visuals.js" "$DEST/index.html"
+          grep -q "chapter-carousel" "$DEST/executive-visuals.js"
           count=$(grep -o '"id":"' "$DEST/guide-data.js" | wc -l)
           test "$count" -ge 29
 
@@ -98,5 +118,5 @@ jobs:
             echo "No publication changes."
             exit 0
           fi
-          git commit -m "Publish KAYAS investment and technology guide [skip ci]"
+          git commit -m "Publish KAYAS executive chapter carousels [skip ci]"
           git push origin HEAD:main
