@@ -14,15 +14,14 @@
 <main class="card">
 <div class="eyebrow">KAYAŞ INVESTOR PORTAL</div>
 <h1>Yatırım ve Teknoloji Rehberi</h1>
-<p>Görsel rehber; 23 bölüm için “Nedir?”, “Veri merkezindeki önemi”, “Başlıca türleri / bileşenleri” ve “Basit çalışma mantığı” kartlarını, bölüm bazlı canlı açıklayıcı diyagramları ve mevcut rehber metnini birlikte sunar.</p>
-<div class="actions"><a class="primary" href="reader-rich.html">Görsel rehberi aç</a><a class="secondary" href="reader-safe.html">Stabil yedek reader</a><a class="secondary" href="../">KAYAŞ ana portalı</a><a class="secondary" href="health.html">Health check</a></div>
-<div class="status"><span class="dot"></span>Görsel reader ana sürümdür; safe reader yalnız yedek erişim için korunur.</div>
+<p>Güncel görsel reader; 23 bölüm için “Nedir?”, “Veri merkezindeki önemi”, “Başlıca türleri / bileşenleri”, “Basit çalışma mantığı”, animasyonlu konu diyagramları ve ayrıntılı rehber metnini birlikte sunar.</p>
+<div class="actions"><a class="primary" href="reader-safe.html">Güncel görsel rehberi aç</a><a class="secondary" href="../">KAYAŞ ana portalı</a><a class="secondary" href="health.html">Health check</a></div>
+<div class="status"><span class="dot"></span>404 riski oluşturan yeni reader dosyası devreden çıkarıldı; mevcut ve stabil <strong>reader-safe.html</strong> güncel görsel sürüme yükseltildi.</div>
 </main>
 <script>
 (function(){
-  const KEY='kayas_walkthrough_auth_until';
-  let until=0;try{until=Number(localStorage.getItem(KEY)||0);}catch(_){until=0;}
-  if(until>Date.now()) setTimeout(()=>location.replace('reader-rich.html'),120);
+ const KEY='kayas_walkthrough_auth_until';let until=0;try{until=Number(localStorage.getItem(KEY)||0)}catch(_){until=0}
+ if(until>Date.now()) setTimeout(()=>location.replace('reader-safe.html?v=20260808-rich2'),120);
 })();
 </script>
 </body>
