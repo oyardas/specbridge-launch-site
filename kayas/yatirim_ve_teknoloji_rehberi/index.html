@@ -1,8 +1,155 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#0d2742">
-<title>KAYAŞ | Yatırım ve Teknoloji Rehberi</title>
-<style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#edf3f6,#dfeaf0);font-family:Inter,Segoe UI,Arial,sans-serif;color:#17334b}.card{width:min(800px,calc(100vw - 32px));background:#fff;border:1px solid #d9e5eb;border-radius:22px;padding:30px;box-shadow:0 18px 48px rgba(13,39,66,.12)}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.07em;color:#168b91}.card h1{font-size:32px;line-height:1.08;color:#102e4a;margin:8px 0 12px}.card p{line-height:1.6;color:#5b7181}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.actions a{display:inline-block;text-decoration:none;border-radius:11px;padding:11px 15px;font-weight:700;font-size:13px}.primary{background:#102e4a;color:#fff}.secondary{background:#eef6f8;color:#17445f;border:1px solid #d5e5eb}.status{margin-top:18px;padding:12px 14px;border-radius:12px;background:#f4f9fb;border:1px solid #d9e8ee;font-size:12px;color:#476071}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2aa876;margin-right:7px}</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071423" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>KAYAS Veri Merkezi | Yatırım ve Teknoloji Rehberi</title>
+  <link rel="icon" type="image/png" href="../assets/logos/specbridge_icon_colored.png" />
+  <link rel="stylesheet" href="styles.css?v=20260808-r1" />
+  <link rel="stylesheet" href="executive-visuals.css?v=20260808-exec1" />
+  <link rel="stylesheet" href="v44-enhancements.css?v=20260808-v44" />
 </head>
-<body><main class="card"><div class="eyebrow">KAYAŞ INVESTOR PORTAL · v4.5 ILLUSTRATED LIVE</div><h1>Yatırım ve Teknoloji Rehberi</h1><p>Görsel sürüm; 23 bölüm için “Nedir?”, veri merkezindeki önemi, başlıca türleri/bileşenleri, basit çalışma mantığı, animasyonlu konu diyagramları, KAYAŞ konsept görselleri ve ayrıntılı rehber metnini birlikte sunar.</p><div class="actions"><a class="primary" href="reader-safe.html?v=20260808-illustrated-live1">Görsel rehberi aç</a><a class="secondary" href="../">KAYAŞ ana portalı</a><a class="secondary" href="health.html">Health check</a></div><div class="status"><span class="dot"></span><strong>reader-safe.html</strong> üretim yolu üzerinde güncel illustrated-live sürüme yükseltildi.</div></main><script>(function(){const KEY='kayas_walkthrough_auth_until';let until=0;try{until=Number(localStorage.getItem(KEY)||0)}catch(_){until=0}if(until>Date.now())setTimeout(()=>location.replace('reader-safe.html?v=20260808-illustrated-live1'),120)})();</script></body></html>
+<body class="is-night">
+  <div class="login-gate" id="loginGate" aria-modal="true" role="dialog">
+    <div class="login-card">
+      <div class="brand-lockup">
+        <img src="../assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" />
+        <div><strong>KAYAS Investor Experience</strong><span>Protected project portal</span></div>
+        <span class="h3c-badge"><img src="../assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
+      </div>
+      <span class="security-label">Protected investor access</span>
+      <h1>Yatırım ve Teknoloji Rehberi</h1>
+      <p>Bu sayfa KAYAS yatırımcı portalının kontrollü web sürümüdür.</p>
+      <label>Kullanıcı adı<input id="loginUser" autocomplete="username" /></label>
+      <label>Parola<input id="loginPass" type="password" autocomplete="current-password" /></label>
+      <button id="loginButton" type="button">Portala gir</button>
+      <p class="login-error" id="loginError" aria-live="polite"></p>
+      <small>Bu istemci tarafı erişim kapısı sunum kolaylığı sağlar; yüksek hassasiyetli dokümanlar için sunucu/CDN katmanında gerçek erişim kontrolü tercih edilmelidir.</small>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="icon-link" href="../" aria-label="KAYAS ana portala dön">←</a>
+      <div class="specbridge-brand">
+        <img class="theme-logo night" src="../assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" />
+        <img class="theme-logo day" src="../assets/logos/specbridge_icon_colored.png" alt="SpecBridge AI" />
+        <div><strong>SpecBridge AI</strong><span>KAYAS Investor Portal</span></div>
+      </div>
+      <div class="title-block"><strong>Yatırım ve Teknoloji Rehberi</strong><span>Web-native karar ve teknik inceleme yüzeyi</span></div>
+    </div>
+    <div class="topbar-actions">
+      <span class="h3c-badge"><img src="../assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
+      <button id="themeButton" class="icon-button" type="button" aria-label="Tema değiştir">◐</button>
+      <button id="printButton" class="icon-button" type="button" aria-label="Yazdır">⎙</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <p class="eyebrow">KAYAS-DC-GUIDE</p>
+        <h2>İçindekiler</h2>
+        <div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Bölüm, teknoloji veya karar ara…" /></div>
+        <div class="filter-row">
+          <button class="filter-chip is-active" data-filter="all">Tümü</button>
+          <button class="filter-chip" data-filter="chapter">23 bölüm</button>
+          <button class="filter-chip" data-filter="appendix">Ekler</button>
+        </div>
+      </div>
+      <nav id="chapterNav" class="chapter-nav" aria-label="Rehber bölümleri"></nav>
+      <div class="sidebar-foot">
+        <a href="#source-panel" class="source-shortcut">Kaynak dosyalar ve sürüm bilgisi ↓</a>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">KAYAS Veri Merkezi</p>
+          <h1>Yatırım, tasarım, teknoloji ve gelecek için tek karar yüzeyi</h1>
+          <p class="lead">197 sayfalık rehberin web-native sürümü; teknik açıklamaları yatırım kararları, kanıt kapıları, fazlama ve H3C çözüm eşleştirmesiyle birlikte dinamik olarak sunar.</p>
+          <div class="hero-actions">
+            <button id="startReading" class="primary-action" type="button">Bölümlere geç</button>
+            <button id="showDecisionMap" class="secondary-action" type="button">Karar haritası</button>
+            <a class="secondary-action" href="#source-panel">PDF / DOCX</a>
+          </div>
+          <div class="status-line"><span class="status-pill amber">OPEN-CONFIRMATION REQUIRED</span><span>206 IT kabinet sayım kapsamı ve yardımcı kabinetlerin fiziksel sayımı yazılı H3C teyidine tabidir.</span></div>
+        </div>
+        <div class="hero-visual">
+          <img src="../assets/gallery/kayas_concept_09_datahall.webp" alt="KAYAS veri merkezi konsept görseli" />
+          <div class="visual-caption"><strong>Konsept görsel</strong><span>Uygulama projesi değildir.</span></div>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Güncel çalışma baseline'ı">
+        <article><strong>206</strong><span>IT kabinet</span><small>196 hava + 10 sıvı</small></article>
+        <article><strong>1.972 MW</strong><span>IT nameplate</span><small>1.372 MW + 0.600 MW</small></article>
+        <article><strong>7 kW</strong><span>Standart kabinet</span><small>196 kabinet çalışma yönü</small></article>
+        <article><strong>60 kW</strong><span>AI/HPC kabinet</span><small>10 kabinet ön varsayımı</small></article>
+        <article><strong>≈2.000</strong><span>Uzun vadeli vizyon</span><small>Fazlı kampüs yaklaşımı</small></article>
+        <article><strong>Tier III</strong><span>Hedef</span><small>Sertifika alınmış değildir</small></article>
+      </section>
+
+      <section class="decision-panel" id="decisionPanel">
+        <div class="section-heading">
+          <div><p class="eyebrow">Yönetici karar çerçevesi</p><h2>Bugün ne yapılmalı, ne hazırlanmalı, ne talep ile açılmalı?</h2></div>
+          <span class="source-tag">Rehber Tablo 5-6</span>
+        </div>
+        <div class="decision-columns">
+          <article class="decision-card now"><span>01</span><h3>BUGÜN YAPILMALI</h3><p>Resmî güç/bağlantı ve load design; statik-sismik-yangın; 8°C su test/izin; Faz-1 MEP ve commissioning; iki fiziksel fiber/MMR; ölçüm/DCIM; IaaS/colo/backup hizmet tasarımı; siber/operasyon modeli; normalize teklifler ve finansal model.</p></article>
+          <article class="decision-card prepare"><span>02</span><h3>ALTYAPISI BUGÜN HAZIRLANMALI</h3><p>Gelecek OG/AG/UPS/jeneratör alanları ve busway koridorları; liquid cooling headers/CDU alanı; ikinci fiber/ODF kapasitesi; ayrı-site DR arayüzleri; 800G-ready fiziksel yol; BESS, PQC, edge ve AI genişleme rezervleri.</p></article>
+          <article class="decision-card demand"><span>03</span><h3>MÜŞTERİ TALEBİYLE</h3><p>İlave GPU/60-100+ kW rack, GPUaaS, wholesale/dedicated hall, PaaS/DBaaS, multi-cloud, edge düğümleri, on-prem quantum donanımı ve 500/1.000/2.000 rack fazları.</p></article>
+        </div>
+        <div class="evidence-gates">
+          <h3>Kritik kanıt kapıları</h3>
+          <div id="evidenceGrid" class="evidence-grid"></div>
+        </div>
+      </section>
+
+      <section class="reader" id="reader">
+        <div class="reader-toolbar">
+          <div><p class="eyebrow" id="readerKicker">Bölüm 01</p><h2 id="readerTitle">Yatırım ve Pazar Görünümü</h2></div>
+          <div class="reader-actions">
+            <button id="prevChapter" type="button">← Önceki</button>
+            <button id="nextChapter" type="button">Sonraki →</button>
+          </div>
+        </div>
+        <div id="searchNotice" class="search-notice" hidden></div>
+        <article id="readerBody" class="reader-body"></article>
+      </section>
+
+      <section class="source-panel" id="source-panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">Kaynak ve sürüm</p><h2>Orijinal belge dosyaları</h2></div>
+          <span class="source-tag">v3.2 Editorial Editable Final</span>
+        </div>
+        <div class="source-grid">
+          <article class="source-card">
+            <div class="file-badge pdf">PDF</div>
+            <div><h3>Yatırım ve Teknoloji Rehberi — PDF</h3><p>Sabit düzen, görseller, tablolar ve sayfa bazlı referans için.</p>
+              <div class="file-actions"><a href="assets/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.pdf" target="_blank" rel="noopener">Tarayıcıda aç</a><a href="assets/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.pdf" download>İndir</a></div>
+            </div>
+          </article>
+          <article class="source-card">
+            <div class="file-badge docx">DOCX</div>
+            <div><h3>Yatırım ve Teknoloji Rehberi — düzenlenebilir kaynak</h3><p>Editoryal güncelleme ve kontrollü sürüm üretimi için.</p>
+              <div class="file-actions"><a href="assets/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.docx" download>DOCX indir</a></div>
+            </div>
+          </article>
+        </div>
+        <div class="document-boundary"><strong>Yayın sınırı</strong><p>Bu rehber bağlayıcı teklif, uygulama projesi, kesin mühendislik hesabı, kesin SLA, sertifika veya yatırım getirisi garantisi değildir. Tier III ifadesi hedefi belirtir; sertifikasyon kanıtı değildir.</p></div>
+      </section>
+    </section>
+  </main>
+
+  <button id="mobileNavButton" class="mobile-nav-button" type="button">☰ Bölümler</button>
+
+  <script src="guide-data.js?v=20260808-r1"></script>
+  <script src="app.js?v=20260808-r1"></script>
+  <script src="executive-visuals.js?v=20260808-exec1"></script>
+  <script src="v44-enhancements.js?v=20260808-v44"></script>
+</body>
+</html>
