@@ -73,6 +73,8 @@ jobs:
           cp /tmp/kayas-guide-docs/* "$DEST/assets/"
           cp kayas/guide-enhancements/executive-visuals.css "$DEST/executive-visuals.css"
           cp kayas/guide-enhancements/executive-visuals.js "$DEST/executive-visuals.js"
+          cp kayas/guide-enhancements/v44-enhancements.css "$DEST/v44-enhancements.css"
+          cp kayas/guide-enhancements/v44-enhancements.js "$DEST/v44-enhancements.js"
           python "$DEST/tools/build_guide_data.py" "$DEST/assets/KAYAS_DC_Yatirim_ve_Teknoloji_Rehberi_v3.2_Editorial_Editable_Final.docx" "$DEST/guide-data.js"
           python - <<'PY'
           from pathlib import Path
@@ -80,10 +82,16 @@ jobs:
           s=p.read_text(encoding='utf-8')
           css='  <link rel="stylesheet" href="executive-visuals.css?v=20260808-exec1" />\n'
           js='  <script src="executive-visuals.js?v=20260808-exec1"></script>\n'
+          css44='  <link rel="stylesheet" href="v44-enhancements.css?v=20260808-v44" />\n'
+          js44='  <script src="v44-enhancements.js?v=20260808-v44"></script>\n'
           if 'executive-visuals.css' not in s:
               s=s.replace('</head>',css+'</head>')
+          if 'v44-enhancements.css' not in s:
+              s=s.replace('</head>',css44+'</head>')
           if 'executive-visuals.js' not in s:
               s=s.replace('</body>',js+'</body>')
+          if 'v44-enhancements.js' not in s:
+              s=s.replace('</body>',js44+'</body>')
           p.write_text(s,encoding='utf-8')
           PY
 
@@ -94,6 +102,7 @@ jobs:
           node --check "$DEST/app.js"
           node --check "$DEST/guide-data.js"
           node --check "$DEST/executive-visuals.js"
+          node --check "$DEST/v44-enhancements.js"
           node --check kayas/model-loader.js
           grep -q "Yatırım ve Teknoloji Rehberi" "$DEST/index.html"
           grep -q '"itCabinetsTotal":206' "$DEST/guide-data.js"
@@ -103,6 +112,10 @@ jobs:
           grep -q "yatirim_ve_teknoloji_rehberi/" kayas/model-loader.js
           grep -q "executive-visuals.css" "$DEST/index.html"
           grep -q "executive-visuals.js" "$DEST/index.html"
+          grep -q "v44-enhancements.css" "$DEST/index.html"
+          grep -q "v44-enhancements.js" "$DEST/index.html"
+          grep -q "Konuya hızlı giriş" "$DEST/v44-enhancements.js"
+          grep -q "v44-dashboard" "$DEST/v44-enhancements.js"
           grep -q "chapter-carousel" "$DEST/executive-visuals.js"
           count=$(grep -o '"id":"' "$DEST/guide-data.js" | wc -l)
           test "$count" -ge 29
@@ -118,5 +131,5 @@ jobs:
             echo "No publication changes."
             exit 0
           fi
-          git commit -m "Publish KAYAS executive chapter carousels [skip ci]"
+          git commit -m "Publish KAYAS v4.4 web enhancements [skip ci]"
           git push origin HEAD:main
