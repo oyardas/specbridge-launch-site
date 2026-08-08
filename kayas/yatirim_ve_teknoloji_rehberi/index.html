@@ -7,22 +7,22 @@
 <meta name="theme-color" content="#0d2742" />
 <title>KAYAŞ | Yatırım ve Teknoloji Rehberi</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#edf3f6,#dfeaf0);font-family:Inter,Segoe UI,Arial,sans-serif;color:#17334b}.card{width:min(760px,calc(100vw - 32px));background:#fff;border:1px solid #d9e5eb;border-radius:22px;padding:30px;box-shadow:0 18px 48px rgba(13,39,66,.12)}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.07em;color:#168b91}.card h1{font-size:32px;line-height:1.08;color:#102e4a;margin:8px 0 12px}.card p{line-height:1.6;color:#5b7181}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.actions a{display:inline-block;text-decoration:none;border-radius:11px;padding:11px 15px;font-weight:700;font-size:13px}.primary{background:#102e4a;color:#fff}.secondary{background:#eef6f8;color:#17445f;border:1px solid #d5e5eb}.status{margin-top:18px;padding:12px 14px;border-radius:12px;background:#f4f9fb;border:1px solid #d9e8ee;font-size:12px;color:#476071}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2aa876;margin-right:7px}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#edf3f6,#dfeaf0);font-family:Inter,Segoe UI,Arial,sans-serif;color:#17334b}.card{width:min(780px,calc(100vw - 32px));background:#fff;border:1px solid #d9e5eb;border-radius:22px;padding:30px;box-shadow:0 18px 48px rgba(13,39,66,.12)}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.07em;color:#168b91}.card h1{font-size:32px;line-height:1.08;color:#102e4a;margin:8px 0 12px}.card p{line-height:1.6;color:#5b7181}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.actions a{display:inline-block;text-decoration:none;border-radius:11px;padding:11px 15px;font-weight:700;font-size:13px}.primary{background:#102e4a;color:#fff}.secondary{background:#eef6f8;color:#17445f;border:1px solid #d5e5eb}.status{margin-top:18px;padding:12px 14px;border-radius:12px;background:#f4f9fb;border:1px solid #d9e8ee;font-size:12px;color:#476071}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2aa876;margin-right:7px}
 </style>
 </head>
 <body>
 <main class="card">
 <div class="eyebrow">KAYAŞ INVESTOR PORTAL</div>
 <h1>Yatırım ve Teknoloji Rehberi</h1>
-<p>Stabil web reader hazır. Portal oturumunuz açıksa rehber otomatik olarak açılır. Oturum yoksa önce KAYAŞ ana portalına giriş yapın.</p>
-<div class="actions"><a class="primary" href="reader-safe.html">Rehberi aç</a><a class="secondary" href="../">KAYAŞ ana portalı</a><a class="secondary" href="health.html">Health check</a></div>
-<div class="status"><span class="dot"></span>Yayın yolu aktif. Bu giriş sayfası ağır görsel/animasyon katmanlarından bağımsızdır.</div>
+<p>Görsel rehber; 23 bölüm için “Nedir?”, “Veri merkezindeki önemi”, “Başlıca türleri / bileşenleri” ve “Basit çalışma mantığı” kartlarını, bölüm bazlı canlı açıklayıcı diyagramları ve mevcut rehber metnini birlikte sunar.</p>
+<div class="actions"><a class="primary" href="reader-rich.html">Görsel rehberi aç</a><a class="secondary" href="reader-safe.html">Stabil yedek reader</a><a class="secondary" href="../">KAYAŞ ana portalı</a><a class="secondary" href="health.html">Health check</a></div>
+<div class="status"><span class="dot"></span>Görsel reader ana sürümdür; safe reader yalnız yedek erişim için korunur.</div>
 </main>
 <script>
 (function(){
   const KEY='kayas_walkthrough_auth_until';
   let until=0;try{until=Number(localStorage.getItem(KEY)||0);}catch(_){until=0;}
-  if(until>Date.now()) setTimeout(()=>location.replace('reader-safe.html'),120);
+  if(until>Date.now()) setTimeout(()=>location.replace('reader-rich.html'),120);
 })();
 </script>
 </body>
