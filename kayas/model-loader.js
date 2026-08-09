@@ -9,6 +9,23 @@
   var applyQueued=false;
   var isApplying=false;
 
+  function ensurePortalPatch(){
+    if(!document.querySelector('link[data-kayas-portal-patch]')){
+      var link=document.createElement('link');
+      link.rel='stylesheet';
+      link.href='portal-light-mobile.css?v=20260809-v1';
+      link.setAttribute('data-kayas-portal-patch','1');
+      document.head.appendChild(link);
+    }
+  }
+  function applyPortalDefaults(){
+    document.body.classList.remove('is-night');
+    var night=document.getElementById('nightToggle');
+    if(night)night.checked=false;
+    var themeMeta=document.querySelector('meta[name="theme-color"]');
+    if(themeMeta)themeMeta.setAttribute('content','#f7fafc');
+  }
+
   function readProjectData(){
     try{
       var xhr=new XMLHttpRequest();
@@ -67,24 +84,31 @@
   function applyGuideLinks(){
     var actions=document.querySelector('.app-bar-actions');
     if(actions&&!document.getElementById('investmentGuideLink')){
-      var top=document.createElement('a');top.id='investmentGuideLink';top.className='tour-button';top.href=GUIDE_URL;top.title='KAYAS Yatırım ve Teknoloji Rehberi';top.innerHTML='▣ <span>Yatırım Rehberi</span>';
+      var top=document.createElement('a');top.id='investmentGuideLink';top.className='tour-button';top.href=GUIDE_URL;top.target='_blank';top.rel='noopener';top.title='KAYAS Yatırım ve Teknoloji Rehberi';top.innerHTML='▣ <span>Yatırım Rehberi</span>';
       var tour=document.getElementById('tourButton');actions.insertBefore(top,tour||actions.firstChild);
     }
     var reportList=document.querySelector('.report-list');
     if(reportList&&!document.getElementById('investmentGuideReportLink')){
-      var item=document.createElement('a');item.id='investmentGuideReportLink';item.className='report-item';item.href=GUIDE_URL;
-      item.innerHTML='<span class="report-icon green">WEB</span><span><strong>Yatırım ve Teknoloji Rehberi</strong><small>23 bölüm + ekler · tam metin arama · güncel karar baseline\'ı</small></span><b>↗</b>';
+      var item=document.createElement('a');item.id='investmentGuideReportLink';item.className='report-item';item.href=GUIDE_URL;item.target='_blank';item.rel='noopener';
+      item.innerHTML='<span class="report-icon green">WEB</span><span><strong>Yatırım ve Teknoloji Rehberi</strong><small>23 bölüm + ekler · Investor Edition 2026 · ayrı sayfada açılır</small></span><b>↗</b>';
       var reportsLabel=Array.prototype.find.call(reportList.children,function(el){return el.classList&&el.classList.contains('report-group-label')&&/Reports/i.test(el.textContent||'');});
       if(reportsLabel&&reportsLabel.nextSibling)reportList.insertBefore(item,reportsLabel.nextSibling);else reportList.insertBefore(item,reportList.firstChild);
     }
     var panel=document.getElementById('controlPanel');
     if(panel&&!document.getElementById('currentBaselineNotice')){
       var note=document.createElement('div');note.id='currentBaselineNotice';note.className='controls';
-      note.innerHTML='<p><strong>CURRENT DECISION BASELINE:</strong> 206 IT cabinets = 196 air × 7 kW + 10 liquid × 60 kW = <strong>1.972 MW</strong>.</p><p>The visible 3D capacity geometry is the previous 200-IT-cabinet concept revision and is <strong>SUPERSEDED</strong> for capacity decisions. <a href="'+GUIDE_URL+'">Open the current guide →</a></p>';
+      note.innerHTML='<p><strong>CURRENT DECISION BASELINE:</strong> 206 IT cabinets = 196 air × 7 kW + 10 liquid × 60 kW = <strong>1.972 MW</strong>.</p><p>The visible 3D capacity geometry is the previous 200-IT-cabinet concept revision and is <strong>SUPERSEDED</strong> for capacity decisions. <a href="'+GUIDE_URL+'" target="_blank" rel="noopener">Open the current guide →</a></p>';
       panel.appendChild(note);
     }
+    if(panel&&!document.getElementById('mobilePrimaryActions')){
+      var row=document.createElement('div');row.id='mobilePrimaryActions';row.className='mobile-primary-actions';
+      row.innerHTML='<button type="button" id="mobileTourStart">▶ Turu Başlat</button><a href="'+GUIDE_URL+'" target="_blank" rel="noopener">▣ Investor Rehberi</a>';
+      var tabs=panel.querySelector('.presentation-tabs');
+      if(tabs&&tabs.nextSibling)tabs.parentNode.insertBefore(row,tabs.nextSibling);else panel.insertBefore(row,panel.firstChild);
+      var start=row.querySelector('#mobileTourStart');if(start)start.addEventListener('click',function(){var t=document.getElementById('tourButton');if(t)t.click();});
+    }
   }
-  function applyAll(){walkAndReplace(document.body);applyMetrics();applyGuideLinks();}
+  function applyAll(){applyPortalDefaults();walkAndReplace(document.body);applyMetrics();applyGuideLinks();}
   function applyAllSafely(){
     if(isApplying)return;isApplying=true;if(observer)observer.disconnect();
     try{applyAll();}finally{isApplying=false;if(observer&&document.body)observer.observe(document.body,observerConfig);}
@@ -99,8 +123,8 @@
     }catch(_){}
   }
 
-  readProjectData();patchSpeech();
-  document.addEventListener('DOMContentLoaded',function(){applyAllSafely();observer=new MutationObserver(function(){if(!isApplying)scheduleApply();});observer.observe(document.body,observerConfig);window.KAYAS_applyProjectData=applyAllSafely;});
+  ensurePortalPatch();readProjectData();patchSpeech();
+  document.addEventListener('DOMContentLoaded',function(){applyPortalDefaults();applyAllSafely();observer=new MutationObserver(function(){if(!isApplying)scheduleApply();});observer.observe(document.body,observerConfig);window.KAYAS_applyProjectData=applyAllSafely;});
   var s=document.createElement('script');s.src='src/kayas-3d.bundle.js?v=20260804-reports-presentations-r1-repair1';
   s.onload=function(){var e=document.getElementById('loadStatus');if(e)e.hidden=true;applyAllSafely();window.dispatchEvent(new Event('resize'));};
   s.onerror=function(){var e=document.getElementById('loadStatus');if(e){e.hidden=false;e.querySelector('strong').textContent='3D deneyim açılamadı';e.querySelector('span').textContent='Paket dosyaları eksik veya tarayıcı WebGL başlatamadı.';}};
