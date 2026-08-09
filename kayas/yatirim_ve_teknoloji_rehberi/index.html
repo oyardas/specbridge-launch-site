@@ -8,29 +8,10 @@
   <title>KAYAŞ Veri Merkezi Yatırım Stratejisi ve Teknoloji Yol Haritası | Investor Edition 2026</title>
   <link rel="icon" type="image/png" href="../assets/logos/specbridge_icon_colored.png" />
   <link rel="stylesheet" href="styles.css?v=20260808-r1" />
-  <link rel="stylesheet" href="executive-visuals.css?v=20260808-exec1" />
-  <link rel="stylesheet" href="v44-enhancements.css?v=20260808-v44" />
-  <link rel="stylesheet" href="v46-investor.css?v=20260809-v46" />
+  <link rel="stylesheet" href="v46-investor.css?v=20260809-v46b" />
+  <link rel="stylesheet" href="v46-stable.css?v=20260809-v46b" />
 </head>
 <body class="is-night">
-  <div class="login-gate" id="loginGate" aria-modal="true" role="dialog">
-    <div class="login-card">
-      <div class="brand-lockup">
-        <img src="../assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" />
-        <div><strong>KAYAŞ Investor Experience</strong><span>Protected project portal</span></div>
-        <span class="h3c-badge"><img src="../assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
-      </div>
-      <span class="security-label">Protected investor access</span>
-      <h1>Yatırım Stratejisi ve Teknoloji Yol Haritası</h1>
-      <p>Investor Edition 2026 · kontrollü web sürümü.</p>
-      <label>Kullanıcı adı<input id="loginUser" autocomplete="username" /></label>
-      <label>Parola<input id="loginPass" type="password" autocomplete="current-password" /></label>
-      <button id="loginButton" type="button">Portala gir</button>
-      <p class="login-error" id="loginError" aria-live="polite"></p>
-      <small>Bu istemci tarafı erişim kapısı sunum kolaylığı sağlar; yüksek hassasiyetli dokümanlar için sunucu/CDN katmanında gerçek erişim kontrolü tercih edilmelidir.</small>
-    </div>
-  </div>
-
   <header class="topbar">
     <div class="topbar-left">
       <a class="icon-link" href="../" aria-label="KAYAŞ ana portala dön">←</a>
@@ -61,23 +42,23 @@
         </div>
       </div>
       <nav id="chapterNav" class="chapter-nav" aria-label="Rehber bölümleri"></nav>
-      <div class="sidebar-foot">
-        <a href="#source-panel" class="source-shortcut">Yayın ve sürüm bilgisi ↓</a>
-      </div>
+      <div class="sidebar-foot"><a href="#source-panel" class="source-shortcut">Kaynak ve yayın sınırı ↓</a></div>
     </aside>
 
     <section class="workspace">
+      <div class="v46-access-note"><strong>Investor Edition 2026:</strong> Bu canlı sürüm KAYAŞ yatırımcı portalından açılan kontrollü sunum yüzeyidir. Teknik değerler ön fizibilite ve doğrulama statüleriyle okunmalıdır.</div>
+
       <section class="hero" id="overview">
         <div class="hero-copy">
           <p class="eyebrow">KAYAŞ VERİ MERKEZİ · INVESTOR EDITION 2026</p>
           <h1>Yatırım Stratejisi ve Teknoloji Yol Haritası</h1>
-          <p class="lead">Yatırımcılar, yönetim ve teknik paydaşlar için kaynaklı, vendor-neutral, fazlı yatırım kararlarıyla teknik mimariyi aynı yüzeyde birleştiren 2026 yatırımcı sürümü.</p>
+          <p class="lead">Yatırımcılar, yönetim ve teknik paydaşlar için kaynaklı, vendor-neutral ve fazlı yatırım kararlarıyla teknik mimariyi aynı yüzeyde birleştiren yatırımcı rehberi.</p>
           <div class="hero-actions">
             <button id="startReading" class="primary-action" type="button">Bölümlere geç</button>
             <button id="showDecisionMap" class="secondary-action" type="button">Karar haritası</button>
-            <a class="secondary-action" href="#source-panel">Yayın bilgisi</a>
+            <a class="secondary-action" href="#source-panel">Yayın sınırı</a>
           </div>
-          <div class="status-line"><span class="status-pill amber">INVESTOR PREVIEW</span><span>Ön fizibilite ve teknoloji stratejisi; bağlayıcı teklif, kesin mühendislik veya sertifika değildir.</span></div>
+          <div class="status-line"><span class="status-pill amber">INVESTOR PREVIEW</span><span>Bağlayıcı teklif, kesin mühendislik hesabı, sertifika veya yatırım getirisi garantisi değildir.</span></div>
         </div>
         <div class="hero-visual">
           <img src="../assets/gallery/kayas_concept_09_datahall.webp" alt="KAYAŞ veri merkezi konsept görseli" />
@@ -86,59 +67,47 @@
       </section>
 
       <section class="metrics-grid" aria-label="Güncel çalışma baseline'ı">
-        <article><strong>206</strong><span>IT kabinet</span><small>196 hava + 10 sıvı</small></article>
-        <article><strong>1.972 MW</strong><span>IT nameplate</span><small>Ön fizibilite modeli</small></article>
-        <article><strong>7 kW</strong><span>Standart kabinet</span><small>Standart colo baseline</small></article>
-        <article><strong>10</strong><span>AI/HPC kabinet</span><small>Sıvı soğutmalı Faz-1 yaklaşımı</small></article>
+        <article><strong>≈206</strong><span>Faz-1 IT kabinet</span><small>Güncel yerleşim ile doğrulanmalı</small></article>
         <article><strong>≈2.000</strong><span>Uzun vadeli vizyon</span><small>Fazlı kampüs yaklaşımı</small></article>
-        <article><strong>Tier III</strong><span>Hedef</span><small>Sertifika alınmış değildir</small></article>
+        <article><strong>≈7 kW</strong><span>Standart kabinet</span><small>Çalışma baseline'ı</small></article>
+        <article><strong>≈10</strong><span>AI/HPC kabinet</span><small>Sıvı soğutmalı başlangıç zonu</small></article>
+        <article><strong>≈16.5 MW</strong><span>Uzun vadeli enerji hedefi</span><small>Resmî tahsis belgesi değildir</small></article>
+        <article><strong>Tier III</strong><span>Hedef</span><small>Sertifika değildir</small></article>
       </section>
 
       <section class="decision-panel" id="decisionPanel">
         <div class="section-heading">
           <div><p class="eyebrow">Yönetici karar çerçevesi</p><h2>Bugün ne yapılmalı, ne hazırlanmalı, ne talep ile açılmalı?</h2></div>
-          <span class="source-tag">Investor Edition 2026</span>
+          <span class="source-tag">KAYAŞ yatırım sınıfları</span>
         </div>
         <div class="decision-columns">
-          <article class="decision-card now"><span>01</span><h3>BUGÜN YAPILMALI</h3><p>Resmî güç/bağlantı ve load design; statik-sismik-yangın; 8°C su test/izin; Faz-1 MEP ve commissioning; iki fiziksel fiber/MMR; ölçüm/DCIM; IaaS/colo/backup hizmet tasarımı; siber/operasyon modeli; normalize teklifler ve finansal model.</p></article>
-          <article class="decision-card prepare"><span>02</span><h3>ALTYAPISI BUGÜN HAZIRLANMALI</h3><p>Gelecek OG/AG/UPS/jeneratör alanları ve busway koridorları; liquid cooling headers/CDU alanı; ikinci fiber/ODF kapasitesi; ayrı-site DR arayüzleri; 1.6T-ready fiziksel yol; BESS, PQC, edge ve AI genişleme rezervleri.</p></article>
-          <article class="decision-card demand"><span>03</span><h3>MÜŞTERİ TALEBİYLE</h3><p>İlave GPU/60–100+ kW rack, GPUaaS, wholesale/dedicated hall, PaaS/DBaaS, multi-cloud, edge düğümleri, on-prem quantum donanımı ve 500/1.000/2.000 rack fazları.</p></article>
+          <article class="decision-card now"><span>01</span><h3>BUGÜN YAPILMALI</h3><p>Resmî güç/bağlantı ve load design; statik-sismik-yangın; 8°C su test/izin; Faz-1 MEP ve commissioning; iki fiziksel fiber/MMR; ölçüm/DCIM; ilk cloud/colo/backup hizmet tasarımı ve finansal model.</p></article>
+          <article class="decision-card prepare"><span>02</span><h3>ALTYAPISI BUGÜN HAZIRLANMALI</h3><p>Gelecek OG/AG/UPS/jeneratör alanları; busway koridorları; liquid cooling headers/CDU alanı; ikinci fiber kapasitesi; ayrı-site DR arayüzleri; BESS, PQC, edge ve AI genişleme rezervleri.</p></article>
+          <article class="decision-card demand"><span>03</span><h3>MÜŞTERİ TALEBİYLE</h3><p>İlave yüksek yoğunluklu GPU rack'leri, GPUaaS, wholesale/dedicated hall, PaaS/DBaaS, multi-cloud, edge düğümleri, on-prem quantum donanımı ve sonraki büyük kapasite fazları.</p></article>
         </div>
-        <div class="evidence-gates">
-          <h3>Kritik kanıt kapıları</h3>
-          <div id="evidenceGrid" class="evidence-grid"></div>
-        </div>
+        <div class="evidence-gates"><h3>Kritik kanıt kapıları</h3><div id="evidenceGrid" class="evidence-grid"></div></div>
       </section>
 
       <section class="reader" id="reader">
         <div class="reader-toolbar">
           <div><p class="eyebrow" id="readerKicker">Bölüm 01</p><h2 id="readerTitle">Yatırım ve Pazar Görünümü</h2></div>
-          <div class="reader-actions">
-            <button id="prevChapter" type="button">← Önceki</button>
-            <button id="nextChapter" type="button">Sonraki →</button>
-          </div>
+          <div class="reader-actions"><button id="prevChapter" type="button">← Önceki</button><button id="nextChapter" type="button">Sonraki →</button></div>
         </div>
         <div id="searchNotice" class="search-notice" hidden></div>
-        <article id="readerBody" class="reader-body"></article>
+        <article id="readerBody" class="reader-body"><p>Rehber yükleniyor…</p></article>
       </section>
 
       <section class="source-panel" id="source-panel">
-        <div class="section-heading">
-          <div><p class="eyebrow">Kaynak ve sürüm</p><h2>Investor Edition — kontrollü yayın bilgisi</h2></div>
-          <span class="source-tag">v4.6 Investor Edition 2026</span>
-        </div>
-        <div class="source-grid" style="display:none"></div>
-        <div class="document-boundary"><strong>Yayın sınırı</strong><p>Bu canlı rehber yatırım ve teknoloji kararlarını yapılandırır; bağlayıcı teklif, uygulama projesi, kesin mühendislik hesabı, kesin SLA, sertifika veya yatırım getirisi garantisi değildir. Tier III ifadesi hedeftir. Kontrollü PDF yatırımcı kopyası ayrıca dağıtılır. İletişim: <a href="mailto:admin@specbridge.co">admin@specbridge.co</a></p></div>
+        <div class="section-heading"><div><p class="eyebrow">Kaynak ve sürüm</p><h2>Investor Edition — kontrollü yayın bilgisi</h2></div><span class="source-tag">v4.6 Investor Edition 2026</span></div>
+        <div class="document-boundary"><strong>Yayın sınırı</strong><p>Bu canlı rehber yatırım ve teknoloji kararlarını yapılandırır; bağlayıcı teklif, uygulama projesi, kesin mühendislik hesabı, kesin SLA, sertifika veya yatırım getirisi garantisi değildir. Tier III ifadesi hedeftir. İletişim: <a href="mailto:admin@specbridge.co">admin@specbridge.co</a></p></div>
       </section>
     </section>
   </main>
 
   <button id="mobileNavButton" class="mobile-nav-button" type="button">☰ Bölümler</button>
 
-  <script src="guide-data.js?v=20260808-r1"></script>
-  <script src="app.js?v=20260808-r1"></script>
-  <script src="executive-visuals.js?v=20260808-exec1"></script>
-  <script src="v44-enhancements.js?v=20260808-v44"></script>
-  <script src="v46-investor.js?v=20260809-v46"></script>
+  <script src="guide-data.js?v=20260809-v46b"></script>
+  <script src="v46-reader-core.js?v=20260809-v46b"></script>
+  <script src="v46-investor.js?v=20260809-v46b"></script>
 </body>
 </html>
