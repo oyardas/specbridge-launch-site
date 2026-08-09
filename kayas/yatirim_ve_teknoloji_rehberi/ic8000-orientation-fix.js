@@ -2,7 +2,9 @@
   'use strict';
 
   const VIEWER_ID = 'ic8000-viewer';
-  const UPRIGHT_ORIENTATION = '90deg 0deg 0deg';
+  // IC8000 GLB is authored Z-up. model-viewer is Y-up, so -90° around X
+  // maps the model's +Z (upper cabling / hotspot 5 side) to screen +Y.
+  const UPRIGHT_ORIENTATION = '-90deg 0deg 0deg';
 
   function applyOrientation(viewer) {
     if (!viewer || viewer.dataset.uprightFixed === 'true') return;
@@ -16,7 +18,7 @@
       }
 
       viewer.cameraTarget = 'auto auto auto';
-      viewer.cameraOrbit = '28deg 72deg 150%';
+      viewer.cameraOrbit = '28deg 62deg 150%';
       viewer.fieldOfView = '28deg';
     };
 
