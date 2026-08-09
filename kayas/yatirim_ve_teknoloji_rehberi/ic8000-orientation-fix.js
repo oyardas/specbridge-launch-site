@@ -2,7 +2,7 @@
   'use strict';
 
   const VIEWER_ID = 'ic8000-viewer';
-  const UPRIGHT_ORIENTATION = '-90deg 0deg 0deg';
+  const UPRIGHT_ORIENTATION = '90deg 0deg 0deg';
 
   function applyOrientation(viewer) {
     if (!viewer || viewer.dataset.uprightFixed === 'true') return;
@@ -16,8 +16,8 @@
       }
 
       viewer.cameraTarget = 'auto auto auto';
-      viewer.cameraOrbit = '35deg 68deg 145%';
-      viewer.fieldOfView = '30deg';
+      viewer.cameraOrbit = '28deg 72deg 150%';
+      viewer.fieldOfView = '28deg';
     };
 
     if (viewer.loaded) {
