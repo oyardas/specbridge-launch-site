@@ -1,0 +1,19 @@
+/* KAYAS portal — light default + mobile investor actions */
+body:not(.is-night){color-scheme:light}
+body:not(.is-night) #app{background:radial-gradient(circle at 76% 8%,rgba(29,115,232,.08),transparent 34%),#e8eef5}
+.mobile-primary-actions{display:none}
+@media(max-width:760px){
+  #investmentGuideLink{display:flex!important;width:39px!important;padding:0!important;justify-content:center}
+  #investmentGuideLink span{display:none!important}
+  #tourButton{display:flex!important;width:39px!important;padding:0!important;justify-content:center}
+  #tourButton span{display:none!important}
+  .mobile-primary-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0 12px}
+  .mobile-primary-actions a,.mobile-primary-actions button{min-height:43px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-size:11px;font-weight:800;text-decoration:none}
+  .mobile-primary-actions a{display:flex;align-items:center;justify-content:center}
+  .mobile-primary-actions button{display:block;width:100%}
+}
+@media(max-width:460px){
+  .app-bar-actions .tour-button{display:flex!important}
+  .app-bar-actions #investmentGuideLink,.app-bar-actions #tourButton{width:37px!important;height:37px!important}
+  .mobile-primary-actions{grid-template-columns:1fr 1fr}
+}
