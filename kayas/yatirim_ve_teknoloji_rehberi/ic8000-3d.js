@@ -4,6 +4,7 @@
   const ROOT_ID = 'kayas-ic8000-3d';
   const MODEL_SRC = './assets/3d/IC8000_Colored_Textured.glb';
   const CHAPTER_TITLE = 'Geleneksel, Mikro-Modül ve Prefabrik Modüler Veri Merkezi';
+  const DEFAULT_ANNOTATION_ID = '5';
 
   const annotations = [
     {
@@ -119,7 +120,12 @@
     )).join('');
   }
 
+  function defaultAnnotation() {
+    return annotations.find((item) => item.id === DEFAULT_ANNOTATION_ID) || annotations[0];
+  }
+
   function buildMarkup() {
+    const initial = defaultAnnotation();
     return '' +
       '<section id="' + ROOT_ID + '" class="ic8000-3d-block" aria-labelledby="ic8000-3d-title">' +
         '<div class="ic8000-head">' +
@@ -142,7 +148,7 @@
               'camera-controls touch-action="pan-y" auto-rotate rotation-per-second="8deg" ' +
               'shadow-intensity="1" exposure="1" environment-image="neutral" tone-mapping="neutral" ' +
               'interaction-prompt="auto" loading="lazy" reveal="auto" ' +
-              'camera-orbit="35deg 68deg 145%" field-of-view="30deg" ' +
+              'camera-orbit="28deg 62deg 150%" field-of-view="28deg" ' +
               'min-camera-orbit="auto auto 70%" max-camera-orbit="auto auto 300%">' +
               makeHotspots() +
               '<div class="ic8000-loading" slot="progress-bar">3D model yükleniyor…</div>' +
@@ -151,8 +157,8 @@
           '</div>' +
           '<aside class="ic8000-panel" aria-live="polite">' +
             '<div class="ic8000-panel-label">Bileşen / Mimari İşlev</div>' +
-            '<h4 id="ic8000-info-title">1. ' + annotations[0].title + '</h4>' +
-            '<p id="ic8000-info-body">' + annotations[0].body + '</p>' +
+            '<h4 id="ic8000-info-title">' + initial.id + '. ' + initial.title + '</h4>' +
+            '<p id="ic8000-info-body">' + initial.body + '</p>' +
             '<ol class="ic8000-list" id="ic8000-list">' + makeList() + '</ol>' +
           '</aside>' +
         '</div>' +
@@ -203,11 +209,11 @@
     const reset = document.getElementById('ic8000-reset');
     if (reset) {
       reset.addEventListener('click', () => {
-        viewer.cameraTarget = '0m 0m 0m';
-        viewer.cameraOrbit = '35deg 68deg 145%';
-        viewer.fieldOfView = '30deg';
+        viewer.cameraTarget = 'auto auto auto';
+        viewer.cameraOrbit = '28deg 62deg 150%';
+        viewer.fieldOfView = '28deg';
         viewer.autoRotate = true;
-        selectAnnotation('1', false);
+        selectAnnotation(DEFAULT_ANNOTATION_ID, false);
       });
     }
 
@@ -234,7 +240,7 @@
       block.classList.add('has-model-error');
     });
 
-    selectAnnotation('1', false);
+    selectAnnotation(DEFAULT_ANNOTATION_ID, false);
   }
 
   function inject() {
