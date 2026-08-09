@@ -2,9 +2,9 @@
   'use strict';
 
   const VIEWER_ID = 'ic8000-viewer';
-  // IC8000 GLB is authored Z-up. model-viewer is Y-up, so -90° around X
-  // maps the model's +Z (upper cabling / hotspot 5 side) to screen +Y.
-  const UPRIGHT_ORIENTATION = '-90deg 0deg 0deg';
+  // model-viewer orientation order is roll pitch yaw. The IC8000 face marked by
+  // hotspot 5 is on model +Z, so a -90° pitch brings that face to screen +Y.
+  const UPRIGHT_ORIENTATION = '0deg -90deg 0deg';
 
   function applyOrientation(viewer) {
     if (!viewer || viewer.dataset.uprightFixed === 'true') return;
