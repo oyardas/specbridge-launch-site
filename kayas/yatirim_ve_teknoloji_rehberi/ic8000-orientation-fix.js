@@ -2,7 +2,7 @@
   'use strict';
 
   const VIEWER_ID = 'ic8000-viewer';
-  const UPRIGHT_ORIENTATION = '0deg -90deg 0deg';
+  const UPRIGHT_ORIENTATION = '-90deg 0deg 0deg';
 
   function applyOrientation(viewer) {
     if (!viewer || viewer.dataset.uprightFixed === 'true') return;
