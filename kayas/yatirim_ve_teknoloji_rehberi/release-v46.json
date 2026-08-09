@@ -1,0 +1,19 @@
+{
+  "project": "KAYAS-DC-GUIDE",
+  "release": "v4.6 Investor Edition 2026",
+  "published_at": "2026-08-09T10:21:00+03:00",
+  "route": "/kayas/yatirim_ve_teknoloji_rehberi/",
+  "status": "INVESTOR_PREVIEW",
+  "content_boundary": "Pre-feasibility and technology strategy; not a binding offer, final engineering design, SLA, certification or ROI guarantee.",
+  "contact": "admin@specbridge.co",
+  "live_layers": [
+    "guide-data.js",
+    "app.js",
+    "executive-visuals.js",
+    "v44-enhancements.js",
+    "v46-investor.css",
+    "v46-investor.js"
+  ],
+  "v46_learning_topics": ["UPS/50Hz", "BESS", "Cooling/8C water", "Fiber/DC fabric", "Cloud", "Colocation", "Tier/Commissioning", "HCI", "Virtualization/HA", "Backup/DR", "DCIM/BMS/EMS/NMS/NOC/SOC", "CPU vs GPU", "Classical bit vs qubit/PQC"],
+  "controlled_pdf_title": "KAYAŞ Veri Merkezi Yatırım Stratejisi ve Teknoloji Yol Haritası — Investor Edition 2026"
+}
