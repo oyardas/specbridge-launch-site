@@ -38,8 +38,8 @@
     {
       id: '5',
       title: 'Üst Kablolama / Dağıtım Bölgesi',
-      position: '0m -250m 1120m',
-      normal: '0m 0m 1m',
+      position: '0m 1775m -150m',
+      normal: '0m 1m 0m',
       body: 'Fiber, bakır kablolama ve bazı üstten dağıtım bileşenleri erişim, ayrışma ve bakım disiplinine göre planlanır. Data, güç ve yönetim yollarının fiziksel ayrımı detay projede doğrulanmalıdır.'
     },
     {
@@ -59,7 +59,7 @@
     {
       id: '8',
       title: 'Modüler Ölçeklenme',
-      position: '0m 1775m -150m',
+      position: '950m 1550m 250m',
       normal: '0m 1m 0m',
       body: 'KAYAŞ açısından temel yatırım ilkesi tek seferde tüm kapasiteyi kurmak değil; ortak güç, soğutma ve fiber omurgasını hazırlayıp satılabilir kW/MW ve müşteri talebine göre tekrarlanabilir modüller eklemektir.'
     }
@@ -148,7 +148,7 @@
               'camera-controls touch-action="pan-y" auto-rotate rotation-per-second="8deg" ' +
               'shadow-intensity="1" exposure="1" environment-image="neutral" tone-mapping="neutral" ' +
               'interaction-prompt="auto" loading="lazy" reveal="auto" ' +
-              'camera-orbit="28deg 62deg 150%" field-of-view="28deg" ' +
+              'camera-orbit="28deg 58deg 155%" field-of-view="28deg" ' +
               'min-camera-orbit="auto auto 70%" max-camera-orbit="auto auto 300%">' +
               makeHotspots() +
               '<div class="ic8000-loading" slot="progress-bar">3D model yükleniyor…</div>' +
@@ -210,7 +210,7 @@
     if (reset) {
       reset.addEventListener('click', () => {
         viewer.cameraTarget = 'auto auto auto';
-        viewer.cameraOrbit = '28deg 62deg 150%';
+        viewer.cameraOrbit = '28deg 58deg 155%';
         viewer.fieldOfView = '28deg';
         viewer.autoRotate = true;
         selectAnnotation(DEFAULT_ANNOTATION_ID, false);
