@@ -1,0 +1,15 @@
+/* KAYAŞ Investor Edition stable reader overrides */
+html,body{min-height:100%;}
+body{visibility:visible!important;opacity:1!important;}
+.topbar,.app-shell,.sidebar,.workspace,.hero,.metrics-grid,.decision-panel,.reader,.source-panel{visibility:visible!important;opacity:1!important;}
+.login-gate{display:none!important;}
+.v46-chapter-visual{margin:0 0 20px;border:1px solid var(--line);border-radius:17px;overflow:hidden;background:var(--panel2);box-shadow:0 12px 30px rgba(0,0,0,.10)}
+.v46-chapter-visual img{display:block;width:100%;height:min(48vw,500px);min-height:300px;object-fit:cover;background:#10243a}
+.v46-chapter-visual figcaption{display:flex;justify-content:space-between;gap:14px;padding:11px 13px;border-top:1px solid var(--line)}
+.v46-chapter-visual figcaption strong{font-size:10.5px}.v46-chapter-visual figcaption span{color:var(--muted);font-size:9.5px;text-align:right}
+.v46-access-note{max-width:1420px;margin:0 auto 14px;padding:10px 13px;border:1px solid rgba(69,213,210,.24);border-radius:12px;background:rgba(69,213,210,.07);color:var(--muted);font-size:10px;line-height:1.5}
+.v46-access-note strong{color:var(--cyan)}
+/* Never allow old motion layers to hide the stable production page. */
+.v44-reveal,.v44-primer,.v44-dashboard,.chapter-executive-v2,.chapter-carousel{opacity:1!important;visibility:visible!important;transform:none!important;}
+@media(max-width:760px){.v46-chapter-visual img{height:54vw;min-height:220px}.v46-chapter-visual figcaption{flex-direction:column}.v46-chapter-visual figcaption span{text-align:left}}
+@media print{.v46-access-note{display:none}.v46-chapter-visual{break-inside:avoid;box-shadow:none}.v46-chapter-visual img{height:auto;max-height:135mm;object-fit:cover}}
