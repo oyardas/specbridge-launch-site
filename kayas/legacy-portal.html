@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071423" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>KAYAS 3D Walkthrough | SpecBridge AI & H3C</title>
+  <link rel="icon" type="image/png" href="assets/logos/specbridge_icon_colored.png" />
+  <link rel="stylesheet" href="styles.css?v=20260804-reports-presentations-r1" />
+  <meta name="kayas-walkthrough-release" content="KAYAS_3D_Walkthrough_RC1_20260804" />
+</head>
+<body class="is-night">
+  <div class="login-gate" id="loginGate" aria-modal="true" role="dialog">
+    <div class="login-card">
+      <div class="login-brands">
+        <img class="specbridge-login-logo" src="assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" /><div class="login-brand-copy"><strong>KAYAS Investor Experience</strong><span>Protected project portal</span></div>
+        <span class="h3c-badge compact"><img class="h3c-wordmark-image" src="assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
+      </div>
+      <span class="security-label">Protected investor access</span>
+      <h1>KAYAS Data Center</h1>
+      <p>3D walkthrough, project visuals, and investor reports.</p>
+      <label>Username<input id="loginUser" autocomplete="username" inputmode="text" /></label>
+      <label>Password<input id="loginPass" type="password" autocomplete="current-password" /></label>
+      <button class="login-primary" id="loginButton" type="button">Enter portal</button>
+      <p class="login-error" id="loginError" aria-live="polite"></p>
+      <small>This is a static access gate. Confidential commercial data and credentials must not be embedded in page source.</small>
+    </div>
+  </div>
+
+  <main id="app">
+    <canvas id="scene" aria-label="KAYAS OSB layered 3D navigable data center model"></canvas>
+
+    <section class="professional-scene-layer" id="professionalSceneLayer" aria-live="polite" hidden>
+      <div class="professional-scene-media"><img id="professionalSceneImage" src="assets/gallery/kayas_concept_09_datahall.webp" alt="KAYAS professional scene visual" /></div>
+      <div class="professional-scene-shade"></div>
+      <div class="professional-scene-copy">
+        <p class="eyebrow" id="professionalSceneKind">Professional Presentation Mode</p>
+        <h2 id="professionalSceneTitle">KAYAS Data Center</h2>
+        <p id="professionalSceneNarrative">Customer-facing visual layer with technical 3D available on demand.</p>
+      </div>
+      <button type="button" class="professional-scene-toggle" id="professionalSceneToggle">Interactive 3D</button>
+    </section>
+
+    <div class="load-status" id="loadStatus" role="status">
+      <img class="loading-brand" src="assets/logos/specbridge_icon_colored.png" alt="SpecBridge AI" />
+      <strong>Loading 3D investor walkthrough…</strong>
+      <span>The model is prepared in real metric units. Use W/A/S/D on desktop and touch navigation on mobile.</span>
+    </div>
+
+    <header class="app-bar" aria-label="Application header">
+      <div class="app-bar-left">
+        <a class="back-button" href="../" aria-label="Return to the KAYAS investor portal">←</a>
+        <div class="specbridge-brand"><span class="specbridge-brand-inline"><span class="theme-logo-stack"><img class="specbridge-icon theme-logo theme-logo-night" src="assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" /><img class="specbridge-icon theme-logo theme-logo-day" src="assets/logos/specbridge_icon_colored.png" alt="SpecBridge AI" /></span><span class="specbridge-wordmark"><strong>SpecBridge AI</strong><span>KAYAS Investor Portal</span></span></span></div>
+        <span class="app-divider" aria-hidden="true"></span>
+        <div class="app-title-block"><strong>KAYAS 3D Walkthrough</strong><span>20 IC8000 pods × 10 IT cabinets + 6 CDU · 110 m × 46 m</span></div>
+      </div>
+      <div class="app-bar-actions">
+        <span class="h3c-badge"><img class="h3c-wordmark-image" src="assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
+        <button type="button" class="tour-button" id="tourButton" title="Start cinematic investor tour">▶ <span>Cinematic Tour</span></button>
+        <button type="button" class="icon-button" id="themeButton" aria-label="Toggle light/dark theme" title="Theme">◐</button>
+        <button type="button" class="icon-button" id="fullscreenButton" aria-label="Fullscreen" title="Fullscreen">⛶</button>
+        <button type="button" class="icon-button" id="panelToggleHeader" aria-label="Show or hide control panel" title="Menu">☰</button>
+      </div>
+    </header>
+
+    <section class="panel" id="controlPanel" aria-label="Walkthrough controls">
+      <div class="panel-heading">
+        <div><p class="eyebrow">KAYAS OSB</p><h1>Investor Walkthrough</h1><p class="subtitle">Next-generation data center investor experience based on H3C IC8000, targeting Tier III.</p></div>
+        <span class="panel-h3c"><img class="h3c-wordmark-image" src="assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
+      </div>
+
+      <div class="presentation-tabs" aria-label="Presentation sections">
+        <button type="button" data-panel="model" class="is-active">3D Model</button>
+        <button type="button" data-panel="gallery">Visuals</button>
+        <button type="button" data-panel="reports">Reports &amp; Presentations</button>
+      </div>
+
+      <div class="metric-grid">
+        <div><strong>110 m</strong><span>Uzunluk</span></div>
+        <div><strong>46 m</strong><span>Toplam derinlik</span></div>
+        <div><strong>5 m</strong><span>East terrace</span></div>
+        <div><strong>200</strong><span>IT cabinet target</span></div>
+        <div><strong>6</strong><span>CDU cabinets · auxiliary</span></div>
+        <div><strong>Tier III</strong><span>Design target</span></div>
+        <div class="schedule-metric"><strong>17 August 2026</strong><span>Target commercial approval and PO date</span></div>
+        <div class="schedule-metric"><strong>February 2027</strong><span>Target opening</span></div>
+      </div>
+      <p class="subtitle cdu-scope-note"><strong>Counting rule:</strong> 206 physical equipment positions = 200 IT cabinets + 6 CDU cabinets. CDU cabinets are auxiliary and not sellable IT cabinets.</p>
+
+      <div class="section-row"><p class="section-label">Camera viewpoints</p><span>Select a scene</span></div>
+      <div class="button-group" aria-label="Kamera presetleri">
+        <button type="button" data-view="entrance"><b>01</b>Entrance</button>
+        <button type="button" data-view="foyer"><b>02</b>Foyer</button>
+        <button type="button" data-view="datahall"><b>03</b>IC8000 Hall</button>
+        <button type="button" data-view="noc"><b>04</b>NOC</button>
+        <button type="button" data-view="terrace"><b>05</b>Terrace</button>
+        <button type="button" data-view="walk"><b>06</b>Route</button>
+        <button type="button" data-view="layers"><b>07</b>Layers</button>
+        <button type="button" data-view="top"><b>08</b>Top View</button>
+      </div>
+
+      <details class="technical-details">
+        <summary>Technical layers and view settings</summary>
+        <div class="toggles layer-toggles">
+          <label><input id="labelsToggle" type="checkbox" checked /> Etiketler</label>
+          <label><input id="zoningToggle" type="checkbox" /> Zon renkleri</label>
+          <label><input id="ceilingToggle" type="checkbox" /> Tavan</label>
+          <label><input id="routeToggle" type="checkbox" /> Visitor route</label>
+          <label><input id="futureToggle" type="checkbox" checked /> Future reserve</label>
+          <label><input id="coolingToggle" type="checkbox" /> Cooling</label>
+          <label><input id="powerToggle" type="checkbox" /> Enerji</label>
+          <label><input id="fiberToggle" type="checkbox" /> Fiber</label>
+          <label><input id="safetyToggle" type="checkbox" /> Fire / safety</label>
+          <label><input id="designToggle" type="checkbox" checked /> Design detail</label>
+          <label><input id="nightToggle" type="checkbox" checked /> Koyu tema</label>
+          <label><input id="walkModeToggle" type="checkbox" /> Walk mode</label>
+        </div>
+      </details>
+
+      <div class="controls"><p><strong>Desktop:</strong> W/A/S/D or arrow keys; drag to look around.</p><p><strong>Mobile:</strong> Use the direction pad to move and drag the scene with your finger.</p></div>
+    </section>
+
+    <button type="button" class="panel-edge-toggle" id="panelEdgeToggle" aria-label="Open or close control panel">‹</button>
+
+    <section class="zone-card" id="zoneCard" aria-live="polite"><p class="eyebrow">Selected zone</p><h2 id="zoneTitle">KAYAS 3D Concept</h2><p id="zoneText">Hover over or click a zone to review the details.</p></section>
+
+    <section class="tour-dock" id="tourDock" aria-live="polite" aria-label="Cinematic investor tour">
+      <div class="tour-dock-main">
+        <button id="tourPrev" class="tour-nav" type="button" title="Previous scene" aria-label="Previous scene">‹</button>
+        <button id="tourPlay" class="tour-play" type="button" title="Play or pause the tour" aria-label="Play the tour">▶</button>
+        <div class="tour-copy">
+          <div class="tour-meta"><span id="tourStep">Ready</span><span id="tourSceneKind">12-scene investor route</span></div>
+          <strong id="tourTitle">KAYAS cinematic 3D walkthrough</strong>
+          <p id="tourNarrative">Start the automated tour from the entrance to the technical backbone, or select scenes manually.</p>
+          <div class="tour-progress" aria-hidden="true"><i id="tourProgress"></i></div>
+        </div>
+        <button id="tourNext" class="tour-nav" type="button" title="Next scene" aria-label="Next scene">›</button>
+      </div>
+      <div class="tour-tools">
+        <button id="tourRestart" type="button" title="Restart the tour">↺ Restart</button>
+        <button id="tourVoice" type="button" aria-pressed="true" title="Mute English narration">🔊 Voice On</button>
+        <button id="tourModeToggle" type="button" class="tour-mode-toggle" aria-pressed="false" title="Switch between Cinematic View and Interactive 3D">Interactive 3D</button>
+        <label class="tour-speed">Speed
+          <select id="tourSpeed" aria-label="Tour speed">
+            <option value="0.75">0.75×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.25">1.25×</option>
+            <option value="1.5">1.5×</option>
+          </select>
+        </label>
+        <button id="tourExit" type="button" title="Exit cinematic mode">Exit</button>
+      </div>
+      <div class="tour-dots" id="tourDots" aria-label="Tour scenes"></div>
+    </section>
+
+    <div class="mobile-pad" id="mobilePad" aria-label="Mobile movement controls">
+      <button data-key="KeyW" aria-label="Forward">▲</button><button data-key="KeyA" aria-label="Left">◀</button><button data-key="KeyS" aria-label="Back">▼</button><button data-key="KeyD" aria-label="Right">▶</button>
+    </div>
+
+    <aside class="customer-drawer" id="customerDrawer" aria-label="Investor presentation content" hidden>
+      <div class="drawer-header">
+        <div class="drawer-specbridge-logo"><span class="specbridge-brand-inline"><span class="theme-logo-stack"><img class="specbridge-icon theme-logo theme-logo-night" src="assets/logos/specbridge_icon_white.png" alt="SpecBridge AI" /><img class="specbridge-icon theme-logo theme-logo-day" src="assets/logos/specbridge_icon_colored.png" alt="SpecBridge AI" /></span><span class="specbridge-wordmark"><strong>SpecBridge AI</strong><span>KAYAS Investor Portal</span></span></span></div>
+        <div><p class="eyebrow">KAYAS Investor Experience</p><h2 id="drawerTitle">Concept Visuals</h2></div>
+        <span class="drawer-h3c"><img class="h3c-wordmark-image" src="assets/logos/h3c_logo_red_transparent.png" alt="H3C" /></span>
+        <button type="button" class="drawer-close" id="drawerClose" aria-label="Close panel">×</button>
+      </div>
+
+      <section class="drawer-panel" data-content="gallery">
+        <div class="gallery-hero">
+          <button type="button" class="gallery-hero-image" id="galleryHeroButton"><img id="galleryHero" src="assets/gallery/kayas_concept_contact_sheet.webp" alt="KAYAS concept visual preview" /><span>Open the original image in large view</span></button>
+          <div><p class="eyebrow" id="galleryCategory">Concept visuals</p><h3 id="galleryTitle">24-image customer concept set</h3><p id="galleryNote">Click an image to inspect it full screen.</p></div>
+        </div>
+        <div class="gallery-grid" id="galleryGrid" aria-label="KAYAS concept visuals"></div>
+      </section>
+
+      <section class="drawer-panel reports-layout" data-content="reports" hidden>
+        <nav class="report-list" aria-label="Reports and presentations list">
+          <p class="report-group-label">Presentations</p>
+          <button class="report-item presentation-item" data-presentation-id="competitive" data-presentation-script="assets/presentations/competitive.js" data-report-title="H3C Uçtan Uca Çözüm ve Rekabet Analizi"><span class="report-icon presentation-icon">PPT</span><span><strong>H3C Uçtan Uca Çözüm ve Rekabet Analizi</strong><small>14 slides · IC8000, UIS, CAS, CloudOS and competition</small></span><b>›</b></button>
+          <button class="report-item presentation-item" data-presentation-id="interior" data-presentation-script="assets/presentations/interior.js" data-report-title="KAYAS Investor Concept Brief"><span class="report-icon presentation-icon">PPT</span><span><strong>KAYAS Investor Concept Brief</strong><small>27 slides · Interior visual concept and investor route</small></span><b>›</b></button>
+          <button class="report-item presentation-item" data-presentation-id="fullstack" data-presentation-script="assets/presentations/fullstack.js" data-report-title="KAYAS Full-Stack Investor Presentation"><span class="report-icon presentation-icon">PPT</span><span><strong>KAYAS Full-Stack Investor Presentation</strong><small>41 slides · Facility, cloud platform, operations and revenue</small></span><b>›</b></button>
+          <p class="report-group-label">Reports</p>
+          <button class="report-item is-selected" data-report-src="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" data-report-download="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" data-report-title="Site Feasibility Report"><span class="report-icon">PDF</span><span><strong>Site Feasibility Report</strong><small>KAYAS OSB on-site feasibility · 15 pages</small></span><b>›</b></button>
+          <button class="report-item" data-report-src="assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf" data-report-download="assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf" data-report-title="Non-Modular Data Center Requirements"><span class="report-icon orange">PDF</span><span><strong>Non-Modular Data Center Requirements</strong><small>Civil, power, mechanical, fiber and operations</small></span><b>›</b></button>
+          <button class="report-item" data-report-src="assets/report/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx" data-report-download="assets/report/KAYAS_Data_Center_Master_Requirements_and_Gantt_v1.xlsx" data-report-title="Master Implementation Schedule" data-download="true"><span class="report-icon blue">XLSX</span><span><strong>Master Implementation Schedule</strong><small>109 tasks, critical path and long-lead procurement</small></span><b>↓</b></button>
+          <button class="report-item" data-report-src="assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf#page=1" data-report-download="assets/report/KAYAS_Data_Center_Professional_Project_Report_v1.pdf" data-report-title="Opening Readiness Plan"><span class="report-icon violet">PDF</span><span><strong>Opening Readiness Plan</strong><small>Commissioning, IST and operational readiness</small></span><b>›</b></button>
+          <button class="report-item is-pending" data-report-title="Competitive Analysis" disabled><span class="report-icon green">RPT</span><span><strong>Competitive Analysis</strong><small>Data Center, UIS, CAS and CloudOS · separate decision-support appendix</small></span><b>•</b></button>
+          <a class="report-item video-link" href="https://youtu.be/gxWI5p_MH3E?t=5" target="_blank" rel="noopener"><span class="report-icon red">▶</span><span><strong>H3C IC8000 Video</strong><small>Product introduction · starts at second 5</small></span><b>↗</b></a>
+        </nav>
+        <div class="report-viewer" id="reportViewer">
+          <div class="report-toolbar"><strong id="reportViewerTitle">Site Feasibility Report</strong><div id="reportToolbarActions"><a id="reportOpen" class="action-link ghost" href="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" target="_blank" rel="noopener">Open in new tab</a><a id="reportDownload" class="action-link" href="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" download>Download</a></div></div>
+          <iframe class="report-frame" id="reportFrame" src="assets/report/KAYAS_OSB_Yerinde_Fizibilite_Saha_Raporu.pdf" title="KAYAS OSB Site Feasibility Report"></iframe>
+          <p class="drawer-note">Reports open inside the portal. The presentation viewer below is display-oriented and does not expose a download control.</p>
+        </div>
+        <div class="presentation-viewer" id="presentationViewer" hidden>
+          <div class="presentation-toolbar">
+            <div><p class="eyebrow">Presentation viewer</p><strong id="presentationTitle">KAYAS Presentation</strong></div>
+            <div class="presentation-controls"><button type="button" id="presentationPrev" aria-label="Previous slide">‹</button><span id="presentationCounter">1 / 1</span><button type="button" id="presentationNext" aria-label="Next slide">›</button><button type="button" id="presentationFullscreen">⛶ Full screen</button></div>
+          </div>
+          <div class="presentation-stage" id="presentationStage" tabindex="0" aria-label="Presentation slide viewer"><div class="presentation-loading" id="presentationLoading">Loading presentation…</div><img id="presentationImage" alt="KAYAS presentation slide" /></div>
+          <p class="drawer-note">Use the arrow buttons, keyboard arrow keys or swipe on mobile. No download control is provided.</p>
+        </div>
+      </section>
+    </aside>
+
+    <div class="image-lightbox" id="imageLightbox" hidden aria-label="Original concept visual"><div class="lightbox-toolbar"><div><p class="eyebrow" id="lightboxCategory">Concept visual</p><h2 id="lightboxTitle">KAYAS Concept Visual</h2></div><div class="lightbox-actions"><a id="lightboxOpenOriginal" class="action-link ghost" href="#" target="_blank" rel="noopener">Open original PNG separately</a><button type="button" class="drawer-close" id="lightboxClose">Close</button></div></div><img id="lightboxImage" src="assets/gallery/kayas_concept_contact_sheet.webp" alt="KAYAS concept visual" /></div>
+
+    <div class="compass" aria-label="Compass"><span>North</span><div></div><span>South</span></div>
+    <div class="scale-control" id="scaleControl" aria-label="Dynamic real scale"><div class="scale-labels"><span>0</span><span id="scaleMid">5</span><span id="scaleMax">10 m</span></div><div class="scale-line" id="scaleLine"><i></i><i></i><i></i></div></div>
+  </main>
+
+  <script>window.addEventListener("error",function(event){var s=document.getElementById("loadStatus");if(!s)return;s.hidden=false;s.querySelector("strong").textContent="3D scene could not be loaded";s.querySelector("span").textContent=event.message||"The browser could not initialize WebGL.";});</script>
+  <script defer src="assets/gallery/gallery_manifest.js?v=20260804-reports-presentations-r1"></script>
+  <script defer src="model-loader.js?v=20260804-reports-presentations-r1"></script>
+  <script defer src="app-shell.js?v=20260804-reports-presentations-r1"></script>
+</body>
+</html>
