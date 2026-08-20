@@ -13,11 +13,14 @@
 <script>
 (function(){
  const f=document.getElementById('reviewFrame');
- f.addEventListener('load',function(){
+ f.addEventListener('load',async function(){
    try{
      const d=f.contentDocument;
      const css=d.createElement('link');css.rel='stylesheet';css.href='../rev16-5-3/enhancements.css?v=20260820-rev1653';d.head.appendChild(css);
-     const js=d.createElement('script');js.src='../rev16-5-3/enhancements.js?v=20260820-rev1653';d.body.appendChild(js);
+     const files=['zone-data-1.js','zone-data-2.js','executive-panel.js','reports-panel.js','enhance-core.js'];
+     for(const file of files){
+       await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src='../rev16-5-3/'+file+'?v=20260820-rev1653';s.onload=resolve;s.onerror=reject;d.body.appendChild(s);});
+     }
    }catch(e){console.error('KAYAS Rev16.5.3 enhancement injection failed',e);}
  });
 })();
