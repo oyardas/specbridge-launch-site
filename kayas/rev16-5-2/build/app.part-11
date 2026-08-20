@@ -1,0 +1,39 @@
+anel(1.85,.30),5.9,3.07,32.7);
+
+// Operators room + management offices.
+place(workDesk(1.65,.78,.74),2.3,0,39.6);place(workDesk(1.65,.78,.74),5.7,0,39.6);place(lowCabinet(1.2,.38,.82),7.3,0,42.0,-Math.PI/2);place(wallScreen(1.55,.78,'KAYAS Ops','Shift room'),4.0,1.70,36.12,0);place(ceilingPanel(1.8,.30),4.0,3.02,40.0);
+place(workDesk(1.55,.74,.74),2.2,0,47.8);place(workDesk(1.55,.74,.74),5.8,0,47.8);place(consoleUnit(1.4,.82,.40),4.0,0,51.0,Math.PI);place(wallArt(1.15,.66,'#2c485c','#b58b63'),.12,1.72,48.0,Math.PI/2);place(ceilingPanel(1.8,.30),4.0,3.02,48.0);
+
+// Staff lounge, WC/locker and store.
+place(sofa(1.55),2.0,0,56.0,Math.PI/2);place(sofa(1.55),5.8,0,56.0,-Math.PI/2);place(coffeeTable(.90,.52,.35),4.0,0,56.0);place(kitchenette(1.85),4.1,0,61.4,Math.PI);place(wallScreen(1.15,.62,'KAYAS','Staff lounge / kitchenette'),4.0,1.72,52.12,0);place(ceilingPanel(1.8,.30),4.0,3.02,56.0);place(ceilingPanel(1.4,.28),4.0,3.02,60.2);
+place(lockerBank(4),1.25,0,66.0,Math.PI/2);place(lockerBank(4),6.75,0,66.0,-Math.PI/2);place(ceilingPanel(1.6,.28),4.0,3.02,66.0);
+place(shelfUnit(1.2,.42,1.95),1.1,0,73.0,Math.PI/2);place(shelfUnit(1.2,.42,1.95),6.9,0,73.0,-Math.PI/2);place(crateStack(.95,.70,.92),4.1,0,74.2);place(ceilingPanel(1.4,.28),4.0,3.02,73.5);
+
+// Observation gallery / west strip.
+place(lowBench(1.35),12.0,0,54.9,Math.PI/2);place(sideTable(.32,.48),12.0,0,57.1);place(wallArt(1.05,.62,'#284760','#7e8a95'),10.10,1.72,57.2,Math.PI/2);place(wallScreen(1.08,.60,'KAYAS','Observation corridor'),13.88,1.72,50.2,-Math.PI/2);place(ceilingPanel(1.7,.24),12.0,3.02,52.0,Math.PI/2);place(ceilingPanel(1.7,.24),12.0,3.02,58.5,Math.PI/2);
+
+// Future opening hall / conference reserve.
+place(sofa(2.05),18.8,0,15.6,Math.PI/2);place(sofa(2.05),18.8,0,25.2,Math.PI/2);place(loungeChair(),22.0,0,14.1,Math.PI);place(loungeChair(),22.0,0,16.9,Math.PI);place(loungeChair(),22.0,0,23.7,Math.PI);place(loungeChair(),22.0,0,26.7,Math.PI);place(coffeeTable(1.05,.56,.38),20.4,0,15.6);place(coffeeTable(1.05,.56,.38),20.4,0,25.2);place(sideTable(.40,.50),17.0,0,20.5);place(consoleUnit(1.55,.82,.40),40.2,0,19.0,-Math.PI/2);place(receptionDesk(1.30,.56,1.00),27.5,0,12.0,Math.PI);place(lowBench(1.5),39.7,0,16.4,-Math.PI/2);place(lowBench(1.5),39.7,0,22.2,-Math.PI/2);
+place(wallScreen(2.20,1.18,'KAYAS','VIP opening hall / future event zone'),27.5,1.74,7.12,0);place(wallArt(1.40,.80,'#274c63','#c29b66'),40.88,1.75,29.5,-Math.PI/2);place(clock(),14.12,2.45,31.5,Math.PI/2);
+for(const z of[11.5,17.0,22.5,28.0])place(ceilingPanel(2.4,.36),27.5,3.70,z);
+
+// Technical rooms, staging and freight lobby.
+place(equipmentCabinet(.82,.86,2.05),2.2,0,10.8);place(equipmentCabinet(.82,.86,2.05),4.0,0,10.8);place(equipmentCabinet(.82,.86,2.05),5.8,0,10.8);place(wallScreen(1.20,.62,'KAYAS','MMR-B'),4.0,1.72,7.12,0);place(ceilingPanel(1.6,.28),4.0,3.32,12.0);
+place(equipmentCabinet(.82,.86,2.05),2.2,0,20.6);place(equipmentCabinet(.82,.86,2.05),4.0,0,20.6);place(equipmentCabinet(.82,.86,2.05),5.8,0,20.6);place(lowCabinet(1.2,.38,.82),6.8,0,17.9,-Math.PI/2);place(ceilingPanel(1.6,.28),4.0,3.32,20.5);
+place(equipmentCabinet(.84,.88,2.05),2.2,0,80.5);place(equipmentCabinet(.84,.88,2.05),4.0,0,80.5);place(equipmentCabinet(.84,.88,2.05),5.8,0,80.5);place(wallScreen(1.20,.62,'KAYAS','MMR-A'),4.0,1.72,77.12,0);place(ceilingPanel(1.6,.28),4.0,3.32,80.5);
+place(crateStack(1.0,.76,.92),22.3,0,82.6);place(crateStack(1.0,.76,.92),24.2,0,82.6);place(shelfUnit(1.25,.48,1.95),26.2,0,87.0,Math.PI/2);place(ceilingPanel(1.6,.28),23.5,3.45,81.8);place(ceilingPanel(1.6,.28),23.5,3.45,87.6);
+place(lowBench(1.4),23.5,0,95.5);place(consoleUnit(1.2,.82,.40),26.2,0,100.0,Math.PI/2);place(ceilingPanel(1.6,.28),23.5,3.45,97.5);place(ceilingPanel(1.6,.28),23.5,3.45,104.0);
+
+// Controlled technical spine.
+place(equipmentCabinet(.82,.86,2.05),18.0,0,72.3);place(equipmentCabinet(.82,.86,2.05),19.2,0,72.3);place(equipmentCabinet(.82,.86,2.05),35.8,0,72.3);place(extinguisher(),14.55,0,75.8);place(wallScreen(1.18,.64,'KAYAS','Technical service spine'),27.5,1.72,76.88,Math.PI);place(ceilingPanel(2.0,.24),27.5,3.48,73.5,Math.PI/2);
+
+// Power / battery rooms and electrical rooms.
+place(equipmentCabinet(.86,.92,2.05),28.7,0,83.1);place(equipmentCabinet(.86,.92,2.05),30.1,0,83.1);place(equipmentCabinet(.86,.92,2.05),31.5,0,83.1);place(shelfUnit(1.0,.42,1.95),33.2,0,87.1,Math.PI/2);
+place(equipmentCabinet(.86,.92,2.05),35.7,0,83.1);place(equipmentCabinet(.86,.92,2.05),37.1,0,83.1);place(equipmentCabinet(.86,.92,2.05),38.5,0,83.1);place(shelfUnit(1.0,.42,1.95),34.8,0,87.1,-Math.PI/2);
+place(equipmentCabinet(.86,.92,1.86),28.7,0,92.2);place(equipmentCabinet(.86,.92,1.86),30.1,0,92.2);place(equipmentCabinet(.86,.92,1.86),35.7,0,92.2);place(equipmentCabinet(.86,.92,1.86),37.1,0,92.2);
+place(equipmentCabinet(.86,.92,1.95),28.7,0,100.5);place(equipmentCabinet(.86,.92,1.95),30.1,0,100.5);place(equipmentCabinet(.86,.92,1.95),35.7,0,100.5);place(equipmentCabinet(.86,.92,1.95),37.1,0,100.5);place(equipmentCabinet(.86,.92,1.95),32.9,0,106.4);
+place(wallScreen(1.10,.60,'KAYAS','UPS room A'),27.12,1.72,84.2,Math.PI/2);place(wallScreen(1.10,.60,'KAYAS','UPS room B'),40.88,1.72,84.2,-Math.PI/2);place(wallScreen(1.18,.62,'KAYAS','Main distribution / bypass'),34.0,1.72,97.12,0);
+for(const p of [[30.5,84.8],[37.5,84.8],[30.5,92.8],[37.5,92.8],[34.0,100.3],[34.0,106.4]])place(ceilingPanel(1.6,.26),p[0],3.40,p[1]);
+
+// Terrace lighting / service clarity.
+for(const z of[12,30,48,66,84,102])place(ceilingPanel(1.4,.22,

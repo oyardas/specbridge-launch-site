@@ -1,0 +1,28 @@
+intentionally excluded.
+const ZONE_VISUALS={};
+
+const zoneOverlay=document.getElementById('zoneOverlay');
+const zoneInfo=document.getElementById('zoneInfo');
+const zoneInfoTitle=document.getElementById('zoneInfoTitle');
+const zoneInfoSub=document.getElementById('zoneInfoSub');
+const zoneInfoDesc=document.getElementById('zoneInfoDesc');
+const zoneInfoImportance=document.getElementById('zoneInfoImportance');
+const zoneInfoWhy=document.getElementById('zoneInfoWhy');
+const zoneInfoArch=document.getElementById('zoneInfoArch');
+const zoneInfoMeta=document.getElementById('zoneInfoMeta');
+const zoneMedia=document.getElementById('zoneMedia');
+const zoneMediaImg=document.getElementById('zoneMediaImg');
+const zoneMediaBadge=document.getElementById('zoneMediaBadge');
+const zonePinNote=document.getElementById('zonePinNote');
+const zoneMarkers=[];
+let activeZoneMarker=null, zonePinnedId=null;
+function zonePanelDefault(){zoneInfoTitle.textContent='Bir bölgenin üzerine gelin';zoneInfoSub.textContent='Expanded right-side zone explanation panel';zoneInfoDesc.textContent='Overview üzerindeki yarı şeffaf numaralardan birinin üzerine geldiğinizde bu panel ilgili oda veya koridorun görevini açıklar. Bir etikete tıklarsanız seçim sabitlenir; onaylanan fotogerçekçi görsel, alanın görevi, veri merkezi içindeki önemi ve neden ayrı bir zon olarak gerektiği bu daha geniş panelde birlikte gösterilir.';zoneInfoImportance.textContent='Seçilen alanın işletme, güvenlik, müşteri deneyimi veya teknik süreklilik açısından neden önemli olduğu burada açıklanacaktır.';zoneInfoWhy.textContent='Bu fonksiyonun neden ayrı bir oda/zon olarak tasarlanması gerektiği burada açıklanacaktır.';zoneInfoArch.textContent='Master numbered layout bağlayıcıdır. Planda olmayan oda, koridor, kapı veya açıklık eklenmez.';zoneInfoMeta.innerHTML='<span>41 zone</span><span>Hover + click</span><span>Expanded panel</span>';zoneMedia.classList.add('empty');zoneMedia.dataset.placeholder='Bu alan için fotogerçekçi görsel henüz eklenmedi.';zoneMediaImg.hidden=true;zoneMediaImg.removeAttribute('src');zoneMediaBadge.textContent='VISUAL PENDING';zonePinNote.innerHTML='<b>Hover:</b> önizleme · <b>Click:</b> seçimi sabitle';}
+function applyZoneVisual(id){const visual=ZONE_VISUALS[id];if(visual){zoneMedia.classList.remove('empty');zoneMediaImg.src=visual;zoneMediaImg.hidden=false;zoneMediaImg.alt=`${id} zone visual`;zoneMediaBadge.textContent='APPROVED VISUAL';}else{zoneMedia.classList.add('empty');zoneMediaImg.hidden=true;zoneMediaImg.removeAttribute('src');zoneMedia.dataset.placeholder=`${id} için fotogerçekçi oda/zon görseli henüz onaylanmadı.`;zoneMediaBadge.textContent='VISUAL PENDING';}}
+function zonePanelShow(id){const room=ROOM_MAP[id],detail=ZONE_DETAILS[id]||{title:room?.name||id,purpose:'Açıklama hazırlanıyor.',importance:'Açıklama hazırlanıyor.',why:'Açıklama hazırlanıyor.'},item=OVERVIEW_ZONE_LIST.find(z=>z.id===id),cat=CAT_LABELS[room?.cat]||room?.cat||'Zone';zoneInfoTitle.textContent=`${item?item.n+' · ':''}${id}`;zoneInfoSub.textContent=detail.title;zoneInfoDesc.textContent=detail.purpose;zoneInfoImportance.textContent=detail.importance;zoneInfoWhy.textContent=detail.why;zoneInfoArch.textContent=getZoneArchLock(room,id);const area=room?(room.w*room.d).toFixed(0):'—';zoneInfoMeta.innerHTML=`<span>${cat}</span><span>${room?room.w+' × '+room.d+' m':'Concept zone'}</span><span>${area} m²</span>`;applyZoneVisual(id);zonePinNote.innerHTML=zonePinnedId===id?'<b>Seçili:</b> bu zone sabitlendi · tekrar tıklayarak bırakabilirsiniz':'<b>Hover:</b> önizleme · <b>Click:</b> seçimi sabitle';}
+function renderZoneState(id,kind='hover'){zoneMarkers.forEach(m=>{m.el.classList.toggle('active',kind==='hover'&&m.id===id);m.el.classList.toggle('pinned',zonePinnedId===m.id)});activeZoneMarker=id;if(id)zonePanelShow(id);else zonePanelDefault();}
+function previewZone(id){if(zonePinnedId&&zonePinnedId!==id){renderZoneState(id,'hover');return}renderZoneState(id,'hover');}
+function leaveZone(){if(zonePinnedId)renderZoneState(zonePinnedId,'pinned');else renderZoneState(null);}
+function pinZone(id){zonePinnedId=zonePinnedId===id?null:id;if(zonePinnedId)renderZoneState(zonePinnedId,'pinned');else renderZoneState(null);}
+function createZoneMarkers(){zoneOverlay.innerHTML='';zoneMarkers.length=0;for(const item of OVERVIEW_ZONE_LIST){const room=ROOM_MAP[item.id];if(!room)continue;const el=document.createElement('button');el.className='zone-tag';el.type='button';el.textContent=item.n;el.dataset.code=item.id;el.setAttribute('aria-label',`${item.n} ${item.id} ${room.name}`);el.dataset.id=item.id;el.dataset.cat=room.cat||'zone';el.addEventListener('mouseenter',()=>previewZone(item.id));el.addEventListener('mouseleave',leaveZone);el.addEventListener('click',e=>{e.stopPropagation();pinZone(item.id)});zoneOverlay.appendChild(el);zoneMarkers.push({id:item.id,room,el,offsetY:room.cat==='data'?2.2:room.cat==='future'?2.1:1.6});}zonePanelDefault();}
+function setZoneOverlayVisible(on){zoneOverlay.classList.toggle('hidden',!on);zoneInfo.classList.toggle('hidden',!on);if(!on){zonePinnedId=null;renderZoneState(null);}}
+function updateZoneMarkers(){if(mode!=='overview'||zoneOverlay.classList.contains('hidden'))return;const rect=canvas.getBoundingClientRect();for(const m of zoneMarkers){const r=m.room;const v=new THREE.Vector3(r.x+r.w/2,m.offsetY,r.z+r.d/2).project(camera);const visible=v.z>-1&&v.z<1&&v.x>-1.15&&v.x<1.15&&v.y>-1.15&&v.y<1.15;if(!visible){m.el.style.display='none';continue;}const sx=(v.x*

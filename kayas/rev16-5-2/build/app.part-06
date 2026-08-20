@@ -1,0 +1,47 @@
+,Math.PI*2);x.fill()}}}
+   for(let i=0;i<1300;i++){x.fillStyle='rgba(50,60,65,.04)';x.fillRect(rnd(0,512),rnd(0,512),1,1)}
+ }else if(kind==='wall'){
+   const g=x.createLinearGradient(0,0,0,512);g.addColorStop(0,'#ece8e1');g.addColorStop(1,'#d9d3c9');x.fillStyle=g;x.fillRect(0,0,512,512);
+   for(let i=0;i<4200;i++){const a=rnd(.010,.026);const grey=205+rnd(-18,12);x.fillStyle=`rgba(${grey},${grey-2},${grey-3},${a})`;x.fillRect(rnd(0,512),rnd(0,512),rnd(.8,2.3),rnd(.8,2.3))}
+   x.fillStyle='rgba(120,110,98,.055)';for(let i=0;i<16;i++)x.fillRect(rnd(0,512),0,rnd(12,32),512);
+ }else if(kind==='wallTech'){
+   const g=x.createLinearGradient(0,0,0,512);g.addColorStop(0,'#dce1e3');g.addColorStop(1,'#c6ced2');x.fillStyle=g;x.fillRect(0,0,512,512);
+   x.strokeStyle='rgba(88,96,102,.18)';x.lineWidth=2;for(let p=0;p<=512;p+=96){x.beginPath();x.moveTo(0,p);x.lineTo(512,p);x.stroke()}
+   for(let i=0;i<2600;i++){x.fillStyle='rgba(82,90,96,.022)';x.fillRect(rnd(0,512),rnd(0,512),1.2,1.2)}
+ }else if(kind==='ceiling'){
+   x.fillStyle='#efeee8';x.fillRect(0,0,512,512);x.strokeStyle='rgba(98,102,104,.16)';x.lineWidth=1.2;for(let p=0;p<=512;p+=128){x.beginPath();x.moveTo(p,0);x.lineTo(p,512);x.stroke();x.beginPath();x.moveTo(0,p);x.lineTo(512,p);x.stroke()} for(let i=0;i<1000;i++){x.fillStyle='rgba(120,120,118,.018)';x.fillRect(rnd(0,512),rnd(0,512),1,1)}
+ }else if(kind==='ceilingTech'){
+   x.fillStyle='#d3d9dc';x.fillRect(0,0,512,512);x.strokeStyle='rgba(76,84,88,.20)';x.lineWidth=1.2;for(let p=0;p<=512;p+=96){x.beginPath();x.moveTo(p,0);x.lineTo(p,512);x.stroke();x.beginPath();x.moveTo(0,p);x.lineTo(512,p);x.stroke()} x.fillStyle='rgba(255,255,255,.06)';for(let p=22;p<512;p+=96)x.fillRect(0,p,512,10)
+ }else if(kind==='wood'){
+   const g=x.createLinearGradient(0,0,512,0);g.addColorStop(0,'#6f5240');g.addColorStop(.5,'#866450');g.addColorStop(1,'#5b4336');x.fillStyle=g;x.fillRect(0,0,512,512);
+   for(let y=0;y<512;y+=6){x.strokeStyle=`rgba(${90+rnd(-12,18)},${62+rnd(-10,10)},${40+rnd(-8,8)},.28)`;x.lineWidth=rnd(.6,1.4);x.beginPath();x.moveTo(0,y+rnd(-2,2));for(let xx=0;xx<=512;xx+=64)x.lineTo(xx,y+rnd(-3,3));x.stroke()}
+ }else if(kind==='fabricLight'){
+   x.fillStyle='#c8c1b8';x.fillRect(0,0,512,512);for(let p=0;p<512;p+=8){x.fillStyle='rgba(255,255,255,.035)';x.fillRect(p,0,2,512);x.fillStyle='rgba(80,82,84,.026)';x.fillRect(0,p,512,2)}
+ }else if(kind==='fabricDark'){
+   x.fillStyle='#4a5660';x.fillRect(0,0,512,512);for(let p=0;p<512;p+=8){x.fillStyle='rgba(255,255,255,.025)';x.fillRect(p,0,2,512);x.fillStyle='rgba(10,16,20,.05)';x.fillRect(0,p,512,2)}
+ }else if(kind==='brushed'){
+   const g=x.createLinearGradient(0,0,512,0);g.addColorStop(0,'#59666f');g.addColorStop(.5,'#77858e');g.addColorStop(1,'#52606a');x.fillStyle=g;x.fillRect(0,0,512,512);for(let i=0;i<4000;i++){x.fillStyle='rgba(255,255,255,.028)';x.fillRect(rnd(0,512),rnd(0,512),rnd(8,40),1)}
+ }
+ const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.SRGBColorSpace;return t;
+}
+const TEX={visitor:makeCanvasTexture('visitorFloor'),tech:makeCanvasTexture('techFloor'),wall:makeCanvasTexture('wall'),wallTech:makeCanvasTexture('wallTech'),ceiling:makeCanvasTexture('ceiling'),ceilingTech:makeCanvasTexture('ceilingTech'),wood:makeCanvasTexture('wood'),fabricLight:makeCanvasTexture('fabricLight'),fabricDark:makeCanvasTexture('fabricDark'),brushed:makeCanvasTexture('brushed')};
+const MAT={
+ wall:new THREE.MeshStandardMaterial({color:0xf3efe8,map:TEX.wall,roughness:.89,metalness:0}),
+ wallTech:new THREE.MeshStandardMaterial({color:0xd8dde0,map:TEX.wallTech,roughness:.78,metalness:.03}),
+ glass:new THREE.MeshPhysicalMaterial({color:0xb8d7e3,roughness:.08,metalness:.02,transparent:true,opacity:.32,transmission:.28,thickness:.02,side:THREE.DoubleSide}),
+ frame:new THREE.MeshStandardMaterial({color:0x414c53,map:TEX.brushed,roughness:.36,metalness:.78}),
+ ceiling:new THREE.MeshStandardMaterial({color:0xf1efe9,map:TEX.ceiling,roughness:.94}),
+ ceilingTech:new THREE.MeshStandardMaterial({color:0xd6dde0,map:TEX.ceilingTech,roughness:.88,metalness:.03}),
+ metal:new THREE.MeshStandardMaterial({color:0x69757d,map:TEX.brushed,roughness:.34,metalness:.82}),
+ dark:new THREE.MeshStandardMaterial({color:0x2b3339,roughness:.68,metalness:.16}),
+ wood:new THREE.MeshStandardMaterial({color:0x765744,map:TEX.wood,roughness:.70,metalness:.02}),
+ upholstery:new THREE.MeshStandardMaterial({color:0xc5beb4,map:TEX.fabricLight,roughness:.97}),
+ upholsteryDark:new THREE.MeshStandardMaterial({color:0x4b5862,map:TEX.fabricDark,roughness:.95}),
+ screen:new THREE.MeshStandardMaterial({color:0x0d1820,emissive:0x4ba2d4,emissiveIntensity:.72,roughness:.20,metalness:.08}),
+ accent:new THREE.MeshStandardMaterial({color:0x235f7b,roughness:.48,metalness:.24}),
+ blue:new THREE.MeshStandardMaterial({color:0x2d7092,roughness:.42,metalness:.46,emissive:0x14394e,emissiveIntensity:.15}),
+ red:new THREE.MeshStandardMaterial({color:0xc92830,roughness:.52,metalness:.16})
+};
+
+function categoryFloorMat(r){const tech=['data','technical','power','battery','logistics','corridor','egress'].includes(r.cat);const map=(tech?TEX.tech:TEX.visitor).clone();map.needsUpdate=true;map.repeat.set(Math.max(1,r.w/(tech?.62:1.35)),Math.max(1,r.d/(tech?.62:1.35)));return new THREE.MeshStandardMaterial({color:tech?0xd6dde0:0xd8d1c7,map,roughness:tech?.64:.52,metalness:tech?.08:.04});}
+function ceilingHeight(r){if(r.id==='D-02')return 4.25;if(r.cat==='data')return 4.25;if(r.cat==='future')return 3.9;if(

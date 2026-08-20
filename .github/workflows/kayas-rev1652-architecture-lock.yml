@@ -1,0 +1,85 @@
+name: KAYAS Rev16.5.2 Architecture-Locked Review
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kayas/rev16-5-2/**'
+      - '.github/workflows/kayas-rev1652-architecture-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kayas-rev1652-architecture-lock
+  cancel-in-progress: false
+
+jobs:
+  validate-and-vendor:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Assemble review application
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat kayas/rev16-5-2/build/app.part-* > kayas/rev16-5-2/app.js
+
+      - name: Validate review application
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kayas/rev16-5-2/app.js
+          grep -q 'Rev16.5.2' kayas/rev16-5-2/index.html
+          grep -q 'MİMARİ SINIR / ARCHITECTURAL LOCK' kayas/rev16-5-2/index.html
+          grep -q 'const ZONE_VISUALS={};' kayas/rev16-5-2/app.js
+          grep -q 'Bina köşe zonudur' kayas/rev16-5-2/app.js
+
+      - name: Vendor offline Three.js r166 when missing
+        shell: bash
+        run: |
+          set -euo pipefail
+          target='kayas/walkthrough/vendor/three.global.r166.js'
+          if [ -s "$target" ]; then
+            echo 'Offline Three.js runtime already present.'
+            exit 0
+          fi
+          curl -L --fail --retry 3 --retry-delay 2 \
+            'https://drive.google.com/uc?export=download&id=1Y_P2iS8zqqKVtrXHY2ZteyBxSPGMjHCz' \
+            -o /tmp/KAYAS_3D_Model_v5_Single_File_H3C.html
+          python - <<'PY2'
+          from pathlib import Path
+          source=Path('/tmp/KAYAS_3D_Model_v5_Single_File_H3C.html').read_text(encoding='utf-8')
+          start=source.index('/* KAYAS OSB 3D Walkthrough file-safe bundle. */')
+          marker='window.THREE = THREE;'
+          end=source.index(marker,start)+len(marker)
+          runtime=source[start:end]+'\n})();\n'
+          target=Path('kayas/walkthrough/vendor/three.global.r166.js')
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_text(runtime,encoding='utf-8')
+          if target.stat().st_size < 1_000_000:
+              raise SystemExit('Three.js runtime unexpectedly small')
+          PY2
+          node --check "$target"
+          printf '%s\n' 'Three.js r166 offline runtime for KAYAS walkthrough.' 'Extracted from the verified single-file KAYAS source; Three.js is MIT licensed.' > kayas/walkthrough/vendor/README.txt
+
+      - name: Commit vendored runtime if created
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add kayas/rev16-5-2/app.js kayas/walkthrough/vendor/three.global.r166.js kayas/walkthrough/vendor/README.txt || true
+          if git diff --cached --quiet; then
+            echo 'No vendor-runtime commit required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Assemble KAYAS Rev16.5.2 review runtime [skip ci]'
+          git push origin HEAD:main

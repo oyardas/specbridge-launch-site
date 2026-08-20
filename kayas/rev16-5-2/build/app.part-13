@@ -1,0 +1,41 @@
+ack.receiveShadow=true;group.add(rack);const face=new THREE.Mesh(new THREE.BoxGeometry(.50,.28,.02),MAT.screen);face.position.set(38.5,1.52,42.41+i*1.72);group.add(face)}const pipeMat1=new THREE.MeshStandardMaterial({color:0x4b9ebc,roughness:.38,metalness:.48});for(const x of[38.0,39.0]){const p=new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,17.2,12),pipeMat1);p.rotation.x=Math.PI/2;p.position.set(x,2.75,50.75);group.add(p)}scene.add(group)}
+function addDataInfrastructure(){for(let r=0;r<5;r++){const z=43.31+r*5.3;for(const x of[21.5,32.5]){const bus=new THREE.Mesh(new THREE.BoxGeometry(7.2,.14,.18),MAT.metal);bus.position.set(x,3.38,z);scene.add(bus);const tray=new THREE.Mesh(new THREE.BoxGeometry(7.2,.05,.62),new THREE.MeshStandardMaterial({color:0x777f83,roughness:.62,metalness:.65,wireframe:false}));tray.position.set(x,3.58,z);scene.add(tray)}}const label=wallScreen(2.1,.82,'IC8000 DATA HALL','196 air-cooled cabinets · 10 micro-module corridors');label.position.set(40.85,2.15,54.5);label.rotation.y=-Math.PI/2;scene.add(label)}
+
+function proceduralRackMaterial(){return new THREE.MeshStandardMaterial({color:0x303940,roughness:.62,metalness:.28});}
+function createProceduralIC8000Pods(){
+ const rackMat=proceduralRackMaterial(), faceMat=new THREE.MeshStandardMaterial({color:0x111b21,roughness:.35,metalness:.25}), logoMat=MAT.red;
+ const rackGeom=new THREE.BoxGeometry(.56,2.12,1.08), faceGeom=new THREE.BoxGeometry(.50,1.80,.025), logoGeom=new THREE.BoxGeometry(.34,.08,.03);
+ for(const pod of PODS){
+   const rowZ=[pod.z+.62,pod.z+pod.d-.62];
+   const counts=[pod.rowA,pod.rowB];
+   for(let r=0;r<2;r++){
+     const count=counts[r], usable=5.72, spacing=usable/10, start=pod.x+.14+(10-count)*spacing/2;
+     for(let i=0;i<count;i++){
+       const x=start+spacing*(i+.5), z=rowZ[r];
+       const rack=new THREE.Mesh(rackGeom,rackMat);rack.position.set(x,1.06,z);rack.castShadow=true;rack.receiveShadow=true;scene.add(rack);
+       const frontZ=z+(r===0?.553:-.553);const face=new THREE.Mesh(faceGeom,faceMat);face.position.set(x,1.06,frontZ);scene.add(face);
+       if(i===Math.floor(count/2)){const lg=new THREE.Mesh(logoGeom,logoMat);lg.position.set(x,1.82,frontZ+(r===0?.02:-.02));scene.add(lg);}
+     }
+   }
+   const frameMat=new THREE.MeshStandardMaterial({color:0x69757d,roughness:.38,metalness:.72});
+   for(const z of [pod.z+.03,pod.z+pod.d-.03]){const beam=new THREE.Mesh(new THREE.BoxGeometry(pod.w,.07,.07),frameMat);beam.position.set(pod.x+pod.w/2,2.42,z);scene.add(beam);}
+   for(const x of [pod.x+.03,pod.x+pod.w-.03]){const beam=new THREE.Mesh(new THREE.BoxGeometry(.07,.07,pod.d),frameMat);beam.position.set(x,2.42,pod.z+pod.d/2);scene.add(beam);}
+ }
+}
+function makeChair(){const g=new THREE.Group();const seat=new THREE.Mesh(new THREE.BoxGeometry(.52,.10,.52),MAT.upholsteryDark);seat.position.y=.50;g.add(seat);const back=new THREE.Mesh(new THREE.BoxGeometry(.52,.58,.10),MAT.upholsteryDark);back.position.set(0,.82,.22);g.add(back);for(const x of[-.20,.20])for(const z of[-.20,.20]){const l=new THREE.Mesh(new THREE.BoxGeometry(.035,.48,.035),MAT.dark);l.position.set(x,.24,z);g.add(l)}return g}
+function makePlant(){const g=new THREE.Group();const pot=new THREE.Mesh(new THREE.CylinderGeometry(.20,.16,.34,16),new THREE.MeshStandardMaterial({color:0x77736d,roughness:.86}));pot.position.y=.17;g.add(pot);const green=new THREE.MeshStandardMaterial({color:0x376847,roughness:.88});for(let i=0;i<9;i++){const leaf=new THREE.Mesh(new THREE.ConeGeometry(.10,.65,8),green);leaf.position.set(Math.cos(i*.7)*.10,.58+((i%3)*.08),Math.sin(i*.7)*.10);leaf.rotation.z=(i%2?.32:-.32);g.add(leaf)}return g}
+function placeClones(source,placements){for(const p of placements){const o=source.clone(true);o.position.set(p.x,0,p.z);o.rotation.y=p.ry||0;scene.add(o)}}
+async function installAssets(){
+ createProceduralIC8000Pods();createLiquidRacks();addDataInfrastructure();
+ const ch=makeChair();
+ const meeting=[];for(const x of[2.85,3.65,4.45,5.25]){meeting.push({x,z:86.95,ry:0},{x,z:89.05,ry:Math.PI})}meeting.push({x:2.0,z:88,ry:Math.PI/2},{x:6.0,z:88,ry:-Math.PI/2});
+ const noc=[{x:1.5,z:29.1,ry:0},{x:3.1,z:29.1,ry:0},{x:4.9,z:29.1,ry:0},{x:6.4,z:29.1,ry:0},{x:1.5,z:30.9,ry:Math.PI},{x:3.1,z:30.9,ry:Math.PI},{x:4.9,z:30.9,ry:Math.PI},{x:6.4,z:30.9,ry:Math.PI}];
+ const small=[{x:12.8,z:79.6,ry:Math.PI/2},{x:12.8,z:81.4,ry:Math.PI/2},{x:14.2,z:79.6,ry:-Math.PI/2},{x:14.2,z:81.4,ry:-Math.PI/2}];
+ const offices=[{x:2.2,z:48.6,ry:Math.PI},{x:5.8,z:48.6,ry:Math.PI},{x:2.3,z:40.4,ry:Math.PI},{x:5.7,z:40.4,ry:Math.PI},{x:13.3,z:107.5,ry:Math.PI}];placeClones(ch,meeting.concat(noc,small,offices));
+ const pl=makePlant();const pp=[{x:15.7,z:91.8,ry:.3},{x:10.9,z:86.2,ry:-.3},{x:6.8,z:89.7,ry:.2},{x:1.0,z:85.0,ry:-.3},{x:15.8,z:103.8,ry:.1},{x:10.8,z:98.8,ry:-.2},{x:15.9,z:109.1,ry:.15},{x:7.1,z:34.8,ry:.15},{x:13.1,z:58.7,ry:-.2},{x:23.9,z:14.0,ry:.1},{x:23.9,z:26.8,ry:-.1},{x:39.6,z:30.5,ry:.15},{x:10.9,z:105.8,ry:.1},{x:16.0,z:84.8,ry:-.2},{x:1.0,z:52.8,ry:.2},{x:6.9,z:52.8,ry:-.15},{x:16.0,z:77.8,ry:.1}];placeClones(pl,pp);
+}
+
+// Movement / camera.
+let mode='overview',drag=false,lastX=0,lastY=0;let yaw=Math.PI,pitch=-.03,targetYaw=yaw,targetPitch=pitch;const keys=new Set();const velocity=new THREE.Vector3();const player={x:13.6,y:1.65,z:90.5,r:.28};
+const overviewTarget=new THREE.Vector3(23,1.25,55);let overviewAz=.76,overviewEl=.57,overviewDist=82,overviewDrag=false,overviewLastX=0,overviewLastY=0,overviewTouched=false;
+function setOverviewVisib

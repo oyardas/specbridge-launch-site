@@ -1,0 +1,32 @@
+n düzenli ve temiz tutulmasına destek olur.",why:"Temizlik ve sarf malzemelerinin koridorlarda veya teknik odalarda tutulmaması gerekir."},
+"O-06":{title:"Staff WC + Locker",purpose:"Operasyon personelinin WC, soyunma ve kişisel eşya dolabı ihtiyacını karşılayan alandır.",importance:"Uzun vardiyalarda personelin operasyon alanından uzaklaşmadan temel ihtiyaçlarını karşılamasını sağlar.",why:"24/7 işletmede personel destek alanları olmadığı takdirde operasyonel konfor ve disiplin düşer."},
+"O-05":{title:"Staff Lounge + Kitchenette",purpose:"NOC ve teknik ekiplerin vardiya arasında dinlenme, yemek ve kısa mola ihtiyacını karşılayan alandır.",importance:"Uzun süreli 24/7 operasyonlarda personel performansını ve iş sürekliliğini destekler.",why:"Mola alanının NOC içinde olmaması; çalışma alanı ile dinlenme alanının ayrılması gerekir."},
+"O-04":{title:"Management Offices",purpose:"Veri merkezi operasyon/yönetim ekipleri için ofis alanıdır.",importance:"Yönetim fonksiyonunu NOC’a yakın tutarken operasyon ekranlarından ve müşteri trafiğinden ayrıştırır.",why:"Planlama, müşteri görüşmesi ve idari işlerin NOC çalışma masalarında yürütülmemesi gerekir."},
+"O-03":{title:"Operators Room",purpose:"NOC ile birlikte çalışan vardiya, teknik koordinasyon ve operasyon ekiplerinin destek çalışma alanıdır.",importance:"NOC’un ekran ve alarm odaklı yapısını destekleyerek ek çalışma kapasitesi sağlar.",why:"Her operasyon faaliyeti NOC ana salonunda yapılmamalı; analiz ve koordinasyon için ayrı çalışma alanı gerekir."},
+"O-02":{title:"NOC / Network Operations Center",purpose:"Ağ, sistem, çevresel alarm ve veri merkezi operasyonlarının 7/24 izlendiği kontrol merkezidir.",importance:"Tesisin Day-2 işletmesinin kalbidir; alarm, incident, kapasite ve müşteri hizmetleri görünürlüğünü merkezileştirir.",why:"Dağıtık izleme yerine tek operasyon merkezi olaylara daha hızlı müdahale, görev ayrımı ve SLA yönetimi sağlar."},
+"O-01":{title:"Carrier / Technical Support",purpose:"Carrier, fiber, ağ ve teknik destek operasyonlarıyla ilişkili çalışma alanıdır.",importance:"MMR ve NOC arasında operasyonel koordinasyonu kolaylaştırır.",why:"Carrier müdahalelerinin NOC veya data hall içinde doğrudan yürütülmesi yerine destek alanında yönetilmesi daha güvenlidir."},
+"T-01":{title:"Meet-Me Room B (MMR-B)",purpose:"MMR-A’dan fiziksel olarak ayrılmış ikinci carrier/fiber demarkasyon odasıdır.",importance:"Fiber giriş ve carrier bağlantılarında ortak hata riskini azaltarak gerçek yedekliliğe katkı sağlar.",why:"Tek MMR tüm operatör bağlantılarını ortak yangın, su, kablo veya fiziksel erişim riskine maruz bırakır."},
+"C-02":{title:"Kuzey Buffer / Technical Strip",purpose:"Kuzey cephesinde odalar ile egress bandı arasında teknik tampon/servis şerididir.",importance:"Yangın/kaçış bandının ve teknik servis sınırının daha kontrollü ayrılmasına yardım eder.",why:"Bina kenarında doğrudan oda sonlandırmak yerine servis ve güvenlik tamponu bırakmak bakım/egress açısından avantaj sağlar."},
+"C-01":{title:"Kuzey Egress Şeridi",purpose:"Kuzey tarafındaki ana kaçış ve dolaşım bandıdır.",importance:"Acil durumda güvenli çıkış rotası ve alternatif dolaşım sağlar.",why:"Büyük veri merkezi katında erişilebilir, kesintisiz ve açık bir egress rotası zorunlu tasarım girdilerindendir."},
+"S-01":{title:"Kuzeybatı Yangın Merdiveni",purpose:"Acil durumda dikey tahliye için kullanılan yangın/kaçış merdivenidir.",importance:"Can güvenliğinin temel bileşenidir ve üçüncü kattaki kullanıcıların bağımsız kaçış yolunu destekler.",why:"Asansörler acil tahliyede ana kaçış yöntemi değildir; yangına dayanımlı merdiven gereklidir."},
+"TR-01":{title:"Doğu 5 m Servis Terası",purpose:"Binanın doğu cephesindeki yaklaşık 5 m × 110 m kapalı servis terasıdır; louver, dış ünite ve bakım erişimi için kullanılır.",importance:"Mekanik ekipmanın servis erişimini white-space ve iç koridorlardan ayırır.",why:"Dış üniteler ve bakım faaliyetleri için erişilebilir, güvenli, hava akışını engellemeyen ayrı dış servis bandı gerekir."},
+};
+const CAT_LABELS={arrival:'Arrival / Security',business:'Business / Meeting',operations:'Operations',staff:'Staff Support',technical:'Technical',corridor:'Corridor / Circulation',data:'Data Hall',future:'Future Use / Event',egress:'Life Safety / Egress',terrace:'Service Terrace'};
+const ZONE_ARCH_LOCKS={
+  "A-01":"Bina köşe zonudur. West ve South yönleri dış bina sınırıdır; bu iki yönde devam eden oda, koridor, kapı veya açıklık oluşturulamaz. Dolaşım yalnız iç tarafa, A-04/C-08 yönüne alınır.",
+  "TR-01":"Enclosed floor'un doğu sınırının dışındaki 5 m servis terasıdır; iç zonların yerine geçmez ve enclosed-floor geometrisini genişletmez."
+};
+function getZoneArchLock(room,id){
+  if(ZONE_ARCH_LOCKS[id]) return ZONE_ARCH_LOCKS[id];
+  if(!room) return 'Master numbered layout bağlayıcıdır; planda olmayan mimari eleman eklenmez.';
+  const b=[];
+  if(room.x===0) b.push('West side: exterior building boundary');
+  if(room.z===0) b.push('North side: exterior building boundary');
+  if(room.z+room.d===110) b.push('South side: exterior building boundary');
+  if(room.x+room.w===41) b.push('East side: enclosed-floor / service-terrace boundary');
+  const edge=b.length?b.join(' · ')+'; ':'';
+  return edge+'master numbered layout is authoritative. No room, corridor, door, opening or adjacent space may be invented.';
+}
+
+// ARCHITECTURE-LOCK RULE: only individually approved, topology-faithful visuals may be mapped here.
+// Rejected, batch-generated or geometry-improvised renders are 

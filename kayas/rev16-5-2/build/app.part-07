@@ -1,0 +1,63 @@
+['technical','power','battery','logistics'].includes(r.cat))return 3.65;return 3.20;}
+
+const architecture=new THREE.Group();scene.add(architecture);
+const ceilings=new THREE.Group();ceilings.name='REV16_CEILINGS';architecture.add(ceilings);
+const overviewHide=[];
+const collision=[];
+for(const r of ROOMS){
+ if(r.cat==='terrace')continue;
+ const floor=new THREE.Mesh(new THREE.BoxGeometry(r.w,.08,r.d),categoryFloorMat(r));floor.position.set(r.x+r.w/2,.01,r.z+r.d/2);floor.receiveShadow=true;architecture.add(floor);
+ const ch=ceilingHeight(r);const ceil=new THREE.Mesh(new THREE.BoxGeometry(r.w,.07,r.d),['data','technical','power','battery','logistics'].includes(r.cat)?MAT.ceilingTech:MAT.ceiling);ceil.position.set(r.x+r.w/2,ch,r.z+r.d/2);ceil.receiveShadow=true;ceil.userData.room=r.id;ceilings.add(ceil);
+}
+
+// Build a single non-duplicated wall network by unioning collinear room boundaries.
+function collectEdges(){const V=new Map(),H=new Map();function add(map,k,a,b){const arr=map.get(k)||[];arr.push([Math.min(a,b),Math.max(a,b)]);map.set(k,arr)}for(const r of ROOMS){if(r.cat==='terrace')continue;add(V,r.x,r.z,r.z+r.d);add(V,r.x+r.w,r.z,r.z+r.d);add(H,r.z,r.x,r.x+r.w);add(H,r.z+r.d,r.x,r.x+r.w)}return {V,H}}
+function unionIntervals(arr){arr=arr.sort((a,b)=>a[0]-b[0]);const out=[];for(const it of arr){if(!out.length||it[0]>out[out.length-1][1]+.001)out.push([...it]);else out[out.length-1][1]=Math.max(out[out.length-1][1],it[1])}return out}
+function subtractOpenings(a,b,opens){let segs=[[a,b]];for(const o of opens){const next=[];for(const [s,e] of segs){if(o[1]<=s||o[0]>=e)next.push([s,e]);else{if(o[0]>s+.02)next.push([s,Math.max(s,o[0])]);if(o[1]<e-.02)next.push([Math.min(e,o[1]),e])}}segs=next}return segs.filter(x=>x[1]-x[0]>.12)}
+function doorOpenings(ori,pos){return DOORS.filter(d=>d.ori===ori&&Math.abs(d.pos-pos)<.02).map(d=>[d.a-.03,d.b+.03])}
+function wallBox(ori,pos,a,b,glass=false,height=3.35){const len=b-a,th=.14;const g=ori==='x'?new THREE.BoxGeometry(th,height,len):new THREE.BoxGeometry(len,height,th);const m=glass?MAT.glass:MAT.wall;const mesh=new THREE.Mesh(g,m);mesh.position.set(ori==='x'?pos:(a+b)/2,height/2,ori==='x'?(a+b)/2:pos);mesh.castShadow=!glass;mesh.receiveShadow=!glass;architecture.add(mesh);if(!glass)collision.push({minx:mesh.position.x-(ori==='x'?th/2:len/2),maxx:mesh.position.x+(ori==='x'?th/2:len/2),minz:mesh.position.z-(ori==='x'?len/2:th/2),maxz:mesh.position.z+(ori==='x'?len/2:th/2)});return mesh}
+const edges=collectEdges();
+for(const [xs,arr] of edges.V){const x=+xs;for(const [a,b] of unionIntervals(arr)){const opens=doorOpenings('x',x);for(const [s,e] of subtractOpenings(a,b,opens)){const glass=Math.abs(x-14)<.02 && e>7 && s<70;wallBox('x',x,s,e,glass,glass?3.05:3.40)}}}
+for(const [zs,arr] of edges.H){const z=+zs;for(const [a,b] of unionIntervals(arr)){const opens=doorOpenings('z',z);for(const [s,e] of subtractOpenings(a,b,opens)){wallBox('z',z,s,e,false,3.40)}}}
+
+// Upper shell around the data hall to reach the 4.25 m technical ceiling.
+const dr=ROOMS.find(r=>r.id==='D-02');
+function upperWall(ori,pos,a,b){const len=b-a,g=ori==='x'?new THREE.BoxGeometry(.14,.85,len):new THREE.BoxGeometry(len,.85,.14);const m=new THREE.Mesh(g,MAT.wallTech);m.position.set(ori==='x'?pos:(a+b)/2,3.825,ori==='x'?(a+b)/2:pos);architecture.add(m)}
+upperWall('z',dr.z,dr.x,dr.x+dr.w);upperWall('z',dr.z+dr.d,dr.x,dr.x+dr.w);upperWall('x',dr.x+dr.w,dr.z,dr.z+dr.d);
+
+// Door frames + closed-by-default leaves. Doors open only when the viewer approaches.
+const doorActors=[];
+const visitorGlassDoorIds=new Set(['arrival-slide','access-slide','foyer-mantrap','mantrap-1','mantrap-2','obs-door','meeting-door','noc-door','vip-door']);
+for(const d of DOORS){
+ const w=d.b-d.a,h=2.45,isX=d.ori==='x',g=new THREE.Group();g.name='DOOR_'+d.id;
+ const mk=(geo,x,y,z)=>{const m=new THREE.Mesh(geo,MAT.frame);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;g.add(m);return m};
+ if(isX){
+   mk(new THREE.BoxGeometry(.12,h,.08),d.pos,h/2,d.a);
+   mk(new THREE.BoxGeometry(.12,h,.08),d.pos,h/2,d.b);
+   mk(new THREE.BoxGeometry(.12,.09,w),d.pos,h,d.a+w/2);
+ }else{
+   mk(new THREE.BoxGeometry(.08,h,.12),d.a,h/2,d.pos);
+   mk(new THREE.BoxGeometry(.08,h,.12),d.b,h/2,d.pos);
+   mk(new THREE.BoxGeometry(w,.09,.12),d.a+w/2,h,d.pos);
+ }
+ const leafW=w*.50+.018;
+ const leafMat=visitorGlassDoorIds.has(d.id)?MAT.glass:MAT.wallTech;
+ let l,r,closedL,closedR,openL,openR;
+ if(isX){
+   const geo=new THREE.BoxGeometry(.045,h-.12,leafW);
+   l=new THREE.Mesh(geo,leafMat);r=new THREE.Mesh(geo,leafMat);
+   closedL=d.a+w*.25;closedR=d.b-w*.25;openL=d.a-w*.25;openR=d.b+w*.25;
+   l.position.set(d.pos,h/2-.03,closedL);r.position.set(d.pos,h/2-.03,closedR);
+ }else{
+   const geo=new THREE.BoxGeometry(leafW,h-.12,.045);
+   l=new THREE.Mesh(geo,leafMat);r=new THREE.Mesh(geo,leafMat);
+   closedL=d.a+w*.25;closedR=d.b-w*.25;openL=d.a-w*.25;openR=d.b+w*.25;
+   l.position.set(closedL,h/2-.03,d.pos);r.position.set(closedR,h/2-.03,d.pos);
+ }
+ l.castShadow=!visitorGlassDoorIds.has(d.id);r.castShadow=l.castShadow;
+ l.receiveShadow=true;r.receiveShadow=true;g.add(l);g.add(r);
+ // Center gasket removes the persistent visible slit while closed.
+ const gasket=isX?new THREE.Mesh(new THREE.BoxGeometry(.055,h-.18,.035),MAT.frame):new THREE.Mesh(new THREE.BoxGeometry(.035,h-.18,.055),MAT.frame);
+ gasket.position.set(isX?d.pos:(d.a+d.b)/2,h/2-.03,isX?(d.a+d.b)/2:d.pos);g.add(gasket);
+ architecture.add(g);
+ doorActors.push({d,g,l,r,gasket,isX,closedL,clo

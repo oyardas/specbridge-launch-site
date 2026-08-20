@@ -1,0 +1,55 @@
+sedR,openL,openR,open:0});
+}
+function updateDoors(dt){
+ let nearestInterlock=null,nearestInterlockDist=1e9;
+ if(mode==='walk'){
+   for(const a of doorActors){if(a.d.type!=='interlock')continue;const cx=a.isX?a.d.pos:(a.d.a+a.d.b)/2,cz=a.isX?(a.d.a+a.d.b)/2:a.d.pos,dd=Math.hypot(player.x-cx,player.z-cz);if(dd<nearestInterlockDist){nearestInterlockDist=dd;nearestInterlock=a}}
+ }
+ for(const a of doorActors){
+   const cx=a.isX?a.d.pos:(a.d.a+a.d.b)/2,cz=a.isX?(a.d.a+a.d.b)/2:a.d.pos;
+   const dist=mode==='walk'?Math.hypot(player.x-cx,player.z-cz):999;
+   let desired=dist<1.75?1:0;
+   if(a.d.type==='interlock' && a!==nearestInterlock)desired=0;
+   const k=1-Math.exp(-dt*(desired?7.5:5.2));a.open+=(desired-a.open)*k;
+   const lp=a.closedL+(a.openL-a.closedL)*a.open,rp=a.closedR+(a.openR-a.closedR)*a.open;
+   if(a.isX){a.l.position.z=lp;a.r.position.z=rp}else{a.l.position.x=lp;a.r.position.x=rp}
+   a.gasket.visible=a.open<.08;
+ }
+}
+
+// Architectural lights: emissive strips plus a small number of real point lights.
+const ledMat=new THREE.MeshStandardMaterial({color:0xf5fbff,emissive:0xe5f7ff,emissiveIntensity:2.2,roughness:.25});
+function led(x,z,len=2.4,ry=0,y=3.05){const m=new THREE.Mesh(new THREE.BoxGeometry(len,.035,.07),ledMat);m.position.set(x,y,z);m.rotation.y=ry;architecture.add(m)}
+for(const z of [87,89])led(4,z,4.7,0,3.02);for(const z of [87,90.5])led(13.5,z,4.8,Math.PI/2,3.02);
+for(let z=42.5;z<=67;z+=4.8){led(27.5,z,7.2,0,4.05);}
+const hallLight1=new THREE.PointLight(0xeaf8ff,20,28,2);hallLight1.position.set(27.5,3.85,52);scene.add(hallLight1);const hallLight2=hallLight1.clone();hallLight2.position.z=63;scene.add(hallLight2);
+const foyerLight=new THREE.PointLight(0xfff2de,10,14,2);foyerLight.position.set(13.5,2.9,89);scene.add(foyerLight);const meetingLight=new THREE.PointLight(0xfff3df,10,13,2);meetingLight.position.set(4,2.8,88);scene.add(meetingLight);
+const arrivalLight=new THREE.PointLight(0xfff3e4,9,14,2);arrivalLight.position.set(13.4,2.9,103.5);scene.add(arrivalLight);const nocLight=new THREE.PointLight(0xe8f2ff,8,13,2);nocLight.position.set(4.0,2.9,29.5);scene.add(nocLight);const futureLight=new THREE.PointLight(0xfff0dc,11,22,2);futureLight.position.set(27.5,3.0,20.0);scene.add(futureLight);const loungeLight=new THREE.PointLight(0xfff1de,6.5,12,2);loungeLight.position.set(4.0,2.8,56.5);scene.add(loungeLight);const officeLight=new THREE.PointLight(0xf4f7ff,6.0,12,2);officeLight.position.set(4.0,2.8,48.0);scene.add(officeLight);const powerLight=new THREE.PointLight(0xeaf5ff,7.5,18,2);powerLight.position.set(34.0,3.0,99.0);scene.add(powerLight);const terraceLight=new THREE.PointLight(0xe5f6ff,5.0,18,2);terraceLight.position.set(43.5,3.2,55.0);scene.add(terraceLight);
+
+// East service terrace shell (concept only): floor, canopy, louver screen and upward-discharge units.
+const tr=ROOMS.find(r=>r.id==='TR-01');const trFloor=new THREE.Mesh(new THREE.BoxGeometry(tr.w,.12,tr.d),new THREE.MeshStandardMaterial({color:0xa6acad,map:TEX.tech,roughness:.72,metalness:.04}));trFloor.position.set(43.5,.02,55);architecture.add(trFloor);const canopy=new THREE.Mesh(new THREE.BoxGeometry(5,.12,110),MAT.frame);canopy.position.set(43.5,3.75,55);architecture.add(canopy);overviewHide.push(canopy);
+for(let z=2;z<109;z+=1.05){const blade=new THREE.Mesh(new THREE.BoxGeometry(.09,.08,.8),MAT.frame);blade.position.set(45.92,2.0,z);blade.rotation.x=.25;architecture.add(blade)}
+const terraceDoorCenters=DOORS.filter(d=>d.ori==='x'&&Math.abs(d.pos-41)<.05).map(d=>(d.a+d.b)/2);
+for(let z=5;z<106;z+=8){
+ if(terraceDoorCenters.some(c=>Math.abs(z-c)<3.25))continue; // keep access and maintenance clearance
+ const unit=new THREE.Group();unit.name='TERRACE_OUTDOOR_UNIT';
+ const body=new THREE.Mesh(new THREE.BoxGeometry(1.25,1.75,1.10),MAT.wallTech);body.position.y=.875;body.castShadow=true;body.receiveShadow=true;unit.add(body);
+ const top=new THREE.Mesh(new THREE.CylinderGeometry(.43,.43,.09,28),MAT.dark);top.position.y=1.81;unit.add(top);
+ const grille=new THREE.Mesh(new THREE.TorusGeometry(.36,.018,8,28),MAT.frame);grille.rotation.x=Math.PI/2;grille.position.y=1.865;unit.add(grille);
+ unit.position.set(42.45,.10,z);architecture.add(unit);
+}
+
+// Furniture primitives.
+function roundedBox(w,h,d,r,mat){
+ const rr=Math.max(.01,Math.min(r,w*.25,h*.45));
+ const s=new THREE.Shape(),x0=-w/2,y0=-h/2,x1=w/2,y1=h/2;
+ s.moveTo(x0+rr,y0);s.lineTo(x1-rr,y0);s.quadraticCurveTo(x1,y0,x1,y0+rr);
+ s.lineTo(x1,y1-rr);s.quadraticCurveTo(x1,y1,x1-rr,y1);
+ s.lineTo(x0+rr,y1);s.quadraticCurveTo(x0,y1,x0,y1-rr);
+ s.lineTo(x0,y0+rr);s.quadraticCurveTo(x0,y0,x0+rr,y0);
+ const g=new THREE.ExtrudeGeometry(s,{depth:d,steps:1,curveSegments:5,bevelEnabled:true,bevelSegments:2,bevelSize:Math.min(.025,rr*.22),bevelThickness:Math.min(.025,rr*.22)});
+ g.translate(0,0,-d/2);g.computeVertexNormals();return new THREE.Mesh(g,mat);
+}
+function sofa(width=1.9,mat=MAT.upholstery){const g=new THREE.Group(),seat=roundedBox(width,.20,.78,.08,mat);seat.position.y=.43;g.add(seat);const back=roundedBox(width,.68,.14,.06,mat);back.position.set(0,.76,-.32);g.add(back);for(const sx of[-width/2+.08,width/2-.08]){const arm=roundedBox(.16,.52,.72,.055,mat);arm.position.set(sx,.56,0);g.add(arm)}for(const sx of[-width/2+.14,width/2-.14])for(const sz of[-.25,.25]){const leg=new THREE.Mesh(new THREE.CylinderGeometry(.018,.018,.32,12),MAT.metal);leg.position.set(sx,.16,sz);g.add(leg)}return g}
+function loungeChair(){return sofa(.82,MAT.upholsteryDark)}
+function coffeeTable(w=1.05,d
