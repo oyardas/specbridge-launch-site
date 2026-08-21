@@ -32,6 +32,30 @@ jobs:
           set -euo pipefail
           cat kayas/rev16-5-2/build/app.part-* > kayas/rev16-5-2/app.js
 
+      - name: Apply runtime performance guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY2'
+          from pathlib import Path
+          p=Path('kayas/rev16-5-2/app.js')
+          s=p.read_text(encoding='utf-8')
+          replacements={
+            "renderer.setPixelRatio(Math.min(1.5,devicePixelRatio||1));":"renderer.setPixelRatio(Math.min(1.0,devicePixelRatio||1));",
+            "renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;":"renderer.shadowMap.enabled=false;",
+            "sun.position.set(24,34,94);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);":"sun.position.set(24,34,94);sun.castShadow=false;sun.shadow.mapSize.set(1024,1024);",
+            "function drawMini(){const c=document.getElementById('mini'),x=c.getContext('2d'),W=c.width=c.clientWidth*devicePixelRatio,H=c.height=c.clientHeight*devicePixelRatio;x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);":"function drawMini(){const c=document.getElementById('mini');if(!c||!c.parentElement||getComputedStyle(c.parentElement).display==='none')return;const x=c.getContext('2d'),dpr=Math.min(1,devicePixelRatio||1),tw=Math.max(1,Math.floor(c.clientWidth*dpr)),th=Math.max(1,Math.floor(c.clientHeight*dpr));if(c.width!==tw)c.width=tw;if(c.height!==th)c.height=th;const W=c.width,H=c.height;x.setTransform(dpr,0,0,dpr,0,0);",
+            "document.getElementById('homeBtn').onclick=openLanding;":"let kayasAssetsPromise=null;window.ensureKAYASAssets=()=>{if(!kayasAssetsPromise){document.getElementById('status').textContent='LOADING DATA HALL EQUIPMENT';kayasAssetsPromise=installAssets().then(()=>{document.getElementById('status').textContent='206 IT CABINETS · 1,972 kW';return true}).catch(e=>{console.error(e);kayasAssetsPromise=null;document.getElementById('status').textContent='3D SHELL READY';return false})}return kayasAssetsPromise};document.getElementById('homeBtn').onclick=openLanding;",
+            "document.getElementById('dataBtn').onclick=()=>{document.getElementById('landing').classList.add('hidden');setWalkPose(27.5,68.2,27.5,56.0,":"document.getElementById('dataBtn').onclick=()=>{window.ensureKAYASAssets();document.getElementById('landing').classList.add('hidden');setWalkPose(27.5,68.2,27.5,56.0,",
+            "(async()=>{try{overview();requestAnimationFrame(frame);await new Promise(r=>setTimeout(r,250));document.getElementById('loading').classList.add('hidden');document.getElementById('landing').classList.remove('hidden');document.getElementById('status').textContent='SHELL READY · BUILDING ARCH-LOCKED ASSETS';installAssets().then(()=>{document.getElementById('status').textContent='READY · REV16.5.2 ARCHITECTURE LOCKED';}).catch(e=>{console.error(e);document.getElementById('status').textContent='SHELL READY · ASSET FALLBACK MODE';});}catch(e){console.error(e);document.querySelector('#loading .loadbox b').textContent='Rev16.5.2 shell could not initialize';document.querySelector('#loading .loadbox span').textContent=e.message||String(e)}})();":"(async()=>{try{overview();requestAnimationFrame(frame);await new Promise(r=>setTimeout(r,120));document.getElementById('loading').classList.add('hidden');document.getElementById('landing').classList.remove('hidden');document.getElementById('status').textContent='206 IT CABINETS · 1,972 kW';}catch(e){console.error(e);document.querySelector('#loading .loadbox b').textContent='KAYAS 3D could not initialize';document.querySelector('#loading .loadbox span').textContent=e.message||String(e)}})();"
+          }
+          for old,new in replacements.items():
+              if old not in s:
+                  raise SystemExit('Expected runtime pattern missing: '+old[:120])
+              s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          PY2
+
       - name: Validate review application
         shell: bash
         run: |
@@ -41,6 +65,8 @@ jobs:
           grep -q 'MİMARİ SINIR / ARCHITECTURAL LOCK' kayas/rev16-5-2/index.html
           grep -q 'const ZONE_VISUALS={};' kayas/rev16-5-2/app.js
           grep -q 'Bina köşe zonudur' kayas/rev16-5-2/app.js
+          grep -q 'window.ensureKAYASAssets' kayas/rev16-5-2/app.js
+          grep -q 'renderer.shadowMap.enabled=false' kayas/rev16-5-2/app.js
 
       - name: Vendor offline Three.js r166 when missing
         shell: bash
@@ -70,16 +96,16 @@ jobs:
           node --check "$target"
           printf '%s\n' 'Three.js r166 offline runtime for KAYAS walkthrough.' 'Extracted from the verified single-file KAYAS source; Three.js is MIT licensed.' > kayas/walkthrough/vendor/README.txt
 
-      - name: Commit vendored runtime if created
+      - name: Commit assembled runtime if changed
         shell: bash
         run: |
           set -euo pipefail
           git add kayas/rev16-5-2/app.js kayas/walkthrough/vendor/three.global.r166.js kayas/walkthrough/vendor/README.txt || true
           if git diff --cached --quiet; then
-            echo 'No vendor-runtime commit required.'
+            echo 'No runtime commit required.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Assemble KAYAS Rev16.5.2 review runtime [skip ci]'
+          git commit -m 'Assemble optimized KAYAS 3D runtime [skip ci]'
           git push origin HEAD:main
