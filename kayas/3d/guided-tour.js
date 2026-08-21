@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 const STOPS=window.KAYAS_TOUR_STOPS||[];
-if(!window.THREE||!window.scene||!window.camera||!window.renderer||!STOPS.length)return;
+if(typeof THREE==='undefined'||typeof scene==='undefined'||typeof camera==='undefined'||typeof renderer==='undefined'||!STOPS.length)return;
 
 renderer.setPixelRatio(Math.min(1,window.devicePixelRatio||1));
 renderer.shadowMap.enabled=false;
