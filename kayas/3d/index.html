@@ -9,35 +9,38 @@
 <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071017}iframe{display:block;border:0;width:100%;height:100%;background:#071017}</style>
 </head>
 <body>
-<iframe id="reviewFrame" src="/kayas/rev16-5-2/index.html?v=20260821-1306" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
+<iframe id="reviewFrame" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
 <script>
-(function(){
+(async function(){
+ const stamp='20260821-1314';
  const f=document.getElementById('reviewFrame');
- f.addEventListener('load',async()=>{
+ async function injectEnhancements(){
   try{
    const d=f.contentDocument;
-   const css=d.createElement('link');
-   css.rel='stylesheet';
-   css.href='/kayas/3d/style.css?v=20260821-1306';
-   d.head.appendChild(css);
+   const css=d.createElement('link');css.rel='stylesheet';css.href='/kayas/3d/style.css?v='+stamp;d.head.appendChild(css);
    const files=[
     '/kayas/rev16-5-3/zone-data-1.js',
     '/kayas/rev16-5-3/zone-data-2.js',
-    '/kayas/3d/clean-ui.js?v=20260821-1306',
-    '/kayas/3d/tour-data.js?v=20260821-1306',
-    '/kayas/3d/guided-tour.js?v=20260821-1306'
+    '/kayas/3d/clean-ui.js?v='+stamp,
+    '/kayas/3d/tour-data.js?v='+stamp,
+    '/kayas/3d/guided-tour.js?v='+stamp
    ];
-   for(const file of files){
-    await new Promise((resolve,reject)=>{
-     const s=d.createElement('script');
-     s.src=file;
-     s.onload=resolve;
-     s.onerror=()=>reject(new Error('Failed to load '+file));
-     d.body.appendChild(s);
-    });
-   }
+   for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+file));d.body.appendChild(s)})}
   }catch(e){console.error('KAYAS 3D experience could not initialize',e)}
- });
+ }
+ try{
+  const r=await fetch('/kayas/rev16-5-2/index.html?runtime='+stamp,{cache:'no-store'});
+  let h=await r.text();
+  h=h.replace('<head>','<head><base href="/kayas/rev16-5-2/">');
+  h=h.replace('../walkthrough/vendor/three.global.r166.js?v=20260820-rev1652','/kayas/walkthrough/vendor/three.global.r166.js?v='+stamp);
+  h=h.replace('./app.js','/kayas/rev16-5-2/app.js?runtime='+stamp);
+  f.addEventListener('load',injectEnhancements,{once:true});
+  f.srcdoc=h;
+ }catch(e){
+  console.error('KAYAS 3D base scene could not load',e);
+  f.src='/kayas/rev16-5-2/index.html?runtime='+stamp;
+  f.addEventListener('load',injectEnhancements,{once:true});
+ }
 })();
 </script>
 </body>
