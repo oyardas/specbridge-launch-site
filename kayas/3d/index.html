@@ -12,28 +12,45 @@
 <iframe id="reviewFrame" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
 <script>
 (async function(){
- const stamp='20260821-1314';
+ const stamp='20260821-1320';
  const f=document.getElementById('reviewFrame');
+ function patchRuntime(app){
+  app=app.replace("new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'})","new THREE.WebGLRenderer({canvas,antialias:false,powerPreference:'high-performance'})");
+  app=app.replace("renderer.setPixelRatio(Math.min(1.5,devicePixelRatio||1));","renderer.setPixelRatio(1);");
+  app=app.replace("renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;","renderer.shadowMap.enabled=false;");
+  app=app.replace("sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);","sun.castShadow=false;sun.shadow.mapSize.set(512,512);");
+  app=app.replace("function drawMini(){const c=document.getElementById('mini'),x=c.getContext('2d'),W=c.width=c.clientWidth*devicePixelRatio,H=c.height=c.clientHeight*devicePixelRatio;","function drawMini(){const c=document.getElementById('mini');if(!c||!c.parentElement||getComputedStyle(c.parentElement).display==='none')return;const x=c.getContext('2d'),W=c.width=c.clientWidth,H=c.height=c.clientHeight;");
+  app=app.replace("let last=performance.now();function frame(now){const dt=","let last=performance.now();function frame(now){if(now-last<28){requestAnimationFrame(frame);return}const dt=");
+  app=app.replace("document.getElementById('status').textContent='SHELL READY · BUILDING ARCH-LOCKED ASSETS';installAssets().then(()=>{document.getElementById('status').textContent='READY · REV16.5.2 ARCHITECTURE LOCKED';}).catch(e=>{console.error(e);document.getElementById('status').textContent='SHELL READY · ASSET FALLBACK MODE';});","document.getElementById('status').textContent='READY';");
+  app=app.replace("document.getElementById('dataBtn').onclick=()=>{","document.getElementById('dataBtn').onclick=()=>{window.ensureKayasAssets&&window.ensureKayasAssets();");
+  app += "\nwindow.__kayasAssetsPromise=null;window.ensureKayasAssets=function(){if(window.__kayasAssetsPromise)return window.__kayasAssetsPromise;const st=document.getElementById('status');if(st)st.textContent='LOADING DATA HALL';window.__kayasAssetsPromise=Promise.resolve().then(()=>installAssets()).then(()=>{if(st)st.textContent='206 IT CABINETS · 1,972 kW';return true}).catch(e=>{console.error(e);window.__kayasAssetsPromise=null;if(st)st.textContent='DATA HALL LOAD ERROR';throw e});return window.__kayasAssetsPromise;};\n";
+  return app;
+ }
  async function injectEnhancements(){
   try{
    const d=f.contentDocument;
    const css=d.createElement('link');css.rel='stylesheet';css.href='/kayas/3d/style.css?v='+stamp;d.head.appendChild(css);
    const files=[
-    '/kayas/rev16-5-3/zone-data-1.js',
-    '/kayas/rev16-5-3/zone-data-2.js',
+    '/kayas/rev16-5-3/zone-data-1.js?v='+stamp,
+    '/kayas/rev16-5-3/zone-data-2.js?v='+stamp,
     '/kayas/3d/clean-ui.js?v='+stamp,
     '/kayas/3d/tour-data.js?v='+stamp,
     '/kayas/3d/guided-tour.js?v='+stamp
    ];
    for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+file));d.body.appendChild(s)})}
+   [...d.querySelectorAll('.nav button')].forEach(b=>{if(/zone details/i.test((b.textContent||'').trim()))b.remove()});
   }catch(e){console.error('KAYAS 3D experience could not initialize',e)}
  }
  try{
-  const r=await fetch('/kayas/rev16-5-2/index.html?runtime='+stamp,{cache:'no-store'});
+  const [r,a]=await Promise.all([
+   fetch('/kayas/rev16-5-2/index.html?runtime='+stamp,{cache:'no-store'}),
+   fetch('/kayas/rev16-5-2/app.js?runtime='+stamp,{cache:'no-store'})
+  ]);
   let h=await r.text();
+  let app=patchRuntime(await a.text()).replace(/<\/script/gi,'<\\/script');
   h=h.replace('<head>','<head><base href="/kayas/rev16-5-2/">');
   h=h.replace('../walkthrough/vendor/three.global.r166.js?v=20260820-rev1652','/kayas/walkthrough/vendor/three.global.r166.js?v='+stamp);
-  h=h.replace('./app.js','/kayas/rev16-5-2/app.js?runtime='+stamp);
+  h=h.replace('<script src="./app.js"></script>','<script>'+app+'<\/script>');
   f.addEventListener('load',injectEnhancements,{once:true});
   f.srcdoc=h;
  }catch(e){
