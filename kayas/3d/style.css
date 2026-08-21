@@ -1,0 +1,22 @@
+#kayasTourBar{position:fixed;z-index:95;left:14px;top:76px;display:flex;gap:6px;flex-wrap:wrap;max-width:760px}
+#kayasTourBar button,#kayasFloorTools button{border:1px solid #405d6e;border-radius:9px;background:rgba(8,22,31,.94);color:#eaf7fc;padding:8px 10px;font:800 9px/1.1 Segoe UI,Arial,sans-serif;cursor:pointer;box-shadow:0 6px 20px #0004}
+#kayasTourBar button:hover,#kayasTourBar button.active,#kayasFloorTools button:hover,#kayasFloorTools button.active{border-color:#69d5ff;background:#17455b}
+#kayasTourPanel{position:fixed;z-index:96;left:14px;bottom:16px;width:min(410px,calc(100vw - 28px));border:1px solid #345467;border-radius:14px;background:rgba(6,18,26,.95);color:#eef8fc;box-shadow:0 22px 60px #0008;backdrop-filter:blur(15px);padding:14px;display:none}
+#kayasTourPanel.open{display:block}
+#kayasTourPanel .kicker{font:900 8px/1 Segoe UI,Arial,sans-serif;color:#74daff;letter-spacing:.16em;text-transform:uppercase}
+#kayasTourPanel h3{margin:7px 0 5px;font:800 17px/1.15 Segoe UI,Arial,sans-serif}
+#kayasTourPanel .zones{color:#8fa9b7;font:700 9px/1.3 Segoe UI,Arial,sans-serif;margin-bottom:9px}
+#kayasTourPanel .copy{color:#bad0da;font:10px/1.52 Segoe UI,Arial,sans-serif;max-height:120px;overflow:auto}
+#kayasTourPanel .progress{height:3px;border-radius:4px;background:#1d3441;margin:10px 0;overflow:hidden}
+#kayasTourPanel .progress span{display:block;height:100%;background:#67d6ff;width:0}
+#kayasTourPanel .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+#kayasTourPanel button,#kayasTourPanel select{border:1px solid #3b596b;border-radius:8px;background:#102936;color:#e8f6fb;padding:7px 8px;font:800 9px Segoe UI,Arial,sans-serif;cursor:pointer}
+#kpVoice{max-width:190px}
+#kayasStops{position:fixed;z-index:94;right:14px;top:76px;width:270px;max-height:calc(100vh - 100px);overflow:auto;border:1px solid #345465;border-radius:12px;background:rgba(7,19,27,.92);padding:7px;display:none;backdrop-filter:blur(13px)}
+#kayasStops.open{display:block}
+#kayasStops button{display:block;width:100%;border:0;border-bottom:1px solid #203845;background:transparent;color:#b9ced8;text-align:left;padding:8px;font:700 9px/1.3 Segoe UI,Arial,sans-serif;cursor:pointer}
+#kayasStops button:hover,#kayasStops button.active{background:#143445;color:#fff}
+#kayasFloorTools{position:fixed;z-index:97;right:14px;bottom:52px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:620px}
+#kayasFloorBadge{position:fixed;z-index:93;right:16px;bottom:16px;border:1px solid #3a596b;border-radius:999px;background:rgba(8,22,31,.9);color:#cbe1ea;padding:7px 10px;font:800 9px Segoe UI,Arial,sans-serif}
+#kayasFade{position:fixed;inset:0;z-index:92;pointer-events:none;background:#061017;opacity:0;transition:opacity .18s ease}#kayasFade.on{opacity:.82}
+@media(max-width:900px){#kayasTourBar{left:8px;right:8px;top:70px}#kayasStops{right:8px;width:220px}#kayasTourPanel{left:8px;bottom:8px;width:calc(100vw - 16px)}#kayasFloorTools{right:8px;left:8px;bottom:54px;justify-content:flex-start}#kpVoice{max-width:150px}}
