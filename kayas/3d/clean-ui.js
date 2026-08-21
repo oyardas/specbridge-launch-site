@@ -1,0 +1,44 @@
+(function(){
+'use strict';
+const DETAILS=window.KAYAS_EN_DETAILS||{};
+const arch={'A-01':'This is a building-corner zone. The west and south sides are exterior building boundaries; no continuation room, corridor, door, or opening may be created in either direction.','TR-01':'This is the 5 m service terrace outside the east boundary of the enclosed floor.'};
+const generic='The master numbered layout is authoritative. No room, corridor, door, opening or adjacent space may be invented.';
+const set=(id,v)=>{const e=typeof id==='string'?document.getElementById(id):id;if(e)e.textContent=v};
+function patch(){
+ document.documentElement.lang='en';document.title='KAYAS · 3rd Floor Zone Review';
+ set(document.querySelector('.brand b'),'KAYAS · 3rd Floor Zone Review');
+ set(document.querySelector('.brand span'),'Integrated Data Center & Digital Services Platform');
+ set(document.querySelector('#zoneInfo .eyebrow'),'ZONE DETAILS');
+ const hs=[...document.querySelectorAll('#zoneInfo .zone-section h4')];
+ if(hs[0])set(hs[0],'IMPORTANCE TO THE DATA CENTER');if(hs[1])set(hs[1],'WHY THIS ZONE IS REQUIRED');if(hs[2])set(hs[2],'ARCHITECTURAL BOUNDARY');
+ set(document.querySelector('#zoneInfo .zone-note'),'Selected zone function, importance and architectural constraints.');
+ set(document.querySelector('#landing .kicker'),'KAYAS · 3RD FLOOR REVIEW');
+ set(document.querySelector('#landing h1'),'KAYAS · 3rd Floor Zone Review');
+ const lp=document.querySelector('#landing .landing-card > p');if(lp)lp.textContent='Interactive review of the 41-zone third-floor architecture, data hall, operations, support areas and service terrace.';
+ const zt=document.getElementById('zoneTitle');if(zt)set(zt,'KAYAS · 3rd Floor Zone Review');
+ const st=document.getElementById('status');if(st)set(st,'206 IT CABINETS · 1,972 kW');
+ const tips=document.querySelector('.tips');if(tips)tips.textContent='Walk: W/A/S/D or arrows · Look: hold mouse and drag · Overview: drag to orbit and use the mouse wheel to zoom.';
+ document.querySelectorAll('#landing .baseline span').forEach(x=>{if(/No humans|No guided|Rev|build/i.test(x.textContent))x.remove()});
+}
+function defaultZone(){
+ set('zoneInfoTitle','Hover over a zone');set('zoneInfoSub','Selected zone information');
+ set('zoneInfoDesc','Hover over a zone number in Overview to display its function. Click a label to pin the selection.');
+ set('zoneInfoImportance','Select a zone to review why it matters to operations, security, customer experience or technical continuity.');
+ set('zoneInfoWhy','Select a zone to review why this function is maintained as a distinct room or controlled area.');
+ set('zoneInfoArch',generic);const m=document.getElementById('zoneMedia');if(m)m.dataset.placeholder='No approved photorealistic visual has been assigned to this zone yet.';
+ set('zoneMediaBadge','VISUAL PENDING');const p=document.getElementById('zonePinNote');if(p)p.innerHTML='<b>Hover:</b> preview · <b>Click:</b> pin selection';
+}
+function apply(){
+ const t=document.getElementById('zoneInfoTitle');if(!t)return;
+ const m=(t.textContent||'').match(/([A-Z]{1,2}-\d{2})/);if(!m){defaultZone();return}
+ const id=m[1],d=DETAILS[id];if(!d)return;
+ set('zoneInfoTitle',id);set('zoneInfoSub',d.title);set('zoneInfoDesc',d.purpose);set('zoneInfoImportance',d.importance);set('zoneInfoWhy',d.why);set('zoneInfoArch',arch[id]||generic);
+}
+function boot(){
+ patch();defaultZone();apply();
+ const zi=document.getElementById('zoneInfo');if(zi)new MutationObserver(()=>{patch();apply()}).observe(zi,{subtree:true,childList:true,characterData:true});
+ const st=document.getElementById('status');if(st)new MutationObserver(()=>set(st,'206 IT CABINETS · 1,972 kW')).observe(st,{subtree:true,childList:true,characterData:true});
+ setTimeout(()=>{const l=document.getElementById('landing');if(l)l.classList.add('hidden');try{overview()}catch(_){}},100);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
