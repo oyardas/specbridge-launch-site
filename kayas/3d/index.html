@@ -12,7 +12,7 @@
 <iframe id="reviewFrame" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
 <script>
 (async function(){
- const stamp='20260821-1323';
+ const stamp='20260821-1330';
  const f=document.getElementById('reviewFrame');
  async function injectEnhancements(){
   try{
@@ -22,14 +22,11 @@
     '/kayas/rev16-5-3/zone-data-1.js?v='+stamp,
     '/kayas/rev16-5-3/zone-data-2.js?v='+stamp,
     '/kayas/3d/clean-ui.js?v='+stamp,
+    '/kayas/3d/datahall-lite.js?v='+stamp,
     '/kayas/3d/tour-data.js?v='+stamp,
     '/kayas/3d/guided-tour.js?v='+stamp
    ];
-   for(const file of files){
-    await new Promise((resolve,reject)=>{
-     const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+file));d.body.appendChild(s);
-    });
-   }
+   for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+file));d.body.appendChild(s)})}
    [...d.querySelectorAll('.nav button')].forEach(b=>{if(/zone details/i.test((b.textContent||'').trim()))b.remove()});
   }catch(e){console.error('KAYAS 3D enhancements could not initialize',e)}
  }
