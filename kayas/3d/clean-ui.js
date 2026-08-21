@@ -4,6 +4,32 @@ const DETAILS=window.KAYAS_EN_DETAILS||{};
 const arch={'A-01':'This is a building-corner zone. The west and south sides are exterior building boundaries; no continuation room, corridor, door, or opening may be created in either direction.','TR-01':'This is the 5 m service terrace outside the east boundary of the enclosed floor.'};
 const generic='The master numbered layout is authoritative. No room, corridor, door, opening or adjacent space may be invented.';
 const set=(id,v)=>{const e=typeof id==='string'?document.getElementById(id):id;if(e)e.textContent=v};
+const ZONE_VIS_KEY='kayas_zone_details_visible';
+let zoneDetailsVisible=true;
+function readZonePref(){try{const v=sessionStorage.getItem(ZONE_VIS_KEY);if(v!==null)zoneDetailsVisible=v!=='0'}catch(_){} }
+function saveZonePref(){try{sessionStorage.setItem(ZONE_VIS_KEY,zoneDetailsVisible?'1':'0')}catch(_){} }
+function installZoneToggle(){
+ const nav=document.querySelector('.nav'),zi=document.getElementById('zoneInfo');if(!nav||!zi)return;
+ if(!document.getElementById('zoneDetailsToggle')){
+  const b=document.createElement('button');b.id='zoneDetailsToggle';b.type='button';b.textContent='Hide Zone Details';b.setAttribute('aria-controls','zoneInfo');nav.appendChild(b);
+  b.addEventListener('click',()=>{zoneDetailsVisible=!zoneDetailsVisible;saveZonePref();applyZoneVisibility(true)});
+ }
+ if(!document.getElementById('zoneDetailsToggleStyle')){
+  const s=document.createElement('style');s.id='zoneDetailsToggleStyle';s.textContent='#zoneInfo.kayas-zone-manual-hidden{display:none!important}';document.head.appendChild(s);
+ }
+ applyZoneVisibility(false);
+}
+function applyZoneVisibility(forceShow){
+ const zi=document.getElementById('zoneInfo'),b=document.getElementById('zoneDetailsToggle');if(!zi||!b)return;
+ if(zoneDetailsVisible){
+  zi.classList.remove('kayas-zone-manual-hidden');
+  if(forceShow)zi.classList.remove('hidden');
+  b.textContent='Hide Zone Details';b.setAttribute('aria-expanded','true');
+ }else{
+  zi.classList.add('kayas-zone-manual-hidden');
+  b.textContent='Show Zone Details';b.setAttribute('aria-expanded','false');
+ }
+}
 function patch(){
  document.documentElement.lang='en';document.title='KAYAS · 3rd Floor Zone Review';
  set(document.querySelector('.brand b'),'KAYAS · 3rd Floor Zone Review');
@@ -19,6 +45,7 @@ function patch(){
  const st=document.getElementById('status');if(st)set(st,'206 IT CABINETS · 1,972 kW');
  const tips=document.querySelector('.tips');if(tips)tips.textContent='Walk: W/A/S/D or arrows · Look: hold mouse and drag · Overview: drag to orbit and use the mouse wheel to zoom.';
  document.querySelectorAll('#landing .baseline span').forEach(x=>{if(/No humans|No guided|Rev|build/i.test(x.textContent))x.remove()});
+ applyZoneVisibility(false);
 }
 function defaultZone(){
  set('zoneInfoTitle','Hover over a zone');set('zoneInfoSub','Selected zone information');
@@ -35,10 +62,10 @@ function apply(){
  set('zoneInfoTitle',id);set('zoneInfoSub',d.title);set('zoneInfoDesc',d.purpose);set('zoneInfoImportance',d.importance);set('zoneInfoWhy',d.why);set('zoneInfoArch',arch[id]||generic);
 }
 function boot(){
- patch();defaultZone();apply();
- const zi=document.getElementById('zoneInfo');if(zi)new MutationObserver(()=>{patch();apply()}).observe(zi,{subtree:true,childList:true,characterData:true});
+ readZonePref();patch();defaultZone();apply();installZoneToggle();
+ const zi=document.getElementById('zoneInfo');if(zi)new MutationObserver(()=>{patch();apply();applyZoneVisibility(false)}).observe(zi,{subtree:true,childList:true,characterData:true});
  const st=document.getElementById('status');if(st)new MutationObserver(()=>set(st,'206 IT CABINETS · 1,972 kW')).observe(st,{subtree:true,childList:true,characterData:true});
- setTimeout(()=>{const l=document.getElementById('landing');if(l)l.classList.add('hidden');try{overview()}catch(_){}},100);
+ setTimeout(()=>{const l=document.getElementById('landing');if(l)l.classList.add('hidden');try{overview()}catch(_){}applyZoneVisibility(false)},100);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
