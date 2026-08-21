@@ -9,16 +9,33 @@
 <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071017}iframe{display:block;border:0;width:100%;height:100%;background:#071017}</style>
 </head>
 <body>
-<iframe id="reviewFrame" src="../rev16-5-2/index.html" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
+<iframe id="reviewFrame" src="/kayas/rev16-5-2/index.html?v=20260821-1306" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
 <script>
 (function(){
  const f=document.getElementById('reviewFrame');
  f.addEventListener('load',async()=>{
   try{
    const d=f.contentDocument;
-   const css=d.createElement('link');css.rel='stylesheet';css.href='style.css';d.head.appendChild(css);
-   const files=['../rev16-5-3/zone-data-1.js','../rev16-5-3/zone-data-2.js','clean-ui.js','tour-data.js','guided-tour.js'];
-   for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=reject;d.body.appendChild(s)})}
+   const css=d.createElement('link');
+   css.rel='stylesheet';
+   css.href='/kayas/3d/style.css?v=20260821-1306';
+   d.head.appendChild(css);
+   const files=[
+    '/kayas/rev16-5-3/zone-data-1.js',
+    '/kayas/rev16-5-3/zone-data-2.js',
+    '/kayas/3d/clean-ui.js?v=20260821-1306',
+    '/kayas/3d/tour-data.js?v=20260821-1306',
+    '/kayas/3d/guided-tour.js?v=20260821-1306'
+   ];
+   for(const file of files){
+    await new Promise((resolve,reject)=>{
+     const s=d.createElement('script');
+     s.src=file;
+     s.onload=resolve;
+     s.onerror=()=>reject(new Error('Failed to load '+file));
+     d.body.appendChild(s);
+    });
+   }
   }catch(e){console.error('KAYAS 3D experience could not initialize',e)}
  });
 })();
