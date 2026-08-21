@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071017">
+<meta name="author" content="Önder Yardaş">
+<title>KAYAS · 3rd Floor Zone Review</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071017}iframe{display:block;border:0;width:100%;height:100%;background:#071017}</style>
+</head>
+<body>
+<iframe id="reviewFrame" src="../rev16-5-2/index.html" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
+<script>
+(function(){
+ const f=document.getElementById('reviewFrame');
+ f.addEventListener('load',async()=>{
+  try{
+   const d=f.contentDocument;
+   const css=d.createElement('link');css.rel='stylesheet';css.href='style.css';d.head.appendChild(css);
+   const files=['../rev16-5-3/zone-data-1.js','../rev16-5-3/zone-data-2.js','clean-ui.js','tour-data.js','guided-tour.js'];
+   for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=reject;d.body.appendChild(s)})}
+  }catch(e){console.error('KAYAS 3D experience could not initialize',e)}
+ });
+})();
+</script>
+</body>
+</html>
