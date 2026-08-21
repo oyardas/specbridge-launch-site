@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#071017">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
-<meta name="kayas-build" content="Rev16.5.3 Main Integrated Portal">
+<meta name="kayas-build" content="Rev16.5.3 Main Integrated Portal · Fail-Open Runtime">
 <title>KAYAS Investor Experience</title>
 <link rel="icon" type="image/png" href="assets/logos/specbridge_icon_colored.png">
 <style>
@@ -17,7 +17,7 @@
 .card{width:min(440px,94vw);border:1px solid #385365;border-radius:18px;background:rgba(7,17,24,.94);box-shadow:0 30px 80px #0008;padding:24px;backdrop-filter:blur(16px)}
 .brands{display:flex;align-items:center;gap:12px;margin-bottom:18px}.brands img.spec{width:36px;height:36px;object-fit:contain}.brands .copy{flex:1}.brands .copy strong{display:block;font-size:14px;letter-spacing:.04em}.brands .copy span{display:block;font-size:11px;color:var(--muted);margin-top:2px}.brands img.h3c{width:66px;max-height:28px;object-fit:contain;background:#fff;border-radius:7px;padding:5px 7px}
 .kicker{font-size:9px;letter-spacing:.16em;font-weight:800;color:#78d9ff;text-transform:uppercase}.card h1{margin:6px 0 7px;font-size:25px}.card>p{margin:0 0 18px;color:#a9bec9;font-size:12px;line-height:1.55}.card label{display:block;margin-top:11px;color:#cfe0e8;font-size:11px;font-weight:700}.card input{width:100%;margin-top:6px;border:1px solid #3b5667;border-radius:9px;background:#0d202b;color:#fff;padding:11px 12px;outline:none}.card input:focus{border-color:#62d2ff;box-shadow:0 0 0 3px #63d4ff1f}.enter{width:100%;margin-top:16px;border:1px solid #67d6ff;border-radius:10px;background:#17435b;color:#fff;padding:11px 14px;font-weight:800;cursor:pointer}.enter:hover{background:#1c506d}.error{min-height:18px;margin:8px 0 0!important;color:#ff9a9f!important;font-size:11px!important}.note{display:block;margin-top:12px;color:#718a98;font-size:9px;line-height:1.5}
-.loading{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#071017;color:#a9bec9;font-size:12px}.loading.hidden{display:none}.loading div{border:1px solid #2f4959;border-radius:12px;background:#0b1a23;padding:15px 18px}.loading b{display:block;color:#eef7fb;margin-bottom:3px}
+.runtime-warning{position:fixed;z-index:50;left:14px;right:14px;bottom:14px;display:none;max-width:680px;margin:auto;border:1px solid #6b5b34;border-radius:10px;background:rgba(24,22,14,.94);color:#ead9aa;padding:10px 12px;font-size:10px}.runtime-warning.show{display:block}
 </style>
 </head>
 <body>
@@ -38,33 +38,42 @@
     <small class="note">This portal uses the existing static access gate. Confidential credentials and commercial secrets must not be embedded in customer-facing source files.</small>
   </div>
 </div>
-<div id="loading" class="loading"><div><b>Preparing KAYAS investor portal…</b><span>Loading the architecture-locked 3rd-floor experience.</span></div></div>
-<iframe id="portalFrame" data-src="rev16-5-2/index.html?v=20260820-main-rev1653" title="KAYAS Investor Experience" allow="fullscreen" allowfullscreen></iframe>
+<iframe id="portalFrame" title="KAYAS Investor Experience" allow="fullscreen" allowfullscreen></iframe>
+<div id="runtimeWarning" class="runtime-warning">The core 3D experience is available, but one or more optional Executive/Reports enhancement modules did not finish loading. Refresh the page to retry.</div>
 <script>
 (function(){
 'use strict';
 const AUTH_KEY='kayas_walkthrough_auth_until';
 const EXPECTED='13a9e92799eaf7515a82f73b4a2b3026a568dae3db4e35b5f4f4562b1d67bef7';
-const gate=document.getElementById('gate'),frame=document.getElementById('portalFrame'),loading=document.getElementById('loading');
+const gate=document.getElementById('gate'),frame=document.getElementById('portalFrame'),warning=document.getElementById('runtimeWarning');
 const user=document.getElementById('loginUser'),pass=document.getElementById('loginPass'),error=document.getElementById('loginError'),button=document.getElementById('loginButton');
 let started=false;
 async function sha256(value){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}
 function storageGet(k){try{return localStorage.getItem(k)}catch(_){return null}}
 function storageSet(k,v){try{localStorage.setItem(k,v)}catch(_){}}
-function loadPortal(){if(started)return;started=true;frame.src=frame.dataset.src;}
+function loadPortal(){if(started)return;started=true;frame.src='rev16-5-2/index.html?v=20260821-freeze-fix-1';}
 function unlock(){gate.classList.add('hidden');loadPortal();}
-if(Number(storageGet(AUTH_KEY)||0)>Date.now())unlock();else loading.classList.add('hidden');
-button.addEventListener('click',async()=>{error.textContent='';const ok=await sha256(user.value.trim()+':'+pass.value);if(ok===EXPECTED){storageSet(AUTH_KEY,String(Date.now()+8*60*60*1000));loading.classList.remove('hidden');unlock();}else{error.textContent='Incorrect username or password.';pass.select();}});
+if(Number(storageGet(AUTH_KEY)||0)>Date.now())unlock();
+button.addEventListener('click',async()=>{error.textContent='';try{const ok=await sha256(user.value.trim()+':'+pass.value);if(ok===EXPECTED){storageSet(AUTH_KEY,String(Date.now()+8*60*60*1000));unlock();}else{error.textContent='Incorrect username or password.';pass.select();}}catch(e){error.textContent='Secure login could not initialize. Please reload the page.';}});
 [user,pass].forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='Enter')button.click()}));
-frame.addEventListener('load',async()=>{
+frame.addEventListener('load',()=>{
+  let done=false;
+  const fail=()=>{if(!done)warning.classList.add('show')};
+  const timer=setTimeout(fail,12000);
   try{
     const d=frame.contentDocument;
-    const css=d.createElement('link');css.rel='stylesheet';css.href='../rev16-5-3/enhancements.css?v=20260820-main-rev1653';d.head.appendChild(css);
-    const files=['zone-data-1.js','zone-data-2.js','executive-panel.js','reports-panel.js','enhance-core.js'];
-    for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src='../rev16-5-3/'+file+'?v=20260820-main-rev1653';s.onload=resolve;s.onerror=reject;d.body.appendChild(s);});}
-    await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src='../integration-root.js?v=20260820-main-rev1653';s.onload=resolve;s.onerror=reject;d.body.appendChild(s);});
-  }catch(e){console.error('KAYAS main integration injection failed',e);}
-  loading.classList.add('hidden');
+    if(!d)throw new Error('Frame document unavailable');
+    const css=d.createElement('link');css.rel='stylesheet';css.href='../rev16-5-3/enhancements.css?v=20260821-freeze-fix-1';d.head.appendChild(css);
+    const files=['zone-data-1.js','zone-data-2.js','executive-panel.js','reports-panel.js','enhance-core.js','../integration-root.js'];
+    let i=0;
+    const next=()=>{
+      if(i>=files.length){done=true;clearTimeout(timer);warning.classList.remove('show');return;}
+      const file=files[i++],s=d.createElement('script');
+      s.src=file.startsWith('../')?file+'?v=20260821-freeze-fix-1':'../rev16-5-3/'+file+'?v=20260821-freeze-fix-1';
+      s.onload=next;s.onerror=()=>{console.warn('Optional KAYAS module failed:',file);next();};d.body.appendChild(s);
+    };
+    setTimeout(next,0);
+  }catch(e){console.error('KAYAS optional enhancement injection failed',e);fail();}
 });
 })();
 </script>
