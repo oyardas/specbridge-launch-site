@@ -1,0 +1,52 @@
+{
+  "standard_id": "KAYAS-3D-DS1",
+  "standard_version": 1,
+  "status": "DESIGN_LOCK_GOLDEN_BASELINE",
+  "baseline_date": "2026-08-28",
+  "author": "Önder Yardaş",
+  "brand": "KAYAS",
+  "canonical_entry": "kayas/3d/index.html",
+  "canonical_live_file": "kayas/3d/experience.html",
+  "design_standard_file": "kayas/_master/KAYAS_3D_EXPERIENCE_STANDARD_V1.md",
+  "baseline_manifest_file": "kayas/_master/KAYAS_3D_EXPERIENCE_BASELINE_V1.json",
+  "golden_source_name": "KAYAS_3D_MULTILINGUAL_RELEASE.html",
+  "golden_sha256": "b5b69d67e8cf5aa2aaace34ed352d486561a8e1770dce28a112da0ed8f473bba",
+  "golden_size_bytes": 22886353,
+  "release_id": "KAYAS-3D-DS1-R001",
+  "languages": ["tr", "en", "zh"],
+  "professional_audio_clips": 42,
+  "panel_hide_unhide_required": true,
+  "panel_hotkey": "Alt+M",
+  "current_it_cabinet_baseline": {
+    "total": 200,
+    "standard": 190,
+    "ai": 10
+  },
+  "visual_geometry": {
+    "ic8000_pods": 10,
+    "ai_final_pod_row_allocation": "OPEN_CONFIRMATION_REQUIRED"
+  },
+  "locked_design_tokens": {
+    "bg": "#0b1219",
+    "panel": "#101b25",
+    "panel2": "#152431",
+    "line": "#2d4050",
+    "text": "#edf5fa",
+    "muted": "#9fb4c2",
+    "accent": "#5ec7ff",
+    "glass": "rgba(255,255,255,.07)"
+  },
+  "reference_breakpoints_px": [1650, 1380, 1120, 1050, 760],
+  "forbidden_customer_visible_markers": [
+    "LOCAL PREVIEW",
+    "Rev10 v8",
+    "embedded professional audio + exact route sync",
+    "Chrome listesinde ayrı bir Türkçe sesi görünmüyor"
+  ],
+  "change_policy": "GENERAL_STRUCTURE_MUST_REMAIN_UNCHANGED_UNLESS_EXPLICITLY_APPROVED",
+  "scope_precedence": "AUTHORITATIVE_FOR_KAYAS_3D_EXPERIENCE_OVER_OLDER_3D_PROTOTYPES",
+  "supersedes_for_3d": [
+    "206-cabinet / 196+10 visual baseline",
+    "older Rev10/v8 prototype UI labels"
+  ]
+}
