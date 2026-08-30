@@ -1,0 +1,21 @@
+/* DCTS v0.12.1 — production hardening only; no topology geometry changes. */
+html[data-dcts-hardening="pass"] .brand small{color:#7896a7}
+.t00-wp8-stage [data-t00-target]:focus-visible,
+.tab:focus-visible,
+.portalbtn:focus-visible{
+  outline:2px solid rgba(89,225,239,.85)!important;
+  outline-offset:2px!important;
+}
+@media(max-width:1360px){
+  .toprow{grid-template-columns:260px 1fr 110px!important}
+  .brand b{font-size:14px!important}
+  .brand small{font-size:7.8px!important}
+  .tab{padding-left:10px!important;padding-right:10px!important}
+  .ctl input{width:190px!important}
+}
+@media(max-height:820px){
+  .toprow{height:52px!important}
+  .controlbar{min-height:52px!important;padding-top:6px!important;padding-bottom:6px!important}
+  .breadcrumb{height:36px!important}
+  body.t00-premium .scene-viewport{inset:36px 0 28px!important}
+}
