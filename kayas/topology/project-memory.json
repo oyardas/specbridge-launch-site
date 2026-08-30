@@ -1,6 +1,6 @@
 {
   "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "date": "2026-08-30",
   "status": "CONTROLLED_PROJECT_BASELINE",
   "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
@@ -12,8 +12,10 @@
     "repository": "oyardas/specbridge-launch-site",
     "branch": "main",
     "viewer_version": "v0.11.9",
-    "loader": "kayas/topology/index.html",
-    "viewer_payload": "kayas/topology/viewer-v0.11.9.html.gz",
+    "delivery_mode": "DIRECT_STATIC_HTML",
+    "production_document": "kayas/topology/index.html",
+    "legacy_payloads": "payload-01.txt..payload-10.txt retained only as reconstruction/recovery material; production must not depend on client-side payload fetch/decompression.",
+    "deployment_workflow": ".github/workflows/dcts-kayas-topology-direct-static.yml",
     "official_resources": "kayas/topology/official-resources.json",
     "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control."
   },
@@ -62,7 +64,7 @@
     "4. Regenerate synchronized T00-T06 views from the same model.",
     "5. Run evidence-safety and visual-routing acceptance checks.",
     "6. Update viewer version and this project-memory file.",
-    "7. Deploy the immutable versioned viewer payload and update /kayas/topology/ loader.",
+    "7. Publish a self-contained direct static kayas/topology/index.html; do not reintroduce runtime payload fetch/decompression as a production dependency.",
     "8. Verify both /kayas/ → topology and topology → /kayas/ navigation."
   ],
   "memory_instruction": "Treat this repository file as the authoritative persistent DCTS/KAYAS project memory when continuing topology work in future conversations. Read it before making topology changes if current project context is incomplete."
