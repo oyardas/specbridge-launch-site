@@ -1,0 +1,128 @@
+/* DCTS v0.12.0 — WP7 final T00 visual / interaction polish
+   Evidence-safe presentation layer only. No canonical relationship changes. */
+
+/* 1) Give the hero map more visual authority without changing topology semantics. */
+body.t00-premium .scene-world{min-height:748px!important}
+.groups.reference-t00{width:1265px!important;height:716px!important}
+.t00-premium-stage{
+  left:10px!important;
+  top:8px!important;
+  transform:scale(1.075);
+  transform-origin:top left;
+}
+
+/* 2) Keep architectural context visible during hover; focus rather than black-out. */
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-panel,
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-core-shell{
+  opacity:.68!important;
+  filter:saturate(.84) brightness(.91)!important
+}
+.t00-premium-stage[data-focus="security"] .t00-core-shell,
+.t00-premium-stage[data-focus="storage"] .t00-core-shell,
+.t00-premium-stage[data-focus="cloud"] .t00-core-shell,
+.t00-premium-stage[data-focus="protection"] .t00-core-shell,
+.t00-premium-stage[data-focus="management"] .t00-core-shell,
+.t00-premium-stage[data-focus="external"] .t00-core-shell{
+  opacity:.90!important;
+  filter:saturate(.96) brightness(.98)!important
+}
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-flow-svg>path.t00-flow{
+  opacity:.22!important
+}
+.t00-premium-stage[data-focus="external"] .t00-flow.f-external,
+.t00-premium-stage[data-focus="security"] .t00-flow.f-security,
+.t00-premium-stage[data-focus="storage"] .t00-flow.f-storage,
+.t00-premium-stage[data-focus="cloud"] .t00-flow.f-cloud,
+.t00-premium-stage[data-focus="protection"] .t00-flow.f-protection,
+.t00-premium-stage[data-focus="management"] .t00-flow.f-management,
+.t00-premium-stage[data-focus="core"] .t00-flow.f-core{
+  opacity:.92!important;
+  filter:drop-shadow(0 0 2px currentColor)!important
+}
+
+/* 3) Stable context pill: no roaming tooltip over Cloud / architecture objects. */
+.t00-hover-hint{
+  left:auto!important;
+  right:20px!important;
+  top:76px!important;
+  transform:translateY(-3px)!important;
+  min-width:258px!important;
+  max-width:335px!important;
+  text-align:left!important;
+  padding:8px 11px!important;
+  border-color:#294f61!important;
+  background:linear-gradient(145deg,rgba(6,20,30,.96),rgba(4,13,21,.96))!important
+}
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-hover-hint{
+  transform:translateY(0)!important
+}
+.t00-hover-hint b{font-size:6.9px!important}
+.t00-hover-hint span{float:right;font-size:6px!important}
+
+/* 4) Compute/Fabric semantic planes: use controlled fill/glow, never browser selection rectangles. */
+.t00-iso-compute-plane,
+.t00-iso-fabric-node{
+  outline:none!important;
+  transition:fill .18s ease,stroke .18s ease,filter .18s ease,opacity .18s ease
+}
+.t00-iso-compute-plane{
+  fill:rgba(57,212,126,.095)!important;
+  stroke:#45d987!important;
+  stroke-width:1.15!important;
+  stroke-dasharray:none!important
+}
+.t00-iso-compute-plane:hover,
+.t00-iso-compute-plane:focus{
+  outline:none!important;
+  fill:rgba(57,212,126,.17)!important;
+  stroke:#79efaa!important;
+  filter:drop-shadow(0 0 5px rgba(69,217,135,.42))
+}
+.t00-iso-fabric-node:hover,
+.t00-iso-fabric-node:focus{
+  outline:none!important;
+  fill:#105066!important;
+  stroke:#8cf0f7!important;
+  filter:drop-shadow(0 0 5px rgba(71,216,228,.38))
+}
+
+/* 5) More volumetric but still representational digital-core rendering. */
+.t00-iso-floor{fill:url(#t00-wp7-floor)!important;stroke:#2b7188!important;stroke-width:1.5!important}
+.t00-rack-front{fill:url(#t00-wp7-rack-front)!important;stroke:#3a93a8!important;stroke-width:1.05!important}
+.t00-rack-top{fill:url(#t00-wp7-rack-top)!important;stroke:#54b2c4!important;stroke-width:1.05!important}
+.t00-rack-side{fill:url(#t00-wp7-rack-side)!important;stroke:#2b7286!important;stroke-width:1.05!important}
+.t00-rack-led{r:1.65;filter:drop-shadow(0 0 2.5px #55e691)!important}
+.t00-iso-svg{filter:drop-shadow(0 18px 26px rgba(0,0,0,.30)) drop-shadow(0 0 8px rgba(42,182,205,.055))!important}
+
+/* 6) Management is a context plane, not a physical trunk. */
+.t00-flow.mgmt{opacity:.30!important;stroke-width:1.1!important;stroke-dasharray:4 7!important}
+.t00-premium-stage[data-focus="management"] .t00-flow.mgmt,
+.t00-premium-stage[data-focus="protection"] .t00-flow.mgmt.f-protection{
+  opacity:.76!important;
+  stroke-width:1.45!important
+}
+
+/* 7) Readability pass: +~10% on the smallest investor-facing labels. */
+.t00-panel-title{font-size:8.05px!important}
+.t00-panel-title small{font-size:5.7px!important}
+.t00-hot-object b{font-size:7.25px!important}
+.t00-hot-object em{font-size:5.55px!important;line-height:1.2!important}
+.t00-hot-object .goto{font-size:5.55px!important}
+.t00-context-chip{font-size:6.15px!important}
+.t00-core-label b{font-size:7.05px!important}
+.t00-core-label span{font-size:5.45px!important}
+.t00-core-head{font-size:8.35px!important}
+.t00-core-head small{font-size:5.55px!important}
+.t00-core-nav button{font-size:5.45px!important}
+.t00-flow-label{font-size:5.75px!important}
+.t00-legend{font-size:6.05px!important}
+.t00-premium-note{font-size:5.7px!important}
+.t00-management-panel .t00-hot-object b{font-size:6.85px!important}
+
+/* 8) Calm destination feedback. */
+.t00-panel:hover:after,.t00-panel:focus-visible:after,.t00-core-shell:hover:after,.t00-core-shell:focus-visible:after{opacity:.46!important}
+
+@media(max-width:1400px){
+  .t00-premium-stage{transform:scale(1.035)}
+  .groups.reference-t00{width:1215px!important;height:690px!important}
+}
