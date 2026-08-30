@@ -10,7 +10,7 @@
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 </head>
 <body>
-<div id="boot" class="boot"><div><b>DCTS v0.12.0</b><small>Loading Premium Interactive Overview Map · WP6…</small></div></div>
+<div id="boot" class="boot"><div><b>DCTS v0.12.0</b><small>Loading Premium Interactive Overview Map · WP7…</small></div></div>
 <iframe id="viewer" src="viewer-v0.11.9.html#view=T00" title="KAYAS DCTS Interactive Architecture"></iframe>
 <script>
 const f=document.getElementById('viewer'),boot=document.getElementById('boot');
@@ -18,13 +18,19 @@ f.addEventListener('load',()=>{
   try{
     const d=f.contentDocument;
     const addCss=(href)=>{const x=d.createElement('link');x.rel='stylesheet';x.href=href;d.head.appendChild(x)};
-    addCss('v0.12-preview.css?v=20260830-wp6');
-    addCss('v0.12-nav.css?v=20260830-wp6');
-    addCss('v0.12-polish.css?v=20260830-wp6');
-    const js=d.createElement('script');js.src='v0.12-preview.js?v=20260830-wp6';
+    addCss('v0.12-preview.css?v=20260830-wp7');
+    addCss('v0.12-nav.css?v=20260830-wp7');
+    addCss('v0.12-polish.css?v=20260830-wp7');
+    addCss('v0.12-wp7.css?v=20260830-wp7');
+    const js=d.createElement('script');js.src='v0.12-preview.js?v=20260830-wp7';
     js.onload=()=>{
-      const polish=d.createElement('script');polish.src='v0.12-polish.js?v=20260830-wp6';
-      polish.onload=()=>{boot.style.display='none'};
+      const polish=d.createElement('script');polish.src='v0.12-polish.js?v=20260830-wp7';
+      polish.onload=()=>{
+        const wp7=d.createElement('script');wp7.src='v0.12-wp7.js?v=20260830-wp7';
+        wp7.onload=()=>{boot.style.display='none'};
+        wp7.onerror=()=>{boot.innerHTML='<div>v0.12 WP7 polish layer could not be loaded.<small>The WP6 preview baseline is still available.</small></div>'};
+        d.body.appendChild(wp7);
+      };
       polish.onerror=()=>{boot.innerHTML='<div>v0.12 polish layer could not be loaded.<small>The preview baseline is still available.</small></div>'};
       d.body.appendChild(polish);
     };
