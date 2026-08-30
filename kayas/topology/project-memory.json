@@ -1,17 +1,20 @@
 {
   "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "date": "2026-08-30",
   "status": "CONTROLLED_PROJECT_BASELINE",
   "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
   "deployment": {
     "public_path": "/kayas/topology/",
     "public_url": "https://specbridge.co/kayas/topology/",
+    "portal_path": "/kayas/",
+    "portal_url": "https://specbridge.co/kayas/",
     "repository": "oyardas/specbridge-launch-site",
     "branch": "main",
-    "viewer_version": "v0.11.6",
+    "viewer_version": "v0.11.7",
     "loader": "kayas/topology/index.html",
-    "official_resources": "kayas/topology/official-resources.json"
+    "official_resources": "kayas/topology/official-resources.json",
+    "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control."
   },
   "canonical_graph": {
     "graph_id": "KAYAS-M5-REL-GOLDEN-01",
@@ -53,7 +56,7 @@
     "4. Regenerate synchronized T00-T06 views from the same model.",
     "5. Run evidence-safety and visual-routing acceptance checks.",
     "6. Update viewer version and this project-memory file.",
-    "7. Deploy to /kayas/topology/ and verify the live URL."
+    "7. Deploy to /kayas/topology/ and verify both /kayas/ → topology and topology → /kayas/ navigation."
   ],
   "memory_instruction": "Treat this repository file as the authoritative persistent DCTS/KAYAS project memory when continuing topology work in future conversations. Read it before making topology changes if current project context is incomplete."
 }
