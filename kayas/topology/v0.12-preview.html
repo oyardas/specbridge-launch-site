@@ -17,8 +17,9 @@ const f=document.getElementById('viewer'),boot=document.getElementById('boot');
 f.addEventListener('load',()=>{
   try{
     const d=f.contentDocument;
-    const css=d.createElement('link');css.rel='stylesheet';css.href='v0.12-preview.css?v=20260830-2020';d.head.appendChild(css);
-    const js=d.createElement('script');js.src='v0.12-preview.js?v=20260830-2020';js.onload=()=>{boot.style.display='none'};js.onerror=()=>{boot.innerHTML='<div>v0.12 enhancement could not be loaded.<small>Return to the current topology viewer.</small></div>'};d.body.appendChild(js);
+    const css=d.createElement('link');css.rel='stylesheet';css.href='v0.12-preview.css?v=20260830-nav2';d.head.appendChild(css);
+    const navcss=d.createElement('link');navcss.rel='stylesheet';navcss.href='v0.12-nav.css?v=20260830-nav2';d.head.appendChild(navcss);
+    const js=d.createElement('script');js.src='v0.12-preview.js?v=20260830-nav2';js.onload=()=>{boot.style.display='none'};js.onerror=()=>{boot.innerHTML='<div>v0.12 enhancement could not be loaded.<small>Return to the current topology viewer.</small></div>'};d.body.appendChild(js);
   }catch(e){boot.innerHTML='<div>Preview could not be initialized.<small>'+String(e.message||e)+'</small></div>'}
 });
 </script>
