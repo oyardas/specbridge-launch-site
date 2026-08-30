@@ -1,0 +1,44 @@
+/* DCTS v0.12.0 — WP5 whole-section navigation affordances */
+.t00-panel{cursor:pointer}
+.t00-panel:focus-visible,
+.t00-core-shell:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--accent,#15d7ff) 78%,#dffcff);
+  outline-offset:3px;
+  box-shadow:0 0 0 4px rgba(21,215,255,.07),0 16px 36px rgba(0,0,0,.30)!important
+}
+.t00-panel:hover .t00-panel-title small,
+.t00-panel:focus-visible .t00-panel-title small{
+  color:color-mix(in srgb,var(--accent) 76%,#dffcff);
+  opacity:1
+}
+.t00-panel-title{cursor:pointer}
+.t00-core-shell{cursor:pointer}
+.t00-core-shell:hover{
+  border-color:#38bfd4;
+  box-shadow:0 18px 46px rgba(0,0,0,.30),0 0 26px rgba(21,215,255,.10),inset 0 0 55px rgba(21,215,255,.045)
+}
+.t00-core-head{cursor:default!important}
+.t00-core-head>span:first-child{white-space:nowrap}
+.t00-core-head small{margin-left:8px!important;white-space:nowrap}
+.t00-core-nav{margin-left:auto;display:flex;gap:5px;align-items:center}
+.t00-core-nav button{
+  height:23px;
+  padding:0 7px;
+  border:1px solid #28596c;
+  border-radius:999px;
+  background:#071923;
+  color:#83dce8;
+  font-size:5.1px;
+  font-weight:850;
+  cursor:pointer
+}
+.t00-core-nav button:hover{
+  border-color:#52d8e7;
+  color:#e0fbff;
+  background:#092633
+}
+.t00-hot-object,.t00-context-chip,.t00-core-label,.t00-physical-cta,.t00-domain-badge{position:relative}
+.t00-hot-object:focus-visible,.t00-context-chip:focus-visible,.t00-core-label:focus-visible,.t00-physical-cta:focus-visible,.t00-domain-badge:focus-visible,.t00-core-nav button:focus-visible{
+  outline:1px solid #dffcff;
+  outline-offset:2px
+}
