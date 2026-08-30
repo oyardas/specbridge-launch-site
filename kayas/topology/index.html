@@ -42,15 +42,24 @@
   );
 
   patch(
-    'function nodeClick(e,id){\\n  e.stopPropagation();',
+    'function nodeClick(e,id){\n  e.stopPropagation();',
     `function t00NodeClick(e,id){\n  e.stopPropagation();\n  const o=obj(id);if(!o)return;\n  selected=id;\n  renderBreadcrumb();\n  $$('.t00-node,.nodecard').forEach(n=>n.classList.toggle('selected',n.dataset.id===id));\n  renderInspector();\n  openFocus(id);\n  if(trace)applyTrace();\n}\nfunction nodeClick(e,id){\n  e.stopPropagation();`,
     'T00 direct click'
   );
-  patch("onclick=\"nodeClick(event,'${o.id}')\" data-domain=\"${o.domain}\" data-role=\"${o.role}\" style=\"--accent:${C[o.domain]}\"", "onclick=\"t00NodeClick(event,'${o.id}')\" data-domain=\"${o.domain}\" data-role=\"${o.role}\" style=\"--accent:${C[o.domain]}\"", 'T00 click binding');
+  patch(
+    "return `<div class=\"t00-node ${selected===o.id?'selected':''}\" data-id=\"${o.id}\" data-domain=\"${o.domain}\" data-role=\"${o.role}\" style=\"--accent:${C[o.domain]}\" onclick=\"nodeClick(event,'${o.id}')\">",
+    "return `<div class=\"t00-node ${selected===o.id?'selected':''}\" data-id=\"${o.id}\" data-domain=\"${o.domain}\" data-role=\"${o.role}\" style=\"--accent:${C[o.domain]}\" onclick=\"t00NodeClick(event,'${o.id}')\">",
+    'T00 click binding'
+  );
 
   patch(
-    "const T00_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);\\nconst rels=()=>view==='T00'?R:R.filter(r=>r.views.includes(view));\\nconst props=()=>view==='T00'?[]:P.filter(p=>p.views.includes(view));\\nconst archIntent=()=>view==='T00'?A.filter(a=>T00_INTENTS.has(a.id)):A.filter(a=>a.views.includes(view));",
-    "const T00_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);\\nconst T01_EXEC_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);\\nconst rels=()=>view==='T00'?R:R.filter(r=>r.views.includes(view));\\nconst props=()=>view==='T00'?[]:P.filter(p=>p.views.includes(view));\\nconst archIntent=()=>view==='T00'?A.filter(a=>T00_INTENTS.has(a.id)):(view==='T01'?A.filter(a=>T01_EXEC_INTENTS.has(a.id)):A.filter(a=>a.views.includes(view)));",
+    "const T00_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);",
+    "const T00_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);\nconst T01_EXEC_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);",
+    'T01 intent registry'
+  );
+  patch(
+    "const archIntent=()=>view==='T00'?A.filter(a=>T00_INTENTS.has(a.id)):A.filter(a=>a.views.includes(view));",
+    "const archIntent=()=>view==='T00'?A.filter(a=>T00_INTENTS.has(a.id)):(view==='T01'?A.filter(a=>T01_EXEC_INTENTS.has(a.id)):A.filter(a=>a.views.includes(view)));",
     'T01 intent subset'
   );
 
