@@ -1,6 +1,6 @@
 {
   "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "date": "2026-08-30",
   "status": "CONTROLLED_PROJECT_BASELINE",
   "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
@@ -11,12 +11,18 @@
     "portal_url": "https://specbridge.co/kayas/",
     "repository": "oyardas/specbridge-launch-site",
     "branch": "main",
-    "viewer_version": "v0.11.9 production / v0.12.0 WP8 preview",
-    "delivery_mode": "DIRECT_STATIC_HTML",
+    "viewer_version": "v0.12.0 WP8 production",
+    "delivery_mode": "STATIC_SAME_ORIGIN_ASSET_BUNDLE",
     "production_document": "kayas/topology/index.html",
+    "base_viewer": "kayas/topology/viewer-v0.11.9.html",
+    "production_assets": [
+      "kayas/topology/v0.12-wp8.css",
+      "kayas/topology/v0.12-wp8.js"
+    ],
     "preview_document": "kayas/topology/v0.12-preview.html",
     "official_resources": "kayas/topology/official-resources.json",
-    "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control."
+    "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control.",
+    "delivery_safety": "Production no longer uses gzip/base64 payload reconstruction or client-side decompression. The production wrapper and all viewer enhancement assets are same-origin static files."
   },
   "canonical_graph": {
     "graph_id": "KAYAS-M5-REL-GOLDEN-01",
@@ -36,42 +42,26 @@
     "T06": "Service / Tenant"
   },
   "current_visual_baseline": {
-    "production": "v0.11.9 remains the accepted live production viewer until v0.12 T00 is manually accepted.",
-    "T00_preview": "v0.12.0 WP8 replaces the layered WP1-WP7 preview composition with one clean T00 implementation loaded directly over the v0.11.9 canonical viewer. The WP8 layout uses fixed non-overlapping External, Security, Cloud, Digital Core, Storage, Data Protection and Management/OOB/Analytics regions with larger investor-facing labels and a simplified high-level flow overlay.",
+    "production": "v0.12.0 WP8 promoted to production by explicit user instruction on 2026-08-30. Live post-deploy browser verification remains required.",
+    "T00": "WP8 clean interactive master overview with fixed non-overlapping External, Security, Cloud, Digital Core, Storage, Data Protection and Management/OOB/Analytics regions, larger investor-facing labels and a simplified high-level evidence-safe flow overlay.",
     "T00_navigation_contract": "External / Service Ingress -> T01; Security -> T02; Data Center Digital Core defaults to T02 with explicit T02 Network and T04 Compute controls; Physical Connectivity CTA -> T03; Storage -> T04; Management/OOB/Analytics -> T05; Cloud Service Platform and Data Protection -> T06. Component cards preserve selected canonical object and open its controlled focus view in the target T-view.",
-    "T00_click_hardening": "WP8 does not rely on inherited inline onclick handlers. It uses capture-phase delegated click/keyboard activation on data-t00-target elements and stops T00 navigation events from bubbling into the base scene pan handler before switching view.",
+    "T00_click_hardening": "WP8 uses capture-phase delegated click/keyboard activation on data-t00-target elements and stops T00 navigation events from bubbling into the base scene pan handler before switching view.",
     "T00_hover_contract": "Hover/focus retains overall architecture context with moderate dimming and a stable top-right context pill. Flow emphasis is limited to short evidence-safe architecture associations.",
-    "T01": "Executive 5/5 visual pass remains in v0.11.9 pending a later dedicated review after T00 acceptance.",
+    "T01": "Executive 5/5 visual pass remains from the v0.11.9 base viewer pending a later dedicated review.",
     "top_right_controls": "Only the functional ← KAYAS return control is shown; placeholder Search/Help/Settings icons are removed."
   },
-  "development_checkpoint": {
-    "id": "DCTS-KAYAS-v0.12.0-WP8",
-    "status": "PREVIEW / USER ACCEPTANCE REQUIRED",
-    "preview_url": "https://specbridge.co/kayas/topology/v0.12-preview.html",
-    "active_preview_files": [
-      "kayas/topology/viewer-v0.11.9.html",
-      "kayas/topology/v0.12-wp8.css",
-      "kayas/topology/v0.12-wp8.js",
-      "kayas/topology/v0.12-preview.html"
-    ],
-    "superseded_preview_layers": [
-      "v0.12-preview.css",
-      "v0.12-nav.css",
-      "v0.12-polish.css",
-      "v0.12-wp7.css",
-      "v0.12-preview.js",
-      "v0.12-polish.js",
-      "v0.12-wp7.js"
-    ],
+  "production_checkpoint": {
+    "id": "DCTS-KAYAS-v0.12.0-WP8-PRODUCTION",
+    "status": "PROMOTED / LIVE VERIFICATION PENDING",
+    "promotion_authority": "Latest explicit user instruction: push the current WP8 implementation to production.",
+    "production_commit": "d26f8a5d9f699510c5d7cb78a20892e8f5b3fa45",
     "scope": [
-      "Remove T00 visual overlap caused by accumulated preview layers",
-      "Restore readable non-overlapping fixed geometry",
-      "Increase investor-facing card and label legibility",
-      "Use a single simplified evidence-safe architecture-flow overlay",
-      "Harden whole-section and component click navigation with delegated capture-phase events",
-      "Keep T01-T06 base viewer behavior unchanged"
-    ],
-    "promotion_rule": "Do not replace production index.html until WP8 visual readability and T00->T01-T06 click navigation are manually accepted by the user."
+      "Promote clean WP8 T00 layout to /kayas/topology/",
+      "Keep T01-T06 base viewer behavior unchanged",
+      "Use same-origin static CSS/JS enhancement assets",
+      "Retain v0.11.9 base viewer as rollback source",
+      "Require post-deploy browser verification of T00 readability and T00->T01-T06 click navigation"
+    ]
   },
   "information_status_policy": [
     "CONFIRMED",
@@ -96,8 +86,8 @@
     "4. Regenerate synchronized T00-T06 views from the same model.",
     "5. Run evidence-safety and visual-routing acceptance checks.",
     "6. Update viewer version and this project-memory file.",
-    "7. Publish a self-contained direct static kayas/topology/index.html; do not reintroduce runtime payload fetch/decompression as a production dependency.",
-    "8. Verify both /kayas/ -> topology and topology -> /kayas/ navigation."
+    "7. Publish production only from same-origin static HTML/CSS/JS assets; do not reintroduce runtime payload fetch/decompression.",
+    "8. Verify both /kayas/ -> topology and topology -> /kayas/ navigation plus T00 -> T01-T06 routing."
   ],
   "memory_instruction": "Treat this repository file as the authoritative persistent DCTS/KAYAS project memory when continuing topology work in future conversations. Read it before making topology changes if current project context is incomplete."
 }
