@@ -10,16 +10,26 @@
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 </head>
 <body>
-<div id="boot" class="boot"><div><b>DCTS v0.12.0</b><small>Loading Premium Interactive Overview Map…</small></div></div>
+<div id="boot" class="boot"><div><b>DCTS v0.12.0</b><small>Loading Premium Interactive Overview Map · WP6…</small></div></div>
 <iframe id="viewer" src="viewer-v0.11.9.html#view=T00" title="KAYAS DCTS Interactive Architecture"></iframe>
 <script>
 const f=document.getElementById('viewer'),boot=document.getElementById('boot');
 f.addEventListener('load',()=>{
   try{
     const d=f.contentDocument;
-    const css=d.createElement('link');css.rel='stylesheet';css.href='v0.12-preview.css?v=20260830-nav2';d.head.appendChild(css);
-    const navcss=d.createElement('link');navcss.rel='stylesheet';navcss.href='v0.12-nav.css?v=20260830-nav2';d.head.appendChild(navcss);
-    const js=d.createElement('script');js.src='v0.12-preview.js?v=20260830-nav2';js.onload=()=>{boot.style.display='none'};js.onerror=()=>{boot.innerHTML='<div>v0.12 enhancement could not be loaded.<small>Return to the current topology viewer.</small></div>'};d.body.appendChild(js);
+    const addCss=(href)=>{const x=d.createElement('link');x.rel='stylesheet';x.href=href;d.head.appendChild(x)};
+    addCss('v0.12-preview.css?v=20260830-wp6');
+    addCss('v0.12-nav.css?v=20260830-wp6');
+    addCss('v0.12-polish.css?v=20260830-wp6');
+    const js=d.createElement('script');js.src='v0.12-preview.js?v=20260830-wp6';
+    js.onload=()=>{
+      const polish=d.createElement('script');polish.src='v0.12-polish.js?v=20260830-wp6';
+      polish.onload=()=>{boot.style.display='none'};
+      polish.onerror=()=>{boot.innerHTML='<div>v0.12 polish layer could not be loaded.<small>The preview baseline is still available.</small></div>'};
+      d.body.appendChild(polish);
+    };
+    js.onerror=()=>{boot.innerHTML='<div>v0.12 enhancement could not be loaded.<small>Return to the current topology viewer.</small></div>'};
+    d.body.appendChild(js);
   }catch(e){boot.innerHTML='<div>Preview could not be initialized.<small>'+String(e.message||e)+'</small></div>'}
 });
 </script>
