@@ -5,23 +5,30 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
-<title>KAYAS Interactive Architecture · DCTS v0.12.0</title>
+<title>KAYAS Interactive Architecture · DCTS v0.12.1</title>
 <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#03070c}iframe{display:block;width:100%;height:100%;border:0;background:#03070c}.boot{position:fixed;inset:0;display:grid;place-items:center;color:#9db5c2;font:13px Segoe UI,Arial,sans-serif;background:#03070c;z-index:2}.boot b{color:#58dce8}.boot small{display:block;margin-top:7px;color:#587384;text-align:center}</style>
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 </head>
 <body>
-<div id="boot" class="boot"><div><b>DCTS v0.12.0</b><small>Loading KAYAS Interactive Architecture…</small></div></div>
+<div id="boot" class="boot"><div><b>DCTS v0.12.1</b><small>Loading KAYAS Interactive Architecture · Production Hardening…</small></div></div>
 <iframe id="viewer" src="viewer-v0.11.9.html#view=T00" title="KAYAS DCTS Interactive Architecture"></iframe>
 <script>
 const f=document.getElementById('viewer'),boot=document.getElementById('boot');
 f.addEventListener('load',()=>{
   try{
     const d=f.contentDocument;
-    const css=d.createElement('link');css.rel='stylesheet';css.href='v0.12-wp8.css?v=20260830-prod-r1';d.head.appendChild(css);
-    const js=d.createElement('script');js.src='v0.12-wp8.js?v=20260830-prod-r1';
-    js.onload=()=>{boot.style.display='none'};
-    js.onerror=()=>{boot.innerHTML='<div>DCTS v0.12.0 enhancement could not be loaded.<small>Return to <a href="/kayas/" style="color:#58dce8">KAYAS</a> and try again.</small></div>'};
-    d.body.appendChild(js);
+    const addCss=(href)=>{const x=d.createElement('link');x.rel='stylesheet';x.href=href;d.head.appendChild(x)};
+    addCss('v0.12-wp8.css?v=20260830-v0121-r1');
+    addCss('v0.12.1-hardening.css?v=20260830-v0121-r1');
+    const wp8=d.createElement('script');wp8.src='v0.12-wp8.js?v=20260830-v0121-r1';
+    wp8.onload=()=>{
+      const hard=d.createElement('script');hard.src='v0.12.1-hardening.js?v=20260830-v0121-r1';
+      hard.onload=()=>{boot.style.display='none'};
+      hard.onerror=()=>{boot.innerHTML='<div>DCTS v0.12.1 hardening layer could not be loaded.<small>Return to <a href="/kayas/" style="color:#58dce8">KAYAS</a> and try again.</small></div>'};
+      d.body.appendChild(hard);
+    };
+    wp8.onerror=()=>{boot.innerHTML='<div>DCTS v0.12.0 topology enhancement could not be loaded.<small>Return to <a href="/kayas/" style="color:#58dce8">KAYAS</a> and try again.</small></div>'};
+    d.body.appendChild(wp8);
   }catch(e){boot.innerHTML='<div>Topology could not be initialized.<small>'+String(e.message||e)+'</small></div>'}
 });
 </script>
