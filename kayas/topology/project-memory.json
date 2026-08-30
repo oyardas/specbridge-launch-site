@@ -1,0 +1,59 @@
+{
+  "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
+  "version": "1.0.0",
+  "date": "2026-08-30",
+  "status": "CONTROLLED_PROJECT_BASELINE",
+  "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
+  "deployment": {
+    "public_path": "/kayas/topology/",
+    "public_url": "https://specbridge.co/kayas/topology/",
+    "repository": "oyardas/specbridge-launch-site",
+    "branch": "main",
+    "viewer_version": "v0.11.6",
+    "loader": "kayas/topology/index.html",
+    "official_resources": "kayas/topology/official-resources.json"
+  },
+  "canonical_graph": {
+    "graph_id": "KAYAS-M5-REL-GOLDEN-01",
+    "objects": 19,
+    "confirmed_relationships": 5,
+    "physical_relationships": 0,
+    "synthetic_edges": 0,
+    "rule": "Never promote OPEN / PROPOSED intent to CONFIRMED without explicit evidence."
+  },
+  "views": {
+    "T00": "Overview Map",
+    "T01": "Executive Architecture",
+    "T02": "Network Logical",
+    "T03": "Physical Connectivity",
+    "T04": "Compute / HCI / Storage",
+    "T05": "Management / OOB / Operations",
+    "T06": "Service / Tenant"
+  },
+  "information_status_policy": [
+    "CONFIRMED",
+    "VENDOR PROPOSAL",
+    "CUSTOMER INPUT",
+    "WORKING ASSUMPTION",
+    "OPEN-CONFIRMATION REQUIRED",
+    "SUPERSEDED"
+  ],
+  "current_open_reconciliation": [
+    {
+      "object": "AnyBackup 7.0 Platform",
+      "issue": "Normalized KAYAS object currently carries VENDOR=H3C while verified official manufacturer sources identify AISHU.",
+      "status": "OPEN-CONFIRMATION REQUIRED",
+      "action": "Do not silently change the canonical vendor field; reconcile against project source evidence first."
+    }
+  ],
+  "change_workflow": [
+    "1. Record the new evidence or explicit design decision.",
+    "2. Update the canonical object/relationship model with status and source traceability.",
+    "3. Preserve superseded values/revision history; do not overwrite silently.",
+    "4. Regenerate synchronized T00-T06 views from the same model.",
+    "5. Run evidence-safety and visual-routing acceptance checks.",
+    "6. Update viewer version and this project-memory file.",
+    "7. Deploy to /kayas/topology/ and verify the live URL."
+  ],
+  "memory_instruction": "Treat this repository file as the authoritative persistent DCTS/KAYAS project memory when continuing topology work in future conversations. Read it before making topology changes if current project context is incomplete."
+}
