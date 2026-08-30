@@ -1,6 +1,6 @@
 {
   "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "date": "2026-08-30",
   "status": "CONTROLLED_PROJECT_BASELINE",
   "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
@@ -15,8 +15,6 @@
     "delivery_mode": "DIRECT_STATIC_HTML",
     "production_document": "kayas/topology/index.html",
     "preview_document": "kayas/topology/v0.12-preview.html",
-    "legacy_payloads": "payload-01.txt..payload-10.txt retained only as reconstruction/recovery material; production must not depend on client-side payload fetch/decompression.",
-    "deployment_workflow": ".github/workflows/dcts-kayas-topology-direct-static.yml",
     "official_resources": "kayas/topology/official-resources.json",
     "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control."
   },
@@ -39,21 +37,23 @@
   },
   "current_visual_baseline": {
     "production": "v0.11.9 remains the accepted live production viewer until v0.12 T00 is visually accepted.",
-    "T00_production": "Legacy/card-based master map retained on production only as rollback baseline.",
-    "T00_preview": "v0.12.0 WP1-WP5 premium interactive master overview is available at /kayas/topology/v0.12-preview.html. It uses a semi-isometric digital-core scene, surrounding Security/Storage/Cloud/Data Protection/Management panels, high-level evidence-safe flows, and clickable navigation hotspots.",
-    "T00_navigation_contract": "Whole domain sections are now clickable, not only their titles or object cards. External / Service Ingress -> T01; Security -> T02; Data Center Digital Core defaults to T02 with explicit T02 Network and T04 Compute controls; Physical Connectivity CTA -> T03; Storage -> T04; Management/OOB/Analytics -> T05; Cloud Service Platform and Data Protection -> T06. Object hotspot navigation preserves selected canonical object and opens its controlled detail/focus view.",
+    "T00_preview": "v0.12.0 WP1-WP6 premium interactive master overview is available at /kayas/topology/v0.12-preview.html. It uses a semi-isometric digital-core scene, surrounding Security/Storage/Cloud/Data Protection/Management panels, high-level evidence-safe flows, whole-section navigation and semantic hover emphasis.",
+    "T00_navigation_contract": "External / Service Ingress -> T01; Security -> T02; Data Center Digital Core defaults to T02 with explicit T02 Network and T04 Compute controls; Physical Connectivity CTA -> T03; Storage -> T04; Management/OOB/Analytics -> T05; Cloud Service Platform and Data Protection -> T06. Object hotspot navigation preserves selected canonical object and opens its controlled detail/focus view.",
+    "T00_hover_contract": "Hover/focus on a domain highlights its relevant high-level architecture flow while unrelated panels and flows are dimmed. Fabric Plane and Compute Plane inside the semi-isometric core are separately interactive and route to T02 and T04 respectively.",
     "T01": "Executive 5/5 visual pass remains in v0.11.9 pending a later dedicated review after T00 acceptance.",
     "top_right_controls": "Only the functional ← KAYAS return control is shown; placeholder Search/Help/Settings icons are removed."
   },
   "development_checkpoint": {
-    "id": "DCTS-KAYAS-v0.12.0-WP1-WP5",
+    "id": "DCTS-KAYAS-v0.12.0-WP1-WP6",
     "status": "PREVIEW / USER ACCEPTANCE REQUIRED",
     "preview_url": "https://specbridge.co/kayas/topology/v0.12-preview.html",
     "files": [
       "kayas/topology/viewer-v0.11.9.html",
       "kayas/topology/v0.12-preview.css",
       "kayas/topology/v0.12-nav.css",
+      "kayas/topology/v0.12-polish.css",
       "kayas/topology/v0.12-preview.js",
+      "kayas/topology/v0.12-polish.js",
       "kayas/topology/v0.12-preview.html"
     ],
     "scope": [
@@ -61,9 +61,10 @@
       "WP2 semi-isometric evidence-safe visual language",
       "WP3 interactive hotspot mapping to T01-T06",
       "WP4 high-level clean connection routing",
-      "WP5 whole-section navigation hardening and explicit core T02/T04 controls"
+      "WP5 whole-section navigation hardening and explicit core T02/T04 controls",
+      "WP6 digital-core polish, semantic hover-flow emphasis, and in-core Fabric/Compute interaction"
     ],
-    "promotion_rule": "Do not replace production index.html until visual quality, whole-section navigation, object hotspot mapping and target-view behavior are manually accepted by the user."
+    "promotion_rule": "Do not replace production index.html until visual quality, hover behavior, whole-section navigation, object hotspot mapping and target-view behavior are manually accepted by the user."
   },
   "information_status_policy": [
     "CONFIRMED",
