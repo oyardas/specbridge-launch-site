@@ -1,4 +1,4 @@
-/* DCTS v0.12.0 — Premium Interactive Overview Map — WP1-WP4 checkpoint */
+/* DCTS v0.12.0 — Premium Interactive Overview Map — WP1-WP5 checkpoint */
 (function(){
   const BASE_RENDER_GROUPS=renderGroups;
   renderGroups=function(){
@@ -19,16 +19,18 @@
   function mini(id,target,forcedLabel=''){
     const o=obj(id);if(!o)return '';
     const label=forcedLabel||shortName(o);
-    return `<button class="t00-hot-object" style="--accent:${C[o.domain]}" onclick="t00Navigate('${target}','${id}')">
+    return `<button class="t00-hot-object" style="--accent:${C[o.domain]}" onclick="event.stopPropagation();t00Navigate('${target}','${id}')">
       <span class="miniico">${icon(o)}</span><span><b>${label}</b><em>${investorSubtitle(o)}</em></span><span class="goto">${target} ↗</span>
     </button>`;
   }
   function coreChip(id,target,cls,label){
     const o=obj(id);if(!o)return '';
-    return `<button class="t00-core-label ${cls}" onclick="t00Navigate('${target}','${id}')" style="--accent:${C[o.domain]}">${icon(o)}<b>${label||shortName(o)}</b><span>${target} · ${investorSubtitle(o)}</span></button>`;
+    return `<button class="t00-core-label ${cls}" onclick="event.stopPropagation();t00Navigate('${target}','${id}')" style="--accent:${C[o.domain]}">${icon(o)}<b>${label||shortName(o)}</b><span>${target} · ${investorSubtitle(o)}</span></button>`;
   }
   function panel(title,target,cls,body){
-    return `<section class="t00-panel ${cls}"><div class="t00-panel-title" onclick="t00Navigate('${target}')">${title}<small>Open ${target} ↗</small></div><div class="t00-panel-body">${body}</div></section>`;
+    return `<section class="t00-panel ${cls}" role="button" tabindex="0" aria-label="Open ${title} in ${target}" onclick="t00PanelNavigate(event,'${target}')" onkeydown="t00PanelNavigate(event,'${target}')">
+      <div class="t00-panel-title">${title}<small>Open ${target} ↗</small></div><div class="t00-panel-body">${body}</div>
+    </section>`;
   }
 
   window.t00Navigate=function(target,id=null){
@@ -45,6 +47,20 @@
         if(semantic)openFocus(id);
       },220);
     }
+  };
+  window.t00PanelNavigate=function(e,target){
+    if(!e)return t00Navigate(target);
+    if(e.type==='keydown' && e.key!=='Enter' && e.key!==' ')return;
+    if(e.target && e.target.closest && e.target.closest('button,a'))return;
+    if(e.type==='keydown')e.preventDefault();
+    t00Navigate(target);
+  };
+  window.t00CoreNavigate=function(e){
+    if(!e)return t00Navigate('T02');
+    if(e.type==='keydown' && e.key!=='Enter' && e.key!==' ')return;
+    if(e.target && e.target.closest && e.target.closest('button,a'))return;
+    if(e.type==='keydown')e.preventDefault();
+    t00Navigate('T02');
   };
 
   renderT00Overview=function(){
@@ -83,17 +99,17 @@
     $('#groups').innerHTML=`<div class="t00-premium-stage">
       <div class="t00-premium-kicker">DCTS · KAYAS · MASTER ARCHITECTURE NAVIGATION</div>
       <div class="t00-premium-title">KAYAS <span>Digital Infrastructure Platform</span></div>
-      <div class="t00-premium-subtitle">Investor-oriented master map · select a technology domain or component to enter the controlled detailed view</div>
+      <div class="t00-premium-subtitle">Investor-oriented master map · click any domain panel or component to enter the correct controlled view</div>
       <div class="t00-legend"><span><i></i>Architecture flow</span><span><i class="mgmt"></i>Management context</span><span><i class="nav"></i>Navigation / evidence boundary</span></div>
       ${flows}
-      ${panel('External / Service Ingress','T01','t00-external-panel',`<button class="t00-context-chip" onclick="t00Navigate('T01')">Internet / Carrier</button><button class="t00-context-chip" onclick="t00Navigate('T01')">Public Cloud</button><button class="t00-context-chip" onclick="t00Navigate('T01')">Partners</button><button class="t00-context-chip" onclick="t00Navigate('T01')">Users / Tenants</button>`)}
+      ${panel('External / Service Ingress','T01','t00-external-panel',`<button class="t00-context-chip" onclick="event.stopPropagation();t00Navigate('T01')">Internet / Carrier</button><button class="t00-context-chip" onclick="event.stopPropagation();t00Navigate('T01')">Public Cloud</button><button class="t00-context-chip" onclick="event.stopPropagation();t00Navigate('T01')">Partners</button><button class="t00-context-chip" onclick="event.stopPropagation();t00Navigate('T01')">Users / Tenants</button>`)}
       ${panel('Security Boundary','T02','t00-security-panel',security)}
       ${panel('Cloud Service Platform','T06','t00-cloud-panel',cloud)}
       ${panel('Storage','T04','t00-storage-panel',storage)}
       ${panel('Data Protection','T06','t00-protect-panel',protection)}
       ${panel('Management / OOB / Analytics','T05','t00-management-panel',management)}
-      <section class="t00-core-shell">
-        <div class="t00-core-head" onclick="t00Navigate('T02')">Data Center Digital Core <small>Network fabric + compute · Open T02 / T04</small></div>
+      <section class="t00-core-shell" role="button" tabindex="0" aria-label="Open Data Center Digital Core in T02 Network Logical" onclick="t00CoreNavigate(event)" onkeydown="t00CoreNavigate(event)">
+        <div class="t00-core-head"><span>Data Center Digital Core</span><small>Network fabric + compute</small><span class="t00-core-nav"><button onclick="event.stopPropagation();t00Navigate('T02')">T02 Network ↗</button><button onclick="event.stopPropagation();t00Navigate('T04')">T04 Compute ↗</button></span></div>
         ${iso}
         ${coreChip('topobj_f8b344bf31c75571769f','T02','c1','Interconnect')}
         ${coreChip('topobj_6c9587efb3d0b49bed8e','T02','c2','Spine Pair')}
@@ -101,7 +117,7 @@
         ${coreChip('topobj_dc742080923da3053e85','T02','c4','Storage Switching')}
         ${coreChip('topobj_6de1118a2c5c7827fc65','T04','c5','CAS Hosts')}
         ${coreChip('topobj_deecc8375d65efa2cb1c','T04','c6','CAS Platform')}
-        <button class="t00-physical-cta" onclick="t00Navigate('T03')">PHYSICAL CONNECTIVITY · OPEN T03 ↗</button>
+        <button class="t00-physical-cta" onclick="event.stopPropagation();t00Navigate('T03')">PHYSICAL CONNECTIVITY · OPEN T03 ↗</button>
       </section>
       <button class="t00-domain-badge network" onclick="t00Navigate('T02')">NETWORK LOGICAL · T02 ↗</button>
       <button class="t00-domain-badge compute" onclick="t00Navigate('T04')">COMPUTE / STORAGE · T04 ↗</button>
@@ -110,6 +126,6 @@
   };
 
   const brand=document.querySelector('.brand small');
-  if(brand)brand.textContent='v0.12.0 Preview · Premium Interactive T00 · WP1–WP4 checkpoint';
+  if(brand)brand.textContent='v0.12.0 Preview · Premium Interactive T00 · WP1–WP5 navigation hardening';
   if(view==='T00')render();
 })();
