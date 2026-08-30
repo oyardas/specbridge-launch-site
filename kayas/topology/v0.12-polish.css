@@ -1,0 +1,83 @@
+/* DCTS v0.12.0 — WP6 visual polish + semantic hover-flow focus */
+.t00-premium-stage{--focus-accent:#4bdde9}
+.t00-premium-stage[data-focus]:not([data-focus=""]){box-shadow:inset 0 0 110px rgba(20,82,107,.09),0 20px 52px rgba(0,0,0,.30)}
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-panel,
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-core-shell{
+  opacity:.42;
+  filter:saturate(.68) brightness(.82);
+  transition:opacity .18s ease,filter .18s ease,transform .18s ease,border-color .18s ease,box-shadow .18s ease
+}
+.t00-premium-stage[data-focus="external"] .t00-external-panel,
+.t00-premium-stage[data-focus="security"] .t00-security-panel,
+.t00-premium-stage[data-focus="cloud"] .t00-cloud-panel,
+.t00-premium-stage[data-focus="storage"] .t00-storage-panel,
+.t00-premium-stage[data-focus="protection"] .t00-protect-panel,
+.t00-premium-stage[data-focus="management"] .t00-management-panel,
+.t00-premium-stage[data-focus="core"] .t00-core-shell{
+  opacity:1;
+  filter:none;
+  transform:translateY(-2px) scale(1.004)
+}
+.t00-premium-stage[data-focus="security"] .t00-core-shell,
+.t00-premium-stage[data-focus="storage"] .t00-core-shell,
+.t00-premium-stage[data-focus="cloud"] .t00-core-shell,
+.t00-premium-stage[data-focus="protection"] .t00-core-shell,
+.t00-premium-stage[data-focus="management"] .t00-core-shell,
+.t00-premium-stage[data-focus="external"] .t00-core-shell{opacity:.78;filter:saturate(.9) brightness(.94)}
+
+/* Flow hierarchy: dim everything, then light the relation that explains the hovered domain. */
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-flow-svg>path.t00-flow{opacity:.12;transition:opacity .16s ease,stroke-width .16s ease,filter .16s ease}
+.t00-premium-stage[data-focus="external"] .t00-flow.f-external,
+.t00-premium-stage[data-focus="security"] .t00-flow.f-security,
+.t00-premium-stage[data-focus="storage"] .t00-flow.f-storage,
+.t00-premium-stage[data-focus="cloud"] .t00-flow.f-cloud,
+.t00-premium-stage[data-focus="protection"] .t00-flow.f-protection,
+.t00-premium-stage[data-focus="management"] .t00-flow.f-management,
+.t00-premium-stage[data-focus="core"] .t00-flow.f-core{
+  opacity:1!important;
+  stroke-width:2.35px!important;
+  filter:drop-shadow(0 0 3px currentColor)
+}
+.t00-premium-stage[data-focus="core"] .t00-flow.f-storage,
+.t00-premium-stage[data-focus="core"] .t00-flow.f-cloud,
+.t00-premium-stage[data-focus="core"] .t00-flow.f-protection{opacity:.68!important}
+.t00-premium-stage[data-focus="management"] .t00-flow.f-management{stroke-width:1.8px!important}
+
+.t00-hover-hint{
+  position:absolute;z-index:44;left:50%;top:79px;transform:translateX(-50%) translateY(-4px);
+  min-width:245px;max-width:420px;padding:8px 12px;border:1px solid #315b6d;border-radius:9px;
+  background:rgba(5,16,25,.94);box-shadow:0 10px 24px rgba(0,0,0,.26);color:#9eb9c7;
+  text-align:center;font-size:6.2px;letter-spacing:.01em;opacity:0;pointer-events:none;transition:.16s
+}
+.t00-hover-hint b{color:#e1f7fb;font-size:6.6px}.t00-hover-hint span{color:#55d9e7;font-weight:850;margin-left:6px}
+.t00-premium-stage[data-focus]:not([data-focus=""]) .t00-hover-hint{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Digital Core polish — deeper semi-isometric scene without asserting physical placement. */
+.t00-core-shell:before{
+  content:'';position:absolute;inset:40px 0 0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 53%,rgba(51,210,228,.12),transparent 38%),radial-gradient(ellipse at 52% 77%,rgba(82,225,139,.055),transparent 31%);
+  z-index:1
+}
+.t00-iso-svg{z-index:5;transform:translateY(-2px) scale(1.025);transform-origin:50% 50%;transition:transform .25s ease,filter .25s ease}
+.t00-core-shell:hover .t00-iso-svg{transform:translateY(-5px) scale(1.04);filter:drop-shadow(0 22px 28px rgba(0,0,0,.30)) drop-shadow(0 0 9px rgba(47,205,222,.08))}
+.t00-iso-fabric-line{fill:none;stroke:#35d9e8;stroke-width:1.15;opacity:.78;stroke-linecap:round;filter:drop-shadow(0 0 2px rgba(53,217,232,.34))}
+.t00-iso-fabric-node{fill:#0b3342;stroke:#47d8e4;stroke-width:1}
+.t00-iso-compute-plane{fill:rgba(57,212,126,.07);stroke:#45d987;stroke-width:1;stroke-dasharray:4 4}
+.t00-iso-plane-label{font:700 7px Segoe UI,Arial,sans-serif;letter-spacing:.08em;fill:#739aaa;paint-order:stroke;stroke:#06111a;stroke-width:2px}
+.t00-iso-plane-label.fabric{fill:#71dfe9}.t00-iso-plane-label.compute{fill:#72db9c}
+.t00-iso-packet{fill:#85f3fb;filter:drop-shadow(0 0 3px #5eeaf2)}
+body:not(.no-motion) .t00-iso-packet{animation:t00Packet 2.8s ease-in-out infinite}
+@keyframes t00Packet{0%,100%{opacity:.18;transform:translateX(-3px)}50%{opacity:1;transform:translateX(4px)}}
+
+/* Stronger visual affordance that each section is a destination. */
+.t00-panel:after,
+.t00-core-shell:after{
+  content:'OPEN';position:absolute;right:9px;bottom:7px;z-index:35;color:#59798a;font-size:4.6px;font-weight:900;letter-spacing:.12em;opacity:0;transition:.16s;pointer-events:none
+}
+.t00-panel:hover:after,.t00-panel:focus-visible:after,.t00-core-shell:hover:after,.t00-core-shell:focus-visible:after{opacity:.7}
+.t00-management-panel:after{display:none}
+
+/* Slightly stronger title hierarchy and calmer cards. */
+.t00-premium-title{font-size:15px!important}.t00-premium-subtitle{font-size:6.8px!important;color:#6e8b9c!important}
+.t00-panel-title{font-size:7.7px!important}.t00-hot-object{background:linear-gradient(145deg,#071722,#06121c)!important}
+.t00-hot-object:hover{transform:translateX(3px) scale(1.006)!important}
