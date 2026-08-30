@@ -1,0 +1,4 @@
+DCTS_KAYAS_DEPLOY_PROBE
+commit_parent=31689ec573b24c3c0899787bd9b4000a48aa56d2
+created=2026-08-30T19:10+03:00
+purpose=verify-live-publishing-source
