@@ -15,19 +15,42 @@
   let ok=false;
   try{ok=Number(localStorage.getItem(AUTH_KEY)||0)>Date.now()}catch(_){}
   if(!ok){location.replace('/kayas/');return}
-  const r=await fetch('viewer-v0.11.9.html.gz',{cache:'no-store'});
-  if(!r.ok)throw new Error('viewer payload');
-  if(!('DecompressionStream' in window)){
-    document.getElementById('boot').textContent='This browser does not support the topology loader. Please use a current Chrome, Edge, Firefox or Safari browser.';
-    return
+
+  const r=await fetch('viewer-v0.11.9.html.gz?v=20260830-1846',{cache:'no-store'});
+  if(!r.ok)throw new Error(`viewer payload HTTP ${r.status}`);
+
+  const bytes=new Uint8Array(await r.arrayBuffer());
+  if(!bytes.length)throw new Error('viewer payload empty');
+
+  let text='';
+  const isGzip=bytes.length>2 && bytes[0]===0x1f && bytes[1]===0x8b;
+
+  if(isGzip){
+    if(!('DecompressionStream' in window)){
+      throw new Error('gzip payload requires DecompressionStream');
+    }
+    const ds=new DecompressionStream('gzip');
+    const stream=new Blob([bytes]).stream().pipeThrough(ds);
+    text=await new Response(stream).text();
+  }else{
+    // Some static hosts/CDNs transparently decode .gz assets before fetch exposes the body.
+    // In that case the received bytes are already the HTML payload and must not be decompressed again.
+    text=new TextDecoder('utf-8').decode(bytes);
   }
-  const ds=new DecompressionStream('gzip');
-  const stream=r.body.pipeThrough(ds);
-  const text=await new Response(stream).text();
-  document.open();document.write(text);document.close();
+
+  if(!/<!doctype html|<html/i.test(text.slice(0,500))){
+    throw new Error('viewer payload is not HTML');
+  }
+
+  document.open();
+  document.write(text);
+  document.close();
 })().catch(e=>{
-  document.getElementById('boot').textContent='Topology could not be loaded. Return to /kayas/ and try again.';
-  console.error(e)
+  const boot=document.getElementById('boot');
+  if(boot){
+    boot.innerHTML='Topology could not be loaded.<br><span style="font-size:12px;color:#89a1af">Return to <a href="/kayas/" style="color:#71dff0">KAYAS</a> and try again.</span>';
+  }
+  console.error('KAYAS topology loader error:',e)
 });
 </script>
 </body>
