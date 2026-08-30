@@ -15,78 +15,15 @@
   let ok=false;
   try{ok=Number(localStorage.getItem(AUTH_KEY)||0)>Date.now()}catch(_){}
   if(!ok){location.replace('/kayas/');return}
-
-  const files=['payload-01.txt','payload-02.txt','payload-03.txt','payload-04.txt','payload-05.txt','payload-06.txt','payload-07.txt','payload-08.txt','payload-09.txt'];
-  const chunks=await Promise.all(files.map(f=>fetch(f,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(f);return r.text()})));
-  const b64=chunks.join('');
-  const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+  const r=await fetch('viewer-v0.11.9.html.gz',{cache:'no-store'});
+  if(!r.ok)throw new Error('viewer payload');
   if(!('DecompressionStream' in window)){
     document.getElementById('boot').textContent='This browser does not support the topology loader. Please use a current Chrome, Edge, Firefox or Safari browser.';
     return
   }
   const ds=new DecompressionStream('gzip');
-  const stream=new Blob([bytes]).stream().pipeThrough(ds);
-  let text=await new Response(stream).text();
-
-  const patch=(from,to,label)=>{
-    if(!text.includes(from)){console.warn('KAYAS runtime patch skipped:',label);return false}
-    text=text.replace(from,to);return true
-  };
-
-  patch('v0.11.6 · Verified Official Resources + Deployment Candidate','v0.11.8 · T00 Interaction Repair + Executive View Refinement','version');
-
-  patch(
-    'const el=root.querySelector(`.nodecard[data-id="${id}"],.story-anchor[data-id="${id}"]`);',
-    'const el=root.querySelector(`.nodecard[data-id="${id}"],.t00-node[data-id="${id}"],.story-anchor[data-id="${id}"]`);',
-    'T00 geometry'
-  );
-
-  patch(
-    'function nodeClick(e,id){\n  e.stopPropagation();',
-    `function t00NodeClick(e,id){\n  e.stopPropagation();\n  const o=obj(id);if(!o)return;\n  selected=id;\n  renderBreadcrumb();\n  $$('.t00-node,.nodecard').forEach(n=>n.classList.toggle('selected',n.dataset.id===id));\n  renderInspector();\n  openFocus(id);\n  if(trace)applyTrace();\n}\nfunction nodeClick(e,id){\n  e.stopPropagation();`,
-    'T00 direct click'
-  );
-  patch(
-    "return `<div class=\"t00-node ${selected===o.id?'selected':''}\" data-id=\"${o.id}\" data-domain=\"${o.domain}\" data-role=\"${o.role}\" style=\"--accent:${C[o.domain]}\" onclick=\"nodeClick(event,'${o.id}')\">",
-    "return `<div class=\"t00-node ${selected===o.id?'selected':''}\" data-id=\"${o.id}\" data-domain=\"${o.domain}\" data-role=\"${o.role}\" style=\"--accent:${C[o.domain]}\" onclick=\"t00NodeClick(event,'${o.id}')\">",
-    'T00 click binding'
-  );
-
-  patch(
-    "const T00_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);",
-    "const T00_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);\nconst T01_EXEC_INTENTS=new Set(['AINT-000','AINT-001','AINT-002','AINT-003','AINT-004','AINT-005','AINT-006','AINT-007','AINT-008','AINT-009','AINT-010','AINT-011','AINT-012']);",
-    'T01 intent registry'
-  );
-  patch(
-    "const archIntent=()=>view==='T00'?A.filter(a=>T00_INTENTS.has(a.id)):A.filter(a=>a.views.includes(view));",
-    "const archIntent=()=>view==='T00'?A.filter(a=>T00_INTENTS.has(a.id)):(view==='T01'?A.filter(a=>T01_EXEC_INTENTS.has(a.id)):A.filter(a=>a.views.includes(view)));",
-    'T01 intent subset'
-  );
-
-  patch(
-    "const fabricBody=`<div class=\"ref-story-label\">Edge / spine / leaf / compute / storage-network composition</div><div class=\"ref-fabric-grid\">${fabric.map((o,i)=>`<div class=\"refslot ${slotNames[i]||''}\">${o.id==='topobj_6c9587efb3d0b49bed8e'?pairNodeHTML(o,'spine'):o.id==='topobj_689f284af5e658a26b88'?pairNodeHTML(o,'leaf'):nodeHTML(o)}</div>`).join('')}</div><div id=\"fabricIntent\" class=\"fabric-intent\"><b>DC_FABRIC intent</b><span>cross-connect paths shown as OPEN / PROPOSED until evidence is approved</span></div>`;",
-    "const fabricBody=`<div class=\"ref-story-label\">Connectivity · fabric · compute · storage access</div><div class=\"ref-fabric-grid\">${fabric.map((o,i)=>`<div class=\"refslot ${slotNames[i]||''}\">${nodeHTML(o)}</div>`).join('')}</div><div id=\"fabricIntent\" class=\"fabric-intent\"><b>DC_FABRIC intent</b><span>OPEN / PROPOSED · aggregate presentation only</span></div>`;",
-    'T01 aggregate cards'
-  );
-  patch("if(edgeId==='AINT-005' && view!=='T00')", "if(edgeId==='AINT-005' && view!=='T00' && view!=='T01')", 'T01 pair-route disable');
-  patch(".forEach(a=>addPath(a.id,a.from,a.to,a.kind,a.type,a.status,i++,a.bundle||1));", ".forEach(a=>addPath(a.id,a.from,a.to,a.kind,a.type,a.status,i++,view==='T01'?1:(a.bundle||1)));", 'T01 single fabric line');
-
-  const uiCss=`
-.portalbtn{height:34px;display:inline-flex;align-items:center;justify-content:center;padding:0 11px;border:1px solid #2a5d70;border-radius:7px;background:#071b27;color:#8fe5f2;text-decoration:none;font-size:8.5px;font-weight:800;white-space:nowrap}.portalbtn:hover{border-color:#56d9e8;color:#dffcff;background:#0a2836}
-.t00-node{pointer-events:auto!important;cursor:pointer!important}.t00-node::after{content:'DETAILS';position:absolute;right:7px;bottom:6px;color:#547789;font-size:4.8px;letter-spacing:.08em;opacity:.72}.t00-node:hover::after{color:var(--accent);opacity:1}
-.groups.reference-t01{display:grid!important;grid-template-columns:100px 150px 360px 140px 306px!important;grid-template-rows:410px 132px!important;grid-template-areas:'external security fabric storage cloud' 'management management management management management'!important;column-gap:22px!important;row-gap:24px!important;padding:30px 28px 52px!important;align-items:stretch!important}
-.groups.reference-t01 .executive-flow-ribbon{display:none!important}.groups.reference-t01 .external-context{grid-area:external!important;min-height:410px!important;height:410px!important}.groups.reference-t01 .ref-security{grid-area:security!important;min-height:410px!important;height:410px!important}.groups.reference-t01 .ref-fabric{grid-area:fabric!important;min-height:410px!important;height:410px!important}.groups.reference-t01 .ref-storage{grid-area:storage!important;min-height:410px!important;height:410px!important}.groups.reference-t01 .ref-cloud{grid-area:cloud!important;min-height:410px!important;height:410px!important}.groups.reference-t01 .ref-management{grid-area:management!important;min-height:132px!important;height:132px!important}
-.groups.reference-t01 .group,.groups.reference-t01 .external-context{border-radius:10px!important;box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.015)!important}.groups.reference-t01 .ghead{height:38px!important;padding:0 12px!important;font-size:9.2px!important;letter-spacing:.02em!important}.groups.reference-t01 .ghead .count{font-size:5.8px!important;max-width:90px;text-align:right;line-height:1.2}
-.groups.reference-t01 .ref-story-label{height:22px!important;padding:7px 13px 0!important;font-size:5.2px!important;text-transform:uppercase;letter-spacing:.06em;color:#5f7d8f!important}.groups.reference-t01 .ref-security .nodegrid{grid-template-columns:1fr!important;gap:13px!important;padding:16px 12px!important;align-content:start!important}.groups.reference-t01 .ref-storage .nodegrid{grid-template-columns:1fr!important;gap:18px!important;padding:28px 11px!important;align-content:start!important}.groups.reference-t01 .ref-cloud .nodegrid{grid-template-columns:1fr 1fr!important;gap:14px 11px!important;padding:20px 11px!important;align-content:start!important}.groups.reference-t01 .ref-management .nodegrid{grid-template-columns:repeat(4,1fr)!important;gap:14px!important;padding:13px 15px!important;align-content:center!important}
-.groups.reference-t01 .ref-fabric-grid{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(3,auto)!important;grid-template-areas:none!important;gap:14px 15px!important;padding:14px 14px 12px!important;align-content:start!important}.groups.reference-t01 .refslot{grid-area:auto!important;align-self:start!important}.groups.reference-t01 .nodecard{min-height:62px!important;height:62px!important;padding:9px 24px 8px 43px!important;border-radius:7px!important;overflow:hidden!important}.groups.reference-t01 .nodecard .ico{left:8px!important;top:12px!important;width:27px!important;height:27px!important}.groups.reference-t01 .nodecard b{font-size:8.3px!important;line-height:1.12!important;padding-right:3px!important}.groups.reference-t01 .nodecard .investor-sub{display:block!important;font-size:5.1px!important;line-height:1.22!important;color:#688596!important;margin-top:4px!important;max-height:13px!important;overflow:hidden!important}.groups.reference-t01 .nodecard .role,.groups.reference-t01 .nodecard .model,.groups.reference-t01 .nodecard .state,.groups.reference-t01 .nodecard .badge{display:none!important}.groups.reference-t01 .nodecard .qty{right:7px!important;top:7px!important;font-size:6px!important}.groups.reference-t01 .fabric-intent,.groups.reference-t01 .worldnote{display:none!important}
-.groups.reference-t01 .external-context{padding:12px 10px!important}.groups.reference-t01 .external-context .context-title{font-size:7.7px!important;line-height:1.18!important}.groups.reference-t01 .external-context .context-note{font-size:4.8px!important;line-height:1.35!important;margin-top:7px!important;color:#557184!important}.groups.reference-t01 .external-chips{margin-top:20px!important;gap:9px!important}.groups.reference-t01 .external-chip{font-size:5.6px!important;padding:5px 4px!important}.groups.reference-t01 .story-anchor{font-size:5.4px!important;padding:6px 3px!important}
-.reference-t01 + .edges .edgepath{stroke-width:1.45!important;opacity:.72!important}.reference-t01 + .edges .edgeglow{opacity:.018!important}.reference-t01 + .edges .edgeLabel,.reference-t01 + .edges .edgeStatus{display:none!important}.reference-t01 + .edges{z-index:18!important}.groups.reference-t01 .group,.groups.reference-t01 .external-context{z-index:24!important}.groups.reference-t01 .nodecard,.groups.reference-t01 .ghead,.groups.reference-t01 .story-anchor,.groups.reference-t01 .external-chip{z-index:36!important}
-body.story .groups.reference-t01 .nodecard .investor-sub{display:block!important}body.story .groups.reference-t01 .nodecard .role,body.story .groups.reference-t01 .nodecard .model,body.story .groups.reference-t01 .nodecard .state,body.story .groups.reference-t01 .nodecard .badge{display:none!important}`;
-  text=text.replace('</style>',uiCss+'</style>');
-
-  text=text.replace('grid-template-columns:310px 1fr 160px','grid-template-columns:310px 1fr 110px').replace('grid-template-columns:240px 1fr 100px','grid-template-columns:240px 1fr 110px');
-  text=text.replace('<div class="topicons"><button class="iconbtn" title="Search">⌕</button><button class="iconbtn" title="Help">?</button><button class="iconbtn" title="Settings">⚙</button></div>','<div class="topicons"><a class="portalbtn" href="/kayas/" title="Back to KAYAS Investor Portal">← KAYAS</a></div>');
-
+  const stream=r.body.pipeThrough(ds);
+  const text=await new Response(stream).text();
   document.open();document.write(text);document.close();
 })().catch(e=>{
   document.getElementById('boot').textContent='Topology could not be loaded. Return to /kayas/ and try again.';
