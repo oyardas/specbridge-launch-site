@@ -16,31 +16,29 @@
   try{ok=Number(localStorage.getItem(AUTH_KEY)||0)>Date.now()}catch(_){}
   if(!ok){location.replace('/kayas/');return}
 
-  const r=await fetch('viewer-v0.11.9.html.gz?v=20260830-1846',{cache:'no-store'});
-  if(!r.ok)throw new Error(`viewer payload HTTP ${r.status}`);
+  const files=[
+    'payload-01.txt','payload-02.txt','payload-03.txt','payload-04.txt','payload-05.txt',
+    'payload-06.txt','payload-07.txt','payload-08.txt','payload-09.txt','payload-10.txt'
+  ];
+  const version='20260830-1854-v0119';
+  const parts=await Promise.all(files.map(async f=>{
+    const r=await fetch(`${f}?v=${version}`,{cache:'no-store'});
+    if(!r.ok)throw new Error(`${f} HTTP ${r.status}`);
+    return (await r.text()).trim();
+  }));
+  const b64=parts.join('');
+  if(b64.length<70000)throw new Error(`incomplete payload: ${b64.length}`);
 
-  const bytes=new Uint8Array(await r.arrayBuffer());
-  if(!bytes.length)throw new Error('viewer payload empty');
+  const binary=atob(b64);
+  const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+  if(bytes[0]!==0x1f||bytes[1]!==0x8b)throw new Error('payload is not gzip');
+  if(!('DecompressionStream' in window))throw new Error('DecompressionStream unavailable');
 
-  let text='';
-  const isGzip=bytes.length>2 && bytes[0]===0x1f && bytes[1]===0x8b;
-
-  if(isGzip){
-    if(!('DecompressionStream' in window)){
-      throw new Error('gzip payload requires DecompressionStream');
-    }
-    const ds=new DecompressionStream('gzip');
-    const stream=new Blob([bytes]).stream().pipeThrough(ds);
-    text=await new Response(stream).text();
-  }else{
-    // Some static hosts/CDNs transparently decode .gz assets before fetch exposes the body.
-    // In that case the received bytes are already the HTML payload and must not be decompressed again.
-    text=new TextDecoder('utf-8').decode(bytes);
-  }
-
-  if(!/<!doctype html|<html/i.test(text.slice(0,500))){
-    throw new Error('viewer payload is not HTML');
-  }
+  const ds=new DecompressionStream('gzip');
+  const stream=new Blob([bytes]).stream().pipeThrough(ds);
+  const text=await new Response(stream).text();
+  if(!/<!doctype html|<html/i.test(text.slice(0,500)))throw new Error('viewer payload is not HTML');
+  if(!text.includes('v0.11.9'))throw new Error('unexpected viewer version');
 
   document.open();
   document.write(text);
