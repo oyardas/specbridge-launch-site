@@ -11,8 +11,9 @@
     "portal_url": "https://specbridge.co/kayas/",
     "repository": "oyardas/specbridge-launch-site",
     "branch": "main",
-    "viewer_version": "v0.11.8",
+    "viewer_version": "v0.11.9",
     "loader": "kayas/topology/index.html",
+    "viewer_payload": "kayas/topology/viewer-v0.11.9.html.gz",
     "official_resources": "kayas/topology/official-resources.json",
     "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control."
   },
@@ -33,11 +34,10 @@
     "T05": "Management / OOB / Operations",
     "T06": "Service / Tenant"
   },
-  "ui_contract": {
-    "T00_interaction": "Single-clicking a canonical object opens synchronized detail focus and Inspector.",
-    "T00_connections": "T00 compact cards participate in geometry/edge routing; overview relationships must be visible when enabled.",
-    "T01_presentation": "Executive view uses compact aggregate cards, reduced proposal-intent density and single aggregate fabric intent line; nested Spine/Leaf mini-instance cards are not shown.",
-    "top_right_controls": "Only the persistent ← KAYAS navigation control is shown. Placeholder Search/Help/Settings icon buttons were removed; actual search remains in the functional search field."
+  "current_visual_baseline": {
+    "T00": "All canonical object cards are direct drill-down controls; details open in the synchronized focus view.",
+    "T01": "Executive 5/5 visual pass: consistent card geometry, reduced intent set, local/gutter routing, no inactive UI placeholders, and management confirmed paths routed above cards.",
+    "top_right_controls": "Only the functional ← KAYAS return control is shown; placeholder Search/Help/Settings icons are removed."
   },
   "information_status_policy": [
     "CONFIRMED",
@@ -60,9 +60,10 @@
     "2. Update the canonical object/relationship model with status and source traceability.",
     "3. Preserve superseded values/revision history; do not overwrite silently.",
     "4. Regenerate synchronized T00-T06 views from the same model.",
-    "5. Run evidence-safety, drill-down interaction and visual-routing acceptance checks.",
+    "5. Run evidence-safety and visual-routing acceptance checks.",
     "6. Update viewer version and this project-memory file.",
-    "7. Deploy to /kayas/topology/ and verify both /kayas/ → topology and topology → /kayas/ navigation."
+    "7. Deploy the immutable versioned viewer payload and update /kayas/topology/ loader.",
+    "8. Verify both /kayas/ → topology and topology → /kayas/ navigation."
   ],
   "memory_instruction": "Treat this repository file as the authoritative persistent DCTS/KAYAS project memory when continuing topology work in future conversations. Read it before making topology changes if current project context is incomplete."
 }
