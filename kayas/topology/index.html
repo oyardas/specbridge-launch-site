@@ -20,36 +20,50 @@
     'payload-01.txt','payload-02.txt','payload-03.txt','payload-04.txt','payload-05.txt',
     'payload-06.txt','payload-07.txt','payload-08.txt','payload-09.txt','payload-10.txt'
   ];
-  const version='20260830-1854-v0119';
-  const parts=await Promise.all(files.map(async f=>{
-    const r=await fetch(`${f}?v=${version}`,{cache:'no-store'});
-    if(!r.ok)throw new Error(`${f} HTTP ${r.status}`);
-    return (await r.text()).trim();
-  }));
-  const b64=parts.join('');
-  if(b64.length<70000)throw new Error(`incomplete payload: ${b64.length}`);
+  // Unique deployment revision intentionally changes whenever any payload chunk changes.
+  // This prevents the static CDN from serving a previously cached payload under the same URL.
+  const version='20260830-1908-v0119-r2';
+  let stage='init';
+  try{
+    stage='fetch-payloads';
+    const parts=await Promise.all(files.map(async f=>{
+      const r=await fetch(`${f}?v=${version}`,{cache:'no-store'});
+      if(!r.ok)throw new Error(`${f} HTTP ${r.status}`);
+      return (await r.text()).trim();
+    }));
 
-  const binary=atob(b64);
-  const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
-  if(bytes[0]!==0x1f||bytes[1]!==0x8b)throw new Error('payload is not gzip');
-  if(!('DecompressionStream' in window))throw new Error('DecompressionStream unavailable');
+    stage='validate-base64';
+    const b64=parts.join('');
+    if(b64.length!==74328)throw new Error(`payload length ${b64.length}, expected 74328`);
 
-  const ds=new DecompressionStream('gzip');
-  const stream=new Blob([bytes]).stream().pipeThrough(ds);
-  const text=await new Response(stream).text();
-  if(!/<!doctype html|<html/i.test(text.slice(0,500)))throw new Error('viewer payload is not HTML');
-  if(!text.includes('v0.11.9'))throw new Error('unexpected viewer version');
+    stage='decode-base64';
+    const binary=atob(b64);
+    const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+    if(bytes[0]!==0x1f||bytes[1]!==0x8b)throw new Error('payload is not gzip');
+    if(!('DecompressionStream' in window))throw new Error('DecompressionStream unavailable');
 
-  document.open();
-  document.write(text);
-  document.close();
-})().catch(e=>{
-  const boot=document.getElementById('boot');
-  if(boot){
-    boot.innerHTML='Topology could not be loaded.<br><span style="font-size:12px;color:#89a1af">Return to <a href="/kayas/" style="color:#71dff0">KAYAS</a> and try again.</span>';
+    stage='decompress-gzip';
+    const ds=new DecompressionStream('gzip');
+    const stream=new Blob([bytes]).stream().pipeThrough(ds);
+    const text=await new Response(stream).text();
+
+    stage='validate-viewer';
+    if(!/<!doctype html|<html/i.test(text.slice(0,500)))throw new Error('viewer payload is not HTML');
+    if(!text.includes('v0.11.9'))throw new Error('unexpected viewer version');
+
+    stage='render-viewer';
+    document.open();
+    document.write(text);
+    document.close();
+  }catch(e){
+    const boot=document.getElementById('boot');
+    if(boot){
+      const safe=String(e&&e.message?e.message:e).replace(/[<>&]/g,'');
+      boot.innerHTML=`<div style="text-align:center;line-height:1.7">Topology could not be loaded.<br><span style="font-size:12px;color:#89a1af">Loader stage: ${stage} · ${safe}</span><br><span style="font-size:12px;color:#89a1af">Return to <a href="/kayas/" style="color:#71dff0">KAYAS</a> and try again.</span></div>`;
+    }
+    console.error('KAYAS topology loader error:',stage,e);
   }
-  console.error('KAYAS topology loader error:',e)
-});
+})().catch(e=>console.error('KAYAS topology bootstrap error:',e));
 </script>
 </body>
 </html>
