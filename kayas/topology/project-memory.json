@@ -1,6 +1,6 @@
 {
   "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "date": "2026-08-30",
   "status": "CONTROLLED_PROJECT_BASELINE",
   "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
@@ -37,9 +37,30 @@
     "T06": "Service / Tenant"
   },
   "current_visual_baseline": {
-    "T00": "All canonical object cards are direct drill-down controls; details open in the synchronized focus view.",
-    "T01": "Executive 5/5 visual pass: consistent card geometry, reduced intent set, local/gutter routing, no inactive UI placeholders, and management confirmed paths routed above cards.",
+    "production": "v0.11.9 remains the accepted live production viewer until v0.12 T00 is visually accepted.",
+    "T00_production": "Legacy/card-based master map retained on production only as rollback baseline.",
+    "T00_preview": "v0.12.0 WP1-WP4 premium interactive master overview is available at /kayas/topology/v0.12-preview.html. It uses a semi-isometric digital-core scene, surrounding Security/Storage/Cloud/Data Protection/Management panels, high-level evidence-safe flows, and clickable navigation hotspots.",
+    "T00_navigation_contract": "External context -> T01; Security and network components -> T02; Physical Connectivity CTA -> T03; Compute/storage components -> T04; Management/OOB/analytics -> T05; Cloud/data-protection components -> T06. Object hotspot navigation preserves selected canonical object and opens its controlled detail/focus view.",
+    "T01": "Executive 5/5 visual pass remains in v0.11.9 pending a later dedicated review after T00 acceptance.",
     "top_right_controls": "Only the functional ← KAYAS return control is shown; placeholder Search/Help/Settings icons are removed."
+  },
+  "development_checkpoint": {
+    "id": "DCTS-KAYAS-v0.12.0-WP1-WP4",
+    "status": "PREVIEW / USER ACCEPTANCE REQUIRED",
+    "preview_url": "https://specbridge.co/kayas/topology/v0.12-preview.html",
+    "files": [
+      "kayas/topology/viewer-v0.11.9.html",
+      "kayas/topology/v0.12-preview.css",
+      "kayas/topology/v0.12-preview.js",
+      "kayas/topology/v0.12-preview.html"
+    ],
+    "scope": [
+      "WP1 T00 scene geometry",
+      "WP2 semi-isometric evidence-safe visual language",
+      "WP3 interactive hotspot mapping to T01-T06",
+      "WP4 high-level clean connection routing"
+    ],
+    "promotion_rule": "Do not replace production index.html until visual quality, hotspot mapping and navigation are manually accepted by the user."
   },
   "information_status_policy": [
     "CONFIRMED",
