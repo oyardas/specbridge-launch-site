@@ -1,6 +1,6 @@
 {
   "document_id": "DCTS-KAYAS-PROJECT-MEMORY",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "date": "2026-08-30",
   "status": "CONTROLLED_PROJECT_BASELINE",
   "purpose": "Repository-backed persistent project memory for the KAYAS DCTS topology. Future topology changes should be reconciled against this file and the canonical source model before viewer regeneration/deployment.",
@@ -11,7 +11,7 @@
     "portal_url": "https://specbridge.co/kayas/",
     "repository": "oyardas/specbridge-launch-site",
     "branch": "main",
-    "viewer_version": "v0.11.7",
+    "viewer_version": "v0.11.8",
     "loader": "kayas/topology/index.html",
     "official_resources": "kayas/topology/official-resources.json",
     "navigation_contract": "KAYAS portal links to Interactive Architecture; topology viewer provides a persistent ← KAYAS return control."
@@ -32,6 +32,12 @@
     "T04": "Compute / HCI / Storage",
     "T05": "Management / OOB / Operations",
     "T06": "Service / Tenant"
+  },
+  "ui_contract": {
+    "T00_interaction": "Single-clicking a canonical object opens synchronized detail focus and Inspector.",
+    "T00_connections": "T00 compact cards participate in geometry/edge routing; overview relationships must be visible when enabled.",
+    "T01_presentation": "Executive view uses compact aggregate cards, reduced proposal-intent density and single aggregate fabric intent line; nested Spine/Leaf mini-instance cards are not shown.",
+    "top_right_controls": "Only the persistent ← KAYAS navigation control is shown. Placeholder Search/Help/Settings icon buttons were removed; actual search remains in the functional search field."
   },
   "information_status_policy": [
     "CONFIRMED",
@@ -54,7 +60,7 @@
     "2. Update the canonical object/relationship model with status and source traceability.",
     "3. Preserve superseded values/revision history; do not overwrite silently.",
     "4. Regenerate synchronized T00-T06 views from the same model.",
-    "5. Run evidence-safety and visual-routing acceptance checks.",
+    "5. Run evidence-safety, drill-down interaction and visual-routing acceptance checks.",
     "6. Update viewer version and this project-memory file.",
     "7. Deploy to /kayas/topology/ and verify both /kayas/ → topology and topology → /kayas/ navigation."
   ],
