@@ -1,0 +1,114 @@
+<section class="section advisor-section" id="advisor-40-80-80">
+  <div class="section-head">
+    <div><div class="kicker">Consultant Recommendation</div><h2>Önerilen başlangıç hizmet modeli: 40 + 80 + 80</h2></div>
+    <p>200 kabinetlik ilk fazın tek tip ürün olarak değil, üç farklı sorumluluk ve gelir modeline ayrılması önerilir.</p>
+  </div>
+
+  <div class="advisor-hero">
+    <div>
+      <div class="advisor-ratio" aria-label="40 IaaS, 80 Managed Colocation, 80 Colocation">
+        <div class="ratio-block iaas"><b>40</b><span>IaaS / Cloud Platform</span><small>Provider-operated</small></div>
+        <div class="ratio-block managed"><b>80</b><span>Managed Colocation</span><small>Shared operations</small></div>
+        <div class="ratio-block colo"><b>80</b><span>Customer-Managed Colocation</span><small>Customer-operated IT</small></div>
+      </div>
+      <div class="notice"><b>Danışman görüşü:</b> 40+80+80 oranı sektör tarafından dikte edilen bir standart değildir. Kayaş'ın ilk 200 kabinetini gelir çeşitliliği, operasyonel risk, müşteri segmentasyonu ve gelecekte servis yukarı-satışı açısından dengelemek için önerilen başlangıç dağılımıdır.</div>
+    </div>
+    <div class="advisor-summary">
+      <b>Neden üç model birlikte?</b>
+      <ul>
+        <li><strong>40 IaaS:</strong> daha yüksek katma değerli cloud/compute geliri için kontrollü başlangıç ölçeği.</li>
+        <li><strong>80 Managed Colo:</strong> müşterinin donanım kontrolünü korurken Kayaş'a NOC, network, security, backup ve hands-on servis geliri sağlar.</li>
+        <li><strong>80 Pure Colo:</strong> düşük operasyonel yükle daha hızlı satışa çıkabilecek rack/kW kapasitesi oluşturur.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="visual-grid" style="margin-top:14px">
+    <article class="visual-card full">
+      <h3>40 + 80 + 80 aynı tesiste nasıl çalışır?</h3>
+      <p>Üç ticari servis zonu ortak facility, carrier, edge, güvenlik, OOB, NOC/DCIM ve interconnection omurgasını paylaşır; müşteri sorumluluğu servis zonuna göre değişir.</p>
+      <svg viewBox="0 0 1360 650" role="img" aria-label="Kayaş 40 80 80 service topology">
+        <defs><marker id="a408080" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#52d7c7"/></marker></defs>
+        <style>
+          .z{fill:#0c1925;stroke:#31506b;stroke-width:1.6}.zi{fill:#10292a;stroke:#52d7c7;stroke-width:2}.zm{fill:#182338;stroke:#79a8ff;stroke-width:2}.zc{fill:#2a2415;stroke:#f0c674;stroke-width:2}.zs{fill:#111d29;stroke:#405a70;stroke-width:1.5}.zt{fill:#edf4fb;font:600 18px Segoe UI,Arial}.zh{fill:#edf4fb;font:700 28px Segoe UI,Arial}.zx{fill:#9eb0c2;font:13px Segoe UI,Arial}.zl{stroke:#52d7c7;stroke-width:2;marker-end:url(#a408080)}.zd{stroke:#405a70;stroke-width:2;stroke-dasharray:6 6}
+        </style>
+        <rect x="60" y="35" width="1240" height="74" rx="14" class="zs"/><text x="680" y="65" text-anchor="middle" class="zt">CARRIER-NEUTRAL EDGE & INTERCONNECTION</text><text x="680" y="90" text-anchor="middle" class="zx">Dual MMR · Internet/Transit · Cross Connect · Cloud Connect · DCI · Optional IX</text>
+        <line x1="680" y1="109" x2="680" y2="155" class="zl"/>
+        <rect x="430" y="155" width="500" height="82" rx="14" class="zs"/><text x="680" y="186" text-anchor="middle" class="zt">SHARED SERVICE & SECURITY EDGE</text><text x="680" y="211" text-anchor="middle" class="zx">Redundant Edge · Firewall/ADC · Shared Services · Tenant VRF/Segmentation</text>
+        <line x1="680" y1="237" x2="680" y2="280" class="zl"/>
+
+        <rect x="60" y="285" width="370" height="245" rx="18" class="zi"/>
+        <text x="245" y="326" text-anchor="middle" class="zh">40</text><text x="245" y="354" text-anchor="middle" class="zt">IaaS / CLOUD PLATFORM</text>
+        <text x="245" y="386" text-anchor="middle" class="zx">Spine–Leaf · EVPN/VXLAN</text><text x="245" y="409" text-anchor="middle" class="zx">HCI / Compute · Shared Storage</text><text x="245" y="432" text-anchor="middle" class="zx">Cloud Portal · Tenant VRF</text><text x="245" y="455" text-anchor="middle" class="zx">Backup / DR · Managed Security</text><text x="245" y="490" text-anchor="middle" class="zx">Kayaş owns infrastructure operations</text>
+
+        <rect x="495" y="285" width="370" height="245" rx="18" class="zm"/>
+        <text x="680" y="326" text-anchor="middle" class="zh">80</text><text x="680" y="354" text-anchor="middle" class="zt">MANAGED COLOCATION</text>
+        <text x="680" y="386" text-anchor="middle" class="zx">Shared Fabric / Tenant Segmentation</text><text x="680" y="409" text-anchor="middle" class="zx">Managed Network / Firewall options</text><text x="680" y="432" text-anchor="middle" class="zx">NOC · Smart Hands · Backup options</text><text x="680" y="455" text-anchor="middle" class="zx">Customer-owned servers/storage</text><text x="680" y="490" text-anchor="middle" class="zx">Operational responsibility is shared</text>
+
+        <rect x="930" y="285" width="370" height="245" rx="18" class="zc"/>
+        <text x="1115" y="326" text-anchor="middle" class="zh">80</text><text x="1115" y="354" text-anchor="middle" class="zt">CUSTOMER-MANAGED COLOCATION</text>
+        <text x="1115" y="386" text-anchor="middle" class="zx">Core/Access or customer demarcation</text><text x="1115" y="409" text-anchor="middle" class="zx">Rack · A+B Power · Cooling</text><text x="1115" y="432" text-anchor="middle" class="zx">Cross Connect · Internet/Carrier</text><text x="1115" y="455" text-anchor="middle" class="zx">Remote/Smart Hands optional</text><text x="1115" y="490" text-anchor="middle" class="zx">Customer owns IT operations</text>
+
+        <line x1="680" y1="280" x2="245" y2="285" class="zd"/><line x1="680" y1="280" x2="680" y2="285" class="zd"/><line x1="680" y1="280" x2="1115" y2="285" class="zd"/>
+        <rect x="190" y="565" width="980" height="55" rx="13" class="zs"/><text x="680" y="589" text-anchor="middle" class="zt">COMMON FACILITY FOUNDATION</text><text x="680" y="611" text-anchor="middle" class="zx">A+B Power · UPS · Generator · Cooling · Physical Security · DCIM · OOB · NOC</text>
+      </svg>
+    </article>
+  </div>
+
+  <div class="section-head" style="margin-top:28px">
+    <div><div class="kicker">Why We Recommend It</div><h2>Neden 40 + 80 + 80?</h2></div>
+  </div>
+  <div class="note-grid advisor-reasons">
+    <article class="note-card"><b>1 · Gelir portföyünü dengeler</b><span>Saf colocation taban gelirini, managed-service recurring gelirini ve IaaS'ın yüksek katma değer potansiyelini aynı tesiste birleştirir.</span></article>
+    <article class="note-card"><b>2 · İlk günden 200 kabinet cloud riski alınmaz</b><span>IaaS kapasitesi 40 kabinetle kontrollü başlar. Talep doğrulandıkça managed veya colo alanları cloud'a dönüştürülebilir.</span></article>
+    <article class="note-card"><b>3 · Satışa çıkış süresini kısaltır</b><span>80 kabinet pure colocation, cloud platformunun tüm otomasyon ve servis süreçleri tamamlanmadan da ticari kapasite olarak sunulabilir.</span></article>
+    <article class="note-card"><b>4 · Müşteri segmentasyonu nettir</b><span>Kendi IT ekibi güçlü müşteri colo; operasyon desteği isteyen müşteri managed colo; CAPEX yapmak istemeyen müşteri IaaS tüketebilir.</span></article>
+    <article class="note-card"><b>5 · Doğal upgrade yolu yaratır</b><span>Müşteri Colocation → Managed Colocation → Private Cloud/IaaS → Backup/DR/Security/AI şeklinde servis merdiveninde yukarı taşınabilir.</span></article>
+    <article class="note-card"><b>6 · Sorumluluk ve SLA sınırları ayrışır</b><span>Her zon için ayrı demarcation, tenant segmentation, runbook, monitoring ve SLA tanımlamak teknik ve ticari anlaşmazlık riskini azaltır.</span></article>
+    <article class="note-card"><b>7 · Network tasarımını sadeleştirir</b><span>IaaS için spine-leaf/EVPN-VXLAN; managed colo için kontrollü shared fabric; pure colo için daha basit customer demarcation yaklaşımı kullanılabilir.</span></article>
+    <article class="note-card"><b>8 · Talebe göre yeniden dengeleme mümkündür</b><span>40/80/80 başlangıç allocation'ıdır; fiziksel ve network tasarımı zonlar arasında kontrollü kapasite transferine izin vermelidir.</span></article>
+    <article class="note-card"><b>9 · AI yatırımı ayrı bir ticari overlay olur</b><span>10 high-density AI kabinet, dördüncü bir hizmet modeli değildir; 40+80+80 ticari zonlarının üzerine gelen güç/cooling sınıfıdır.</span></article>
+  </div>
+
+  <div class="visual-grid" style="margin-top:16px">
+    <article class="visual-card full">
+      <h3>AI katmanı: 40 + 80 + 80 ile 190 + 10 ayrımı birbirine karıştırılmamalı</h3>
+      <p>40+80+80 ticari sorumluluk ve hizmet modelidir. 190 standart + 10 AI ise fiziksel güç/soğutma sınıfıdır. Bu iki eksen üst üste bindirilmelidir.</p>
+      <svg viewBox="0 0 1240 420" role="img" aria-label="Commercial zoning versus physical rack class">
+        <style>.q{fill:#0d1b28;stroke:#35516b;stroke-width:1.5}.qi{fill:#10292a;stroke:#52d7c7;stroke-width:2}.qa{fill:#221b35;stroke:#7f5af0;stroke-width:2}.qt{fill:#edf4fb;font:600 16px Segoe UI,Arial}.qx{fill:#9eb0c2;font:12px Segoe UI,Arial}.ql{stroke:#536f85;stroke-width:2}</style>
+        <text x="80" y="38" class="qt">COMMERCIAL / RESPONSIBILITY AXIS</text>
+        <rect x="80" y="60" width="300" height="75" rx="12" class="qi"/><text x="230" y="92" text-anchor="middle" class="qt">40 · IaaS</text><text x="230" y="115" text-anchor="middle" class="qx">Kayaş-operated infrastructure</text>
+        <rect x="470" y="60" width="300" height="75" rx="12" class="q"/><text x="620" y="92" text-anchor="middle" class="qt">80 · Managed Colo</text><text x="620" y="115" text-anchor="middle" class="qx">Shared operations</text>
+        <rect x="860" y="60" width="300" height="75" rx="12" class="q"/><text x="1010" y="92" text-anchor="middle" class="qt">80 · Pure Colo</text><text x="1010" y="115" text-anchor="middle" class="qx">Customer-operated IT</text>
+        <line x1="620" y1="150" x2="620" y2="205" class="ql"/>
+        <text x="80" y="240" class="qt">PHYSICAL POWER / COOLING AXIS</text>
+        <rect x="80" y="265" width="760" height="95" rx="14" class="q"/><text x="460" y="303" text-anchor="middle" class="qt">190 · STANDARD RACK CLASS</text><text x="460" y="328" text-anchor="middle" class="qx">Air cooled · General enterprise / colo / cloud workloads</text>
+        <rect x="880" y="265" width="280" height="95" rx="14" class="qa"/><text x="1020" y="303" text-anchor="middle" class="qt">10 · AI / HIGH-DENSITY</text><text x="1020" y="328" text-anchor="middle" class="qx">Liquid/hybrid cooling · GPU/HPC</text>
+        <text x="620" y="400" text-anchor="middle" class="qx">Recommendation: keep the AI racks commercially assignable to IaaS/GPUaaS, Managed AI Colocation or customer AI Colocation as demand develops.</text>
+      </svg>
+    </article>
+  </div>
+
+  <div class="section-head" style="margin-top:30px" id="reference-videos">
+    <div><div class="kicker">Reference Videos</div><h2>Modeli anlatmak için kullanılabilecek videolar</h2></div>
+    <p>Aşağıdaki videolar Kayaş'a ait değildir; yatırımcı ve teknik ekip için kavramları açıklayan sektör referanslarıdır.</p>
+  </div>
+  <div class="video-grid">
+    <article class="video-card">
+      <div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/eY_CsUrPkg4" title="What Is Colocation - LINX" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="video-copy"><span>COLOCATION</span><b>What Is Colocation?</b><small>London Internet Exchange (LINX) · 2025</small><p>Pure colocation modelinde müşteri ekipmanı ile data center facility sorumluluğu arasındaki sınırı kısa biçimde anlatıyor.</p><a href="https://www.youtube.com/watch?v=eY_CsUrPkg4" target="_blank" rel="noopener">YouTube'da aç ↗</a></div>
+    </article>
+    <article class="video-card">
+      <div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/XkQosU8wkW0" title="Equinix Managed Solutions" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="video-copy"><span>MANAGED INFRASTRUCTURE</span><b>Equinix Managed Solutions</b><small>Equinix · 2025</small><p>Managed private cloud, backup, firewall ve operasyon katmanının müşterinin günlük altyapı yükünü nasıl azalttığını gösteriyor.</p><a href="https://www.youtube.com/watch?v=XkQosU8wkW0" target="_blank" rel="noopener">YouTube'da aç ↗</a></div>
+    </article>
+    <article class="video-card">
+      <div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/XRdmfo4M_YA" title="IaaS Explained - IBM Technology" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="video-copy"><span>IAAS</span><b>IaaS Explained</b><small>IBM Technology</small><p>Compute, storage ve network kaynaklarının on-demand ve as-a-service modelinde nasıl sunulduğunu anlatıyor.</p><a href="https://www.youtube.com/watch?v=XRdmfo4M_YA" target="_blank" rel="noopener">YouTube'da aç ↗</a></div>
+    </article>
+    <article class="video-card">
+      <div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/phLPKVx3Cl4" title="Cloud Architecture - IBM Technology" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="video-copy"><span>CLOUD ARCHITECTURE</span><b>Cloud Delivery Models & Architecture</b><small>IBM Technology · 2024</small><p>IaaS, SaaS ve private/public/hybrid cloud ilişkisini daha geniş mimari bağlamda açıklıyor.</p><a href="https://www.youtube.com/watch?v=phLPKVx3Cl4" target="_blank" rel="noopener">YouTube'da aç ↗</a></div>
+    </article>
+  </div>
+</section>
