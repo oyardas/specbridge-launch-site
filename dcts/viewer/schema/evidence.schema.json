@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specbridge.co/dcts/schema/evidence.schema.json",
+  "title": "DCTS Evidence Register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_id", "evidence"],
+  "properties": {
+    "schema_version": {"const": "1.0.0-draft.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence_id", "source_type", "source_file", "source_revision"],
+        "properties": {
+          "evidence_id": {"type": "string", "minLength": 1},
+          "source_type": {"enum": ["BOQ", "BOM", "HLD", "LLD", "VENDOR_DOCUMENTATION", "CUSTOMER_INPUT", "APPROVED_DESIGN", "USER_DECISION", "ENGINEERING_INFERENCE", "OTHER"]},
+          "source_file": {"type": "string", "minLength": 1},
+          "boq_line_id": {"type": ["string", "null"]},
+          "source_revision": {"type": "string", "minLength": 1},
+          "locator": {"type": ["string", "null"], "description": "Page, sheet, row, slide, section or other source locator."},
+          "claim": {"type": ["string", "null"]},
+          "status": {"enum": ["CONFIRMED", "VENDOR PROPOSAL", "CUSTOMER INPUT", "WORKING ASSUMPTION", "OPEN-CONFIRMATION REQUIRED", "SUPERSEDED", null]},
+          "uri": {"type": ["string", "null"]},
+          "notes": {"type": ["string", "null"]},
+          "extensions": {"type": "object"}
+        }
+      }
+    }
+  }
+}
