@@ -1,0 +1,65 @@
+{
+  "document_id": "DCTS-VIEWER-WP4-CHECKPOINT",
+  "version": "1.0.0-alpha.1",
+  "date": "2026-08-31",
+  "status": "IMPLEMENTED_PREVIEW_MANUAL_ACCEPTANCE_REQUIRED",
+  "work_package": "V1-WP4 — Shared DCTS Viewer Runtime Engine & Dual-Project Preview",
+  "shared_runtime": {
+    "css": "dcts/viewer/runtime/dcts-viewer.css",
+    "layout_hardening": "dcts/viewer/runtime/dcts-viewer-layout-v1a1.css",
+    "javascript": "dcts/viewer/runtime/dcts-viewer.js"
+  },
+  "project_previews": {
+    "KAYAS": {
+      "path": "kayas/topology/v1-preview.html",
+      "url": "https://specbridge.co/kayas/topology/v1-preview.html",
+      "package": "dcts/viewer/fixtures/kayas/",
+      "production_replaced": false
+    },
+    "Haven Healthcare": {
+      "path": "haven-healthcare/v1-preview.html",
+      "url": "https://specbridge.co/haven-healthcare/v1-preview.html",
+      "package": "dcts/viewer/fixtures/haven-healthcare/",
+      "production_replaced": false
+    }
+  },
+  "implemented_capabilities": [
+    "One project-neutral runtime loads manifest/config/objects/relationships/evidence/findings/views resources",
+    "T00 master navigation generated from enabled project views",
+    "T01-T08 view rendering according to package availability",
+    "Presentation and Engineering modes use the same canonical package",
+    "Canonical relationships and presentation intents remain visually and semantically separate",
+    "Information-status styling for confirmed/proposal/assumption/open/superseded states",
+    "Relationship-layer styling for physical/logical/service/management/OOB/security/backup/DR",
+    "Object inspector with Overview / Engineering / Evidence & Traceability tabs",
+    "Deep-link state for view/object/mode/language/design-path visibility",
+    "Refresh and browser hash navigation restoration",
+    "Responsive fit behavior",
+    "Print / browser Save as PDF integration with project-config watermark support",
+    "Language selector with EN/TR shared UI and controlled fallback for unsupported translated content",
+    "Browser speech narration from controlled/generated view narrative",
+    "Project-specific authentication remains in thin project wrapper pages, outside the shared renderer and package"
+  ],
+  "static_checks": [
+    {"check": "Shared JavaScript syntax", "result": "PASS", "method": "node --check using Node v22.16.0"},
+    {"check": "KAYAS package contract wiring", "result": "PASS_STATIC"},
+    {"check": "Haven package contract wiring", "result": "PASS_STATIC"},
+    {"check": "Project-specific SKU/customer/credential logic inside shared renderer", "result": "PASS_NONE_FOUND_BY_IMPLEMENTATION_DESIGN"},
+    {"check": "Canonical graph mutation", "result": "NONE"}
+  ],
+  "manual_acceptance_required": [
+    "KAYAS preview loads after existing KAYAS portal authorization",
+    "Haven preview loads after existing Haven portal authorization",
+    "T00 navigation opens each enabled view",
+    "KAYAS T01-T06 render without node overlap at normal desktop widths",
+    "Haven T01-T08 use migrated normalized layout hints without material overlap",
+    "Object selection populates inspector",
+    "Presentation / Engineering mode switch works",
+    "Design paths toggle does not change canonical relationship counts",
+    "Deep-link refresh restores view/object state",
+    "Print/PDF output is readable and Haven watermark appears",
+    "Return control navigates to each project portal"
+  ],
+  "production_promotion": "BLOCKED_UNTIL_MANUAL_ACCEPTANCE",
+  "notes": "The shared engine is implemented and both projects have real preview entry points. Existing KAYAS and Haven production viewers remain untouched until manual visual/runtime acceptance."
+}
