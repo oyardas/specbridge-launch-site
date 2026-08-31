@@ -1,0 +1,44 @@
+{
+  "generated_at_utc": "2026-08-31T10:10:33.368952+00:00",
+  "model": "gpt-4o-mini-tts",
+  "voices": {
+    "tr": "marin",
+    "en": "cedar"
+  },
+  "languages": [
+    "tr",
+    "en"
+  ],
+  "views": [
+    "T00",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08"
+  ],
+  "generated_files": [
+    "audio/tr/T00.mp3",
+    "audio/tr/T01.mp3",
+    "audio/tr/T02.mp3",
+    "audio/tr/T03.mp3",
+    "audio/tr/T04.mp3",
+    "audio/tr/T05.mp3",
+    "audio/tr/T06.mp3",
+    "audio/tr/T07.mp3",
+    "audio/tr/T08.mp3",
+    "audio/en/T00.mp3",
+    "audio/en/T01.mp3",
+    "audio/en/T02.mp3",
+    "audio/en/T03.mp3",
+    "audio/en/T04.mp3",
+    "audio/en/T05.mp3",
+    "audio/en/T06.mp3",
+    "audio/en/T07.mp3",
+    "audio/en/T08.mp3"
+  ],
+  "delivery": "static-mp3"
+}
