@@ -1,10 +1,16 @@
 {
   "document_id": "DCTS-VIEWER-WP1-CHECKPOINT",
-  "version": "1.0.0-draft.1",
+  "version": "1.0.0-rc.1",
   "date": "2026-08-31",
-  "status": "REVIEW_REQUIRED",
+  "status": "APPROVED_FROZEN",
   "work_package": "V1-WP1 — Shared Viewer Architecture & Visual Standard Freeze",
-  "authoritative_standard": "dcts/viewer/DCTS-Viewer-Standard-v1.0-draft.md",
+  "approval": {
+    "type": "EXPLICIT_USER_APPROVAL",
+    "date": "2026-08-31",
+    "decision": "Freeze WP1 and proceed to V1-WP2 Canonical Project Package Schema & Adapter Mapping"
+  },
+  "authoritative_standard": "dcts/viewer/DCTS-Viewer-Standard-v1.0.md",
+  "superseded_draft": "dcts/viewer/DCTS-Viewer-Standard-v1.0-draft.md",
   "source_reference_projects": {
     "KAYAS": {
       "role": "Engineering and canonical-semantics Golden Reference",
@@ -39,7 +45,7 @@
       ]
     }
   },
-  "proposed_standard_views": [
+  "standard_views": [
     "T00 Overview / Navigation Map",
     "T01 Executive Architecture",
     "T02 Network Logical",
@@ -54,16 +60,7 @@
     "T09 AI / GPU Fabric",
     "T10 Multi-site / DR"
   ],
-  "proposed_modes": [
-    "PRESENTATION",
-    "ENGINEERING"
-  ],
-  "standard_shell": {
-    "header": "Project identity + T-view navigation + mode/language/actions",
-    "left": "Narrative / summary / controlled findings",
-    "center": "Topology canvas",
-    "right": "Overview / Engineering / Evidence & Traceability inspector"
-  },
+  "modes": ["PRESENTATION", "ENGINEERING"],
   "mandatory_rules": [
     "One shared renderer for KAYAS, Haven and future projects",
     "Project package is independent from renderer implementation",
@@ -73,6 +70,6 @@
     "No silent invention of topology facts",
     "No project-specific SKU/customer/credential logic inside shared renderer"
   ],
-  "next_gate": "User approval required to freeze V1-WP1 before V1-WP2 Canonical Project Package Schema & Adapter Mapping",
-  "runtime_code_started": false
+  "runtime_code_started": false,
+  "next_gate": "V1-WP2 — Canonical Project Package Schema & Adapter Mapping"
 }
