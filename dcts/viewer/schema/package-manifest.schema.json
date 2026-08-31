@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "package_id", "project_id", "package_revision", "resources"],
   "properties": {
-    "schema_version": {"const": "1.0.0-draft.1"},
+    "schema_version": {"const": "1.0.1-draft.1"},
     "package_id": {"type": "string", "minLength": 1},
     "project_id": {"type": "string", "minLength": 1},
     "package_revision": {"type": "string", "minLength": 1},
