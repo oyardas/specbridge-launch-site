@@ -1,0 +1,26 @@
+{
+  "document_id": "DCTS-VIEWER-WP3-CHECKPOINT",
+  "version": "1.0.0",
+  "date": "2026-08-31",
+  "status": "APPROVED_FROZEN",
+  "work_package": "V1-WP3 — Deterministic KAYAS/Haven Package Fixtures & Schema Validation",
+  "wp1_status": "APPROVED_FROZEN",
+  "wp2_status": "APPROVED_FROZEN",
+  "validation_report": "dcts/viewer/wp3-validation-report.json",
+  "approval_basis": "User explicitly authorized moving forward to implement the shared DCTS Viewer engine for KAYAS and Haven on 2026-08-31.",
+  "frozen_outputs": [
+    "dcts/viewer/fixtures/kayas/",
+    "dcts/viewer/fixtures/haven-healthcare/",
+    "dcts/viewer/wp3-validation-report.json"
+  ],
+  "frozen_invariants": [
+    "KAYAS remains 19 canonical objects / 5 confirmed canonical relationships / 0 physical canonical relationships",
+    "KAYAS AINT and unresolved proposal records remain non-canonical",
+    "AnyBackup vendor reconciliation remains OPEN-CONFIRMATION REQUIRED",
+    "Haven physical link attributes are retained only where source-supported",
+    "Haven RECOMMENDED and DESIGN_TO_FINALIZE records remain presentation intents until provenance reconciliation",
+    "Project credentials remain outside DCTS project packages"
+  ],
+  "next_gate": "V1-WP4 — Shared DCTS Viewer Runtime Engine & Dual-Project Preview",
+  "runtime_code_started": true
+}
