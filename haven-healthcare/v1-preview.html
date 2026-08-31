@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Haven Healthcare · DCTS Viewer v1.0 Preview</title>
+<script>
+(function(){
+  try{
+    if(Number(localStorage.getItem('haven_healthcare_auth_until')||0)<=Date.now()){
+      location.replace('/haven-healthcare/');
+    }
+  }catch(_){ location.replace('/haven-healthcare/'); }
+})();
+window.DCTS_VIEWER_BOOT={packageBase:'/dcts/viewer/fixtures/haven-healthcare'};
+</script>
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer.css?v=20260831-v1a1">
+</head>
+<body>
+<noscript>DCTS Viewer requires JavaScript.</noscript>
+<script src="/dcts/viewer/runtime/dcts-viewer.js?v=20260831-v1a1"></script>
+</body>
+</html>
