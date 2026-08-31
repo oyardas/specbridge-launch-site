@@ -22,6 +22,7 @@
           "object_type": {"type": "string", "minLength": 1},
           "object_class": {"enum": ["PHYSICAL_DEVICE", "CLUSTER", "LOGICAL_PLATFORM", "LOGICAL_SERVICE", "EXTERNAL_NETWORK", "SECURITY_BOUNDARY", "MANAGEMENT_SYSTEM", "FACILITY_ELEMENT", "TENANT", "OTHER"]},
           "vendor": {"type": ["string", "null"]},
+          "model": {"type": ["string", "null"]},
           "sku": {"type": ["string", "null"]},
           "product_family": {"type": ["string", "null"]},
           "description": {"type": ["string", "null"]},
