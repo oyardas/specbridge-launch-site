@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specbridge.co/dcts/schema/relationships.schema.json",
+  "title": "DCTS Canonical Relationships",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_id", "relationships"],
+  "properties": {
+    "schema_version": {"const": "1.0.0-draft.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relationship_id", "type", "from_object_id", "to_object_id", "layer", "status"],
+        "properties": {
+          "relationship_id": {"type": "string", "minLength": 1},
+          "type": {"enum": ["CONNECTS_TO", "UPLINKS_TO", "DOWNLINKS_TO", "MANAGED_BY", "OOB_MANAGED_BY", "MEMBER_OF", "PROTECTED_BY", "CONTROLS", "MONITORS", "STORES_DATA_FOR", "BACKS_UP", "REPLICATES_TO", "PROVIDES_SERVICE_TO", "HOSTS"]},
+          "from_object_id": {"type": "string", "minLength": 1},
+          "to_object_id": {"type": "string", "minLength": 1},
+          "layer": {"enum": ["PHYSICAL", "LOGICAL", "SERVICE", "MANAGEMENT", "OOB", "SECURITY", "BACKUP", "DR"]},
+          "status": {"enum": ["CONFIRMED", "VENDOR PROPOSAL", "CUSTOMER INPUT", "WORKING ASSUMPTION", "OPEN-CONFIRMATION REQUIRED", "SUPERSEDED"]},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "attributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "from_port": {"type": ["string", "null"]},
+              "to_port": {"type": ["string", "null"]},
+              "link_type": {"type": ["string", "null"]},
+              "link_speed": {"type": ["string", "null"]},
+              "link_quantity": {"type": ["integer", "null"], "minimum": 1},
+              "media": {"type": ["string", "null"]},
+              "optic_from": {"type": ["string", "null"]},
+              "optic_to": {"type": ["string", "null"]},
+              "path_role": {"enum": ["A", "B", "A/B", "PRIMARY", "SECONDARY", "UNSPECIFIED", null]},
+              "vlan": {"type": ["string", "null"]},
+              "vrf": {"type": ["string", "null"]},
+              "vni": {"type": ["string", "null"]},
+              "bandwidth": {"type": ["string", "null"]}
+            }
+          },
+          "source_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "legacy_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "notes": {"type": ["string", "null"]},
+          "extensions": {"type": "object"}
+        }
+      }
+    }
+  }
+}
