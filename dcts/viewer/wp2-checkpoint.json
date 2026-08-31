@@ -1,9 +1,10 @@
 {
   "document_id": "DCTS-VIEWER-WP2-CHECKPOINT",
-  "version": "1.0.0-draft.1",
+  "version": "1.0.0",
   "date": "2026-08-31",
-  "status": "REVIEW_REQUIRED",
+  "status": "APPROVED_FROZEN",
   "work_package": "V1-WP2 — Canonical Project Package Schema & Adapter Mapping",
+  "approval": "Explicit user approval received on 2026-08-31 to freeze WP2 and proceed to V1-WP3.",
   "wp1_status": "APPROVED_FROZEN",
   "authoritative_wp1_standard": "dcts/viewer/DCTS-Viewer-Standard-v1.0.md",
   "schema_contract": "dcts/viewer/DCTS-Project-Package-Schema-v1.0-draft.md",
@@ -26,7 +27,7 @@
     "No silent invention of engineering facts",
     "No project-specific credentials or SKU/customer logic in shared renderer"
   ],
-  "wp2_decisions": [
+  "wp2_frozen_decisions": [
     "Project package is split into manifest/config/objects/relationships/evidence/findings/views resources",
     "Canonical objects use stable project-scoped IDs",
     "Canonical relationships are separate from non-canonical presentation intents",
@@ -55,5 +56,6 @@
     }
   },
   "runtime_code_started": false,
-  "next_gate_after_approval": "V1-WP3 — Deterministic KAYAS/Haven Package Fixtures & Schema Validation"
+  "next_gate": "V1-WP3 — Deterministic KAYAS/Haven Package Fixtures & Schema Validation",
+  "revision_note": "WP2 field semantics are frozen. Compatible schema defects discovered by WP3 validation may be corrected only as an explicitly documented WP3 compatibility patch; no silent mutation is permitted."
 }
