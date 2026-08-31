@@ -32,6 +32,7 @@ jobs:
       TTS_MODEL: gpt-4o-mini-tts
       TTS_VOICE_TR: marin
       TTS_VOICE_EN: cedar
+      TTS_VOICE_DV: marin
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,7 +45,7 @@ jobs:
             exit 2
           fi
 
-      - name: Generate TR and EN narration MP3 files
+      - name: Generate TR, EN and DV narration MP3 files
         run: python haven-healthcare/scripts/generate_narration.py
 
       - name: Commit generated audio
@@ -59,5 +60,3 @@ jobs:
           fi
           git commit -m "Generate Haven Healthcare static narration audio"
           git push
-
-# trigger: 2026-08-31T13:08+03:00
