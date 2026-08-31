@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Static Haven narration generator: TR, EN and Dhivehi.
+# Static Haven narration generator: Turkish and English only.
 import json
 import os
 import sys
@@ -17,7 +17,6 @@ MODEL = os.environ.get("TTS_MODEL", "gpt-4o-mini-tts")
 VOICES = {
     "tr": os.environ.get("TTS_VOICE_TR", "marin"),
     "en": os.environ.get("TTS_VOICE_EN", "cedar"),
-    "dv": os.environ.get("TTS_VOICE_DV", "marin"),
 }
 INSTRUCTIONS = {
     "tr": (
@@ -29,12 +28,6 @@ INSTRUCTIONS = {
     "en": (
         "Speak in clear international English with a calm, confident, premium investor-presentation style. "
         "Moderate pace, precise technical diction, natural phrasing, no exaggerated sales tone."
-    ),
-    "dv": (
-        "Speak in Dhivehi as used in the Maldives, with a natural Maldivian Dhivehi accent and native rhythm. "
-        "Read Thaana text naturally from right to left. Use a calm, confident, premium investor-presentation style. "
-        "Do not use an English or Arabic accent. Pronounce transliterated technical terms as naturally as possible for a Maldivian audience. "
-        "Moderate pace, clear diction, warm but professional tone."
     ),
 }
 
@@ -77,7 +70,7 @@ def main() -> int:
     data = json.loads(NARRATION_FILE.read_text(encoding="utf-8"))
     generated = []
 
-    for lang in ("tr", "en", "dv"):
+    for lang in ("tr", "en"):
         target_dir = AUDIO_ROOT / lang
         target_dir.mkdir(parents=True, exist_ok=True)
         for view_id in [f"T{i:02d}" for i in range(0, 9)]:
@@ -98,10 +91,11 @@ def main() -> int:
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "model": MODEL,
         "voices": VOICES,
-        "languages": ["tr", "en", "dv"],
+        "languages": ["tr", "en"],
         "views": [f"T{i:02d}" for i in range(0, 9)],
         "generated_files": generated,
         "delivery": "static-mp3",
+        "note": "Dhivehi text remains available in the UI; spoken Dhivehi narration is intentionally disabled pending native-language validation.",
     }
     (AUDIO_ROOT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"DONE generated={len(generated)}")
