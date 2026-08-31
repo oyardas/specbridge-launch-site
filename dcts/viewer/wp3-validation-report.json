@@ -1,0 +1,43 @@
+{
+  "document_id": "DCTS-VIEWER-WP3-VALIDATION-REPORT",
+  "version": "1.0.0",
+  "date": "2026-08-31",
+  "work_package": "V1-WP3 — Deterministic KAYAS/Haven Package Fixtures & Schema Validation",
+  "status": "PASS",
+  "schema_version": "1.0.0-draft.1",
+  "fixtures": {
+    "KAYAS": {
+      "path": "dcts/viewer/fixtures/kayas/",
+      "objects": 19,
+      "canonical_relationships": 5,
+      "confirmed_relationships": 5,
+      "physical_relationships": 0,
+      "architecture_intents_canonicalized": 0,
+      "special_reconciliation": "AnyBackup vendor attribution remains OPEN-CONFIRMATION REQUIRED"
+    },
+    "Haven Healthcare": {
+      "path": "dcts/viewer/fixtures/haven-healthcare/",
+      "objects": 27,
+      "canonical_relationships": 7,
+      "evidence_supported_physical_relationships": 3,
+      "presentation_intents": 43,
+      "recommended_intents": 36,
+      "design_to_finalize_intents": 7,
+      "special_rule": "RECOMMENDED and DESIGN_TO_FINALIZE remain non-canonical presentation intents until provenance reconciliation"
+    }
+  },
+  "validation_checks": [
+    {"check": "Required package resources present", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Schema structure", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Duplicate object/relationship IDs", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Relationship endpoints resolve", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Evidence references resolve", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "View references resolve", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Presentation-intent to canonical leakage", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Physical relationship evidence gate", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Credential leakage into package", "KAYAS": "PASS", "Haven Healthcare": "PASS"},
+    {"check": "Layout used as physical-location evidence", "KAYAS": "PASS", "Haven Healthcare": "PASS"}
+  ],
+  "runtime_viewer_tested": false,
+  "notes": "WP3 validates deterministic package fixtures and semantic boundaries only. Browser/runtime acceptance belongs to WP4."
+}
