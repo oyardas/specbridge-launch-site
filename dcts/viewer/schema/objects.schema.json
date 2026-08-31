@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specbridge.co/dcts/schema/objects.schema.json",
+  "title": "DCTS Canonical Objects",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_id", "objects"],
+  "properties": {
+    "schema_version": {"const": "1.0.0-draft.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object_id", "display_name", "domain", "functional_role", "object_type", "status"],
+        "properties": {
+          "object_id": {"type": "string", "minLength": 1},
+          "display_name": {"type": "string", "minLength": 1},
+          "domain": {"enum": ["EXTERNAL", "CARRIER", "EDGE", "NETWORK", "SECURITY", "COMPUTE", "HCI", "STORAGE", "CLOUD", "BACKUP", "DR", "MANAGEMENT", "OOB", "MONITORING", "DCIM", "OPERATIONS", "SERVICE", "TENANT"]},
+          "functional_role": {"type": "string", "minLength": 1},
+          "object_type": {"type": "string", "minLength": 1},
+          "object_class": {"enum": ["PHYSICAL_DEVICE", "CLUSTER", "LOGICAL_PLATFORM", "LOGICAL_SERVICE", "EXTERNAL_NETWORK", "SECURITY_BOUNDARY", "MANAGEMENT_SYSTEM", "FACILITY_ELEMENT", "TENANT", "OTHER"]},
+          "vendor": {"type": ["string", "null"]},
+          "sku": {"type": ["string", "null"]},
+          "product_family": {"type": ["string", "null"]},
+          "description": {"type": ["string", "null"]},
+          "quantity": {"type": ["number", "integer", "string", "null"]},
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "site_id": {"type": ["string", "null"]},
+              "zone": {"type": ["string", "null"]},
+              "room": {"type": ["string", "null"]},
+              "rack": {"type": ["string", "null"]}
+            }
+          },
+          "topology_membership": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ha_group": {"type": ["string", "null"]},
+              "cluster": {"type": ["string", "null"]},
+              "fabric": {"type": ["string", "null"]},
+              "failure_domain": {"type": ["string", "null"]}
+            }
+          },
+          "management": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "management_type": {"type": ["string", "null"]},
+              "oob_required": {"type": ["boolean", "null"]}
+            }
+          },
+          "status": {"enum": ["CONFIRMED", "VENDOR PROPOSAL", "CUSTOMER INPUT", "WORKING ASSUMPTION", "OPEN-CONFIRMATION REQUIRED", "SUPERSEDED"]},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "source_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "legacy_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "notes": {"type": ["string", "null"]},
+          "extensions": {"type": "object"}
+        }
+      }
+    }
+  }
+}
