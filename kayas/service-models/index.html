@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
-<meta name="description" content="Kayaş Data Center Service Models — hizmet, altyapı, gelir, yönetim ve sorumluluk karşılaştırması">
+<meta name="description" content="Kayaş Data Center Service Models — 40+80+80 danışman önerisi, hizmet, altyapı, gelir, yönetim ve sorumluluk karşılaştırması">
 <link rel="canonical" href="https://specbridge.co/kayas/service-models/">
 <title>KAYAŞ Data Center · Service Models</title>
-<link rel="stylesheet" href="styles.css?v=20260831-r1">
+<link rel="stylesheet" href="styles.css?v=20260831-r2">
+<link rel="stylesheet" href="advisor.css?v=20260831-r1">
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 </head>
 <body>
@@ -17,19 +18,21 @@
 <div class="topbar-inner">
 <div class="brand">
 <div class="brandmark">K</div>
-<div><b>KAYAŞ DATA CENTER</b><small>Service Models Explorer · Visual Edition</small></div>
+<div><b>KAYAŞ DATA CENTER</b><small>Service Models Explorer · Advisory Edition</small></div>
 </div>
 <div class="toolbar">
 <a class="btn" href="../" style="text-decoration:none">← KAYAŞ Portal</a>
 <a class="btn" href="../topology/" style="text-decoration:none">Interactive Architecture</a>
 <a class="btn" href="../yatirim_ve_teknoloji_rehberi/investor-edition-en.html" style="text-decoration:none">Investor Guide</a>
+<button class="btn" onclick="document.getElementById('advisor-40-80-80').scrollIntoView()">40 + 80 + 80</button>
 <button class="btn" onclick="document.getElementById('explorer').scrollIntoView()">Servis Explorer</button>
-<button class="btn" onclick="document.getElementById('matrix').scrollIntoView()">Karşılaştırma</button>
 <button class="btn" onclick="window.print()">Print / PDF</button>
 </div>
 </div>
 </header>
 <nav aria-label="Section navigation" class="subnav">
+<a href="#advisor-40-80-80">40 + 80 + 80 Recommendation</a>
+<a href="#reference-videos">Reference Videos</a>
 <a href="#visual-overview">Executive Visuals</a>
 <a href="#service-stack">Service Stack</a>
 <a href="#cabinet-compare">Standard vs AI</a>
@@ -42,19 +45,19 @@
 </nav>
 <section class="hero">
 <div>
-<div class="kicker">Datacenter Service Architecture</div>
-<h1>Fiziksel kapasiteden dijital altyapı platformuna</h1>
-<p>Kayaş Data Center aynı fiziksel tesis üzerinde alan, enerji, bağlantı, compute, cloud, storage, backup, disaster recovery, managed services ve AI kapasitesi sunabilir. Bu sayfa 43 temel hizmet modelinin <b>hizmet farkını, altyapı farkını, gelir modelini ve sorumluluk sınırını</b> tek bir karar ekranında gösterir.</p>
-<div class="notice">Sorumluluk, karmaşıklık ve değer göstergeleri finansal tahmin değildir. Modelleri karşılaştırmak için kullanılan kavramsal indekslerdir; gerçek SLA ve sorumluluk sınırları sözleşmeyle belirlenir.</div>
+<div class="kicker">Datacenter Service Architecture · Consultant Recommendation</div>
+<h1>200 kabineti tek ürün olarak değil, dengeli bir hizmet portföyü olarak işletmek</h1>
+<p>Kayaş için önerimiz; ilk 200 kabineti <b>40 IaaS / Cloud Platform + 80 Managed Colocation + 80 Customer-Managed Colocation</b> olarak üç ticari servis zonuna ayırmaktır. Amaç yalnız rack doldurmak değil; aynı fiziksel yatırım üzerinde farklı sorumluluk, SLA ve recurring revenue seviyeleri oluşturmaktır.</p>
+<div class="notice">40+80+80 bir sektör standardı değil, Kayaş için önerilen başlangıç allocation modelidir. Tasarım, talep geliştikçe zonlar arasında kontrollü kapasite dönüşümüne izin vermelidir.</div>
 </div>
 <div class="hero-card">
-<h3>Kayaş için önerilen hedef</h3>
-<p><b>Carrier-Neutral, Enterprise-Class, AI-Ready Digital Infrastructure Platform</b></p>
+<h3>Önerilen ilk kapasite dağılımı</h3>
+<p><b>Balanced Colocation + Managed Services + Cloud</b></p>
 <div class="statgrid">
-<div class="stat"><b>43</b><span>Servis modeli</span></div>
-<div class="stat"><b>8</b><span>Hizmet ailesi</span></div>
-<div class="stat"><b>4</b><span>Ürünleşme fazı</span></div>
-<div class="stat"><b>1</b><span>Ortak fiziksel platform</span></div>
+<div class="stat"><b>40</b><span>IaaS / Cloud Platform</span></div>
+<div class="stat"><b>80</b><span>Managed Colocation</span></div>
+<div class="stat"><b>80</b><span>Customer-Managed Colocation</span></div>
+<div class="stat"><b>200</b><span>Toplam ilk faz kabinet</span></div>
 </div>
 </div>
 </section>
@@ -66,14 +69,14 @@
 <script>
 (async()=>{
  const host=document.getElementById('fragmentHost');
- const files=["01-overview.html", "02-cabinet-commercial.html", "03-governance.html", "04-explorer.html", "05-architecture.html", "06-references.html"];
+ const files=["00-advisor-40-80-80.html", "01-overview.html", "02-cabinet-commercial.html", "03-governance.html", "04-explorer.html", "05-architecture.html", "06-references.html"];
  for(const f of files){
    const r=await fetch('fragments/'+f,{cache:'no-store'});
    if(!r.ok) throw new Error('fragment '+f);
    host.insertAdjacentHTML('beforeend',await r.text());
  }
  for(const src of ['data/services-1.js','data/services-2.js','data/services-3.js','data/services-4.js','app.js']){
-   await new Promise((resolve,reject)=>{const x=document.createElement('script');x.src=src+'?v=20260831-r1';x.onload=resolve;x.onerror=reject;document.body.appendChild(x);});
+   await new Promise((resolve,reject)=>{const x=document.createElement('script');x.src=src+'?v=20260831-r2';x.onload=resolve;x.onerror=reject;document.body.appendChild(x);});
  }
 })().catch(e=>{
  document.getElementById('fragmentHost').innerHTML='<section class="section"><div class="notice">Service Models content could not be loaded. Please return to the KAYAŞ portal and retry.</div></section>';
