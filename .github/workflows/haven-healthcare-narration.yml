@@ -1,0 +1,51 @@
+name: Haven Healthcare Narration
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_regenerate:
+        description: Regenerate existing MP3 files
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  generate-narration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      FORCE_REGENERATE: ${{ inputs.force_regenerate }}
+      TTS_MODEL: gpt-4o-mini-tts
+      TTS_VOICE_TR: marin
+      TTS_VOICE_EN: cedar
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify secret
+        shell: bash
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY repository secret is missing." >&2
+            exit 2
+          fi
+
+      - name: Generate TR and EN narration MP3 files
+        run: python haven-healthcare/scripts/generate_narration.py
+
+      - name: Commit generated audio
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add haven-healthcare/audio
+          if git diff --cached --quiet; then
+            echo "No audio changes to commit."
+            exit 0
+          fi
+          git commit -m "Generate Haven Healthcare static narration audio"
+          git push
