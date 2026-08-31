@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specbridge.co/dcts/schema/package-manifest.schema.json",
+  "title": "DCTS Project Package Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "package_id", "project_id", "package_revision", "resources"],
+  "properties": {
+    "schema_version": {"const": "1.0.0-draft.1"},
+    "package_id": {"type": "string", "minLength": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "package_revision": {"type": "string", "minLength": 1},
+    "generated_at": {"type": ["string", "null"], "format": "date-time"},
+    "source_revision": {"type": ["string", "null"]},
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_config", "objects", "relationships", "evidence", "findings", "views"],
+      "properties": {
+        "project_config": {"$ref": "#/$defs/resource"},
+        "objects": {"$ref": "#/$defs/resource"},
+        "relationships": {"$ref": "#/$defs/resource"},
+        "evidence": {"$ref": "#/$defs/resource"},
+        "findings": {"$ref": "#/$defs/resource"},
+        "views": {"$ref": "#/$defs/resource"},
+        "narratives": {"$ref": "#/$defs/resourceOrNull"},
+        "translations": {"$ref": "#/$defs/resourceOrNull"},
+        "official_resources": {"$ref": "#/$defs/resourceOrNull"},
+        "theme": {"$ref": "#/$defs/resourceOrNull"}
+      }
+    },
+    "status": {"enum": ["DEVELOPMENT", "REVIEW_REQUIRED", "APPROVED", "SUPERSEDED"]},
+    "notes": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+        "schema": {"type": ["string", "null"]}
+      }
+    },
+    "resourceOrNull": {
+      "anyOf": [
+        {"$ref": "#/$defs/resource"},
+        {"type": "null"}
+      ]
+    }
+  }
+}
