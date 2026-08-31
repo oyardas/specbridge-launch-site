@@ -1,0 +1,31 @@
+{
+  "evidence": [
+    {
+      "claim": "Controlled migration source containing the accepted KAYAS canonical object and relationship set.",
+      "evidence_id": "KAYAS-SRC-VIEWER",
+      "source_file": "kayas/topology/viewer-v0.11.9.html",
+      "source_revision": "v0.11.9",
+      "source_type": "OTHER",
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Controlled baseline records 19 canonical objects, 5 confirmed relationships and 0 physical relationships.",
+      "evidence_id": "KAYAS-SRC-PROJECT-MEMORY",
+      "source_file": "kayas/topology/project-memory.json",
+      "source_revision": "1.5.1",
+      "source_type": "APPROVED_DESIGN",
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Official manufacturer evidence identifies AISHU while the normalized KAYAS vendor value remains H3C pending reconciliation.",
+      "evidence_id": "KAYAS-ANYBACKUP-OFFICIAL",
+      "locator": "AnyBackup 7.0 Platform",
+      "source_file": "kayas/topology/official-resources.json",
+      "source_revision": "current",
+      "source_type": "VENDOR_DOCUMENTATION",
+      "status": "OPEN-CONFIRMATION REQUIRED"
+    }
+  ],
+  "project_id": "KAYAS",
+  "schema_version": "1.0.0-draft.1"
+}
