@@ -1,0 +1,15 @@
+{
+  "evidence": [
+    {"claim":"Legacy Haven HN node dataset used as deterministic migration input.","evidence_id":"HAVEN-SRC-NODES","source_file":"haven-healthcare/nodes.js","source_revision":"1c30872b1966285a273587ae61267a14b9ae95e2","source_type":"OTHER","status":"OPEN-CONFIRMATION REQUIRED"},
+    {"claim":"Legacy Haven HT view, canonical relationship and presentation-path dataset used as deterministic migration input.","evidence_id":"HAVEN-SRC-TOPOLOGY","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"Project documents support two-layer Core + Access architecture with redundant uplinks; exact per-IDF physical mapping remains open.","evidence_id":"HAVEN-REL-ACCESS_CORE","locator":"HT.r.ACCESS_CORE","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"Kitlist specifies four 100G uplinks: each DC switch to both campus cores.","evidence_id":"HAVEN-REL-CORE_DC100G","locator":"HT.r.CORE_DC100G","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"Kitlist specifies 16 SFP28 DAC links for HCI to S6850 A/B.","evidence_id":"HAVEN-REL-HCI_DC25G","locator":"HT.r.HCI_DC25G","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"Kitlist specifies 12 SFP28 DAC links for storage nodes to S6850 A/B.","evidence_id":"HAVEN-REL-PACS_DC25G","locator":"HT.r.PACS_DC25G","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"OOB role explicitly covers HDM / infrastructure management interfaces.","evidence_id":"HAVEN-REL-OOB_HCI","locator":"HT.r.OOB_HCI","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"OOB role explicitly covers storage management interfaces.","evidence_id":"HAVEN-REL-OOB_PACS","locator":"HT.r.OOB_PACS","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"},
+    {"claim":"OOB role explicitly covers backup management interfaces.","evidence_id":"HAVEN-REL-OOB_BACKUP","locator":"HT.r.OOB_BACKUP","source_file":"haven-healthcare/topology-data-v042.js","source_revision":"9e0ae0b0ac0ed1b6974393008c8a50f159c4e73a","source_type":"OTHER","status":"CONFIRMED"}
+  ],
+  "project_id": "HAVEN-HEALTHCARE",
+  "schema_version": "1.0.0-draft.1"
+}
