@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specbridge.co/dcts/schema/project-config.schema.json",
+  "title": "DCTS Project Configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_id", "project_name", "default_language", "enabled_views", "information_status_policy"],
+  "properties": {
+    "schema_version": {"const": "1.0.0-draft.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "project_name": {"type": "string", "minLength": 1},
+    "project_revision": {"type": ["string", "null"]},
+    "site_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "default_language": {"type": "string", "minLength": 2},
+    "languages": {"type": "array", "items": {"type": "string", "minLength": 2}, "uniqueItems": true},
+    "enabled_views": {
+      "type": "array",
+      "items": {"enum": ["T00", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10"]},
+      "uniqueItems": true
+    },
+    "viewer_modes": {
+      "type": "array",
+      "items": {"enum": ["PRESENTATION", "ENGINEERING"]},
+      "uniqueItems": true,
+      "default": ["PRESENTATION", "ENGINEERING"]
+    },
+    "default_mode": {"enum": ["PRESENTATION", "ENGINEERING"]},
+    "return_url": {"type": ["string", "null"]},
+    "watermark": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "text": {"type": ["string", "null"]},
+        "print_only": {"type": "boolean"}
+      }
+    },
+    "narration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "source": {"enum": ["PROJECT_NARRATIVE", "DISABLED"]}
+      }
+    },
+    "theme_ref": {"type": ["string", "null"]},
+    "official_resources_ref": {"type": ["string", "null"]},
+    "information_status_policy": {
+      "type": "array",
+      "const": ["CONFIRMED", "VENDOR PROPOSAL", "CUSTOMER INPUT", "WORKING ASSUMPTION", "OPEN-CONFIRMATION REQUIRED", "SUPERSEDED"]
+    },
+    "metadata": {"type": "object"}
+  }
+}
