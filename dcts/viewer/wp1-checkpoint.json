@@ -1,0 +1,78 @@
+{
+  "document_id": "DCTS-VIEWER-WP1-CHECKPOINT",
+  "version": "1.0.0-draft.1",
+  "date": "2026-08-31",
+  "status": "REVIEW_REQUIRED",
+  "work_package": "V1-WP1 — Shared Viewer Architecture & Visual Standard Freeze",
+  "authoritative_standard": "dcts/viewer/DCTS-Viewer-Standard-v1.0-draft.md",
+  "source_reference_projects": {
+    "KAYAS": {
+      "role": "Engineering and canonical-semantics Golden Reference",
+      "production_path": "kayas/topology/",
+      "preserve": [
+        "canonical object model",
+        "explicit relationship model",
+        "evidence and traceability",
+        "information status",
+        "validation findings",
+        "vendor-neutral taxonomy",
+        "evidence-safe physical/logical separation"
+      ]
+    },
+    "Haven Healthcare": {
+      "role": "Presentation UX reference fixture",
+      "production_path": "haven-healthcare/",
+      "adopt_as_standard_capabilities": [
+        "light professional shell",
+        "left narrative panel",
+        "central topology canvas",
+        "right inspector",
+        "multilingual UX",
+        "narration capability",
+        "print/PDF presentation workflow"
+      ],
+      "do_not_standardize": [
+        "project-specific HN/HT arrays",
+        "hard-coded project coordinates as canonical data",
+        "H3C-specific product identity in renderer",
+        "project credentials in renderer"
+      ]
+    }
+  },
+  "proposed_standard_views": [
+    "T00 Overview / Navigation Map",
+    "T01 Executive Architecture",
+    "T02 Network Logical",
+    "T03 Physical Connectivity",
+    "T04 Compute / HCI / Storage",
+    "T05 Management / OOB / Operations",
+    "T06 Service / Tenant",
+    "T07 Security",
+    "T08 Backup / DR"
+  ],
+  "extension_views": [
+    "T09 AI / GPU Fabric",
+    "T10 Multi-site / DR"
+  ],
+  "proposed_modes": [
+    "PRESENTATION",
+    "ENGINEERING"
+  ],
+  "standard_shell": {
+    "header": "Project identity + T-view navigation + mode/language/actions",
+    "left": "Narrative / summary / controlled findings",
+    "center": "Topology canvas",
+    "right": "Overview / Engineering / Evidence & Traceability inspector"
+  },
+  "mandatory_rules": [
+    "One shared renderer for KAYAS, Haven and future projects",
+    "Project package is independent from renderer implementation",
+    "Canonical data is not mutated by presentation logic",
+    "Relationship type and information status are separate dimensions",
+    "Layout metadata is presentation-only unless separately evidenced",
+    "No silent invention of topology facts",
+    "No project-specific SKU/customer/credential logic inside shared renderer"
+  ],
+  "next_gate": "User approval required to freeze V1-WP1 before V1-WP2 Canonical Project Package Schema & Adapter Mapping",
+  "runtime_code_started": false
+}
