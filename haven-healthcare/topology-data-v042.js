@@ -1,0 +1,1 @@
+window.__HAVEN_TOPOLOGY_DATA_PLACEHOLDER__=true;
