@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0-draft.1",
+  "package_id": "DCTS-FIXTURE-KAYAS-001",
+  "project_id": "KAYAS",
+  "package_revision": "wp3-fixture-1",
+  "source_revision": "KAYAS-M5-REL-GOLDEN-01 / viewer-v0.11.9",
+  "resources": {
+    "project_config": {"path":"project-config.json","sha256":null,"schema":"../../schema/project-config.schema.json"},
+    "objects": {"path":"objects.json","sha256":null,"schema":"../../schema/objects.schema.json"},
+    "relationships": {"path":"relationships.json","sha256":null,"schema":"../../schema/relationships.schema.json"},
+    "evidence": {"path":"evidence.json","sha256":null,"schema":"../../schema/evidence.schema.json"},
+    "findings": {"path":"findings.json","sha256":null,"schema":"../../schema/findings.schema.json"},
+    "views": {"path":"views.json","sha256":null,"schema":"../../schema/views.schema.json"}
+  },
+  "status": "REVIEW_REQUIRED",
+  "notes": "Deterministic V1-WP3 KAYAS schema-validation fixture; production topology is not modified."
+}
