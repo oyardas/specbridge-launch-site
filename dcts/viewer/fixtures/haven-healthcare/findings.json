@@ -1,0 +1,49 @@
+{
+  "findings": [
+    {
+      "description": "The HN tuple contains product/view data but no DCTS information-status authority.",
+      "evidence_refs": ["HAVEN-SRC-NODES"],
+      "finding_id": "HAVEN-MIG-001",
+      "object_ids": ["haven_obj_af7e86b45bdb94ef247f","haven_obj_bfc4aacab87f713c74dd","haven_obj_3fbce0d17920f227e98e","haven_obj_1f62c0f980ceeb05a158","haven_obj_30def1c80be24580c6bd","haven_obj_73e27741d3bad3dcfaa7","haven_obj_e2561be6582488a83a4e","haven_obj_f59f029812101e3f6ed8","haven_obj_51914e1cc36984e263e2","haven_obj_0b50457e4b37d88b9990","haven_obj_570b6b299cbb9089873f","haven_obj_aac6a901d7ef02cf3b14","haven_obj_da4681ce1b462e1f978e","haven_obj_ca67f2baa03fa7904038","haven_obj_e1195c03700c5f336eb7","haven_obj_8b5ca64c07916f2a86c7","haven_obj_5b17aa93bd7254659592","haven_obj_e8342d2a013a10b7f09c","haven_obj_4c861eb0cd74da9b347b","haven_obj_6aaa190c4653aa504fa7","haven_obj_38d499e04dfd6ee41389","haven_obj_913d250124070643a000","haven_obj_953bae123e7f6be809a7","haven_obj_13ab62b39f700b8fe9ca","haven_obj_2a99a8ed05c1afaf71df","haven_obj_f95f4adeb511f1c17bf9","haven_obj_5c333433aaacf6fa26d9"],
+      "recommended_action": "Reconcile each migrated object against project BoQ/approved design/customer evidence before promoting status.",
+      "severity": "DESIGN GAP",
+      "status": "OPEN-CONFIRMATION REQUIRED",
+      "title": "Legacy HN objects lack DCTS project-selection provenance",
+      "view_ids": ["T00","T01","T02","T03","T04","T05","T06","T07","T08"]
+    },
+    {
+      "description": "Legacy presentation status is preserved in legacy_refs and is not treated as a DCTS authority.",
+      "evidence_refs": ["HAVEN-SRC-TOPOLOGY"],
+      "finding_id": "HAVEN-MIG-002",
+      "recommended_action": "Classify each presentation intent as customer input, vendor proposal, working assumption or confirmed relationship only with supporting evidence.",
+      "severity": "WARNING",
+      "status": "OPEN-CONFIRMATION REQUIRED",
+      "title": "Legacy RECOMMENDED and DESIGN_TO_FINALIZE presentation paths require provenance reconciliation",
+      "view_ids": ["T01","T02","T03","T04","T05","T06","T07","T08"]
+    },
+    {
+      "description": "The legacy DR target is Secondary site / cloud TBD; RPO/RTO and target location are not confirmed.",
+      "evidence_refs": ["HAVEN-SRC-NODES"],
+      "finding_id": "HAVEN-MIG-003",
+      "object_ids": ["haven_obj_aac6a901d7ef02cf3b14"],
+      "recommended_action": "Confirm DR target, RPO/RTO, replication method and recovery responsibility before promoting DR relationships.",
+      "severity": "DESIGN GAP",
+      "status": "OPEN-CONFIRMATION REQUIRED",
+      "title": "Off-site DR target and recovery objectives remain unresolved",
+      "view_ids": ["T08"]
+    },
+    {
+      "description": "HT.r supports 4×100G, 16×25G and 12×25G claims; exact ports, optics and A/B port mapping are not encoded.",
+      "evidence_refs": ["HAVEN-REL-CORE_DC100G","HAVEN-REL-HCI_DC25G","HAVEN-REL-PACS_DC25G"],
+      "finding_id": "HAVEN-MIG-004",
+      "recommended_action": "Preserve known speed/count only and obtain port/cabling evidence before adding endpoint ports, optics or A/B labels.",
+      "relationship_ids": ["haven_rel_de6de96939239368dcbb","haven_rel_89d59b6f507f6254836b","haven_rel_eb1b3ac979d43bce3dad"],
+      "severity": "WARNING",
+      "status": "OPEN-CONFIRMATION REQUIRED",
+      "title": "Physical link counts/speeds are known but endpoint ports and path labeling remain open",
+      "view_ids": ["T01","T03","T04"]
+    }
+  ],
+  "project_id": "HAVEN-HEALTHCARE",
+  "schema_version": "1.0.0-draft.1"
+}
