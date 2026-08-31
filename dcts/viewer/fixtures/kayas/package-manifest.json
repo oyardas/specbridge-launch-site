@@ -1,18 +1,1 @@
-{
-  "schema_version": "1.0.0-draft.1",
-  "package_id": "DCTS-FIXTURE-KAYAS-001",
-  "project_id": "KAYAS",
-  "package_revision": "wp4-preview-2",
-  "source_revision": "KAYAS-M5-REL-GOLDEN-01 / viewer-v0.11.9",
-  "resources": {
-    "project_config": {"path":"project-config.json","sha256":null,"schema":"../../schema/project-config.schema.json"},
-    "objects": {"path":"objects.json","sha256":null,"schema":"../../schema/objects.schema.json"},
-    "relationships": {"path":"relationships.json","sha256":null,"schema":"../../schema/relationships.schema.json"},
-    "evidence": {"path":"evidence.json","sha256":null,"schema":"../../schema/evidence.schema.json"},
-    "findings": {"path":"findings.json","sha256":null,"schema":"../../schema/findings.schema.json"},
-    "views": {"path":"views.json","sha256":null,"schema":"../../schema/views.schema.json"},
-    "official_resources": {"path":"/kayas/topology/official-resources.json","sha256":null,"schema":null}
-  },
-  "status": "REVIEW_REQUIRED",
-  "notes": "DCTS KAYAS preview package. Canonical WP3 fixture semantics remain unchanged; WP4 adds package-driven official reference metadata only. Production topology is not modified."
-}
+{"schema_version":"1.0.0-draft.1","package_id":"DCTS-FIXTURE-KAYAS-001","project_id":"KAYAS","package_revision":"service-model-40-80-80-v1","source_revision":"KAYAS-M5-REL-GOLDEN-01 / viewer-v0.11.9 + KAYAS-SM-40-80-80-v1","resources":{"project_config":{"path":"project-config-service-model-v1.json","sha256":null,"schema":"../../schema/project-config.schema.json"},"objects":{"path":"objects-service-model-v1.json","sha256":null,"schema":"../../schema/objects.schema.json"},"relationships":{"path":"relationships-service-model-v1.json","sha256":null,"schema":"../../schema/relationships.schema.json"},"evidence":{"path":"evidence.json","sha256":null,"schema":"../../schema/evidence.schema.json"},"findings":{"path":"findings.json","sha256":null,"schema":"../../schema/findings.schema.json"},"views":{"path":"views-service-model-v1.json","sha256":null,"schema":"../../schema/views.schema.json"},"official_resources":{"path":"/kayas/topology/official-resources.json","sha256":null,"schema":null}},"status":"REVIEW_REQUIRED","notes":"Adds the KAYAS 40+80+80 service model to the DCTS preview package: 40 IaaS/Cloud, 80 Managed Colocation and 80 Colocation cabinets; provisional 2+4+4 pod mapping; shared DC service layer; and a 10-cabinet AI/high-density capability overlay. The 40+80+80 service split is retained as a vendor proposal, pod numbering remains a working assumption, and AI commercial allocation remains pending. The legacy production topology is not modified."}
