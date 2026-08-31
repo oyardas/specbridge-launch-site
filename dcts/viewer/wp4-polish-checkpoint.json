@@ -1,0 +1,60 @@
+{
+  "document_id": "DCTS-VIEWER-WP4-POLISH-CHECKPOINT",
+  "version": "1.0.0-alpha.2",
+  "date": "2026-08-31",
+  "status": "IMPLEMENTED_PREVIEW_REVIEW_REQUIRED",
+  "work_package": "V1-WP4 Viewer Polish — Official Resources + Refined Connection Grammar + Semantic Micro-Motion",
+  "basis": "User visual review of KAYAS v1-preview identified missing official links, overly prominent/incorrect connection lines, and absence of animated icons/flow lines.",
+  "shared_runtime_additions": {
+    "javascript": "dcts/viewer/runtime/dcts-viewer-polish-v1a2.js",
+    "css": "dcts/viewer/runtime/dcts-viewer-polish-v1a2.css"
+  },
+  "project_integrations": {
+    "KAYAS": {
+      "preview": "https://specbridge.co/kayas/topology/v1-preview.html",
+      "official_resources": "/kayas/topology/official-resources.json",
+      "canonical_graph_mutation": false
+    },
+    "Haven Healthcare": {
+      "preview": "https://specbridge.co/haven-healthcare/v1-preview.html",
+      "official_resources": "/haven-healthcare/official-resources-v1.json",
+      "canonical_graph_mutation": false
+    }
+  },
+  "implemented": [
+    "Official Resources inspector tab is added when project-controlled resource metadata exists",
+    "Verified official product/support links open in a new tab and remain presentation/reference metadata only",
+    "AnyBackup manufacturer reconciliation note remains visible without changing the canonical KAYAS vendor field",
+    "Connection endpoints are recalculated from actual rendered card dimensions instead of the old fixed 205px center assumption",
+    "Canonical and presentation-intent paths are rerouted through rounded orthogonal corridors with obstacle scoring",
+    "Presentation mode suppresses arrowheads; Engineering mode retains smaller arrowheads",
+    "Canonical lines are visually lighter by default and become prominent only when related objects are hovered/selected",
+    "Presentation/design intents are lower-opacity dashed paths and remain outside the canonical graph",
+    "Subtle animated flow overlays are added to canonical relationships",
+    "Subtle moving-dash animation is added to presentation intents",
+    "Project-neutral semantic SVG icons are injected into infrastructure cards",
+    "Cloud, security, storage and monitoring icons use restrained domain-specific micro-motion",
+    "T00 receives a restrained animated central orbit and low-intensity navigation-line motion",
+    "prefers-reduced-motion disables semantic animations",
+    "Print output suppresses moving flow overlays"
+  ],
+  "static_validation": [
+    {"check":"dcts-viewer-polish-v1a2.js syntax","result":"PASS","method":"node --check before repository write"},
+    {"check":"Canonical data resource mutation","result":"NONE"},
+    {"check":"KAYAS official resource source","result":"EXISTING_CONTROLLED_RESOURCE_REUSED"},
+    {"check":"Haven official resources","result":"MIGRATED_FROM_LEGACY_HN_OFFICIAL_LINKS_WITHOUT_PROJECT_SELECTION_PROMOTION"}
+  ],
+  "manual_acceptance_required": [
+    "Hard refresh KAYAS v1-preview and confirm animated icons are visible but not distracting",
+    "Confirm T01/T02/T05/T06 connection paths no longer originate from stale fixed centers or cross cards materially",
+    "Confirm design paths are visually subordinate in Presentation mode",
+    "Select KAYAS objects and confirm Official Resources tab opens the expected vendor/manufacturer links",
+    "Select AnyBackup and confirm the AISHU/H3C reconciliation note remains open rather than silently corrected",
+    "Confirm hover/selection highlights only related paths",
+    "Confirm Haven preview receives the same line/icon grammar and official-resource inspector behavior",
+    "Confirm motion respects OS reduced-motion preference",
+    "Confirm print/PDF remains readable"
+  ],
+  "production_promotion": "BLOCKED_UNTIL_USER_VISUAL_ACCEPTANCE",
+  "notes": "This is a viewer/presentation-layer polish release. It does not alter KAYAS 19-object/5-confirmed/0-physical canonical baseline or promote Haven presentation intents into canonical relationships."
+}
