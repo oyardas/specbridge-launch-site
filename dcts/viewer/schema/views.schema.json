@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specbridge.co/dcts/schema/views.schema.json",
+  "title": "DCTS View Definitions and Presentation Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_id", "views"],
+  "properties": {
+    "schema_version": {"const": "1.0.0-draft.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "views": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["view_id", "enabled", "title"],
+        "properties": {
+          "view_id": {"enum": ["T00", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10"]},
+          "enabled": {"type": "boolean"},
+          "title": {"type": "string", "minLength": 1},
+          "subtitle": {"type": ["string", "null"]},
+          "object_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "relationship_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "finding_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "layout": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "strategy": {"enum": ["AUTO", "GROUPED", "LANES", "NORMALIZED_HINTS"]},
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["group_id", "title", "object_ids"],
+                  "properties": {
+                    "group_id": {"type": "string"},
+                    "title": {"type": "string"},
+                    "object_ids": {"type": "array", "items": {"type": "string"}},
+                    "order": {"type": ["integer", "null"]},
+                    "lane": {"type": ["string", "null"]}
+                  }
+                }
+              },
+              "object_hints": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["object_id"],
+                  "properties": {
+                    "object_id": {"type": "string"},
+                    "x": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+                    "y": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+                    "priority": {"type": ["integer", "null"]},
+                    "lane": {"type": ["string", "null"]}
+                  }
+                }
+              }
+            }
+          },
+          "presentation_intents": {
+            "type": "array",
+            "description": "Non-canonical visual/navigation intents. These SHALL NOT be promoted to canonical relationships by the viewer.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["intent_id", "label", "status"],
+              "properties": {
+                "intent_id": {"type": "string", "minLength": 1},
+                "label": {"type": "string", "minLength": 1},
+                "from_object_id": {"type": ["string", "null"]},
+                "to_object_id": {"type": ["string", "null"]},
+                "from_context": {"type": ["string", "null"]},
+                "to_context": {"type": ["string", "null"]},
+                "status": {"enum": ["VENDOR PROPOSAL", "WORKING ASSUMPTION", "OPEN-CONFIRMATION REQUIRED", "CUSTOMER INPUT"]},
+                "relationship_type_hint": {"type": ["string", "null"]},
+                "evidence_refs": {"type": "array", "items": {"type": "string"}},
+                "legacy_refs": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "navigation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source_key", "target_view"],
+              "properties": {
+                "source_key": {"type": "string"},
+                "target_view": {"enum": ["T00", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10"]},
+                "target_object_id": {"type": ["string", "null"]}
+              }
+            }
+          },
+          "extensions": {"type": "object"}
+        }
+      }
+    }
+  }
+}
