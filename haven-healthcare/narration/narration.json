@@ -1,0 +1,38 @@
+{
+  "T00": {
+    "en": "This topology map is the navigation layer for Haven Healthcare. It brings executive architecture, logical network, physical connectivity, private cloud, operations, healthcare services, security, and recovery into one investor-oriented digital hospital model.",
+    "tr": "Bu topoloji haritası, Haven Healthcare için ana navigasyon katmanıdır. Yönetici mimarisi, mantıksal ağ, fiziksel bağlantı, özel bulut, operasyon, sağlık servisleri, güvenlik ve geri dönüş katmanlarını tek bir yatırımcı odaklı dijital hastane modeli altında birleştirir."
+  },
+  "T01": {
+    "en": "Haven Healthcare is designed as one integrated digital hospital platform. A resilient campus backbone supports clinical users and wireless mobility, while a separate high-speed data-center fabric connects the private cloud, dedicated PACS storage, and backup. The objective is continuity, clinical data protection, and controlled growth rather than a flat network.",
+    "tr": "Haven Healthcare, tek ve entegre bir dijital hastane platformu olarak tasarlanmıştır. Yedekli kampüs omurgası klinik kullanıcıları ve kablosuz mobiliteyi destekler. Ayrı yüksek hızlı veri merkezi omurgası ise özel bulut, PAKS depolama ve yedekleme katmanlarını birbirine bağlar. Temel hedef; iş sürekliliği, klinik veri güvenliği ve kontrollü büyümedir."
+  },
+  "T02": {
+    "en": "The logical architecture separates clinical, imaging, medical IoT, staff, guest, building management, nurse call, CCTV, access control, and corporate services. This limits unnecessary communication between systems and allows security policies to match the role of each service.",
+    "tr": "Mantıksal mimari; klinik, görüntüleme, medikal nesnelerin interneti, personel, misafir, bina yönetimi, hemşire çağrı, CCTV, erişim kontrolü ve kurumsal servisleri birbirinden ayırır. Böylece sistemler arasındaki gereksiz iletişim sınırlandırılır ve her servis için görevine uygun güvenlik politikaları uygulanabilir."
+  },
+  "T03": {
+    "en": "The physical model focuses only on confirmed high-level connectivity. The data-center fabric has redundant one-hundred-gigabit paths to the campus core, while the private-cloud and PACS platforms use dedicated twenty-five-gigabit links. Detailed floor cabling will be finalized during the engineering survey.",
+    "tr": "Fiziksel model yalnızca doğrulanmış üst seviye bağlantıları gösterir. Veri merkezi omurgası kampüs çekirdeğine yedekli yüz gigabit bağlantılarla bağlanır. Özel bulut ve PAKS platformları ise ayrı yirmi beş gigabit bağlantılar kullanır. Kat bazındaki ayrıntılı kablolama mühendislik çalışması sırasında kesinleştirilecektir."
+  },
+  "T04": {
+    "en": "The hospital information-technology platform is built around a four-node private cloud, separate PACS storage, and an independent backup tier. This separation prevents clinical imaging growth from consuming general application capacity and provides a clearer recovery model.",
+    "tr": "Hastane bilgi teknolojileri platformu; dört düğümlü özel bulut, ayrı PAKS depolama ve bağımsız yedekleme katmanı üzerine kuruludur. Bu ayrım, klinik görüntüleme verisinin genel uygulama kapasitesini tüketmesini önler ve daha net bir geri dönüş modeli sağlar."
+  },
+  "T05": {
+    "en": "Operations are separated from production traffic through dedicated out-of-band management. U-Center and campus-management functions provide the foundation for centralized visibility, identity, and operational control.",
+    "tr": "Operasyon yönetimi, ayrı bant dışı yönetim ağı sayesinde üretim trafiğinden ayrılır. U-Center ve kampüs yönetim fonksiyonları; merkezi görünürlük, kimlik yönetimi ve operasyonel kontrol için ortak bir temel sağlar."
+  },
+  "T06": {
+    "en": "Healthcare services are organized according to clinical and operational roles. Imaging, medical devices, nurse call, security, building systems, corporate users, and guest services remain logically separated while sharing the same resilient physical infrastructure.",
+    "tr": "Sağlık servisleri klinik ve operasyonel rollerine göre düzenlenmiştir. Görüntüleme, medikal cihazlar, hemşire çağrı, güvenlik, bina sistemleri, kurumsal kullanıcılar ve misafir servisleri aynı yedekli fiziksel altyapıyı kullanırken mantıksal olarak ayrı tutulur."
+  },
+  "T07": {
+    "en": "Security is based on layered protection: a redundant perimeter, segmented internal services, and centralized identity controls. Final firewall and access-control rules will be completed together with hospital application and medical-device vendors.",
+    "tr": "Güvenlik çok katmanlı koruma yaklaşımına dayanır. Yedekli dış güvenlik, ayrıştırılmış iç servisler ve merkezi kimlik kontrolleri birlikte çalışır. Nihai güvenlik duvarı ve erişim kuralları, hastane uygulama ve medikal cihaz sağlayıcılarıyla birlikte kesinleştirilecektir."
+  },
+  "T08": {
+    "en": "The recovery model intentionally separates production, backup, and future disaster recovery. The backup tier is part of the baseline, while the off-site disaster-recovery target, replication design, and recovery objectives will be approved during final design.",
+    "tr": "Geri dönüş modeli; üretim, yedekleme ve gelecekteki felaket kurtarma katmanlarını bilinçli biçimde birbirinden ayırır. Yedekleme mevcut temel tasarımın parçasıdır. Tesis dışı felaket kurtarma hedefi, replikasyon tasarımı ve geri dönüş hedefleri ise nihai tasarım aşamasında onaylanacaktır."
+  }
+}
