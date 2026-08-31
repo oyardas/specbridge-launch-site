@@ -1,0 +1,57 @@
+<section class="section" id="matrix">
+<div class="section-head">
+<div><div class="kicker">Responsibility Matrix</div><h2>Hizmet modeline göre sorumluluk değişimi</h2></div>
+<p>Alt katmanlarda müşteri IT sorumluluğu daha yüksek; servis katmanı yükseldikçe Kayaş'ın operasyonel rolü artar.</p>
+</div>
+<div class="matrix-wrap">
+<table>
+<thead><tr><th>Katman</th><th>Colocation</th><th>Managed Hosting</th><th>IaaS</th><th>Managed Private Cloud</th><th>PaaS / AI Platform</th></tr></thead>
+<tbody>
+<tr><td>Facility</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>Power / Cooling</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>Physical Network</td><td>Shared</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>Physical Server</td><td>Müşteri</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>Storage</td><td>Müşteri</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>Virtualization</td><td>Müşteri</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>OS</td><td>Müşteri</td><td>Kayaş</td><td>Müşteri</td><td>Kayaş</td><td>Kayaş</td></tr>
+<tr><td>Middleware</td><td>Müşteri</td><td>Opsiyonel</td><td>Müşteri</td><td>Kayaş / Ops.</td><td>Kayaş</td></tr>
+<tr><td>Application</td><td>Müşteri</td><td>Müşteri</td><td>Müşteri</td><td>Müşteri</td><td>Kayaş / Partner</td></tr>
+<tr><td>Business Data</td><td>Müşteri</td><td>Müşteri</td><td>Müşteri</td><td>Müşteri</td><td>Müşteri</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="section">
+<div class="section-head">
+<div><div class="kicker">Kayaş Target Architecture</div><h2>Önerilen servis mimarisi</h2></div>
+<p>Facility geliri tabanı oluşturur; connectivity, cloud, data protection, managed services ve AI katmanları aynı fiziksel yatırımın gelir yoğunluğunu artırır.</p>
+</div>
+<div class="arch">
+<svg aria-label="Kayaş target service architecture" role="img" viewbox="0 0 1200 620">
+<defs><lineargradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#52d7c7"></stop><stop offset="1" stop-color="#79a8ff"></stop></lineargradient></defs>
+<style>.bx{fill:#0b1722;stroke:#2e4a62;stroke-width:1.5}.tx{fill:#eef5fb;font:600 16px Segoe UI,Arial}.sm{fill:#98aebf;font:13px Segoe UI,Arial}.ln{stroke:#45657f;stroke-width:2}.hi{fill:url(#g);opacity:.18;stroke:#52d7c7;stroke-width:1.6}</style>
+<rect class="hi" height="70" rx="14" width="940" x="130" y="520"></rect><text class="tx" text-anchor="middle" x="600" y="550">PHYSICAL FACILITY</text><text class="sm" text-anchor="middle" x="600" y="574">Power · UPS · Generator · Cooling · Security · DCIM</text>
+<rect class="bx" height="70" rx="14" width="940" x="130" y="420"></rect><text class="tx" text-anchor="middle" x="600" y="450">COLOCATION</text><text class="sm" text-anchor="middle" x="600" y="474">Retail · Cage · Private Suite · Wholesale · AI Colocation</text>
+<rect class="bx" height="70" rx="14" width="940" x="130" y="320"></rect><text class="tx" text-anchor="middle" x="600" y="350">CONNECTIVITY</text><text class="sm" text-anchor="middle" x="600" y="374">Internet · IX · Cross Connect · Cloud Connect · DCI</text>
+<rect class="bx" height="105" rx="14" width="285" x="130" y="170"></rect><text class="tx" text-anchor="middle" x="272" y="204">CLOUD &amp; AI</text><text class="sm" text-anchor="middle" x="272" y="232">IaaS · Private Cloud</text><text class="sm" text-anchor="middle" x="272" y="254">GPU · HPC · AI Cloud</text>
+<rect class="bx" height="105" rx="14" width="285" x="458" y="170"></rect><text class="tx" text-anchor="middle" x="600" y="204">MANAGED SERVICES</text><text class="sm" text-anchor="middle" x="600" y="232">NOC · SOC · Network</text><text class="sm" text-anchor="middle" x="600" y="254">Security · OS · Lifecycle</text>
+<rect class="bx" height="105" rx="14" width="285" x="785" y="170"></rect><text class="tx" text-anchor="middle" x="928" y="204">DATA SERVICES</text><text class="sm" text-anchor="middle" x="928" y="232">Storage · Backup · DR</text><text class="sm" text-anchor="middle" x="928" y="254">Cyber Recovery</text>
+<rect class="hi" height="85" rx="18" width="560" x="320" y="35"></rect><text class="tx" text-anchor="middle" x="600" y="72">KAYAŞ DIGITAL INFRASTRUCTURE PLATFORM</text><text class="sm" text-anchor="middle" x="600" y="98">Marketplace · PaaS · SaaS · Partner Ecosystem</text>
+<line class="ln" x1="600" x2="600" y1="120" y2="170"></line><line class="ln" x1="272" x2="272" y1="275" y2="320"></line><line class="ln" x1="600" x2="600" y1="275" y2="320"></line><line class="ln" x1="928" x2="928" y1="275" y2="320"></line><line class="ln" x1="600" x2="600" y1="390" y2="420"></line><line class="ln" x1="600" x2="600" y1="490" y2="520"></line>
+</svg>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><div><div class="kicker">Commercial Roadmap</div><h2>Önerilen ürünleşme fazları</h2></div></div>
+<div class="matrix-wrap">
+<table>
+<thead><tr><th>Faz</th><th>Temel ürünler</th><th>Ticari amaç</th><th>Operasyonel etki</th></tr></thead>
+<tbody>
+<tr><td>Phase 1 — Core Datacenter</td><td>Retail Colo, Cage, Wholesale, Internet, Cross Connect, Remote/Smart Hands</td><td>Tesis gelirini başlatmak</td><td>Düşük–Orta</td></tr>
+<tr><td>Phase 2 — Enterprise Services</td><td>IaaS, Private Cloud, Storage, Backup, DR, Managed Network, NOC</td><td>Müşteri başına recurring revenue artırmak</td><td>Orta–Yüksek</td></tr>
+<tr><td>Phase 3 — AI &amp; Advanced Services</td><td>AI Colo, GPUaaS, HPC, AI Storage, SOC, Cyber Recovery</td><td>Premium yüksek katma değerli servisler</td><td>Yüksek</td></tr>
+<tr><td>Phase 4 — Digital Platform</td><td>Marketplace, Multi-cloud, Sovereign Cloud, PaaS, AI Platform, Edge</td><td>Regional Digital Infrastructure Platform</td><td>Çok yüksek</td></tr>
+</tbody>
+</table>
+</div>
+</section>
