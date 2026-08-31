@@ -2,7 +2,7 @@
   "schema_version": "1.0.0-draft.1",
   "package_id": "DCTS-FIXTURE-KAYAS-001",
   "project_id": "KAYAS",
-  "package_revision": "wp3-fixture-1",
+  "package_revision": "wp4-preview-2",
   "source_revision": "KAYAS-M5-REL-GOLDEN-01 / viewer-v0.11.9",
   "resources": {
     "project_config": {"path":"project-config.json","sha256":null,"schema":"../../schema/project-config.schema.json"},
@@ -10,8 +10,9 @@
     "relationships": {"path":"relationships.json","sha256":null,"schema":"../../schema/relationships.schema.json"},
     "evidence": {"path":"evidence.json","sha256":null,"schema":"../../schema/evidence.schema.json"},
     "findings": {"path":"findings.json","sha256":null,"schema":"../../schema/findings.schema.json"},
-    "views": {"path":"views.json","sha256":null,"schema":"../../schema/views.schema.json"}
+    "views": {"path":"views.json","sha256":null,"schema":"../../schema/views.schema.json"},
+    "official_resources": {"path":"/kayas/topology/official-resources.json","sha256":null,"schema":null}
   },
   "status": "REVIEW_REQUIRED",
-  "notes": "Deterministic V1-WP3 KAYAS schema-validation fixture; production topology is not modified."
+  "notes": "DCTS KAYAS preview package. Canonical WP3 fixture semantics remain unchanged; WP4 adds package-driven official reference metadata only. Production topology is not modified."
 }
