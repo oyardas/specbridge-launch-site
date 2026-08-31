@@ -1,0 +1,20 @@
+{
+  "default_language": "en",
+  "default_mode": "PRESENTATION",
+  "enabled_views": ["T00","T01","T02","T03","T04","T05","T06","T07","T08"],
+  "information_status_policy": ["CONFIRMED","VENDOR PROPOSAL","CUSTOMER INPUT","WORKING ASSUMPTION","OPEN-CONFIRMATION REQUIRED","SUPERSEDED"],
+  "languages": ["en","tr","dv"],
+  "metadata": {
+    "credentials_in_package": false,
+    "fixture_role": "Presentation UX reference",
+    "legacy_sources": ["window.HN","window.HT"]
+  },
+  "narration": {"enabled": true,"source": "PROJECT_NARRATIVE"},
+  "project_id": "HAVEN-HEALTHCARE",
+  "project_name": "Haven Healthcare",
+  "project_revision": "legacy-v0.4.7-migration-fixture",
+  "return_url": "/haven-healthcare/",
+  "schema_version": "1.0.0-draft.1",
+  "viewer_modes": ["PRESENTATION","ENGINEERING"],
+  "watermark": {"enabled": true,"print_only": true,"text": "specbridge.co — confidential"}
+}
