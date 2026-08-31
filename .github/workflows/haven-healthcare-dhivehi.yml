@@ -1,0 +1,73 @@
+name: Haven Healthcare Dhivehi Narration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/haven-healthcare-dhivehi.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-dhivehi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      TTS_MODEL: gpt-4o-mini-tts
+      TTS_VOICE_DV: marin
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify secret
+        shell: bash
+        run: |
+          test -n "$OPENAI_API_KEY" || { echo "OPENAI_API_KEY repository secret is missing." >&2; exit 2; }
+
+      - name: Generate Dhivehi T00-T08
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, time, urllib.request, urllib.error
+          from pathlib import Path
+          root = Path('haven-healthcare')
+          data = json.loads((root/'narration'/'narration.json').read_text(encoding='utf-8'))
+          outdir = root/'audio'/'dv'
+          outdir.mkdir(parents=True, exist_ok=True)
+          api_key = os.environ['OPENAI_API_KEY']
+          model = os.environ.get('TTS_MODEL','gpt-4o-mini-tts')
+          voice = os.environ.get('TTS_VOICE_DV','marin')
+          instructions = (
+              'Speak in Dhivehi as used in the Maldives, with a natural Maldivian Dhivehi accent and native rhythm. '
+              'Read Thaana text naturally from right to left. Use a calm, confident, premium investor-presentation style. '
+              'Do not use an English or Arabic accent. Pronounce technical transliterations naturally for a Maldivian audience. '
+              'Moderate pace, clear diction, warm but professional tone.'
+          )
+          for i in range(9):
+              view = f'T{i:02d}'
+              text = data[view]['dv'].strip()
+              target = outdir/f'{view}.mp3'
+              body = json.dumps({'model':model,'voice':voice,'input':text,'instructions':instructions,'response_format':'mp3'},ensure_ascii=False).encode('utf-8')
+              req = urllib.request.Request('https://api.openai.com/v1/audio/speech',data=body,method='POST',headers={'Authorization':f'Bearer {api_key}','Content-Type':'application/json'})
+              try:
+                  with urllib.request.urlopen(req,timeout=180) as r: audio=r.read()
+              except urllib.error.HTTPError as e:
+                  raise RuntimeError(f'{view}: HTTP {e.code}: {e.read().decode("utf-8",errors="replace")}') from e
+              if len(audio) < 1000: raise RuntimeError(f'{view}: audio too small: {len(audio)}')
+              target.write_bytes(audio)
+              print(f'generated {target} {len(audio)} bytes')
+              time.sleep(.35)
+          PY
+
+      - name: Commit Dhivehi audio
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add haven-healthcare/audio/dv
+          test -n "$(git status --porcelain -- haven-healthcare/audio/dv)" || { echo 'No Dhivehi audio changes'; exit 0; }
+          git commit -m "Generate Haven Healthcare Dhivehi narration audio"
+          git push
