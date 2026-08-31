@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "project_id", "project_name", "default_language", "enabled_views", "information_status_policy"],
   "properties": {
-    "schema_version": {"const": "1.0.0-draft.1"},
+    "schema_version": {"const": "1.0.1-draft.1"},
     "project_id": {"type": "string", "minLength": 1},
     "project_name": {"type": "string", "minLength": 1},
     "project_revision": {"type": ["string", "null"]},
