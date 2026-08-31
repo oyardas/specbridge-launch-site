@@ -1,0 +1,59 @@
+{
+  "document_id": "DCTS-VIEWER-WP2-CHECKPOINT",
+  "version": "1.0.0-draft.1",
+  "date": "2026-08-31",
+  "status": "REVIEW_REQUIRED",
+  "work_package": "V1-WP2 — Canonical Project Package Schema & Adapter Mapping",
+  "wp1_status": "APPROVED_FROZEN",
+  "authoritative_wp1_standard": "dcts/viewer/DCTS-Viewer-Standard-v1.0.md",
+  "schema_contract": "dcts/viewer/DCTS-Project-Package-Schema-v1.0-draft.md",
+  "adapter_mapping": "dcts/viewer/DCTS-Project-Package-Adapter-Mapping-v1.0-draft.md",
+  "schemas": [
+    "dcts/viewer/schema/package-manifest.schema.json",
+    "dcts/viewer/schema/project-config.schema.json",
+    "dcts/viewer/schema/objects.schema.json",
+    "dcts/viewer/schema/relationships.schema.json",
+    "dcts/viewer/schema/evidence.schema.json",
+    "dcts/viewer/schema/findings.schema.json",
+    "dcts/viewer/schema/views.schema.json"
+  ],
+  "frozen_invariants_from_wp1": [
+    "One shared renderer for all projects",
+    "Canonical model is authoritative and immutable from viewer presentation logic",
+    "T00-T08 standard views with T09/T10 extensions",
+    "Presentation and Engineering modes share one package",
+    "Layout is presentation metadata",
+    "No silent invention of engineering facts",
+    "No project-specific credentials or SKU/customer logic in shared renderer"
+  ],
+  "wp2_decisions": [
+    "Project package is split into manifest/config/objects/relationships/evidence/findings/views resources",
+    "Canonical objects use stable project-scoped IDs",
+    "Canonical relationships are separate from non-canonical presentation intents",
+    "Relationship attributes are sparse and evidence-gated",
+    "Legacy keys/statuses are preserved when migration is not lossless",
+    "KAYAS topobj IDs and canonical counts remain unchanged during viewer-only migration",
+    "KAYAS AINT records map only to presentation_intents",
+    "Haven HN nodes map through an explicit controlled domain/role table",
+    "Haven HT.r entries require evidence-aware relationship typing",
+    "Haven HT.p RECOMMENDED and DESIGN_TO_FINALIZE default to OPEN-CONFIRMATION REQUIRED until provenance is reconciled",
+    "Haven coordinates are presentation hints only",
+    "Credentials are outside the package contract"
+  ],
+  "cross_project_fixture_requirements": {
+    "KAYAS": {
+      "objects": 19,
+      "confirmed_relationships": 5,
+      "physical_relationships": 0,
+      "special_rule": "AnyBackup vendor reconciliation remains OPEN-CONFIRMATION REQUIRED"
+    },
+    "Haven Healthcare": {
+      "source_nodes": "window.HN",
+      "source_views_relationships": "window.HT",
+      "standard_views": "T00-T08",
+      "special_rule": "Do not treat RECOMMENDED as a DCTS authority/status without provenance reconciliation"
+    }
+  },
+  "runtime_code_started": false,
+  "next_gate_after_approval": "V1-WP3 — Deterministic KAYAS/Haven Package Fixtures & Schema Validation"
+}
