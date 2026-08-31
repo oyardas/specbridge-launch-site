@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-31T10:10:33.368952+00:00",
+  "generated_at_utc": "2026-08-31T10:16:19.047720+00:00",
   "model": "gpt-4o-mini-tts",
   "voices": {
     "tr": "marin",
@@ -20,25 +20,6 @@
     "T07",
     "T08"
   ],
-  "generated_files": [
-    "audio/tr/T00.mp3",
-    "audio/tr/T01.mp3",
-    "audio/tr/T02.mp3",
-    "audio/tr/T03.mp3",
-    "audio/tr/T04.mp3",
-    "audio/tr/T05.mp3",
-    "audio/tr/T06.mp3",
-    "audio/tr/T07.mp3",
-    "audio/tr/T08.mp3",
-    "audio/en/T00.mp3",
-    "audio/en/T01.mp3",
-    "audio/en/T02.mp3",
-    "audio/en/T03.mp3",
-    "audio/en/T04.mp3",
-    "audio/en/T05.mp3",
-    "audio/en/T06.mp3",
-    "audio/en/T07.mp3",
-    "audio/en/T08.mp3"
-  ],
+  "generated_files": [],
   "delivery": "static-mp3"
 }
