@@ -1,0 +1,47 @@
+{
+  "default_language": "en",
+  "default_mode": "PRESENTATION",
+  "enabled_views": [
+    "T00",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06"
+  ],
+  "information_status_policy": [
+    "CONFIRMED",
+    "VENDOR PROPOSAL",
+    "CUSTOMER INPUT",
+    "WORKING ASSUMPTION",
+    "OPEN-CONFIRMATION REQUIRED",
+    "SUPERSEDED"
+  ],
+  "languages": [
+    "en"
+  ],
+  "metadata": {
+    "canonical_graph_id": "KAYAS-M5-REL-GOLDEN-01",
+    "fixture_role": "DCTS Golden Reference"
+  },
+  "narration": {
+    "enabled": true,
+    "source": "PROJECT_NARRATIVE"
+  },
+  "official_resources_ref": "official-resources.json",
+  "project_id": "KAYAS",
+  "project_name": "KAYAS Data Center",
+  "project_revision": "DCTS-KAYAS-v0.12.1",
+  "return_url": "/kayas/",
+  "schema_version": "1.0.0-draft.1",
+  "viewer_modes": [
+    "PRESENTATION",
+    "ENGINEERING"
+  ],
+  "watermark": {
+    "enabled": false,
+    "print_only": true,
+    "text": null
+  }
+}
