@@ -1,0 +1,1 @@
+Switch topology.js to compatibility loader; preserve canonical data in topology-data-v042.js.
