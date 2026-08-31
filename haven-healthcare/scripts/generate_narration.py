@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Static Haven narration generator: TR, EN and Dhivehi.
 import json
 import os
 import sys
