@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://specbridge.co/kayas/service-models/">
 <title>KAYAŞ Data Center · Service Models</title>
 <link rel="stylesheet" href="styles.css?v=20260831-r2">
-<link rel="stylesheet" href="advisor.css?v=20260831-r1">
+<link rel="stylesheet" href="advisor.css?v=20260831-r2">
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 </head>
 <body>
@@ -24,8 +24,8 @@
 <a class="btn" href="../" style="text-decoration:none">← KAYAŞ Portal</a>
 <a class="btn" href="../topology/" style="text-decoration:none">Interactive Architecture</a>
 <a class="btn" href="../yatirim_ve_teknoloji_rehberi/investor-edition-en.html" style="text-decoration:none">Investor Guide</a>
-<button class="btn" onclick="document.getElementById('advisor-40-80-80').scrollIntoView()">40 + 80 + 80</button>
-<button class="btn" onclick="document.getElementById('explorer').scrollIntoView()">Servis Explorer</button>
+<button class="btn" onclick="document.getElementById('advisor-40-80-80').scrollIntoView({behavior:'smooth'})">40 + 80 + 80</button>
+<button class="btn" onclick="document.getElementById('explorer').scrollIntoView({behavior:'smooth'})">Servis Explorer</button>
 <button class="btn" onclick="window.print()">Print / PDF</button>
 </div>
 </div>
@@ -75,8 +75,8 @@
    if(!r.ok) throw new Error('fragment '+f);
    host.insertAdjacentHTML('beforeend',await r.text());
  }
- for(const src of ['data/services-1.js','data/services-2.js','data/services-3.js','data/services-4.js','app.js']){
-   await new Promise((resolve,reject)=>{const x=document.createElement('script');x.src=src+'?v=20260831-r2';x.onload=resolve;x.onerror=reject;document.body.appendChild(x);});
+ for(const src of ['data/services-1.js','data/services-2.js','data/services-3.js','data/services-4.js','app.js','advisor-motion.js']){
+   await new Promise((resolve,reject)=>{const x=document.createElement('script');x.src=src+'?v=20260831-r3';x.onload=resolve;x.onerror=reject;document.body.appendChild(x);});
  }
 })().catch(e=>{
  document.getElementById('fragmentHost').innerHTML='<section class="section"><div class="notice">Service Models content could not be loaded. Please return to the KAYAŞ portal and retry.</div></section>';
