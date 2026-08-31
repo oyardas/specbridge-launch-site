@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
-<title>KAYAS Interactive Architecture · DCTS v0.14.1</title>
+<title>KAYAS Interactive Architecture · DCTS v0.14.2</title>
 <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#03070c}iframe{display:block;width:100%;height:100%;border:0;background:#03070c}.boot{position:fixed;inset:0;display:grid;place-items:center;color:#9db5c2;font:13px Segoe UI,Arial,sans-serif;background:#03070c;z-index:2}.boot b{color:#58dce8}.boot small{display:block;margin-top:7px;color:#587384;text-align:center;line-height:1.5}</style>
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 </head>
 <body>
-<div id="boot" class="boot"><div><b>DCTS v0.14.1 · KAYAS</b><small>Loading 210-cabinet service-network architecture…</small></div></div>
+<div id="boot" class="boot"><div><b>DCTS v0.14.2 · KAYAS</b><small>Loading 210-cabinet service-network architecture…</small></div></div>
 <iframe id="viewer" title="KAYAS DCTS Interactive Architecture"></iframe>
 <script>
 (function(){
@@ -19,15 +19,20 @@
  f.addEventListener('load',()=>{
   try{
    const d=f.contentDocument;
-   const css=d.createElement('link');css.rel='stylesheet';css.href='v0.14-service-network.css?v=20260831-r3';d.head.appendChild(css);
-   const model=d.createElement('script');model.src='v0.14-service-model.js?v=20260831-r3';
+   const css=d.createElement('link');css.rel='stylesheet';css.href='v0.14-service-network.css?v=20260831-r4';d.head.appendChild(css);
+   const model=d.createElement('script');model.src='v0.14-service-model.js?v=20260831-r4';
    model.onload=()=>{
-    const ui=d.createElement('script');ui.src='v0.14-service-ui.js?v=20260831-r3';
-    ui.onload=()=>{boot.style.display='none'};
-    ui.onerror=()=>{boot.innerHTML='<div>v0.14.1 UI enhancement could not be loaded.<small>The base DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',2200)};
+    const ui=d.createElement('script');ui.src='v0.14-service-ui.js?v=20260831-r4';
+    ui.onload=()=>{
+     const term=d.createElement('script');term.src='dcts-terminology-v1.js?v=20260831-r1';
+     term.onload=()=>{boot.style.display='none'};
+     term.onerror=()=>{boot.innerHTML='<div>DCTS terminology layer could not be loaded.<small>The service-network viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)};
+     d.body.appendChild(term);
+    };
+    ui.onerror=()=>{boot.innerHTML='<div>v0.14.2 UI enhancement could not be loaded.<small>The base DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',2200)};
     d.body.appendChild(ui);
    };
-   model.onerror=()=>{boot.innerHTML='<div>v0.14.1 service model could not be loaded.<small>The base DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',2200)};
+   model.onerror=()=>{boot.innerHTML='<div>v0.14.2 service model could not be loaded.<small>The base DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',2200)};
    d.body.appendChild(model);
   }catch(e){boot.innerHTML='<div>Viewer enhancement could not be initialized.<small>'+String(e.message||e)+'</small></div>'}
  });

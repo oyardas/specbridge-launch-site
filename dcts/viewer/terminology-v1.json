@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "standard_id": "DCTS-TERM-001",
+  "version": "1.0.0",
+  "scope": "cross-project-display-terminology",
+  "terms": [
+    {
+      "term_id": "SECURITY_ADC_LOAD_BALANCER",
+      "canonical_domain": "SECURITY",
+      "canonical_object_type": "ADC",
+      "canonical_role_prefix": "SECURITY.ADC",
+      "presentation_label": "ADC / Load Balancer",
+      "redundant_pair_label": "ADC / Load Balancer Pair",
+      "engineering_label": "Application Delivery Controller (ADC / Load Balancer)",
+      "accepted_aliases": [
+        "ADC",
+        "Application Delivery Controller",
+        "Load Balancer",
+        "LB",
+        "Application Load Balancer"
+      ],
+      "preserve_canonical_semantics": true,
+      "vendor_neutral": true
+    }
+  ]
+}
