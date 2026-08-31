@@ -1,0 +1,61 @@
+{
+  "project_id": "KAYAS",
+  "relationships": [
+    {
+      "extensions": {},
+      "from_object_id": "topobj_6de1118a2c5c7827fc65",
+      "layer": "MANAGEMENT",
+      "legacy_refs": ["CONTROLLED_MAPPING:K014","PROJECT_RULE:KREL-001","S04:slides 13-14"],
+      "relationship_id": "rel_15af6273757e687ffb27033f",
+      "source_refs": ["KAYAS-SRC-VIEWER"],
+      "status": "CONFIRMED",
+      "to_object_id": "topobj_deecc8375d65efa2cb1c",
+      "type": "MANAGED_BY"
+    },
+    {
+      "extensions": {},
+      "from_object_id": "topobj_f61dad7a8323cc32b048",
+      "layer": "SERVICE",
+      "legacy_refs": ["CONTROLLED_MAPPING:K018","PROJECT_RULE:KREL-002","S04:slides 21-24"],
+      "relationship_id": "rel_1b8eae77bfbac9237b118f77",
+      "source_refs": ["KAYAS-SRC-VIEWER"],
+      "status": "CONFIRMED",
+      "to_object_id": "topobj_4290683013244cf50d95",
+      "type": "HOSTS"
+    },
+    {
+      "extensions": {},
+      "from_object_id": "topobj_ca569b60f525d5fd277f",
+      "layer": "SERVICE",
+      "legacy_refs": ["CONTROLLED_MAPPING:K020","PROJECT_RULE:KREL-003","S04:slide 17"],
+      "relationship_id": "rel_e6ba8310776b41660f5fa94b",
+      "source_refs": ["KAYAS-SRC-VIEWER"],
+      "status": "CONFIRMED",
+      "to_object_id": "topobj_bbc53ea9c663404b7a82",
+      "type": "HOSTS"
+    },
+    {
+      "extensions": {},
+      "from_object_id": "topobj_ca569b60f525d5fd277f",
+      "layer": "SERVICE",
+      "legacy_refs": ["CONTROLLED_MAPPING:K020","PROJECT_RULE:KREL-004","S04:slide 17"],
+      "relationship_id": "rel_255c9685c2d04a8113d18003",
+      "source_refs": ["KAYAS-SRC-VIEWER"],
+      "status": "CONFIRMED",
+      "to_object_id": "topobj_60b6648480d5d86edc25",
+      "type": "HOSTS"
+    },
+    {
+      "extensions": {},
+      "from_object_id": "topobj_bba651ea257e81f79ce6",
+      "layer": "SERVICE",
+      "legacy_refs": ["CONTROLLED_MAPPING:K024","CONTROLLED_MAPPING:K025","PROJECT_RULE:KREL-005","S04:slide 19"],
+      "relationship_id": "rel_11db8c5f00905d9ecdf64aa0",
+      "source_refs": ["KAYAS-SRC-VIEWER"],
+      "status": "CONFIRMED",
+      "to_object_id": "topobj_f59c004a4842a0ab2300",
+      "type": "HOSTS"
+    }
+  ],
+  "schema_version": "1.0.0-draft.1"
+}
