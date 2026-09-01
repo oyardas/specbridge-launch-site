@@ -1,0 +1,26 @@
+/* KAYAS T02 engineering connection grammar — preview only. */
+body.kx-network-engineering .kxne-links{pointer-events:auto}
+.kxne-link-hit{fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:pointer;vector-effect:non-scaling-stroke;outline:none}
+.kxne-path,.kxne-label,.kxne-cluster,.kxne-external{transition:opacity .16s ease,filter .16s ease,stroke-width .16s ease,transform .16s ease}
+.kxne-path.kxne-rel-focus{opacity:1!important;stroke-width:3!important;filter:drop-shadow(0 0 4px currentColor)}
+.kxne-path.kxne-rel-dim,.kxne-label.kxne-rel-dim{opacity:.12!important}
+.kxne-cluster.kxne-rel-node,.kxne-external.kxne-rel-node{filter:brightness(1.12);z-index:10}
+.kxne-cluster.kxne-rel-node-dim{opacity:.28;filter:saturate(.55)}
+.kxne-bus{stroke-width:2.3!important;opacity:.9!important}
+.kxne-bus-trunk{stroke-width:2!important;opacity:.78!important}
+.kxne-bus-stub{stroke-width:1.7!important;opacity:.86!important}
+.kxne-bus-label{font-size:6.4px!important;letter-spacing:.04em}
+.kxne-bus-title{font-size:6.8px!important;font-weight:900!important;letter-spacing:.08em}
+.kxne-fabric-note[role="button"]{cursor:pointer}
+.kxne-fabric-note[role="button"]:hover,.kxne-fabric-note[role="button"]:focus-visible{box-shadow:0 0 0 1px #e1b35a,0 0 14px rgba(243,183,68,.22);outline:none}
+.kxne-link-inspector{margin:10px 0 0;border:1px solid #2d536b;background:linear-gradient(180deg,#081827,#06111c);border-radius:8px;padding:11px;color:#d9eaf4;box-shadow:0 14px 28px rgba(0,0,0,.22)}
+.kxne-link-inspector[hidden]{display:none!important}
+.kxne-li-head{display:flex;align-items:flex-start;gap:8px;padding-bottom:8px;border-bottom:1px solid #19364a}.kxne-li-head span{display:block;font-size:7px;letter-spacing:.09em;color:#5edce8;font-weight:800}.kxne-li-head b{display:block;margin-top:3px;font-size:12px}.kxne-li-head button{margin-left:auto;border:0;background:none;color:#7992a5;font-size:17px;line-height:1;padding:0 2px}.kxne-li-status{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:9px;border:1px solid #78571d;background:#151006;border-radius:6px;padding:7px}.kxne-li-status strong{font-size:7.5px;color:#f1bd55}.kxne-li-status span{font-size:7px;color:#b79a5f}.kxne-link-inspector dl{display:grid;grid-template-columns:105px 1fr;gap:7px 8px;margin:11px 0 0;font-size:8px}.kxne-link-inspector dt{color:#6c8598}.kxne-link-inspector dd{margin:0;color:#bed1dc;word-break:break-word}.kxne-li-note{margin-top:11px;border:1px solid #2a4050;background:#07131f;border-radius:6px;padding:8px}.kxne-li-note b{font-size:7px;color:#89a6b7;text-transform:uppercase;letter-spacing:.07em}.kxne-li-note p{margin:5px 0 0;color:#829aaa;font-size:7.5px;line-height:1.45}
+body.kx-network-engineering .z-workload .kxne-cluster header{transform:translateY(-2px)}
+body.kx-network-engineering .z-workload .kxne-endpoint{margin-top:2px}
+body.kx-t06-capacity .sectitle span,body.kx-t06-capacity .path{color:#7896a6}
+html[data-sb-theme="light"] body.kx-t06-capacity .sectitle span,html[data-sb-theme="light"] body.kx-t06-capacity .path{color:#597483}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-link-inspector{background:#fff;border-color:#c8dce6;color:#17324a;box-shadow:0 12px 28px rgba(23,50,74,.1)}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-head{border-color:#d6e4ea}html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-head b{color:#17324a}html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-head button{color:#678090}html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-status{background:#fff7e8;border-color:#d1a24b}html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-status strong{color:#8b5b12}html[data-sb-theme="light"] body.kx-network-engineering .kxne-link-inspector dt{color:#668090}html[data-sb-theme="light"] body.kx-network-engineering .kxne-link-inspector dd{color:#35566c}html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-note{background:#f6fafc;border-color:#d3e1e8}html[data-sb-theme="light"] body.kx-network-engineering .kxne-li-note p{color:#607988}
+@media (prefers-reduced-motion:reduce){.kxne-path,.kxne-label,.kxne-cluster,.kxne-external{transition:none!important}}
+@media print{.kxne-link-hit{display:none!important}.kxne-link-inspector{display:none!important}}
