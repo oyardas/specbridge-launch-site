@@ -5,43 +5,53 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
-<title>KAYAS Interactive Architecture · Experience Standard v1</title>
+<title>KAYAS Interactive Architecture · DCTS Topology Standard v1.0.2</title>
 <link rel="stylesheet" href="../kayas-shell.css?v=20260901-theme1">
-<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#03070c}body{display:flex;flex-direction:column}iframe{display:block;flex:1 1 auto;width:100%;height:0;border:0;background:#03070c}.boot{position:fixed;left:0;right:0;top:44px;bottom:0;display:grid;place-items:center;color:#9db5c2;font:13px Segoe UI,Arial,sans-serif;background:#03070c;z-index:9980}.boot b{color:#58dce8}.boot small{display:block;margin-top:7px;color:#587384;text-align:center;line-height:1.5}</style>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#03070c}
+body{display:flex;flex-direction:column}
+iframe{display:block;flex:1 1 auto;width:100%;height:0;border:0;background:#edf3f7}
+.boot{position:fixed;left:0;right:0;top:44px;bottom:0;display:grid;place-items:center;color:#9db5c2;font:13px Segoe UI,Arial,sans-serif;background:#03070c;z-index:9980}
+.boot b{color:#58dce8}.boot small{display:block;margin-top:7px;color:#587384;text-align:center;line-height:1.5}
+</style>
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 <script src="../kayas-canonical.js?v=20260901-es1"></script>
 <script defer src="../kayas-shell.js?v=20260901-theme1"></script>
 </head>
 <body>
-<div id="boot" class="boot"><div><b>K00 · KAYAS MASTER ARCHITECTURE</b><small>Loading canonical project data and DCTS engineering views…</small></div></div>
+<div id="boot" class="boot"><div><b>K00 · KAYAS MASTER ARCHITECTURE</b><small>Loading DCTS Topology Visual Grammar Standard v1.0.2…</small></div></div>
 <iframe id="viewer" title="KAYAS DCTS Interactive Architecture"></iframe>
 <script>
 (function(){
- const f=document.getElementById('viewer'),boot=document.getElementById('boot'),requested=location.hash||'#view=K00';let started=false;
- function theme(){return window.KAYAS_THEME?.getEffective?.()||document.documentElement.dataset.sbTheme||'dark'}
+ const f=document.getElementById('viewer'),boot=document.getElementById('boot');
+ let started=false;
+ function theme(){return window.KAYAS_THEME?.getEffective?.()||document.documentElement.dataset.sbTheme||'light'}
  function syncTheme(){try{f.contentDocument.documentElement.dataset.sbTheme=theme()}catch(_){}}
- function start(){if(started)return;started=true;const c=window.KAYAS_DATA?.capacity;if(c)boot.querySelector('small').textContent=`Loading ${c.itCabinetsTotal}-cabinet digital-infrastructure architecture and DCTS engineering views…`;f.src='viewer-v0.11.9.html'+(requested.includes('view=K00')?'#view=T00':requested);}
- function addScript(d,src,id,onload,onerror){const s=d.createElement('script');s.src=src;s.id=id||'';s.onload=onload||null;s.onerror=onerror||null;d.body.appendChild(s)}
- f.addEventListener('load',()=>{
-  try{
-   const d=f.contentDocument;d.documentElement.dataset.sbTheme=theme();
-   const css=d.createElement('link');css.rel='stylesheet';css.href='v0.14-service-network.css?v=20260901-es1';d.head.appendChild(css);
-   const esCss=d.createElement('link');esCss.rel='stylesheet';esCss.href='kayas-experience-standard.css?v=20260901-es1';d.head.appendChild(esCss);
-   const themeCss=d.createElement('link');themeCss.rel='stylesheet';themeCss.href='../kayas-theme-frame.css?v=20260901-theme1';d.head.appendChild(themeCss);
-   const mobCss=d.createElement('link');mobCss.rel='stylesheet';mobCss.href='kayas-mobile.css?v=20260901-mobile1';d.head.appendChild(mobCss);
-   addScript(d,'v0.14-service-model.js?v=20260901-es1','kxModel',()=>{
-    addScript(d,'v0.14-service-ui.js?v=20260901-es1','kxUi',()=>{
-     addScript(d,'dcts-terminology-v1.js?v=20260901-es1','kxTerm',()=>{
-      addScript(d,'kayas-experience-standard.js?v=20260901-es1','kxExperience',()=>{
-       addScript(d,'kayas-mobile.js?v=20260901-mobile1','kxMobile',()=>{boot.style.display='none';if(requested.includes('view=K00')){try{f.contentWindow.KAYAS_K00_OPEN?.()}catch(_){}}},()=>{boot.style.display='none';if(requested.includes('view=K00')){try{f.contentWindow.KAYAS_K00_OPEN?.()}catch(_){}}});
-      },()=>{boot.innerHTML='<div>K00 experience layer could not be loaded.<small>The DCTS engineering viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)});
-     },()=>{boot.innerHTML='<div>DCTS terminology layer could not be loaded.<small>The service-network viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)});
-    },()=>{boot.innerHTML='<div>Service UI enhancement could not be loaded.<small>The base DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',2200)});
-   },()=>{boot.innerHTML='<div>Service model could not be loaded.<small>The base DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',2200)});
-  }catch(e){boot.innerHTML='<div>Viewer enhancement could not be initialized.<small>'+String(e.message||e)+'</small></div>'}
- });
+ function normalizedHash(){
+   const raw=(location.hash||'#view=K00').replace(/^#/,'');
+   const p=new URLSearchParams(raw);
+   let view=(p.get('view')||'K00').toUpperCase();
+   if(view==='K00')view='T00';
+   if(!/^T(?:0[0-9]|10)$/.test(view))view='T00';
+   p.set('view',view);
+   if(!p.has('mode'))p.set('mode','PRESENTATION');
+   if(!p.has('lang'))p.set('lang','en');
+   if(!p.has('design'))p.set('design','1');
+   return '#'+p.toString();
+ }
+ function start(){
+   if(started)return;started=true;
+   const c=window.KAYAS_DATA?.capacity;
+   if(c)boot.querySelector('small').textContent=`Loading ${c.itCabinetsTotal}-cabinet DCTS topology standard…`;
+   f.src='v1-preview.html?prod=topology-std-v102'+normalizedHash();
+ }
+ f.addEventListener('load',()=>{syncTheme();boot.style.display='none'});
  window.addEventListener('specbridge:theme',syncTheme);
- if(window.KAYAS_DATA)start();else window.addEventListener('kayas:data',start,{once:true});setTimeout(start,1800);
+ window.addEventListener('hashchange',()=>{
+   try{const target=normalizedHash();if(f.contentWindow.location.hash!==target)f.contentWindow.location.hash=target}catch(_){ }
+ });
+ if(window.KAYAS_DATA)start();else window.addEventListener('kayas:data',start,{once:true});
+ setTimeout(start,1800);
 })();
 </script>
 </body>
