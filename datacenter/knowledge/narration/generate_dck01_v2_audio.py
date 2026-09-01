@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# PR validation trigger: DC-K01 Golden Audio v2
 import difflib,json,os,re,sys,time,unicodedata
 from pathlib import Path
 from mutagen.mp3 import MP3
@@ -104,8 +105,7 @@ def main():
         results.append(result)
     manifest={'version':'DC_K01_GOLDEN_AUDIO_V2','voice':vc,'chapter_count':len(results),'accepted_count':len(results)-len(failures),'failed_count':len(failures),'total_duration_seconds':round(sum(float(x.get('duration_seconds',0)) for x in results),3),'chapters':results}
     (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(json.dumps(manifest,ensure_ascii=False,indent=2))
-    return 1 if failures else 0
+    print(json.dumps(manifest,ensure_ascii=False,indent=2));return 1 if failures else 0
 
 if __name__=='__main__':
     raise SystemExit(main())
