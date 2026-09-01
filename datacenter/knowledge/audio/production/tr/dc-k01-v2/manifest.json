@@ -1,0 +1,256 @@
+{
+  "version": "DC_K01_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2042.256,
+  "chapters": [
+    {
+      "id": "K01-00",
+      "title": "Veri merkezi gerçekte ne satar?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-00-veri-merkezi-gercekte-ne-satar.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-00-veri-merkezi-gercekte-ne-satar.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-00-veri-merkezi-gercekte-ne-satar.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 225.12,
+          "bytes": 3601920,
+          "source_words": 393,
+          "transcript_words": 393,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.972,
+          "tail_score": 0.9167,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 225.12,
+      "bytes": 3601920,
+      "source_words": 393,
+      "transcript_words": 393,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.972,
+      "tail_score": 0.9167,
+      "accepted": true
+    },
+    {
+      "id": "K01-01",
+      "title": "Colocation: cabinet’ten build-to-suit’a",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-01-colocation-cabinetten-build-to-suita.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-01-colocation-cabinetten-build-to-suita.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-01-colocation-cabinetten-build-to-suita.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 290.4,
+          "bytes": 4646400,
+          "source_words": 509,
+          "transcript_words": 505,
+          "word_count_ratio": 0.9921,
+          "transcript_similarity": 0.9349,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 290.4,
+      "bytes": 4646400,
+      "source_words": 509,
+      "transcript_words": 505,
+      "word_count_ratio": 0.9921,
+      "transcript_similarity": 0.9349,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K01-02",
+      "title": "Managed hosting, dedicated server ve bare metal",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-02-managed-hosting-dedicated-server-ve-bare-metal.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-02-managed-hosting-dedicated-server-ve-bare-metal.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-02-managed-hosting-dedicated-server-ve-bare-metal.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 257.664,
+          "bytes": 4122624,
+          "source_words": 460,
+          "transcript_words": 459,
+          "word_count_ratio": 0.9978,
+          "transcript_similarity": 0.9619,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 257.664,
+      "bytes": 4122624,
+      "source_words": 460,
+      "transcript_words": 459,
+      "word_count_ratio": 0.9978,
+      "transcript_similarity": 0.9619,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K01-03",
+      "title": "IaaS, private, hybrid ve sovereign cloud",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-03-iaas-private-hybrid-ve-sovereign-cloud.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-03-iaas-private-hybrid-ve-sovereign-cloud.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-03-iaas-private-hybrid-ve-sovereign-cloud.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 283.008,
+          "bytes": 4528128,
+          "source_words": 481,
+          "transcript_words": 483,
+          "word_count_ratio": 1.0042,
+          "transcript_similarity": 0.9647,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 283.008,
+      "bytes": 4528128,
+      "source_words": 481,
+      "transcript_words": 483,
+      "word_count_ratio": 1.0042,
+      "transcript_similarity": 0.9647,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K01-04",
+      "title": "GPUaaS, AI Cloud ve HPC as a Service",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-04-gpuaas-ai-cloud-ve-hpc-as-a-service.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-04-gpuaas-ai-cloud-ve-hpc-as-a-service.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-04-gpuaas-ai-cloud-ve-hpc-as-a-service.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 251.112,
+          "bytes": 4017792,
+          "source_words": 427,
+          "transcript_words": 432,
+          "word_count_ratio": 1.0117,
+          "transcript_similarity": 0.9616,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 251.112,
+      "bytes": 4017792,
+      "source_words": 427,
+      "transcript_words": 432,
+      "word_count_ratio": 1.0117,
+      "transcript_similarity": 0.9616,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K01-05",
+      "title": "Storage, Backup, DR ve Cyber Recovery",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-05-storage-backup-dr-ve-cyber-recovery.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-05-storage-backup-dr-ve-cyber-recovery.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-05-storage-backup-dr-ve-cyber-recovery.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 225.456,
+          "bytes": 3607296,
+          "source_words": 413,
+          "transcript_words": 388,
+          "word_count_ratio": 0.9395,
+          "transcript_similarity": 0.9363,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 225.456,
+      "bytes": 3607296,
+      "source_words": 413,
+      "transcript_words": 388,
+      "word_count_ratio": 0.9395,
+      "transcript_similarity": 0.9363,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K01-06",
+      "title": "Interconnection ve managed operations",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-06-interconnection-ve-managed-operations.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-06-interconnection-ve-managed-operations.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-06-interconnection-ve-managed-operations.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 236.4,
+          "bytes": 3782400,
+          "source_words": 408,
+          "transcript_words": 407,
+          "word_count_ratio": 0.9975,
+          "transcript_similarity": 0.9546,
+          "tail_score": 0.9167,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 236.4,
+      "bytes": 3782400,
+      "source_words": 408,
+      "transcript_words": 407,
+      "word_count_ratio": 0.9975,
+      "transcript_similarity": 0.9546,
+      "tail_score": 0.9167,
+      "accepted": true
+    },
+    {
+      "id": "K01-07",
+      "title": "Ekonomi, risk ve hangi model seçilmeli?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-07-ekonomi-risk-ve-hangi-model-secilmeli.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-07-ekonomi-risk-ve-hangi-model-secilmeli.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k01-v2/k01-07-ekonomi-risk-ve-hangi-model-secilmeli.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 273.096,
+          "bytes": 4369536,
+          "source_words": 521,
+          "transcript_words": 518,
+          "word_count_ratio": 0.9942,
+          "transcript_similarity": 0.9374,
+          "tail_score": 0.9167,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 273.096,
+      "bytes": 4369536,
+      "source_words": 521,
+      "transcript_words": 518,
+      "word_count_ratio": 0.9942,
+      "transcript_similarity": 0.9374,
+      "tail_score": 0.9167,
+      "accepted": true
+    }
+  ]
+}

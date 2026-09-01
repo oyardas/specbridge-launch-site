@@ -1,0 +1,21 @@
+Colocation’da provider’ın ana sorumluluğu facility katmanındadır. Managed infrastructure hizmetlerinde ise provider IT operasyonuna doğru ilerlemeye başlar. Bu geçiş ticari olarak daha yüksek service value yaratabilir; fakat aynı anda staffing, tooling, process ve liability de büyür.
+
+En basit managed servislerden biri Smart Hands veya Remote Hands’tir. Müşterinin cihazı yine müşteriye aittir; fakat provider’ın sahadaki teknisyeni rack-and-stack, cabling, power cycle, visual inspection, component replacement veya emergency troubleshooting gibi fiziksel görevleri yapar. Bu hizmet özellikle data center’dan uzakta olan müşteriler için kritiktir. Çünkü her basit fiziksel müdahalede kendi mühendisini sahaya göndermek zorunda kalmaz.
+
+Smart Hands’in önemi yalnız teknisyen saatinden elde edilen gelir değildir. Müşterinin data center’a operasyonel bağımlılığını güçlendirir ve colocation hizmetini daha kullanılabilir hale getirir.
+
+Managed colocation bundan daha geniş bir kavramdır. Provider network management, firewall operations, monitoring, backup veya işletim sistemi operasyonlarının bir kısmını üstlenebilir. Buradaki en büyük risk “managed” kelimesinin belirsiz kullanılmasıdır. Sözleşmede kimin patch yaptığı, firmware upgrade’i kimin yaptığı, incident sırasında kimin hangi süre içinde müdahale ettiği, backup restore’u kimin test ettiği ve application health’in kimin sorumluluğunda olduğu açıkça yazılmalıdır.
+
+Dedicated server modelinde fiziksel server artık provider’a aittir. Müşteri tek tenant olarak server kapasitesini kullanır. Müşteri server satın alma CAPEX’inden kurtulur; provider ise hardware lifecycle sorumluluğunu üstlenir. Bundan sonra spare parts, standard server profiles, firmware, replacement SLA ve inventory management provider’ın işidir.
+
+Managed hosting, dedicated server üzerine daha fazla operasyon katmanı ekler. Provider işletim sistemi kurabilir, hardening yapabilir, patch uygulayabilir, monitoring, antivirus, backup veya middleware hizmeti sağlayabilir. Bunun sonucunda müşteri açısından operational burden azalır. Provider açısından ise daha yüksek katma değerli gelir mümkündür; fakat insan kaynağı ve service-management olgunluğu zorunlu hale gelir.
+
+Bare Metal as a Service ise dedicated fiziksel server ile cloud consumption modelinin kesiştiği noktadır. Fiziksel server tek tenant’a tahsis edilir; ancak provisioning portal veya API üzerinden, daha standardize ve hızlı biçimde yapılır. Bazı provider’larda saatlik, bazılarında aylık tüketim modeli olabilir.
+
+Bare metal özellikle birkaç durumda anlamlıdır. Birincisi, lisanslama fiziksel socket veya core ile ilişkili olduğunda. İkincisi, shared hypervisor istemeyen security-sensitive workloads’ta. Üçüncüsü, düşük jitter veya daha deterministic performance beklenen uygulamalarda. Dördüncüsü, bazı HPC veya appliance deployment modellerinde.
+
+Dedicated hosting ile bare metal arasındaki temel fark fiziksel server’ın dedicated olması değildir; ikisinde de bu olabilir. Asıl fark consumption ve automation modelidir. Bare-metal-as-a-service, cloud’a benzeyen hızlı provisioning, standard profile, portal, API, metering ve network automation yaklaşımı hedefler.
+
+Bu aşamada provider için kritik bir strateji sorusu oluşur: Facility operator olarak mı kalacağız, yoksa IT lifecycle’ın içine mi gireceğiz? Çünkü her yeni managed service yeni bir operasyon zinciri doğurur. Monitoring tool, ticketing, escalation, maintenance window, spare strategy ve L1, L2, L3 support olmadan geniş service catalog açmak, gelirden önce service debt üretir.
+
+Bir sonraki bölümde abstraction seviyesini bir adım daha yükseltip IaaS, private cloud, hybrid cloud ve sovereign cloud modellerini inceleyeceğiz.
