@@ -1,0 +1,13 @@
+html[data-dcts-engineering-topology11="active"] .eng11-canvas{height:1040px}
+html[data-dcts-engineering-topology11="active"] .z-work{left:17%;top:770px;width:58%}
+html[data-dcts-engineering-topology11="active"] .z-mgmt{left:14%;top:900px;width:72%;height:auto;padding-left:0;border-left:0;border-top:1px solid #d7d0e7;padding-top:24px}
+html[data-dcts-engineering-topology11="active"] .z-mgmt>label{left:0;top:-18px}
+html[data-dcts-engineering-topology11="active"] .mgmt-row{height:auto;flex-direction:row;justify-content:space-between;gap:22px}
+html[data-dcts-engineering-topology11="active"] .z-mgmt .eng11-group{width:31%;min-width:0}
+html[data-dcts-engineering-topology11="active"] .z-mgmt .eng11-group-head{grid-template-columns:auto 1fr}
+html[data-dcts-engineering-topology11="active"] .z-mgmt .eng11-group-head em{grid-column:1/-1}
+html[data-dcts-engineering-topology11="active"] .eng11-links{z-index:1}
+html[data-dcts-engineering-topology11="active"] .eng11-zone{z-index:3}
+html[data-dcts-engineering-topology11="active"] .eng11-label{font-size:8px;stroke-width:4px}
+html[data-dcts-engineering-topology11="active"] .eng11-open-note{font-size:7.5px}
+@media(max-width:1280px){html[data-dcts-engineering-topology11="active"] .eng11-canvas{height:1010px}}
