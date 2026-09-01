@@ -1,0 +1,52 @@
+name: Build Data Center Audio Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/datacenter-audio-sync.yml
+      - datacenter/narration/generate_audio_sync.py
+      - datacenter/audio/production/tr/*.mp3
+      - datacenter/audio/production/tr/manifest.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade openai mutagen
+
+      - name: Build timestamped transcript and WebVTT
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python datacenter/narration/generate_audio_sync.py
+
+      - name: Commit sync assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add datacenter/briefing-audio-data.js datacenter/captions/tr
+          if git diff --cached --quiet; then
+            echo 'No sync changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Add timestamped Turkish briefing subtitles'
+          git push origin HEAD:main
