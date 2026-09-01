@@ -1,0 +1,46 @@
+{
+  "document_id": "DCTS-VISUAL-STD-002",
+  "version": "v1.0.0",
+  "date": "2026-09-01",
+  "status": "CONTROLLED_APPROVED_BASELINE",
+  "approval_basis": "Explicit user approval to save the accepted topology-first structure and apply it to KAYAS and Haven Healthcare.",
+  "standard": "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.md",
+  "runtime": {
+    "css": "dcts/viewer/runtime/dcts-viewer-topology-standard-v1.css",
+    "javascript": "dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js"
+  },
+  "semantic_guardrails": [
+    "NO_CANONICAL_OBJECT_MUTATION",
+    "NO_CANONICAL_RELATIONSHIP_MUTATION",
+    "NO_EVIDENCE_MUTATION",
+    "NO_STATUS_MUTATION",
+    "NO_PROJECT_SPECIFIC_OBJECT_IDS_IN_SHARED_RUNTIME",
+    "LAYOUT_IS_PRESENTATION_METADATA_ONLY",
+    "PRESENTATION_INTENT_IS_NOT_CANONICAL"
+  ],
+  "target_projects": {
+    "KAYAS": {
+      "package": "/dcts/viewer/fixtures/kayas",
+      "enabled_views_from_package": true
+    },
+    "HAVEN-HEALTHCARE": {
+      "package": "/dcts/viewer/fixtures/haven-healthcare",
+      "enabled_views_from_package": true
+    }
+  },
+  "relationship_semantics": {
+    "data_network": "blue",
+    "service": "teal",
+    "management_oob": "purple",
+    "security": "red",
+    "backup_dr": "green",
+    "presentation_intent": "amber_dashed_not_canonical"
+  },
+  "interaction": [
+    "click_to_inspector",
+    "hover_connected_path_focus",
+    "double_click_object_focus",
+    "escape_back",
+    "design_path_toggle_respected"
+  ]
+}
