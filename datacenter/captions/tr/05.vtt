@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.400
+Bir sunucu elektrik tükettiğinde, bu enerjinin çok büyük bölümü sonunda ısıya dönüşür.
+
+2
+00:00:06.900 --> 00:00:11.100
+Bu yüzden veri merkezi yalnızca bir kompüt tesisi değildir.
+
+3
+00:00:11.600 --> 00:00:15.900
+Aynı zamanda 24 saat çalışan bir ısı taşıma sistemidir.
+
+4
+00:00:16.400 --> 00:00:18.500
+Termal zincir çipte başlar.
+
+5
+00:00:18.900 --> 00:00:23.700
+Isı çipten sunucuya, sunucudan rek'e, rek'ten beyaz alana,
+
+6
+00:00:24.000 --> 00:00:27.700
+oradan hava veya sıvı üzerinden soğutma sistemine
+
+7
+00:00:27.900 --> 00:00:32.600
+ve en sonunda dış ortama veya Heat Rejection sistemine taşınır.
+
+8
+00:00:33.100 --> 00:00:36.400
+Bu zincirde başarısızlık çok hızlı sonuç üretir.
+
+9
+00:00:36.900 --> 00:00:40.700
+Elektrik kesintisinde UPS size zaman kazandırabilir.
+
+10
+00:00:41.100 --> 00:00:45.600
+Fakat yoğun bir rek'in termal toleransı oldukça sınırlı olabilir.
+
+11
+00:00:46.100 --> 00:00:51.300
+Özellikle yüksek yoğunluklu AI yüklerinde, soğutma artık destek sistemi değil,
+
+12
+00:00:51.600 --> 00:00:54.700
+kompüt kapasitesinin doğrudan bir parçasıdır.
+
+13
+00:00:55.200 --> 00:01:00.400
+Bu nedenle hangi klima markasına alalım sorusu tek başına doğru soru değildir.
+
+14
+00:01:00.700 --> 00:01:01.900
+Doğru soru şudur.
+
+15
+00:01:02.200 --> 00:01:04.100
+Betlenen rek yoğunluğu nedir?
+
+16
+00:01:04.500 --> 00:01:06.000
+Ortam sıcaklığı nedir?
+
+17
+00:01:06.300 --> 00:01:07.600
+Su kullanılacak mı?
+
+18
+00:01:07.900 --> 00:01:09.200
+Su kalitesi nasıl?
+
+19
+00:01:09.600 --> 00:01:11.800
+Hangi redundancy seviyesi gerekiyor?
+
+20
+00:01:12.300 --> 00:01:16.500
+Bir fan, pompa veya CDU arızasında sistem ne yapacak?
+
+21
+00:01:17.000 --> 00:01:19.200
+Bakım sırasında yük nasıl korunacak?
+
+22
+00:01:19.600 --> 00:01:24.500
+Gelecekte 10 kilovat rek'in yerine 40 veya 60 kilovat rek geldiğinde
+
+23
+00:01:24.700 --> 00:01:27.500
+altyapı ne kadar değişmek zorunda kalacak?
+
+24
+00:01:28.000 --> 00:01:32.300
+Hava soğutma hala çok önemli ve verimli bir çözüm olabilir.
+
+25
+00:01:32.700 --> 00:01:37.000
+Liquid cooling'de her proje için otomatik olarak doğru cevap değildir.
+
+26
+00:01:37.500 --> 00:01:43.100
+Direct-to-Chip, Rear Door Heat Exchanger, Immersion veya Hybrid yaklaşımlar
+
+27
+00:01:43.200 --> 00:01:45.000
+farklı ihtiyaçlara cevap verir.
+
+28
+00:01:45.500 --> 00:01:48.700
+İyi mühendislik en yeni teknolojiyi seçmek değil,
+
+29
+00:01:49.100 --> 00:01:53.900
+doğru yük profiline en güvenilir ve ekonomik termal mimariyi kurmaktır.
+
+30
+00:01:54.300 --> 00:01:58.200
+Ve burada enerji verimliliği de ticari modele bağlanır.
+
+31
+00:01:58.600 --> 00:02:02.000
+Çünkü soğutma verimsizse yalnız OPEX artmaz.
+
+32
+00:02:02.300 --> 00:02:07.000
+Aynı şebeke bağlantısından satabileceğiniz IT kapasitesi de azalabilir.

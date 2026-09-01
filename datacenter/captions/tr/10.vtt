@@ -1,0 +1,193 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.400
+Bir veri merkezi projesinde çok sayıda uzman taraf vardır.
+
+2
+00:00:04.400 --> 00:00:07.520
+Elektrik yüklenicisi elektrik işine bakar.
+
+3
+00:00:07.520 --> 00:00:10.880
+Cooling vendor soğutma çözümünü optimize eder.
+
+4
+00:00:10.880 --> 00:00:15.040
+Network üreticisi network mimarisini optimize eder.
+
+5
+00:00:15.040 --> 00:00:18.320
+UPS üreticisi kendi çözümünü savunur.
+
+6
+00:00:18.320 --> 00:00:22.600
+Müteahhit kendi sözleşme kapsamını ve teslim takvimini yönetir.
+
+7
+00:00:22.600 --> 00:00:24.680
+Bunların hepsi normaldir.
+
+8
+00:00:24.960 --> 00:00:26.640
+Ama bir soru kalır.
+
+9
+00:00:26.640 --> 00:00:30.440
+Bütün sistemi yatırımcı adına kim optimize ediyor?
+
+10
+00:00:30.440 --> 00:00:34.600
+Bağımsız teknik danışmanın gerçek rolü burada başlar.
+
+11
+00:00:34.600 --> 00:00:38.440
+Danışmanın görevi bir markanın ürününü seçmek değildir.
+
+12
+00:00:38.440 --> 00:00:42.440
+Yatırımcının iş hedefini teknik gereksinime çevirmektir.
+
+13
+00:00:42.440 --> 00:00:45.360
+Örneğin, yatırımcı Tier 3 seviyesinde
+
+14
+00:00:45.360 --> 00:00:50.440
+AI Ready, Carrier Neutral, 20 MW'lık bir tesis istiyorum diyebilir.
+
+15
+00:00:50.440 --> 00:00:53.640
+Bu cümlede onlarca teknik karar gizlidir.
+
+16
+00:00:53.680 --> 00:00:56.680
+Concurrent Maintainability nasıl sağlanacak?
+
+17
+00:00:56.680 --> 00:00:59.240
+AB Power Path nasıl ayrılacak?
+
+18
+00:00:59.240 --> 00:01:02.160
+AI Zone başlangıçta kaç medalat olacak?
+
+19
+00:01:02.160 --> 00:01:05.040
+Liquus Cooling hangi noktada devreye girecek?
+
+20
+00:01:05.040 --> 00:01:07.880
+Carrier Entrance nasıl çeşitlendirilecek?
+
+21
+00:01:07.880 --> 00:01:11.200
+Hangi odalar birbirinden fiziksel olarak ayrılacak?
+
+22
+00:01:11.200 --> 00:01:16.600
+BMS, EPMS, DCIM ve NOC nasıl entegre edilecek?
+
+23
+00:01:16.600 --> 00:01:19.120
+Commissioning kriterini kim tanımlayacak?
+
+24
+00:01:19.120 --> 00:01:23.280
+Bu kararların her biri başka vendorların sınırında kalabilir.
+
+25
+00:01:23.280 --> 00:01:27.400
+Danışmanın değerlerinden biri, interface risklerini yönetmesidir.
+
+26
+00:01:27.400 --> 00:01:31.720
+Çünkü büyük mission-critical projelerde sorunların önemli bölümü
+
+27
+00:01:31.720 --> 00:01:34.600
+tek bir ekipmanın yanlış seçilmesinden değil,
+
+28
+00:01:34.600 --> 00:01:36.120
+iki farklı disiplinin,
+
+29
+00:01:36.120 --> 00:01:39.920
+burası benim scopum değil dediği boşluklardan çıkar.
+
+30
+00:01:39.920 --> 00:01:42.440
+İkinci rol, vendor neutrality'dir.
+
+31
+00:01:42.440 --> 00:01:45.680
+Teklifleri aynı teknik çerçevede karşılaştırmak,
+
+32
+00:01:45.680 --> 00:01:48.080
+gereksiz over-design'i ayıklamak,
+
+33
+00:01:48.080 --> 00:01:50.160
+under-design risklerini görmek,
+
+34
+00:01:50.160 --> 00:01:52.720
+hidden single point of failure'ları bulmak,
+
+35
+00:01:52.720 --> 00:01:54.920
+change order riskini azaltmak,
+
+36
+00:01:54.920 --> 00:01:59.520
+yatırımcıya yalnız CAPEX değil, TCO perspektifi vermek gerekir.
+
+37
+00:01:59.520 --> 00:02:01.960
+Üçüncü rol, teknik hafızadır.
+
+38
+00:02:01.960 --> 00:02:04.120
+Proje aylar ve yıllar sürer,
+
+39
+00:02:04.120 --> 00:02:05.560
+insanlar değişir,
+
+40
+00:02:05.560 --> 00:02:07.080
+vendorlar değişir,
+
+41
+00:02:07.080 --> 00:02:08.640
+tasarım revize olur,
+
+42
+00:02:08.640 --> 00:02:09.880
+bağımsız danışman,
+
+43
+00:02:09.880 --> 00:02:13.560
+neden bu kararı vermiştik sorusunun cevabını korur.
+
+44
+00:02:13.560 --> 00:02:16.960
+Bu nedenle danışman ürünün temsilcisi değildir,
+
+45
+00:02:16.960 --> 00:02:19.880
+yatırım kararının teknik temsilcisidir
+
+46
+00:02:19.880 --> 00:02:24.280
+ve iyi danışmanlığın amacı projeyi pahalı hale getirmek değil,
+
+47
+00:02:24.280 --> 00:02:27.400
+yanlış yerde harcanan sermayeyi azaltırken,
+
+48
+00:02:27.400 --> 00:02:30.800
+kritik yerde eksik yatırım yapılması ve engellemektir.

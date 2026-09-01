@@ -1,0 +1,109 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.000
+Veri, merkezi, güvenli olmalı cümlesi çok basit görünür ama güvenlik tek bir kapı, tek bir firewall veya tek bir kamera değildir.
+
+2
+00:00:10.000 --> 00:00:12.000
+Güvenlik katmanlıdır.
+
+3
+00:00:12.000 --> 00:00:14.000
+Dış çevreden başlar.
+
+4
+00:00:14.000 --> 00:00:17.000
+Araç ve insan girişleri kontrol edilir.
+
+5
+00:00:17.000 --> 00:00:19.000
+Güvenlik sonları oluşturulur.
+
+6
+00:00:19.000 --> 00:00:28.000
+CCTV, Access Control, Mantrap, Ziyaretçi Yönetimi ve Jack seriyesine kadar erişim politikaları tasarlanır.
+
+7
+00:00:28.000 --> 00:00:32.000
+Ama fiziksel güvenlik yalnızca ilk halkadır.
+
+8
+00:00:32.000 --> 00:00:37.000
+Bir saldırganın binaya hiç girmeden kritik sisteme erişebilmesi mümkündür.
+
+9
+00:00:37.000 --> 00:00:53.000
+Bu nedenle Network Segmentation, Firewall Mimarisi, Privileged Access Management, Yönetim Ağı, Loglama, Monitoring, SOC entegrasyonu ve Out-of-Band erişim politikaları fiziksel güvenlik kadar önemlidir.
+
+10
+00:00:53.000 --> 00:00:56.000
+Burada özellikle yönetim ağına dikkat etmek gerekir.
+
+11
+00:00:56.000 --> 00:01:06.000
+BMS, EPMS, UPS, PDU, SWITCH, Firewall, Storage ve Server Management arayüzleri operasyon açısından vazgeçilmezdir.
+
+12
+00:01:06.000 --> 00:01:14.000
+Fakat yanlış tasarlanmış bir Management Network, saldırgan için bütün altyapıya açılan kestirme yol haline gelebilir.
+
+13
+00:01:14.000 --> 00:01:17.000
+Güvenlik aynı zamanda süreçtir.
+
+14
+00:01:17.000 --> 00:01:18.000
+Kim erişebilir?
+
+15
+00:01:18.000 --> 00:01:19.000
+Hangi şartta?
+
+16
+00:01:19.000 --> 00:01:21.000
+Ne kadar süreyle?
+
+17
+00:01:21.000 --> 00:01:23.000
+Erişim kayda alınıyor mu?
+
+18
+00:01:23.000 --> 00:01:27.000
+Bir çalışan ayrıldığında yetkiler ne kadar hızlı kakanıyor?
+
+19
+00:01:27.000 --> 00:01:29.000
+Vendor uzaktan bağlanabiliyor mu?
+
+20
+00:01:29.000 --> 00:01:32.000
+Acil durumda hangi hesaplar kullanılacak?
+
+21
+00:01:32.000 --> 00:01:34.000
+Backup Immutable mı?
+
+22
+00:01:34.000 --> 00:01:36.000
+Cyber Recovery ayrı mı?
+
+23
+00:01:36.000 --> 00:01:40.000
+ISO 2007-1 gibi çerçevelerin önemi burada ortaya çıkar.
+
+24
+00:01:40.000 --> 00:01:44.000
+Çünkü teknoloji ürünleri tek başına güvenlik sağlamaz.
+
+25
+00:01:44.000 --> 00:01:53.000
+Yönetim sistemi, rol ve sorumluluklar, risk değerlendirmesi, kontrol süreçleri ve sürekli iyileştirme gerekir.
+
+26
+00:01:53.000 --> 00:01:58.000
+Güvenli veri merkezi en fazla güvenlik ürünü satın alan tesis değildir.
+
+27
+00:01:58.000 --> 00:02:05.000
+Güvenliği fiziksel, teknik ve operasyonel katmanlarda tutarlı şekilde yöneten tesistir.

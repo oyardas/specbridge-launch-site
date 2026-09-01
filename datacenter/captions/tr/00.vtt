@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.600
+Bir veri merkezine ilk kez giren bir yatırımcının gördüğü şey, genellikle kabinetlerdir.
+
+2
+00:00:06.600 --> 00:00:15.400
+Sıralar halinde duran siyah kabinetler, içlerindeki sunucular, yanıp sonan ışıklar ve kilometrelerce kablo.
+
+3
+00:00:15.400 --> 00:00:20.000
+Fakat veri merkezinin kendisi bunların hiçbiri değildir.
+
+4
+00:00:20.000 --> 00:00:23.400
+Kabinet yalnızca görünen son noktadır.
+
+5
+00:00:23.400 --> 00:00:33.000
+Asıl yatırım, o kabinetin yılın 365 günü, günün 24 saati güvenilir biçimde çalışabilmesini sağlayan bütün sistemdir.
+
+6
+00:00:33.000 --> 00:00:46.000
+Elektriktir, soğutmadır, fiber bağlantıdır, fiziksel güvenliktir, siber güvenliktir, izlemedir, operasyondur, bakımdır, prosedürdür, insan kaynağıdır.
+
+7
+00:00:46.000 --> 00:00:51.800
+Ve bütün bunların tek bir yapı gibi davranmasını sağlayan mühendislik disiplinidir.
+
+8
+00:00:52.000 --> 00:00:57.600
+Bir ofis binasında elektrik kesildiğinde çalışanlar birkaç dakika bekleyebilir.
+
+9
+00:00:57.600 --> 00:01:02.600
+Bir alışveriş merkezinde bazı sistemler kontrollü şekilde kapanabilir.
+
+10
+00:01:02.600 --> 00:01:08.000
+Ama bir veri merkezinin ürünü tam da bu kesintinin gerçekleşmemesidir.
+
+11
+00:01:08.000 --> 00:01:14.000
+Bu nedenle veri merkezi yatırımını yalnız gayrimenkul mantığıyla değerlendirmek eksik kalır.
+
+12
+00:01:14.000 --> 00:01:19.000
+Burada metrekare satılmaz, burada güvenilir kapasite üretilir.
+
+13
+00:01:19.000 --> 00:01:23.000
+Müşterinin satın aldığı şey aslında bir kabinet değildir.
+
+14
+00:01:23.000 --> 00:01:35.400
+Güç kapasitesidir, bağlantıdır, kontrollü çevresel koşullardır, güvenliktir, uptime'dir ve gerektiğinde bütün bu hizmetlerin arkasında duran operasyonel tahriktir.
+
+15
+00:01:35.400 --> 00:01:44.800
+Bir başka ifadeyle veri merkezi bir bina değil, birbirine bağımlı kritik sistemlerin oluşturduğu bir system of systems yapısıdır.
+
+16
+00:01:44.800 --> 00:01:46.800
+Ve kritik nokta şudur.
+
+17
+00:01:46.800 --> 00:01:54.800
+En pahalı sunucuyu satın alabilirsiniz, en güçlü switch'i kurabilirsiniz, en iyi UPS markasını seçebilirsiniz.
+
+18
+00:01:54.800 --> 00:02:02.400
+Ama sistemin tamamı doğru tasarlanmamışsa, bu parçaların hiçbiri tek başına size dayanıklılık sağlamaz.
+
+19
+00:02:02.400 --> 00:02:06.400
+Bu anlatım boyunca aslında tek bir soruya cevap arayacağız.
+
+20
+00:02:06.400 --> 00:02:11.800
+Bir yatırımcı veri merkezine gerçekten yatırım yaptığında ne satın alır?
+
+21
+00:02:11.800 --> 00:02:16.800
+Ve bu yatırımın başarılı olması için hangi parçaların birlikte doğru çalışması gerekir?

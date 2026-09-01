@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.440
+Veri merkezi, yatırımındaki en büyük hatalardan biri, nihai vizyonla ilk gün CAPEX'ini birbirine karıştırmaktır.
+
+2
+00:00:08.440 --> 00:00:14.000
+Örneğin, uzun vadede 50 MW'lık bir kampüs hedeflenmek doğru olabilir.
+
+3
+00:00:14.000 --> 00:00:20.400
+Ama bu, 50 MW'ın tamamını ilk gün devreye almak zorunda olduğumuz anlamına gelmez.
+
+4
+00:00:20.400 --> 00:00:22.800
+Daha disiplinli yaklaşım şudur.
+
+5
+00:00:22.800 --> 00:00:28.400
+Arsa'nın ve ana altyapının nihai büyümeyi desteklediği bir master plan yapılır.
+
+6
+00:00:28.800 --> 00:00:32.400
+Power ve Fibre Expansion Path baştan korunur.
+
+7
+00:00:32.400 --> 00:00:38.400
+İlk faz, pazardaki gerçek talep ve anchor müşteri ihtiyacına göre boyutlandırılır.
+
+8
+00:00:38.400 --> 00:00:44.400
+Sonraki fazlar, sözleşmeli veya güçlü pipeline oluştuğunda devreye alınır.
+
+9
+00:00:44.400 --> 00:00:46.800
+Bu model iki riski azaltır.
+
+10
+00:00:46.800 --> 00:00:49.200
+Birincisi, stranded capital.
+
+11
+00:00:49.200 --> 00:00:52.800
+Yıllarca gelir üretmeden bekleyen aşırı CAPEX.
+
+12
+00:00:52.800 --> 00:00:55.200
+İkincisi, teknoloji riski.
+
+13
+00:00:55.200 --> 00:01:01.800
+Bugün kurduğumuz altyapının 5 yıl sonra değişmiş yoğunluk ve cooling ihtiyacına uymaması.
+
+14
+00:01:01.800 --> 00:01:06.000
+Ticari modelde yalnız rack rental'dan ibaret olmamalıdır.
+
+15
+00:01:06.000 --> 00:01:08.600
+Collocation, temel gelir katmanıdır.
+
+16
+00:01:08.600 --> 00:01:19.400
+Ama bunun üzerinde Managed Collocation, Cross Connect, Connectivity, Remote Hands, Managed Network, Security, Backup, DR, Private Cloud, EOS
+
+17
+00:01:19.400 --> 00:01:26.800
+ve uygun projelerde GPU veya AI Services gibi daha yüksek katma değerli servisler oluşabilir.
+
+18
+00:01:26.800 --> 00:01:31.400
+Bununla birlikte, bütün servisleri ilk günden kurmak da doğru değildir.
+
+19
+00:01:31.400 --> 00:01:35.400
+Hizmet portföyü, operasyon yetkinliği kadar büyümelidir.
+
+20
+00:01:35.400 --> 00:01:39.600
+Yatırım kararında 5 soru her zaman masada kalmalıdır.
+
+21
+00:01:39.600 --> 00:01:41.800
+Power gerçekten secured mi?
+
+22
+00:01:41.800 --> 00:01:44.400
+Fibre fiziksel olarak diverse mi?
+
+23
+00:01:44.400 --> 00:01:48.400
+Anchor customer veya güvenilir demand pipeline var mı?
+
+24
+00:01:48.400 --> 00:01:51.400
+Teknik tasarım gerçek ihtiyaçla dengeli mi?
+
+25
+00:01:51.400 --> 00:01:55.800
+Ve işletme organizasyonu ilk müşteri gelmeden hazır olacak mı?
+
+26
+00:01:55.800 --> 00:02:05.800
+Bu soruların cevabı evet'e yaklaştıkça, veri merkezi pahalı bir yapı olmaktan çıkar, uzun ömürlü bir dijital altyapı esnetine dönüşür.

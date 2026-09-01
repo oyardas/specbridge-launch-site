@@ -1,0 +1,109 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.000
+Bugün, veri merkezi denildiğinde ilk konuşulan konu yapay zeka.
+
+2
+00:00:05.000 --> 00:00:09.000
+Bunun nedeni yalnızca AI uygulamalarının popüler olması değil.
+
+3
+00:00:09.000 --> 00:00:14.000
+Yapay zeka, veri merkezinin fiziksel tasarımını da değiştiriyor.
+
+4
+00:00:14.000 --> 00:00:22.000
+Klasik enterprise iş yüklerinde bir kabinetin güç yoğunluğu uzun yıllar nispeten yönetilebilir seriyelerde kaldı.
+
+5
+00:00:22.000 --> 00:00:29.000
+Fakat GPU ve accelerator hükümeleri aynı fiziksel alan içinde çok daha yüksek güç çekebiliyor.
+
+6
+00:00:29.000 --> 00:00:32.000
+Sonuç doğrudan ortaya çıkıyor.
+
+7
+00:00:32.000 --> 00:00:46.000
+Daha yüksek akım, daha güçlü busway ve dağıtım altyapısı, daha yoğun network fabric, daha yüksek storage throughput ve çoğu durumda yalnız havayla soğutmanın sınırlarına yaklaşan termal yükler.
+
+8
+00:00:46.000 --> 00:00:57.000
+Bu nedenle direct-to-chip liquid cooling, rear-door heat exchanger, hybrid cooling ve yüksek yoğunluklu özel zonlar artık tasarım gündeminin bir parçası.
+
+9
+00:00:57.000 --> 00:01:01.000
+Fakat burada ikinci bir hata yapmamak gerekiyor.
+
+10
+00:01:01.000 --> 00:01:08.000
+AI büyüyor diye her kabineti 100 kW veya daha yüksek yoğunluğa göre tasarlamak zorunda değiliz.
+
+11
+00:01:08.000 --> 00:01:11.000
+Bu, sermayeyi yanlış yerde harcamak olabilir.
+
+12
+00:01:11.000 --> 00:01:18.000
+Doğru tasarım, klasik enterprise, cloud ve co-location yüklerini verimli biçimde desteklerken,
+
+13
+00:01:18.000 --> 00:01:26.000
+yüksek yoğunluklu AI alanları için ayrı, ölçeklenebilir ve geleceğe açık bir mimariyi kurmaktır.
+
+14
+00:01:26.000 --> 00:01:38.000
+McKinsey'nin iş yükü analizleri, 2030'a doğru AI inference'ın özellikle hızlı büyüyebileceğini, toplam kapasite içinde çok daha büyük bir pay alabileceğini gösteriyor.
+
+15
+00:01:38.000 --> 00:01:42.000
+Ancak aynı çalışmalar belirsizliği de vurguluyor.
+
+16
+00:01:42.000 --> 00:01:50.000
+Chip verimliliği artıyor, model mimarileri değişiyor, birim hesaplama başına enerji ihtiyacı düşebiliyor.
+
+17
+00:01:50.000 --> 00:01:56.000
+Bu nedenle yatırımcı açısından doğru yaklaşım, AI kesinlikle şu kadar büyüyecek demek değildir.
+
+18
+00:01:56.000 --> 00:01:58.000
+Doğru yaklaşım şudur.
+
+19
+00:01:58.000 --> 00:02:03.000
+AI, altyapı yoğunluğunu değiştirecek kadar güçlü bir talep kaynağıdır.
+
+20
+00:02:03.000 --> 00:02:09.000
+Fakat yatırımın ekonomik dayanıklılığı yalnız AI senaryosuna bağlı olmamalıdır.
+
+21
+00:02:09.000 --> 00:02:11.000
+Bankalar çalışmaya devam edecek.
+
+22
+00:02:11.000 --> 00:02:14.000
+Sağlık sistemleri veri üretecek.
+
+23
+00:02:14.000 --> 00:02:16.000
+Kamu dijitalleşecek.
+
+24
+00:02:16.000 --> 00:02:19.000
+Şirketler ERP ve cloud kullanacak.
+
+25
+00:02:19.000 --> 00:02:25.000
+Video, e-ticaret, gaming, IoT ve kurumsal uygulanalar büyümeye devam edecek.
+
+26
+00:02:25.000 --> 00:02:28.000
+AI bir dönüşümü başlatmadı.
+
+27
+00:02:28.000 --> 00:02:33.000
+AI zaten başlamış olan dijital altyapı dönüşümünü hızlandırdı.

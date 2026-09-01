@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.500
+Bir veri merkezinde elektrik varsa ama bağlantı yoksa, çok pahalı bir depo elde edersiniz.
+
+2
+00:00:07.500 --> 00:00:15.000
+Çünkü veri merkezinin ekonomik değeri yalnız içinde ne olduğu ile değil, neye bağlandığıyla da ölçülür.
+
+3
+00:00:15.000 --> 00:00:21.500
+Profesyonel bir tesisin network stratejisi tek bir internet hattından ibaret olamaz.
+
+4
+00:00:21.500 --> 00:00:27.500
+Birden fazla carrier gerekir, fiziksel olarak ayrılmış fiber güzergahları gerekir,
+
+5
+00:00:27.500 --> 00:00:31.500
+meet-me room yapısı gerekir, cross-connect hizmetleri gerekir,
+
+6
+00:00:31.500 --> 00:00:39.500
+mümkünse internet exchange bağlantısı, cloud on-ramp, DCI ve ayrı out-of-band yönetim yolları gerekir.
+
+7
+00:00:39.500 --> 00:00:46.500
+Burada carrier-neutral yaklaşım yalnız teknik bir özellik değildir, ticari bir özelliktir.
+
+8
+00:00:46.500 --> 00:00:52.500
+Müşteriye seçenek verir, fiyat rekabeti yaratır, tek operatöre bağımlılığı azaltır,
+
+9
+00:00:52.500 --> 00:00:56.500
+cloud ve diğer veri merkezlerine erişimi kolaylaştırır
+
+10
+00:00:56.500 --> 00:01:01.500
+ve zamanla tesisin çevresinde bir network efekt oluşturabilir.
+
+11
+00:01:01.500 --> 00:01:07.500
+Bu yüzden başarılı veri merkezi hubları yalnız çok sayıda bina bulunan yerler değildir.
+
+12
+00:01:07.500 --> 00:01:18.500
+Carrierlerin, cloud platformlarının, içerik sağlayıcıların, CDN'lerin, internet exchange'lerin ve kurumsal müşterilerin birbirine bağlandığı ekosistemlerdir.
+
+13
+00:01:18.500 --> 00:01:22.500
+Network tasarımında da iki fiber var demek yetmez.
+
+14
+00:01:22.500 --> 00:01:34.500
+Eğer iki fiber aynı kanalizasyondan geçiyorsa, aynı çöprüden geçiyorsa veya aynı giriş odasına bağımlıysa, fiziksel bir kazı her ikisini de aynı anda etkileyebilir.
+
+15
+00:01:34.500 --> 00:01:39.500
+Logical diversity ile physical diversity aynı şey değildir.
+
+16
+00:01:39.500 --> 00:01:49.500
+Bu nedenle route survey, bina giriş noktaları, MMR tasarımı, carrier demarcation ve cross-connect operasyonu yatırımın başlangıcında düşünülmelidir.
+
+17
+00:01:49.500 --> 00:02:00.500
+Ve AI inference, finans, gaming, medya ve sağlık gibi düşük gecikmeye duyarlı iş yükleri arttıkça lokasyonun network değeri daha da büyür.
+
+18
+00:02:00.500 --> 00:02:09.500
+Bir veri merkezinin gücü yalnız megawatt ile değil, kaç farklı dijital ekosisteme ne kadar güvenilir bağlanabildiği ile de ölçülür.
