@@ -2,15 +2,6 @@ name: Data Center Knowledge DC-K01 Golden Audio
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - feature/datacenter-dck01-v2-golden
-    paths:
-      - .github/workflows/datacenter-knowledge-dck01-v2-audio.yml
-      - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
-      - datacenter/knowledge/narration/generate_dck01_v2_audio.py
-      - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
   pull_request:
     branches:
       - main
@@ -18,12 +9,15 @@ on:
       - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
       - datacenter/knowledge/narration/generate_dck01_v2_audio.py
       - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
+      - datacenter/knowledge/narration/DC-K01_PUBLISH_AUDIO_V2.txt
 
 permissions:
-  contents: read
+  contents: write
+  actions: read
 
 jobs:
   generate:
+    if: ${{ github.event_name == 'workflow_dispatch' || !contains(github.event.pull_request.title, '[PUBLISH AUDIO]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -51,3 +45,55 @@ jobs:
           path: datacenter/knowledge/audio/production/tr/dc-k01-v2/
           if-no-files-found: error
           retention-days: 30
+
+  publish:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.title, '[PUBLISH AUDIO]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN_ID: '33545593161'
+      ARTIFACT_NAME: datacenter-knowledge-dck01-golden-audio-tr-v2
+      AUDIO_DIR: datacenter/knowledge/audio/production/tr/dc-k01-v2
+    steps:
+      - name: Checkout PR head branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Download accepted 8/8 artifact
+        run: |
+          set -euo pipefail
+          rm -rf "$AUDIO_DIR"
+          mkdir -p "$AUDIO_DIR"
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$ARTIFACT_NAME" --dir "$AUDIO_DIR"
+
+      - name: Verify Golden manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('datacenter/knowledge/audio/production/tr/dc-k01-v2/manifest.json')
+          m=json.loads(p.read_text(encoding='utf-8'))
+          assert m['version']=='DC_K01_GOLDEN_AUDIO_V2',m
+          assert m['chapter_count']==8,m
+          assert m['accepted_count']==8,m
+          assert m['failed_count']==0,m
+          mp3=list(p.parent.glob('*.mp3'))
+          assert len(mp3)==8,len(mp3)
+          print('PASS_8_OF_8',m['total_duration_seconds'])
+          PY
+
+      - name: Commit accepted audio to PR branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$AUDIO_DIR"
+          if git diff --cached --quiet; then
+            echo 'Accepted audio already present.'
+            exit 0
+          fi
+          git commit -m 'Publish accepted DC-K01 Golden v2 audio [skip ci]'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
