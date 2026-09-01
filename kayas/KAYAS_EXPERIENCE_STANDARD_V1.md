@@ -7,7 +7,7 @@
 
 ## 1. Experience objective
 
-KAYAS shall present one integrated project experience rather than a collection of unrelated pages. The presentation layer remains dark, premium and infrastructure-oriented, while the information architecture follows a common SpecBridge model: executive narrative, architecture navigation, progressive technical drill-down and evidence.
+KAYAS shall present one integrated project experience rather than a collection of unrelated pages. Its default presentation remains dark, premium and infrastructure-oriented, while the information architecture follows the common SpecBridge model: executive narrative, architecture navigation, progressive technical drill-down and evidence.
 
 ## 2. Common project shell
 
@@ -19,7 +19,7 @@ Active investor-facing KAYAS surfaces must provide consistent navigation between
 - Investor Guide
 - 3D Experience
 
-The shell must preserve project context and language state.
+The shell must preserve project context, language state and compatible user theme preference.
 
 ## 3. K00 Master Architecture
 
@@ -84,13 +84,20 @@ These values must be consumed from `/kayas/data/kayas-project-data.json` on acti
 
 English and Turkish share one persistent language state. Where a dedicated localized page exists, changing language should retain the same page position/hash where practical. Technical product names and DCTS identifiers are not translated mechanically.
 
-## 9. Theme rule
+## 9. Theme standard
 
-KAYAS remains a dark, premium infrastructure experience. The common SpecBridge interaction standard does not require visual identity to match other projects such as Haven Healthcare; common information architecture and interaction behavior are shared, not project-specific visual styling.
+KAYAS declares **Dark** as its Project Default Theme, but all active Project Experience surfaces must support **Light**, **Dark** and **System** user modes.
+
+- The choice is persistent and uses the shared SpecBridge project-theme preference.
+- If no preference exists, KAYAS opens in Dark.
+- Theme changes are applied without page reload and must propagate to topology and compatible embedded views.
+- The Light theme preserves KAYAS infrastructure identity rather than applying generic color inversion.
+- In the 3D experience, theme selection changes navigation, controls and information overlays; physical scene lighting/material appearance remains governed by the 3D design.
+- Print/PDF remains print-safe/light regardless of the interactive theme unless a controlled deliverable explicitly requires another treatment.
 
 ## 10. Change-control
 
-Any new KAYAS investor-facing page should use the common canonical runtime, common navigation pattern and motion/accessibility conventions unless a documented technical reason requires an exception.
+Any new KAYAS investor-facing page should use the common canonical runtime, common navigation pattern, selectable-theme runtime and motion/accessibility conventions unless a documented technical reason requires an exception.
 
 ## 11. Mobile Architecture Mode
 
