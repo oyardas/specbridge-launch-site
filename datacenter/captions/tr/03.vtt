@@ -1,89 +1,105 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:06.000
+00:00:00.000 --> 00:00:05.887
 Bir veri merkezi yatırımında en değerli unsur her zaman arsa değildir.
 
 2
-00:00:06.000 --> 00:00:13.000
-Bugün birçok pazarda daha kritik unsur zamanında kullanılabilir elektrik kapasitesidir.
+00:00:05.887 --> 00:00:12.723
+Bugün birçok pazarda daha kritik unsur, zamanında kullanılabilir elektrik kapasitesidir.
 
 3
-00:00:13.000 --> 00:00:18.000
-Arazi bulunabilir, bina tasarlanabilir, finansman bulunabilir.
+00:00:12.723 --> 00:00:14.305
+Arazi bulunabilir.
 
 4
-00:00:18.000 --> 00:00:26.000
-Fakat doğru lokasyonda 20, 30 veya 50 megawattı hangi tarihte alabileceğiniz belli değilse,
+00:00:14.305 --> 00:00:15.940
+Bina tasarlanabilir.
 
 5
-00:00:26.000 --> 00:00:29.000
-projenin ticari takvini de belli değildir.
+00:00:15.940 --> 00:00:17.575
+Finansman bulunabilir.
 
 6
-00:00:29.000 --> 00:00:35.000
-IEA'nın güncel merkezi projeksiyonuna göre, veri merkezlerinin küresel elektrik tüketimi
+00:00:17.575 --> 00:00:28.566
+Fakat doğru lokasyonda 20, 30 veya 50 megawattı hangi tarihte alabileceğiniz belli değilse… projenin ticari takvimi de belli değildir.
 
 7
-00:00:35.000 --> 00:00:45.000
-2025'te yaklaşık 485 TWh seviyesinden, 2030'da yaklaşık 950 TWh seviyesine çıkabilir.
+00:00:28.566 --> 00:00:45.349
+IEA’nın güncel merkezi projeksiyonuna göre veri merkezlerinin küresel elektrik tüketimi 2025’te yaklaşık 485 terawatt-saat seviyesinden 2030’da yaklaşık 950 terawatt-saat seviyesine çıkabilir.
 
 8
-00:00:45.000 --> 00:00:49.000
+00:00:45.349 --> 00:00:49.328
 Bu, kabaca iki katına yakın bir artış demektir.
 
 9
-00:00:49.000 --> 00:00:55.000
-Ve bu, yalnız veri merkezi binasının içindeki elektrik ekipmanını ilgilendirmez,
+00:00:49.328 --> 00:00:55.287
+Ve bu yalnız veri merkezi binasının içindeki elektrik ekipmanını ilgilendirmez.
 
 10
-00:00:55.000 --> 00:00:59.000
-şebekeyi ilgilendirir, üretim kapasitesini ilgilendirir,
+00:00:55.287 --> 00:00:56.857
+Şebekeyi ilgilendirir.
 
 11
-00:00:59.000 --> 00:01:04.000
-trafo merkezlerine ilgilendirir, iletim ve dağıtım yatırımlarını ilgilendirir,
+00:00:56.857 --> 00:00:59.165
+Üretim kapasitesini ilgilendirir.
 
 12
-00:01:04.000 --> 00:01:08.000
-büyük transformatörlerin üretim sürelerine ilgilendirir.
+00:00:59.165 --> 00:01:01.005
+Trafo merkezlerini ilgilendirir.
 
 13
-00:01:08.000 --> 00:01:14.000
-Bu nedenle, olgun data center hub'larında yeni kapasitenin en büyük darboğazlarından biri,
+00:01:01.005 --> 00:01:04.091
+İletim ve dağıtım yatırımlarını ilgilendirir.
 
 14
-00:01:14.000 --> 00:01:20.000
-artık müşteri var mı sorusu değildir, power ne zaman geliyor sorusudur.
+00:01:04.091 --> 00:01:08.009
+Büyük transformatörlerin üretim sürelerini ilgilendirir.
 
 15
-00:01:20.000 --> 00:01:24.000
-Yatırımcı için de arazi değerlendirme sırası değişmelidir.
+00:01:08.009 --> 00:01:17.098
+Bu nedenle olgun data-center hub’larında yeni kapasitenin en büyük darboğazlarından biri artık “müşteri var mı?” sorusu değildir.
 
 16
-00:01:24.000 --> 00:01:31.000
-Bir araziye önce kaç metrekare diye bakmak, yerine kaç megawatt gerçekten tahsis edilebilir,
+00:01:17.098 --> 00:01:19.774
+“Power ne zaman geliyor?” sorusudur.
 
 17
-00:01:31.000 --> 00:01:37.000
-bağlantı hangi tarihte gelir, tek kaynak mı, alternatif besleme imkanı var mı,
+00:01:19.774 --> 00:01:23.687
+Yatırımcı için de arazi değerlendirme sırası değişmelidir.
 
 18
-00:01:37.000 --> 00:01:45.000
-genişleme hakkı var mı, trafo merkezi ne kadar yakın, enerji maliyeti ve sözleşme modeli nedir?
+00:01:23.687 --> 00:01:30.573
+Bir araziye önce “kaç metrekare?” diye bakmak yerine; Kaç megawatt gerçekten tahsis edilebilir?
 
 19
-00:01:45.000 --> 00:01:49.000
-Bu soruların cevabı, projenin değerini doğrudan belirler.
+00:01:30.573 --> 00:01:32.566
+Bağlantı hangi tarihte gelir?
 
 20
-00:01:49.000 --> 00:01:56.000
-Bu yüzden, veri merkezi sektöründe giderek daha fazla kullanılan iki kelimeyi özellikle vurgulamak gerekir.
+00:01:32.566 --> 00:01:36.981
+Tek kaynak mı, alternatif besleme imkânı var mı?
 
 21
-00:01:56.000 --> 00:01:58.000
-Secured power.
+00:01:36.981 --> 00:01:39.073
+Genişleme hakkı var mı?
 
 22
-00:01:58.000 --> 00:02:05.000
-Çünkü yatırımcı için vadedilen megawatt ile gerçekten bağlanabilir megawatt aynı şey değildir.
+00:01:39.073 --> 00:01:41.689
+Trafo merkezi ne kadar yakın?
+
+23
+00:01:41.689 --> 00:01:44.829
+Enerji maliyeti ve sözleşme modeli nedir?
+
+24
+00:01:44.829 --> 00:01:48.741
+Bu soruların cevabı, projenin değerini doğrudan belirler.
+
+25
+00:01:48.741 --> 00:01:57.245
+Bu yüzden veri merkezi sektöründe giderek daha fazla kullanılan iki kelimeyi özellikle vurgulamak gerekir: Secured power.
+
+26
+00:01:57.245 --> 00:02:05.592
+Çünkü yatırımcı için vaat edilen megawatt ile gerçekten bağlanabilir megawatt aynı şey değildir.

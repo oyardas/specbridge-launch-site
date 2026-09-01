@@ -1,109 +1,117 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:10.000
-Veri, merkezi, güvenli olmalı cümlesi çok basit görünür ama güvenlik tek bir kapı, tek bir firewall veya tek bir kamera değildir.
+00:00:00.000 --> 00:00:03.827
+“Veri merkezi güvenli olmalı” cümlesi çok basit görünür.
 
 2
-00:00:10.000 --> 00:00:12.000
-Güvenlik katmanlıdır.
+00:00:03.827 --> 00:00:10.099
+Ama güvenlik tek bir kapı, tek bir firewall veya tek bir kamera değildir.
 
 3
-00:00:12.000 --> 00:00:14.000
-Dış çevreden başlar.
+00:00:10.099 --> 00:00:12.072
+Güvenlik katmanlıdır.
 
 4
-00:00:14.000 --> 00:00:17.000
-Araç ve insan girişleri kontrol edilir.
+00:00:12.072 --> 00:00:14.061
+Dış çevreden başlar.
 
 5
-00:00:17.000 --> 00:00:19.000
-Güvenlik sonları oluşturulur.
+00:00:14.061 --> 00:00:17.101
+Araç ve insan girişleri kontrol edilir.
 
 6
-00:00:19.000 --> 00:00:28.000
-CCTV, Access Control, Mantrap, Ziyaretçi Yönetimi ve Jack seriyesine kadar erişim politikaları tasarlanır.
+00:00:17.101 --> 00:00:19.114
+Güvenlik zonları oluşturulur.
 
 7
-00:00:28.000 --> 00:00:32.000
-Ama fiziksel güvenlik yalnızca ilk halkadır.
+00:00:19.114 --> 00:00:28.151
+CCTV, access control, mantrap, ziyaretçi yönetimi ve rack seviyesine kadar erişim politikaları tasarlanır.
 
 8
-00:00:32.000 --> 00:00:37.000
-Bir saldırganın binaya hiç girmeden kritik sisteme erişebilmesi mümkündür.
+00:00:28.151 --> 00:00:32.142
+Ama fiziksel güvenlik yalnızca ilk halkadır.
 
 9
-00:00:37.000 --> 00:00:53.000
-Bu nedenle Network Segmentation, Firewall Mimarisi, Privileged Access Management, Yönetim Ağı, Loglama, Monitoring, SOC entegrasyonu ve Out-of-Band erişim politikaları fiziksel güvenlik kadar önemlidir.
+00:00:32.142 --> 00:00:37.190
+Bir saldırganın binaya hiç girmeden kritik sisteme erişebilmesi mümkündür.
 
 10
-00:00:53.000 --> 00:00:56.000
-Burada özellikle yönetim ağına dikkat etmek gerekir.
+00:00:37.190 --> 00:00:45.549
+Bu nedenle network segmentation, firewall mimarisi, privileged access management, yönetim ağı, loglama, monitoring,
 
 11
-00:00:56.000 --> 00:01:06.000
-BMS, EPMS, UPS, PDU, SWITCH, Firewall, Storage ve Server Management arayüzleri operasyon açısından vazgeçilmezdir.
+00:00:45.549 --> 00:00:53.178
+SOC entegrasyonu ve out-of-band erişim politikaları fiziksel güvenlik kadar önemlidir.
 
 12
-00:01:06.000 --> 00:01:14.000
-Fakat yanlış tasarlanmış bir Management Network, saldırgan için bütün altyapıya açılan kestirme yol haline gelebilir.
+00:00:53.178 --> 00:00:56.320
+Burada özellikle yönetim ağına dikkat etmek gerekir.
 
 13
-00:01:14.000 --> 00:01:17.000
-Güvenlik aynı zamanda süreçtir.
+00:00:56.320 --> 00:01:06.274
+BMS, EPMS, UPS, PDU, switch, firewall, storage ve server management arayüzleri; operasyon açısından vazgeçilmezdir.
 
 14
-00:01:17.000 --> 00:01:18.000
-Kim erişebilir?
+00:01:06.274 --> 00:01:14.439
+Fakat yanlış tasarlanmış bir management network, saldırgan için bütün altyapıya açılan kestirme yol haline gelebilir.
 
 15
-00:01:18.000 --> 00:01:19.000
-Hangi şartta?
+00:01:14.439 --> 00:01:17.302
+Güvenlik aynı zamanda süreçtir.
 
 16
-00:01:19.000 --> 00:01:21.000
-Ne kadar süreyle?
+00:01:17.302 --> 00:01:18.307
+Kim erişebilir?
 
 17
-00:01:21.000 --> 00:01:23.000
-Erişim kayda alınıyor mu?
+00:01:18.307 --> 00:01:19.415
+Hangi şartta?
 
 18
-00:01:23.000 --> 00:01:27.000
-Bir çalışan ayrıldığında yetkiler ne kadar hızlı kakanıyor?
+00:01:19.415 --> 00:01:21.318
+Ne kadar süreyle?
 
 19
-00:01:27.000 --> 00:01:29.000
-Vendor uzaktan bağlanabiliyor mu?
+00:01:21.318 --> 00:01:23.328
+Erişim kayda alınıyor mu?
 
 20
-00:01:29.000 --> 00:01:32.000
-Acil durumda hangi hesaplar kullanılacak?
+00:01:23.328 --> 00:01:27.347
+Bir çalışan ayrıldığında yetkiler ne kadar hızlı kapanıyor?
 
 21
-00:01:32.000 --> 00:01:34.000
-Backup Immutable mı?
+00:01:27.347 --> 00:01:29.427
+Vendor uzaktan bağlanabiliyor mu?
 
 22
-00:01:34.000 --> 00:01:36.000
-Cyber Recovery ayrı mı?
+00:01:29.427 --> 00:01:32.491
+Acil durumda hangi hesaplar kullanılacak?
 
 23
-00:01:36.000 --> 00:01:40.000
-ISO 2007-1 gibi çerçevelerin önemi burada ortaya çıkar.
+00:01:32.491 --> 00:01:34.375
+Backup immutable mı?
 
 24
-00:01:40.000 --> 00:01:44.000
-Çünkü teknoloji ürünleri tek başına güvenlik sağlamaz.
+00:01:34.375 --> 00:01:36.342
+Cyber recovery ayrı mı?
 
 25
-00:01:44.000 --> 00:01:53.000
-Yönetim sistemi, rol ve sorumluluklar, risk değerlendirmesi, kontrol süreçleri ve sürekli iyileştirme gerekir.
+00:01:36.342 --> 00:01:39.914
+ISO 27001 gibi çerçevelerin önemi burada ortaya çıkar.
 
 26
-00:01:53.000 --> 00:01:58.000
-Güvenli veri merkezi en fazla güvenlik ürünü satın alan tesis değildir.
+00:01:39.914 --> 00:01:43.908
+Çünkü teknoloji ürünleri tek başına güvenlik sağlamaz.
 
 27
-00:01:58.000 --> 00:02:05.000
+00:01:43.908 --> 00:01:52.931
+Yönetim sistemi, rol ve sorumluluklar, risk değerlendirmesi, kontrol süreçleri ve sürekli iyileştirme gerekir.
+
+28
+00:01:52.931 --> 00:01:57.979
+Güvenli veri merkezi, en fazla güvenlik ürünü satın alan tesis değildir.
+
+29
+00:01:57.979 --> 00:02:06.168
 Güvenliği fiziksel, teknik ve operasyonel katmanlarda tutarlı şekilde yöneten tesistir.

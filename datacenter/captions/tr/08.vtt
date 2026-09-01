@@ -1,109 +1,113 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:03.680
+00:00:00.000 --> 00:00:03.835
 Bir veri merkezi açılış günü tamamlanmaz.
 
 2
-00:00:03.680 --> 00:00:05.680
+00:00:03.835 --> 00:00:06.012
 Aslında o gün başlar.
 
 3
-00:00:05.680 --> 00:00:17.280
+00:00:06.012 --> 00:00:18.036
 Çünkü tesisin ömrü boyunca yapılacak binlerce bakım, değişiklik, arıza müdahalesi, kapasite ekleme, yazılım güncellemesi ve insan müdahalesi vardır.
 
 4
-00:00:17.280 --> 00:00:24.080
+00:00:18.036 --> 00:00:25.168
 Bu nedenle tasarım ne kadar iyi olursa olsun, operasyon zayıfsa dayanıklılık da zayıftır.
 
 5
-00:00:24.080 --> 00:00:27.680
-Data Center operasyonunda üç kısaltma çok önemlidir.
+00:00:25.168 --> 00:00:29.943
+Data-center operasyonunda üç kısaltma çok önemlidir: SOP.
 
 6
-00:00:27.920 --> 00:00:31.360
-S.O.P. Standard Operating Procedure
+00:00:29.943 --> 00:00:31.642
+Standard Operating Procedure.
 
 7
-00:00:31.360 --> 00:00:33.840
-M.O.P. Method of Procedure
+00:00:31.642 --> 00:00:32.077
+MOP.
 
 8
-00:00:33.840 --> 00:00:37.280
-E.O.P. Emergency Operating Procedure
+00:00:32.077 --> 00:00:33.381
+Method of Procedure.
 
 9
-00:00:37.280 --> 00:00:41.040
-S.O.P. normal işlerin nasıl yapılacağını tanımlar.
+00:00:33.381 --> 00:00:33.815
+EOP.
 
 10
-00:00:41.040 --> 00:00:48.320
-M.O.P. örneğin bir UPS bakımı veya kritik switching işleminin adım adım nasıl uygulanacağını belirler.
+00:00:33.815 --> 00:00:35.615
+Emergency Operating Procedure.
 
 11
-00:00:48.320 --> 00:00:53.360
-E.O.P. ise normal planın bozulduğu anda ne yapılacağını tanımlar.
+00:00:35.615 --> 00:00:38.880
+SOP, normal işlerin nasıl yapılacağını tanımlar.
 
 12
-00:00:53.360 --> 00:00:55.680
-Bu belgeler bürokrasi değildir.
+00:00:38.880 --> 00:00:45.648
+MOP, örneğin bir UPS bakımı veya kritik switching işleminin adım adım nasıl uygulanacağını belirler.
 
 13
-00:00:55.680 --> 00:01:02.640
-Doğru yazıldığında insan hatasının sistem üzerindeki etkisini azaltan güvenlik katmanlarıdır.
+00:00:45.648 --> 00:00:49.965
+EOP ise normal planın bozulduğu anda ne yapılacağını tanımlar.
 
 14
-00:01:02.640 --> 00:01:14.720
-Uptime Institute'un yıllardır yayımladığı alt iç araştırmalarında insan ve süreç faktörleri ciddi kesintilerin önemli nedenleri arasında tekrar tekrar karşımıza çıkıyor.
+00:00:49.965 --> 00:00:51.893
+Bu belgeler bürokrasi değildir.
 
 15
-00:01:14.720 --> 00:01:17.040
-Bu bize kritik bir şey söyler.
+00:00:51.893 --> 00:00:57.986
+Doğru yazıldığında, insan hatasının sistem üzerindeki etkisini azaltan güvenlik katmanlarıdır.
 
 16
-00:01:17.040 --> 00:01:20.560
-10 milyonlarca dolarlık redundancy kurabilirsiniz.
+00:00:57.986 --> 00:01:10.669
+Uptime Institute’un yıllardır yayımladığı outage araştırmalarında insan ve süreç faktörleri ciddi kesintilerin önemli nedenleri arasında tekrar tekrar karşımıza çıkıyor.
 
 17
-00:01:20.560 --> 00:01:36.560
-Ama yanlış sırada açılan bir breaker, yanlış anlaşılan bir alarm, eksik bir bakım prosedürü veya yeterince eğitim almamış bir operasyon ekibi, bütün bu fiziksel yatırımı birkaç dakika içinde anlamsız hale getirebilir.
+00:01:10.669 --> 00:01:16.600
+Bu bize kritik bir şey söyler: On milyonlarca dolarlık redundancy kurabilirsiniz.
 
 18
-00:01:36.560 --> 00:01:39.760
-Uptime yalnız ekipman özelliği değildir.
+00:01:16.600 --> 00:01:29.332
+Ama yanlış sırada açılan bir breaker… yanlış anlaşılan bir alarm… eksik bir bakım prosedürü… veya yeterince eğitim almamış bir operasyon ekibi… bütün
 
 19
-00:01:39.760 --> 00:01:42.480
-Uptime bir işletme disiplinidir.
+00:01:29.332 --> 00:01:34.217
+bu fiziksel yatırımı birkaç dakika içinde anlamsız hale getirebilir.
 
 20
-00:01:42.480 --> 00:01:48.400
-Burada DCIM, BMS ve EPMS gibi sistemler de önem kazanır.
+00:01:34.217 --> 00:01:37.020
+Uptime, yalnız ekipman özelliği değildir.
 
 21
-00:01:48.400 --> 00:01:51.600
-BMS mekanik ve bina sistemlerini izler.
+00:01:37.020 --> 00:01:39.712
+Uptime bir işletme disiplinidir.
 
 22
-00:01:51.600 --> 00:01:55.600
-EPMS, elektrik altyapısını görünür hale getirir.
+00:01:39.712 --> 00:01:46.293
+Burada DCIM, BMS ve EPMS gibi sistemler de önem kazanır.
 
 23
-00:01:55.600 --> 00:02:03.200
-DCIM, kapasite, rack, enerji ve çevresel veriyi operasyonel kararlarla ilişkilendirebilir.
+00:01:46.293 --> 00:01:49.867
+BMS mekanik ve bina sistemlerini izler.
 
 24
-00:02:03.200 --> 00:02:07.200
-Fakat hiçbir yazılım tek başına iyi operasyon yaratmaz.
+00:01:49.867 --> 00:01:53.640
+EPMS elektrik altyapısını görünür hale getirir.
 
 25
-00:02:07.280 --> 00:02:20.320
-Yetkin ekip, vardiya yapısı, alarm yönetimi, eskalasyon, spare parts, vendor SNA, bakım planı, change management ve olay sonrası öğrenme mekanizması birlikte kurulmalıdır.
+00:01:53.640 --> 00:02:01.357
+DCIM kapasite, rack, enerji ve çevresel veriyi operasyonel kararlarla ilişkilendirebilir.
 
 26
-00:02:20.320 --> 00:02:23.760
-Ve yatırımcı açısından en önemli nokta şudur.
+00:02:01.357 --> 00:02:06.194
+Fakat hiçbir yazılım tek başına iyi operasyon yaratmaz.
 
 27
-00:02:23.760 --> 00:02:28.960
-Veri merkezi CAPEX ile kurulur ama OPEX disipliniyle ayakta kalır.
+00:02:06.194 --> 00:02:19.800
+Yetkin ekip, vardiya yapısı, alarm yönetimi, escalation, spare parts, vendor SLA, bakım planı, change management ve olay sonrası öğrenme mekanizması birlikte kurulmalıdır.
+
+28
+00:02:19.800 --> 00:02:29.112
+Ve yatırımcı açısından en önemli nokta şudur: Veri merkezi CAPEX ile kurulur… ama OPEX disipliniyle ayakta kalır.

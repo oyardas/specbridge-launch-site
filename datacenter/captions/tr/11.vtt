@@ -1,129 +1,113 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:03.360
-Şimdi, küresel resmi Türkiye'ye getirelim.
+00:00:00.000 --> 00:00:03.339
+Şimdi küresel resmi Türkiye’ye getirelim.
 
 2
-00:00:03.840 --> 00:00:07.960
-Türkiye'nin veri merkezi yatırım tezi tek bir avantaja dayanmaz.
+00:00:03.339 --> 00:00:07.920
+Türkiye’nin veri merkezi yatırım tezi tek bir avantaja dayanmaz.
 
 3
-00:00:08.320 --> 00:00:12.200
+00:00:07.920 --> 00:00:12.133
 Asıl güç, birkaç faktörün aynı anda birleşmesinden gelir.
 
 4
-00:00:12.560 --> 00:00:14.720
+00:00:12.133 --> 00:00:14.647
 Birincisi, büyük bir iç pazar.
 
 5
-00:00:15.120 --> 00:00:22.520
-Türkiye, 86 milyonu aşan nüfusuyla Avrupa'nın ve yakın coğrafyanın büyük dijital tüketici pazarlarından biri.
+00:00:14.647 --> 00:00:22.384
+Türkiye 86 milyonu aşan nüfusuyla Avrupa’nın ve yakın coğrafyanın büyük dijital tüketici pazarlarından biri.
 
 6
-00:00:23.080 --> 00:00:32.720
-TÜİK'in ALSTOS 2026 verilerine göre, 16-74 yaş grubunda internet kullanım oranı %92,3 seviyesine ulaşmış durumda.
+00:00:22.384 --> 00:00:33.467
+TÜİK’in Ağustos 2026 verilerine göre 16–74 yaş grubunda internet kullanım oranı yüzde 92,3 seviyesine ulaşmış durumda.
 
 7
-00:00:33.240 --> 00:00:35.040
-Bu, önemli bir ayrım yaratıyor.
+00:00:33.467 --> 00:00:35.759
+Bu önemli bir ayrım yaratıyor.
 
 8
-00:00:35.480 --> 00:00:38.280
-Türkiye, gelecekte dijitalleşecek bir ülke değil.
+00:00:35.759 --> 00:00:38.891
+Türkiye gelecekte dijitalleşecek bir ülke değil.
 
 9
-00:00:38.640 --> 00:00:41.320
-Türkiye, zaten büyük bir dijital ekonomi.
+00:00:38.891 --> 00:00:42.072
+Türkiye zaten büyük bir dijital ekonomi.
 
 10
-00:00:41.800 --> 00:00:50.120
+00:00:42.072 --> 00:00:50.826
 Bankacılık, e-devlet, e-ticaret, medya, gaming, sağlık, üretim, telekom ve kurumsal uygulamalar sürekli veri üretiyor.
 
 11
-00:00:50.640 --> 00:00:53.280
-İkinci faktör, coğrafya ve network konumu.
+00:00:50.826 --> 00:00:53.892
+İkinci faktör coğrafya ve network konumu.
 
 12
-00:00:53.720 --> 00:01:00.400
+00:00:53.892 --> 00:01:01.126
 Türkiye, Avrupa ile Orta Doğu, Karadeniz, Kafkasya ve Orta Asya arasında doğal bir kesişim noktasında.
 
 13
-00:01:00.960 --> 00:01:06.640
-Ama coğrafi haritada merkezde olmak, tek başına dijital hub olmak için yeterli değildir.
+00:01:01.126 --> 00:01:07.195
+Ama coğrafi haritada merkezde olmak tek başına dijital hub olmak için yeterli değildir.
 
 14
-00:01:07.080 --> 00:01:10.920
+00:01:07.195 --> 00:01:11.503
 Gerçek network trafiği ve interconnection ekosistemi gerekir.
 
 15
-00:01:11.400 --> 00:01:20.040
-DECIX verilerine göre, İstanbul Internet Exchange üzerinden 2025 yılında yaklaşık 927 petabyte trafik geçti.
+00:01:11.503 --> 00:01:20.953
+DE-CIX verilerine göre İstanbul Internet Exchange üzerinden 2025 yılında yaklaşık 927 petabyte trafik geçti.
 
 16
-00:01:20.520 --> 00:01:24.560
+00:01:20.953 --> 00:01:25.690
 Bu, bir önceki yıla göre yaklaşık yüzde 28 artış demek.
 
 17
-00:01:25.160 --> 00:01:34.080
-2025 içinde, peak trafik 500 gigabit saniye eşiğini aştı ve Eylül ayında 533 gigabit saniyenin üzerine çıktı.
+00:01:25.690 --> 00:01:34.921
+2025 içinde peak trafik 500 gigabit/saniye eşiğini aştı ve Eylül ayında 533 gigabit/saniyenin üzerine çıktı.
 
 18
-00:01:34.560 --> 00:01:36.160
-Bu rakamların anlamı şudur.
+00:01:34.921 --> 00:01:46.269
+Bu rakamların anlamı şudur: İstanbul yalnız transit noktası değil… giderek daha fazla network’ün birbirine bağlandığı bir dijital buluşma noktası haline geliyor.
 
 19
-00:01:36.560 --> 00:01:45.200
-İstanbul, yalnız transit noktası değil, giderek daha fazla network'ın birbirine bağlandığı bir dijital buluşma noktası haline geliyor.
+00:01:46.269 --> 00:01:49.314
+Üçüncü faktör hyperscaler sinyalleri.
 
 20
-00:01:45.760 --> 00:01:48.400
-Üçüncü faktör, hyperscaler sinyalleri.
+00:01:49.314 --> 00:01:54.993
+AWS, 20 Mayıs 2026’da İstanbul Local Zone’u genel kullanıma açtı.
 
 21
-00:01:48.920 --> 00:01:54.200
-AWS, 20 Mayıs 2026'da İstanbul Local Zone'u genel kullanıma açtı.
+00:01:54.993 --> 00:02:00.533
+Bu yapı tam bir AWS Region değildir; bunu doğru ifade etmek gerekir.
 
 22
-00:01:54.720 --> 00:01:57.520
-Bu yapı, tam bir AWS region değildir.
+00:02:00.533 --> 00:02:11.635
+Ancak compute, networking ve local storage servislerini kullanıcıya yaklaştırması, latency ve data-residency ihtiyacına verilen somut bir altyapı cevabıdır.
 
 23
-00:01:57.880 --> 00:01:59.680
-Bunu doğru ifade etmek gerekir.
+00:02:11.635 --> 00:02:18.322
+Google Cloud ise Kasım 2025’te Türkiye’de yeni bir cloud region kurma planını açıkladı.
 
 24
-00:02:00.200 --> 00:02:10.600
-Ancak compute, networking ve local storage servislerini kullanıcıya yaklaştırması, latency ve data residency ihtiyacına verilen somut bir altyapı cevabıdır.
+00:02:18.322 --> 00:02:23.189
+Google bunu on yıllık 2 milyar dolarlık Türkiye yatırımı kapsamında duyurdu;
 
 25
-00:02:11.400 --> 00:02:17.640
-Google Cloud ise Kasım 2025'te Türkiye'de yeni bir cloud region kurma planını açıkladı.
+00:02:23.189 --> 00:02:29.418
+Turkcell de data center ve cloud teknolojilerine 1 milyar dolar yatırım planını açıkladı.
 
 26
-00:02:18.160 --> 00:02:22.480
-Google bunu, 10 yıllık 2 milyar dolarlık Türkiye yatırımı kapsamında duyurdu.
+00:02:29.418 --> 00:02:36.123
+Bunlar şu anlama gelmez: “Artık her veri merkezi dolacaktır.” Ama çok güçlü bir şeyi gösterir:
 
 27
-00:02:23.040 --> 00:02:28.720
-Turkcell de, data center ve cloud teknolojilerine 1 milyar dolar yatırım planını açıkladı.
+00:02:36.123 --> 00:02:44.194
+Global platformlar Türkiye’yi yalnız satış pazarı olarak değil, fiziksel dijital altyapı pazarı olarak da değerlendirmeye başlamıştır.
 
 28
-00:02:29.320 --> 00:02:30.800
-Bunlar şu anlama gelmez.
-
-29
-00:02:31.280 --> 00:02:33.280
-Artık her veri merkezi dolacaktır.
-
-30
-00:02:33.880 --> 00:02:35.560
-Ama çok güçlü bir şey gösterir.
-
-31
-00:02:36.040 --> 00:02:44.120
-Global platformlar, Türkiye'yi yalnız satış pazarı olarak değil, fiziksel-dijital altyapı pazarı olarak da değerlendirmeye başlamıştır.
-
-32
-00:02:44.120 --> 00:02:49.520
-Ve bu değişim yatırımcı açısından dikkate değer bir zamanlana sinirlidir.
+00:02:44.194 --> 00:02:49.824
+Ve bu değişim yatırımcı açısından dikkate değer bir zamanlama sinyalidir.

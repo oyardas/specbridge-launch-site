@@ -1,81 +1,101 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:06.000
-Şimdi, birkaç milyon dolarlık sunucunun bulunduğu bir kabinetin önünde durduğumuzu düşünelim.
+00:00:00.000 --> 00:00:05.973
+Şimdi birkaç milyon dolarlık sunucunun bulunduğu bir kabinetin önünde durduğumuzu düşünelim.
 
 2
-00:00:06.640 --> 00:00:07.800
+00:00:05.973 --> 00:00:07.766
 Kabinet çalışıyor.
 
 3
-00:00:08.360 --> 00:00:10.280
+00:00:07.766 --> 00:00:10.244
 Peki elektrik nereden geliyor?
 
 4
-00:00:10.680 --> 00:00:12.000
+00:00:10.244 --> 00:00:11.969
 Bir adım geriye gidelim.
 
 5
-00:00:12.480 --> 00:00:23.480
-Rack PDU'dan dağıtım sistemine, oradan UPS'e, switchgear'a, transformatöre, şebekeye ve yedek üretim sistemlerine kadar uzanan bir zincir var.
+00:00:11.969 --> 00:00:23.374
+Rack PDU’dan dağıtım sistemine… oradan UPS’e… switchgear’a… transformatöre… şebekeye ve yedek üretim sistemlerine kadar uzanan bir zincir var.
 
 6
-00:00:24.120 --> 00:00:30.320
-Bu zincirin herhangi bir halkası piyasasızsa, en pahalı IT ekipmanı bile güvenilir değildir.
+00:00:23.374 --> 00:00:30.209
+Bu zincirin herhangi bir halkası plansızsa, en pahalı IT ekipmanı bile güvenilir değildir.
 
 7
-00:00:31.000 --> 00:00:35.880
-Burada redundancy ile resilience arasındaki fark kritik önem taşır.
+00:00:30.209 --> 00:00:35.732
+Burada “redundancy” ile “resilience” arasındaki fark kritik önem taşır.
 
 8
-00:00:36.520 --> 00:00:40.040
+00:00:35.732 --> 00:00:39.904
 İki adet UPS satın almak redundancy gibi görünebilir.
 
 9
-00:00:40.640 --> 00:00:49.840
-Ama iki UPS aynı upstream panelden besleniyorsa, aynı kontrol sistemine bağımlıysa, aynı kablo güzergahından geçiyorsa
+00:00:39.904 --> 00:00:54.570
+Ama iki UPS aynı upstream panelden besleniyorsa… aynı kontrol sistemine bağımlıysa… aynı kablo güzergâhından geçiyorsa… veya bakım sırasında ikisini aynı anda etkileyen
 
 10
-00:00:50.320 --> 00:00:59.840
-veya bakım sırasında ikisini aynı anda etkileyen bir switching prosedürü varsa, kağıt üzerindeki yedeklilik gerçek dayanıklılığa dönüşmeyebilir.
+00:00:54.570 --> 00:01:00.792
+bir switching prosedürü varsa… kağıt üzerindeki yedeklilik gerçek dayanıklılığa dönüşmeyebilir.
 
 11
-00:01:00.560 --> 00:01:04.400
-İki cihaz otomatik olarak iki bağımsız yol anlamına gelmez.
+00:01:00.792 --> 00:01:05.280
+İki cihaz, otomatik olarak iki bağımsız yol anlamına gelmez.
 
 12
-00:01:05.040 --> 00:01:09.320
-Bu nedenle Profesyonel Data Center tasarımı ekipman listesiyle bitmez.
+00:01:05.280 --> 00:01:10.132
+Bu nedenle profesyonel data-center tasarımı ekipman listesiyle bitmez.
 
 13
-00:01:09.880 --> 00:01:19.640
-Tek hat şemaları gerekir, kuruma koordinasyonu gerekir, selektiviti gerekir, A ve B yollarının gerçekten bağımsız olup olmadığı doğrulanır,
+00:01:10.132 --> 00:01:12.291
+Tek hat şemaları gerekir.
 
 14
-00:01:20.080 --> 00:01:28.480
-bakım senaryoları incelenir, arıza durumunda hangi breaker'ın açacağı hesaplanır, jeneratörün devreye giriş sırası test edilir.
+00:01:12.291 --> 00:01:13.910
+Koruma koordinasyonu gerekir.
 
 15
-00:01:29.040 --> 00:01:35.560
-UPS otonomisi yalnız katalogdan değil, gerçek yük ve çalışma senaryosundan değerlendirilir.
+00:01:13.910 --> 00:01:14.990
+Selectivity gerekir.
 
 16
-00:01:36.160 --> 00:01:41.000
-Tier 3 hedefi konuşuluyorsa amaç sadece yedek cihaz satın almak değildir.
+00:01:14.990 --> 00:01:20.295
+A ve B yollarının gerçekten bağımsız olup olmadığı doğrulanır.
 
 17
-00:01:41.640 --> 00:01:47.960
-Asıl hedef planlı bakım yapılırken kritik IT yükünü durdurmadan altyapının sürdürülebilmesidir.
+00:01:20.295 --> 00:01:21.968
+Bakım senaryoları incelenir.
 
 18
-00:01:48.680 --> 00:01:52.720
-Bu da satın alma kararından çok daha geniş bir mühendislik problemidir.
+00:01:21.968 --> 00:01:25.313
+Arıza durumunda hangi breaker’ın açacağı hesaplanır.
 
 19
-00:01:53.520 --> 00:01:57.000
-Ve yatırımcının görmediği değer tam olarak burada oluşur.
+00:01:25.313 --> 00:01:29.228
+Jeneratörün devreye giriş sırası test edilir.
 
 20
-00:01:57.000 --> 00:02:06.760
-Kabinetin önünde görünen birkaç kilolatın arkasında onu güvenilir hale getiren milyonlarca dolarlık ve çok disiplinli bir güç mimarisi vardır.
+00:01:29.228 --> 00:01:36.278
+UPS autonomy’si yalnız katalogdan değil, gerçek yük ve çalışma senaryosundan değerlendirilir.
+
+21
+00:01:36.278 --> 00:01:41.766
+Tier III hedefi konuşuluyorsa amaç sadece “yedek cihaz satın almak” değildir.
+
+22
+00:01:41.766 --> 00:01:48.742
+Asıl hedef, planlı bakım yapılırken kritik IT yükünü durdurmadan altyapının sürdürülebilmesidir.
+
+23
+00:01:48.742 --> 00:01:53.572
+Bu da satın alma kararından çok daha geniş bir mühendislik problemidir.
+
+24
+00:01:53.572 --> 00:02:00.112
+Ve yatırımcının görmediği değer tam olarak burada oluşur: Kabinetin önünde görünen birkaç kilowattın arkasında,
+
+25
+00:02:00.112 --> 00:02:07.368
+onu güvenilir hale getiren milyonlarca dolarlık ve çok disiplinli bir güç mimarisi vardır.

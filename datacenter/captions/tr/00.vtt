@@ -1,85 +1,145 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:06.600
-Bir veri merkezine ilk kez giren bir yatırımcının gördüğü şey, genellikle kabinetlerdir.
+00:00:00.000 --> 00:00:06.486
+Bir veri merkezine ilk kez giren bir yatırımcının gördüğü şey genellikle kabinetlerdir.
 
 2
-00:00:06.600 --> 00:00:15.400
-Sıralar halinde duran siyah kabinetler, içlerindeki sunucular, yanıp sonan ışıklar ve kilometrelerce kablo.
+00:00:06.486 --> 00:00:15.108
+Sıralar halinde duran siyah kabinetler… içlerindeki sunucular… yanıp sönen ışıklar… ve kilometrelerce kablo.
 
 3
-00:00:15.400 --> 00:00:20.000
+00:00:15.108 --> 00:00:19.637
 Fakat veri merkezinin kendisi bunların hiçbiri değildir.
 
 4
-00:00:20.000 --> 00:00:23.400
-Kabinet yalnızca görünen son noktadır.
+00:00:19.637 --> 00:00:22.966
+Kabinet, yalnızca görünen son noktadır.
 
 5
-00:00:23.400 --> 00:00:33.000
-Asıl yatırım, o kabinetin yılın 365 günü, günün 24 saati güvenilir biçimde çalışabilmesini sağlayan bütün sistemdir.
+00:00:22.966 --> 00:00:35.802
+Asıl yatırım; o kabinetin yılın üç yüz altmış beş günü, günün yirmi dört saati güvenilir biçimde çalışabilmesini sağlayan bütün sistemdir.
 
 6
-00:00:33.000 --> 00:00:46.000
-Elektriktir, soğutmadır, fiber bağlantıdır, fiziksel güvenliktir, siber güvenliktir, izlemedir, operasyondur, bakımdır, prosedürdür, insan kaynağıdır.
+00:00:35.802 --> 00:00:36.714
+Elektriktir.
 
 7
-00:00:46.000 --> 00:00:51.800
-Ve bütün bunların tek bir yapı gibi davranmasını sağlayan mühendislik disiplinidir.
+00:00:36.714 --> 00:00:37.627
+Soğutmadır.
 
 8
-00:00:52.000 --> 00:00:57.600
-Bir ofis binasında elektrik kesildiğinde çalışanlar birkaç dakika bekleyebilir.
+00:00:37.627 --> 00:00:39.452
+Fiber bağlantıdır.
 
 9
-00:00:57.600 --> 00:01:02.600
-Bir alışveriş merkezinde bazı sistemler kontrollü şekilde kapanabilir.
+00:00:39.452 --> 00:00:41.277
+Fiziksel güvenliktir.
 
 10
-00:01:02.600 --> 00:01:08.000
-Ama bir veri merkezinin ürünü tam da bu kesintinin gerçekleşmemesidir.
+00:00:41.277 --> 00:00:43.102
+Siber güvenliktir.
 
 11
-00:01:08.000 --> 00:01:14.000
-Bu nedenle veri merkezi yatırımını yalnız gayrimenkul mantığıyla değerlendirmek eksik kalır.
+00:00:43.102 --> 00:00:44.015
+İzlemedir.
 
 12
-00:01:14.000 --> 00:01:19.000
-Burada metrekare satılmaz, burada güvenilir kapasite üretilir.
+00:00:44.015 --> 00:00:44.927
+Operasyondur.
 
 13
-00:01:19.000 --> 00:01:23.000
-Müşterinin satın aldığı şey aslında bir kabinet değildir.
+00:00:44.927 --> 00:00:45.840
+Bakımdır.
 
 14
-00:01:23.000 --> 00:01:35.400
-Güç kapasitesidir, bağlantıdır, kontrollü çevresel koşullardır, güvenliktir, uptime'dir ve gerektiğinde bütün bu hizmetlerin arkasında duran operasyonel tahriktir.
+00:00:45.840 --> 00:00:46.427
+Prosedürdür.
 
 15
-00:01:35.400 --> 00:01:44.800
-Bir başka ifadeyle veri merkezi bir bina değil, birbirine bağımlı kritik sistemlerin oluşturduğu bir system of systems yapısıdır.
+00:00:46.427 --> 00:00:47.464
+İnsan kaynağıdır.
 
 16
-00:01:44.800 --> 00:01:46.800
-Ve kritik nokta şudur.
+00:00:47.464 --> 00:00:53.609
+Ve bütün bunların tek bir yapı gibi davranmasını sağlayan mühendislik disiplinidir.
 
 17
-00:01:46.800 --> 00:01:54.800
-En pahalı sunucuyu satın alabilirsiniz, en güçlü switch'i kurabilirsiniz, en iyi UPS markasını seçebilirsiniz.
+00:00:53.609 --> 00:00:59.119
+Bir ofis binasında elektrik kesildiğinde çalışanlar birkaç dakika bekleyebilir.
 
 18
-00:01:54.800 --> 00:02:02.400
-Ama sistemin tamamı doğru tasarlanmamışsa, bu parçaların hiçbiri tek başına size dayanıklılık sağlamaz.
+00:00:59.119 --> 00:01:03.838
+Bir alışveriş merkezinde bazı sistemler kontrollü şekilde kapanabilir.
 
 19
-00:02:02.400 --> 00:02:06.400
-Bu anlatım boyunca aslında tek bir soruya cevap arayacağız.
+00:01:03.838 --> 00:01:09.157
+Ama bir veri merkezinin ürünü, tam da bu kesintinin gerçekleşmemesidir.
 
 20
-00:02:06.400 --> 00:02:11.800
-Bir yatırımcı veri merkezine gerçekten yatırım yaptığında ne satın alır?
+00:01:09.157 --> 00:01:15.379
+Bu nedenle veri merkezi yatırımını yalnız gayrimenkul mantığıyla değerlendirmek eksik kalır.
 
 21
-00:02:11.800 --> 00:02:16.800
-Ve bu yatırımın başarılı olması için hangi parçaların birlikte doğru çalışması gerekir?
+00:01:15.379 --> 00:01:17.485
+Burada metrekare satılmaz.
+
+22
+00:01:17.485 --> 00:01:19.905
+Burada güvenilir kapasite üretilir.
+
+23
+00:01:19.905 --> 00:01:24.220
+Müşterinin satın aldığı şey aslında bir kabinet değildir.
+
+24
+00:01:24.220 --> 00:01:25.654
+Güç kapasitesidir.
+
+25
+00:01:25.654 --> 00:01:26.370
+Bağlantıdır.
+
+26
+00:01:26.370 --> 00:01:28.521
+Kontrollü çevresel koşullardır.
+
+27
+00:01:28.521 --> 00:01:29.238
+Güvenliktir.
+
+28
+00:01:29.238 --> 00:01:29.955
+Uptime’dır.
+
+29
+00:01:29.955 --> 00:01:36.120
+Ve gerektiğinde bütün bu hizmetlerin arkasında duran operasyonel taahhüttür.
+
+30
+00:01:36.120 --> 00:01:45.334
+Bir başka ifadeyle, veri merkezi bir bina değil; birbirine bağımlı kritik sistemlerin oluşturduğu bir system of systems yapısıdır.
+
+31
+00:01:45.334 --> 00:01:50.179
+Ve kritik nokta şudur: En pahalı sunucuyu satın alabilirsiniz.
+
+32
+00:01:50.179 --> 00:01:52.426
+En güçlü switch’i kurabilirsiniz.
+
+33
+00:01:52.426 --> 00:01:55.244
+En iyi UPS markasını seçebilirsiniz.
+
+34
+00:01:55.244 --> 00:02:02.638
+Ama sistemin tamamı doğru tasarlanmamışsa… bu parçaların hiçbiri tek başına size dayanıklılık sağlamaz.
+
+35
+00:02:02.638 --> 00:02:07.666
+Bu anlatım boyunca aslında tek bir soruya cevap arayacağız: Bir yatırımcı,
+
+36
+00:02:07.666 --> 00:02:17.232
+veri merkezine gerçekten yatırım yaptığında ne satın alır… ve bu yatırımın başarılı olması için hangi parçaların birlikte doğru çalışması gerekir?

@@ -1,153 +1,133 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:07.000
-Dijital ekonomi görünmezdir ama onu çalıştıran altyapırı son derece fizikseldir.
+00:00:00.000 --> 00:00:06.949
+Dijital ekonomi görünmezdir… ama onu çalıştıran altyapı son derece fizikseldir.
 
 2
-00:00:07.000 --> 00:00:16.000
-Bir banka havanesi yaptığınızda, bir hastane emar görüntüsünü açtığında, bir şirket seype üzerinde sipariş girdiğinde,
+00:00:06.949 --> 00:00:30.167
+Bir banka havalesi yaptığınızda… bir hastane MR görüntüsünü açtığında… bir şirket SAP üzerinde sipariş girdiğinde… bir e-ticaret platformu saniyede binlerce işlem aldığında… bir video izlendiğinde… bir yapay zekâ modeli sorgulandığında… bütün bu işlemler bir yerde fiziksel olarak hesaplanır,
 
 3
-00:00:16.000 --> 00:00:26.000
-bir e-ticaret platformu saniyede binlerce işlem aldığında, bir video izlendiğinde, bir yapay zeka modeli sorgulandığında,
+00:00:30.167 --> 00:00:31.791
+saklanır ve taşınır.
 
 4
-00:00:26.000 --> 00:00:32.000
-bütün bu işlemler bir yerde fiziksel olarak hesaplanır, saklanır ve taşınır.
-
-5
-00:00:32.000 --> 00:00:37.000
+00:00:31.791 --> 00:00:36.789
 Bu yüzden veri merkezi talebi tek bir sektörün büyümesine bağlı değildir.
 
-6
-00:00:37.000 --> 00:00:38.000
+5
+00:00:36.789 --> 00:00:37.838
 Cloud dönüşümü var.
 
-7
-00:00:38.000 --> 00:00:43.000
+6
+00:00:37.838 --> 00:00:42.694
 Kurumsal sistemlerin dış kaynaklı ve profesyonel altyapılara taşınması var.
 
-8
-00:00:43.000 --> 00:00:44.000
+7
+00:00:42.694 --> 00:00:43.717
 Video var.
 
-9
-00:00:44.000 --> 00:00:45.000
+8
+00:00:43.717 --> 00:00:44.710
 IoT var.
 
-10
-00:00:45.000 --> 00:00:48.000
+9
+00:00:44.710 --> 00:00:47.542
 Siber dayanıklılık ihtiyacı var.
 
-11
-00:00:48.000 --> 00:00:51.000
+10
+00:00:47.542 --> 00:00:50.673
 Veri yerleşimi ve egemenlik gereksinimleri var.
 
-12
-00:00:51.000 --> 00:00:54.000
+11
+00:00:50.673 --> 00:00:53.585
 Düşük gecikme isteyen uygulamalar var.
 
+12
+00:00:53.585 --> 00:00:56.682
+Ve bütün bunların üzerine yapay zekâ geliyor.
+
 13
-00:00:54.000 --> 00:00:57.000
-Ve bütün bunların üzerine yapay zeka geliyor.
+00:00:56.682 --> 00:01:11.231
+McKinsey’nin güncel orta senaryolarında küresel veri merkezi kapasite ihtiyacı 2025’te yaklaşık 82 gigawatt seviyesinden, 2030’da yaklaşık 219–220 gigawatt seviyesine çıkabiliyor.
 
 14
-00:00:57.000 --> 00:01:06.000
-McKinsey'nin güncen orta senaryolarında küresel veri merkezi kapasite ihtiyacı 2025'te yaklaşık 82 gigawatt seviyesinden,
+00:01:11.231 --> 00:01:17.571
+Bu, beş yıl içinde bugünkü kapasitenin neredeyse üç katına yaklaşan bir talep anlamına geliyor.
 
 15
-00:01:06.000 --> 00:01:12.000
-2030'da yaklaşık 219-220 gigawatt seviyesine çıkabiliyor.
-
-16
-00:01:12.000 --> 00:01:18.000
-Bu, 5 yıl içinde bugünkü kapasitenin neredeyse 3 katına yaklaşan bir talep anlamına geliyor.
-
-17
-00:01:18.000 --> 00:01:22.000
+00:01:17.571 --> 00:01:21.471
 Ancak burada rakamı tek başına okumak yeterli değil.
 
-18
-00:01:22.000 --> 00:01:24.000
-Asıl önemli olan şu.
+16
+00:01:21.471 --> 00:01:27.426
+Asıl önemli olan şu: bu kapasiteyi üretmek için yalnız sunucu satın alınmıyor.
 
-19
-00:01:24.000 --> 00:01:28.000
-Bu kapasiteyi üretmek için yalnız sunucu satın alınmıyor.
-
-20
-00:01:28.000 --> 00:01:29.000
+17
+00:01:27.426 --> 00:01:28.419
 Arazi gerekiyor.
 
-21
-00:01:29.000 --> 00:01:31.000
+18
+00:01:28.419 --> 00:01:30.211
 Şebeke bağlantısı gerekiyor.
 
-22
-00:01:31.000 --> 00:01:33.000
+19
+00:01:30.211 --> 00:01:31.801
 Trafo gerekiyor.
 
-23
-00:01:33.000 --> 00:01:35.000
+20
+00:01:31.801 --> 00:01:33.787
 UPS gerekiyor.
 
-24
-00:01:35.000 --> 00:01:36.000
+21
+00:01:33.787 --> 00:01:35.386
 Jeneratör gerekiyor.
 
-25
-00:01:36.000 --> 00:01:38.000
+22
+00:01:35.386 --> 00:01:36.757
 Soğutma gerekiyor.
 
-26
-00:01:38.000 --> 00:01:39.000
+23
+00:01:36.757 --> 00:01:38.371
 Fiber gerekiyor.
 
-27
-00:01:39.000 --> 00:01:45.000
+24
+00:01:38.371 --> 00:01:44.118
 Ve bütün bunların yıllarca güvenilir çalışmasını sağlayacak operasyon gerekiyor.
 
+25
+00:01:44.118 --> 00:01:49.136
+CBRE’nin 2026 verileri başka bir önemli sinyal veriyor.
+
+26
+00:01:49.136 --> 00:01:58.719
+Dünyanın 16 büyük veri merkezi pazarında arz bir yılda yaklaşık yüzde 25 artarak 16 gigawatt seviyesine ulaşmasına rağmen,
+
+27
+00:01:58.719 --> 00:02:04.210
+global vacancy yaklaşık yüzde 6,7 seviyesine gerilemiş durumda.
+
 28
-00:01:45.000 --> 00:01:50.000
-CBRI'nin 2026 verileri başka bir önemli siyal veriyor.
-
-29
-00:01:50.000 --> 00:01:53.000
-Dünyanın 16 büyük veri merkezi pazarında,
-
-30
-00:01:53.000 --> 00:01:59.000
-ARS bir yılda yaklaşık %25 artarak 16 gigawatt seriyesine ulaşmasına rağmen,
-
-31
-00:01:59.000 --> 00:02:04.000
-global vakansi yaklaşık %6,7 seriyesine gerilemiş durumda.
-
-32
-00:02:04.000 --> 00:02:08.000
+00:02:04.210 --> 00:02:08.180
 Yani sektör yalnızca hızla yeni kapasite inşa etmiyor.
 
-33
-00:02:08.000 --> 00:02:11.000
+29
+00:02:08.180 --> 00:02:11.172
 Yeni kapasiteyi aynı zamanda hızla tüketiyor.
 
-34
-00:02:11.000 --> 00:02:17.000
-Bu nedenle bugünkü büyümeyi yalnız AI modası şeklinde okumak yanıltıcı olur.
+30
+00:02:11.172 --> 00:02:17.141
+Bu nedenle bugünkü büyümeyi yalnız “AI modası” şeklinde okumak yanıltıcı olur.
 
-35
-00:02:17.000 --> 00:02:20.000
-AI çok güçlü bir hızlandırıcıdır.
+31
+00:02:17.141 --> 00:02:20.099
+AI, çok güçlü bir hızlandırıcıdır.
 
-36
-00:02:20.000 --> 00:02:24.000
-Ama altında daha büyük bir yapısal dönüşüm vardır.
+32
+00:02:20.099 --> 00:02:30.037
+Ama altında daha büyük bir yapısal dönüşüm vardır: ekonomi dijitalleştikçe, dijital ekonominin fiziksel altyapısına olan ihtiyaç da büyür.
 
-37
-00:02:24.000 --> 00:02:30.000
-Ekonomi dijitalleştikçe dijital ekonominin fiziksel altyapısına olan ihtiyaç da büyür.
-
-38
-00:02:30.000 --> 00:02:35.000
+33
+00:02:30.037 --> 00:02:36.120
 Ve veri merkezi tam olarak bu fiziksel altyapının merkezindedir.

@@ -1,193 +1,149 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:04.400
+00:00:00.000 --> 00:00:04.443
 Bir veri merkezi projesinde çok sayıda uzman taraf vardır.
 
 2
-00:00:04.400 --> 00:00:07.520
+00:00:04.443 --> 00:00:07.579
 Elektrik yüklenicisi elektrik işine bakar.
 
 3
-00:00:07.520 --> 00:00:10.880
+00:00:07.579 --> 00:00:10.985
 Cooling vendor soğutma çözümünü optimize eder.
 
 4
-00:00:10.880 --> 00:00:15.040
+00:00:10.985 --> 00:00:15.169
 Network üreticisi network mimarisini optimize eder.
 
 5
-00:00:15.040 --> 00:00:18.320
+00:00:15.169 --> 00:00:18.446
 UPS üreticisi kendi çözümünü savunur.
 
 6
-00:00:18.320 --> 00:00:22.600
+00:00:18.446 --> 00:00:22.805
 Müteahhit kendi sözleşme kapsamını ve teslim takvimini yönetir.
 
 7
-00:00:22.600 --> 00:00:24.680
+00:00:22.805 --> 00:00:25.094
 Bunların hepsi normaldir.
 
 8
-00:00:24.960 --> 00:00:26.640
-Ama bir soru kalır.
+00:00:25.094 --> 00:00:30.679
+Ama bir soru kalır: Bütün sistemi yatırımcı adına kim optimize ediyor?
 
 9
-00:00:26.640 --> 00:00:30.440
-Bütün sistemi yatırımcı adına kim optimize ediyor?
-
-10
-00:00:30.440 --> 00:00:34.600
+00:00:30.679 --> 00:00:34.849
 Bağımsız teknik danışmanın gerçek rolü burada başlar.
 
-11
-00:00:34.600 --> 00:00:38.440
+10
+00:00:34.849 --> 00:00:38.778
 Danışmanın görevi bir markanın ürününü seçmek değildir.
 
-12
-00:00:38.440 --> 00:00:42.440
+11
+00:00:38.778 --> 00:00:42.763
 Yatırımcının iş hedefini teknik gereksinime çevirmektir.
 
+12
+00:00:42.763 --> 00:00:50.796
+Örneğin yatırımcı “Tier III seviyesinde, AI-ready, carrier-neutral, 20 megawattlık bir tesis istiyorum” diyebilir.
+
 13
-00:00:42.440 --> 00:00:45.360
-Örneğin, yatırımcı Tier 3 seviyesinde
-
-14
-00:00:45.360 --> 00:00:50.440
-AI Ready, Carrier Neutral, 20 MW'lık bir tesis istiyorum diyebilir.
-
-15
-00:00:50.440 --> 00:00:53.640
+00:00:50.796 --> 00:00:54.214
 Bu cümlede onlarca teknik karar gizlidir.
 
+14
+00:00:54.214 --> 00:00:57.060
+Concurrent maintainability nasıl sağlanacak?
+
+15
+00:00:57.060 --> 00:01:00.110
+A/B power path nasıl ayrılacak?
+
 16
-00:00:53.680 --> 00:00:56.680
-Concurrent Maintainability nasıl sağlanacak?
+00:01:00.110 --> 00:01:03.040
+AI zone başlangıçta kaç megawatt olacak?
 
 17
-00:00:56.680 --> 00:00:59.240
-AB Power Path nasıl ayrılacak?
+00:01:03.040 --> 00:01:06.374
+Liquid cooling hangi noktada devreye girecek?
 
 18
-00:00:59.240 --> 00:01:02.160
-AI Zone başlangıçta kaç medalat olacak?
+00:01:06.374 --> 00:01:08.936
+Carrier entrance nasıl çeşitlendirilecek?
 
 19
-00:01:02.160 --> 00:01:05.040
-Liquus Cooling hangi noktada devreye girecek?
-
-20
-00:01:05.040 --> 00:01:07.880
-Carrier Entrance nasıl çeşitlendirilecek?
-
-21
-00:01:07.880 --> 00:01:11.200
+00:01:08.936 --> 00:01:12.519
 Hangi odalar birbirinden fiziksel olarak ayrılacak?
 
-22
-00:01:11.200 --> 00:01:16.600
+20
+00:01:12.519 --> 00:01:17.870
 BMS, EPMS, DCIM ve NOC nasıl entegre edilecek?
 
-23
-00:01:16.600 --> 00:01:19.120
+21
+00:01:17.870 --> 00:01:20.184
 Commissioning kriterini kim tanımlayacak?
 
-24
-00:01:19.120 --> 00:01:23.280
-Bu kararların her biri başka vendorların sınırında kalabilir.
+22
+00:01:20.184 --> 00:01:24.726
+Bu kararların her biri başka vendor’ların sınırında kalabilir.
 
-25
-00:01:23.280 --> 00:01:27.400
+23
+00:01:24.726 --> 00:01:28.562
 Danışmanın değerlerinden biri, interface risklerini yönetmesidir.
 
+24
+00:01:28.562 --> 00:01:35.744
+Çünkü büyük mission-critical projelerde sorunların önemli bölümü tek bir ekipmanın yanlış seçilmesinden değil;
+
+25
+00:01:35.744 --> 00:01:41.390
+iki farklı disiplinin “burası benim scope’um değil” dediği boşluklardan çıkar.
+
 26
-00:01:27.400 --> 00:01:31.720
-Çünkü büyük mission-critical projelerde sorunların önemli bölümü
+00:01:41.390 --> 00:01:43.972
+İkinci rol vendor neutrality’dir.
 
 27
-00:01:31.720 --> 00:01:34.600
-tek bir ekipmanın yanlış seçilmesinden değil,
+00:01:43.972 --> 00:01:55.800
+Teklifleri aynı teknik çerçevede karşılaştırmak… gereksiz overdesign’ı ayıklamak… underdesign risklerini görmek… hidden single point of failure’ları bulmak… change order riskini azaltmak… yatırımcıya
 
 28
-00:01:34.600 --> 00:01:36.120
-iki farklı disiplinin,
+00:01:55.800 --> 00:01:59.876
+yalnız CAPEX değil TCO perspektifi vermek gerekir.
 
 29
-00:01:36.120 --> 00:01:39.920
-burası benim scopum değil dediği boşluklardan çıkar.
+00:01:59.876 --> 00:02:02.225
+Üçüncü rol teknik hafızadır.
 
 30
-00:01:39.920 --> 00:01:42.440
-İkinci rol, vendor neutrality'dir.
+00:02:02.225 --> 00:02:04.589
+Proje aylar ve yıllar sürer.
 
 31
-00:01:42.440 --> 00:01:45.680
-Teklifleri aynı teknik çerçevede karşılaştırmak,
+00:02:04.589 --> 00:02:06.067
+İnsanlar değişir.
 
 32
-00:01:45.680 --> 00:01:48.080
-gereksiz over-design'i ayıklamak,
+00:02:06.067 --> 00:02:07.435
+Vendor’lar değişir.
 
 33
-00:01:48.080 --> 00:01:50.160
-under-design risklerini görmek,
+00:02:07.435 --> 00:02:09.077
+Tasarım revize olur.
 
 34
-00:01:50.160 --> 00:01:52.720
-hidden single point of failure'ları bulmak,
+00:02:09.077 --> 00:02:13.998
+Bağımsız danışman, “neden bu kararı vermiştik?” sorusunun cevabını korur.
 
 35
-00:01:52.720 --> 00:01:54.920
-change order riskini azaltmak,
+00:02:13.998 --> 00:02:17.557
+Bu nedenle danışman ürünün temsilcisi değildir.
 
 36
-00:01:54.920 --> 00:01:59.520
-yatırımcıya yalnız CAPEX değil, TCO perspektifi vermek gerekir.
+00:02:17.557 --> 00:02:20.295
+Yatırım kararının teknik temsilcisidir.
 
 37
-00:01:59.520 --> 00:02:01.960
-Üçüncü rol, teknik hafızadır.
-
-38
-00:02:01.960 --> 00:02:04.120
-Proje aylar ve yıllar sürer,
-
-39
-00:02:04.120 --> 00:02:05.560
-insanlar değişir,
-
-40
-00:02:05.560 --> 00:02:07.080
-vendorlar değişir,
-
-41
-00:02:07.080 --> 00:02:08.640
-tasarım revize olur,
-
-42
-00:02:08.640 --> 00:02:09.880
-bağımsız danışman,
-
-43
-00:02:09.880 --> 00:02:13.560
-neden bu kararı vermiştik sorusunun cevabını korur.
-
-44
-00:02:13.560 --> 00:02:16.960
-Bu nedenle danışman ürünün temsilcisi değildir,
-
-45
-00:02:16.960 --> 00:02:19.880
-yatırım kararının teknik temsilcisidir
-
-46
-00:02:19.880 --> 00:02:24.280
-ve iyi danışmanlığın amacı projeyi pahalı hale getirmek değil,
-
-47
-00:02:24.280 --> 00:02:27.400
-yanlış yerde harcanan sermayeyi azaltırken,
-
-48
-00:02:27.400 --> 00:02:30.800
-kritik yerde eksik yatırım yapılması ve engellemektir.
+00:02:20.295 --> 00:02:30.888
+Ve iyi danışmanlığın amacı projeyi pahalı hale getirmek değil; yanlış yerde harcanan sermayeyi azaltırken kritik yerde eksik yatırım yapılmasını engellemektir.

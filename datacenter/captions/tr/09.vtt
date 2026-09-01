@@ -1,109 +1,125 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:06.800
-UPS çalıştı, jeneratör çalıştı, chiller çalıştı, switch çalıştı.
+00:00:00.000 --> 00:00:01.700
+UPS çalıştı.
 
 2
-00:00:07.200 --> 00:00:09.100
-Peki veri merkezi çalışıyor mu?
+00:00:01.700 --> 00:00:03.400
+Jeneratör çalıştı.
 
 3
-00:00:09.600 --> 00:00:11.100
-Henüz bunu bilmiyoruz.
+00:00:03.400 --> 00:00:05.100
+Chiller çalıştı.
 
 4
-00:00:11.500 --> 00:00:17.200
-Çünkü mission-critical bir tesiste cihazların ayrı ayrı çalışması yeterli değildir.
+00:00:05.100 --> 00:00:06.800
+Switch çalıştı.
 
 5
-00:00:17.600 --> 00:00:25.100
-Asos soru, beklenmeyen bir olay olduğunda bütün sistemlerin birlikte ve doğru sırada çalışıp çalışmadığıdır.
+00:00:06.800 --> 00:00:09.100
+Peki veri merkezi çalışıyor mu?
 
 6
-00:00:25.600 --> 00:00:28.600
-Şehir elektriği aniden kesildiğinde ne olur?
+00:00:09.100 --> 00:00:11.100
+Henüz bunu bilmiyoruz.
 
 7
-00:00:29.000 --> 00:00:31.400
-UPS yükü kesintisiz taşır mı?
+00:00:11.100 --> 00:00:17.200
+Çünkü mission-critical bir tesiste cihazların ayrı ayrı çalışması yeterli değildir.
 
 8
-00:00:31.900 --> 00:00:34.300
-Jeneratör doğru zamanda devreye girer mi?
+00:00:17.200 --> 00:00:25.100
+Asıl soru, beklenmeyen bir olay olduğunda bütün sistemlerin birlikte ve doğru sırada çalışıp çalışmadığıdır.
 
 9
-00:00:34.700 --> 00:00:37.800
-ATS veya switchgear doğru geçişi yapar mı?
+00:00:25.100 --> 00:00:28.600
+Şehir elektriği aniden kesildiğinde ne olur?
 
 10
-00:00:38.100 --> 00:00:43.400
-Cooling sistemleri yeniden başlarken kritik alanda sıcaklık kontrolü korunur mu?
+00:00:28.600 --> 00:00:31.400
+UPS yükü kesintisiz taşır mı?
 
 11
-00:00:44.000 --> 00:00:46.700
-BMS ve EPMS doğru alarm üretir mi?
+00:00:31.400 --> 00:00:34.300
+Jeneratör doğru zamanda devreye girer mi?
 
 12
-00:00:47.200 --> 00:00:48.800
-Operasyon ekibi ne görür?
+00:00:34.300 --> 00:00:37.800
+ATS veya switchgear doğru geçişi yapar mı?
 
 13
-00:00:49.200 --> 00:00:52.000
-Yanlış alarm veya alarm flood oluşur mu?
+00:00:37.800 --> 00:00:43.400
+Cooling sistemleri yeniden başlarken kritik alanda sıcaklık kontrolü korunur mu?
 
 14
-00:00:52.500 --> 00:00:55.400
-Bu sorular PowerPoint üzerinde cevaplanamaz.
+00:00:43.400 --> 00:00:46.700
+BMS ve EPMS doğru alarm üretir mi?
 
 15
-00:00:55.700 --> 00:00:56.500
-Test edilir.
+00:00:46.700 --> 00:00:48.800
+Operasyon ekibi ne görür?
 
 16
-00:00:56.900 --> 00:01:00.500
-Conditioning bu nedenle yalnız cihaz devreye alma değildir.
+00:00:48.800 --> 00:00:52.000
+Yanlış alarm veya alarm flood oluşur mu?
 
 17
-00:01:01.100 --> 00:01:02.600
-Design review ile başlar.
+00:00:52.000 --> 00:00:55.400
+Bu sorular PowerPoint üzerinde cevaplanamaz.
 
 18
-00:01:02.900 --> 00:01:05.500
-Factory acceptance test ile devam edebilir.
+00:00:55.400 --> 00:00:56.500
+Test edilir.
 
 19
-00:01:06.000 --> 00:01:07.700
-Site acceptance test yapılır.
+00:00:56.500 --> 00:01:00.500
+Commissioning bu nedenle yalnız “cihaz devreye alma” değildir.
 
 20
-00:01:08.200 --> 00:01:09.600
-Fonksiyonel test yapılır.
+00:01:00.500 --> 00:01:02.600
+Design review ile başlar.
 
 21
-00:01:10.200 --> 00:01:19.100
-Ve mümkün olan en ileri aşamada integrated systems testing ile bütün disiplinlerin gerçek senaryolarda birlikte çalışması doğrulanır.
+00:01:02.600 --> 00:01:05.500
+Factory acceptance test ile devam edebilir.
 
 22
-00:01:19.600 --> 00:01:22.500
-Burada testin amacı sistemi bozmak değildir.
+00:01:05.500 --> 00:01:07.700
+Site acceptance test yapılır.
 
 23
-00:01:23.100 --> 00:01:29.000
-Sistemin kontrollü koşullarda nerede bozulabileceğini müşteri yükü gelmeden önce bulmaktır.
+00:01:07.700 --> 00:01:09.600
+Fonksiyonel test yapılır.
 
 24
-00:01:29.500 --> 00:01:32.600
-Bu yaklaşım yatırımcı açısından çok değerlidir.
+00:01:09.600 --> 00:01:19.100
+Ve mümkün olan en ileri aşamada integrated systems testing ile bütün disiplinlerin gerçek senaryolarda birlikte çalışması doğrulanır.
 
 25
-00:01:33.200 --> 00:01:37.900
-Çünkü tasarım hatasını çizimde bulmak ucuzdur, sahada bulmak pahalıdır.
+00:01:19.100 --> 00:01:22.500
+Burada testin amacı sistemi bozmak değildir.
 
 26
-00:01:38.500 --> 00:01:44.500
-Canlı müşteri taşındıktan sonra bulmak ise hem pahalı hem itibari açıdan tehlikelidir.
+00:01:22.500 --> 00:01:29.000
+Sistemin kontrollü koşullarda nerede bozulabileceğini, müşteri yükü gelmeden önce bulmaktır.
 
 27
-00:01:45.100 --> 00:01:49.000
-Bu nedenle conditioning gider değil, risk azaltma yatırımıdır.
+00:01:29.000 --> 00:01:32.600
+Bu yaklaşım yatırımcı açısından çok değerlidir.
+
+28
+00:01:32.600 --> 00:01:36.333
+Çünkü tasarım hatasını çizimde bulmak ucuzdur.
+
+29
+00:01:36.333 --> 00:01:37.900
+Sahada bulmak pahalıdır.
+
+30
+00:01:37.900 --> 00:01:44.500
+Canlı müşteri taşındıktan sonra bulmak ise hem pahalı hem itibari açıdan tehlikelidir.
+
+31
+00:01:44.500 --> 00:01:49.248
+Bu nedenle commissioning gider değil… risk azaltma yatırımıdır.

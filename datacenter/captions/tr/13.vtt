@@ -1,105 +1,89 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:08.440
-Veri merkezi, yatırımındaki en büyük hatalardan biri, nihai vizyonla ilk gün CAPEX'ini birbirine karıştırmaktır.
+00:00:00.000 --> 00:00:08.923
+Veri merkezi yatırımındaki en büyük hatalardan biri, nihai vizyon ile ilk gün CAPEX’ini birbirine karıştırmaktır.
 
 2
-00:00:08.440 --> 00:00:14.000
-Örneğin, uzun vadede 50 MW'lık bir kampüs hedeflenmek doğru olabilir.
+00:00:08.923 --> 00:00:14.384
+Örneğin uzun vadede 50 megawattlık bir kampüs hedeflemek doğru olabilir.
 
 3
-00:00:14.000 --> 00:00:20.400
-Ama bu, 50 MW'ın tamamını ilk gün devreye almak zorunda olduğumuz anlamına gelmez.
+00:00:14.384 --> 00:00:20.800
+Ama bu, 50 megawattın tamamını ilk gün devreye almak zorunda olduğumuz anlamına gelmez.
 
 4
-00:00:20.400 --> 00:00:22.800
-Daha disiplinli yaklaşım şudur.
+00:00:20.800 --> 00:00:28.168
+Daha disiplinli yaklaşım şudur: Arsanın ve ana altyapının nihai büyümeyi desteklediği bir masterplan yapılır.
 
 5
-00:00:22.800 --> 00:00:28.400
-Arsa'nın ve ana altyapının nihai büyümeyi desteklediği bir master plan yapılır.
+00:00:28.168 --> 00:00:32.134
+Power ve fiber expansion path baştan korunur.
 
 6
-00:00:28.800 --> 00:00:32.400
-Power ve Fibre Expansion Path baştan korunur.
-
-7
-00:00:32.400 --> 00:00:38.400
+00:00:32.134 --> 00:00:38.065
 İlk faz, pazardaki gerçek talep ve anchor müşteri ihtiyacına göre boyutlandırılır.
 
-8
-00:00:38.400 --> 00:00:44.400
-Sonraki fazlar, sözleşmeli veya güçlü pipeline oluştuğunda devreye alınır.
+7
+00:00:38.065 --> 00:00:43.938
+Sonraki fazlar sözleşmeli veya güçlü pipeline oluştuğunda devreye alınır.
 
-9
-00:00:44.400 --> 00:00:46.800
+8
+00:00:43.938 --> 00:00:46.446
 Bu model iki riski azaltır.
 
+9
+00:00:46.446 --> 00:00:52.311
+Birincisi stranded capital: yıllarca gelir üretmeden bekleyen aşırı CAPEX.
+
 10
-00:00:46.800 --> 00:00:49.200
-Birincisi, stranded capital.
+00:00:52.311 --> 00:01:01.279
+İkincisi teknoloji riski: bugün kurduğumuz altyapının beş yıl sonra değişmiş yoğunluk ve cooling ihtiyacına uymaması.
 
 11
-00:00:49.200 --> 00:00:52.800
-Yıllarca gelir üretmeden bekleyen aşırı CAPEX.
+00:01:01.279 --> 00:01:05.989
+Ticari model de yalnız rack rental’dan ibaret olmamalıdır.
 
 12
-00:00:52.800 --> 00:00:55.200
-İkincisi, teknoloji riski.
+00:01:05.989 --> 00:01:08.566
+Colocation temel gelir katmanıdır.
 
 13
-00:00:55.200 --> 00:01:01.800
-Bugün kurduğumuz altyapının 5 yıl sonra değişmiş yoğunluk ve cooling ihtiyacına uymaması.
+00:01:08.566 --> 00:01:18.679
+Ama bunun üzerinde managed colocation, cross-connect, connectivity, remote hands, managed network, security, backup, DR, private cloud,
 
 14
-00:01:01.800 --> 00:01:06.000
-Ticari modelde yalnız rack rental'dan ibaret olmamalıdır.
+00:01:18.679 --> 00:01:26.624
+IaaS ve uygun projelerde GPU veya AI services gibi daha yüksek katma değerli servisler oluşabilir.
 
 15
-00:01:06.000 --> 00:01:08.600
-Collocation, temel gelir katmanıdır.
+00:01:26.624 --> 00:01:31.206
+Bununla birlikte bütün servisleri ilk günden kurmak da doğru değildir.
 
 16
-00:01:08.600 --> 00:01:19.400
-Ama bunun üzerinde Managed Collocation, Cross Connect, Connectivity, Remote Hands, Managed Network, Security, Backup, DR, Private Cloud, EOS
-
-17
-00:01:19.400 --> 00:01:26.800
-ve uygun projelerde GPU veya AI Services gibi daha yüksek katma değerli servisler oluşabilir.
-
-18
-00:01:26.800 --> 00:01:31.400
-Bununla birlikte, bütün servisleri ilk günden kurmak da doğru değildir.
-
-19
-00:01:31.400 --> 00:01:35.400
+00:01:31.206 --> 00:01:35.084
 Hizmet portföyü, operasyon yetkinliği kadar büyümelidir.
 
-20
-00:01:35.400 --> 00:01:39.600
-Yatırım kararında 5 soru her zaman masada kalmalıdır.
+17
+00:01:35.084 --> 00:01:41.482
+Yatırım kararında beş soru her zaman masada kalmalıdır: Power gerçekten secured mı?
 
-21
-00:01:39.600 --> 00:01:41.800
-Power gerçekten secured mi?
+18
+00:01:41.482 --> 00:01:44.076
+Fiber fiziksel olarak diverse mı?
 
-22
-00:01:41.800 --> 00:01:44.400
-Fibre fiziksel olarak diverse mi?
-
-23
-00:01:44.400 --> 00:01:48.400
+19
+00:01:44.076 --> 00:01:48.054
 Anchor customer veya güvenilir demand pipeline var mı?
 
-24
-00:01:48.400 --> 00:01:51.400
+20
+00:01:48.054 --> 00:01:51.027
 Teknik tasarım gerçek ihtiyaçla dengeli mi?
 
-25
-00:01:51.400 --> 00:01:55.800
+21
+00:01:51.027 --> 00:01:55.397
 Ve işletme organizasyonu ilk müşteri gelmeden hazır olacak mı?
 
-26
-00:01:55.800 --> 00:02:05.800
-Bu soruların cevabı evet'e yaklaştıkça, veri merkezi pahalı bir yapı olmaktan çıkar, uzun ömürlü bir dijital altyapı esnetine dönüşür.
+22
+00:01:55.397 --> 00:02:06.024
+Bu soruların cevabı “evet”e yaklaştıkça, veri merkezi pahalı bir yapı olmaktan çıkar… uzun ömürlü bir dijital altyapı asset’ine dönüşür.

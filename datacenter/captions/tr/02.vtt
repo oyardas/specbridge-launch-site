@@ -2,7 +2,7 @@ WEBVTT
 
 1
 00:00:00.000 --> 00:00:05.000
-Bugün, veri merkezi denildiğinde ilk konuşulan konu yapay zeka.
+Bugün veri merkezi denildiğinde ilk konuşulan konu yapay zekâ.
 
 2
 00:00:05.000 --> 00:00:09.000
@@ -10,100 +10,116 @@ Bunun nedeni yalnızca AI uygulamalarının popüler olması değil.
 
 3
 00:00:09.000 --> 00:00:14.000
-Yapay zeka, veri merkezinin fiziksel tasarımını da değiştiriyor.
+Yapay zekâ, veri merkezinin fiziksel tasarımını da değiştiriyor.
 
 4
 00:00:14.000 --> 00:00:22.000
-Klasik enterprise iş yüklerinde bir kabinetin güç yoğunluğu uzun yıllar nispeten yönetilebilir seriyelerde kaldı.
+Klasik enterprise iş yüklerinde bir kabinetin güç yoğunluğu uzun yıllar nispeten yönetilebilir seviyelerde kaldı.
 
 5
 00:00:22.000 --> 00:00:29.000
-Fakat GPU ve accelerator hükümeleri aynı fiziksel alan içinde çok daha yüksek güç çekebiliyor.
+Fakat GPU ve accelerator kümeleri, aynı fiziksel alan içinde çok daha yüksek güç çekebiliyor.
 
 6
-00:00:29.000 --> 00:00:32.000
-Sonuç doğrudan ortaya çıkıyor.
+00:00:29.000 --> 00:00:33.556
+Sonuç doğrudan ortaya çıkıyor: Daha yüksek akım.
 
 7
-00:00:32.000 --> 00:00:46.000
-Daha yüksek akım, daha güçlü busway ve dağıtım altyapısı, daha yoğun network fabric, daha yüksek storage throughput ve çoğu durumda yalnız havayla soğutmanın sınırlarına yaklaşan termal yükler.
+00:00:33.556 --> 00:00:36.667
+Daha güçlü busway ve dağıtım altyapısı.
 
 8
-00:00:46.000 --> 00:00:57.000
-Bu nedenle direct-to-chip liquid cooling, rear-door heat exchanger, hybrid cooling ve yüksek yoğunluklu özel zonlar artık tasarım gündeminin bir parçası.
+00:00:36.667 --> 00:00:38.741
+Daha yoğun network fabric.
 
 9
-00:00:57.000 --> 00:01:01.000
-Fakat burada ikinci bir hata yapmamak gerekiyor.
+00:00:38.741 --> 00:00:40.815
+Daha yüksek storage throughput.
 
 10
-00:01:01.000 --> 00:01:08.000
-AI büyüyor diye her kabineti 100 kW veya daha yüksek yoğunluğa göre tasarlamak zorunda değiliz.
+00:00:40.815 --> 00:00:46.478
+Ve çoğu durumda yalnız hava ile soğutmanın sınırlarına yaklaşan termal yükler.
 
 11
-00:01:08.000 --> 00:01:11.000
-Bu, sermayeyi yanlış yerde harcamak olabilir.
+00:00:46.478 --> 00:00:51.739
+Bu nedenle direct-to-chip liquid cooling, rear-door heat exchanger,
 
 12
-00:01:11.000 --> 00:01:18.000
-Doğru tasarım, klasik enterprise, cloud ve co-location yüklerini verimli biçimde desteklerken,
+00:00:51.739 --> 00:00:57.571
+hybrid cooling ve yüksek yoğunluklu özel zonlar artık tasarım gündeminin bir parçası.
 
 13
-00:01:18.000 --> 00:01:26.000
-yüksek yoğunluklu AI alanları için ayrı, ölçeklenebilir ve geleceğe açık bir mimariyi kurmaktır.
+00:00:57.571 --> 00:01:01.467
+Fakat burada ikinci bir hata yapmamak gerekiyor.
 
 14
-00:01:26.000 --> 00:01:38.000
-McKinsey'nin iş yükü analizleri, 2030'a doğru AI inference'ın özellikle hızlı büyüyebileceğini, toplam kapasite içinde çok daha büyük bir pay alabileceğini gösteriyor.
+00:01:01.467 --> 00:01:08.500
+AI büyüyor diye her kabineti 100 kilowatt veya daha yüksek yoğunluğa göre tasarlamak zorunda değiliz.
 
 15
+00:01:08.500 --> 00:01:11.583
+Bu, sermayeyi yanlış yerde harcamak olabilir.
+
+16
+00:01:11.583 --> 00:01:21.692
+Doğru tasarım; klasik enterprise, cloud ve colocation yüklerini verimli biçimde desteklerken… yüksek yoğunluklu AI alanları için ayrı,
+
+17
+00:01:21.692 --> 00:01:26.000
+ölçeklenebilir ve geleceğe açık bir mimari kurmaktır.
+
+18
+00:01:26.000 --> 00:01:38.000
+McKinsey’nin iş yükü analizleri 2030’a doğru AI inference’ın özellikle hızlı büyüyebileceğini, toplam kapasite içinde çok daha büyük bir pay alabileceğini gösteriyor.
+
+19
 00:01:38.000 --> 00:01:42.000
 Ancak aynı çalışmalar belirsizliği de vurguluyor.
 
-16
-00:01:42.000 --> 00:01:50.000
-Chip verimliliği artıyor, model mimarileri değişiyor, birim hesaplama başına enerji ihtiyacı düşebiliyor.
-
-17
-00:01:50.000 --> 00:01:56.000
-Bu nedenle yatırımcı açısından doğru yaklaşım, AI kesinlikle şu kadar büyüyecek demek değildir.
-
-18
-00:01:56.000 --> 00:01:58.000
-Doğru yaklaşım şudur.
-
-19
-00:01:58.000 --> 00:02:03.000
-AI, altyapı yoğunluğunu değiştirecek kadar güçlü bir talep kaynağıdır.
-
 20
-00:02:03.000 --> 00:02:09.000
-Fakat yatırımın ekonomik dayanıklılığı yalnız AI senaryosuna bağlı olmamalıdır.
+00:01:42.000 --> 00:01:44.000
+Çip verimliliği artıyor.
 
 21
+00:01:44.000 --> 00:01:46.000
+Model mimarileri değişiyor.
+
+22
+00:01:46.000 --> 00:01:50.000
+Birim hesaplama başına enerji ihtiyacı düşebiliyor.
+
+23
+00:01:50.000 --> 00:01:56.000
+Bu nedenle yatırımcı açısından doğru yaklaşım “AI kesinlikle şu kadar büyüyecek” demek değildir.
+
+24
+00:01:56.000 --> 00:02:09.000
+Doğru yaklaşım şudur: AI, altyapı yoğunluğunu değiştirecek kadar güçlü bir talep kaynağıdır; fakat yatırımın ekonomik dayanıklılığı yalnız AI senaryosuna bağlı olmamalıdır.
+
+25
 00:02:09.000 --> 00:02:11.000
 Bankalar çalışmaya devam edecek.
 
-22
+26
 00:02:11.000 --> 00:02:14.000
 Sağlık sistemleri veri üretecek.
 
-23
+27
 00:02:14.000 --> 00:02:16.000
 Kamu dijitalleşecek.
 
-24
+28
 00:02:16.000 --> 00:02:19.000
 Şirketler ERP ve cloud kullanacak.
 
-25
+29
 00:02:19.000 --> 00:02:25.000
-Video, e-ticaret, gaming, IoT ve kurumsal uygulanalar büyümeye devam edecek.
+Video, e-ticaret, gaming, IoT ve kurumsal uygulamalar büyümeye devam edecek.
 
-26
+30
 00:02:25.000 --> 00:02:28.000
-AI bir dönüşümü başlatmadı.
+AI bu dönüşümü başlatmadı.
 
-27
-00:02:28.000 --> 00:02:33.000
-AI zaten başlamış olan dijital altyapı dönüşümünü hızlandırdı.
+31
+00:02:28.000 --> 00:02:33.144
+AI, zaten başlamış olan dijital altyapı dönüşümünü hızlandırdı.

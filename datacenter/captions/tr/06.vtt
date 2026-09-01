@@ -1,73 +1,97 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:07.500
-Bir veri merkezinde elektrik varsa ama bağlantı yoksa, çok pahalı bir depo elde edersiniz.
+00:00:00.000 --> 00:00:07.530
+Bir veri merkezinde elektrik varsa ama bağlantı yoksa… çok pahalı bir depo elde edersiniz.
 
 2
-00:00:07.500 --> 00:00:15.000
-Çünkü veri merkezinin ekonomik değeri yalnız içinde ne olduğu ile değil, neye bağlandığıyla da ölçülür.
+00:00:07.530 --> 00:00:14.560
+Çünkü veri merkezinin ekonomik değeri yalnız içinde ne olduğuyla değil, neye bağlandığıyla da ölçülür.
 
 3
-00:00:15.000 --> 00:00:21.500
+00:00:14.560 --> 00:00:21.007
 Profesyonel bir tesisin network stratejisi tek bir internet hattından ibaret olamaz.
 
 4
-00:00:21.500 --> 00:00:27.500
-Birden fazla carrier gerekir, fiziksel olarak ayrılmış fiber güzergahları gerekir,
+00:00:21.007 --> 00:00:23.410
+Birden fazla carrier gerekir.
 
 5
-00:00:27.500 --> 00:00:31.500
-meet-me room yapısı gerekir, cross-connect hizmetleri gerekir,
+00:00:23.410 --> 00:00:27.595
+Fiziksel olarak ayrılmış fiber güzergâhları gerekir.
 
 6
-00:00:31.500 --> 00:00:39.500
-mümkünse internet exchange bağlantısı, cloud on-ramp, DCI ve ayrı out-of-band yönetim yolları gerekir.
+00:00:27.595 --> 00:00:29.826
+Meet-me room yapısı gerekir.
 
 7
-00:00:39.500 --> 00:00:46.500
-Burada carrier-neutral yaklaşım yalnız teknik bir özellik değildir, ticari bir özelliktir.
+00:00:29.826 --> 00:00:31.626
+Cross-connect hizmetleri gerekir.
 
 8
-00:00:46.500 --> 00:00:52.500
-Müşteriye seçenek verir, fiyat rekabeti yaratır, tek operatöre bağımlılığı azaltır,
+00:00:31.626 --> 00:00:39.686
+Mümkünse internet exchange bağlantısı, cloud on-ramp, DCI ve ayrı out-of-band yönetim yolları gerekir.
 
 9
-00:00:52.500 --> 00:00:56.500
-cloud ve diğer veri merkezlerine erişimi kolaylaştırır
+00:00:39.686 --> 00:00:44.959
+Burada “carrier-neutral” yaklaşım yalnız teknik bir özellik değildir.
 
 10
-00:00:56.500 --> 00:01:01.500
-ve zamanla tesisin çevresinde bir network efekt oluşturabilir.
+00:00:44.959 --> 00:00:46.722
+Ticari bir özelliktir.
 
 11
-00:01:01.500 --> 00:01:07.500
-Bu yüzden başarılı veri merkezi hubları yalnız çok sayıda bina bulunan yerler değildir.
+00:00:46.722 --> 00:00:48.530
+Müşteriye seçenek verir.
 
 12
-00:01:07.500 --> 00:01:18.500
-Carrierlerin, cloud platformlarının, içerik sağlayıcıların, CDN'lerin, internet exchange'lerin ve kurumsal müşterilerin birbirine bağlandığı ekosistemlerdir.
+00:00:48.530 --> 00:00:50.337
+Fiyat rekabeti yaratır.
 
 13
-00:01:18.500 --> 00:01:22.500
-Network tasarımında da iki fiber var demek yetmez.
+00:00:50.337 --> 00:00:52.736
+Tek operatöre bağımlılığı azaltır.
 
 14
-00:01:22.500 --> 00:01:34.500
-Eğer iki fiber aynı kanalizasyondan geçiyorsa, aynı çöprüden geçiyorsa veya aynı giriş odasına bağımlıysa, fiziksel bir kazı her ikisini de aynı anda etkileyebilir.
+00:00:52.736 --> 00:00:56.777
+Cloud ve diğer veri merkezlerine erişimi kolaylaştırır.
 
 15
-00:01:34.500 --> 00:01:39.500
-Logical diversity ile physical diversity aynı şey değildir.
+00:00:56.777 --> 00:01:01.720
+Ve zamanla tesisin çevresinde bir network effect oluşturabilir.
 
 16
-00:01:39.500 --> 00:01:49.500
-Bu nedenle route survey, bina giriş noktaları, MMR tasarımı, carrier demarcation ve cross-connect operasyonu yatırımın başlangıcında düşünülmelidir.
+00:01:01.720 --> 00:01:07.918
+Bu yüzden başarılı veri merkezi hub’ları yalnız çok sayıda bina bulunan yerler değildir.
 
 17
-00:01:49.500 --> 00:02:00.500
-Ve AI inference, finans, gaming, medya ve sağlık gibi düşük gecikmeye duyarlı iş yükleri arttıkça lokasyonun network değeri daha da büyür.
+00:01:07.918 --> 00:01:18.796
+Carrier’ların, cloud platformlarının, içerik sağlayıcıların, CDN’lerin, internet exchange’lerin ve kurumsal müşterilerin birbirine bağlandığı ekosistemlerdir.
 
 18
-00:02:00.500 --> 00:02:09.500
-Bir veri merkezinin gücü yalnız megawatt ile değil, kaç farklı dijital ekosisteme ne kadar güvenilir bağlanabildiği ile de ölçülür.
+00:01:18.796 --> 00:01:22.826
+Network tasarımında da “iki fiber var” demek yetmez.
+
+19
+00:01:22.826 --> 00:01:30.162
+Eğer iki fiber aynı kanalizasyondan geçiyorsa, aynı köprüden geçiyorsa veya aynı giriş odasına bağımlıysa;
+
+20
+00:01:30.162 --> 00:01:34.952
+fiziksel bir kazı her ikisini de aynı anda etkileyebilir.
+
+21
+00:01:34.952 --> 00:01:39.921
+Logical diversity ile physical diversity aynı şey değildir.
+
+22
+00:01:39.921 --> 00:01:49.937
+Bu nedenle route survey, bina giriş noktaları, MMR tasarımı, carrier demarcation ve cross-connect operasyonu yatırımın başlangıcında düşünülmelidir.
+
+23
+00:01:49.937 --> 00:02:00.937
+Ve AI inference, finans, gaming, medya ve sağlık gibi düşük gecikmeye duyarlı iş yükleri arttıkça, lokasyonun network değeri daha da büyür.
+
+24
+00:02:00.937 --> 00:02:10.680
+Bir veri merkezinin gücü yalnız MW ile değil… kaç farklı dijital ekosisteme ne kadar güvenilir bağlanabildiğiyle de ölçülür.
