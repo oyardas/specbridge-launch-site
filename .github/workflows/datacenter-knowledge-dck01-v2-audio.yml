@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - main
       - feature/datacenter-dck01-v2-golden
     paths:
       - .github/workflows/datacenter-knowledge-dck01-v2-audio.yml
