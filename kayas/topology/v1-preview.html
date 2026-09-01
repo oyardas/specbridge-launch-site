@@ -14,8 +14,33 @@
   }catch(_){ location.replace('/kayas/'); }
 })();
 window.DCTS_VIEWER_BOOT={
-  packageBase:'/dcts/viewer/fixtures/kayas'
+  packageBase:'/dcts/viewer/fixtures/kayas',
+  engineeringProfile:'/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json'
 };
+(function(){
+  const nativeFetch=window.fetch.bind(window);
+  window.fetch=function(input,init){
+    if(typeof input==='string'){
+      try{
+        const u=new URL(input,location.href);
+        if(u.pathname==='/dcts/viewer/fixtures/kayas/package-manifest.json'){
+          u.searchParams.set('dctsrev','eng-profile-v2');
+          return nativeFetch(u.href,init);
+        }
+        if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v1.json'){
+          u.pathname='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json';
+          u.searchParams.set('dctsrev','eng-profile-v2');
+          return nativeFetch(u.href,init);
+        }
+        if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json'){
+          u.searchParams.set('dctsrev','eng-profile-v2');
+          return nativeFetch(u.href,init);
+        }
+      }catch(_){ }
+    }
+    return nativeFetch(input,init);
+  };
+})();
 </script>
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer.css?v=20260831-v1a5">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-layout-v1a1.css?v=20260831-v1a5">
@@ -25,7 +50,7 @@ window.DCTS_VIEWER_BOOT={
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-v1a6.css?v=20260901-v1a6">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.css?v=20260901-v1a7">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-schematic-v1a8.css?v=20260901-v1a8b">
-<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.css?v=20260901-v1a9">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.css?v=20260901-v1a9c">
 </head>
 <body>
 <noscript>DCTS Viewer requires JavaScript.</noscript>
@@ -35,6 +60,6 @@ window.DCTS_VIEWER_BOOT={
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-v1a6.js?v=20260901-v1a6"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.js?v=20260901-v1a7"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-schematic-v1a8.js?v=20260901-v1a8b"></script>
-<script src="/dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.js?v=20260901-v1a9"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.js?v=20260901-v1a9c"></script>
 </body>
 </html>
