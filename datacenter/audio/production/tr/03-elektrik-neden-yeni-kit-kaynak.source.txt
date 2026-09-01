@@ -1,0 +1,31 @@
+Bir veri merkezi yatırımında en değerli unsur her zaman arsa değildir.
+
+Bugün birçok pazarda daha kritik unsur, zamanında kullanılabilir elektrik kapasitesidir.
+
+Arazi bulunabilir. Bina tasarlanabilir. Finansman bulunabilir. Fakat doğru lokasyonda 20, 30 veya 50 megawattı hangi tarihte alabileceğiniz belli değilse… projenin ticari takvimi de belli değildir.
+
+IEA’nın güncel merkezi projeksiyonuna göre veri merkezlerinin küresel elektrik tüketimi 2025’te yaklaşık 485 terawatt-saat seviyesinden 2030’da yaklaşık 950 terawatt-saat seviyesine çıkabilir.
+
+Bu, kabaca iki katına yakın bir artış demektir.
+
+Ve bu yalnız veri merkezi binasının içindeki elektrik ekipmanını ilgilendirmez.
+
+Şebekeyi ilgilendirir. Üretim kapasitesini ilgilendirir. Trafo merkezlerini ilgilendirir. İletim ve dağıtım yatırımlarını ilgilendirir. Büyük transformatörlerin üretim sürelerini ilgilendirir.
+
+Bu nedenle olgun data-center hub’larında yeni kapasitenin en büyük darboğazlarından biri artık “müşteri var mı?” sorusu değildir.
+
+ “Power ne zaman geliyor?” sorusudur.
+
+Yatırımcı için de arazi değerlendirme sırası değişmelidir.
+
+Bir araziye önce “kaç metrekare?” diye bakmak yerine;
+
+Kaç megawatt gerçekten tahsis edilebilir? Bağlantı hangi tarihte gelir? Tek kaynak mı, alternatif besleme imkânı var mı? Genişleme hakkı var mı? Trafo merkezi ne kadar yakın? Enerji maliyeti ve sözleşme modeli nedir?
+
+Bu soruların cevabı, projenin değerini doğrudan belirler.
+
+Bu yüzden veri merkezi sektöründe giderek daha fazla kullanılan iki kelimeyi özellikle vurgulamak gerekir:
+
+ Secured power.
+
+Çünkü yatırımcı için vaat edilen megawatt ile gerçekten bağlanabilir megawatt aynı şey değildir.

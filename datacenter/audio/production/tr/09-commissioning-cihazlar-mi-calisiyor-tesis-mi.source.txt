@@ -1,0 +1,39 @@
+UPS çalıştı.
+
+Jeneratör çalıştı.
+
+Chiller çalıştı.
+
+Switch çalıştı.
+
+Peki veri merkezi çalışıyor mu?
+
+Henüz bunu bilmiyoruz.
+
+Çünkü mission-critical bir tesiste cihazların ayrı ayrı çalışması yeterli değildir.
+
+Asıl soru, beklenmeyen bir olay olduğunda bütün sistemlerin birlikte ve doğru sırada çalışıp çalışmadığıdır.
+
+Şehir elektriği aniden kesildiğinde ne olur?
+
+UPS yükü kesintisiz taşır mı? Jeneratör doğru zamanda devreye girer mi? ATS veya switchgear doğru geçişi yapar mı? Cooling sistemleri yeniden başlarken kritik alanda sıcaklık kontrolü korunur mu? BMS ve EPMS doğru alarm üretir mi? Operasyon ekibi ne görür? Yanlış alarm veya alarm flood oluşur mu?
+
+Bu sorular PowerPoint üzerinde cevaplanamaz.
+
+Test edilir.
+
+Commissioning bu nedenle yalnız “cihaz devreye alma” değildir.
+
+Design review ile başlar. Factory acceptance test ile devam edebilir. Site acceptance test yapılır. Fonksiyonel test yapılır. Ve mümkün olan en ileri aşamada integrated systems testing ile bütün disiplinlerin gerçek senaryolarda birlikte çalışması doğrulanır.
+
+Burada testin amacı sistemi bozmak değildir.
+
+ Sistemin kontrollü koşullarda nerede bozulabileceğini, müşteri yükü gelmeden önce bulmaktır.
+
+Bu yaklaşım yatırımcı açısından çok değerlidir.
+
+Çünkü tasarım hatasını çizimde bulmak ucuzdur. Sahada bulmak pahalıdır. Canlı müşteri taşındıktan sonra bulmak ise hem pahalı hem itibari açıdan tehlikelidir.
+
+Bu nedenle commissioning gider değil… 
+
+ risk azaltma yatırımıdır.

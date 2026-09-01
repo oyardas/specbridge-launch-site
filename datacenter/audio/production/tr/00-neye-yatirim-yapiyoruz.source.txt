@@ -1,0 +1,31 @@
+Bir veri merkezine ilk kez giren bir yatırımcının gördüğü şey genellikle kabinetlerdir. Sıralar halinde duran siyah kabinetler… içlerindeki sunucular… yanıp sönen ışıklar… ve kilometrelerce kablo.
+
+Fakat veri merkezinin kendisi bunların hiçbiri değildir.
+
+Kabinet, yalnızca görünen son noktadır.
+
+ Asıl yatırım; o kabinetin yılın üç yüz altmış beş günü, günün yirmi dört saati güvenilir biçimde çalışabilmesini sağlayan bütün sistemdir.
+
+Elektriktir. Soğutmadır. Fiber bağlantıdır. Fiziksel güvenliktir. Siber güvenliktir. İzlemedir. Operasyondur. Bakımdır. Prosedürdür. İnsan kaynağıdır. Ve bütün bunların tek bir yapı gibi davranmasını sağlayan mühendislik disiplinidir.
+
+Bir ofis binasında elektrik kesildiğinde çalışanlar birkaç dakika bekleyebilir. Bir alışveriş merkezinde bazı sistemler kontrollü şekilde kapanabilir. Ama bir veri merkezinin ürünü, tam da bu kesintinin gerçekleşmemesidir.
+
+Bu nedenle veri merkezi yatırımını yalnız gayrimenkul mantığıyla değerlendirmek eksik kalır.
+
+Burada metrekare satılmaz. Burada güvenilir kapasite üretilir.
+
+Müşterinin satın aldığı şey aslında bir kabinet değildir. Güç kapasitesidir. Bağlantıdır. Kontrollü çevresel koşullardır. Güvenliktir. Uptime’dır. Ve gerektiğinde bütün bu hizmetlerin arkasında duran operasyonel taahhüttür.
+
+Bir başka ifadeyle, veri merkezi bir bina değil; birbirine bağımlı kritik sistemlerin oluşturduğu bir system of systems yapısıdır.
+
+Ve kritik nokta şudur:
+
+En pahalı sunucuyu satın alabilirsiniz. En güçlü switch’i kurabilirsiniz. En iyi UPS markasını seçebilirsiniz.
+
+Ama sistemin tamamı doğru tasarlanmamışsa… 
+
+ bu parçaların hiçbiri tek başına size dayanıklılık sağlamaz.
+
+Bu anlatım boyunca aslında tek bir soruya cevap arayacağız:
+
+ Bir yatırımcı, veri merkezine gerçekten yatırım yaptığında ne satın alır… ve bu yatırımın başarılı olması için hangi parçaların birlikte doğru çalışması gerekir?

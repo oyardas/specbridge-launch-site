@@ -1,0 +1,31 @@
+Bir sunucu elektrik tükettiğinde, bu enerjinin çok büyük bölümü sonunda ısıya dönüşür.
+
+Bu yüzden veri merkezi yalnızca bir compute tesisi değildir.
+
+Aynı zamanda yirmi dört saat çalışan bir ısı taşıma sistemidir.
+
+Termal zincir çipte başlar.
+
+Isı çipten sunucuya… sunucudan rack’e… rack’ten beyaz alana… oradan hava veya sıvı üzerinden soğutma sistemine… ve en sonunda dış ortama veya heat-rejection sistemine taşınır.
+
+Bu zincirde başarısızlık çok hızlı sonuç üretir.
+
+Elektrik kesintisinde UPS size zaman kazandırabilir. Fakat yoğun bir rack’in termal toleransı oldukça sınırlı olabilir. Özellikle yüksek yoğunluklu AI yüklerinde soğutma artık destek sistemi değil, compute kapasitesinin doğrudan bir parçasıdır.
+
+Bu nedenle “hangi klima markasını alalım?” sorusu tek başına doğru soru değildir.
+
+Doğru soru şudur:
+
+Beklenen rack yoğunluğu nedir? Ortam sıcaklığı nedir? Su kullanılacak mı? Su kalitesi nasıl? Hangi redundancy seviyesi gerekiyor? Bir fan, pompa veya CDU arızasında sistem ne yapacak? Bakım sırasında yük nasıl korunacak? Gelecekte 10 kilowatt rack’in yerine 40 veya 60 kilowatt rack geldiğinde altyapı ne kadar değişmek zorunda kalacak?
+
+Hava soğutma hâlâ çok önemli ve verimli bir çözüm olabilir.
+
+Liquid cooling de her proje için otomatik olarak doğru cevap değildir.
+
+Direct-to-chip, rear-door heat exchanger, immersion veya hybrid yaklaşımlar farklı ihtiyaçlara cevap verir.
+
+ İyi mühendislik, en yeni teknolojiyi seçmek değil; doğru yük profiline en güvenilir ve ekonomik termal mimariyi kurmaktır.
+
+Ve burada enerji verimliliği de ticari modele bağlanır.
+
+Çünkü soğutma verimsizse yalnız OPEX artmaz; aynı şebeke bağlantısından satabileceğiniz IT kapasitesi de azalabilir.

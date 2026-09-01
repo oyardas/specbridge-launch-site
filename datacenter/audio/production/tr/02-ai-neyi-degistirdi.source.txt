@@ -1,0 +1,33 @@
+Bugün veri merkezi denildiğinde ilk konuşulan konu yapay zekâ.
+
+Bunun nedeni yalnızca AI uygulamalarının popüler olması değil. Yapay zekâ, veri merkezinin fiziksel tasarımını da değiştiriyor.
+
+Klasik enterprise iş yüklerinde bir kabinetin güç yoğunluğu uzun yıllar nispeten yönetilebilir seviyelerde kaldı. Fakat GPU ve accelerator kümeleri, aynı fiziksel alan içinde çok daha yüksek güç çekebiliyor.
+
+Sonuç doğrudan ortaya çıkıyor:
+
+Daha yüksek akım. Daha güçlü busway ve dağıtım altyapısı. Daha yoğun network fabric. Daha yüksek storage throughput. Ve çoğu durumda yalnız hava ile soğutmanın sınırlarına yaklaşan termal yükler.
+
+Bu nedenle direct-to-chip liquid cooling, rear-door heat exchanger, hybrid cooling ve yüksek yoğunluklu özel zonlar artık tasarım gündeminin bir parçası.
+
+Fakat burada ikinci bir hata yapmamak gerekiyor.
+
+AI büyüyor diye her kabineti 100 kilowatt veya daha yüksek yoğunluğa göre tasarlamak zorunda değiliz.
+
+Bu, sermayeyi yanlış yerde harcamak olabilir.
+
+Doğru tasarım; klasik enterprise, cloud ve colocation yüklerini verimli biçimde desteklerken… yüksek yoğunluklu AI alanları için ayrı, ölçeklenebilir ve geleceğe açık bir mimari kurmaktır.
+
+McKinsey’nin iş yükü analizleri 2030’a doğru AI inference’ın özellikle hızlı büyüyebileceğini, toplam kapasite içinde çok daha büyük bir pay alabileceğini gösteriyor. Ancak aynı çalışmalar belirsizliği de vurguluyor. Çip verimliliği artıyor. Model mimarileri değişiyor. Birim hesaplama başına enerji ihtiyacı düşebiliyor.
+
+Bu nedenle yatırımcı açısından doğru yaklaşım “AI kesinlikle şu kadar büyüyecek” demek değildir.
+
+Doğru yaklaşım şudur:
+
+ AI, altyapı yoğunluğunu değiştirecek kadar güçlü bir talep kaynağıdır; fakat yatırımın ekonomik dayanıklılığı yalnız AI senaryosuna bağlı olmamalıdır.
+
+Bankalar çalışmaya devam edecek. Sağlık sistemleri veri üretecek. Kamu dijitalleşecek. Şirketler ERP ve cloud kullanacak. Video, e-ticaret, gaming, IoT ve kurumsal uygulamalar büyümeye devam edecek.
+
+AI bu dönüşümü başlatmadı.
+
+AI, zaten başlamış olan dijital altyapı dönüşümünü hızlandırdı.

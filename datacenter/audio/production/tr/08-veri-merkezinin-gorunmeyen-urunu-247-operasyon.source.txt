@@ -1,0 +1,47 @@
+Bir veri merkezi açılış günü tamamlanmaz.
+
+Aslında o gün başlar.
+
+Çünkü tesisin ömrü boyunca yapılacak binlerce bakım, değişiklik, arıza müdahalesi, kapasite ekleme, yazılım güncellemesi ve insan müdahalesi vardır.
+
+Bu nedenle tasarım ne kadar iyi olursa olsun, operasyon zayıfsa dayanıklılık da zayıftır.
+
+Data-center operasyonunda üç kısaltma çok önemlidir:
+
+SOP. Standard Operating Procedure.
+
+MOP. Method of Procedure.
+
+EOP. Emergency Operating Procedure.
+
+SOP, normal işlerin nasıl yapılacağını tanımlar.
+
+MOP, örneğin bir UPS bakımı veya kritik switching işleminin adım adım nasıl uygulanacağını belirler.
+
+EOP ise normal planın bozulduğu anda ne yapılacağını tanımlar.
+
+Bu belgeler bürokrasi değildir.
+
+Doğru yazıldığında, insan hatasının sistem üzerindeki etkisini azaltan güvenlik katmanlarıdır.
+
+Uptime Institute’un yıllardır yayımladığı outage araştırmalarında insan ve süreç faktörleri ciddi kesintilerin önemli nedenleri arasında tekrar tekrar karşımıza çıkıyor.
+
+Bu bize kritik bir şey söyler:
+
+On milyonlarca dolarlık redundancy kurabilirsiniz.
+
+Ama yanlış sırada açılan bir breaker… yanlış anlaşılan bir alarm… eksik bir bakım prosedürü… veya yeterince eğitim almamış bir operasyon ekibi… bütün bu fiziksel yatırımı birkaç dakika içinde anlamsız hale getirebilir.
+
+ Uptime, yalnız ekipman özelliği değildir. Uptime bir işletme disiplinidir.
+
+Burada DCIM, BMS ve EPMS gibi sistemler de önem kazanır.
+
+BMS mekanik ve bina sistemlerini izler. EPMS elektrik altyapısını görünür hale getirir. DCIM kapasite, rack, enerji ve çevresel veriyi operasyonel kararlarla ilişkilendirebilir.
+
+Fakat hiçbir yazılım tek başına iyi operasyon yaratmaz.
+
+Yetkin ekip, vardiya yapısı, alarm yönetimi, escalation, spare parts, vendor SLA, bakım planı, change management ve olay sonrası öğrenme mekanizması birlikte kurulmalıdır.
+
+Ve yatırımcı açısından en önemli nokta şudur:
+
+Veri merkezi CAPEX ile kurulur… ama OPEX disipliniyle ayakta kalır.

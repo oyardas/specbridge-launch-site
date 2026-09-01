@@ -1,0 +1,39 @@
+Yatırım kararında yalnız “neden Türkiye?” sorusu yetmez.
+
+İkinci soru şudur:
+
+ Neden şimdi?
+
+Çünkü bugün birkaç trend aynı anda kesişiyor.
+
+Bir: global compute talebi büyüyor.
+
+İki: Frankfurt, Londra, Northern Virginia ve benzeri olgun hub’larda enerji bağlantısı, arsa ve teslim süresi giderek daha ciddi kısıt haline geliyor.
+
+Üç: Türkiye’nin kendi dijital iç talebi büyüyor.
+
+Dört: İstanbul’daki interconnection trafiği hızlanıyor.
+
+Beş: AWS ve Google gibi global platformlardan fiziksel altyapı yönünde somut sinyaller geliyor.
+
+Bu tabloyu abartmadan okumak gerekir.
+
+Türkiye bugün Frankfurt ölçeğinde olgun bir data-center cluster değildir.
+
+Dubai veya Northern Virginia ölçeğinde hyperscale yoğunluğuna sahip değildir.
+
+Ve bu aslında tezin bir parçasıdır.
+
+Çünkü fırsat çoğu zaman pazar tamamen olgunlaştıktan sonra değil, talep sinyalleri güçlenirken ve kaliteli kapasite henüz sınırlıyken oluşur.
+
+Ancak erken olmak tek başına avantaj değildir.
+
+Yanlış lokasyonda, secured power olmadan, carrier diversity kurulmadan veya anchor demand görülmeden yapılan yatırım “erken” değil… sadece riskli olabilir.
+
+Bu yüzden “Why Now?” cevabı şu değildir:
+
+“Hemen büyük bir tesis yapalım.”
+
+Doğru cevap şudur:
+
+ Doğru enerji, doğru lokasyon, doğru connectivity ve doğru müşteri pipeline’ı varsa; Türkiye’nin önümüzdeki dijital altyapı genişleme dönemine bugün hazırlanmak stratejik olabilir.

@@ -1,0 +1,49 @@
+Şimdi küresel resmi Türkiye’ye getirelim.
+
+Türkiye’nin veri merkezi yatırım tezi tek bir avantaja dayanmaz.
+
+Asıl güç, birkaç faktörün aynı anda birleşmesinden gelir.
+
+Birincisi, büyük bir iç pazar.
+
+Türkiye 86 milyonu aşan nüfusuyla Avrupa’nın ve yakın coğrafyanın büyük dijital tüketici pazarlarından biri.
+
+TÜİK’in Ağustos 2026 verilerine göre 16–74 yaş grubunda internet kullanım oranı yüzde 92,3 seviyesine ulaşmış durumda.
+
+Bu önemli bir ayrım yaratıyor.
+
+Türkiye gelecekte dijitalleşecek bir ülke değil.
+
+ Türkiye zaten büyük bir dijital ekonomi.
+
+Bankacılık, e-devlet, e-ticaret, medya, gaming, sağlık, üretim, telekom ve kurumsal uygulamalar sürekli veri üretiyor.
+
+İkinci faktör coğrafya ve network konumu.
+
+Türkiye, Avrupa ile Orta Doğu, Karadeniz, Kafkasya ve Orta Asya arasında doğal bir kesişim noktasında.
+
+Ama coğrafi haritada merkezde olmak tek başına dijital hub olmak için yeterli değildir.
+
+Gerçek network trafiği ve interconnection ekosistemi gerekir.
+
+DE-CIX verilerine göre İstanbul Internet Exchange üzerinden 2025 yılında yaklaşık 927 petabyte trafik geçti. Bu, bir önceki yıla göre yaklaşık yüzde 28 artış demek. 2025 içinde peak trafik 500 gigabit/saniye eşiğini aştı ve Eylül ayında 533 gigabit/saniyenin üzerine çıktı.
+
+Bu rakamların anlamı şudur:
+
+İstanbul yalnız transit noktası değil… giderek daha fazla network’ün birbirine bağlandığı bir dijital buluşma noktası haline geliyor.
+
+Üçüncü faktör hyperscaler sinyalleri.
+
+AWS, 20 Mayıs 2026’da İstanbul Local Zone’u genel kullanıma açtı. Bu yapı tam bir AWS Region değildir; bunu doğru ifade etmek gerekir. Ancak compute, networking ve local storage servislerini kullanıcıya yaklaştırması, latency ve data-residency ihtiyacına verilen somut bir altyapı cevabıdır.
+
+Google Cloud ise Kasım 2025’te Türkiye’de yeni bir cloud region kurma planını açıkladı. Google bunu on yıllık 2 milyar dolarlık Türkiye yatırımı kapsamında duyurdu; Turkcell de data center ve cloud teknolojilerine 1 milyar dolar yatırım planını açıkladı.
+
+Bunlar şu anlama gelmez:
+
+“Artık her veri merkezi dolacaktır.”
+
+Ama çok güçlü bir şeyi gösterir:
+
+ Global platformlar Türkiye’yi yalnız satış pazarı olarak değil, fiziksel dijital altyapı pazarı olarak da değerlendirmeye başlamıştır.
+
+Ve bu değişim yatırımcı açısından dikkate değer bir zamanlama sinyalidir.

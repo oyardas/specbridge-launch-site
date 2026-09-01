@@ -1,0 +1,33 @@
+Bir veri merkezinde elektrik varsa ama bağlantı yoksa… 
+
+ çok pahalı bir depo elde edersiniz.
+
+Çünkü veri merkezinin ekonomik değeri yalnız içinde ne olduğuyla değil, neye bağlandığıyla da ölçülür.
+
+Profesyonel bir tesisin network stratejisi tek bir internet hattından ibaret olamaz.
+
+Birden fazla carrier gerekir. Fiziksel olarak ayrılmış fiber güzergâhları gerekir. Meet-me room yapısı gerekir. Cross-connect hizmetleri gerekir. Mümkünse internet exchange bağlantısı, cloud on-ramp, DCI ve ayrı out-of-band yönetim yolları gerekir.
+
+Burada “carrier-neutral” yaklaşım yalnız teknik bir özellik değildir.
+
+Ticari bir özelliktir.
+
+Müşteriye seçenek verir. Fiyat rekabeti yaratır. Tek operatöre bağımlılığı azaltır. Cloud ve diğer veri merkezlerine erişimi kolaylaştırır. Ve zamanla tesisin çevresinde bir network effect oluşturabilir.
+
+Bu yüzden başarılı veri merkezi hub’ları yalnız çok sayıda bina bulunan yerler değildir.
+
+Carrier’ların, cloud platformlarının, içerik sağlayıcıların, CDN’lerin, internet exchange’lerin ve kurumsal müşterilerin birbirine bağlandığı ekosistemlerdir.
+
+Network tasarımında da “iki fiber var” demek yetmez.
+
+Eğer iki fiber aynı kanalizasyondan geçiyorsa, aynı köprüden geçiyorsa veya aynı giriş odasına bağımlıysa; fiziksel bir kazı her ikisini de aynı anda etkileyebilir.
+
+ Logical diversity ile physical diversity aynı şey değildir.
+
+Bu nedenle route survey, bina giriş noktaları, MMR tasarımı, carrier demarcation ve cross-connect operasyonu yatırımın başlangıcında düşünülmelidir.
+
+Ve AI inference, finans, gaming, medya ve sağlık gibi düşük gecikmeye duyarlı iş yükleri arttıkça, lokasyonun network değeri daha da büyür.
+
+Bir veri merkezinin gücü yalnız MW ile değil… 
+
+ kaç farklı dijital ekosisteme ne kadar güvenilir bağlanabildiğiyle de ölçülür.

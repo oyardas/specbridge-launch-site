@@ -1,0 +1,27 @@
+Dijital ekonomi görünmezdir… ama onu çalıştıran altyapı son derece fizikseldir.
+
+Bir banka havalesi yaptığınızda… bir hastane MR görüntüsünü açtığında… bir şirket SAP üzerinde sipariş girdiğinde… bir e-ticaret platformu saniyede binlerce işlem aldığında… bir video izlendiğinde… bir yapay zekâ modeli sorgulandığında… bütün bu işlemler bir yerde fiziksel olarak hesaplanır, saklanır ve taşınır.
+
+Bu yüzden veri merkezi talebi tek bir sektörün büyümesine bağlı değildir.
+
+Cloud dönüşümü var. Kurumsal sistemlerin dış kaynaklı ve profesyonel altyapılara taşınması var. Video var. IoT var. Siber dayanıklılık ihtiyacı var. Veri yerleşimi ve egemenlik gereksinimleri var. Düşük gecikme isteyen uygulamalar var. Ve bütün bunların üzerine yapay zekâ geliyor.
+
+McKinsey’nin güncel orta senaryolarında küresel veri merkezi kapasite ihtiyacı 2025’te yaklaşık 82 gigawatt seviyesinden, 2030’da yaklaşık 219–220 gigawatt seviyesine çıkabiliyor.
+
+Bu, beş yıl içinde bugünkü kapasitenin neredeyse üç katına yaklaşan bir talep anlamına geliyor.
+
+Ancak burada rakamı tek başına okumak yeterli değil.
+
+Asıl önemli olan şu: bu kapasiteyi üretmek için yalnız sunucu satın alınmıyor. Arazi gerekiyor. Şebeke bağlantısı gerekiyor. Trafo gerekiyor. UPS gerekiyor. Jeneratör gerekiyor. Soğutma gerekiyor. Fiber gerekiyor. Ve bütün bunların yıllarca güvenilir çalışmasını sağlayacak operasyon gerekiyor.
+
+CBRE’nin 2026 verileri başka bir önemli sinyal veriyor. Dünyanın 16 büyük veri merkezi pazarında arz bir yılda yaklaşık yüzde 25 artarak 16 gigawatt seviyesine ulaşmasına rağmen, global vacancy yaklaşık yüzde 6,7 seviyesine gerilemiş durumda.
+
+Yani sektör yalnızca hızla yeni kapasite inşa etmiyor.
+
+ Yeni kapasiteyi aynı zamanda hızla tüketiyor.
+
+Bu nedenle bugünkü büyümeyi yalnız “AI modası” şeklinde okumak yanıltıcı olur.
+
+AI, çok güçlü bir hızlandırıcıdır. Ama altında daha büyük bir yapısal dönüşüm vardır: ekonomi dijitalleştikçe, dijital ekonominin fiziksel altyapısına olan ihtiyaç da büyür.
+
+Ve veri merkezi tam olarak bu fiziksel altyapının merkezindedir.

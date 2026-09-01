@@ -1,0 +1,45 @@
+Veri merkezi yatırımındaki en büyük hatalardan biri, nihai vizyon ile ilk gün CAPEX’ini birbirine karıştırmaktır.
+
+Örneğin uzun vadede 50 megawattlık bir kampüs hedeflemek doğru olabilir.
+
+Ama bu, 50 megawattın tamamını ilk gün devreye almak zorunda olduğumuz anlamına gelmez.
+
+Daha disiplinli yaklaşım şudur:
+
+Arsanın ve ana altyapının nihai büyümeyi desteklediği bir masterplan yapılır.
+
+Power ve fiber expansion path baştan korunur.
+
+İlk faz, pazardaki gerçek talep ve anchor müşteri ihtiyacına göre boyutlandırılır.
+
+Sonraki fazlar sözleşmeli veya güçlü pipeline oluştuğunda devreye alınır.
+
+Bu model iki riski azaltır.
+
+Birincisi stranded capital: yıllarca gelir üretmeden bekleyen aşırı CAPEX.
+
+İkincisi teknoloji riski: bugün kurduğumuz altyapının beş yıl sonra değişmiş yoğunluk ve cooling ihtiyacına uymaması.
+
+Ticari model de yalnız rack rental’dan ibaret olmamalıdır.
+
+Colocation temel gelir katmanıdır.
+
+Ama bunun üzerinde managed colocation, cross-connect, connectivity, remote hands, managed network, security, backup, DR, private cloud, IaaS ve uygun projelerde GPU veya AI services gibi daha yüksek katma değerli servisler oluşabilir.
+
+Bununla birlikte bütün servisleri ilk günden kurmak da doğru değildir.
+
+ Hizmet portföyü, operasyon yetkinliği kadar büyümelidir.
+
+Yatırım kararında beş soru her zaman masada kalmalıdır:
+
+Power gerçekten secured mı?
+
+Fiber fiziksel olarak diverse mı?
+
+Anchor customer veya güvenilir demand pipeline var mı?
+
+Teknik tasarım gerçek ihtiyaçla dengeli mi?
+
+Ve işletme organizasyonu ilk müşteri gelmeden hazır olacak mı?
+
+Bu soruların cevabı “evet”e yaklaştıkça, veri merkezi pahalı bir yapı olmaktan çıkar… uzun ömürlü bir dijital altyapı asset’ine dönüşür.
