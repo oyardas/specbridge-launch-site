@@ -1,0 +1,23 @@
+Carrier-neutral bir veri merkezinde network yalnız müşterinin internete çıkmasını sağlayan teknik bir altyapı değildir. Doğru tasarlandığında interconnection, ayrı bir ürün ailesi ve güçlü bir ecosystem moat oluşturabilir.
+
+En temel ürün cross-connect’tir. Müşterinin cabinet, cage veya suite’inden bir carrier, cloud provider, business partner veya başka bir müşteriye fiziksel bağlantı kurulur. Bu hizmet çoğu pazarda bir defalık installation charge ve aylık recurring charge ile fiyatlanabilir. Yani MMR ve cross-connect altyapısı yalnız teknik maliyet değil, recurring revenue kaynağıdır.
+
+Internet Exchange, farklı networklerin doğrudan peering yapmasına imkân verir. Bunun IP Transit’ten farklı olduğunu vurgulamak gerekir. IX üzerinde networkler birbirleriyle traffic exchange eder. Transit provider ise müşteriye daha geniş internet routing erişimi sağlar. Bir data center hem IX ekosistemine hem birden fazla transit provider’a sahip olabilir.
+
+Cloud Connect veya cloud on-ramp hizmeti, müşteri infrastructure’ını public-cloud ortamına private veya dedicated connection üzerinden bağlar. Hybrid-cloud adoption arttıkça bu ürünün değeri yükselir. Çünkü müşteri kendi private infrastructure’ını AWS, Azure, Google Cloud veya başka platformlara public internet dışındaki kontrollü bağlantılarla entegre etmek isteyebilir.
+
+Data Center Interconnect, yani DCI, iki data center arasındaki yüksek kapasiteli bağlantıdır. Active-active uygulamalar, storage replication, metro cluster veya disaster recovery için kullanılabilir.
+
+Bir üst katmanda software-defined interconnection bulunur. Burada müşteriler portal veya API üzerinden virtual connections oluşturabilir, bandwidth seçebilir ve cloud veya partner endpoints’e bağlanabilir. Böylece fiziksel data center ekosistemi programmable bir network platformuna dönüşür.
+
+Interconnection-heavy operator için MMR’nin tasarımı facility’nin merkezinde olmalıdır. Carrier diversity, fiber entrance diversity, patching capacity, demarcation process, cross-connect delivery time ve documentation kalitesi doğrudan commercial value üretir.
+
+Bu network ekosistemini managed operations ile birleştirdiğimizde daha geniş bir service portfolio oluşur. Smart Hands, managed network, managed firewall, NOC as a Service, DDoS protection veya SOC services müşterinin operasyon yükünü azaltabilir.
+
+Ancak managed service tarafında dikkat edilmesi gereken temel kural şudur: Satılan her service için operation model oluşturulmalıdır. Bir firewall service açıyorsanız kimin policy change yaptığı, change approval’ın nasıl olduğu, incident sırasında escalation’ın nereye gittiği ve log retention’ın nasıl yönetildiği bilinmelidir.
+
+Aynı şekilde NOC veya SOC service yalnız dashboard açmak değildir. Alarm ownership, triage, escalation, response time ve service boundaries gerektirir.
+
+Bu nedenle interconnection ve managed services gelir açısından çekici olabilir; fakat en başarılı provider, katalogda en fazla satırı olan değil, sattığı her satırı repeatable ve auditable bir süreçle işletebilen provider’dır.
+
+Son bölümde bütün bu modelleri yatırımcı ve operator perspektifinden birleştirip hangi hizmetin hangi durumda seçilmesi gerektiğini, margin ile complexity arasındaki ilişkiyi ve doğru service portfolio’nun nasıl fazlanacağını değerlendireceğiz.

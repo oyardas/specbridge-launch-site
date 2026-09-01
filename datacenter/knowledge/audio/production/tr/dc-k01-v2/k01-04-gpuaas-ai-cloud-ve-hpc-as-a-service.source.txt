@@ -1,0 +1,23 @@
+AI yatırımlarının büyümesiyle birlikte GPU as a Service, AI Cloud ve AI Factory gibi kavramlar çok sık kullanılmaya başladı. Fakat bu terimler aynı şeyi anlatmaz.
+
+En basit katman GPU colocation’dır. Müşteri GPU server’ını getirir; data center yüksek yoğunluklu power, cooling, physical security ve connectivity sağlar. Provider GPU kaynağını işletmek zorunda değildir.
+
+Bir sonraki katman dedicated GPU server’dır. GPU hardware provider’a aittir ve müşteriye dedicated olarak sunulur. Burada hardware lifecycle provider’a geçer.
+
+GPU as a Service modelinde ise GPU kapasitesi tüketilebilir bir resource haline gelir. GPU-hour, GPU-month, reserved GPU veya cluster reservation gibi charging modelleri kullanılabilir. Bazı GPU’lar partition teknolojileriyle birden fazla tenant’a bölünebilir. NVIDIA MIG buna bir örnektir. Buradaki amaç her workload’un bütün GPU’yu kullanmadığı durumlarda utilization’ı yükseltirken gerekli isolation’ı sağlamaktır.
+
+Ancak GPU business modelinin en kritik finansal değişkeni satın alınan GPU sayısı değildir. Billable utilization’dır. On milyonlarca dolarlık accelerator capacity satın alıp bunun önemli bölümünü idle bırakmak, çok yüksek görünen saatlik fiyatlara rağmen kötü bir yatırım sonucu üretebilir.
+
+Bu nedenle operator yalnız GPU procurement’a bakmamalıdır. Scheduler ne kadar iyi? Cluster fragmentation ne kadar? Müşteriler hangi reservation sürelerini istiyor? Network veya storage darboğazı GPU’yu bekletiyor mu? Maintenance sırasında ne kadar capacity kaybediliyor? Bu sorular finansal modelin parçasıdır.
+
+AI Cloud, GPUaaS’tan daha geniştir. Kullanıcı yalnız accelerator talep etmek yerine Kubernetes capacity, models, endpoints, AI platform veya inference workers tüketebilir. NVIDIA’nın güncel cloud-partner reference yaklaşımı da AI hizmetini compute, network, storage, software ve operations stack’i olarak ele alır.
+
+AI Cloud’un facility tarafındaki etkisi de ağırdır. GPU rack’leri çok yüksek power density’ye çıkabilir. Liquid cooling gerekebilir. AI fabric 200, 400 veya 800 gigabit gibi yüksek hızlara çıkabilir. Storage yalnız kapasite değil çok yüksek throughput üretmek zorunda olabilir. Yani GPU server satın alınması, toplam architecture’ın yalnız bir parçasıdır.
+
+HPC as a Service bu ekosistemle bazı ortak özellikler taşır. HPC cluster’ları da compute, high-performance networking ve storage üçlüsüne dayanır. Fakat HPC workloads çoğunlukla batch scheduler, simulation, scientific workloads veya parallel computation odaklı olabilir. AI training ile aynı GPU veya network teknolojilerini kullanabilse bile software ecosystem ve workload behavior farklı olabilir.
+
+Bir operator için en sağlıklı AI service ladder şu şekilde düşünülebilir. Önce high-density colocation. Sonra dedicated GPU. Sonra GPUaaS. Ardından managed GPU Kubernetes veya Container as a Service. Daha sonra managed AI platform ve inference service.
+
+Her basamakta müşterinin yönetmek zorunda olduğu altyapı azalırken provider’ın sorumluluğu artar. Bu nedenle en üst servise doğrudan sıçramak her zaman doğru değildir. Organizasyonun people, process, tooling ve software maturity’si hangi seviyeyi güvenilir biçimde sunabileceğini belirlemelidir.
+
+Bir sonraki bölümde data protection tarafına geçeceğiz ve storage, backup, disaster recovery ve cyber recovery kavramlarının neden birbirinin yerine kullanılmaması gerektiğini inceleyeceğiz.

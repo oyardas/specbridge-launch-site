@@ -1,0 +1,23 @@
+IaaS, yani Infrastructure as a Service, compute, storage ve network kaynaklarının hizmet olarak sunulmasıdır. Bu tanım basit görünür, fakat bir data center operator için çok önemli bir dönüşüm içerir. Çünkü müşteri artık fiziksel server değil, programlanabilir bir kaynak havuzu tüketir.
+
+IaaS’ın altında portal veya API, identity ve tenant yönetimi, orchestration, virtual compute, virtual network, storage, metering, billing ve monitoring bulunur. Bunların altında fiziksel server, network fabric ve facility vardır.
+
+Bu nedenle bir hypervisor cluster kurmak IaaS olmak için yeterli değildir. Gerçek IaaS müşterisi self-service bekler. VM oluşturmak, network bağlamak, storage tahsis etmek, image seçmek, quota görmek ve kaynağı kapattığında lifecycle’ın doğru biçimde sonlanmasını ister. Provider aynı zamanda tenant isolation ve resource accounting yapabilmelidir.
+
+Bu modelde shared responsibility kavramı kritik hale gelir. Provider facility, hardware ve virtualization gibi alt katmanları yönetebilir. Müşteri ise guest operating system, application, identity configuration ve data için sorumluluk taşımaya devam edebilir. Hangi katmanın kimde olduğu kullanılan service’e göre değişir.
+
+Private cloud ise tek bir organizasyona dedicated cloud operating modelidir. Private cloud’un on-premises olmak zorunda olduğu düşüncesi yanlıştır. Müşterinin kendi binasında olabilir, colocation tesisinde olabilir veya provider data center’ında managed service olarak çalışabilir. Önemli olan resource pool ve control modelinin müşteriye dedicated olmasıdır.
+
+Managed private cloud’da provider platform lifecycle’ın daha büyük bölümünü üstlenir. Cluster deployment, patching, monitoring, backup integration ve capacity management provider tarafından yürütülebilir. Bu model, kendi cloud platformunu işletmek istemeyen fakat public cloud’a tamamen geçmek istemeyen kuruluşlar için anlamlı olabilir.
+
+Hybrid cloud ise iki ayrı dünyanın yan yana bulunmasından daha fazlasıdır. On-prem veya private environment ile public cloud arasında connectivity, identity, DNS, security, monitoring ve data movement tutarlı biçimde yönetilmelidir. AWS Outposts gibi modeller public-cloud infrastructure ve services’i customer veya colo lokasyonuna getirerek bu hybrid experience’ı daha bütünleşik hale getirmeye çalışır.
+
+Sovereign cloud konusu ise son yıllarda giderek daha önemli hale geldi. Burada en sık yapılan hata sovereignty’yi yalnız data residency ile eşitlemektir. Verinin ülke sınırları içinde bulunması önemli olabilir, ancak tek kriter değildir. Administrator kim? Control plane nerede? Encryption keys kimde? Provider hangi jurisdiction’a tabi? Sistem internet bağlantısı olmadan çalışabiliyor mu? Foreign operator erişimi nasıl sınırlandırılıyor? Audit log kim tarafından kontrol ediliyor?
+
+Güncel sovereign-cloud modellerinde public cloud üzerinde ek sovereignty controls, customer-controlled private cloud ve local partner-operated national cloud gibi farklı seçenekler bulunabiliyor. Bu nedenle bir yerel data center’ın “veri burada duruyor, dolayısıyla sovereign cloud’uz” demesi teknik olarak yetersizdir.
+
+Yerel operator açısından doğru tasarlanmış sovereign service ciddi bir fırsat olabilir. Local facility, local operations, controlled access, private infrastructure, dedicated connectivity ve auditable governance birlikte sunulabilir. Fakat bunun bir marketing label değil, gerçek operating model olması gerekir.
+
+Özetle cloud service’e doğru ilerledikçe provider daha fazla abstraction ve automation üstlenir. Bu da daha yüksek service value yaratabilir; ancak responsibility boundary, software maturity ve operational risk aynı hızda büyür.
+
+Bir sonraki bölümde bu mantığın en yüksek sermaye ve performans yoğunluğuna sahip alanlarından biri olan GPUaaS, AI Cloud ve HPC as a Service’i ele alacağız.

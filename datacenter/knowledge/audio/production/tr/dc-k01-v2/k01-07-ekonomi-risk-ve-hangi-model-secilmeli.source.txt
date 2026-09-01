@@ -1,0 +1,31 @@
+Şimdi bütün service modellerini tek bir yatırım kararı çerçevesinde birleştirebiliriz.
+
+İlk önemli ders şudur: Revenue ile margin aynı şey değildir. Bir hizmetin satış fiyatı yüksek olabilir, fakat o hizmeti üretmek için gereken capital, software, staff ve idle capacity maliyeti daha hızlı büyüyebilir.
+
+Retail colocation yüksek facility CAPEX gerektirir; ancak software complexity görece düşüktür. Wholesale modelde büyük capacity blocks satılır ve unit revenue daha düşük olabilir, fakat scale yüksektir. Bunun karşılığında customer concentration riski artar.
+
+Smart Hands düşük capital ile ek service revenue yaratabilir; ancak insan kaynağı gerektirir. Managed hosting daha yüksek margin fırsatı sunabilir, fakat patching, monitoring, hardware replacement ve support organizasyonu gerekir.
+
+IaaS ve private cloud daha yüksek service value üretir, ancak automation ve platform operations çok daha karmaşıktır. GPUaaS’ın gelir potansiyeli çok yüksek olabilir; fakat CAPEX ve utilization riski de en yüksek modeller arasındadır. GPU satın almakla gelir oluşmaz. GPU’nun billable biçimde kullanılması gerekir.
+
+DRaaS başka bir örnektir. Müşteri recovery outcome için yüksek değer ödeyebilir; fakat provider RPO ve RTO sözünü tutmak için reserved recovery capacity, testing ve orchestration yatırımı yapmak zorundadır.
+
+Interconnection ise farklı bir karakter taşır. Cross-connect, port ve cloud connectivity gibi hizmetler physical ecosystem üzerine recurring revenue ekleyebilir ve müşteri bağlılığını yükseltebilir. Bu nedenle carrier-neutral bir data center’ın değerini yalnız cabinet occupancy ile ölçmek eksik olur.
+
+Peki yeni bir operator hangi sırayla ilerlemeli?
+
+En güvenli yaklaşım service maturity ladder kullanmaktır. İlk seviyede facility operator olunur: cabinet, cage, suite, power, cooling ve security. İkinci seviyede carrier ve interconnection ekosistemi büyütülür. Üçüncü seviyede Smart Hands, managed network, dedicated server ve backup gibi managed infrastructure hizmetleri eklenir. Dördüncü seviyede IaaS, private cloud ve DRaaS gibi software-defined platform services açılır. Beşinci seviyede GPUaaS, AI Cloud, HPC veya managed AI platform gibi çok yüksek complexity’li servisler düşünülür.
+
+Bu sıra zorunlu değildir, fakat önemli bir test sağlar. Bir sonraki seviyeye geçmeden önce people, process, tooling, automation, capacity, security, billing ve SLA governance hazır mı?
+
+Customer fit de aynı derecede önemlidir. Kendi hardware’ını kontrol etmek isteyen enterprise için colocation doğru olabilir. Küçük IT ekibi olan müşteri managed colo veya managed hosting isteyebilir. Elastic digital workload IaaS’a uygundur. Regulated workload private veya sovereign cloud gerektirebilir. AI startup GPUaaS tüketebilir. Büyük AI training müşterisi dedicated GPU cluster isteyebilir. Business continuity ihtiyacı DRaaS’a, ransomware resilience ihtiyacı ise cyber recovery’ye yönelir.
+
+Son olarak service architecture ile facility architecture’ın birlikte fazlanması gerekir. Örneğin ilk günden bütün tesisi AI facility’ye çevirmek yerine standard colocation hall, liquid-ready high-density zone, future cloud pod ve future DR pod gibi growth interfaces planlanabilir. Böylece capital demand ile birlikte devreye alınır.
+
+DC-K01’in nihai mesajı budur: En iyi data center business model, katalogda en fazla hizmeti sunan model değildir. Hedef müşterinin ihtiyacına uygun, facility ve IT architecture tarafından gerçekten desteklenen, söz verilen SLA’yı operasyonel olarak üretebilen ve utilization riski kabul edilebilir olan service portfolio en iyi modeldir.
+
+Bu nedenle her yeni projede önce müşteriyi ve service modelini tanımlamalı; sonra responsibility boundary, commercial unit, SLA ve workload’u belirlemeli; en son power, cooling, network, compute, storage ve operations architecture’ını tasarlamalıyız.
+
+Bu, kabinet satan bir tesisten güvenilir bir dijital altyapı platformuna geçişin temelidir.
+
+Bu ses yapay zekâ ile üretilmiştir.

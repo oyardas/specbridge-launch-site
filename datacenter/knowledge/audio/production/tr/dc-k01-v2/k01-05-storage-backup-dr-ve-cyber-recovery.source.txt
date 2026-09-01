@@ -1,0 +1,23 @@
+Data protection hizmetlerinde en sık yapılan kavramsal hata, storage, backup, disaster recovery ve cyber recovery’yi aynı ürün ailesinin farklı isimleri gibi görmektir. Oysa bunların her biri farklı bir outcome üretir.
+
+Storage as a Service, müşterinin yönetilen storage capacity ve performance tüketmesidir. Provider disk satmaz; TB-month, throughput, IOPS, replication veya performance tier gibi parametrelerle bir storage service sunar. Burada durability, availability ve lifecycle management sözleşmenin parçası haline gelir.
+
+Backup as a Service’in amacı production data’nın ayrı recovery copies’ini oluşturmaktır. Charging protected TB, workload count, retention period veya restore tier üzerinden yapılabilir. Fakat backup service’in başarısını yalnız “job success” oranıyla ölçmek tehlikelidir. Asıl soru verinin geri döndürülebilip döndürülemediğidir. Bu nedenle restore testing kritik bir service elementidir.
+
+Disaster Recovery as a Service bir adım daha ileri gider. Burada yalnız data copy değil, workload’un başka bir ortamda yeniden çalışması hedeflenir. Replication, recovery compute, network configuration, dependency mapping, orchestration ve runbook gerekir.
+
+Bu noktada RPO ve RTO kavramları ortaya çıkar. Recovery Point Objective, kesinti sonrasında verinin hangi geçmiş noktaya kadar geri getirilebilmesi gerektiğini ifade eder. RTO ise sistemin recovery sürecinde ne kadar süre unavailable kalabileceğini tanımlar. Bu iki hedef service design’ı ve maliyeti ciddi biçimde etkiler.
+
+Örneğin sekiz saatlik RPO ile beş dakikalık RPO aynı replication architecture’ı gerektirmez. Dört saatlik RTO ile on beş dakikalık RTO da aynı reserved recovery compute kapasitesini gerektirmez. Provider satış ekibinin bu değerleri teknik architecture’dan bağımsız biçimde vaat etmesi büyük risktir.
+
+Cyber recovery ise klasik DR’dan farklı bir threat model kullanır. Geleneksel disaster senaryosunda production site kaybedilmiş olabilir. Cyber incident’ta ise production environment’ın kendisinin compromised olduğu varsayılır. Backup credentials çalınmış olabilir, administrator accounts ele geçirilmiş olabilir, replication corrupted data’yı secondary site’a taşımış olabilir.
+
+Bu nedenle cyber recovery için isolated recovery domain, immutable veya offline copies, privileged-access separation, clean-room recovery ve malware validation gibi ek kontroller gerekir. CISA’nın ransomware guidance’ı da offline ve encrypted backup, immutable storage ve düzenli restore testini özellikle vurgular.
+
+Bu ayrım ticari açıdan önemlidir. Provider “backup hizmeti” satıyorsa müşteriye otomatik olarak business continuity sağlamış olmaz. DRaaS satıyorsa cyber recovery sağladığı da varsayılamaz.
+
+Data protection service ladder’ını şöyle düşünebiliriz. Storage capacity veriyi barındırır. Backup verinin recovery copy’sini oluşturur. DR workload’u yeniden çalıştırır. Cyber recovery ise compromised environment koşullarında güvenilir bir clean recovery hedefler.
+
+Bu dört seviyenin her birinde provider’ın sorumluluğu, tooling’i, test yükü ve SLA riski yükselir. Dolayısıyla data protection gelir modeli yalnız TB kapasitesiyle değil, recovery outcome ile tasarlanmalıdır.
+
+Bir sonraki bölümde data center’ın en güçlü network-effect alanlarından biri olan interconnection’ı ve bunun managed operations ile nasıl birleştiğini ele alacağız.

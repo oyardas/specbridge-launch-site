@@ -1,0 +1,21 @@
+Colocation, veri merkezi hizmetlerinin en temel ticari modellerinden biridir; ancak “kabinet kiralama” şeklinde tanımlamak yetersizdir. Müşteri aslında yalnız metal bir cabinet satın almaz. Güvenli alan, sürekli enerji, ısı uzaklaştırma kapasitesi, fiziksel güvenlik, operasyonel süreç ve bağlantı ekosisteminin birlikte oluşturduğu bir service boundary satın alır.
+
+Retail colocation modelinde müşteri çoğunlukla kendi server, storage ve network cihazlarını getirir. Provider building, power, cooling, physical security ve facility operations’ı yönetir. Müşteri ise işletim sistemi, application ve çoğu IT architecture kararını kendi kontrolünde tutar.
+
+Bu modelin küçük başlangıç noktası tek veya birkaç cabinet olabilir. Güç tahsisi cabinet başına kW veya kVA ile yapılabilir. Burada provider’ın kritik kabiliyeti granular capacity management’tır. Çünkü bir müşteri 5 kilowatt, başka biri 12 kilowatt, bir diğeri ise çok daha yüksek bir rack density isteyebilir. Metering, A ve B power feed, hot-cold aisle disiplini ve customer access süreçleri bu nedenle hizmetin parçasıdır.
+
+Müşteri cabinet sayısını büyüttüğünde private cage modeli devreye girebilir. Cage, birden fazla cabinet’in fiziksel olarak ayrılmış güvenli bir müşteri alanında tutulmasını sağlar. Ancak cage, müşterinin kendi veri merkezine sahip olduğu anlamına gelmez. Temel facility altyapısı, power, cooling, MMR ve ortak operasyon provider’a aittir.
+
+Daha büyük müşteriler private suite veya dedicated data hall talep edebilir. Burada tenant isolation yükselir; müşteri kendi layout, security policy ve bazen cooling veya network demarcation tasarımında daha fazla söz sahibi olur. Retail ile wholesale arasındaki sınırlar operator’dan operator’a değişebilir; bu terimlerin evrensel sabit teknik eşikleri yoktur.
+
+Wholesale modelde sözleşme genellikle daha büyük capacity block’larına çıkar. Yüzlerce kilowatt veya megawatt seviyesindeki commitments görülebilir. Provider açısından bunun avantajı büyük bir anchor customer ile kapasite doluluğunu hızlı yükseltmektir. Dezavantajı ise customer concentration’dır. Bir büyük müşterinin contract yenilememesi, çok büyük boş kapasite bırakabilir.
+
+Powered shell modelinde scope daha da değişir. Genel olarak bina kabuğu, utility ve fiber erişimi gibi temel unsurlar provider tarafından hazırlanırken, müşteri teknik fit-out’un daha büyük bölümünü üstlenebilir. Fakat “powered shell” teriminin kapsamı provider’a göre değiştiği için, bu modelde sözleşmedeki demarcation son derece önemlidir. Hangi switchgear hazır? UPS kimde? Cooling plant kimde? Commissioning sınırı nerede? Bunların açık yazılması gerekir.
+
+Build-to-suit ise belirli bir büyük müşteri için purpose-built facility veya facility block geliştirilmesidir. Hyperscaler, büyük AI platformu, national cloud veya çok büyük enterprise bu modeli tercih edebilir. Structural design, security, redundancy, power density ve cooling architecture müşterinin gereksinimine göre özelleştirilebilir. Provider büyük ve uzun vadeli bir kontrat kazanır; müşteri ise kendi standardına yakın bir tesis elde eder. Buna karşılık design-lock ve anchor-customer dependency artar.
+
+AI colocation bu fiziksel kapasite ailesinin yeni ve önemli bir alt segmentidir. Bir operator’ın “yüksek yoğunluk destekliyoruz” demesi tek başına yeterli değildir. Önemli olan 60, 80 veya 100 kilowatt gibi bir rack load’un sürekli ve yedekli biçimde rack’e ulaştırılması, ısının güvenli biçimde uzaklaştırılması, ilgili CDU veya liquid loop’un servis edilebilmesi ve yüksek hızlı fiber fabric’in desteklenmesidir.
+
+Bu nedenle colocation tasarımında temel soru yalnız kaç cabinet olacağı değildir. Asıl soru şudur: Hangi müşteri segmentleri için hangi capacity granularity, isolation, density ve interconnection modelini satıyoruz?
+
+Bir sonraki bölümde müşteri donanımının provider tarafından işletildiği veya provider’ın fiziksel server sağladığı managed hosting, dedicated server ve bare metal modellerine geçeceğiz.
