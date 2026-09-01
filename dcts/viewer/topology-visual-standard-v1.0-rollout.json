@@ -1,12 +1,14 @@
 {
   "document_id": "DCTS-VISUAL-STD-002-ROLLOUT-001",
-  "standard_version": "v1.0.0",
-  "status_safety_amendment": "v1a1",
+  "standard_version": "v1.0.1",
+  "parent_standard": "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.md",
+  "controlled_amendment": "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.1-Amendment.md",
   "date": "2026-09-01",
   "status": "APPLIED_TO_ALL_ENABLED_DCTS_PREVIEW_VIEWS",
   "shared_runtime": {
     "css": "/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.css",
     "javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js",
+    "service_segmentation_javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-service-segmentation-v1a1.js",
     "status_safety_css": "/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.css",
     "status_safety_javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.js"
   },
@@ -15,6 +17,7 @@
       "preview_path": "/kayas/topology/v1-preview.html",
       "package_base": "/dcts/viewer/fixtures/kayas",
       "presentation_views": ["T00", "T01", "T02", "T03", "T04", "T05", "T06"],
+      "t02_service_segmentation": "PACKAGE_DRIVEN_WHEN_MULTIPLE_SERVICE_MODEL_CODES_EXIST",
       "engineering_renderer_preserved": true,
       "production_shell_replaced": false
     },
@@ -22,6 +25,7 @@
       "preview_path": "/haven-healthcare/v1-preview.html",
       "package_base": "/dcts/viewer/fixtures/haven-healthcare",
       "presentation_views": ["T00", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08"],
+      "t02_service_segmentation": "PACKAGE_DRIVEN_ONLY_IF_EXPLICIT_SERVICE_MODEL_METADATA_EXISTS",
       "engineering_renderer_preserved": true,
       "production_shell_replaced": false
     }
@@ -32,6 +36,7 @@
     "canonical_relationship_mutation": false,
     "evidence_mutation": false,
     "missing_status_assumed_confirmed": false,
+    "presentation_grouping_promoted_to_semantics": false,
     "presentation_intent_promoted_to_canonical": false
   },
   "promotion_gate": "HUMAN_VISUAL_ACCEPTANCE_BEFORE_PRODUCTION_SHELL_CUTOVER"
