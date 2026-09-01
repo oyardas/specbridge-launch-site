@@ -19,7 +19,7 @@
 (function(){
  const f=document.getElementById('viewer'),boot=document.getElementById('boot'),requested=location.hash||'#view=T02';let started=false;
  function theme(){return window.KAYAS_THEME?.getEffective?.()||document.documentElement.dataset.sbTheme||'dark'}
- function syncTheme(){try{f.contentDocument.documentElement.dataset.sbTheme=theme()}catch(_){}}
+ function syncTheme(){try{f.contentDocument.documentElement.dataset.sbTheme=theme()}catch(_){} }
  function start(){if(started)return;started=true;const c=window.KAYAS_DATA?.capacity;if(c)boot.querySelector('small').textContent=`Loading ${c.itCabinetsTotal}-cabinet project data with T02 engineering / T06 service separation…`;f.src='viewer-v0.11.9.html'+requested;}
  function addScript(d,src,id,onload,onerror){const s=d.createElement('script');s.src=src;s.id=id||'';s.onload=onload||null;s.onerror=onerror||null;d.body.appendChild(s)}
  f.addEventListener('load',()=>{
@@ -30,12 +30,15 @@
    const netCss=d.createElement('link');netCss.rel='stylesheet';netCss.href='kayas-network-engineering-v1.css?v=20260901-net1';d.head.appendChild(netCss);
    const themeCss=d.createElement('link');themeCss.rel='stylesheet';themeCss.href='../kayas-theme-frame.css?v=20260901-theme1';d.head.appendChild(themeCss);
    const mobCss=d.createElement('link');mobCss.rel='stylesheet';mobCss.href='kayas-mobile.css?v=20260901-mobile1';d.head.appendChild(mobCss);
+   const reviewCss=d.createElement('link');reviewCss.rel='stylesheet';reviewCss.href='kayas-network-engineering-v1a2.css?v=20260901-net2';d.head.appendChild(reviewCss);
    addScript(d,'v0.14-service-model.js?v=20260901-es1','kxModel',()=>{
     addScript(d,'v0.14-service-ui.js?v=20260901-es1','kxUi',()=>{
      addScript(d,'dcts-terminology-v1.js?v=20260901-es1','kxTerm',()=>{
       addScript(d,'kayas-experience-standard.js?v=20260901-es1','kxExperience',()=>{
        addScript(d,'kayas-network-engineering-v1.js?v=20260901-net1','kxNetworkEngineering',()=>{
-        addScript(d,'kayas-mobile.js?v=20260901-mobile1','kxMobile',()=>{boot.style.display='none'},()=>{boot.style.display='none'});
+        addScript(d,'kayas-network-engineering-v1a2.js?v=20260901-net2','kxNetworkEngineeringReview',()=>{
+         addScript(d,'kayas-mobile.js?v=20260901-mobile1','kxMobile',()=>{boot.style.display='none'},()=>{boot.style.display='none'});
+        },()=>{boot.innerHTML='<div>T02 review refinement could not be loaded.<small>The first engineering preview remains available.</small></div>';setTimeout(()=>boot.style.display='none',2000)});
        },()=>{boot.innerHTML='<div>T02 engineering preview layer could not be loaded.<small>The current Experience Standard remains unchanged.</small></div>';setTimeout(()=>boot.style.display='none',2200)});
       },()=>{boot.innerHTML='<div>Experience layer could not be loaded.<small>The DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)});
      },()=>{boot.innerHTML='<div>DCTS terminology layer could not be loaded.<small>The service-network viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)});
