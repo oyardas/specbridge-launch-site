@@ -1,0 +1,47 @@
+{
+  "version": "TRIAL_PROFILES_V1",
+  "language": "tr-TR",
+  "model": "gpt-4o-mini-tts-2025-12-15",
+  "transcription_model": "gpt-4o-mini-transcribe",
+  "response_format": "mp3",
+  "disclosure": "Bu ses yapay zekâ ile üretilmiştir.",
+  "sample": {
+    "chapter": "00",
+    "title": "Neye yatırım yapıyoruz?",
+    "text": "Bir veri merkezine ilk kez giren bir yatırımcının gördüğü şey genellikle kabinetlerdir. Sıralar halinde duran siyah kabinetler, içlerindeki sunucular, yanıp sönen ışıklar ve kilometrelerce kablo. Fakat veri merkezinin kendisi bunların hiçbiri değildir. Kabinet, yalnızca görünen son noktadır. Asıl yatırım; o kabinetin yılın üç yüz altmış beş günü, günün yirmi dört saati güvenilir biçimde çalışabilmesini sağlayan bütün sistemdir. Elektriktir. Soğutmadır. Fiber bağlantıdır. Fiziksel güvenliktir. Siber güvenliktir. İzlemedir. Operasyondur. Bakımdır. Prosedürdür. İnsan kaynağıdır. Ve bütün bunların tek bir yapı gibi davranmasını sağlayan mühendislik disiplinidir."
+  },
+  "profiles": [
+    {
+      "id": "A",
+      "name": "Executive Adviser",
+      "voice": "cedar",
+      "speed": 1.0,
+      "instructions": "Speak in Turkish as a senior technical adviser briefing an investor. Calm, authoritative, measured, precise and non-promotional. Natural adult voice with a slightly lower register. Target roughly 128 words per minute. Use controlled pauses after important conclusions. Pronounce established English data-center terms clearly without forcing Turkish phonetics. Never sound like an advertisement, podcast host, radio announcer or movie trailer."
+    },
+    {
+      "id": "B",
+      "name": "Documentary Authority",
+      "voice": "onyx",
+      "speed": 0.97,
+      "instructions": "Speak in Turkish with restrained documentary authority. Slightly deeper and slower than normal conversation, but never theatrical. Target roughly 123 to 128 words per minute. Let key sentences land through short deliberate pauses, not louder volume. Keep emotional range controlled. Technical English terms must be clean and intelligible. No sales tone, no banter, no exaggerated trailer delivery."
+    },
+    {
+      "id": "C",
+      "name": "Technical Strategist",
+      "voice": "sage",
+      "speed": 1.02,
+      "instructions": "Speak in Turkish as a highly experienced infrastructure strategist. Prioritize clarity, technical articulation and confidence over drama. Target roughly 130 to 135 words per minute. Neutral, composed and analytical. Use subtle emphasis on investment conclusions and engineering terms. English technical terminology should remain crisp. No casual podcast style, no enthusiasm padding, no promotional tone."
+    }
+  ],
+  "acceptance": {
+    "minimum_transcript_similarity": 0.88,
+    "required_final_phrase": "mühendislik disiplinidir",
+    "manual_checks": [
+      "Turkish pronunciation sounds native enough for investor use",
+      "MW, UPS, network, data center and other technical terms remain clear",
+      "No casual podcast or advertising tone",
+      "Pauses feel deliberate but not slow or artificial",
+      "Voice remains credible for 45–55 minutes of continuous briefing"
+    ]
+  }
+}
