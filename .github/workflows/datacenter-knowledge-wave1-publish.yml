@@ -1,5 +1,6 @@
 name: Publish Data Center Knowledge Wave 1 Audio
 
+# Publication trigger revision: 2026-09-01-wave1-reviewed
 on:
   push:
     branches:
