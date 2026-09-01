@@ -1,0 +1,157 @@
+/* KAYAS T02/T06 visual review refinement — preview only. */
+
+/* T02: improve default 100% legibility and reduce vertical dead-space. */
+body.kx-network-engineering .groups{padding:14px 20px 68px!important;width:1200px!important}
+.kxne-stage{width:1160px;min-height:760px}
+.kxne-title{height:56px;padding:0 16px 0 18px}
+.kxne-title span{font-size:9px}
+.kxne-title b{font-size:17px;margin-top:2px}
+.kxne-title small{font-size:8.5px;margin-top:2px}
+.kxne-summary{gap:6px}
+.kxne-summary span{padding:5px 8px;font-size:7.5px}
+.kxne-canvas{width:1160px;height:666px;margin-top:8px}
+.kxne-zone>label{top:7px;left:10px;font-size:8px}
+.z-external{left:430px;top:12px;width:300px;height:60px}
+.z-security{left:105px;top:84px;width:950px;height:106px}
+.z-edge{left:445px;top:202px;width:270px;height:80px}
+.z-spine{left:405px;top:294px;width:350px;height:88px}
+.z-access{left:105px;top:394px;width:950px;height:102px}
+.z-workload{left:160px;top:508px;width:840px;height:72px}
+.z-management{left:70px;top:592px;width:1020px;height:62px}
+.kxne-external{left:22px;right:22px;top:19px;height:35px;padding:0 12px}
+.kxne-external .cloud{font-size:19px}
+.kxne-external b{font-size:9.5px}
+.kxne-external small{font-size:7px}
+.kxne-external em{font-size:7px}
+.security-row{left:22px;right:22px;top:22px;bottom:7px;gap:30px}
+.access-row{left:92px;right:92px;top:23px;bottom:9px;gap:130px}
+.workload-row{left:78px;right:78px;top:8px;bottom:7px;gap:120px}
+.management-row{left:18px;right:18px;top:20px;bottom:5px;gap:20px}
+.kxne-cluster{min-width:205px;max-width:250px}
+.kxne-cluster header{height:15px;font-size:7.5px}
+.kxne-cluster header b{font-size:8px}
+.kxne-cluster header span{font-size:6.5px}
+.kxne-cluster footer{height:11px;font-size:6.5px}
+.kxne-cluster footer b{font-size:6.5px}
+.kxne-member{min-height:45px;padding:7px 8px}
+.kxne-member span{font-size:6.5px}
+.kxne-member b{font-size:8.7px;margin-top:2px}
+.kxne-member small{font-size:6.3px}
+.kxne-member em{font-size:6.2px}
+.kxne-endpoint{width:265px;height:44px;padding:6px 42px 6px 9px}
+.kxne-endpoint span{font-size:6.4px}
+.kxne-endpoint b{font-size:8.8px}
+.kxne-endpoint small{font-size:6.2px}
+.kxne-endpoint strong{font-size:12px;top:13px}
+.z-edge>.kxne-cluster,.z-spine>.kxne-cluster{top:20px;width:230px}
+.z-management .kxne-cluster header{height:12px}
+.z-management .kxne-member{min-height:31px;padding:4px 7px}
+.z-management .kxne-member b{font-size:7.8px}
+.kxne-fabric-note{bottom:2px;padding:3px 8px;font-size:6.3px}
+.kxne-path{stroke-width:1.9}
+.kxne-path.illustrative{stroke-width:1.7;opacity:.78}
+.kxne-label{font-size:6.5px}
+.kxne-policy{height:38px;margin-top:7px;grid-template-columns:118px 1fr auto;gap:10px;padding:0 12px;font-size:7px}
+.kxne-policy b{font-size:7px}
+.kxne-policy strong{font-size:6.8px}
+
+/* The review layer converts the pairwise illustrative full-mesh into a shared fabric bus.
+   This remains an OPEN presentation intent and must not be read as member mapping. */
+.kxne-path[data-review="fabric-bus"]{stroke-width:2.2;opacity:.86}
+.kxne-path[data-review^="fabric-spine-"],.kxne-path[data-review^="fabric-leaf-"]{stroke-width:1.7;opacity:.76}
+.kxne-path[data-review="management-corridor"]{stroke-width:1.8;opacity:.74}
+
+/* Light mode: use a true light engineering canvas instead of a dark island in a light shell. */
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-stage{color:#17324a}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-title{background:linear-gradient(180deg,#ffffff,#f3f8fb);border-color:#c8dce6;box-shadow:0 9px 24px rgba(23,50,74,.08)}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-title b{color:#17324a}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-title small{color:#657e8f}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-summary span{background:#f8fbfd;border-color:#cadce5;color:#5a7486}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-summary span:first-child{background:#fff7e7;border-color:#cf9b43;color:#8a5d15}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-canvas{background:radial-gradient(circle at 48% 36%,rgba(255,255,255,.98),rgba(238,245,249,.98) 62%),linear-gradient(rgba(77,120,145,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(77,120,145,.09) 1px,transparent 1px);background-size:auto,24px 24px,24px 24px;border-color:#c8dbe5;box-shadow:inset 0 0 38px rgba(23,50,74,.05)}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone{background:rgba(255,255,255,.82);border-color:#bed4df;box-shadow:0 4px 15px rgba(23,50,74,.04)}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone.z-security{background:#fff6fa;border-color:#deb3c8}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone.z-management{background:#faf7ff;border-color:#cabce0}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone.z-access{background:#f5fbfa;border-color:#b8ddd8}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone.z-workload{background:#f6fbf8;border-color:#bedcc9}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone>label{color:#53778a}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone.z-security>label{color:#9b4269}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-zone.z-management>label{color:#73539b}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-external{background:#eef8fc;border-color:#6db1ca;color:#17324a}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-external .cloud{color:#318cac}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-external small{color:#607c8e}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-cluster header b{color:#34566a}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-cluster header span,
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-cluster footer{color:#6c8493}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-member{background:linear-gradient(155deg,#edf7fd,#dfeff8);border-color:#6ea5c1;color:#17324a;box-shadow:0 5px 12px rgba(23,50,74,.08)}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-member span{color:#376f91}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-member small,
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-member em{color:#5e7b8d}
+html[data-sb-theme="light"] body.kx-network-engineering .role-firewall .kxne-member,
+html[data-sb-theme="light"] body.kx-network-engineering .role-adc .kxne-member{background:linear-gradient(155deg,#fff1f6,#f8dde8);border-color:#bd6388}
+html[data-sb-theme="light"] body.kx-network-engineering .role-firewall .kxne-member span,
+html[data-sb-theme="light"] body.kx-network-engineering .role-adc .kxne-member span{color:#8f3c60}
+html[data-sb-theme="light"] body.kx-network-engineering .role-storage-sw .kxne-member{background:linear-gradient(155deg,#e8f8f5,#d6efeb);border-color:#55a99f}
+html[data-sb-theme="light"] body.kx-network-engineering .role-oob .kxne-member,
+html[data-sb-theme="light"] body.kx-network-engineering .role-controller .kxne-member,
+html[data-sb-theme="light"] body.kx-network-engineering .role-analytics .kxne-member{background:linear-gradient(155deg,#f3edfc,#e8def7);border-color:#8d72b6}
+html[data-sb-theme="light"] body.kx-network-engineering .role-oob .kxne-member span,
+html[data-sb-theme="light"] body.kx-network-engineering .role-controller .kxne-member span,
+html[data-sb-theme="light"] body.kx-network-engineering .role-analytics .kxne-member span{color:#694c92}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-endpoint{background:#edf7f7;border-color:#75aeb0;color:#17324a}
+html[data-sb-theme="light"] body.kx-network-engineering .role-compute .kxne-endpoint{background:#edf8f1;border-color:#69a983}
+html[data-sb-theme="light"] body.kx-network-engineering .role-storage .kxne-endpoint{background:#edf8f8;border-color:#63a8aa}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-endpoint span,
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-endpoint small{color:#557789}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-endpoint strong{color:#17324a}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-fabric-note{background:#fff6df;border-color:#c7953b;color:#7d5417}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-label{stroke:#f1f6f9;stroke-width:4px}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-policy{background:#fff8e8;border-color:#d2ae69;color:#765f39}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-policy b{color:#8d5f17}
+html[data-sb-theme="light"] body.kx-network-engineering .kxne-policy strong{color:#76571d}
+
+/* T06 light mode: keep service/capacity semantics but remove white-card-on-dark-panel contrast failures. */
+html[data-sb-theme="light"] body.kx-t06-capacity .t02stage section{background:linear-gradient(155deg,#ffffff,#f4f8fb);border-color:#c8dce6;color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .caphead b{color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .caphead span,
+html[data-sb-theme="light"] body.kx-t06-capacity .caphead em{color:#667f90}
+html[data-sb-theme="light"] body.kx-t06-capacity .metric{background:#f8fbfd;border-color:#c5dce6;color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .metric small{color:#647e8e}
+html[data-sb-theme="light"] body.kx-t06-capacity .metric.ai{background:#fff7e8;border-color:#d0a24c}
+html[data-sb-theme="light"] body.kx-t06-capacity .sectitle{border-color:#d0e0e7;color:#287d8d}
+html[data-sb-theme="light"] body.kx-t06-capacity .sectitle span{color:#6c8391}
+html[data-sb-theme="light"] body.kx-t06-capacity .dev{background:#fff4f8;border-color:#c887a4;color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .dev small{color:#765f69}
+html[data-sb-theme="light"] body.kx-t06-capacity .fabric{background:#eef9fb!important;border-color:#69aeba!important;color:#17324a!important}
+html[data-sb-theme="light"] body.kx-t06-capacity .fabric b{color:#17324a!important}
+html[data-sb-theme="light"] body.kx-t06-capacity .fabric small{color:#627f8f}
+html[data-sb-theme="light"] body.kx-t06-capacity .branch{background:#f8fbfd;border-color:#c6dce5}
+html[data-sb-theme="light"] body.kx-t06-capacity .branch.special{border-color:#c9bbdc}
+html[data-sb-theme="light"] body.kx-t06-capacity .branchhead{border-color:#d4e2e8;color:#2b8290}
+html[data-sb-theme="light"] body.kx-t06-capacity .branchhead span{color:#6b8190}
+html[data-sb-theme="light"] body.kx-t06-capacity .svc.nodecard{background:linear-gradient(155deg,color-mix(in srgb,var(--c) 5%,#ffffff),#f8fbfd)!important;color:#17324a!important}
+html[data-sb-theme="light"] body.kx-t06-capacity .svc>b{color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .svc p{color:#5e7888}
+html[data-sb-theme="light"] body.kx-t06-capacity .svc .m{color:#668090;border-color:#d4e2e8}
+html[data-sb-theme="light"] body.kx-t06-capacity .hop{background:#ffffff;color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .hop span{color:#687f8d}
+html[data-sb-theme="light"] body.kx-t06-capacity .oob{background:#f6f1fb!important;border-color:#b9a1d6!important;color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .oob b{color:#6d4c96}
+html[data-sb-theme="light"] body.kx-t06-capacity .oob span,
+html[data-sb-theme="light"] body.kx-t06-capacity .oob em{color:#746b80}
+html[data-sb-theme="light"] body.kx-t06-capacity .ichip{background:#ffffff;border-color:#c8dce5;color:#17324a}
+html[data-sb-theme="light"] body.kx-t06-capacity .ichip small{color:#697f8f}
+html[data-sb-theme="light"] body.kx-t06-capacity .open{background:#fff8e8!important;border-color:#d2ae69!important}
+html[data-sb-theme="light"] body.kx-t06-capacity .open div{border-color:#d2ae69}
+html[data-sb-theme="light"] body.kx-t06-capacity .open b{color:#8b5f18}
+html[data-sb-theme="light"] body.kx-t06-capacity .open span{color:#76613d}
+
+@media (max-height:820px){
+  .kxne-title{height:52px}
+  .kxne-canvas{height:648px}
+  .z-management{top:574px}
+  .kxne-policy{height:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  .kxne-path[data-review]{animation:none!important}
+}
