@@ -1,0 +1,79 @@
+name: Publish Data Center Production Audio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/datacenter-publish-audio.yml
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download approved production audio artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: datacenter-turkish-production-audio-v1
+          path: /tmp/datacenter-audio
+          repository: oyardas/specbridge-launch-site
+          run-id: '33531173714'
+          github-token: ${{ github.token }}
+
+      - name: Validate approved artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f /tmp/datacenter-audio/manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/datacenter-audio')
+          m=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          assert m['chapter_count']==15, m
+          assert m['accepted_count']==15, m
+          assert m['failed_count']==0, m
+          mp3s=sorted(root.glob('*.mp3'))
+          assert len(mp3s)==15, len(mp3s)
+          for p in mp3s:
+              assert p.stat().st_size>50000, p
+          print('AUDIO_ARTIFACT_ACCEPTANCE=PASS')
+          print('TOTAL_DURATION_SECONDS=',m['total_duration_seconds'])
+          PY
+
+      - name: Publish mastered audio assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          target='datacenter/audio/production/tr'
+          mkdir -p "$target"
+          rm -f "$target"/*.mp3 "$target"/*.source.txt "$target"/*.transcript.txt "$target"/manifest.json
+          cp /tmp/datacenter-audio/*.mp3 "$target"/
+          cp /tmp/datacenter-audio/*.source.txt "$target"/
+          cp /tmp/datacenter-audio/*.transcript.txt "$target"/
+          cp /tmp/datacenter-audio/manifest.json "$target"/
+
+      - name: Commit permanent production audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add datacenter/audio/production/tr
+          if git diff --cached --quiet; then
+            echo 'No audio changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Publish mastered Turkish data center briefing audio'
+          git push origin HEAD:main
