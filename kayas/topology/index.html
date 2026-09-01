@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
-<title>KAYAS Interactive Architecture · DCTS Topology Standard v1.0.2</title>
+<title>KAYAS Interactive Architecture · DCTS Topology Standard v1.0.3</title>
 <link rel="stylesheet" href="../kayas-shell.css?v=20260901-theme1">
 <style>
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#03070c}
@@ -19,12 +19,12 @@ iframe{display:block;flex:1 1 auto;width:100%;height:0;border:0;background:#edf3
 <script defer src="../kayas-shell.js?v=20260901-theme1"></script>
 </head>
 <body>
-<div id="boot" class="boot"><div><b>K00 · KAYAS MASTER ARCHITECTURE</b><small>Loading DCTS Topology Visual Grammar Standard v1.0.2…</small></div></div>
+<div id="boot" class="boot"><div><b>K00 · KAYAS MASTER ARCHITECTURE</b><small>Loading DCTS Topology Visual Grammar Standard v1.0.3…</small></div></div>
 <iframe id="viewer" title="KAYAS DCTS Interactive Architecture"></iframe>
 <script>
 (function(){
  const f=document.getElementById('viewer'),boot=document.getElementById('boot');
- let started=false;
+ let started=false,childHashBound=false,updatingFromChild=false;
  function theme(){return window.KAYAS_THEME?.getEffective?.()||document.documentElement.dataset.sbTheme||'light'}
  function syncTheme(){try{f.contentDocument.documentElement.dataset.sbTheme=theme()}catch(_){}}
  function normalizedHash(){
@@ -39,15 +39,31 @@ iframe{display:block;flex:1 1 auto;width:100%;height:0;border:0;background:#edf3
    if(!p.has('design'))p.set('design','1');
    return '#'+p.toString();
  }
+ function bindChildHash(){
+   if(childHashBound)return;
+   try{
+     f.contentWindow.addEventListener('hashchange',()=>{
+       try{
+         const h=f.contentWindow.location.hash;
+         if(!h||location.hash===h)return;
+         updatingFromChild=true;
+         history.replaceState(null,'',h);
+         queueMicrotask(()=>{updatingFromChild=false});
+       }catch(_){ }
+     });
+     childHashBound=true;
+   }catch(_){ }
+ }
  function start(){
    if(started)return;started=true;
    const c=window.KAYAS_DATA?.capacity;
    if(c)boot.querySelector('small').textContent=`Loading ${c.itCabinetsTotal}-cabinet DCTS topology standard…`;
-   f.src='v1-preview.html?prod=topology-std-v102'+normalizedHash();
+   f.src='v1-preview.html?prod=topology-std-v103'+normalizedHash();
  }
- f.addEventListener('load',()=>{syncTheme();boot.style.display='none'});
+ f.addEventListener('load',()=>{syncTheme();bindChildHash();boot.style.display='none'});
  window.addEventListener('specbridge:theme',syncTheme);
  window.addEventListener('hashchange',()=>{
+   if(updatingFromChild)return;
    try{const target=normalizedHash();if(f.contentWindow.location.hash!==target)f.contentWindow.location.hash=target}catch(_){ }
  });
  if(window.KAYAS_DATA)start();else window.addEventListener('kayas:data',start,{once:true});
