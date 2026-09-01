@@ -1,0 +1,45 @@
+name: Data Center Turkish Production Audio
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/datacenter-production-audio.yml
+      - datacenter/narration/MASTER_NARRATION_TR_V1.md
+      - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
+      - datacenter/narration/generate_production_audio.py
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install production audio dependencies
+        run: python -m pip install --upgrade openai mutagen num2words
+
+      - name: Generate and validate 15 Turkish production chapters
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python datacenter/narration/generate_production_audio.py
+
+      - name: Upload production audio bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: datacenter-turkish-production-audio-v1
+          path: datacenter/audio/production/tr/
+          if-no-files-found: error
+          retention-days: 30
