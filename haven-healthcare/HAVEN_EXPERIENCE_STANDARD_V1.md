@@ -7,7 +7,7 @@
 
 ## 1. Experience objective
 
-Haven Healthcare shall present one integrated digital-hospital architecture experience rather than a collection of isolated topology screens. The existing light healthcare/infrastructure identity is retained. The information architecture follows the common SpecBridge model: investor narrative, master architecture, progressive engineering drill-down and evidence.
+Haven Healthcare shall present one integrated digital-hospital architecture experience rather than a collection of isolated topology screens. Its default presentation remains light, clinical and clarity-oriented. The information architecture follows the common SpecBridge model: investor narrative, master architecture, progressive engineering drill-down and evidence.
 
 ## 2. H00 Master Architecture
 
@@ -78,22 +78,33 @@ English, Turkish and Dhivehi are preserved. Language choice should persist betwe
 
 Investor narrative, callouts, inspector text and official-reference links should be readable on a standard desktop display without browser zoom. Technical identifiers may remain smaller than descriptive content.
 
-## 9. Print / confidentiality
+## 9. Theme standard
+
+Haven Healthcare declares **Light** as its Project Default Theme, but the active Project Experience supports **Light**, **Dark** and **System** user modes.
+
+- The user choice is persistent and uses the shared SpecBridge project-theme preference.
+- If the user has never selected a preference, Haven opens in Light.
+- Theme changes are applied without page reload.
+- The Dark theme must preserve the clinical/healthcare information hierarchy rather than becoming a generic dark dashboard.
+- Theme switching applies to H00, T00–T08, inspector/evidence panels and mobile bottom sheets.
+- Print/PDF remains print-safe/light and retains the confidentiality watermark and author attribution.
+
+## 10. Print / confidentiality
 
 Existing print/PDF behavior is retained. Investor-print output must preserve the `specbridge.co - confidential` watermark and the `Önder Yardaş` attribution.
 
-## 10. Change control
+## 11. Change control
 
-New investor-facing Haven surfaces should consume the canonical runtime and follow H00/H-code navigation, progressive disclosure, semantic controls, persistent language state and evidence-boundary conventions unless a documented technical constraint requires an exception.
+New investor-facing Haven surfaces should consume the canonical runtime and follow H00/H-code navigation, progressive disclosure, semantic controls, persistent language/theme state and evidence-boundary conventions unless a documented technical constraint requires an exception.
 
-## 11. Mobile Architecture Mode
+## 12. Mobile Architecture Mode
 
 At phone/tablet breakpoints, Haven uses a topology-first mobile interaction model rather than compressing the desktop three-panel layout.
 
 - The central topology remains visible and receives the majority of screen area.
 - WHY, DETAIL/EVIDENCE and controls move into bottom sheets.
 - Selecting a topology node opens the Details sheet automatically.
-- Flow, Design Paths, Labels, Evidence, Narration, Print and EN/TR/DV language controls remain accessible through mobile proxy controls backed by the existing desktop/native controls.
+- Flow, Design Paths, Labels, Evidence, Narration, Print, Theme and EN/TR/DV language controls remain accessible through mobile proxy controls backed by the existing desktop/native controls.
 - A Fit action re-renders the active engineering view into its default framing.
 - H00 Master Architecture becomes a compact one/two-column card map depending on available width.
 - Desktop sidebars and dense action bars are hidden on small screens; information is not discarded, only progressively disclosed.
