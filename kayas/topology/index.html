@@ -32,7 +32,7 @@
      const term=d.createElement('script');term.src='dcts-terminology-v1.js?v=20260901-es1';
      term.onload=()=>{
       const exp=d.createElement('script');exp.src='kayas-experience-standard.js?v=20260901-es1';
-      exp.onload=()=>{boot.style.display='none';if(requested.includes('view=K00')){try{f.contentWindow.location.hash='#view=K00';f.contentWindow.dispatchEvent(new HashChangeEvent('hashchange'))}catch(_){}}};
+      exp.onload=()=>{boot.style.display='none';if(requested.includes('view=K00')){try{f.contentWindow.KAYAS_K00_OPEN?.()}catch(_){}}};
       exp.onerror=()=>{boot.innerHTML='<div>K00 experience layer could not be loaded.<small>The DCTS engineering viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)};
       d.body.appendChild(exp);
      };
