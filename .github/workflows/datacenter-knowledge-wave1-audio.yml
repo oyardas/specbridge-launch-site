@@ -1,4 +1,4 @@
-name: Data Center Knowledge Audio
+name: Data Center Knowledge Wave 1 Audio
 
 on:
   workflow_dispatch:
@@ -7,8 +7,8 @@ on:
       - main
     paths:
       - .github/workflows/datacenter-knowledge-wave1-audio.yml
-      - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
-      - datacenter/knowledge/narration/generate_dck01_v2_audio.py
+      - datacenter/knowledge/narration/WAVE1_MASTER_NARRATION_TR.md
+      - datacenter/knowledge/narration/generate_wave1_audio.py
       - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
 
 permissions:
@@ -17,7 +17,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,16 +30,16 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade openai mutagen num2words
 
-      - name: Generate and validate DC-K01 Golden Turkish audio
+      - name: Generate and validate Wave 1 Turkish knowledge audio
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python datacenter/knowledge/narration/generate_dck01_v2_audio.py
+        run: python datacenter/knowledge/narration/generate_wave1_audio.py
 
-      - name: Upload DC-K01 Golden audio artifact
+      - name: Upload Wave 1 knowledge audio artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: datacenter-knowledge-dck01-golden-audio-tr-v2
-          path: datacenter/knowledge/audio/production/tr/dc-k01-v2/
+          name: datacenter-knowledge-wave1-audio-tr-v1
+          path: datacenter/knowledge/audio/production/tr/
           if-no-files-found: error
           retention-days: 30
