@@ -1,5 +1,5 @@
 {
-  "version": "TRIAL_PROFILES_V1",
+  "version": "TRIAL_PROFILES_V2_SAGE_REFINEMENT",
   "language": "tr-TR",
   "model": "gpt-4o-mini-tts-2025-12-15",
   "transcription_model": "gpt-4o-mini-transcribe",
@@ -12,25 +12,25 @@
   },
   "profiles": [
     {
-      "id": "A",
-      "name": "Executive Adviser",
-      "voice": "cedar",
-      "speed": 1.0,
-      "instructions": "Speak in Turkish as a senior technical adviser briefing an investor. Calm, authoritative, measured, precise and non-promotional. Natural adult voice with a slightly lower register. Target roughly 128 words per minute. Use controlled pauses after important conclusions. Pronounce established English data-center terms clearly without forcing Turkish phonetics. Never sound like an advertisement, podcast host, radio announcer or movie trailer."
-    },
-    {
-      "id": "B",
-      "name": "Documentary Authority",
-      "voice": "onyx",
-      "speed": 0.97,
-      "instructions": "Speak in Turkish with restrained documentary authority. Slightly deeper and slower than normal conversation, but never theatrical. Target roughly 123 to 128 words per minute. Let key sentences land through short deliberate pauses, not louder volume. Keep emotional range controlled. Technical English terms must be clean and intelligible. No sales tone, no banter, no exaggerated trailer delivery."
-    },
-    {
-      "id": "C",
-      "name": "Technical Strategist",
+      "id": "S1",
+      "name": "Sage Baseline",
       "voice": "sage",
       "speed": 1.02,
       "instructions": "Speak in Turkish as a highly experienced infrastructure strategist. Prioritize clarity, technical articulation and confidence over drama. Target roughly 130 to 135 words per minute. Neutral, composed and analytical. Use subtle emphasis on investment conclusions and engineering terms. English technical terminology should remain crisp. No casual podcast style, no enthusiasm padding, no promotional tone."
+    },
+    {
+      "id": "S2",
+      "name": "Sage Warm Executive",
+      "voice": "sage",
+      "speed": 1.01,
+      "instructions": "Speak in Turkish as a senior data-center adviser briefing an investor in person. Keep the technical clarity of an experienced engineer, but sound more natural, warm and human than a synthesized narration. Calm and confident, with a comfortable conversational cadence while remaining formal. Avoid metallic cadence, over-precise syllable timing, radio-announcer energy, theatrical pauses or sales tone. Use short natural pauses only where meaning requires them. Target about 130 words per minute. Keep Turkish pronunciation fluent and native-sounding; pronounce established English technical terms clearly and naturally."
+    },
+    {
+      "id": "S3",
+      "name": "Sage Senior Adviser",
+      "voice": "sage",
+      "speed": 1.0,
+      "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Allow important conclusions to land with brief pauses, but maintain forward momentum. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 127 to 132 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
     }
   ],
   "acceptance": {
@@ -38,10 +38,12 @@
     "required_final_phrase": "mühendislik disiplinidir",
     "manual_checks": [
       "Turkish pronunciation sounds native enough for investor use",
-      "MW, UPS, network, data center and other technical terms remain clear",
-      "No casual podcast or advertising tone",
-      "Pauses feel deliberate but not slow or artificial",
-      "Voice remains credible for 45–55 minutes of continuous briefing"
+      "Voice sounds natural rather than metallic or synthetic",
+      "Credibility as a senior technical adviser",
+      "Clarity of English technical terminology",
+      "Pace and pause discipline",
+      "No casual podcast, advertising or radio-announcer tone",
+      "Voice remains comfortable for 45–55 minutes of continuous briefing"
     ]
   }
 }
