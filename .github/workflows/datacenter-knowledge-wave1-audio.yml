@@ -1,4 +1,4 @@
-name: Data Center Knowledge Wave 1 Audio
+name: Data Center Knowledge Audio
 
 on:
   workflow_dispatch:
@@ -9,13 +9,16 @@ on:
       - .github/workflows/datacenter-knowledge-wave1-audio.yml
       - datacenter/knowledge/narration/WAVE1_MASTER_NARRATION_TR.md
       - datacenter/knowledge/narration/generate_wave1_audio.py
+      - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
+      - datacenter/knowledge/narration/generate_dck01_v2_audio.py
       - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
 
 permissions:
   contents: read
 
 jobs:
-  generate:
+  wave1_quick:
+    if: ${{ github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, 'DC-K01 Golden v2') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -41,5 +44,35 @@ jobs:
         with:
           name: datacenter-knowledge-wave1-audio-tr-v1
           path: datacenter/knowledge/audio/production/tr/
+          if-no-files-found: error
+          retention-days: 30
+
+  dck01_golden_v2:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, 'DC-K01 Golden v2') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade openai mutagen num2words
+
+      - name: Generate and validate DC-K01 Golden Turkish audio
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python datacenter/knowledge/narration/generate_dck01_v2_audio.py
+
+      - name: Upload DC-K01 Golden audio artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: datacenter-knowledge-dck01-golden-audio-tr-v2
+          path: datacenter/knowledge/audio/production/tr/dc-k01-v2/
           if-no-files-found: error
           retention-days: 30
