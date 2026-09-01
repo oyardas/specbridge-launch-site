@@ -1,0 +1,87 @@
+# Haven Healthcare Experience Standard v1.0
+
+**Status:** CURRENT PROJECT EXPERIENCE STANDARD  
+**Effective date:** 2026-09-01  
+**Canonical project data:** `/haven-healthcare/data/haven-project-data.json`  
+**Prepared / metadata author:** Önder Yardaş
+
+## 1. Experience objective
+
+Haven Healthcare shall present one integrated digital-hospital architecture experience rather than a collection of isolated topology screens. The existing light healthcare/infrastructure identity is retained. The information architecture follows the common SpecBridge model: investor narrative, master architecture, progressive engineering drill-down and evidence.
+
+## 2. H00 Master Architecture
+
+H00 is the project-experience navigation layer above the existing engineering views.
+
+- H00 — Master Architecture
+- H01 — Executive Architecture
+- H02 — Network Logical
+- H03 — Physical Connectivity
+- H04 — Compute / HCI / Storage
+- H05 — Management / OOB
+- H06 — Healthcare Services
+- H07 — Security
+- H08 — Backup / DR
+- H09 — Evidence & Official Resources
+
+Existing T00–T08 identifiers remain valid engineering-view identifiers and are not replaced by H-codes.
+
+## 3. Three-panel reading model
+
+Architecture experiences must answer three questions simultaneously:
+
+- **WHY** — investor narrative, clinical/operational rationale and design boundary
+- **WHAT / HOW** — interactive topology and semantic infrastructure flows
+- **DETAIL / EVIDENCE** — selected-object properties, quantities, official references and design status
+
+Progressive disclosure is preferred over showing all engineering detail at once.
+
+## 4. Semantic relationship controls
+
+The existing relationship model is preserved and standardized:
+
+- Confirmed/service relationship — teal solid
+- Management / OOB — purple dashed
+- Recommended/design path — blue dashed
+- Design-to-finalize — amber dashed
+
+The user must be able to control Flow, Design Paths, Labels and Evidence. Motion must respect `prefers-reduced-motion`.
+
+## 5. Canonical project-data rule
+
+Current investor-facing quantities represented in the experience are centralized in `/haven-healthcare/data/haven-project-data.json`, including:
+
+- 2 campus-core switches
+- 26 active + 2 spare access switches
+- 7 preliminary IDFs
+- 2 WLAN controllers
+- 104 active + 6 spare Wi-Fi 7 APs
+- 2 data-center fabric switches
+- 4 HCI nodes
+- 3 PACS storage nodes
+- 1 backup system
+- 2 OOB switches
+- 140 CCTV endpoints
+- 50 IPTV endpoints
+
+The runtime canonical layer normalizes active Haven topology objects against this source. Existing `nodes.js`, topology data and official-resource data remain engineering/source inputs; the canonical project-data file is the investor-facing quantity baseline.
+
+## 6. Evidence boundary
+
+Official manufacturer URLs establish product/reference metadata only. They do not by themselves prove final project selection. Confirmed facts, recommended paths and design-to-finalize items must remain visually distinct.
+
+## 7. Language architecture
+
+English, Turkish and Dhivehi are preserved. Language choice should persist between page reloads. Technical product names and engineering identifiers are not mechanically translated.
+
+## 8. Readability
+
+Investor narrative, callouts, inspector text and official-reference links should be readable on a standard desktop display without browser zoom. Technical identifiers may remain smaller than descriptive content.
+
+## 9. Print / confidentiality
+
+Existing print/PDF behavior is retained. Investor-print output must preserve the `specbridge.co - confidential` watermark and the `Önder Yardaş` attribution.
+
+## 10. Change control
+
+New investor-facing Haven surfaces should consume the canonical runtime and follow H00/H-code navigation, progressive disclosure, semantic controls, persistent language state and evidence-boundary conventions unless a documented technical constraint requires an exception.
