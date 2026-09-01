@@ -32,7 +32,7 @@ function statusClass(s){const x=String(s||'OPEN-CONFIRMATION REQUIRED').toUpperC
 function statusShort(s){const x=String(s||'OPEN-CONFIRMATION REQUIRED').toUpperCase();if(x==='OPEN-CONFIRMATION REQUIRED')return'OPEN';if(x==='WORKING ASSUMPTION')return'ASSUMPTION';if(x==='VENDOR PROPOSAL')return'PROPOSAL';if(x==='CUSTOMER INPUT')return'CUSTOMER';return x;}
 function pairLabel(o){const n=String(o?.display_name||'').replace(/\s+(Pair|Switches|Nodes|Hosts)$/i,'').trim();return n||role(o);}
 function memberNode(o,index,total){
- const id=o.object_id, model=o.model||o.sku||'', memberText=tr()?`Görsel Üye ${index}`:`Visual Member ${index}`;
+ const id=o.object_id, model=o.model||o.sku||'', memberText=total===1?(o.display_name||role(o)):(tr()?`Görsel Üye ${index}`:`Visual Member ${index}`);
  return `<button type="button" class="eng10-member role-${esc(roleClass(o))} status-${statusClass(o.status)}" data-object="${esc(id)}" data-member="${index}" title="${esc(`${o.display_name||id} · ${memberText} · quantity-derived placeholder`)}">
    <span class="eng10-member-role">${esc(role(o))}</span>
    <strong>${esc(memberText)}</strong>
@@ -81,7 +81,7 @@ function text(svg,x,y,value,cls='design'){const t=document.createElementNS('http
 function orth(a,b){const down=b.cy>=a.cy,sy=down?a.y+a.h:a.y,ty=down?b.y:b.y+b.h,sx=a.cx,tx=b.cx,my=(sy+ty)/2;return{d:`M ${sx} ${sy} V ${my} H ${tx} V ${ty}`,x:(sx+tx)/2,y:my};}
 function horizontal(a,b){const right=b.cx>=a.cx,sx=right?a.x+a.w:a.x,tx=right?b.x:b.x+b.w,sy=a.cy,ty=b.cy,mx=(sx+tx)/2;return{d:`M ${sx} ${sy} H ${mx} V ${ty} H ${tx}`,x:mx,y:(sy+ty)/2};}
 function drawIntent(stage,svg,intentId,label,kind='design'){
- const i=intentBy(intentId);if(!i)return;const from=i.from_object_id||i.from_context,to=i.to_object_id||i.to_context,a=clusterRect(stage,from),b=clusterRect(stage,to);if(!a||!b)return;const g=Math.abs(b.cx-a.cx)>Math.abs(b.cy-a.cy)*1.2?horizontal(a,b):orth(a,b);drawPath(svg,g.d,kind,{kind:'design',from,to,intent:intentId});text(svg,g.x,g.y-7,label,'design');
+ const i=intentBy(intentId);if(!i)return;const from=i.from_object_id||i.from_context,to=i.to_object_id||i.to_context,a=clusterRect(stage,from),b=clusterRect(stage,to);if(!a||!b)return;const g=Math.abs(b.cx-a.cx)>Math.abs(b.cy-a.cy)*1.2?horizontal(a,b):orth(a,b);drawPath(svg,g.d,kind,{kind,from,to,intent:intentId});text(svg,g.x,g.y-7,label,kind);
 }
 function drawFabric(stage,svg){
  const spine=laneObjects('fabric')[0], access=laneObjects('access'), leaf=access.find(o=>role(o)==='LEAF')||access[0];if(!spine||!leaf)return;
