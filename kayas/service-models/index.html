@@ -8,21 +8,21 @@
 <meta name="description" content="Kayaş Data Center Service Models — 40+80+80 danışman önerisi, 200 standart + 10 AI kabinet, hizmet, altyapı, gelir, yönetim ve sorumluluk karşılaştırması">
 <link rel="canonical" href="https://specbridge.co/kayas/service-models/">
 <title>KAYAŞ Data Center · Service Models</title>
-<link rel="stylesheet" href="styles.css?v=20260831-r2">
-<link rel="stylesheet" href="advisor.css?v=20260831-r2">
+<link rel="stylesheet" href="../kayas-shell.css?v=20260901-es1">
+<link rel="stylesheet" href="styles.css?v=20260901-es1">
+<link rel="stylesheet" href="advisor.css?v=20260901-es1">
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
+<script src="../kayas-canonical.js?v=20260901-es1"></script>
+<script defer src="../kayas-shell.js?v=20260901-es1"></script>
 </head>
 <body>
 <div class="printmark">SPECBRIDGE.CO · CONFIDENTIAL</div>
 <header class="topbar">
 <div class="topbar-inner">
-<div class="brand">
-<div class="brandmark">K</div>
-<div><b>KAYAŞ DATA CENTER</b><small>Service Models Explorer · Advisory Edition</small></div>
-</div>
+<div class="brand"><div class="brandmark">K</div><div><b>KAYAŞ DATA CENTER</b><small>Service Models Explorer · Advisory Edition</small></div></div>
 <div class="toolbar">
 <a class="btn" href="../" style="text-decoration:none">← KAYAŞ Portal</a>
-<a class="btn" href="../topology/" style="text-decoration:none">Interactive Architecture</a>
+<a class="btn" href="../topology/#view=K00" style="text-decoration:none">K00 Master Architecture</a>
 <a class="btn" href="../yatirim_ve_teknoloji_rehberi/investor-edition-en.html" style="text-decoration:none">Investor Guide</a>
 <button class="btn" onclick="document.getElementById('advisor-40-80-80').scrollIntoView({behavior:'smooth'})">40 + 80 + 80</button>
 <button class="btn" onclick="document.getElementById('explorer').scrollIntoView({behavior:'smooth'})">Servis Explorer</button>
@@ -31,69 +31,32 @@
 </div>
 </header>
 <nav aria-label="Section navigation" class="subnav">
-<a href="#advisor-40-80-80">40 + 80 + 80 Recommendation</a>
-<a href="#reference-videos">Reference Videos</a>
-<a href="#visual-overview">Executive Visuals</a>
-<a href="#service-stack">Service Stack</a>
-<a href="#cabinet-compare">Standard vs AI</a>
-<a href="#commercial-model">Revenue Model</a>
-<a href="#responsibility-visual">Responsibility</a>
-<a href="#explorer">43 Models</a>
-<a href="#heatmap">Heatmap</a>
-<a href="#roadmap-v2">Roadmap</a>
-<a href="#matrix">Detailed Matrix</a>
+<a href="#advisor-40-80-80">40 + 80 + 80 Recommendation</a><a href="#reference-videos">Reference Videos</a><a href="#visual-overview">Executive Visuals</a><a href="#service-stack">Service Stack</a><a href="#cabinet-compare">Standard vs AI</a><a href="#commercial-model">Revenue Model</a><a href="#responsibility-visual">Responsibility</a><a href="#explorer">43 Models</a><a href="#heatmap">Heatmap</a><a href="#roadmap-v2">Roadmap</a><a href="#matrix">Detailed Matrix</a>
 </nav>
 <section class="hero">
 <div>
-<div class="kicker">Datacenter Service Architecture · Consultant Recommendation</div>
-<h1>200 standart servis kabineti + 10 AI kabinet: tek tesis, iki fiziksel sınıf, üç ana hizmet modeli</h1>
-<p>Kayaş için önerimiz; <b>200 standart servis kabinetini 40 IaaS / Cloud Platform + 80 Managed Colocation + 80 Customer-Managed Colocation</b> olarak üç ticari servis zonuna ayırmak ve buna <b>10 ayrı AI / high-density kabinet</b> eklemektir. Toplam ilk faz kapasitesi böylece <b>210 IT kabinet</b> olur.</p>
-<div class="notice">40+80+80 bir sektör standardı değil, Kayaş'ın 200 standart servis kabineti için önerilen başlangıç allocation modelidir. 10 AI/high-density kabinet bu dağılıma ek fiziksel kapasitedir ve talebe göre GPUaaS, Managed AI Colocation veya Customer AI Colocation olarak ticarileştirilebilir.</div>
+<div class="kicker" data-kayas-en="Datacenter Service Architecture · Consultant Recommendation" data-kayas-tr="Datacenter Service Architecture · Danışman Önerisi">Datacenter Service Architecture · Danışman Önerisi</div>
+<h1 data-kayas-en="200 standard service cabinets + 10 AI cabinets: one facility, two physical classes, three core service models" data-kayas-tr="200 standart servis kabineti + 10 AI kabinet: tek tesis, iki fiziksel sınıf, üç ana hizmet modeli">200 standart servis kabineti + 10 AI kabinet: tek tesis, iki fiziksel sınıf, üç ana hizmet modeli</h1>
+<p>Kayaş için önerimiz; <b><span data-kayas="capacity.standardCabinets">200</span> standart servis kabinetini <span data-kayas="serviceAllocation.iaasCloud">40</span> IaaS / Cloud Platform + <span data-kayas="serviceAllocation.managedColocation">80</span> Managed Colocation + <span data-kayas="serviceAllocation.customerManagedColocation">80</span> Customer-Managed Colocation</b> olarak üç ticari servis zonuna ayırmak ve buna <b><span data-kayas="capacity.aiHighDensityCabinets">10</span> ayrı AI / high-density kabinet</b> eklemektir. Toplam ilk faz kapasitesi <b><span data-kayas="capacity.itCabinetsTotal">210</span> IT kabinet</b> olur.</p>
+<div class="notice">40+80+80 bir sektör standardı değil, Kayaş'ın <span data-kayas="capacity.standardCabinets">200</span> standart servis kabineti için önerilen başlangıç allocation modelidir. <span data-kayas="capacity.aiHighDensityCabinets">10</span> AI/high-density kabinet bu dağılıma ek fiziksel kapasitedir ve talebe göre GPUaaS, Managed AI Colocation veya Customer AI Colocation olarak ticarileştirilebilir.</div>
 </div>
 <div class="hero-card">
 <h3>Önerilen ilk kapasite dağılımı</h3>
-<p><b>210 IT Cabinets · 200 Standard + 10 AI / High-Density</b></p>
-<div class="statgrid">
-<div class="stat"><b>40</b><span>IaaS / Cloud Platform</span></div>
-<div class="stat"><b>80</b><span>Managed Colocation</span></div>
-<div class="stat"><b>80</b><span>Customer-Managed Colocation</span></div>
-<div class="stat"><b>10</b><span>AI / High-Density</span></div>
-</div>
+<p><b><span data-kayas="capacity.itCabinetsTotal">210</span> IT Cabinets · <span data-kayas="capacity.standardCabinets">200</span> Standard + <span data-kayas="capacity.aiHighDensityCabinets">10</span> AI / High-Density</b></p>
+<div class="statgrid"><div class="stat"><b data-kayas="serviceAllocation.iaasCloud">40</b><span>IaaS / Cloud Platform</span></div><div class="stat"><b data-kayas="serviceAllocation.managedColocation">80</b><span>Managed Colocation</span></div><div class="stat"><b data-kayas="serviceAllocation.customerManagedColocation">80</b><span>Customer-Managed Colocation</span></div><div class="stat"><b data-kayas="capacity.aiHighDensityCabinets">10</b><span>AI / High-Density</span></div></div>
 </div>
 </section>
 <div id="fragmentHost"></div>
-<footer>
-<b>Kayaş Data Center Service Models</b><br/>
-  SpecBridge · Confidential · Önder Yardaş · <a href="../" style="color:inherit">Return to KAYAŞ Portal</a>
-</footer>
+<footer><b>Kayaş Data Center Service Models</b><br>SpecBridge · Confidential · Önder Yardaş · <a href="../" style="color:inherit">Return to KAYAŞ Portal</a></footer>
 <script>
 (async()=>{
  const host=document.getElementById('fragmentHost');
- const files=["00-advisor-40-80-80.html", "01-overview.html", "02-cabinet-commercial.html", "03-governance.html", "04-explorer.html", "05-architecture.html", "06-references.html"];
- const normalizeBaseline=(f,t)=>{
-   if(f==='00-advisor-40-80-80.html'){
-     t=t.replace('200 kabinetlik ilk fazın tek tip ürün olarak değil, üç farklı sorumluluk ve gelir modeline ayrılması önerilir.','210 IT kabinetlik ilk fazda 200 standart servis kabinetinin üç farklı sorumluluk ve gelir modeline ayrılması; 10 AI/high-density kabinetin ise ek fiziksel kapasite olarak konumlandırılması önerilir.');
-     t=t.replace("Kayaş'ın ilk 200 kabinetini gelir çeşitliliği, operasyonel risk, müşteri segmentasyonu ve gelecekte servis yukarı-satışı açısından dengelemek için önerilen başlangıç dağılımıdır.","Kayaş'ın 200 standart servis kabinetini gelir çeşitliliği, operasyonel risk, müşteri segmentasyonu ve gelecekte servis yukarı-satışı açısından dengelemek için önerilen başlangıç dağılımıdır; 10 AI/high-density kabinet bu yapıya ayrıca eklenir.");
-     t=t.replace('AI katmanı: 40 + 80 + 80 ile 190 + 10 ayrımı birbirine karıştırılmamalı','AI katmanı: 40 + 80 + 80 ile 200 + 10 ayrımı birbirine karıştırılmamalı');
-     t=t.replace('40+80+80 ticari sorumluluk ve hizmet modelidir. 190 standart + 10 AI ise fiziksel güç/soğutma sınıfıdır. Bu iki eksen üst üste bindirilmelidir.','40+80+80, 200 standart servis kabinetinin ticari sorumluluk ve hizmet modelidir. Buna ek 10 AI/high-density kabinet ayrı fiziksel güç/soğutma sınıfıdır. Toplam kapasite 210 IT kabinettir.');
-     t=t.replace('>190 · STANDARD RACK CLASS<','>200 · STANDARD RACK CLASS<');
-     t=t.replace('10 high-density AI kabinet, dördüncü bir hizmet modeli değildir; 40+80+80 ticari zonlarının üzerine gelen güç/cooling sınıfıdır.','10 high-density AI kabinet, 40+80+80 kapsamındaki 200 standart kabinetin üzerine ek fiziksel kapasitedir; ticari olarak GPUaaS/IaaS, Managed AI Colocation veya Customer AI Colocation servislerine atanabilir.');
-   }
-   return t;
- };
- for(const f of files){
-   const r=await fetch('fragments/'+f,{cache:'no-store'});
-   if(!r.ok) throw new Error('fragment '+f);
-   const t=normalizeBaseline(f,await r.text());
-   host.insertAdjacentHTML('beforeend',t);
- }
- for(const src of ['data/services-1.js','data/services-2.js','data/services-3.js','data/services-4.js','app.js','advisor-motion.js']){
-   await new Promise((resolve,reject)=>{const x=document.createElement('script');x.src=src+'?v=20260831-r4';x.onload=resolve;x.onerror=reject;document.body.appendChild(x);});
- }
-})().catch(e=>{
- document.getElementById('fragmentHost').innerHTML='<section class="section"><div class="notice">Service Models content could not be loaded. Please return to the KAYAŞ portal and retry.</div></section>';
- console.error(e);
-});
+ const files=["00-advisor-40-80-80.html","01-overview.html","02-cabinet-commercial.html","03-governance.html","04-explorer.html","05-architecture.html","06-references.html"];
+ for(const f of files){const r=await fetch('fragments/'+f,{cache:'no-store'});if(!r.ok)throw new Error('fragment '+f);host.insertAdjacentHTML('beforeend',await r.text());}
+ window.KAYAS?.normalizeKnownStale?.(document);window.KAYAS?.applyBindings?.(document);
+ for(const src of ['data/services-1.js','data/services-2.js','data/services-3.js','data/services-4.js','app.js','advisor-motion.js']){await new Promise((resolve,reject)=>{const x=document.createElement('script');x.src=src+'?v=20260901-es1';x.onload=resolve;x.onerror=reject;document.body.appendChild(x);});}
+ window.addEventListener('kayas:language',()=>window.KAYAS?.applyBindings?.(document));
+})().catch(e=>{document.getElementById('fragmentHost').innerHTML='<section class="section"><div class="notice">Service Models content could not be loaded. Please return to the KAYAŞ portal and retry.</div></section>';console.error(e);});
 </script>
 </body>
 </html>
