@@ -34,7 +34,7 @@
     }
   ],
   "acceptance": {
-    "minimum_transcript_similarity": 0.88,
+    "minimum_transcript_similarity": 0.97,
     "required_final_phrase": "mühendislik disiplinidir",
     "manual_checks": [
       "Turkish pronunciation sounds native enough for investor use",
