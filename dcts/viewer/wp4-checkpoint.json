@@ -1,27 +1,26 @@
 {
   "document_id": "DCTS-VIEWER-WP4-CHECKPOINT",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "date": "2026-09-01",
-  "status": "ITERATION_4B_ENGINEERING_PROFILE_IMPLEMENTED_MANUAL_ACCEPTANCE_REQUIRED",
-  "visual_acceptance": "ITERATION_4_BROWSER_REVIEW_FAILED_T02_ENGINEERING_READABILITY_ITERATION_4B_PENDING_REVIEW",
+  "status": "ITERATION_4E_MEMBER_DECOMPOSED_TOPOLOGY_IMPLEMENTED_MANUAL_ACCEPTANCE_REQUIRED",
+  "visual_acceptance": "ITERATION_4D_LOADED_BUT_REJECTED_FOR_MOCKUP_FIDELITY_ITERATION_4E_PENDING_REVIEW",
   "work_package": "V1-WP4 — Connection-Centric Engineering Topology",
   "revision_history": [
     {"version":"1.0.0-alpha.2","date":"2026-08-31","change_rationale":"Refined connection routing, official resources and semantic micro-motion after prior visual rejection."},
     {"version":"1.0.0-alpha.3","date":"2026-08-31","change_rationale":"Added semantic legend and synchronized Engineering labels to routed SVG paths."},
     {"version":"1.0.0-alpha.4","date":"2026-09-01","change_rationale":"Added generic connection-centric Engineering behavior, but the active KAYAS T02 NORMALIZED_HINTS service-domain model prevented the expected spine/leaf engineering composition."},
-    {"version":"1.0.0-alpha.5","date":"2026-09-01","change_rationale":"User browser screenshots showed that T02 remained service/capacity-centric rather than engineer-readable spine/leaf connectivity. Added a mode-specific optional engineering profile so Presentation T02 can retain the 210-cabinet service-domain story while Engineering T02 renders device-role connectivity without mutating the canonical graph."}
+    {"version":"1.0.0-alpha.5","date":"2026-09-01","change_rationale":"Separated Presentation T02 from a device-role Engineering profile so the 210-cabinet service-domain story could coexist with evidence-safe network engineering composition."},
+    {"version":"1.0.0-alpha.6","date":"2026-09-01","change_rationale":"User confirmed the v1a9 renderer loaded but still looked like grouped colored cards rather than the approved engineering mockup. Added a member-decomposed, connection-first T02 renderer: QTY-based network/security/OOB groups are visually expanded into member placeholders, spine-to-leaf fabric is shown only as explicitly labelled illustrative design intent, and canonical graph data remains unchanged."}
   ],
-  "browser_review_iteration_4": {
-    "source": "User browser screenshots, 2026-09-01",
-    "result": "FAIL_T02_ENGINEERING_READABILITY",
+  "browser_review_iteration_4d": {
+    "source": "User browser screenshot, 2026-09-01",
+    "result": "FAIL_MOCKUP_FIDELITY",
     "observations": [
-      "T00 is visually readable and suitable as a navigation map.",
-      "T01 remains suitable as an executive architecture view but is not the target engineering connectivity view.",
-      "T02 Engineering displayed the 210-cabinet service-domain NORMALIZED_HINTS model (shared fabric, colocation demarcation, AI fabric and OOB) and did not expose the physical-device role chain expected by a network engineer.",
-      "T03 correctly showed 0 canonical physical relationships and explicitly stated that physical connectivity is not yet evidenced; no ports, optics, speeds or A/B paths were invented.",
-      "T04 is evidence-safe but intentionally sparse.",
-      "T05 provides useful management/OOB context but does not substitute for a dedicated T02 spine/leaf engineering composition.",
-      "T06 appropriately carries the service and capacity model, reinforcing that the 40+80+80 plus AI10 commercial/service story belongs primarily in the service/capacity view rather than being the only T02 engineering representation."
+      "The v1a9 renderer was confirmed loaded by the visible T02 NETWORK ENGINEERING TOPOLOGY toolbar.",
+      "Functional layers and role colors were readable, but QTY 2 / QTY 4 network objects remained visually grouped inside single object cards.",
+      "The resulting composition still read as layered infrastructure cards rather than a classic engineer-readable topology with separate spine, leaf, firewall, interconnect and OOB member nodes.",
+      "Connection labels remained visually dominant in several areas and the management plane still behaved more like a sidebar than a network topology domain.",
+      "No evidence-discipline violation was observed; the rejection was visual/engineering readability rather than semantic correctness."
     ]
   },
   "shared_runtime": {
@@ -36,24 +35,31 @@
     "engineering_connectivity_javascript": "dcts/viewer/runtime/dcts-viewer-engineering-v1a6.js",
     "engineering_profile_css": "dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.css",
     "engineering_profile_javascript": "dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.js",
-    "engineering_cache_revision": "20260901-v1a7"
+    "engineering_schematic_css": "dcts/viewer/runtime/dcts-viewer-engineering-schematic-v1a8.css",
+    "engineering_schematic_javascript": "dcts/viewer/runtime/dcts-viewer-engineering-schematic-v1a8.js",
+    "engineering_diagram_css": "dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.css",
+    "engineering_diagram_javascript": "dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.js",
+    "member_topology_css": "dcts/viewer/runtime/dcts-viewer-engineering-topology-v1a10.css",
+    "member_topology_javascript": "dcts/viewer/runtime/dcts-viewer-engineering-topology-v1a10.js",
+    "engineering_cache_revision": "20260901-v1a10b"
   },
   "project_previews": {
-    "KAYAS": {"path":"kayas/topology/v1-preview.html","url":"https://specbridge.co/kayas/topology/v1-preview.html","package":"dcts/viewer/fixtures/kayas/","engineering_profile":"dcts/viewer/fixtures/kayas/engineering-profiles-v1.json","production_replaced":false},
+    "KAYAS": {"path":"kayas/topology/v1-preview.html","url":"https://specbridge.co/kayas/topology/v1-preview.html","package":"dcts/viewer/fixtures/kayas/","engineering_profile":"dcts/viewer/fixtures/kayas/engineering-profiles-v2.json","production_replaced":false},
     "Haven Healthcare": {"path":"haven-healthcare/v1-preview.html","url":"https://specbridge.co/haven-healthcare/v1-preview.html","package":"dcts/viewer/fixtures/haven-healthcare/","engineering_profile":null,"production_replaced":false}
   },
-  "iteration_4b_changes": [
-    "Added optional package resource engineering_profiles; projects without the resource keep existing behavior.",
-    "KAYAS T02 Engineering now has a dedicated device-role profile independent of the Presentation-mode 210-cabinet service-domain layout.",
-    "The KAYAS Engineering profile includes explicit External/Carrier context, Security/Application Delivery, Edge/Interconnect, Spine/Fabric Core, Leaf/Storage Access, Compute/Storage Endpoints and Management/OOB/Analytics lanes.",
-    "The profile references existing normalized objects and existing presentation-intent IDs; it does not create new canonical objects or relationships.",
-    "External/Carrier is represented as a non-canonical context node because router/carrier implementation details are not confirmed in the active package.",
-    "Pair quantities are shown as QTY only; no A/B member identity, HA protocol, peer link, ring, MLAG, IRF, port, speed or optic is inferred.",
-    "Existing design intents such as Security Service Chain, Interconnect to Fabric, Spine to Leaf Fabric, Compute Access, Storage Data Path, OOB to Fabric, Fabric Control and Fabric Telemetry are rendered as dashed DESIGN paths.",
-    "No arrowhead is added to design-intent paths; vertical role ordering communicates architecture without inventing confirmed directionality.",
-    "Engineering profile hover highlights only directly related nodes and paths and dims unrelated elements.",
-    "Engineering profile filters are view-only and do not mutate canonical data.",
-    "Haven loads the same generic overlay runtime but has no engineering_profiles resource, so the overlay is a no-op there."
+  "iteration_4e_changes": [
+    "Added v1a10 member-decomposed T02 Engineering renderer and stylesheet as a new overlay; prior renderers remain preserved for rollback until visual acceptance.",
+    "Network/security/OOB canonical objects with quantity up to four are decomposed into quantity-derived visual member placeholders rather than remaining single pair/group cards.",
+    "Visual Member 1 / Visual Member 2 labels are explicitly non-canonical placeholders derived only from the quantity field; they do not create device identities or mutate objects.json.",
+    "Single-quantity management objects remain visually recognizable by their actual object display name rather than being presented as a synthetic pair member.",
+    "CAS compute hosts and All-Flash storage nodes remain aggregated endpoint groups to control visual density; no ten-host or six-node physical fanout is invented.",
+    "Spine-to-leaf design intent is rendered as an illustrative multi-line fabric pattern only when the existing AINT-005 Spine-to-Leaf Fabric presentation intent is present.",
+    "The illustrative fabric is explicitly labelled MEMBER MAPPING UNCONFIRMED and uses a separate dotted visual grammar so it cannot be mistaken for evidenced physical links.",
+    "Security chain, external ingress, security handoff, interconnect-to-fabric, compute access, storage access and storage data path remain dashed design-intent paths.",
+    "OOB-to-fabric, fabric control and fabric telemetry paths use a separate management/OOB grammar and filter.",
+    "No ring, HA, IRF, MLAG, M-LAG, EVPN, VXLAN, A/B naming, ports, optics, speeds or confirmed member-to-member physical mapping was added.",
+    "The object drawer states that member placeholders are quantity-derived only and that actual member name, A/B, HA, ports, speeds and optics remain OPEN-CONFIRMATION REQUIRED.",
+    "The KAYAS preview loads v1a10 with cache revision v1a10b; production viewer remains untouched."
   ],
   "active_package_invariants": {
     "KAYAS": {
@@ -65,8 +71,9 @@
       "T03_confirmed_physical_relationships": 0,
       "engineering_profile_adds_canonical_objects": false,
       "engineering_profile_adds_canonical_relationships": false,
-      "anybackup_vendor_field_changed": false,
-      "note": "The older 19-object / 5-relationship KAYAS fixture invariant belongs to the pre-service-model baseline and is superseded for active-package counts; its canonical records remain preserved within the expanded package."
+      "member_decomposition_adds_canonical_objects": false,
+      "member_decomposition_adds_physical_relationships": false,
+      "anybackup_vendor_field_changed": false
     },
     "Haven Healthcare": {
       "canonical_relationships": 7,
@@ -76,28 +83,25 @@
     }
   },
   "static_checks": [
-    {"check":"Iteration 4B JavaScript syntax","result":"PASS","method":"node --check on authored dcts-viewer-engineering-profile-v1a7.js before repository write"},
-    {"check":"Iteration 4B CSS structural balance","result":"PASS_STATIC","method":"60 opening and 60 closing rule braces before repository write"},
-    {"check":"Engineering profile JSON parse","result":"PASS_STATIC","method":"python -m json.tool before repository write"},
-    {"check":"Files changed from Iteration 4 checkpoint 50014b9c4e7f33e17ae37debd607b5648a1952c9 through implementation head f27a0941725b9400c7a9b3783b7350a55208e916","result":"PASS_ONLY_INTENDED_PROFILE_RUNTIME_AND_PREVIEW_FILES","files":["dcts/viewer/fixtures/kayas/engineering-profiles-v1.json","dcts/viewer/fixtures/kayas/package-manifest.json","dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.css","dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.js","kayas/topology/v1-preview.html","haven-healthcare/v1-preview.html"]},
-    {"check":"Canonical objects/relationships/views modified by Iteration 4B","result":"NONE"},
-    {"check":"Production viewer replacement by Iteration 4B","result":"NONE"},
-    {"check":"Live browser visual/runtime acceptance for Iteration 4B","result":"NOT_YET_CONFIRMED","method":"Requires user browser evidence after hard refresh"}
+    {"check":"Iteration 4E JavaScript syntax","result":"PASS","method":"node --check on authored dcts-viewer-engineering-topology-v1a10.js before repository write and after management-filter/member-label fix"},
+    {"check":"Iteration 4E CSS structural balance","result":"PASS_STATIC","method":"116 opening and 116 closing rule braces before repository write"},
+    {"check":"Canonical objects/relationships/views modified by Iteration 4E","result":"NONE"},
+    {"check":"Production viewer replacement by Iteration 4E","result":"NONE"},
+    {"check":"Live browser visual/runtime acceptance for Iteration 4E","result":"NOT_YET_CONFIRMED","method":"Requires user browser evidence after cache-busted refresh"}
   ],
   "manual_acceptance_required": [
-    "Hard-refresh KAYAS preview and open T02 in ENGINEERING mode.",
-    "T02 Engineering must show the role sequence External/Carrier -> Security/Application Delivery -> Edge/Interconnect -> Spine/Fabric Core -> Leaf/Storage Access -> Compute/Storage Endpoints with Management/OOB/Analytics as a separate lane.",
-    "DC Fabric Spine Pair must be visibly tagged SPINE and Server/Tenant Leaf Pair must be visibly tagged LEAF.",
-    "Storage Network Switches must be visibly tagged STORAGE SW.",
-    "Dashed paths must be labelled DESIGN and remain clearly non-canonical.",
-    "The Engineering profile must show 0 canonical profile connections unless explicit relationship IDs are later added from evidence.",
-    "No router device, ring, HA/peer protocol, EVPN, VXLAN, port, speed or optic may appear unless supported by explicit package evidence.",
-    "T03 must remain unchanged in evidence discipline and continue to show zero evidenced physical connectivity.",
-    "Switching from ENGINEERING to PRESENTATION must restore the existing 210-cabinet T02 service-domain layout rather than deleting it.",
-    "Selecting an engineering-profile normalized device must continue to populate the shared DCTS Inspector.",
-    "Haven preview must remain visually unchanged because no Haven engineering profile is configured.",
+    "Open KAYAS T02 in ENGINEERING mode using a fresh/cache-busted URL.",
+    "Perimeter Firewall, ADC, Egress Firewall, Legacy Interconnect, Spine, Leaf, Storage Switch and OOB quantity groups must be visibly decomposed into separate member placeholders rather than one large pair/group card.",
+    "Spine and Leaf must read as separate engineering nodes and the illustrative spine-to-leaf cross-fabric must be visible without being presented as canonical or physical evidence.",
+    "The in-canvas fabric note must state that member mapping is unconfirmed.",
+    "Compute and storage endpoint groups must remain aggregated and readable rather than exploding into ten/six unsupported physical nodes.",
+    "Management/OOB paths must be independently filterable and use a distinct visual grammar.",
+    "Selecting a quantity-derived member placeholder must open the drawer and explicitly state that the member identity is not canonical.",
+    "Design paths Off must hide all dashed/dotted design and illustrative paths.",
+    "No ring, HA/peer protocol, A/B names, EVPN/VXLAN, port, link speed or optic may appear without explicit evidence.",
+    "T03 must remain unchanged and continue to show zero evidenced physical connectivity.",
     "KAYAS and Haven production viewers must remain unchanged."
   ],
   "production_promotion": "BLOCKED_UNTIL_EXPLICIT_USER_PASS",
-  "notes": "Iteration 4 browser evidence was sufficient to reject T02 as the final engineering topology even though T03 evidence discipline was correct. Iteration 4B separates presentation/service topology composition from engineer-oriented device-role topology composition through an optional package resource. This checkpoint is not a runtime PASS; explicit user browser acceptance remains mandatory before production promotion."
+  "notes": "Iteration 4E is a deliberate visual decomposition layer, not a canonical device-instance generator. Quantity-derived member placeholders exist only to make the engineering topology read like a network diagram while preserving DCTS evidence discipline. Explicit user browser acceptance remains mandatory before any production promotion."
 }
