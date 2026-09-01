@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "HAVEN_PROJECT_DATA_V1",
+  "revision": "HAVEN-EXPERIENCE-STANDARD-V1",
+  "revisionDate": "2026-09-01",
+  "status": "CURRENT WORKING BASELINE",
+  "project": {
+    "name": "Haven Healthcare",
+    "experienceStandard": "SpecBridge Project Experience Standard v1.0",
+    "architectureType": "Integrated Digital Hospital Infrastructure",
+    "viewMode": "Investor + Engineering"
+  },
+  "infrastructure": {
+    "campusCore": {"active": 2, "platform": "H3C S7503X-G"},
+    "accessSwitches": {"active": 26, "spare": 2, "total": 28},
+    "idfEstate": {"preliminary": 7},
+    "wlanControllers": {"active": 2, "platform": "H3C WX2860X"},
+    "wifiAccessPoints": {"active": 104, "spare": 6, "total": 110, "generation": "Wi-Fi 7"},
+    "dcFabric": {"active": 2, "platform": "H3C S6850-56HF", "serverStorageLinks": "25G", "campusUplinks": "100G"},
+    "hci": {"nodes": 4, "platform": "H3C UIS 3000 G7"},
+    "pacsStorage": {"nodes": 3, "platform": "H3C UniStor X20516"},
+    "backup": {"systems": 1, "platformClass": "H3C UniStor CB7000 class"},
+    "oob": {"switches": 2, "platform": "H3C S5130S-28P-EI"},
+    "perimeterSecurity": {"firewalls": 2, "platform": "H3C SecPath F1000-AI"},
+    "campusManagement": {"platform": "AD-Campus + EIA/EAD allowance", "endpointAllowance": 1200},
+    "monitoring": {"systems": 1, "platform": "H3C U-Center 2.0"}
+  },
+  "healthcareServices": {
+    "cctv": {"endpoints": 140},
+    "iptv": {"endpoints": 50},
+    "logicalZones": [
+      "Clinical",
+      "PACS-RIS",
+      "Medical-IoMT",
+      "Staff Wi-Fi",
+      "Patient-Guest",
+      "BMS / OT",
+      "Nurse Call",
+      "CCTV",
+      "Access Control",
+      "Corporate",
+      "Voice / IPTV"
+    ]
+  },
+  "designBoundary": {
+    "tierOrCertificationClaim": "NOT ASSERTED",
+    "drTarget": "TBD",
+    "floorCabling": "FINAL ENGINEERING SURVEY REQUIRED",
+    "firewallRules": "FINALIZE WITH HOSPITAL APPLICATION AND MEDICAL-DEVICE VENDORS",
+    "evidencePolicy": "Confirmed project facts, recommended design paths and design-to-finalize items must remain visually distinct."
+  },
+  "experience": {
+    "defaultLanguage": "en",
+    "languages": ["en", "tr", "dv"],
+    "motion": {
+      "semanticFlow": true,
+      "userFlowControl": true,
+      "reducedMotionSupport": true
+    },
+    "relationshipStyles": {
+      "confirmed": "teal-solid",
+      "management": "purple-dashed",
+      "design": "blue-dashed",
+      "finalize": "amber-dashed"
+    }
+  },
+  "architectureNavigator": [
+    {"code":"H00","title":{"en":"Master Architecture","tr":"Ana Mimari Haritası","dv":"Master Architecture"},"target":"T00","kind":"master"},
+    {"code":"H01","title":{"en":"Executive Architecture","tr":"Executive Mimari","dv":"Executive Architecture"},"target":"T01","kind":"executive"},
+    {"code":"H02","title":{"en":"Network Logical","tr":"Mantıksal Network","dv":"Network Logical"},"target":"T02","kind":"network"},
+    {"code":"H03","title":{"en":"Physical Connectivity","tr":"Fiziksel Bağlantı","dv":"Physical Connectivity"},"target":"T03","kind":"physical"},
+    {"code":"H04","title":{"en":"Compute / HCI / Storage","tr":"Compute / HCI / Storage","dv":"Compute / HCI / Storage"},"target":"T04","kind":"compute"},
+    {"code":"H05","title":{"en":"Management / OOB","tr":"Yönetim / OOB","dv":"Management / OOB"},"target":"T05","kind":"management"},
+    {"code":"H06","title":{"en":"Healthcare Services","tr":"Sağlık Servisleri","dv":"Healthcare Services"},"target":"T06","kind":"services"},
+    {"code":"H07","title":{"en":"Security","tr":"Güvenlik","dv":"Security"},"target":"T07","kind":"security"},
+    {"code":"H08","title":{"en":"Backup / DR","tr":"Backup / DR","dv":"Backup / DR"},"target":"T08","kind":"backup"},
+    {"code":"H09","title":{"en":"Evidence & Official Resources","tr":"Kanıt ve Resmi Kaynaklar","dv":"Evidence & Official Resources"},"target":"EVIDENCE","kind":"evidence"}
+  ],
+  "governance": {
+    "authoritativeSource": "/haven-healthcare/data/haven-project-data.json",
+    "sourceModel": ["/haven-healthcare/nodes.js", "/haven-healthcare/topology-data-v042.js", "/haven-healthcare/official-resources-v1.json"],
+    "staleValuePolicy": "Active investor-facing Haven surfaces must use or normalize against this canonical baseline where values are represented.",
+    "engineeringIdentifiers": "T00-T08 remain valid engineering view identifiers; H00-H09 are the project-experience navigation layer."
+  }
+}
