@@ -1,0 +1,142 @@
+/* DCTS Viewer engineering connectivity layer v1a6.
+   Generic role/relationship driven enhancement. Does not mutate canonical package data. */
+
+html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .scene{
+  background:
+    linear-gradient(rgba(38,113,159,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(38,113,159,.035) 1px,transparent 1px),
+    #fbfcfd;
+  background-size:24px 24px;
+}
+.dcts-engineering-v1a6 .engineering-lane{
+  position:absolute;left:12px;right:12px;z-index:0;border:1px solid #dbe6ec;border-radius:12px;
+  background:rgba(248,251,253,.80);pointer-events:none;
+}
+.dcts-engineering-v1a6 .engineering-lane>span{
+  position:absolute;left:10px;top:7px;font-size:6.6px;font-weight:900;letter-spacing:.085em;color:#607987;
+}
+.dcts-engineering-v1a6 .engineering-lane.lane-security{border-color:#ead8dd;background:rgba(252,247,249,.80)}
+.dcts-engineering-v1a6 .engineering-lane.lane-edge{border-color:#d8e3e9;background:rgba(248,251,253,.84)}
+.dcts-engineering-v1a6 .engineering-lane.lane-fabric{border-color:#cbdde8;background:rgba(244,249,252,.84)}
+.dcts-engineering-v1a6 .engineering-lane.lane-access{border-color:#cde5e5;background:rgba(244,251,250,.84)}
+.dcts-engineering-v1a6 .engineering-lane.lane-workload{border-color:#ddd9eb;background:rgba(249,248,252,.84)}
+.dcts-engineering-v1a6 .engineering-lane.lane-mgmt{border-color:#d9d3e9;background:rgba(249,248,252,.86)}
+
+html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .domain-box{
+  background:transparent;border-style:dashed;opacity:.72;
+}
+html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .domain-box>span{opacity:.72}
+
+.dcts-engineering-v1a6 .node-card.engineering-node{
+  min-height:92px;border-width:1.35px;
+}
+.dcts-engineering-v1a6 .eng-role-badge,
+.dcts-engineering-v1a6 .eng-qty-badge{
+  position:absolute;top:-10px;z-index:6;border:1px solid #c9dbe4;background:#f7fbfd;color:#34677f;
+  border-radius:999px;padding:3px 6px;font-size:5.8px;line-height:1;font-weight:900;letter-spacing:.055em;
+  box-shadow:0 2px 7px rgba(30,72,98,.08);pointer-events:none;
+}
+.dcts-engineering-v1a6 .eng-role-badge{left:8px}
+.dcts-engineering-v1a6 .eng-qty-badge{right:8px;color:#6b5b82;border-color:#d9d2e6;background:#fbf9fd}
+html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .node-card:hover,
+html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .node-card:focus-visible{
+  transform:translateY(-2px) scale(1.12)!important;
+}
+
+.dcts-engineering-v1a6 .engineering-toolbar{
+  position:absolute;z-index:14;right:14px;top:12px;width:330px;border:1px solid #cfdde5;background:rgba(255,255,255,.96);
+  border-radius:10px;padding:9px 10px;box-shadow:0 8px 22px rgba(28,67,90,.12);backdrop-filter:blur(8px);
+}
+.dcts-engineering-v1a6 .eng-toolbar-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.dcts-engineering-v1a6 .eng-toolbar-head b{font-size:6.4px;letter-spacing:.08em;color:#456778}
+.dcts-engineering-v1a6 .eng-toolbar-head span{font-size:5.8px;line-height:1.3;color:#80929d;text-align:right}
+.dcts-engineering-v1a6 .eng-toolbar-buttons{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.dcts-engineering-v1a6 .eng-toolbar-buttons button{
+  border:1px solid #d7e2e8;background:#f8fbfc;color:#607987;border-radius:999px;padding:4px 7px;font-size:5.9px;font-weight:750;cursor:pointer;
+}
+.dcts-engineering-v1a6 .eng-toolbar-buttons button.on{border-color:#6ba1ba;background:#eaf5f9;color:#205f7d}
+.dcts-engineering-v1a6 .eng-toolbar-policy{margin-top:6px;font-size:5.8px;color:#7f6b4f}
+.dcts-engineering-v1a6 .engineering-topology-flags{
+  position:absolute;left:14px;top:12px;z-index:13;display:flex;align-items:center;gap:5px;border:1px solid #d1e0e7;
+  background:rgba(255,255,255,.95);border-radius:9px;padding:7px 8px;box-shadow:0 6px 16px rgba(29,69,91,.08)
+}
+.dcts-engineering-v1a6 .engineering-topology-flags b{font-size:5.9px;letter-spacing:.07em;color:#5d7684}
+.dcts-engineering-v1a6 .engineering-topology-flags span{border:1px solid #bad6c7;background:#f0f8f4;color:#3b8060;border-radius:999px;padding:3px 5px;font-size:5.7px;font-weight:850}
+.dcts-engineering-v1a6 .engineering-safety-note{
+  position:absolute;right:14px;top:108px;z-index:12;width:330px;border:1px dashed #d8c992;background:rgba(255,250,236,.95);
+  color:#786229;border-radius:9px;padding:7px 9px;font-size:6px;line-height:1.35;pointer-events:none;
+}
+
+/* Link aggregation: a single canonical relationship remains one semantic edge;
+   link quantity/speed are rendered as evidence labels instead of fake parallel cables. */
+.dcts-engineering-v1a6 .edge.edge-bundle{stroke-width:1.85}
+html[data-dcts-mode="ENGINEERING"].dcts-engineering-v1a6 .edge-label[data-kind="canonical"]{
+  font-size:6.5px;font-weight:750;fill:#435f70;stroke-width:3.8px;
+}
+html[data-dcts-mode="ENGINEERING"].dcts-engineering-v1a6 .edge-label[data-kind="intent"]{
+  font-size:5.9px;font-weight:700;fill:#7c8790;opacity:.78;
+}
+
+/* View-only layer filters. */
+html[data-dcts-edge-filter="canonical"] .edge-intent,
+html[data-dcts-edge-filter="canonical"] .flow-intent,
+html[data-dcts-edge-filter="canonical"] .edge-label[data-kind="intent"]{display:none!important}
+
+html[data-dcts-edge-filter="design"] .edge-canonical,
+html[data-dcts-edge-filter="design"] .flow-canonical,
+html[data-dcts-edge-filter="design"] .edge-label[data-kind="canonical"]{display:none!important}
+
+html[data-dcts-edge-filter="physical"] .edge:not(.layer-physical),
+html[data-dcts-edge-filter="physical"] .edge-flow:not(.layer-physical),
+html[data-dcts-edge-filter="physical"] .edge-label:not([data-layer="physical"]){display:none!important}
+
+html[data-dcts-edge-filter="logical"] .edge:not(.layer-logical),
+html[data-dcts-edge-filter="logical"] .edge-flow:not(.layer-logical),
+html[data-dcts-edge-filter="logical"] .edge-label:not([data-layer="logical"]){display:none!important}
+
+html[data-dcts-edge-filter="management"] .edge:not(.layer-management):not(.layer-oob),
+html[data-dcts-edge-filter="management"] .edge-flow:not(.layer-management):not(.layer-oob),
+html[data-dcts-edge-filter="management"] .edge-label:not([data-layer="management"]):not([data-layer="oob"]){display:none!important}
+
+/* Inspector engineering evidence panel. */
+.dcts-engineering-v1a6 .engineering-connectivity-panel{
+  border:1px solid #cadde7;background:linear-gradient(180deg,#f8fcfd,#f3f8fa);border-radius:10px;padding:9px;margin-bottom:10px;
+}
+.dcts-engineering-v1a6 .eng-panel-title{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.dcts-engineering-v1a6 .eng-panel-title>span{border:1px solid #9fc3d4;background:#eaf5f9;color:#225f7d;border-radius:999px;padding:3px 6px;font-size:5.8px;font-weight:900;letter-spacing:.05em}
+.dcts-engineering-v1a6 .eng-panel-title>b{font-size:6.1px;letter-spacing:.075em;color:#55717f}
+.dcts-engineering-v1a6 .eng-panel-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}
+.dcts-engineering-v1a6 .eng-panel-metrics>span{border:1px solid #d7e3e9;background:#fff;border-radius:7px;padding:6px;font-size:5.9px;color:#708694}
+.dcts-engineering-v1a6 .eng-panel-metrics b{display:block;font-size:12px;line-height:1;color:#285f7d;margin-bottom:3px}
+.dcts-engineering-v1a6 .eng-layer-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.dcts-engineering-v1a6 .eng-layer-chips span{border:1px solid #d7e2e8;background:#fff;border-radius:999px;padding:3px 5px;font-size:5.6px;color:#607987}
+.dcts-engineering-v1a6 .eng-evidence-note{margin-top:8px;border:1px solid #e1d5ad;background:#fff9e9;color:#756027;border-radius:7px;padding:7px;font-size:6.2px;line-height:1.45}
+.dcts-engineering-v1a6 .engineering-connectivity-panel h5{margin:10px 0 5px;font-size:6.2px;letter-spacing:.07em;color:#597482;text-transform:uppercase}
+.dcts-engineering-v1a6 .eng-link-card{border:1px solid #cee0e8;background:#fff;border-radius:8px;padding:7px;margin-top:5px}
+.dcts-engineering-v1a6 .eng-link-card>div{display:flex;justify-content:space-between;gap:6px}
+.dcts-engineering-v1a6 .eng-link-card b{font-size:6.6px;color:#275f7d}
+.dcts-engineering-v1a6 .eng-link-card span{font-size:6.1px;color:#607987;text-align:right}
+.dcts-engineering-v1a6 .eng-link-card small{display:block;margin-top:4px;font-size:5.7px;color:#7b8d98}
+.dcts-engineering-v1a6 .eng-link-card em{display:block;margin-top:5px;font-size:5.8px;line-height:1.35;color:#8b6a2d;font-style:normal}
+.dcts-engineering-v1a6 .eng-no-physical{border:1px dashed #d8c892;background:#fffaf0;border-radius:7px;padding:7px;font-size:6.1px;line-height:1.4;color:#7b642d}
+.dcts-engineering-v1a6 .eng-intent-list{display:grid;gap:4px}
+.dcts-engineering-v1a6 .eng-intent-list>span{display:block;border-left:2px solid #9ba8af;background:#fff;padding:5px 6px;font-size:6px;color:#5d747f}
+.dcts-engineering-v1a6 .eng-intent-list small{display:block;margin-top:2px;color:#8b969d;font-size:5.4px}
+
+/* T03 must remain evidence-first. Design edges may still be toggled/filterable, but are visually secondary. */
+html[data-dcts-view="T03"][data-dcts-mode="ENGINEERING"].dcts-engineering-v1a6 .edge-intent{opacity:.24}
+html[data-dcts-view="T03"][data-dcts-mode="ENGINEERING"].dcts-engineering-v1a6 .flow-intent{opacity:.10}
+
+@media (max-width:1200px){
+  .dcts-engineering-v1a6 .engineering-toolbar,.dcts-engineering-v1a6 .engineering-safety-note{width:286px}
+  .dcts-engineering-v1a6 .eng-toolbar-head span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .dcts-engineering-v1a6 .engineering-toolbar,.dcts-engineering-v1a6 .engineering-topology-flags{backdrop-filter:none}
+}
+@media print{
+  .dcts-engineering-v1a6 .engineering-toolbar,
+  .dcts-engineering-v1a6 .engineering-topology-flags{display:none!important}
+  .dcts-engineering-v1a6 .engineering-safety-note{position:absolute;top:auto;bottom:8px;right:8px;box-shadow:none;background:#fff}
+  html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .scene{background:#fff}
+}
