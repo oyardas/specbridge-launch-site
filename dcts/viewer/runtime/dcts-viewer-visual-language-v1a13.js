@@ -130,8 +130,8 @@ function ensureCanvasButton(){
 }
 
 function sync(){
-  if(!S.loaded)return;ensureCanvasButton();annotateNodes();annotateDomains();annotateEdges();restoreSelectionFocus();
-  document.documentElement.dataset.dctsVisualLanguage='v1a13';
+  if(!S.loaded)return;ensureCanvasButton();annotateNodes();annotateDomains();annotateEdges();
+  document.documentElement.dataset.dctsVisualLanguage='v1a13b';
 }
 function schedule(){if(S.scheduled)return;S.scheduled=true;requestAnimationFrame(()=>{S.scheduled=false;sync();});}
 
@@ -139,8 +139,11 @@ async function boot(){
   let tries=0;while(!$('.dcts-app')&&tries++<120)await new Promise(r=>setTimeout(r,40));
   await load();sync();
   const root=$('.dcts-app')||document.body;
-  new MutationObserver(m=>{if(m.some(x=>x.type==='childList'||x.attributeName==='class'))schedule();}).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
-  window.addEventListener('hashchange',()=>setTimeout(schedule,40));
+  new MutationObserver(m=>{if(m.some(x=>x.type==='childList'))schedule();}).observe(root,{subtree:true,childList:true});
+  document.addEventListener('click',e=>{
+    if(e.target.closest('.node-card,#clearSelection,.tab'))setTimeout(()=>{schedule();restoreSelectionFocus();},35);
+  },true);
+  window.addEventListener('hashchange',()=>setTimeout(()=>{schedule();restoreSelectionFocus();},40));
   window.addEventListener('resize',schedule);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
