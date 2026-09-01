@@ -1,0 +1,143 @@
+/* DCTS Viewer v1a15 — Topology-first presentation grammar
+   Reference direction: simple network hierarchy, strong zones, obvious connectivity.
+   Projection only: no mutation of canonical objects, relationships, evidence, or status. */
+:root{
+  --v15-ink:#15364d;
+  --v15-muted:#667f91;
+  --v15-blue:#2d78b7;
+  --v15-teal:#2c8b8d;
+  --v15-purple:#6a55a2;
+  --v15-red:#c94e5d;
+  --v15-green:#4c8a68;
+  --v15-amber:#ba7d24;
+  --v15-line:#cedae3;
+  --v15-panel:#ffffff;
+}
+.viewport{position:relative!important}
+.dcts-v15-projection{
+  position:absolute;inset:58px 12px 12px 12px;z-index:22;
+  display:none;overflow:hidden;border:1px solid #d2dee7;border-radius:14px;
+  background:#fbfcfd;
+  box-shadow:0 12px 28px rgba(25,50,72,.11);
+}
+body.dcts-v15-projection-active .dcts-v15-projection{display:block}
+body.dcts-v15-projection-active .viewport>.scene{visibility:hidden!important;pointer-events:none!important}
+body.dcts-v15-projection-active .dcts-m14-evidence{z-index:35}
+body.dcts-v15-projection-active .dcts-m14-tools{z-index:36}
+
+.dcts-v15-board{
+  position:relative;width:100%;height:100%;min-height:590px;overflow:auto;
+  background-color:#fbfcfd;
+  background-image:
+    linear-gradient(rgba(45,120,183,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(45,120,183,.032) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.dcts-v15-stage{position:relative;min-width:880px;min-height:620px;width:100%;height:100%}
+.dcts-v15-zone{
+  position:absolute;border:1px solid var(--zone-border,#cdd9e2);border-radius:10px;
+  background:var(--zone-bg,rgba(243,247,250,.82));overflow:visible;
+}
+.dcts-v15-zone-label{
+  position:absolute;left:10px;top:8px;z-index:2;
+  padding:3px 7px;border:1px solid var(--zone-border,#cdd9e2);border-radius:999px;
+  background:rgba(255,255,255,.96);color:var(--zone-ink,#557184);
+  font:800 7px/1.1 Segoe UI,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+}
+.dcts-v15-zone.security{--zone-bg:rgba(201,78,93,.055);--zone-border:rgba(201,78,93,.30);--zone-ink:#98505b}
+.dcts-v15-zone.fabric{--zone-bg:rgba(45,120,183,.052);--zone-border:rgba(45,120,183,.28);--zone-ink:#2c688f}
+.dcts-v15-zone.iaas{--zone-bg:rgba(44,139,141,.075);--zone-border:rgba(44,139,141,.34);--zone-ink:#27777a}
+.dcts-v15-zone.managed{--zone-bg:rgba(228,190,70,.13);--zone-border:rgba(190,145,35,.38);--zone-ink:#8d6a1f}
+.dcts-v15-zone.colo{--zone-bg:rgba(226,153,76,.12);--zone-border:rgba(195,124,51,.38);--zone-ink:#995f26}
+.dcts-v15-zone.ai{--zone-bg:rgba(76,138,104,.085);--zone-border:rgba(76,138,104,.35);--zone-ink:#3e7758}
+.dcts-v15-zone.oob{--zone-bg:rgba(106,85,162,.06);--zone-border:rgba(106,85,162,.32);--zone-ink:#655494}
+.dcts-v15-zone.management{--zone-bg:rgba(98,112,128,.07);--zone-border:rgba(98,112,128,.32);--zone-ink:#506779}
+.dcts-v15-zone.infrastructure{--zone-bg:rgba(45,120,183,.045);--zone-border:rgba(45,120,183,.24);--zone-ink:#3f6c88}
+
+.dcts-v15-node{
+  position:absolute;z-index:5;transform:translate(-50%,-50%);
+  width:156px;min-height:70px;box-sizing:border-box;
+  display:grid;grid-template-columns:38px minmax(0,1fr);gap:8px;align-items:center;
+  padding:8px 9px;border:1px solid #cbd7e0;border-left:4px solid var(--node-accent,#2d78b7);
+  border-radius:8px;background:#fff;color:var(--v15-ink);
+  box-shadow:0 4px 11px rgba(23,54,77,.075);
+  cursor:pointer;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease,opacity .14s ease;
+}
+.dcts-v15-node:hover,.dcts-v15-node.is-active{
+  transform:translate(-50%,-50%) translateY(-2px);border-color:var(--node-accent,#2d78b7);
+  box-shadow:0 10px 20px color-mix(in srgb,var(--node-accent,#2d78b7) 17%,transparent);
+}
+.dcts-v15-node.is-muted{opacity:.18;filter:saturate(.45)}
+.dcts-v15-node-icon{
+  width:36px;height:36px;display:grid;place-items:center;border-radius:7px;
+  color:var(--node-accent,#2d78b7);background:color-mix(in srgb,var(--node-accent,#2d78b7) 7%,#fff);
+  border:1px solid color-mix(in srgb,var(--node-accent,#2d78b7) 34%,#d5e0e8)
+}
+.dcts-v15-node-icon .dcts-prod-icon{width:20px;height:20px}
+.dcts-v15-node-title{font:800 9px/1.12 Segoe UI,Arial,sans-serif;color:#173850;max-height:31px;overflow:hidden}
+.dcts-v15-node-role{margin-top:3px;font:700 6.4px/1.1 Segoe UI,Arial,sans-serif;color:var(--node-accent,#2d78b7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dcts-v15-node-meta{display:flex;align-items:center;gap:5px;margin-top:4px;font:650 6px/1.1 Segoe UI,Arial,sans-serif;color:#6a8192}
+.dcts-v15-node-qty{margin-left:auto;font-weight:850;color:#4e7188}
+.dcts-v15-status-dot{width:5px;height:5px;border-radius:50%;background:#8a9ca8;box-shadow:0 0 0 2px rgba(138,156,168,.12)}
+.dcts-v15-status-dot.confirmed{background:#2f8a67}
+.dcts-v15-status-dot.working-assumption{background:#b7832f}
+.dcts-v15-status-dot.vendor-proposal{background:#8b6a28}
+.dcts-v15-status-dot.open-confirmation-required{background:#c45848}
+.dcts-v15-expand{
+  position:absolute;right:4px;bottom:4px;width:17px;height:17px;border:0;border-radius:5px;
+  background:#f5f8fa;color:var(--node-accent,#2d78b7);font:800 9px/17px Segoe UI,Arial,sans-serif;
+  opacity:0;cursor:zoom-in;padding:0
+}
+.dcts-v15-node:hover .dcts-v15-expand{opacity:.92}
+
+.dcts-v15-edge-svg{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
+.dcts-v15-edge{fill:none;stroke:var(--edge-color,#2d78b7);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.88;transition:opacity .14s ease,stroke-width .14s ease,filter .14s ease}
+.dcts-v15-edge.confirmed{stroke-dasharray:none}
+.dcts-v15-edge.working-assumption{stroke-dasharray:7 5}
+.dcts-v15-edge.vendor-proposal{stroke-dasharray:5 5}
+.dcts-v15-edge.open-confirmation-required{stroke-dasharray:3 6}
+.dcts-v15-edge.intent{stroke:#b97824;stroke-width:2.15;stroke-dasharray:5 6;opacity:.68}
+.dcts-v15-edge.management{--edge-color:#6a55a2}
+.dcts-v15-edge.security{--edge-color:#c94e5d}
+.dcts-v15-edge.service{--edge-color:#2c8b8d}
+.dcts-v15-edge.backup{--edge-color:#4c8a68}
+.dcts-v15-edge.data{--edge-color:#2d78b7}
+.dcts-v15-edge.is-active{stroke-width:4.3;opacity:1;filter:drop-shadow(0 0 2px color-mix(in srgb,var(--edge-color,#2d78b7) 55%,transparent))}
+.dcts-v15-edge.is-muted{opacity:.08}
+.dcts-v15-edge-label{
+  font:750 6.5px Segoe UI,Arial,sans-serif;fill:#5a7182;paint-order:stroke;stroke:#fbfcfd;stroke-width:4px;stroke-linejoin:round
+}
+.dcts-v15-edge-label.intent{fill:#8a611e}
+
+.dcts-v15-topnote{
+  position:absolute;right:12px;top:10px;z-index:9;max-width:350px;padding:6px 8px;border-radius:7px;
+  background:rgba(16,54,80,.92);color:#dceaf2;font:650 6.6px/1.3 Segoe UI,Arial,sans-serif;
+  box-shadow:0 4px 12px rgba(16,54,80,.15)
+}
+.dcts-v15-topnote b{color:#fff}
+.dcts-v15-legend{
+  position:absolute;left:12px;bottom:10px;z-index:9;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  padding:5px 7px;border:1px solid #d6e0e7;border-radius:7px;background:rgba(255,255,255,.95);
+  font:700 6.2px Segoe UI,Arial,sans-serif;color:#617989
+}
+.dcts-v15-key{display:flex;align-items:center;gap:4px}
+.dcts-v15-swatch{width:22px;height:0;border-top:2px solid #2d78b7}
+.dcts-v15-swatch.management{border-color:#6a55a2;border-top-style:dotted}
+.dcts-v15-swatch.assumption{border-color:#b7832f;border-top-style:dashed}
+.dcts-v15-swatch.intent{border-color:#b97824;border-top-style:dashed;opacity:.65}
+
+/* T05 management architecture — visual language follows the supplied management-network reference. */
+.dcts-v15-titlecloud{
+  position:absolute;z-index:7;transform:translate(-50%,-50%);min-width:112px;padding:9px 15px;
+  border:2px solid #2d78b7;border-radius:50%;background:#fff;color:#2d78b7;text-align:center;
+  font:italic 800 10px Segoe UI,Arial,sans-serif;box-shadow:0 4px 10px rgba(45,120,183,.08)
+}
+
+@media(max-width:1280px){
+  .dcts-v15-stage{min-width:820px}.dcts-v15-node{width:145px}.dcts-v15-node-title{font-size:8.4px}
+}
+@media(prefers-reduced-motion:reduce){.dcts-v15-node,.dcts-v15-edge{transition:none!important}}
+@media print{
+  .dcts-v15-projection{position:relative;inset:auto;display:block!important;min-height:650px;box-shadow:none}
+  body.dcts-v15-projection-active .viewport>.scene{display:none!important}
+}
