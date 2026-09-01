@@ -44,7 +44,7 @@ html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .node-card:focus-vis
 }
 
 .dcts-engineering-v1a6 .engineering-toolbar{
-  position:absolute;z-index:14;right:14px;top:12px;width:330px;border:1px solid #cfdde5;background:rgba(255,255,255,.96);
+  position:absolute;z-index:14;right:14px;top:12px;width:240px;border:1px solid #cfdde5;background:rgba(255,255,255,.96);
   border-radius:10px;padding:9px 10px;box-shadow:0 8px 22px rgba(28,67,90,.12);backdrop-filter:blur(8px);
 }
 .dcts-engineering-v1a6 .eng-toolbar-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
@@ -57,13 +57,13 @@ html[data-dcts-engineering-view="on"].dcts-engineering-v1a6 .node-card:focus-vis
 .dcts-engineering-v1a6 .eng-toolbar-buttons button.on{border-color:#6ba1ba;background:#eaf5f9;color:#205f7d}
 .dcts-engineering-v1a6 .eng-toolbar-policy{margin-top:6px;font-size:5.8px;color:#7f6b4f}
 .dcts-engineering-v1a6 .engineering-topology-flags{
-  position:absolute;left:14px;top:12px;z-index:13;display:flex;align-items:center;gap:5px;border:1px solid #d1e0e7;
+  position:absolute;left:14px;top:82px;z-index:13;display:flex;align-items:center;gap:5px;border:1px solid #d1e0e7;
   background:rgba(255,255,255,.95);border-radius:9px;padding:7px 8px;box-shadow:0 6px 16px rgba(29,69,91,.08)
 }
 .dcts-engineering-v1a6 .engineering-topology-flags b{font-size:5.9px;letter-spacing:.07em;color:#5d7684}
 .dcts-engineering-v1a6 .engineering-topology-flags span{border:1px solid #bad6c7;background:#f0f8f4;color:#3b8060;border-radius:999px;padding:3px 5px;font-size:5.7px;font-weight:850}
 .dcts-engineering-v1a6 .engineering-safety-note{
-  position:absolute;right:14px;top:108px;z-index:12;width:330px;border:1px dashed #d8c992;background:rgba(255,250,236,.95);
+  position:absolute;left:14px;right:auto;top:12px;z-index:12;width:220px;border:1px dashed #d8c992;background:rgba(255,250,236,.95);
   color:#786229;border-radius:9px;padding:7px 9px;font-size:6px;line-height:1.35;pointer-events:none;
 }
 
@@ -128,7 +128,7 @@ html[data-dcts-view="T03"][data-dcts-mode="ENGINEERING"].dcts-engineering-v1a6 .
 html[data-dcts-view="T03"][data-dcts-mode="ENGINEERING"].dcts-engineering-v1a6 .flow-intent{opacity:.10}
 
 @media (max-width:1200px){
-  .dcts-engineering-v1a6 .engineering-toolbar,.dcts-engineering-v1a6 .engineering-safety-note{width:286px}
+  .dcts-engineering-v1a6 .engineering-toolbar{width:220px}.dcts-engineering-v1a6 .engineering-safety-note{width:205px}
   .dcts-engineering-v1a6 .eng-toolbar-head span{display:none}
 }
 @media (prefers-reduced-motion:reduce){
