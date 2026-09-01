@@ -67,30 +67,28 @@ function installHitTargets(){
    const h=svgEl('path',{d:p.getAttribute('d'),'class':'kxne-link-hit','data-review':`v1a3-hit-${id}`,'data-intent':id,'tabindex':'0','role':'button','aria-label':`${META[id]?.relation||id} relationship details`});svg.appendChild(h)
  });
 }
-function setFocus(id,on){
+function setFocus(focusId){
  const svg=$('.kxne-links');if(!svg)return;
- const active=on?id:'';selectedIntent=active||selectedIntent;
- const focusId=active||selectedIntent;
  $$('.kxne-path[data-intent],.kxne-link-hit,.kxne-label[data-intent]',svg).forEach(n=>{const same=n.dataset.intent===focusId||(focusId&&focusId==='AINT-MGMT-BUS'&&String(n.dataset.intent||'').startsWith('AINT-01'));n.classList.toggle('kxne-rel-focus',!!focusId&&same);n.classList.toggle('kxne-rel-dim',!!focusId&&!same)});
  $$('.kxne-cluster,.kxne-external').forEach(n=>n.classList.remove('kxne-rel-node','kxne-rel-node-dim'));
  if(focusId&&META[focusId]){const m=META[focusId];const ids=[m.from,m.to].filter(v=>typeof v==='string'&&v.startsWith('topobj_'));$$('.kxne-cluster').forEach(n=>n.classList.add('kxne-rel-node-dim'));ids.forEach(x=>{const n=$(`[data-cluster="${CSS.escape(x)}"]`);if(n){n.classList.remove('kxne-rel-node-dim');n.classList.add('kxne-rel-node')}});if(!String(m.from).startsWith('topobj_'))$('.kxne-external')?.classList.add('kxne-rel-node')}
  if(!focusId){$$('.kxne-cluster').forEach(n=>n.classList.remove('kxne-rel-node-dim','kxne-rel-node'));$('.kxne-external')?.classList.remove('kxne-rel-node')}
 }
 function inspector(){let p=$('#kxneLinkInspector');if(p)return p;const right=$('.right');if(!right)return null;p=document.createElement('section');p.id='kxneLinkInspector';p.className='kxne-link-inspector';p.hidden=true;const tabs=$('.itabs',right);(tabs?.parentNode||right).insertBefore(p,tabs?.nextSibling||right.firstChild);return p}
-function showInspector(id){const m=META[id];if(!m)return;selectedIntent=id;setFocus(id,true);const p=inspector();if(!p)return;const from=objectName(m.from),to=objectName(m.to);p.hidden=false;p.innerHTML=`<div class="kxne-li-head"><div><span>RELATIONSHIP / EVIDENCE</span><b>${esc(m.label)}</b></div><button type="button" aria-label="Close relationship inspector">×</button></div><div class="kxne-li-status"><strong>OPEN-CONFIRMATION REQUIRED</strong><span>${esc(id)}</span></div><dl><dt>Semantic intent</dt><dd>${esc(m.relation)}</dd><dt>From</dt><dd>${esc(from)}</dd><dt>To</dt><dd>${esc(to)}</dd><dt>Rendering</dt><dd>${m.kind==='management'?'Management/OOB presentation relationship':m.kind==='illustrative'?'Illustrative fabric intent bus':'Open design intent'}</dd><dt>Canonical physical evidence</dt><dd>0 evidenced physical links in KAYAS T02/T03 baseline</dd></dl><div class="kxne-li-note"><b>Evidence boundary</b><p>This path is a presentation/design relationship only. It does not assert member mapping, A/B identity, HA protocol, ports, speed, optics, EVPN/VXLAN or physical cabling.</p></div>`;p.querySelector('button').onclick=()=>{p.hidden=true;selectedIntent='';setFocus('',false)}
+function showInspector(id){const m=META[id];if(!m)return;selectedIntent=id;setFocus(id);const p=inspector();if(!p)return;const from=objectName(m.from),to=objectName(m.to);p.hidden=false;p.innerHTML=`<div class="kxne-li-head"><div><span>RELATIONSHIP / EVIDENCE</span><b>${esc(m.label)}</b></div><button type="button" aria-label="Close relationship inspector">×</button></div><div class="kxne-li-status"><strong>OPEN-CONFIRMATION REQUIRED</strong><span>${esc(id)}</span></div><dl><dt>Semantic intent</dt><dd>${esc(m.relation)}</dd><dt>From</dt><dd>${esc(from)}</dd><dt>To</dt><dd>${esc(to)}</dd><dt>Rendering</dt><dd>${m.kind==='management'?'Management/OOB presentation relationship':m.kind==='illustrative'?'Illustrative fabric intent bus':'Open design intent'}</dd><dt>Canonical physical evidence</dt><dd>0 evidenced physical links in KAYAS T02/T03 baseline</dd></dl><div class="kxne-li-note"><b>Evidence boundary</b><p>This path is a presentation/design relationship only. It does not assert member mapping, A/B identity, HA protocol, ports, speed, optics, EVPN/VXLAN or physical cabling.</p></div>`;p.querySelector('button').onclick=()=>{p.hidden=true;selectedIntent='';setFocus('')}
 }
 function bindInteractions(){
  const svg=$('.kxne-links');if(!svg||svg.dataset.v1a3Bound==='1')return;svg.dataset.v1a3Bound='1';svg.style.pointerEvents='auto';
- svg.addEventListener('pointerover',e=>{const h=e.target.closest?.('.kxne-link-hit');if(h&&!selectedIntent)setFocus(h.dataset.intent,true)});
- svg.addEventListener('pointerout',e=>{const h=e.target.closest?.('.kxne-link-hit');if(h&&!selectedIntent)setFocus('',false)});
+ svg.addEventListener('pointerover',e=>{const h=e.target.closest?.('.kxne-link-hit');if(h&&!selectedIntent)setFocus(h.dataset.intent)});
+ svg.addEventListener('pointerout',e=>{const h=e.target.closest?.('.kxne-link-hit');if(h&&!selectedIntent)setFocus('')});
  svg.addEventListener('click',e=>{const h=e.target.closest?.('.kxne-link-hit');if(h){e.preventDefault();e.stopPropagation();showInspector(h.dataset.intent)}});
  svg.addEventListener('keydown',e=>{const h=e.target.closest?.('.kxne-link-hit');if(h&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showInspector(h.dataset.intent)}});
  const note=$('.kxne-fabric-note');if(note&&!note.dataset.v1a3Bound){note.dataset.v1a3Bound='1';note.addEventListener('click',()=>showInspector('AINT-005'));note.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showInspector('AINT-005')}})}
 }
-function enhance(){if(viewId()!=='T02')return;cleanupReview();managementBus();fabricLabel();shortLabels();installHitTargets();bindInteractions();if(selectedIntent)setFocus(selectedIntent,true)}
+function enhance(){if(viewId()!=='T02')return;cleanupReview();managementBus();fabricLabel();shortLabels();installHitTargets();bindInteractions();if(selectedIntent)setFocus(selectedIntent)}
 function schedule(){cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>requestAnimationFrame(enhance))}
 function hook(){try{if(typeof render==='function'&&!render.__kxV1a3){const prev=render,wrapped=function(){const out=prev.apply(this,arguments);setTimeout(schedule,0);return out};wrapped.__kxV1a3=true;render=wrapped}}catch(_){}
- try{mo?.disconnect();mo=new MutationObserver(schedule);mo.observe($('#groups')||document.body,{childList:true,subtree:true})}catch(_){}
+ try{mo?.disconnect();mo=new MutationObserver(schedule);mo.observe($('#groups')||document.body,{childList:true,subtree:false})}catch(_){}
  try{ro?.disconnect();const v=$('.scene-viewport');if(v&&window.ResizeObserver){ro=new ResizeObserver(schedule);ro.observe(v)}}catch(_){}
 }
 hook();window.addEventListener('resize',schedule);window.addEventListener('hashchange',schedule);setTimeout(schedule,0);setTimeout(schedule,300);
