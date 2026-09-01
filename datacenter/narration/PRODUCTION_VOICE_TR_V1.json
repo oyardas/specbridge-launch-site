@@ -14,10 +14,10 @@
     "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
   },
   "acceptance": {
-    "minimum_transcript_similarity": 0.88,
+    "minimum_transcript_similarity": 0.90,
     "minimum_word_count_ratio": 0.85,
     "maximum_word_count_ratio": 1.15,
     "minimum_audio_bytes": 50000,
-    "tail_word_count": 4
+    "tail_word_count": 8
   }
 }
