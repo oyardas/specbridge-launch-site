@@ -24,16 +24,16 @@ window.DCTS_VIEWER_BOOT={
       try{
         const u=new URL(input,location.href);
         if(u.pathname==='/dcts/viewer/fixtures/kayas/package-manifest.json'){
-          u.searchParams.set('dctsrev','topology-std-v1');
+          u.searchParams.set('dctsrev','topology-std-v1a1');
           return nativeFetch(u.href,init);
         }
         if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v1.json'){
           u.pathname='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json';
-          u.searchParams.set('dctsrev','topology-std-v1');
+          u.searchParams.set('dctsrev','topology-std-v1a1');
           return nativeFetch(u.href,init);
         }
         if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json'){
-          u.searchParams.set('dctsrev','topology-std-v1');
+          u.searchParams.set('dctsrev','topology-std-v1a1');
           return nativeFetch(u.href,init);
         }
       }catch(_){ }
@@ -57,6 +57,7 @@ window.DCTS_VIEWER_BOOT={
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-icons-v1a12.css?v=20260901-icons-v1a12b">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-visual-language-v1a13.css?v=20260901-v1a13">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.css?v=20260901-topology-std-v1">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.css?v=20260901-topology-std-v1a1">
 </head>
 <body>
 <noscript>DCTS Viewer requires JavaScript.</noscript>
@@ -74,5 +75,6 @@ window.DCTS_VIEWER_BOOT={
 <script src="/dcts/viewer/runtime/dcts-viewer-icons-v1a12.js?v=20260901-icons-v1a12b"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-visual-language-v1a13.js?v=20260901-v1a13b"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js?v=20260901-topology-std-v1"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.js?v=20260901-topology-std-v1a1"></script>
 </body>
 </html>
