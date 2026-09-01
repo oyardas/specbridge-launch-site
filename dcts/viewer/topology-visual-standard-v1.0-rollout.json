@@ -1,13 +1,14 @@
 {
   "document_id": "DCTS-VISUAL-STD-002-ROLLOUT-001",
-  "standard_version": "v1.0.2",
+  "standard_version": "v1.0.3",
   "parent_standard": "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.md",
   "controlled_amendments": [
     "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.1-Amendment.md",
-    "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.2-Amendment.md"
+    "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.2-Amendment.md",
+    "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.3-Amendment.md"
   ],
   "date": "2026-09-01",
-  "status": "APPLIED_TO_ALL_ENABLED_DCTS_PREVIEW_VIEWS",
+  "status": "PRODUCTION_TOPOLOGY_CUTOVER_APPLIED_PENDING_POST_DEPLOY_SMOKE_TEST",
   "shared_runtime": {
     "css": "/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.css",
     "javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js",
@@ -19,21 +20,28 @@
   "projects": {
     "KAYAS": {
       "preview_path": "/kayas/topology/v1-preview.html",
+      "production_topology_path": "/kayas/topology/",
+      "rollback_shell": "/kayas/topology/index-pre-dcts-topology-standard-v1.0.2.html",
       "package_base": "/dcts/viewer/fixtures/kayas",
       "presentation_views": ["T00", "T01", "T02", "T03", "T04", "T05", "T06"],
       "t02_service_segmentation": "PACKAGE_DRIVEN_WHEN_MULTIPLE_SERVICE_MODEL_CODES_EXIST",
       "view_lifecycle_fix": "APPLIED",
       "engineering_renderer_preserved": true,
-      "production_shell_replaced": false
+      "production_topology_cutover": true,
+      "legacy_k00_mapping": "K00_TO_T00"
     },
     "HAVEN-HEALTHCARE": {
       "preview_path": "/haven-healthcare/v1-preview.html",
+      "production_topology_path": "/haven-healthcare/topology/",
+      "investor_shell_path": "/haven-healthcare/",
       "package_base": "/dcts/viewer/fixtures/haven-healthcare",
       "presentation_views": ["T00", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08"],
       "t02_service_segmentation": "PACKAGE_DRIVEN_ONLY_IF_EXPLICIT_SERVICE_MODEL_METADATA_EXISTS",
       "view_lifecycle_fix": "APPLIED",
       "engineering_renderer_preserved": true,
-      "production_shell_replaced": false
+      "production_topology_cutover": true,
+      "investor_shell_replaced": false,
+      "engineering_route_bridge": "/haven-healthcare/haven-topology-production-router-v1.js"
     }
   },
   "guardrail_verdict": {
@@ -44,7 +52,8 @@
     "missing_status_assumed_confirmed": false,
     "presentation_grouping_promoted_to_semantics": false,
     "presentation_intent_promoted_to_canonical": false,
-    "stale_projection_visible_outside_presentation_mode": false
+    "stale_projection_visible_outside_presentation_mode": false,
+    "production_cutover_changes_canonical_graph": false
   },
-  "promotion_gate": "HUMAN_VISUAL_ACCEPTANCE_BEFORE_PRODUCTION_SHELL_CUTOVER"
+  "promotion_gate": "POST_DEPLOY_PRODUCTION_SMOKE_TEST"
 }
