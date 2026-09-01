@@ -1,0 +1,107 @@
+:root{
+  --dcts-vl-network:#246f9b;
+  --dcts-vl-security:#a44f67;
+  --dcts-vl-compute:#3b8060;
+  --dcts-vl-storage:#237f8f;
+  --dcts-vl-service:#8c6e3b;
+  --dcts-vl-ops:#6753a0;
+  --dcts-vl-external:#536d7e;
+  --dcts-vl-facility:#6b7d86;
+}
+
+/* Canvas gets priority over chrome without changing the canonical scene geometry. */
+.dcts-main{grid-template-columns:230px minmax(0,1fr) 305px}
+.dcts-left,.dcts-right{padding:10px}
+.viewport{padding:10px}
+.scene{background:linear-gradient(180deg,#fbfdfe,#f7fafc);border-color:#cfdae2;box-shadow:0 14px 34px rgba(28,58,77,.11)}
+
+/* Domain containers read as topology zones instead of dashboard grouping cards. */
+.domain-box{background:rgba(246,250,252,.46);border:1.4px solid #cad9e2;border-radius:16px}
+.domain-box>span{top:6px;left:12px;font-size:6.7px;letter-spacing:.12em;padding:2px 6px;border-radius:999px;background:#fff;border:1px solid #d9e4ea;color:#536d7e;box-shadow:0 2px 7px rgba(40,72,90,.06)}
+.domain-box[data-dcts-domain="SECURITY"]{border-color:rgba(164,79,103,.42);background:rgba(164,79,103,.035)}
+.domain-box[data-dcts-domain="NETWORK"]{border-color:rgba(36,111,155,.38);background:rgba(36,111,155,.03)}
+.domain-box[data-dcts-domain="OOB"],.domain-box[data-dcts-domain="MANAGEMENT"],.domain-box[data-dcts-domain="OPERATIONS"],.domain-box[data-dcts-domain="MONITORING"]{border-color:rgba(103,83,160,.38);background:rgba(103,83,160,.028)}
+.domain-box[data-dcts-domain="COMPUTE"],.domain-box[data-dcts-domain="HCI"]{border-color:rgba(59,128,96,.38);background:rgba(59,128,96,.03)}
+.domain-box[data-dcts-domain="STORAGE"]{border-color:rgba(35,127,143,.38);background:rgba(35,127,143,.03)}
+.domain-box[data-dcts-domain="SERVICE"],.domain-box[data-dcts-domain="TENANT"],.domain-box[data-dcts-domain="CLOUD"]{border-color:rgba(140,110,59,.36);background:rgba(140,110,59,.026)}
+
+/* Node composition: icon is the primary visual identifier, not a decorative badge. */
+.node-card{
+  min-height:100px;
+  border-radius:11px;
+  box-shadow:0 7px 18px rgba(25,58,80,.09),inset 0 3px 0 var(--dcts-node-accent,#7b94a4);
+  overflow:hidden;
+}
+.node-card .dcts-node-icon-slot{
+  left:11px!important;
+  right:auto!important;
+  top:34px!important;
+  width:38px!important;
+  height:38px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--dcts-node-accent,#536d7e)!important;
+  opacity:.98;
+}
+.node-card .dcts-node-icon-slot .dcts-prod-icon{width:31px!important;height:31px!important}
+.node-card[data-dcts-icon-v1="1"] strong,
+.node-card[data-dcts-icon-v1="1"] small{padding-right:0!important;padding-left:47px!important}
+.node-card[data-dcts-icon-v1="1"] .node-foot{padding-left:47px}
+.node-card[data-dcts-icon-v1="1"] strong{font-size:9.7px;line-height:1.16;min-height:22px}
+.node-card[data-dcts-icon-v1="1"] small{font-size:6.7px;margin-top:2px}
+.node-card[data-dcts-icon-v1="1"] .node-foot{margin-top:5px}
+.node-card[data-dcts-icon-v1="1"] code{margin-top:4px}
+.node-card:hover,.node-card.selected{transform:translateY(-2px);box-shadow:0 11px 26px rgba(31,104,143,.18),inset 0 3px 0 var(--dcts-node-accent,#26719f)}
+
+.node-card[data-dcts-kind="network"]{--dcts-node-accent:var(--dcts-vl-network)}
+.node-card[data-dcts-kind="security"]{--dcts-node-accent:var(--dcts-vl-security)}
+.node-card[data-dcts-kind="compute"]{--dcts-node-accent:var(--dcts-vl-compute)}
+.node-card[data-dcts-kind="storage"]{--dcts-node-accent:var(--dcts-vl-storage)}
+.node-card[data-dcts-kind="service"]{--dcts-node-accent:var(--dcts-vl-service)}
+.node-card[data-dcts-kind="operations"]{--dcts-node-accent:var(--dcts-vl-ops)}
+.node-card[data-dcts-kind="external"]{--dcts-node-accent:var(--dcts-vl-external)}
+.node-card[data-dcts-kind="facility"]{--dcts-node-accent:var(--dcts-vl-facility)}
+.node-card[data-dcts-kind="cluster"]{--dcts-node-accent:var(--dcts-vl-compute);border-width:1.6px;outline:1px solid rgba(59,128,96,.14);outline-offset:2px}
+.node-card[data-dcts-kind="service"]{background:linear-gradient(180deg,#fff,#fdfbf7)}
+.node-card[data-dcts-kind="security"]{background:linear-gradient(180deg,#fff,#fffafb)}
+.node-card[data-dcts-kind="operations"]{background:linear-gradient(180deg,#fff,#fcfbff)}
+
+/* Stronger topology links and semantic relationship grammar. */
+.edge{stroke-width:2.75;opacity:.92;transition:opacity .13s,stroke-width .13s,filter .13s}
+.edge.edge-canonical{stroke-width:2.9}
+.edge.edge-intent{stroke:#a06d18;stroke-width:2;stroke-dasharray:7 6;opacity:.82}
+.edge[data-dcts-semantic="management"]{stroke:var(--dcts-vl-ops);stroke-dasharray:4 5}
+.edge[data-dcts-semantic="security"]{stroke:var(--dcts-vl-security)}
+.edge[data-dcts-semantic="service"]{stroke:var(--dcts-vl-service)}
+.edge[data-dcts-semantic="backup"]{stroke:#708b3a;stroke-dasharray:10 5}
+.edge[data-dcts-semantic="physical"]{stroke:#295d80}
+.edge[data-dcts-semantic="intent"]{stroke:#a06d18;stroke-dasharray:7 6}
+.edge.dcts-related{stroke-width:4.3;opacity:1;filter:drop-shadow(0 0 2px rgba(38,113,159,.42))}
+.edge.dcts-muted{opacity:.11}
+.node-card.dcts-related{opacity:1;box-shadow:0 12px 28px rgba(31,104,143,.2),inset 0 3px 0 var(--dcts-node-accent,#26719f)}
+.node-card.dcts-muted{opacity:.24;filter:saturate(.55)}
+.domain-box.dcts-muted{opacity:.34}
+
+/* Engineering nodes use the same visual language. */
+.engp-device-glyph .dcts-prod-icon{width:25px!important;height:25px!important}
+.engp-node[data-dcts-kind="network"] .engp-device-glyph{color:var(--dcts-vl-network)}
+.engp-node[data-dcts-kind="security"] .engp-device-glyph{color:var(--dcts-vl-security)}
+.engp-node[data-dcts-kind="compute"],.engp-node[data-dcts-kind="cluster"] .engp-device-glyph{color:var(--dcts-vl-compute)}
+.engp-node[data-dcts-kind="storage"] .engp-device-glyph{color:var(--dcts-vl-storage)}
+.engp-node[data-dcts-kind="operations"] .engp-device-glyph{color:var(--dcts-vl-ops)}
+
+/* Full-canvas mode: topology becomes the dominant workspace. */
+body.dcts-canvas-focus .dcts-main{grid-template-columns:0 minmax(0,1fr) 0}
+body.dcts-canvas-focus .dcts-left,body.dcts-canvas-focus .dcts-right{display:none}
+body.dcts-canvas-focus .dcts-center{grid-column:2}
+#dctsCanvasBtn{min-width:48px}
+
+@media(max-width:1380px){
+  .dcts-main{grid-template-columns:205px minmax(0,1fr) 270px}
+  .node-card .dcts-node-icon-slot{width:35px!important;height:35px!important}
+  .node-card .dcts-node-icon-slot .dcts-prod-icon{width:28px!important;height:28px!important}
+}
