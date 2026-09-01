@@ -11,6 +11,13 @@ on:
       - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
       - datacenter/knowledge/narration/generate_dck01_v2_audio.py
       - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
+  pull_request:
+    branches:
+      - main
+    paths:
+      - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
+      - datacenter/knowledge/narration/generate_dck01_v2_audio.py
+      - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
 
 permissions:
   contents: read
