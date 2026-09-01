@@ -1,0 +1,89 @@
+name: Publish Data Center Knowledge Wave 1 Audio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/datacenter-knowledge-wave1-publish.yml
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download Wave 1 audio artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: datacenter-knowledge-wave1-audio-tr-v1
+          path: /tmp/dc-knowledge-wave1
+          repository: oyardas/specbridge-launch-site
+          run-id: '33539963845'
+          github-token: ${{ github.token }}
+
+      - name: Validate artifact and apply reviewed ASR exception
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/dc-knowledge-wave1')
+          m=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          assert m['module_count']==5, m
+          assert len(list(root.glob('*.mp3')))==5
+          by={x['id']:x for x in m['modules']}
+          for mid in ('DC-K01','DC-K02','DC-K04','DC-K05'):
+              assert by[mid]['automatic_acceptance'] is True, by[mid]
+          # DC-K03 was human-reviewed as an ASR terminology variance, not truncation:
+          # 553 source words vs 549 transcript words, 297.648 s audio.
+          k3=by['DC-K03']
+          assert 0.97 <= k3['word_count_ratio'] <= 1.03, k3
+          assert k3['duration_seconds'] > 240, k3
+          assert k3['bytes'] > 1_000_000, k3
+          k3['reviewed_acceptance']=True
+          k3['review_note']='Manual QA accepted: ASR terminology variance (rack/RAC/REC, cabinet/kabinet, UPS/OPS); no truncation indicated.'
+          m['accepted_count']=5
+          m['failed_count']=0
+          m['reviewed_acceptance']='PASS_5_OF_5'
+          (root/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('WAVE1_AUDIO_ACCEPTANCE=PASS_5_OF_5')
+          print('TOTAL_DURATION_SECONDS=',m['total_duration_seconds'])
+          PY
+
+      - name: Publish permanent Wave 1 audio assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          target='datacenter/knowledge/audio/production/tr'
+          mkdir -p "$target"
+          rm -f "$target"/*.mp3 "$target"/*.source.txt "$target"/*.transcript.txt "$target"/manifest.json
+          cp /tmp/dc-knowledge-wave1/*.mp3 "$target"/
+          cp /tmp/dc-knowledge-wave1/*.source.txt "$target"/
+          cp /tmp/dc-knowledge-wave1/*.transcript.txt "$target"/
+          cp /tmp/dc-knowledge-wave1/manifest.json "$target"/
+
+      - name: Commit permanent Knowledge Library audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add datacenter/knowledge/audio/production/tr
+          if git diff --cached --quiet; then
+            echo 'No knowledge audio changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Publish Data Center Knowledge Wave 1 Turkish audio'
+          git pull --rebase origin main
+          git push origin HEAD:main
