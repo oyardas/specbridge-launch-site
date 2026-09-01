@@ -31,13 +31,16 @@
    const themeCss=d.createElement('link');themeCss.rel='stylesheet';themeCss.href='../kayas-theme-frame.css?v=20260901-theme1';d.head.appendChild(themeCss);
    const mobCss=d.createElement('link');mobCss.rel='stylesheet';mobCss.href='kayas-mobile.css?v=20260901-mobile1';d.head.appendChild(mobCss);
    const reviewCss=d.createElement('link');reviewCss.rel='stylesheet';reviewCss.href='kayas-network-engineering-v1a2.css?v=20260901-net2';d.head.appendChild(reviewCss);
+   const grammarCss=d.createElement('link');grammarCss.rel='stylesheet';grammarCss.href='kayas-network-engineering-v1a3.css?v=20260901-net3';d.head.appendChild(grammarCss);
    addScript(d,'v0.14-service-model.js?v=20260901-es1','kxModel',()=>{
     addScript(d,'v0.14-service-ui.js?v=20260901-es1','kxUi',()=>{
      addScript(d,'dcts-terminology-v1.js?v=20260901-es1','kxTerm',()=>{
       addScript(d,'kayas-experience-standard.js?v=20260901-es1','kxExperience',()=>{
        addScript(d,'kayas-network-engineering-v1.js?v=20260901-net1','kxNetworkEngineering',()=>{
         addScript(d,'kayas-network-engineering-v1a2.js?v=20260901-net2','kxNetworkEngineeringReview',()=>{
-         addScript(d,'kayas-mobile.js?v=20260901-mobile1','kxMobile',()=>{boot.style.display='none'},()=>{boot.style.display='none'});
+         addScript(d,'kayas-network-engineering-v1a3.js?v=20260901-net3','kxNetworkEngineeringGrammar',()=>{
+          addScript(d,'kayas-mobile.js?v=20260901-mobile1','kxMobile',()=>{boot.style.display='none'},()=>{boot.style.display='none'});
+         },()=>{boot.innerHTML='<div>T02 connection grammar refinement could not be loaded.<small>The Iteration 2 preview remains available.</small></div>';setTimeout(()=>boot.style.display='none',2000)});
         },()=>{boot.innerHTML='<div>T02 review refinement could not be loaded.<small>The first engineering preview remains available.</small></div>';setTimeout(()=>boot.style.display='none',2000)});
        },()=>{boot.innerHTML='<div>T02 engineering preview layer could not be loaded.<small>The current Experience Standard remains unchanged.</small></div>';setTimeout(()=>boot.style.display='none',2200)});
       },()=>{boot.innerHTML='<div>Experience layer could not be loaded.<small>The DCTS viewer remains available.</small></div>';setTimeout(()=>boot.style.display='none',1800)});
