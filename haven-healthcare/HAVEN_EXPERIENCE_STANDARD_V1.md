@@ -85,3 +85,18 @@ Existing print/PDF behavior is retained. Investor-print output must preserve the
 ## 10. Change control
 
 New investor-facing Haven surfaces should consume the canonical runtime and follow H00/H-code navigation, progressive disclosure, semantic controls, persistent language state and evidence-boundary conventions unless a documented technical constraint requires an exception.
+
+## 11. Mobile Architecture Mode
+
+At phone/tablet breakpoints, Haven uses a topology-first mobile interaction model rather than compressing the desktop three-panel layout.
+
+- The central topology remains visible and receives the majority of screen area.
+- WHY, DETAIL/EVIDENCE and controls move into bottom sheets.
+- Selecting a topology node opens the Details sheet automatically.
+- Flow, Design Paths, Labels, Evidence, Narration, Print and EN/TR/DV language controls remain accessible through mobile proxy controls backed by the existing desktop/native controls.
+- A Fit action re-renders the active engineering view into its default framing.
+- H00 Master Architecture becomes a compact one/two-column card map depending on available width.
+- Desktop sidebars and dense action bars are hidden on small screens; information is not discarded, only progressively disclosed.
+- Touch targets should be approximately 42–44 px or larger where practical.
+- Portrait mode may show a non-blocking landscape suggestion; rotation is optional.
+- `viewport-fit=cover`, safe-area insets and `prefers-reduced-motion` must be supported.
