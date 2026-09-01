@@ -1,2 +1,0 @@
-Publish accepted artifact from source run 33545593161.
-Acceptance contract: chapter_count=8, accepted_count=8, failed_count=0.
