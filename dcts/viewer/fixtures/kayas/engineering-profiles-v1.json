@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0-draft.1",
+  "project_id": "KAYAS",
+  "profiles": {
+    "T02": {
+      "profile_id": "KAYAS-T02-ENGINEERING-CONNECTIVITY-v1",
+      "mode": "ENGINEERING",
+      "title": "Network Engineering Connectivity",
+      "subtitle": "Device-role topology for engineering review. Connections shown as DESIGN unless canonical evidence exists.",
+      "subtitle_tr": "Mühendislik incelemesi için cihaz-rol topolojisi. Canonical kanıt yoksa bağlantılar DESIGN olarak gösterilir.",
+      "context_nodes": [
+        {
+          "context_id": "ctx_external",
+          "display_name": "External / Carrier / Internet",
+          "description": "External connectivity context; carrier/router implementation details remain open.",
+          "status": "OPEN-CONFIRMATION REQUIRED"
+        }
+      ],
+      "object_ids": [
+        "topobj_dc750ed177fb87984c3a",
+        "topobj_d22103a970df15ebc013",
+        "topobj_4a235cb934f5c5a46901",
+        "topobj_f8b344bf31c75571769f",
+        "topobj_6c9587efb3d0b49bed8e",
+        "topobj_689f284af5e658a26b88",
+        "topobj_dc742080923da3053e85",
+        "topobj_6de1118a2c5c7827fc65",
+        "topobj_6a8d3500c63b7ce61860",
+        "topobj_56b5cee0b4c39857a70a",
+        "topobj_bbc53ea9c663404b7a82",
+        "topobj_60b6648480d5d86edc25"
+      ],
+      "relationship_ids": [],
+      "presentation_intent_ids": [
+        "AINT-000",
+        "AINT-001",
+        "AINT-002",
+        "AINT-003",
+        "AINT-004",
+        "AINT-005",
+        "AINT-006",
+        "AINT-007",
+        "AINT-008",
+        "AINT-013",
+        "AINT-014",
+        "AINT-015"
+      ],
+      "layout": {
+        "lanes": [
+          {"id":"external","label":"EXTERNAL / CARRIER CONTEXT","label_tr":"EXTERNAL / CARRIER BAĞLAMI","object_ids":["ctx_external"]},
+          {"id":"security","label":"SECURITY / APPLICATION DELIVERY","label_tr":"GÜVENLİK / APPLICATION DELIVERY","object_ids":["topobj_dc750ed177fb87984c3a","topobj_d22103a970df15ebc013","topobj_4a235cb934f5c5a46901"]},
+          {"id":"edge","label":"EDGE / INTERCONNECT","label_tr":"EDGE / INTERCONNECT","object_ids":["topobj_f8b344bf31c75571769f"]},
+          {"id":"fabric","label":"SPINE / FABRIC CORE","label_tr":"SPINE / FABRIC CORE","object_ids":["topobj_6c9587efb3d0b49bed8e"]},
+          {"id":"access","label":"LEAF / STORAGE ACCESS","label_tr":"LEAF / STORAGE ACCESS","object_ids":["topobj_689f284af5e658a26b88","topobj_dc742080923da3053e85"]},
+          {"id":"workload","label":"COMPUTE / STORAGE ENDPOINTS","label_tr":"COMPUTE / STORAGE UÇLARI","object_ids":["topobj_6de1118a2c5c7827fc65","topobj_6a8d3500c63b7ce61860"]},
+          {"id":"mgmt","label":"MANAGEMENT / OOB / ANALYTICS","label_tr":"YÖNETİM / OOB / ANALİTİK","object_ids":["topobj_56b5cee0b4c39857a70a","topobj_bbc53ea9c663404b7a82","topobj_60b6648480d5d86edc25"]}
+        ]
+      },
+      "evidence_policy": {
+        "note": "KAYAS currently has no evidenced physical links in this engineering profile; dashed DESIGN paths are unresolved topology intent only.",
+        "note_tr": "KAYAS için bu mühendislik profilinde kanıtlanmış fiziksel link bulunmuyor; kesikli DESIGN yollar yalnızca doğrulanmamış topoloji niyetidir."
+      }
+    }
+  }
+}
