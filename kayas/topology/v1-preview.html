@@ -24,16 +24,16 @@ window.DCTS_VIEWER_BOOT={
       try{
         const u=new URL(input,location.href);
         if(u.pathname==='/dcts/viewer/fixtures/kayas/package-manifest.json'){
-          u.searchParams.set('dctsrev','topology-std-v1a2');
+          u.searchParams.set('dctsrev','topology-std-v1a3');
           return nativeFetch(u.href,init);
         }
         if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v1.json'){
           u.pathname='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json';
-          u.searchParams.set('dctsrev','topology-std-v1a2');
+          u.searchParams.set('dctsrev','topology-std-v1a3');
           return nativeFetch(u.href,init);
         }
         if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json'){
-          u.searchParams.set('dctsrev','topology-std-v1a2');
+          u.searchParams.set('dctsrev','topology-std-v1a3');
           return nativeFetch(u.href,init);
         }
       }catch(_){ }
@@ -76,6 +76,7 @@ window.DCTS_VIEWER_BOOT={
 <script src="/dcts/viewer/runtime/dcts-viewer-visual-language-v1a13.js?v=20260901-v1a13b"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js?v=20260901-topology-std-v1"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-service-segmentation-v1a1.js?v=20260901-topology-std-v1a2"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-view-lifecycle-v1a2.js?v=20260901-topology-std-v1a3"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.js?v=20260901-topology-std-v1a2"></script>
 </body>
 </html>
