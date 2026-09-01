@@ -2,6 +2,13 @@ name: Data Center Turkish Voice Trials
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/datacenter-voice-trials.yml
+      - datacenter/narration/generate_voice_trials.py
+      - datacenter/narration/VOICE_TRIAL_PROFILES_TR_V1.json
 
 permissions:
   contents: read
