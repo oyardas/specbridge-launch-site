@@ -7,18 +7,21 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="author" content="Önder Yardaş">
 <title>KAYAS · 3D Experience</title>
-<link rel="stylesheet" href="../kayas-shell.css?v=20260901-es1">
+<link rel="stylesheet" href="../kayas-shell.css?v=20260901-theme1">
 <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071017}body{display:flex;flex-direction:column}iframe{display:block;border:0;width:100%;height:0;flex:1 1 auto;background:#071017}</style>
 <script>(function(){const k='kayas_walkthrough_auth_until';let ok=false;try{ok=Number(localStorage.getItem(k)||0)>Date.now()}catch(_){}if(!ok)location.replace('/kayas/');})();</script>
 <script src="../kayas-canonical.js?v=20260901-es1"></script>
-<script defer src="../kayas-shell.js?v=20260901-es1"></script>
+<script defer src="../kayas-shell.js?v=20260901-theme1"></script>
 </head>
 <body>
 <iframe id="reviewFrame" title="KAYAS 3rd Floor Zone Review" allow="fullscreen" allowfullscreen></iframe>
 <script>
 (async function(){
- const stamp='20260901-mobile1';const f=document.getElementById('reviewFrame');
- async function injectEnhancements(){try{const d=f.contentDocument;const css=d.createElement('link');css.rel='stylesheet';css.href='/kayas/3d/style.css?v='+stamp;d.head.appendChild(css);const files=['/kayas/rev16-5-3/zone-data-1.js?v='+stamp,'/kayas/rev16-5-3/zone-data-2.js?v='+stamp,'/kayas/3d/clean-ui.js?v='+stamp,'/kayas/3d/datahall-lite.js?v='+stamp,'/kayas/3d/tour-data.js?v='+stamp,'/kayas/3d/guided-tour.js?v='+stamp];for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+file));d.body.appendChild(s)})}[...d.querySelectorAll('.nav button')].forEach(b=>{if(/zone details/i.test((b.textContent||'').trim()))b.remove()});const badge=d.createElement('div');badge.textContent=`KAYAŞ · ${window.KAYAS_DATA?.capacity?.itCabinetsTotal||210} IT · Experience Standard v1`;badge.style.cssText='position:fixed;right:12px;bottom:10px;z-index:9999;padding:6px 9px;border:1px solid #35566a;border-radius:7px;background:rgba(5,14,21,.82);color:#9ab4c0;font:9px Segoe UI,Arial,sans-serif;pointer-events:none;backdrop-filter:blur(8px)';d.body.appendChild(badge)}catch(e){console.error('KAYAS 3D enhancements could not initialize',e)}}
+ const stamp='20260901-theme1';const f=document.getElementById('reviewFrame');
+ function theme(){return window.KAYAS_THEME?.getEffective?.()||document.documentElement.dataset.sbTheme||'dark'}
+ function syncTheme(){try{f.contentDocument.documentElement.dataset.sbTheme=theme()}catch(_){}}
+ async function injectEnhancements(){try{const d=f.contentDocument;d.documentElement.dataset.sbTheme=theme();const css=d.createElement('link');css.rel='stylesheet';css.href='/kayas/3d/style.css?v='+stamp;d.head.appendChild(css);const tc=d.createElement('link');tc.rel='stylesheet';tc.href='/kayas/kayas-theme-frame.css?v='+stamp;d.head.appendChild(tc);const files=['/kayas/rev16-5-3/zone-data-1.js?v='+stamp,'/kayas/rev16-5-3/zone-data-2.js?v='+stamp,'/kayas/3d/clean-ui.js?v='+stamp,'/kayas/3d/datahall-lite.js?v='+stamp,'/kayas/3d/tour-data.js?v='+stamp,'/kayas/3d/guided-tour.js?v='+stamp];for(const file of files){await new Promise((resolve,reject)=>{const s=d.createElement('script');s.src=file;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+file));d.body.appendChild(s)})}[...d.querySelectorAll('.nav button')].forEach(b=>{if(/zone details/i.test((b.textContent||'').trim()))b.remove()});const badge=d.createElement('div');badge.textContent=`KAYAŞ · ${window.KAYAS_DATA?.capacity?.itCabinetsTotal||210} IT · Experience Standard v1`;badge.style.cssText='position:fixed;right:12px;bottom:10px;z-index:9999;padding:6px 9px;border:1px solid #35566a;border-radius:7px;background:rgba(5,14,21,.82);color:#9ab4c0;font:9px Segoe UI,Arial,sans-serif;pointer-events:none;backdrop-filter:blur(8px)';d.body.appendChild(badge)}catch(e){console.error('KAYAS 3D enhancements could not initialize',e)}}
+ window.addEventListener('specbridge:theme',syncTheme);
  try{const r=await fetch('/kayas/rev16-5-2/index.html?loader='+stamp,{cache:'no-store'});let h=await r.text();h=h.replace('<head>','<head><base href="/kayas/rev16-5-2/">');h=h.replace('../walkthrough/vendor/three.global.r166.js?v=20260820-rev1652','/kayas/walkthrough/vendor/three.global.r166.js?v='+stamp);h=h.replace('./app.js','/kayas/rev16-5-2/app.js?v='+stamp);f.addEventListener('load',injectEnhancements,{once:true});f.srcdoc=h}catch(e){console.error('KAYAS 3D base scene could not load',e);f.addEventListener('load',injectEnhancements,{once:true});f.src='/kayas/rev16-5-2/index.html?loader='+stamp}
 })();
 </script>
