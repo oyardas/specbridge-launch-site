@@ -16,20 +16,43 @@
 window.DCTS_VIEWER_BOOT={
   packageBase:'/dcts/viewer/fixtures/haven-healthcare'
 };
+(function(){
+  const nativeFetch=window.fetch.bind(window);
+  window.fetch=function(input,init){
+    if(typeof input==='string'){
+      try{
+        const u=new URL(input,location.href);
+        if(u.pathname==='/dcts/viewer/fixtures/haven-healthcare/package-manifest.json'){
+          u.searchParams.set('dctsrev','topology-std-v1');
+          return nativeFetch(u.href,init);
+        }
+      }catch(_){ }
+    }
+    return nativeFetch(input,init);
+  };
+})();
 </script>
-<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer.css?v=20260831-v1a4">
-<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-layout-v1a1.css?v=20260831-v1a4">
-<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-polish-v1a2.css?v=20260831-v1a4">
-<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-polish-v1a3.css?v=20260831-v1a4">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer.css?v=20260831-v1a5">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-layout-v1a1.css?v=20260831-v1a5">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-polish-v1a2.css?v=20260831-v1a5">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-polish-v1a3.css?v=20260831-v1a5">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-usability-v1a5.css?v=20260831-v1a5">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-v1a6.css?v=20260901-v1a6">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.css?v=20260901-v1a7">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-icons-v1a12.css?v=20260901-icons-v1a12b">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-visual-language-v1a13.css?v=20260901-v1a13">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.css?v=20260901-topology-std-v1">
 </head>
 <body>
 <noscript>DCTS Viewer requires JavaScript.</noscript>
-<script src="/dcts/viewer/runtime/dcts-viewer.js?v=20260831-v1a4"></script>
-<script src="/dcts/viewer/runtime/dcts-viewer-polish-v1a2.js?v=20260831-v1a4"></script>
-<script src="/dcts/viewer/runtime/dcts-viewer-polish-v1a3.js?v=20260831-v1a4"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer.js?v=20260831-v1a5"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-polish-v1a2.js?v=20260831-v1a5"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-polish-v1a3.js?v=20260831-v1a5"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-v1a6.js?v=20260901-v1a6"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.js?v=20260901-v1a7"></script>
+<script src="/dcts/viewer/runtime/dcts-icon-registry-v1.js?v=20260901-icons-v1a12b"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-icons-v1a12.js?v=20260901-icons-v1a12b"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-visual-language-v1a13.js?v=20260901-v1a13b"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js?v=20260901-topology-std-v1"></script>
 </body>
 </html>
