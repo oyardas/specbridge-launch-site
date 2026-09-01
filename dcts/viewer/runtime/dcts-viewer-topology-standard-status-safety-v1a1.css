@@ -1,0 +1,5 @@
+/* DCTS Topology Visual Grammar v1.0.1 status-safety amendment.
+   Missing status is never rendered as CONFIRMED. */
+.dcts-std-status-dot.unknown{background:#8799a6!important;box-shadow:0 0 0 2px rgba(135,153,166,.12)!important}
+.dcts-std-edge.unknown{stroke:#8295a3!important;stroke-width:1.7!important;stroke-dasharray:2 6!important;opacity:.30!important}
+.dcts-std-edge.unknown.is-active{stroke-width:3.3!important;opacity:.82!important}
