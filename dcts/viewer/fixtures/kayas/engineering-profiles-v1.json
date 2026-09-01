@@ -3,7 +3,7 @@
   "project_id": "KAYAS",
   "profiles": {
     "T02": {
-      "profile_id": "KAYAS-T02-ENGINEERING-CONNECTIVITY-v1",
+      "profile_id": "KAYAS-T02-ENGINEERING-CONNECTIVITY-v2",
       "mode": "ENGINEERING",
       "title": "Network Engineering Connectivity",
       "subtitle": "Device-role topology for engineering review. Connections shown as DESIGN unless canonical evidence exists.",
@@ -32,18 +32,7 @@
       ],
       "relationship_ids": [],
       "presentation_intent_ids": [
-        "AINT-000",
-        "AINT-001",
-        "AINT-002",
-        "AINT-003",
-        "AINT-004",
-        "AINT-005",
-        "AINT-006",
-        "AINT-007",
-        "AINT-008",
-        "AINT-013",
-        "AINT-014",
-        "AINT-015"
+        "AINT-000","AINT-001","AINT-002","AINT-003","AINT-004","AINT-005","AINT-006","AINT-007","AINT-008","AINT-013","AINT-014","AINT-015"
       ],
       "layout": {
         "lanes": [
@@ -54,6 +43,34 @@
           {"id":"access","label":"LEAF / STORAGE ACCESS","label_tr":"LEAF / STORAGE ACCESS","object_ids":["topobj_689f284af5e658a26b88","topobj_dc742080923da3053e85"]},
           {"id":"workload","label":"COMPUTE / STORAGE ENDPOINTS","label_tr":"COMPUTE / STORAGE UÇLARI","object_ids":["topobj_6de1118a2c5c7827fc65","topobj_6a8d3500c63b7ce61860"]},
           {"id":"mgmt","label":"MANAGEMENT / OOB / ANALYTICS","label_tr":"YÖNETİM / OOB / ANALİTİK","object_ids":["topobj_56b5cee0b4c39857a70a","topobj_bbc53ea9c663404b7a82","topobj_60b6648480d5d86edc25"]}
+        ]
+      },
+      "schematic": {
+        "style": "NETWORK_ENGINEERING_SCHEMATIC",
+        "subtitle": "Connection-first view: device groups, spine/leaf roles and unresolved design paths are visually primary. Quantity glyphs do not imply HA or A/B connectivity.",
+        "subtitle_tr": "Bağlantı-öncelikli görünüm: cihaz grupları, spine/leaf rolleri ve açık tasarım yolları görsel olarak önceliklidir. Quantity gösterimi HA veya A/B bağlantısı anlamına gelmez.",
+        "groups": [
+          {"id":"external","label":"EXTERNAL / CARRIER / INTERNET","label_tr":"EXTERNAL / CARRIER / INTERNET","tone":"context","x":0.30,"y":0.01,"w":0.38,"h":0.11,"object_ids":["ctx_external"]},
+          {"id":"security","label":"SECURITY / APPLICATION DELIVERY","label_tr":"GÜVENLİK / APPLICATION DELIVERY","tone":"security","x":0.04,"y":0.15,"w":0.70,"h":0.16,"object_ids":["topobj_dc750ed177fb87984c3a","topobj_d22103a970df15ebc013","topobj_4a235cb934f5c5a46901"]},
+          {"id":"edge","label":"EDGE / INTERCONNECT","label_tr":"EDGE / INTERCONNECT","tone":"network","x":0.25,"y":0.34,"w":0.35,"h":0.11,"object_ids":["topobj_f8b344bf31c75571769f"]},
+          {"id":"fabric","label":"SPINE / FABRIC CORE","label_tr":"SPINE / FABRIC CORE","tone":"fabric","x":0.25,"y":0.48,"w":0.35,"h":0.12,"object_ids":["topobj_6c9587efb3d0b49bed8e"]},
+          {"id":"access","label":"LEAF / STORAGE ACCESS","label_tr":"LEAF / STORAGE ACCESS","tone":"access","x":0.04,"y":0.63,"w":0.70,"h":0.14,"object_ids":["topobj_689f284af5e658a26b88","topobj_dc742080923da3053e85"]},
+          {"id":"workload","label":"COMPUTE / STORAGE ENDPOINTS","label_tr":"COMPUTE / STORAGE UÇLARI","tone":"network","x":0.04,"y":0.80,"w":0.70,"h":0.16,"object_ids":["topobj_6de1118a2c5c7827fc65","topobj_6a8d3500c63b7ce61860"]},
+          {"id":"mgmt","label":"MANAGEMENT / OOB / ANALYTICS","label_tr":"YÖNETİM / OOB / ANALİTİK","tone":"management","x":0.77,"y":0.15,"w":0.21,"h":0.81,"object_ids":["topobj_56b5cee0b4c39857a70a","topobj_bbc53ea9c663404b7a82","topobj_60b6648480d5d86edc25"]}
+        ],
+        "links": [
+          {"intent_id":"AINT-000","label":"EXTERNAL INGRESS"},
+          {"intent_id":"AINT-001","label":"SECURITY CHAIN"},
+          {"intent_id":"AINT-002","label":"SECURITY CHAIN"},
+          {"intent_id":"AINT-003","label":"SECURITY → INTERCONNECT"},
+          {"intent_id":"AINT-004","label":"INTERCONNECT → SPINE"},
+          {"intent_id":"AINT-005","label":"SPINE → LEAF FABRIC"},
+          {"intent_id":"AINT-006","label":"LEAF → STORAGE ACCESS"},
+          {"intent_id":"AINT-007","label":"COMPUTE ACCESS"},
+          {"intent_id":"AINT-008","label":"STORAGE DATA PATH"},
+          {"intent_id":"AINT-013","label":"OOB → FABRIC"},
+          {"intent_id":"AINT-014","label":"FABRIC CONTROL"},
+          {"intent_id":"AINT-015","label":"FABRIC TELEMETRY"}
         ]
       },
       "evidence_policy": {
