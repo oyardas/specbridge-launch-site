@@ -1,14 +1,18 @@
 {
   "document_id": "DCTS-VISUAL-STD-002-ROLLOUT-001",
-  "standard_version": "v1.0.1",
+  "standard_version": "v1.0.2",
   "parent_standard": "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.md",
-  "controlled_amendment": "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.1-Amendment.md",
+  "controlled_amendments": [
+    "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.1-Amendment.md",
+    "dcts/viewer/DCTS-Topology-Visual-Grammar-Standard-v1.0.2-Amendment.md"
+  ],
   "date": "2026-09-01",
   "status": "APPLIED_TO_ALL_ENABLED_DCTS_PREVIEW_VIEWS",
   "shared_runtime": {
     "css": "/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.css",
     "javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-v1.js",
     "service_segmentation_javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-service-segmentation-v1a1.js",
+    "view_lifecycle_javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-view-lifecycle-v1a2.js",
     "status_safety_css": "/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.css",
     "status_safety_javascript": "/dcts/viewer/runtime/dcts-viewer-topology-standard-status-safety-v1a1.js"
   },
@@ -18,6 +22,7 @@
       "package_base": "/dcts/viewer/fixtures/kayas",
       "presentation_views": ["T00", "T01", "T02", "T03", "T04", "T05", "T06"],
       "t02_service_segmentation": "PACKAGE_DRIVEN_WHEN_MULTIPLE_SERVICE_MODEL_CODES_EXIST",
+      "view_lifecycle_fix": "APPLIED",
       "engineering_renderer_preserved": true,
       "production_shell_replaced": false
     },
@@ -26,6 +31,7 @@
       "package_base": "/dcts/viewer/fixtures/haven-healthcare",
       "presentation_views": ["T00", "T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08"],
       "t02_service_segmentation": "PACKAGE_DRIVEN_ONLY_IF_EXPLICIT_SERVICE_MODEL_METADATA_EXISTS",
+      "view_lifecycle_fix": "APPLIED",
       "engineering_renderer_preserved": true,
       "production_shell_replaced": false
     }
@@ -37,7 +43,8 @@
     "evidence_mutation": false,
     "missing_status_assumed_confirmed": false,
     "presentation_grouping_promoted_to_semantics": false,
-    "presentation_intent_promoted_to_canonical": false
+    "presentation_intent_promoted_to_canonical": false,
+    "stale_projection_visible_outside_presentation_mode": false
   },
   "promotion_gate": "HUMAN_VISUAL_ACCEPTANCE_BEFORE_PRODUCTION_SHELL_CUTOVER"
 }
