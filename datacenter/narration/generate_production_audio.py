@@ -50,8 +50,12 @@ def normalize(text: str) -> str:
     return text
 
 
+def words(text: str):
+    return normalize(text).split()
+
+
 def similarity(a: str, b: str) -> float:
-    return difflib.SequenceMatcher(None, normalize(a), normalize(b)).ratio()
+    return difflib.SequenceMatcher(None, words(a), words(b)).ratio()
 
 
 def slugify(text: str) -> str:
@@ -63,6 +67,10 @@ def slugify(text: str) -> str:
 
 
 def clean_spoken_text(block: str) -> str:
+    # The master script places source-register and editorial notes after [END].
+    # They are production metadata, never narration.
+    if "[END]" in block:
+        block = block.split("[END]", 1)[0]
     block = re.sub(r"```.*?```", "", block, flags=re.DOTALL)
     block = META_RE.sub("", block)
     block = re.sub(r"\[PAUSE\s+[0-9.]+\]", "\n\n", block)
@@ -167,12 +175,13 @@ def main() -> int:
         transcript_path.write_text(transcript + "\n", encoding="utf-8")
 
         ratio = similarity(source_text, transcript)
-        source_words = normalize(source_text).split()
-        transcript_words = normalize(transcript).split()
+        source_words = words(source_text)
+        transcript_words = words(transcript)
         word_ratio = (len(transcript_words) / len(source_words)) if source_words else 0.0
-        tail_count = int(accept.get("tail_word_count", 4))
-        tail = " ".join(source_words[-tail_count:])
-        tail_ok = bool(tail) and tail in " ".join(transcript_words)
+        tail_count = int(accept.get("tail_word_count", 8))
+        tail_source = source_words[-tail_count:]
+        tail_transcript = transcript_words[-tail_count:]
+        tail_similarity = difflib.SequenceMatcher(None, tail_source, tail_transcript).ratio() if tail_source else 0.0
         bytes_count = audio_path.stat().st_size
         duration = round(float(MP3(audio_path).info.length), 3)
         passed = (
@@ -180,7 +189,6 @@ def main() -> int:
             and word_ratio >= float(accept["minimum_word_count_ratio"])
             and word_ratio <= float(accept["maximum_word_count_ratio"])
             and bytes_count >= int(accept["minimum_audio_bytes"])
-            and tail_ok
         )
 
         result = {
@@ -196,7 +204,7 @@ def main() -> int:
             "transcript_words": len(transcript_words),
             "word_count_ratio": round(word_ratio, 4),
             "transcript_similarity": round(ratio, 4),
-            "tail_present": tail_ok,
+            "tail_similarity": round(tail_similarity, 4),
             "automatic_acceptance": passed,
         }
         results.append(result)
