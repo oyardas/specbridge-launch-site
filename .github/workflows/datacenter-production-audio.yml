@@ -1,4 +1,4 @@
-name: Data Center DC-K01 Golden Audio
+name: Data Center Turkish Production Audio
 
 on:
   workflow_dispatch:
@@ -7,9 +7,9 @@ on:
       - main
     paths:
       - .github/workflows/datacenter-production-audio.yml
-      - datacenter/knowledge/narration/DC-K01_FULL_NARRATION_TR_V2.md
-      - datacenter/knowledge/narration/generate_dck01_v2_audio.py
+      - datacenter/narration/MASTER_NARRATION_TR_V1.md
       - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
+      - datacenter/narration/generate_production_audio.py
 
 permissions:
   contents: read
@@ -30,16 +30,16 @@ jobs:
       - name: Install production audio dependencies
         run: python -m pip install --upgrade openai mutagen num2words
 
-      - name: Generate and validate DC-K01 Golden Turkish chapters
+      - name: Generate and validate 15 Turkish production chapters
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python datacenter/knowledge/narration/generate_dck01_v2_audio.py
+        run: python datacenter/narration/generate_production_audio.py
 
-      - name: Upload DC-K01 Golden audio bundle
+      - name: Upload production audio bundle
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: datacenter-knowledge-dck01-golden-audio-tr-v2
-          path: datacenter/knowledge/audio/production/tr/dc-k01-v2/
+          name: datacenter-turkish-production-audio-v1
+          path: datacenter/audio/production/tr/
           if-no-files-found: error
           retention-days: 30
