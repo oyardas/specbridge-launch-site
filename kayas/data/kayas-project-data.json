@@ -1,34 +1,99 @@
 {
-  "schemaVersion": "KAYAS_PROJECT_DATA_V1",
-  "revision": "R3-200IT-6CDU",
-  "revisionDate": "2026-08-04",
-  "status": "WORKING ASSUMPTION - H3C CONFIRMATION REQUIRED",
+  "schemaVersion": "KAYAS_PROJECT_DATA_V2",
+  "revision": "REV16.5.6-EXPERIENCE-STANDARD-V1",
+  "revisionDate": "2026-09-01",
+  "status": "CURRENT WORKING BASELINE",
   "project": {
     "name": "KAYAS",
+    "fullName": "KAYAS Data Center",
     "location": "Kahramanmaraş / Türkoğlu / Ceceli",
-    "site": "KAYAS Ambalaj facility, 3rd floor"
+    "site": "KAYAS Ambalaj facility",
+    "phase": "Phase 1",
+    "tierTarget": "Tier III",
+    "experienceStandard": "SpecBridge Project Experience Standard v1.0"
   },
   "capacity": {
-    "ic8000Pods": 20,
-    "itCabinetsPerPod": 10,
-    "itCabinetsTotal": 200,
-    "cduCabinets": 6,
-    "auxiliaryCabinets": 6,
-    "physicalEquipmentCabinetsTotal": 206,
-    "countingRule": "206 physical equipment positions = 200 IT/sellable cabinets + 6 CDU cabinets. CDU cabinets are auxiliary liquid-cooling infrastructure and must not be counted as sellable IT cabinets.",
-    "displayLine": "20 IC8000 pods × 10 IT cabinets + 6 CDU",
-    "headerLine": "20 IC8000 pods × 10 IT cabinets + 6 CDU · 110 m × 46 m",
-    "itLoadRule": "IT load must be calculated from the final air/liquid IT cabinet mix, not from 206 physical equipment positions.",
-    "designLoadStatus": "OPEN-CONFIRMATION REQUIRED"
+    "standardCabinets": 200,
+    "aiHighDensityCabinets": 10,
+    "itCabinetsTotal": 210,
+    "standardRackDesignKW": 7,
+    "aiRackWorkingDesignKW": 60,
+    "standardDesignLoadKW": 1400,
+    "aiWorkingDesignLoadKW": 600,
+    "workingDesignITLoadKW": 2000,
+    "workingDesignITLoadMW": 2.0,
+    "longTermCabinetVision": 2000,
+    "longTermEnergyTargetMW": 16.5,
+    "countingRule": "210 total IT cabinets = 200 standard service cabinets + 10 additional AI/high-density cabinets.",
+    "designLoadRule": "2.00 MW working design IT load = 200 standard cabinets × 7 kW + 10 AI/high-density cabinets × 60 kW.",
+    "aiDensityStatus": "WORKING DESIGN ASSUMPTION — FINAL ENGINEERING CONFIRMATION REQUIRED"
   },
-  "dimensions": {
-    "lengthM": 110,
-    "depthM": 46,
-    "eastTerraceM": 5
+  "serviceAllocation": {
+    "allocationScope": "200 standard service cabinets",
+    "iaasCloud": 40,
+    "managedColocation": 80,
+    "customerManagedColocation": 80,
+    "aiHighDensityAdditional": 10,
+    "allocationRule": "40 + 80 + 80 = 200 standard service cabinets; the additional 10 AI/high-density cabinets are a separate physical capacity class and may be commercialized as GPUaaS/AI Cloud, Managed AI Colocation or Customer AI Colocation according to demand.",
+    "commercialStatus": "CONSULTANT RECOMMENDED STARTING ALLOCATION — NOT AN INDUSTRY-MANDATED STANDARD"
   },
-  "schedule": {
-    "commercialApprovalPO": "17 August 2026",
-    "targetOpening": "February 2027"
+  "physical": {
+    "standardCooling": "Air-cooled / in-row",
+    "aiCooling": "Liquid or hybrid cooling",
+    "groundwaterDirectCooling": false,
+    "coolingBoundary": "No raw groundwater connection to IT cooling loop; isolated heat-exchanger / secondary closed-loop interfaces only where engineered.",
+    "powerArchitecture": "A/B critical power concept",
+    "oobScopeCabinets": 210
   },
-  "revisionNote": "Previous customer materials used a 200-cabinet baseline without separating auxiliary CDU cabinets. Current working structure preserves 200 IT cabinets and adds 6 CDU cabinets as non-sellable auxiliary equipment."
+  "experience": {
+    "defaultLanguage": "en",
+    "languages": ["en", "tr"],
+    "themes": {
+      "kayas": "dark-premium-infrastructure"
+    },
+    "motion": {
+      "scrollReveal": true,
+      "semanticFlow": true,
+      "userFlowControl": true,
+      "reducedMotionSupport": true
+    },
+    "relationshipStyles": {
+      "confirmed": "solid-cyan",
+      "management": "purple-dashed",
+      "design": "blue-dashed",
+      "future": "amber-dashed",
+      "backupReplication": "green-animated",
+      "securityBoundary": "red-controlled"
+    }
+  },
+  "architectureNavigator": [
+    {"code":"K00","title":{"en":"Master Architecture","tr":"Ana Mimari Haritası"},"target":"/kayas/topology/#view=T00","kind":"master"},
+    {"code":"K01","title":{"en":"Facility & Building","tr":"Tesis ve Bina"},"target":"/kayas/#three","kind":"facility"},
+    {"code":"K02","title":{"en":"Power Infrastructure","tr":"Enerji Altyapısı"},"target":"/kayas/yatirim_ve_teknoloji_rehberi/investor-edition-en.html#chapters","kind":"power"},
+    {"code":"K03","title":{"en":"Cooling Infrastructure","tr":"Soğutma Altyapısı"},"target":"/kayas/yatirim_ve_teknoloji_rehberi/investor-edition-en.html#chapters","kind":"cooling"},
+    {"code":"K04","title":{"en":"Network & Connectivity","tr":"Network ve Bağlantı"},"target":"/kayas/topology/#view=T02","kind":"network"},
+    {"code":"K05","title":{"en":"Compute / HCI / Storage","tr":"Compute / HCI / Storage"},"target":"/kayas/topology/#view=T04","kind":"compute"},
+    {"code":"K06","title":{"en":"Cloud & Service Platform","tr":"Cloud ve Servis Platformu"},"target":"/kayas/topology/#view=T06","kind":"cloud"},
+    {"code":"K07","title":{"en":"Security","tr":"Güvenlik"},"target":"/kayas/topology/#view=T07","kind":"security"},
+    {"code":"K08","title":{"en":"Backup / DR","tr":"Yedekleme / DR"},"target":"/kayas/topology/#view=T08","kind":"backup"},
+    {"code":"K09","title":{"en":"AI / High-Density","tr":"AI / Yüksek Yoğunluk"},"target":"/kayas/topology/#view=T09","kind":"ai"},
+    {"code":"K10","title":{"en":"Service Models","tr":"Hizmet Modelleri"},"target":"/kayas/service-models/","kind":"service"}
+  ],
+  "navigation": {
+    "overview": "/kayas/",
+    "architecture": "/kayas/topology/",
+    "serviceModels": "/kayas/service-models/",
+    "investorGuideEN": "/kayas/yatirim_ve_teknoloji_rehberi/investor-edition-en.html",
+    "investorGuideTR": "/kayas/yatirim_ve_teknoloji_rehberi/investor-edition.html",
+    "threeD": "/kayas/#three"
+  },
+  "governance": {
+    "authoritativeSource": "/kayas/data/kayas-project-data.json",
+    "supersedes": [
+      "196 standard + 10 AI = 206 total",
+      "190 standard + 10 AI = 200 total",
+      "200 IT + 6 CDU = 206 physical positions as current sellable-capacity baseline"
+    ],
+    "staleValuePolicy": "Any current investor-facing KAYAS page that presents superseded cabinet or IT-load values must be normalized from this canonical source at render time and corrected in source when revised."
+  }
 }
