@@ -1,0 +1,49 @@
+Veri merkezi projelerinde sık duyduğumuz iki kelime var: geleneksel ve modüler. Bunlar çoğu zaman iki rakip teknoloji gibi anlatılıyor. Oysa esas fark, altyapının nasıl üretildiği, test edildiği ve sahaya nasıl entegre edildiğidir.
+
+Geleneksel veya stick-built veri merkezinde bina, elektrik ve mekanik sistemlerin büyük bölümü proje bazında sahada inşa edilir. Bu yaklaşım özellikle büyük, karmaşık ve araziye özel kampüslerde yüksek tasarım özgürlüğü sağlar. Irregular building geometry, özel utility bağlantıları, farklı katlar veya karmaşık mechanical plant düzenleri söz konusuysa geleneksel model çok güçlü olabilir.
+
+Ancak bunun bedeli daha uzun saha programı, daha fazla subcontractor interface ve daha yüksek saha kalite değişkenliği olabilir.
+
+Prefabricated veya modular yaklaşımda ise power room, cooling skid, IT module veya bazen bütün data hall fabrikada daha yüksek standardizasyonla üretilir ve test edilir. Schneider Electric bu değişimi customized construction yaklaşımından standardized site integration yaklaşımına geçiş olarak tarif ediyor.
+
+Burada önemli bir yanlış anlamayı düzeltelim. Modular veri merkezi demek container demek değildir. Containerized data center, modular yaklaşımın yalnızca bir alt türüdür.
+
+Modülerliği dört seviyede düşünebiliriz.
+
+Birinci seviyede component modularity vardır. Örneğin modular UPS power modules veya modular chillers.
+
+İkinci seviyede subsystem modularity vardır. Prefabricated power room, pump skid veya CDU skid gibi.
+
+Üçüncü seviyede IT space modularity vardır. Prefabricated data hall, modular row veya micro data center.
+
+Dördüncü seviyede ise power, cooling, rack, monitoring ve fire protection gibi sistemlerin büyük bölümünü birlikte taşıyan full-facility modular yaklaşım bulunur.
+
+Bu nedenle hybrid mimari çok yaygındır. Bina geleneksel olabilir, power rooms prefabricated olabilir, standard white-space geleneksel olabilir ve AI zone için modular liquid-cooling pod eklenebilir.
+
+Peki modular yaklaşım neden tercih edilir?
+
+Birincisi, zaman. Fabrikadaki üretim devam ederken sahada civil works paralel ilerleyebilir.
+
+İkincisi, repeatability. Aynı modül ailesi tekrarlandığında wiring, controls, piping ve test prosedürleri daha öngörülebilir hale gelir.
+
+Üçüncüsü, phased CAPEX. Kapasite ihtiyaç geldikçe bloklar halinde eklenebilir. Bu, başlangıçta gereksiz kapasite kurup yıllarca kullanmama riskini azaltabilir.
+
+Dördüncüsü, edge ve uzak lokasyonlardır. Küçük ekiplerle işletilecek sahalarda önceden entegre edilmiş micro data center veya smart cabinet ciddi avantaj sağlayabilir.
+
+Ama modular yaklaşımın riskleri de vardır.
+
+En kritik risk interface riskidir. Fabrikadan çıkan modül çok iyi olabilir; ancak utility, site cooling loop, BMS, fire system veya structural anchoring bağlantısı yanlış tasarlanırsa bütün sistem başarısız olur.
+
+İkinci risk lojistiktir. Modülün ağırlığı, karayolu taşımacılığı, köprü limitleri, crane erişimi ve site entrance geometry projenin başında değerlendirilmelidir.
+
+Üçüncü risk vendor lock-in'dir. Module geometry, control system veya özel connector'lar future expansion'ı tek üreticiye bağımlı hale getirebilir.
+
+Bir başka önemli konu Tier'dır. Modular sistem Tier hedefiyle çelişmez. Uptime Institute'un yaklaşımı technology-neutral ve performance-based'dir. Ancak Tier-Ready bir modül, bütün sahanın otomatik olarak Tier Certified olduğu anlamına gelmez. Site integration, distribution paths, operations ve commissioning hâlâ proje seviyesinde değerlendirilir.
+
+Smart cabinet ve micro data center da doğru yerde çok değerlidir. Birkaç rack'lik hospital edge, branch, industrial site veya regional edge deployment için rack, UPS, cooling, monitoring ve security'nin entegre olduğu sistemler hızlı ve kontrollü çözüm olabilir.
+
+Ancak aynı yaklaşımı yüzlerce kabinetlik colocation kampüsüne mekanik olarak büyütmek doğru olmayabilir.
+
+Sonuç olarak, modüler mi geleneksel mi sorusunun tek doğru cevabı yoktur. Eğer deployment süresi kritik, büyüme fazlı ve tasarım tekrarlanabilir ise modular yaklaşım güçlüdür. Eğer site çok özel, kapasite çok büyük ve mimari yüksek derecede customized ise geleneksel veya hybrid yaklaşım daha uygun olabilir.
+
+Doğru soru teknoloji adı değil, teslimat modelinin yatırım hedefiyle uyumudur.

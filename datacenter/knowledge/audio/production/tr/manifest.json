@@ -1,0 +1,79 @@
+{
+  "version": "DC_KNOWLEDGE_WAVE1_AUDIO_V1",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "module_count": 5,
+  "accepted_count": 5,
+  "failed_count": 0,
+  "total_duration_seconds": 1477.032,
+  "modules": [
+    {
+      "id": "DC-K01",
+      "title": "Data Center Hizmet Modelleri",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k01-data-center-hizmet-modelleri.mp3",
+      "duration_seconds": 297.36,
+      "bytes": 4757760,
+      "source_words": 523,
+      "transcript_words": 522,
+      "word_count_ratio": 0.9981,
+      "transcript_similarity": 0.9742,
+      "automatic_acceptance": true
+    },
+    {
+      "id": "DC-K02",
+      "title": "Veri Merkezi Tipleri ve Modülerlik",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-veri-merkezi-tipleri-ve-modulerlik.mp3",
+      "duration_seconds": 304.632,
+      "bytes": 4874112,
+      "source_words": 550,
+      "transcript_words": 548,
+      "word_count_ratio": 0.9964,
+      "transcript_similarity": 0.9344,
+      "automatic_acceptance": true
+    },
+    {
+      "id": "DC-K03",
+      "title": "Rack ve Cabinet Engineering",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-rack-ve-cabinet-engineering.mp3",
+      "duration_seconds": 297.648,
+      "bytes": 4762368,
+      "source_words": 553,
+      "transcript_words": 549,
+      "word_count_ratio": 0.9928,
+      "transcript_similarity": 0.8857,
+      "automatic_acceptance": false,
+      "reviewed_acceptance": true,
+      "review_note": "Manual QA accepted: ASR terminology variance (rack/RAC/REC, cabinet/kabinet, UPS/OPS); no truncation indicated."
+    },
+    {
+      "id": "DC-K04",
+      "title": "Data Center Power Architecture",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-data-center-power-architecture.mp3",
+      "duration_seconds": 270.024,
+      "bytes": 4320384,
+      "source_words": 527,
+      "transcript_words": 527,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9203,
+      "automatic_acceptance": true
+    },
+    {
+      "id": "DC-K05",
+      "title": "Cooling Architecture",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-cooling-architecture.mp3",
+      "duration_seconds": 307.368,
+      "bytes": 4917888,
+      "source_words": 591,
+      "transcript_words": 590,
+      "word_count_ratio": 0.9983,
+      "transcript_similarity": 0.9297,
+      "automatic_acceptance": true
+    }
+  ],
+  "reviewed_acceptance": "PASS_5_OF_5"
+}

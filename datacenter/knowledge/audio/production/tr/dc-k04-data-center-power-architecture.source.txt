@@ -1,0 +1,39 @@
+Bir veri merkezinde elektrik sistemini anlamak için tek bir UPS'e bakmak yeterli değildir. Asıl konu, enerjinin şebekeden sunucunun güç kaynağına kadar hangi yollardan geçtiği ve bu yollardan biri kaybolduğunda ne olduğudur.
+
+Tipik zincir utility ile başlar. Ardından medium-voltage switchgear, transformer, low-voltage switchgear, UPS, downstream power distribution, rack PDU ve en sonunda server PSU gelir.
+
+Generator ve battery sistemi, utility kaybında bu zincirin sürekliliğini destekler.
+
+Burada ilk önemli kavram UPS'tir. Data center dünyasında online double-conversion UPS çok yaygındır. Enerji önce AC'den DC'ye, sonra tekrar kontrollü AC'ye çevrilir ve kritik yük sürekli inverter üzerinden beslenir. Utility kaybolduğunda inverter zaten aktif olduğu için transition gap oluşmaz.
+
+Bazı UPS'lerde yüksek verim için ECO veya benzeri modlar bulunur. Bu modlarda load normal şartlarda bypass path üzerinden beslenebilir. Verim artar; ancak critical load'un mains condition'a exposure'ı ve transfer behavior'ı ayrıca değerlendirilmelidir. Bu nedenle yalnız yüksek efficiency yüzdesine bakarak mode seçilmez.
+
+Şimdi N, N+1 ve 2N kavramlarını ayıralım.
+
+N, ihtiyacımız olan minimum kapasitedir. N+1, gerekli kapasiteye bir yedek component ekler. Ancak yalnız UPS module seviyesinde N+1 olmak, bütün distribution path'in redundant olduğu anlamına gelmez.
+
+2N ise iki ayrı tam kapasite path demektir. Fakat iki path aynı transformer, aynı bypass veya aynı room'u paylaşıyorsa common-mode failure oluşabilir.
+
+Bu yüzden gerçek mühendislik sorusu şudur: Hangi bileşen ortak ve o ortak bileşen kaybolursa ne kadar IT etkilenir?
+
+Rack seviyesindeki A/B feed bu konunun en görünür örneğidir. Server'ın PSU A'sı Rack PDU A'ya, PSU B'si Rack PDU B'ye bağlanır. İdeal durumda upstream distribution da bağımsızdır. A ve B yalnız etiket değil, failure domain tanımıdır.
+
+Generator tasarımında da yalnız kVA değeri yeterli değildir. Starting sequence, step-load capability, fuel autonomy, paralleling controls, maintenance isolation ve black-start davranışı birlikte incelenmelidir.
+
+Battery teknolojisinde VRLA, lithium-ion, flywheel ve daha büyük BESS sistemleri farklı roller oynar. Lithium-ion daha yüksek energy density ve cycle-life avantajı sunabilir; ancak thermal runaway, BMS ve fire strategy kritik hale gelir.
+
+Downstream distribution'da traditional PDU/RPP veya busway kullanılabilir. PDU/RPP fixed layout için olgun bir çözümdür. Busway ise overhead trunk ve tap-off units sayesinde dynamic colocation veya sık capacity değişimi olan hall'larda çok esnek olabilir.
+
+Ancak busway de otomatik olarak daha iyi değildir. Short-circuit protection, breaker coordination, tap-off safety ve vendor compatibility doğru tasarlanmalıdır.
+
+High-density AI altyapısı power design'ı yeniden zorluyor. Geleneksel yedi kilowatt rack ile yüz kilowatt AI rack aynı distribution granularity ile tasarlanamaz. Rack circuit current, busway rating, UPS block size ve transformer topology değişebilir.
+
+Burada en önemli kavramlardan biri selective coordination'dır. Bir rack branch'inde fault olduğunda yalnız o branch'in açılmasını isteriz. Eğer upstream main breaker trip ederse küçük bir fault büyük outage'a dönüşür.
+
+Bu nedenle short-circuit study, protection coordination ve settings management power architecture'ın ayrılmaz parçasıdır.
+
+Son olarak redundancy ile maintainability'yi ayıralım. Redundancy, bir component fail olduğunda spare capacity olmasıdır. Concurrent maintainability ise planlı bakım sırasında bir component veya distribution path service dışına alındığında IT operasyonunun devam edebilmesidir.
+
+Bu ayrım, neden 'N+1 UPS aldık, dolayısıyla Tier III olduk' cümlesinin teknik olarak yanlış olduğunu açıklar.
+
+Power architecture bir cihaz listesi değildir. Doğru tasarım, utility'den rack'e kadar bütün zinciri failure domain'ler halinde görüp yatırımın ihtiyacı kadar resilience sağlamaktır.

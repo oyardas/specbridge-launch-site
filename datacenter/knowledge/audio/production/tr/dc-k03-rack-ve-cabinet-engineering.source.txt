@@ -1,0 +1,33 @@
+Bir veri merkezine girdiğinizde gözünüz ilk olarak kabinetlere gider. Bu nedenle rack çoğu zaman sistemin en basit parçası sanılır. Aslında rack, elektrik, mekanik, network ve operasyon tasarımının fiziksel olarak kesiştiği noktadır.
+
+Rack seçiminde ilk konuşulan sayı genellikle 42U veya 48U olur. Ancak yalnız U kapasitesine bakmak büyük bir hatadır. Rack boş U kalmasına rağmen power capacity, cooling capacity veya cable capacity dolmuş olabilir.
+
+Önce rack ve cabinet farkını ayıralım. Open rack yalnız mounting frame olabilir. Cabinet ise doors, side panels, locking ve airflow management gibi özelliklerle enclosed yapı oluşturur. Smart cabinet ise rack'in yanında UPS, PDU, cooling, monitoring veya access control gibi supporting systems'i de entegre edebilir.
+
+Modern enterprise sistemlerinin büyük bölümü 19-inch mounting standardını kullanır. Fakat Open Compute Project'in Open Rack yaklaşımı farklıdır. OCP rack'i yalnız metal çerçeve olarak değil, rack-level power ve cooling infrastructure'ın parçası olarak ele alır. Open Rack V3 gibi sistemlerde vertical busbar ve power shelf yaklaşımı görülebilir.
+
+Rack width ve depth neden önemlidir? Çünkü modern server'lar giderek derinleşiyor. GPU chassis, storage nodes, rear cabling ve büyük power connector'ları arka tarafta ciddi alan ister. Rack yeterince derin değilse kapı kapanabilir ama cable bend radius veya service access bozulabilir.
+
+Ağırlık da kritik hale geliyor. Traditional enterprise rack ile yüksek yoğunluklu AI rack arasında ciddi fark vardır. GPU server'lar, büyük PSU population, rear-door heat exchanger, manifold ve sıvı hatları toplam rack ağırlığını artırır. Bu nedenle floor load ve point load structural engineering ile birlikte kontrol edilmelidir.
+
+Power tarafına bakalım.
+
+Geleneksel rack'te facility distribution iki ayrı rack PDU'ya, A ve B olarak gelir. Server'ın iki PSU'su varsa her biri farklı PDU'ya bağlanır. Fakat burada bir yanılsama olabilir. İki PDU'nun ikisi de aynı upstream UPS veya aynı panelden besleniyorsa gerçek dual path yoktur.
+
+Bu nedenle rack seviyesinde gördüğümüz redundancy'nin upstream topology ile doğrulanması gerekir.
+
+OCP gibi mimarilerde rack-level DC busbar ve power shelf kullanılabilir. Bu yaklaşım power cord sayısını azaltabilir ve hyperscale standardizasyonu sağlayabilir. Ancak traditional enterprise ecosystem için otomatik doğru çözüm değildir.
+
+Airflow rack'in başka bir kritik boyutudur. Front-to-back airflow kullanan server'larda cold aisle önden besler, sıcak hava arkadan çıkar. Boş U alanlarına blanking panel koymazsanız sıcak hava rack içinde tekrar öne dönebilir. Rear cable bundle çok yoğun ise exhaust airflow'u kısıtlayabilir.
+
+Yani cable management yalnız düzen değildir; thermal design'ın bir parçasıdır.
+
+Liquid cooling geldiğinde rack daha da karmaşıklaşır. Manifold mounting, quick disconnect, hose routing, leak detection, CDU interface ve service access birlikte tasarlanmalıdır. Rear-door heat exchanger kullanılıyorsa kapı artık yalnız metal panel değildir; ağır bir heat exchanger'dır ve structural/service impact yaratır.
+
+Burada practical bir yoğunluk yaklaşımı kullanabiliriz. Beş ile on kilowatt arası standard enterprise rack, çoğu air-cooled sistemde rahat yönetilebilir. Yirmi ile kırk kilowatt bandında airflow engineering daha kritik hale gelir. Kırk ile seksen kilowatt arası liquid-assisted tasarım güçlü aday olur. Seksen kilowatt ve üzeri AI/HPC rack'lerde purpose-built liquid cooling çoğu projede ana tasarım yolu haline gelebilir.
+
+Bu değerler standard değildir; karar bandıdır. Her zaman gerçek IT equipment requirement doğrulanmalıdır.
+
+Colocation için rack standardı ayrıca ticari konudur. Müşteri kendi cabinet'ini getiriyorsa width, depth, weight, power connector, locking ve cable entry kuralları sözleşmede tanımlanmalıdır. Aksi halde her müşteri farklı fiziksel standard getirir ve operasyon karmaşıklaşır.
+
+Sonuç şu: rack seçimi katalogdan kabinet seçmek değildir. Rack, chip'ten power path'e, airflow'dan network cabling'e ve servis prosedürüne kadar bütün sistemin fiziksel entegrasyon noktasıdır.

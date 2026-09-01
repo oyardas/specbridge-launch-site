@@ -1,0 +1,41 @@
+Veri merkezinde soğutmayı anlamanın en doğru yolu klimalardan başlamak değil, chip'ten başlamaktır.
+
+Bir işlemci veya GPU elektrik tükettiğinde bu enerjinin büyük bölümü ısıya dönüşür. O ısının chip'ten alınması, rack'ten çıkarılması ve sonunda dış çevreye atılması gerekir.
+
+Bu nedenle cooling bir zincirdir: chip, heat sink veya cold plate, air veya liquid, room ya da rack heat exchanger, facility loop ve son olarak chiller, dry cooler, condenser veya başka bir heat rejection sistemi.
+
+ASHRAE'nin data center thermal çalışmalarında temel referanslardan biri IT equipment inlet condition'dır. Yani odanın ortasında ölçülen sıcaklık tek başına yeterli değildir. Server'ın gerçekten içine çektiği havanın sıcaklık ve nem koşulları önemlidir.
+
+Geleneksel air cooling'de cold aisle ve hot aisle düzeni kullanılır. Rack'lerin ön yüzleri birbirine bakar ve cold aisle oluşur. Arka yüzleri hot aisle oluşturur. Eğer sıcak ve soğuk hava karışırsa cooling capacity var olduğu halde server inlet temperature yükselir.
+
+Containment bu mixing'i azaltır. Cold aisle containment soğuk alanı, hot aisle containment ise sıcak exhaust alanını izole eder.
+
+CRAC ve CRAH terimleri de sık karıştırılır. CRAC genellikle direct-expansion, yani refrigerant-based cooling ile ilişkilidir. CRAH ise çoğunlukla chilled-water coil kullanır. Fakat isimden çok asıl loop architecture önemlidir.
+
+DX sistemler küçük ve orta uygulamalarda daha local ve basit olabilir. Chilled-water plant ise büyük kampüslerde central optimization ve scale avantajı sağlayabilir; ancak pump, valve, common header ve plant controls nedeniyle daha karmaşık failure domains oluşturabilir.
+
+In-row cooling, cooling unit'i heat source'a daha yakın getirir. Böylece airflow path kısalır ve daha yüksek rack density desteklenebilir.
+
+Rear-door heat exchanger başka bir ara çözümdür. Server hâlâ air-cooled çalışır, ancak arka kapıdaki liquid heat exchanger sıcak exhaust havadan ısıyı alır. Retrofit açısından güçlü olabilir.
+
+Şimdi direct-to-chip liquid cooling'e gelelim.
+
+Cold plate doğrudan CPU veya GPU gibi yüksek heat flux üreten component'in üzerine yerleştirilir. Liquid, ısıyı havaya göre çok daha yüksek heat capacity ile taşır. Bu nedenle yüksek yoğunluklu AI rack'lerde güçlü bir çözüm haline gelir.
+
+Fakat önemli bir ayrıntı var: her direct-to-chip server bütün ısıyı sıvıya vermeyebilir. PSU, NIC veya diğer komponentler hâlâ air cooling gerektirebilir. Bu yüzden birçok deployment hybrid liquid-plus-air olur.
+
+CDU, yani Coolant Distribution Unit, facility loop ile technology cooling loop arasında önemli sınırdır. Heat exchanger, pump, filtration, pressure ve temperature control sağlar. CDU rack içinde, row sonunda veya perimeter'da olabilir.
+
+Neden facility water'ı doğrudan server loop'una bağlamıyoruz? Çünkü water quality, pressure, material compatibility, contamination ve warranty sınırlarını kontrol etmek isteriz. Facility Water System ile Technology Cooling System'in ayrılması bu nedenle güçlü bir mühendislik yaklaşımıdır.
+
+Rack içinde manifold, coolant'ı server'lara dağıtır. Quick disconnect'ler servis sırasında hose bağlantısını yönetir. Burada flow capacity, pressure drop, leak performance ve service access gelecekteki rack density ile birlikte seçilmelidir.
+
+Immersion cooling ise farklı bir dünyadır. Server dielectric fluid içine yerleştirilir. Single-phase veya two-phase sistemler olabilir. Çok yüksek density kapasitesi sunabilir, ancak service procedures, fluid compatibility, warranty ve operasyon modelini değiştirir.
+
+Hangi yoğunlukta hangi teknoloji kullanılmalı? Evrensel tek eşik yoktur. Practical olarak on kilowatt altı rack'lerde iyi tasarlanmış air cooling çoğu zaman yeterlidir. Yirmi ile kırk kilowatt bandında in-row veya rear-door gibi çözümler daha güçlü hale gelir. Kırk ile seksen kilowatt bandında liquid-assisted design ciddi adaydır. Seksen kilowatt ve üzerindeki modern AI rack'lerde purpose-built liquid cooling çoğunlukla ana tasarım yoluna dönüşür.
+
+Bu bandlar standard değil, karar rehberidir.
+
+Son olarak PUE'ye bakalım. Düşük PUE önemlidir, ancak tek metrik değildir. Water use, climate, equipment reliability, capacity utilization ve operational risk birlikte değerlendirilmelidir.
+
+Soğutma mimarisi mekanik ekipman listesinden başlamamalıdır. Workload ve rack density'den başlamalı; chip'ten dış çevreye kadar bütün heat path tasarlanmalıdır.

@@ -1,0 +1,33 @@
+Bir veri merkezini yalnız kabinet, enerji ve soğutma kapasitesi üzerinden tanımlarsak, yatırımın en kritik kısmını eksik bırakmış oluruz. Çünkü aynı fiziksel veri merkezi, farklı hizmet modelleriyle tamamen farklı bir iş modeline dönüşebilir.
+
+Önce en temel ayrımı kuralım. Colocation'da müşteri kendi sunucusunu, storage'ını ve network ekipmanını getirir. Veri merkezi ona güvenli alan, enerji, soğutma, fiziksel güvenlik ve bağlantı ortamı sağlar. Yani müşteri hâlâ kendi BT altyapısının sahibidir. Provider ise kritik fiziksel ortamı işletir.
+
+Retail colocation tek kabinetten başlayabilir. Private cage modelinde müşteri birkaç veya onlarca kabineti fiziksel olarak ayrılmış bir alanda kullanır. Daha büyük müşteriler için private suite veya data hall ortaya çıkar. Wholesale colocation ise yüzlerce kilowatt veya megawatt ölçeğinde kapasite bloklarıyla çalışabilir.
+
+Bu noktada önemli bir soru soralım: Colocation ile cloud aynı şey midir? Hayır.
+
+IaaS, yani Infrastructure as a Service modelinde müşteri artık fiziksel sunucunun kendisini satın almak zorunda değildir. Compute, storage ve network kaynaklarını hizmet olarak tüketir. Burada provider'ın sorumluluğu rack'in çok ötesine geçer. Virtualization, orchestration, tenant isolation, virtual networking, metering, billing, monitoring ve lifecycle automation gibi katmanlar gerekir.
+
+Dolayısıyla bir binanın içinde yüzlerce sunucu bulunması, o işletmeyi otomatik olarak cloud provider yapmaz.
+
+Managed hosting ve dedicated server modelleri ise colocation ile IaaS arasında düşünülebilir. Fiziksel sunucu provider'a aittir; müşteri dedicated kapasite kullanır. Managed modelde işletim sistemi, monitoring, patching veya backup gibi görevler de sağlayıcının sorumluluğuna geçebilir.
+
+Bare metal as a Service burada ayrı bir yere sahiptir. Müşteriye fiziksel sunucu tahsis edilir, ancak satın alma ve klasik kurulum süreci yerine hizmet modeliyle sunulur. Bu yaklaşım lisanslama, performans analizi, legacy workload veya düşük seviyeli donanım erişimi gereken uygulamalarda değerlidir.
+
+Şimdi AI tarafına geçelim.
+
+GPU as a Service, yalnız GPU sunucusu kiralamak değildir. Başarılı bir GPUaaS veya AI Cloud için yüksek yoğunluklu güç, çoğu zaman sıvı soğutma, yüksek hızlı east-west network, yüksek throughput storage, scheduler, orchestration ve GPU health management birlikte gerekir.
+
+NVIDIA'nın AI cloud gereksinimleri de bunu full-stack bir hizmet olarak ele alıyor. Yani AI cloud'un gerçek ürünü GPU kartı değil; compute, network, storage, software ve operasyonun birlikte garanti edilen davranışıdır.
+
+Data protection servisleri de ayrı bir gelir katmanıdır. Storage as a Service, Backup as a Service, DR as a Service ve Cyber Recovery birbirinden farklıdır. Backup bir kopya üretir. Disaster Recovery iş yükünü başka bir ortamda yeniden çalıştırma kabiliyetidir. Cyber Recovery ise saldırıya karşı izole, immutable veya kontrollü recovery alanı gerektirebilir.
+
+Bir diğer kritik katman interconnection'dır. Cross-connect, Internet Exchange, IP Transit, Cloud Connect ve Data Center Interconnect servisleri özellikle carrier-neutral veri merkezlerinde stratejik değer yaratır. Büyük bir colocation tesisinin yalnız kabinet satması ve interconnection ekosistemini zayıf bırakması önemli bir ticari fırsatı kaybetmek anlamına gelir.
+
+Buradan yatırımcı açısından temel sonuca gelelim.
+
+Hizmet modeli belirlenmeden fiziksel mimari dondurulmamalıdır. Retail colocation istiyorsanız tenant isolation, metering, cage yapısı ve MMR önem kazanır. Private cloud istiyorsanız standardizasyon, HCI veya virtualization platformu, backup ve automation önem kazanır. AI cloud istiyorsanız rack density, liquid cooling, fabric network ve parallel storage tasarımı değişir.
+
+Bu nedenle doğru sıra şudur: önce müşteri ve hizmet modeli; sonra SLA ve sorumluluk sınırı; ardından workload karakteri; en son facility ve IT mimarisi.
+
+Bir veri merkezinin gerçek ürünü metrekare değildir. Gerçek ürün; güvenilir kapasitenin, doğru sorumluluk modeliyle müşteriye dönüştürülmesidir.
