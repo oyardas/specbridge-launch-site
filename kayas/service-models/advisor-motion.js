@@ -21,21 +21,25 @@
 
   function setupReveal(){
     const selectors=[
-      '#advisor-40-80-80 .section-head',
-      '#advisor-40-80-80 .advisor-hero',
-      '#advisor-40-80-80 .visual-card',
-      '#advisor-40-80-80 .note-card',
-      '#advisor-40-80-80 .video-card',
-      '#visual-overview .visual-card',
-      '#cabinet-compare .visual-card',
-      '#commercial-model .visual-card',
-      '#heatmap .matrix-wrap',
-      '#roadmap-v2 .phasecard'
+      '.hero > div', '.hero-card',
+      '.section > .section-head',
+      '.section .visual-card',
+      '.section .note-card',
+      '.section .video-card',
+      '.section .matrix-wrap',
+      '.section .arch',
+      '.section .family',
+      '.section .detail-card',
+      '.section .phasecard',
+      '.section .kpi',
+      '.section .metric',
+      '.section .ref',
+      '#advisor-40-80-80 .advisor-hero'
     ];
     const targets=[...document.querySelectorAll(selectors.join(','))];
     targets.forEach((el,i)=>{
       el.classList.add('motion-reveal');
-      el.style.setProperty('--reveal-delay',`${(i%5)*70}ms`);
+      el.style.setProperty('--reveal-delay',`${(i%6)*55}ms`);
     });
 
     if(reduce||!('IntersectionObserver' in window)){
@@ -50,19 +54,15 @@
         if(!entry.isIntersecting)return;
         const el=entry.target;
         el.classList.add('is-visible');
-        if(el.classList.contains('advisor-hero')){
-          el.querySelectorAll('.ratio-block b').forEach(animateCounter);
-        }
+        if(el.classList.contains('advisor-hero'))el.querySelectorAll('.ratio-block b').forEach(animateCounter);
         io.unobserve(el);
       });
-    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    },{threshold:.1,rootMargin:'0px 0px -7% 0px'});
     targets.forEach(el=>io.observe(el));
 
     const advisor=document.getElementById('advisor-40-80-80');
     if(advisor){
-      const advisorIo=new IntersectionObserver(([entry])=>{
-        advisor.classList.toggle('motion-active',entry.isIntersecting);
-      },{threshold:.08,rootMargin:'-10% 0px -20% 0px'});
+      const advisorIo=new IntersectionObserver(([entry])=>advisor.classList.toggle('motion-active',entry.isIntersecting),{threshold:.08,rootMargin:'-10% 0px -20% 0px'});
       advisorIo.observe(advisor);
     }
   }
