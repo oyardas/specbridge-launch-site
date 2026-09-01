@@ -8,43 +8,26 @@
 <meta name="author" content="Önder Yardaş" />
 <title>Kayas Yatırımcı Rehberi | Veri Merkezi Yatırım Stratejisi ve Teknoloji Yol Haritası 2026</title>
 <script>(function(){try{const k='kayas_walkthrough_auth_until';if(Number(localStorage.getItem(k)||0)<=Date.now())location.replace('../?from=investor-guide');}catch(_){location.replace('../?from=investor-guide');}})();</script>
-<link rel="stylesheet" href="investor-edition.css?v=20260809-v1" />
-<link rel="stylesheet" href="../kayas-motion.css?v=20260901-motion1" />
-<link rel="stylesheet" href="ic8000-3d.css?v=20260809-ic8000-1" />
-<link rel="stylesheet" href="guide-infographics.css?v=20260809-ig1" />
-<link rel="stylesheet" href="investor-print.css?v=20260809-print2" />
+<link rel="stylesheet" href="../kayas-shell.css?v=20260901-es1" />
+<link rel="stylesheet" href="investor-edition.css?v=20260901-es1" />
+<link rel="stylesheet" href="../kayas-motion.css?v=20260901-es1" />
+<link rel="stylesheet" href="ic8000-3d.css?v=20260901-es1" />
+<link rel="stylesheet" href="guide-infographics.css?v=20260901-es1" />
+<link rel="stylesheet" href="investor-print.css?v=20260901-es1" />
 <script>window.PagedConfig={auto:false};</script>
 <script defer src="https://unpkg.com/pagedjs@0.4.3/dist/paged.polyfill.js"></script>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
+<script src="../kayas-canonical.js?v=20260901-es1"></script>
+<script defer src="../kayas-shell.js?v=20260901-es1"></script>
 </head>
 <body>
-<header class="topbar" id="top">
-  <div class="brand-wrap"><a class="home-link" href="../">← KAYAŞ</a><div class="brand">Kayas Yatırımcı Rehberi</div></div>
-  <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-label="Menüyü aç/kapat">☰</button>
-  <nav id="topNav"><a href="../">Ana Sayfa</a><a href="#toc">İçindekiler</a><a href="#chapters">Bölümler</a><a href="#appendices">Ekler</a><a href="#top">Başa Dön</a><a href="investor-edition-en.html?v=20260901-motion1" title="English Investor & Audio Edition">EN · Audio</a><button id="printButton" type="button">PDF / Yazdır</button></nav>
-</header>
+<header class="topbar" id="top"><div class="brand-wrap"><a class="home-link" href="../">← KAYAŞ</a><div class="brand">Kayas Yatırımcı Rehberi</div></div><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-label="Menüyü aç/kapat">☰</button><nav id="topNav"><a href="../">Ana Sayfa</a><a href="../topology/#view=K00">K00 Mimari</a><a href="../service-models/">Hizmet Modelleri</a><a href="#toc">İçindekiler</a><a href="#chapters">Bölümler</a><a href="#appendices">Ekler</a><a href="#top">Başa Dön</a><a href="investor-edition-en.html" title="English Investor & Audio Edition">EN · Audio</a><button id="printButton" type="button">PDF / Yazdır</button></nav></header>
 <main class="shell">
-<section class="paper hero" id="cover">
-  <div class="eyebrow">KAYAŞ DATA CENTER · INVESTOR EDITION 2026</div>
-  <h1>Veri Merkezi Yatırım Stratejisi ve Teknoloji Yol Haritası</h1>
-  <p class="lead">Yatırımcı ve yönetim için kaynaklı, vendor-neutral ve fazlı karar rehberi; teknik paydaşlar için uygulanabilir mimari ve teknoloji çerçevesi.</p>
-  <div class="badge-row"><span class="badge">23 bölüm</span><span class="badge">Tier III hedefi</span><span class="badge">Hybrid cooling</span><span class="badge">AI/HPC ready</span><span class="badge">Investor Preview</span></div>
-  <div class="metrics"><div class="metric"><b>210</b><span>Faz-1 IT kabinet · 200 standart + 10 AI</span></div><div class="metric"><b>2.00 MW</b><span>Faz-1 çalışma tasarım IT yükü*</span></div><div class="metric"><b>≈2.000</b><span>Uzun vadeli kabinet vizyonu</span></div><div class="metric"><b>≈16.5 MW</b><span>Uzun vadeli enerji hedefi</span></div></div>
-  <div class="release"><strong>Yayın sınırı:</strong> Bu içerik yatırım ve teknoloji kararlarını yapılandırır; bağlayıcı teklif, kesin mühendislik, sertifika veya yatırım getirisi garantisi değildir. *2.00 MW mevcut çalışma tasarım varsayımıdır: 200 standart kabinet × 7 kW + 10 AI/high-density kabinet × 60 kW. Nihai AI güç yoğunluğu mühendislik onayına tabidir.</div>
-</section>
+<section class="paper hero" id="cover"><div class="eyebrow">KAYAŞ DATA CENTER · INVESTOR EDITION 2026</div><h1>Veri Merkezi Yatırım Stratejisi ve Teknoloji Yol Haritası</h1><p class="lead">Yatırımcı ve yönetim için kaynaklı, vendor-neutral ve fazlı karar rehberi; teknik paydaşlar için uygulanabilir mimari ve teknoloji çerçevesi.</p><div class="badge-row"><span class="badge">23 bölüm</span><span class="badge">Tier III hedefi</span><span class="badge">Hybrid cooling</span><span class="badge">AI/HPC ready</span><span class="badge">Investor Preview</span></div>
+<div class="metrics"><div class="metric"><b data-kayas="capacity.itCabinetsTotal">210</b><span>Faz-1 IT kabinet · <span data-kayas="capacity.standardCabinets">200</span> standart + <span data-kayas="capacity.aiHighDensityCabinets">10</span> AI</span></div><div class="metric"><b data-kayas="capacity.workingDesignITLoadMW" data-kayas-format="mw">2.00 MW</b><span>Faz-1 çalışma tasarım IT yükü*</span></div><div class="metric"><b data-kayas="capacity.longTermCabinetVision" data-kayas-format="int">2.000</b><span>Uzun vadeli kabinet vizyonu</span></div><div class="metric"><b><span data-kayas="capacity.longTermEnergyTargetMW">16.5</span> MW</b><span>Uzun vadeli enerji hedefi</span></div></div>
+<div class="release"><strong>Yayın sınırı:</strong> Bu içerik yatırım ve teknoloji kararlarını yapılandırır; bağlayıcı teklif, kesin mühendislik, sertifika veya yatırım getirisi garantisi değildir. *Mevcut çalışma tasarım varsayımı <span data-kayas="capacity.workingDesignITLoadMW">2</span> MW'dır: <span data-kayas="capacity.standardCabinets">200</span> standart kabinet × <span data-kayas="capacity.standardRackDesignKW">7</span> kW + <span data-kayas="capacity.aiHighDensityCabinets">10</span> AI/high-density kabinet × <span data-kayas="capacity.aiRackWorkingDesignKW">60</span> kW. Nihai AI güç yoğunluğu mühendislik onayına tabidir.</div></section>
 <section class="paper" id="toc"><div class="section-head"><div class="section-no">TOC</div><div><div class="eyebrow">İÇİNDEKİLER</div><h1>Yatırımcı için tam rehber</h1></div></div><p class="lead">Bölümler tek uzun sayfada okunur. Mobilde menü ve alttaki hızlı kısayollar her zaman erişilebilir kalır.</p><div class="toc-tools"><input id="tocSearch" type="search" placeholder="Bölüm veya teknoloji ara…" /></div><div id="tocGrid" class="toc-grid"></div><div id="appendixToc"></div></section>
-<div id="chapters"><div class="paper loading">Rehber içeriği yükleniyor…</div></div>
-<div id="appendices"></div>
-<div class="footer">Kayas Yatırımcı Rehberi · Investor Edition 2026 · admin@specbridge.co</div>
-</main>
-<nav class="quick-nav" aria-label="Hızlı navigasyon"><a href="../">← Ana Sayfa</a><a href="#toc">☰ İndeks</a><a href="#top">↑ Başa Dön</a></nav>
-<script src="guide-data.js?v=20260809-v46"></script>
-<script src="investor-edition.js?v=20260809-v1"></script>
-<script src="ic8000-3d.js?v=20260809-ic8000-3"></script>
-<script src="ic8000-orientation-fix.js?v=20260809-upright-4"></script>
-<script src="ic8000-final-orientation.js?v=20260809-final-orientation-1"></script>
-<script src="guide-infographics.js?v=20260809-ig2"></script>
-<script src="investor-print.js?v=20260809-print1"></script>
-<script src="../kayas-motion.js?v=20260901-motion1" defer></script>
-</body>
-</html>
+<div id="chapters"><div class="paper loading">Rehber içeriği yükleniyor…</div></div><div id="appendices"></div><div class="footer">Kayas Yatırımcı Rehberi · Investor Edition 2026 · admin@specbridge.co</div></main>
+<nav class="quick-nav" aria-label="Hızlı navigasyon"><a href="../">← Ana Sayfa</a><a href="../topology/#view=K00">⌘ K00</a><a href="#toc">☰ İndeks</a><a href="#top">↑ Başa Dön</a></nav>
+<script src="guide-data.js?v=20260901-es1"></script><script src="investor-edition.js?v=20260901-es1"></script><script src="ic8000-3d.js?v=20260901-es1"></script><script src="ic8000-orientation-fix.js?v=20260901-es1"></script><script src="ic8000-final-orientation.js?v=20260901-es1"></script><script src="guide-infographics.js?v=20260901-es1"></script><script src="investor-print.js?v=20260901-es1"></script><script src="../kayas-motion.js?v=20260901-es1" defer></script>
+</body></html>
