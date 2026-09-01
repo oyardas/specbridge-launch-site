@@ -91,3 +91,18 @@ KAYAS remains a dark, premium infrastructure experience. The common SpecBridge i
 ## 10. Change-control
 
 Any new KAYAS investor-facing page should use the common canonical runtime, common navigation pattern and motion/accessibility conventions unless a documented technical reason requires an exception.
+
+## 11. Mobile Architecture Mode
+
+At phone/tablet breakpoints, the desktop three-panel architecture must transform into a topology-first mobile experience rather than merely shrinking the desktop layout.
+
+- The topology remains the primary viewport.
+- WHY, DETAIL/EVIDENCE and controls are exposed through a bottom-sheet pattern.
+- Selecting a topology node on mobile opens the Details sheet automatically.
+- Flow, Design Paths, Labels and Evidence remain controllable through mobile proxy controls backed by the existing native state.
+- A Fit action must restore the active topology view to a readable default framing.
+- Touch targets should be approximately 42–44 px or larger where practical.
+- Portrait mode may show a non-blocking recommendation to rotate for maximum topology area; landscape is not mandatory.
+- Existing DCTS pan/zoom behavior must remain authoritative rather than introducing a second mobile topology engine.
+- The standalone 3D experience must use viewport-safe controls, horizontally scrollable toolbars where necessary and mobile-sized touch targets.
+- `viewport-fit=cover`, safe-area insets and `prefers-reduced-motion` must be supported.
