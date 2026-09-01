@@ -24,16 +24,16 @@ window.DCTS_VIEWER_BOOT={
       try{
         const u=new URL(input,location.href);
         if(u.pathname==='/dcts/viewer/fixtures/kayas/package-manifest.json'){
-          u.searchParams.set('dctsrev','eng-profile-v2-v1a10');
+          u.searchParams.set('dctsrev','eng-profile-v2-v1a10b');
           return nativeFetch(u.href,init);
         }
         if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v1.json'){
           u.pathname='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json';
-          u.searchParams.set('dctsrev','eng-profile-v2-v1a10');
+          u.searchParams.set('dctsrev','eng-profile-v2-v1a10b');
           return nativeFetch(u.href,init);
         }
         if(u.pathname==='/dcts/viewer/fixtures/kayas/engineering-profiles-v2.json'){
-          u.searchParams.set('dctsrev','eng-profile-v2-v1a10');
+          u.searchParams.set('dctsrev','eng-profile-v2-v1a10b');
           return nativeFetch(u.href,init);
         }
       }catch(_){ }
@@ -51,7 +51,7 @@ window.DCTS_VIEWER_BOOT={
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.css?v=20260901-v1a7">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-schematic-v1a8.css?v=20260901-v1a8b">
 <link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.css?v=20260901-v1a9c">
-<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-topology-v1a10.css?v=20260901-v1a10">
+<link rel="stylesheet" href="/dcts/viewer/runtime/dcts-viewer-engineering-topology-v1a10.css?v=20260901-v1a10b">
 </head>
 <body>
 <noscript>DCTS Viewer requires JavaScript.</noscript>
@@ -62,6 +62,6 @@ window.DCTS_VIEWER_BOOT={
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-profile-v1a7.js?v=20260901-v1a7"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-schematic-v1a8.js?v=20260901-v1a8b"></script>
 <script src="/dcts/viewer/runtime/dcts-viewer-engineering-diagram-v1a9.js?v=20260901-v1a9c"></script>
-<script src="/dcts/viewer/runtime/dcts-viewer-engineering-topology-v1a10.js?v=20260901-v1a10"></script>
+<script src="/dcts/viewer/runtime/dcts-viewer-engineering-topology-v1a10.js?v=20260901-v1a10b"></script>
 </body>
 </html>
