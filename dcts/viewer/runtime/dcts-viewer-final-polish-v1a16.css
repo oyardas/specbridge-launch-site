@@ -1,0 +1,100 @@
+/* DCTS Viewer v1a16 — final topology polish
+   Visual-only refinement of the v1a15 topology-first projection.
+   No canonical object / relationship / evidence / status mutation. */
+
+/* Remove permanent debug / control overlays from the final presentation surface. */
+body.dcts-v15-projection-active .dcts-v15-topnote,
+body.dcts-v15-projection-active .dcts-m14-evidence{display:none!important}
+
+/* Cleaner canvas chrome. */
+.dcts-v15-projection{inset:58px 12px 12px 12px!important}
+.dcts-v15-board{background-size:30px 30px!important}
+.dcts-v15-stage{min-height:610px!important}
+.dcts-v15-legend{
+  left:50%!important;bottom:8px!important;transform:translateX(-50%);
+  gap:10px!important;padding:4px 7px!important;background:rgba(255,255,255,.90)!important;
+  box-shadow:0 2px 7px rgba(25,50,72,.05)!important
+}
+.dcts-v15-key{opacity:.82}
+
+/* Nodes become topology symbols rather than information cards. */
+.dcts-v15-node{
+  width:146px!important;min-height:62px!important;
+  grid-template-columns:40px minmax(0,1fr)!important;gap:8px!important;
+  padding:7px 8px!important;border-radius:8px!important;
+  box-shadow:0 3px 8px rgba(23,54,77,.065)!important
+}
+.dcts-v15-node-icon{width:40px!important;height:40px!important;border-radius:8px!important}
+.dcts-v15-node-icon .dcts-prod-icon{width:23px!important;height:23px!important}
+.dcts-v15-node-title{font-size:9.3px!important;line-height:1.08!important;max-height:30px!important}
+.dcts-v15-node-role{font-size:5.7px!important;line-height:1.05!important;opacity:.76}
+.dcts-v15-node-meta{font-size:5.8px!important;margin-top:3px!important}
+.dcts-v15-expand{right:3px!important;bottom:3px!important}
+.dcts-v15-node:hover,.dcts-v15-node.is-active{
+  transform:translate(-50%,-50%) translateY(-2px) scale(1.018)!important;
+  box-shadow:0 9px 18px color-mix(in srgb,var(--node-accent,#2d78b7) 16%,transparent)!important
+}
+
+/* Connection hierarchy: quiet by default, strong on focus. */
+.dcts-v15-edge{stroke-width:2.25!important;opacity:.56!important}
+.dcts-v15-edge.working-assumption{opacity:.48!important;stroke-width:2!important}
+.dcts-v15-edge.vendor-proposal{opacity:.44!important;stroke-width:1.9!important}
+.dcts-v15-edge.open-confirmation-required{opacity:.38!important;stroke-width:1.8!important}
+.dcts-v15-edge.intent{stroke-width:1.5!important;opacity:.28!important;stroke-dasharray:4 7!important}
+.dcts-v15-edge.is-active{stroke-width:4!important;opacity:1!important}
+.dcts-v15-edge.is-muted{opacity:.055!important}
+
+/* T02 — hierarchy and whitespace tuned to the supplied topology references. */
+body[data-dcts-final-view="T02"] .dcts-v15-zone.security{top:3.5%!important;height:17%!important}
+body[data-dcts-final-view="T02"] .dcts-v15-zone.fabric{top:25%!important;height:18%!important}
+body[data-dcts-final-view="T02"] .dcts-v15-zone.iaas,
+body[data-dcts-final-view="T02"] .dcts-v15-zone.managed,
+body[data-dcts-final-view="T02"] .dcts-v15-zone.colo,
+body[data-dcts-final-view="T02"] .dcts-v15-zone.ai{top:48%!important;height:33%!important}
+body[data-dcts-final-view="T02"] .dcts-v15-zone.oob{top:84%!important;height:11%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_dc750ed177fb87984c3a"],
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_d22103a970df15ebc013"],
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_4a235cb934f5c5a46901"]{top:12%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_dc_network_fabric"]{top:34%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_service_iaas_40"]{left:12.5%!important;top:64%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_service_managed_colo_80"]{left:36.5%!important;top:64%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_colo_demarcation"]{left:60%!important;top:59%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_service_colo_80"]{left:60%!important;top:74%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_ai_network_fabric"]{left:85.5%!important;top:59%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_ai_hd_zone"]{left:85.5%!important;top:74%!important}
+body[data-dcts-final-view="T02"] [data-v15-object="topobj_kayas_oob_plane_210"]{top:89.5%!important}
+
+/* T05 — compress the large empty OOB tier and make OOB the clear distribution point. */
+body[data-dcts-final-view="T05"] .dcts-v15-zone.management{top:3.5%!important;height:23%!important}
+body[data-dcts-final-view="T05"] .dcts-v15-zone.oob{top:30%!important;height:17%!important}
+body[data-dcts-final-view="T05"] .dcts-v15-zone.infrastructure{top:51%!important;height:42%!important}
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_ca569b60f525d5fd277f"],
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_bbc53ea9c663404b7a82"],
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_60b6648480d5d86edc25"]{top:14.5%!important}
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_56b5cee0b4c39857a70a"]{top:38.5%!important}
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_f8b344bf31c75571769f"],
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_6c9587efb3d0b49bed8e"],
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_689f284af5e658a26b88"],
+body[data-dcts-final-view="T05"] [data-v15-object="topobj_dc742080923da3053e85"]{top:70%!important}
+
+/* Final-zone labels: lighter than devices and paths. */
+.dcts-v15-zone-label{font-size:6.6px!important;opacity:.86!important;box-shadow:none!important}
+
+/* Compact contextual information button generated by v1a16 JS. */
+.dcts-v16-info{
+  position:absolute;right:94px;top:10px;z-index:12;width:24px;height:24px;
+  border:1px solid #cfdae3;border-radius:7px;background:rgba(255,255,255,.94);color:#526e81;
+  font:800 10px/22px Segoe UI,Arial,sans-serif;text-align:center;cursor:help;box-shadow:0 2px 6px rgba(25,50,72,.06)
+}
+.dcts-v16-info-pop{
+  position:absolute;right:94px;top:40px;z-index:13;display:none;width:310px;padding:9px 10px;
+  border:1px solid #d2dde5;border-radius:8px;background:rgba(255,255,255,.98);color:#567083;
+  font:650 7px/1.45 Segoe UI,Arial,sans-serif;box-shadow:0 8px 22px rgba(25,50,72,.11)
+}
+.dcts-v16-info-pop.show{display:block}
+.dcts-v16-info-pop b{color:#244a64}
+
+@media(max-width:1280px){
+  .dcts-v15-node{width:138px!important}
+  .dcts-v15-node-title{font-size:8.7px!important}
+}
