@@ -1,0 +1,54 @@
+{
+  "version": "DC_K06_QUICK_AUDIO_V1",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 1,
+  "accepted_count": 1,
+  "failed_count": 0,
+  "total_duration_seconds": 334.296,
+  "source_qa": {
+    "version": "DC_K06_QUICK_SOURCE_QA_V1",
+    "chapter_count": 1,
+    "source_words": 592,
+    "final_char": ".",
+    "errors": [],
+    "accepted": true
+  },
+  "chapters": [
+    {
+      "id": "K06-Q",
+      "title": "UPS ve enerji depolamada doğru karar çerçevesi",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-quick-v1/k06-quick-ups-ve-enerji-depolamada-dogru-karar-cercevesi.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-quick-v1/k06-quick-ups-ve-enerji-depolamada-dogru-karar-cercevesi.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-quick-v1/k06-quick-ups-ve-enerji-depolamada-dogru-karar-cercevesi.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 334.296,
+          "bytes": 5348736,
+          "source_words": 592,
+          "transcript_words": 590,
+          "word_count_ratio": 0.9966,
+          "transcript_similarity": 0.9036,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 334.296,
+      "bytes": 5348736,
+      "source_words": 592,
+      "transcript_words": 590,
+      "word_count_ratio": 0.9966,
+      "transcript_similarity": 0.9036,
+      "tail_score": 0.875,
+      "accepted": true
+    }
+  ]
+}
