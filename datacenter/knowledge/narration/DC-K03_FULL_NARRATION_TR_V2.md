@@ -18,6 +18,8 @@ Modern rack engineering aynı zamanda üç farklı ekosistemi birlikte anlamayı
 
 Buradaki amaç her projeye en yeni rack'i koymak değildir. Amaç, hangi rack ecosystem'inin hangi workload ve facility şartlarında doğru olduğunu bilmektir. Enterprise virtualization cluster için geniş bir AI rack gereksiz olabilir. Buna karşılık yüz kilowatt sınıfına yaklaşan rack-scale AI sistemi için standart bir kabinet seçip sonradan güç, sıvı ve kablo eklemeye çalışmak ciddi entegrasyon riski yaratabilir.
 
+Bu nedenle rack sınıfı, ekipman kabul kriterleriyle birlikte yönetilmelidir.
+
 Bu bölümün ana fikri basittir: rack satın alınan bir aksesuar değil, proje boyunca yönetilen bir interface contract'tır. Mekanik, elektrik, termal, kablolama ve operasyon disiplinleri rack standardında ortaklaşa buluşmalıdır. Bu bakış açısı kurulmadan sağlıklı cabinet selection yapılamaz.
 
 ---
@@ -48,7 +50,7 @@ Kabinet mühendisliğinde mekanik boyutlandırma sadece dış ölçüleri yazmak
 
 Bu nedenle derinlik hesabı basitçe server datasheet'inde yazan uzunluk değildir. Ekipmanın tam servis pozisyonunda nasıl çıkarılacağı da düşünülmelidir. Bir server ray üzerinde tamamen dışarı çekildiğinde aisle içinde ne kadar alan gerekir? Arka kapı açıkken komşu rack'e veya containment kapısına çarpar mı? Ağır GPU tray için lifting tool yaklaşabilir mi? Overhead busway, cable tray veya liquid piping servis hareketini engeller mi? Bu sorular proje çiziminde çözülmezse ilk büyük bakım sırasında ortaya çıkar.
 
-Ağırlık tarafında da tek bir load rating yoktur. Static load, rack yerinde sabit dururken taşıdığı yüktür. Dynamic veya rolling load, rack hareket ettirilirken ortaya çıkan şartları ifade eder. Shipping load, paketlenmiş ve yüklü rack'in taşıma koşullarını içerir. Seismic performance ise farklı bir test ve yapısal davranış konusudur. Bir rack'in yüksek static load değeri olması, aynı yükle güvenli biçimde taşınabileceği veya deprem performansının yeterli olduğu anlamına gelmez.
+Ağırlık tarafında da tek bir load rating yoktur. Static load, rack yerindeyken taşıdığı yüktür. Dynamic veya rolling load, rack hareket ettirilirken ortaya çıkan şartları ifade eder. Shipping load, paketlenmiş ve yüklü rack'in taşıma koşullarını içerir. Seismic performance ise farklı bir test ve yapısal davranış konusudur. Bir rack'in yüksek static load değeri olması, aynı yükle güvenli biçimde taşınabileceği veya deprem performansının yeterli olduğu anlamına gelmez.
 
 AI rack'lerde bu ayrım daha kritik hale gelir. Compute trays, büyük power shelves, busbar, liquid manifold, coolant, cable cartridge, rear-door ekipmanı ve bazen rack CDU toplam kütleyi ciddi biçimde artırabilir. Fully loaded rack weight hesabında boş kabinet ağırlığına yalnız IT equipment eklemek yeterli değildir; sıvı, kablo, power hardware ve aksesuarlar da dahil edilmelidir. Floor engineering tarafında ise yalnız kilogram cinsinden toplam ağırlık değil, contact area, point load, rolling path ve anchoring detayları önemlidir.
 
