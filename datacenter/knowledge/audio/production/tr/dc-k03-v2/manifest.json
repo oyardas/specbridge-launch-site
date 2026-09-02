@@ -1,0 +1,345 @@
+{
+  "version": "DC_K03_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2067.36,
+  "source_qa": {
+    "version": "DC_K03_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3793,
+    "chapters": [
+      {
+        "id": "K03-00",
+        "title": "Rack neden artık metal bir kutu değildir?",
+        "source_words": 458,
+        "final_char": "."
+      },
+      {
+        "id": "K03-01",
+        "title": "On dokuz inch, OpenU, ORv3, MGX ve ORW nasıl ayrılır?",
+        "source_words": 510,
+        "final_char": "."
+      },
+      {
+        "id": "K03-02",
+        "title": "Derinlik, ağırlık, floor load ve serviceability neden birlikte hesaplanır?",
+        "source_words": 461,
+        "final_char": "."
+      },
+      {
+        "id": "K03-03",
+        "title": "Rack power architecture: A/B PDU'dan DC busbar'a",
+        "source_words": 464,
+        "final_char": "."
+      },
+      {
+        "id": "K03-04",
+        "title": "Airflow, kapak ve kablo yönetimi termal tasarımın parçasıdır",
+        "source_words": 484,
+        "final_char": "."
+      },
+      {
+        "id": "K03-05",
+        "title": "Liquid-ready rack ne demektir?",
+        "source_words": 481,
+        "final_char": "."
+      },
+      {
+        "id": "K03-06",
+        "title": "Rack-scale AI sistemi conventional cabinet'ten nasıl farklıdır?",
+        "source_words": 465,
+        "final_char": "."
+      },
+      {
+        "id": "K03-07",
+        "title": "Proje rack standardı nasıl seçilir ve freeze edilir?",
+        "source_words": 470,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K03-00",
+    "K03-01",
+    "K03-02",
+    "K03-03",
+    "K03-04",
+    "K03-05",
+    "K03-06",
+    "K03-07"
+  ],
+  "chapters": [
+    {
+      "id": "K03-00",
+      "title": "Rack neden artık metal bir kutu değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-00-rack-neden-artik-metal-bir-kutu-degildir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-00-rack-neden-artik-metal-bir-kutu-degildir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-00-rack-neden-artik-metal-bir-kutu-degildir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 254.784,
+          "bytes": 4076544,
+          "source_words": 458,
+          "transcript_words": 452,
+          "word_count_ratio": 0.9869,
+          "transcript_similarity": 0.9187,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 254.784,
+      "bytes": 4076544,
+      "source_words": 458,
+      "transcript_words": 452,
+      "word_count_ratio": 0.9869,
+      "transcript_similarity": 0.9187,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K03-01",
+      "title": "On dokuz inch, OpenU, ORv3, MGX ve ORW nasıl ayrılır?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-01-on-dokuz-inch-openu-orv3-mgx-ve-orw-nasil-ayrilir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-01-on-dokuz-inch-openu-orv3-mgx-ve-orw-nasil-ayrilir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-01-on-dokuz-inch-openu-orv3-mgx-ve-orw-nasil-ayrilir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 274.776,
+          "bytes": 4396416,
+          "source_words": 510,
+          "transcript_words": 480,
+          "word_count_ratio": 0.9412,
+          "transcript_similarity": 0.8646,
+          "tail_score": 0.75,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 274.152,
+          "bytes": 4386432,
+          "source_words": 510,
+          "transcript_words": 496,
+          "word_count_ratio": 0.9725,
+          "transcript_similarity": 0.8887,
+          "tail_score": 0.875,
+          "accepted": false
+        },
+        {
+          "attempt": 3,
+          "duration_seconds": 271.32,
+          "bytes": 4341120,
+          "source_words": 510,
+          "transcript_words": 491,
+          "word_count_ratio": 0.9627,
+          "transcript_similarity": 0.9031,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 3,
+      "duration_seconds": 271.32,
+      "bytes": 4341120,
+      "source_words": 510,
+      "transcript_words": 491,
+      "word_count_ratio": 0.9627,
+      "transcript_similarity": 0.9031,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K03-02",
+      "title": "Derinlik, ağırlık, floor load ve serviceability neden birlikte hesaplanır?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-02-derinlik-agirlik-floor-load-ve-serviceability-neden-birlikte-hesaplanir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-02-derinlik-agirlik-floor-load-ve-serviceability-neden-birlikte-hesaplanir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-02-derinlik-agirlik-floor-load-ve-serviceability-neden-birlikte-hesaplanir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 252.168,
+          "bytes": 4034688,
+          "source_words": 461,
+          "transcript_words": 461,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9436,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 252.168,
+      "bytes": 4034688,
+      "source_words": 461,
+      "transcript_words": 461,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9436,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K03-03",
+      "title": "Rack power architecture: A/B PDU'dan DC busbar'a",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-03-rack-power-architecture-a-b-pdu-dan-dc-busbar-a.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-03-rack-power-architecture-a-b-pdu-dan-dc-busbar-a.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-03-rack-power-architecture-a-b-pdu-dan-dc-busbar-a.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 258.96,
+          "bytes": 4143360,
+          "source_words": 464,
+          "transcript_words": 453,
+          "word_count_ratio": 0.9763,
+          "transcript_similarity": 0.9269,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 258.96,
+      "bytes": 4143360,
+      "source_words": 464,
+      "transcript_words": 453,
+      "word_count_ratio": 0.9763,
+      "transcript_similarity": 0.9269,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K03-04",
+      "title": "Airflow, kapak ve kablo yönetimi termal tasarımın parçasıdır",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-04-airflow-kapak-ve-kablo-yonetimi-termal-tasarimin-parcasidir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-04-airflow-kapak-ve-kablo-yonetimi-termal-tasarimin-parcasidir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-04-airflow-kapak-ve-kablo-yonetimi-termal-tasarimin-parcasidir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 259.824,
+          "bytes": 4157184,
+          "source_words": 484,
+          "transcript_words": 481,
+          "word_count_ratio": 0.9938,
+          "transcript_similarity": 0.9513,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 259.824,
+      "bytes": 4157184,
+      "source_words": 484,
+      "transcript_words": 481,
+      "word_count_ratio": 0.9938,
+      "transcript_similarity": 0.9513,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K03-05",
+      "title": "Liquid-ready rack ne demektir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-05-liquid-ready-rack-ne-demektir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-05-liquid-ready-rack-ne-demektir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-05-liquid-ready-rack-ne-demektir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 257.808,
+          "bytes": 4124928,
+          "source_words": 481,
+          "transcript_words": 478,
+          "word_count_ratio": 0.9938,
+          "transcript_similarity": 0.9364,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 257.808,
+      "bytes": 4124928,
+      "source_words": 481,
+      "transcript_words": 478,
+      "word_count_ratio": 0.9938,
+      "transcript_similarity": 0.9364,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K03-06",
+      "title": "Rack-scale AI sistemi conventional cabinet'ten nasıl farklıdır?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-06-rack-scale-ai-sistemi-conventional-cabinet-ten-nasil-farklidir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-06-rack-scale-ai-sistemi-conventional-cabinet-ten-nasil-farklidir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-06-rack-scale-ai-sistemi-conventional-cabinet-ten-nasil-farklidir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 258.624,
+          "bytes": 4137984,
+          "source_words": 465,
+          "transcript_words": 458,
+          "word_count_ratio": 0.9849,
+          "transcript_similarity": 0.9187,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 258.624,
+      "bytes": 4137984,
+      "source_words": 465,
+      "transcript_words": 458,
+      "word_count_ratio": 0.9849,
+      "transcript_similarity": 0.9187,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K03-07",
+      "title": "Proje rack standardı nasıl seçilir ve freeze edilir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-07-proje-rack-standardi-nasil-secilir-ve-freeze-edilir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-07-proje-rack-standardi-nasil-secilir-ve-freeze-edilir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k03-v2/k03-07-proje-rack-standardi-nasil-secilir-ve-freeze-edilir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 253.872,
+          "bytes": 4061952,
+          "source_words": 470,
+          "transcript_words": 465,
+          "word_count_ratio": 0.9894,
+          "transcript_similarity": 0.9262,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 253.872,
+      "bytes": 4061952,
+      "source_words": 470,
+      "transcript_words": 465,
+      "word_count_ratio": 0.9894,
+      "transcript_similarity": 0.9262,
+      "tail_score": 1.0,
+      "accepted": true
+    }
+  ]
+}
