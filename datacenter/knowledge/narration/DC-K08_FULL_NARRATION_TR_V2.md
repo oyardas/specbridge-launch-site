@@ -16,6 +16,8 @@ Bu yüzden server sizing üç temel düzlemde dengelenmelidir: compute, memory v
 
 Bir başka kritik ayrım da standard ile gerçek platform capability arasındadır. Endüstride daha yeni PCIe, CXL veya NVMe standardı yayımlanmış olabilir. Bu, bugün seçtiğiniz server CPU’sunun, motherboard’un, BIOS’un, riser’ın ve cihazın o standardın tüm özelliklerini desteklediği anlamına gelmez. RFP’ye “latest standard” yazmak yerine, gerçekten ihtiyaç duyulan lane width, generation, protocol feature ve validated support açıkça yazılmalıdır.
 
+Aynı prensip OEM datasheet okumalarında da geçerlidir. Datasheet platformun maksimum teorik seçeneklerini gösterebilir; fakat seçilen chassis, riser, CPU adedi, DIMM population veya storage backplane bu seçeneklerin hepsini aynı anda sunmayabilir. Bu yüzden maksimum değerleri toplamak yerine exact configured BOM üzerinden capability matrix oluşturmak gerekir. Teknik kabulün konusu ürün ailesi değil, satın alınan gerçek konfigürasyondur.
+
 Sonuç olarak x86 server satın alımı bir SKU seçimi değildir. Önce workload tanımlanır. Ardından CPU topology, memory capacity ve bandwidth, NUMA, PCIe/CXL lane budget, storage, network, management, power, thermal ve support lifecycle birlikte modellenir. En yüksek core sayısına veya en yeni ürün adına sahip sunucu otomatik olarak en iyi sunucu değildir. En iyi sunucu, hedef workload için dengeli, yönetilebilir, güvenli, servis edilebilir ve ekonomik olan platformdur.
 
 ---
@@ -76,6 +78,8 @@ Storage ve network tarafında interrupt ve queue affinity de önemlidir. High-ra
 
 NUMA validation için birkaç bilgi mutlaka kayıt altına alınmalıdır: OS-visible node sayısı, her node’a ait CPU/core listesi, memory capacity, PCIe endpoint’lerin root-complex ilişkisi, NIC queue ve interrupt affinity, storage controller veya NVMe locality ve varsa accelerator placement. Bu topology, BoQ’daki fiziksel slot listesiyle eşleştirilmelidir.
 
+Operasyonda NUMA doğrulaması yalnız kurulum günü yapılmamalıdır. BIOS değişikliği, yeni riser, NIC taşıma veya firmware update OS-visible topology’yi etkileyebilir. Bu nedenle golden configuration inventory’sinde NUMA map saklanmalı; performans problemi yaşandığında scheduler, memory allocation ve device locality aynı referans üzerinden karşılaştırılmalıdır. Özellikle büyük cluster’larda node’lar arasında topology drift sessiz ve pahalı bir performans farkı yaratabilir.
+
 En doğru yaklaşım NUMA’yı bir tuning detayı değil, server architecture requirement’ı olarak görmektir. Single-socket server seçmek NUMA problemini büyük ölçüde sadeleştirebilir. Dual-socket gerekiyorsa locality-aware sizing ve benchmark acceptance devreye girer. Golden karar kuralı basittir: CPU, memory ve I/O aynı topology üzerinde haritalanmadan server’ın gerçek performans kapasitesi kabul edilmez.
 
 ---
@@ -95,6 +99,8 @@ Lane budget hesabı BoQ freeze’den önce yapılmalıdır. Örneğin iki yükse
 CXL bu resme coherent memory ve device semantics ekler. CXL’i sadece daha hızlı PCIe gibi düşünmek doğru değildir. Memory expansion, pooling veya composability gibi use case’ler CPU, board, slot, firmware, ACPI, operating system ve device support’un birlikte doğrulanmasını gerektirir. CXL standardının daha yeni bir version’ı yayımlanmış olsa bile shipping server platformu daha eski bir CXL generation veya sınırlı device feature set’i destekliyor olabilir.
 
 Bu nedenle “CXL-ready” ifadesi tek başına kabul kriteri değildir. Exact version, device class, lane/port, BIOS option, OS/hypervisor support ve validated device list istenmelidir. Eğer CXL memory expansion kullanılacaksa capacity kadar latency, bandwidth ve locality de modellenmelidir. CXL memory local DDR ile otomatik olarak eşdeğer değildir.
+
+Lifecycle planında da I/O topology önemini korur. Bugün boş bırakılan slotun gelecekte accelerator veya daha hızlı NIC için kullanılacağı düşünülüyorsa yalnız physical boşluk değil reserved lane, root locality, PSU headroom ve cooling capacity de ayrılmalıdır. Aksi halde “future-ready” görünen chassis, refresh döneminde yeni device’ı elektriksel veya termal olarak desteklemeyebilir. Expansion path bir slot listesi değil, kaynak rezervidir.
 
 Golden I/O karar zinciri şöyledir: önce endpoint listesi çıkarılır; gerekli bandwidth belirlenir; lane width ve generation hesaplanır; root complex ve NUMA locality haritalanır; switch veya bifurcation ihtiyacı belirlenir; physical slot/riser seçilir; sonra power, thermal, firmware ve driver support doğrulanır. Bu harita kapanmadan server I/O mimarisi tamamlanmış sayılmaz.
 
@@ -135,6 +141,8 @@ Platform security de bir zincirdir. Secure Boot boot edilen executable’ın tru
 Kritik nokta yalnız protection değil detection ve recovery’dir. Firmware compromise veya failed update durumunda platformun güvenilir bir state’e nasıl döneceği tasarlanmalıdır. Signed image varsa ama recovery mechanism yoksa resilience eksiktir. Golden security yaklaşımı firmware’i protect, detect ve recover döngüsü içinde ele alır.
 
 Supply chain tarafında component serial, approved part list, firmware provenance ve update source governance önemlidir. Server’a sonradan eklenen NIC, drive veya accelerator kendi firmware’ini taşır; bu yüzden platform trust yalnız motherboard üzerinde bitmez. Device inventory ve firmware inventory birlikte tutulmalıdır.
+
+Bu control plane’in operasyonel sahibi de net olmalıdır. Server team, security team ve network team arasında BMC certificate, admin role, firmware cadence veya vulnerability response sorumluluğu belirsiz bırakılırsa teknik capability kullanılamaz hale gelir. Golden design bu nedenle yalnız feature listesi değil, ownership, change control, emergency access ve evidence retention modelini de tanımlar. Yönetilebilirlik, ürün fonksiyonundan çok sürekli bir operasyon disiplinidir.
 
 Sonuç olarak BMC, UEFI ve security ayrı ayrı checkbox değil, operasyonel bir control plane’dir. Procurement aşamasında BMC capability, Redfish support, TPM, Secure Boot, measured boot veya root-of-trust requirement, firmware recovery ve update lifecycle yazılmalıdır. Acceptance aşamasında ise management API erişimi, identity policy, telemetry, firmware baseline, recovery procedure ve auditability test edilmelidir.
 
