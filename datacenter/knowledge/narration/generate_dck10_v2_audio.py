@@ -75,11 +75,15 @@ def source_qa(chapters):
  result={'version':'DC_K10_NARRATION_SOURCE_QA_V2','chapter_count':len(chapters),'total_source_words':sum(r['source_words'] for r in rows),'chapters':rows,'errors':errors,'accepted':not errors}
  print(json.dumps(result,ensure_ascii=False,indent=2)); return result
 
+def terminal_quota_error(e):
+ s=str(e).casefold()
+ return 'insufficient_quota' in s or 'credit_balance_exhausted' in s or 'no credits remaining' in s
+
 def retry_call(fn,label):
  for n in range(3):
   try:return fn()
   except Exception as e:
-   if n==2:raise
+   if terminal_quota_error(e) or n==2:raise
    print(f'{label}: {e}',file=sys.stderr); time.sleep(2**(n+1))
 
 def transcribe(client,cfg,audio):
@@ -94,46 +98,80 @@ def parse_selected(raw):
  if bad:raise ValueError(f'unknown chapter ids: {bad}')
  return vals
 
-def previous_results(selected):
- if selected==set(EXPECTED):return {}
- manifest=OUT/'manifest.json'
- if not manifest.exists():raise RuntimeError('selective regeneration requires an existing artifact/manifest')
- old=json.loads(manifest.read_text(encoding='utf-8'))
- if old.get('version')!='DC_K10_GOLDEN_AUDIO_V2':raise RuntimeError('existing manifest version mismatch')
- return {x['id']:x for x in old.get('chapters',[]) if x.get('automatic_acceptance') is True}
-
 def files_exist(rec):
  for k in ('audio','source','transcript'):
   p=ROOT/rec.get(k,'')
   if not p.is_file() or p.stat().st_size==0:return False
  return True
 
+def recovered_record(c,acc):
+ base=f"{c['id'].lower()}-{slug(c['title'])}"
+ audio=OUT/f'{base}.mp3'; src=OUT/f'{base}.source.txt'; txp=OUT/f'{base}.transcript.txt'
+ if not (audio.is_file() and src.is_file() and txp.is_file()):return None
+ if min(audio.stat().st_size,src.stat().st_size,txp.stat().st_size)<=0:return None
+ source=src.read_text(encoding='utf-8').strip(); text=txp.read_text(encoding='utf-8').strip()
+ if norm(source)!=norm(c['text']):return None
+ sw=norm(source).split(); tw=norm(text).split(); wr=len(tw)/len(sw) if sw else 0
+ ratio=sim(source,text); tail=tail_score(source,text,int(acc.get('tail_word_count',8)))
+ size=audio.stat().st_size; dur=round(MP3(audio).info.length,3)
+ passed=(ratio>=float(acc['minimum_transcript_similarity']) and float(acc['minimum_word_count_ratio'])<=wr<=float(acc['maximum_word_count_ratio']) and size>=int(acc['minimum_audio_bytes']) and tail>=0.62)
+ if not passed:return None
+ return {'id':c['id'],'title':c['title'],'audio':str(audio.relative_to(ROOT)),'source':str(src.relative_to(ROOT)),'transcript':str(txp.relative_to(ROOT)),'attempts':[{'attempt':'recovered','duration_seconds':dur,'bytes':size,'source_words':len(sw),'transcript_words':len(tw),'word_count_ratio':round(wr,4),'transcript_similarity':round(ratio,4),'tail_score':round(tail,4),'accepted':True}],'automatic_acceptance':True,'attempt':'recovered','duration_seconds':dur,'bytes':size,'source_words':len(sw),'transcript_words':len(tw),'word_count_ratio':round(wr,4),'transcript_similarity':round(ratio,4),'tail_score':round(tail,4),'accepted':True,'recovered_from_partial_artifact':True}
+
+def previous_results(selected,chapters,acc):
+ if selected==set(EXPECTED):return {}
+ manifest=OUT/'manifest.json'
+ if manifest.exists():
+  old=json.loads(manifest.read_text(encoding='utf-8'))
+  if old.get('version')!='DC_K10_GOLDEN_AUDIO_V2':raise RuntimeError('existing manifest version mismatch')
+  prior={x['id']:x for x in old.get('chapters',[]) if x.get('automatic_acceptance') is True and files_exist(x)}
+ else: prior={}
+ by_id={c['id']:c for c in chapters}
+ for cid in EXPECTED:
+  if cid in selected or cid in prior:continue
+  rec=recovered_record(by_id[cid],acc)
+  if rec:prior[cid]=rec
+ missing=[cid for cid in EXPECTED if cid not in selected and cid not in prior]
+ if missing:raise RuntimeError(f'cannot preserve accepted prior chapters: {missing}')
+ return prior
+
+def write_manifest(cfg,qa,selected,results):
+ failures=[x for x in results if x.get('automatic_acceptance') is not True]
+ manifest={'version':'DC_K10_GOLDEN_AUDIO_V2','voice':cfg['voice'],'chapter_count':len(results),'accepted_count':len(results)-len(failures),'failed_count':len(failures),'total_duration_seconds':round(sum(float(x.get('duration_seconds',0)) for x in results if x.get('automatic_acceptance') is True),3),'source_qa':qa,'regenerated_chapters':sorted(selected),'chapters':results}
+ (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(manifest,ensure_ascii=False,indent=2)); return manifest
+
 def main():
  ap=argparse.ArgumentParser(); ap.add_argument('--validate-source',action='store_true'); ap.add_argument('--chapters',default='',help='comma-separated failed chapter ids for selective regeneration'); args=ap.parse_args()
  chapters=extract(MASTER.read_text(encoding='utf-8')); qa=source_qa(chapters)
  if not qa['accepted']:return 3
  if args.validate_source:return 0
- if not os.getenv('OPENAI_API_KEY'):print('OPENAI_API_KEY missing',file=sys.stderr); return 2
  try:selected=parse_selected(args.chapters)
  except ValueError as e:print(str(e),file=sys.stderr); return 4
  OUT.mkdir(parents=True,exist_ok=True)
- try:prior=previous_results(selected)
+ cfg=json.loads(CONFIG.read_text(encoding='utf-8')); vc=cfg['voice']; acc=cfg['acceptance']
+ try:prior=previous_results(selected,chapters,acc)
  except RuntimeError as e:print(str(e),file=sys.stderr); return 5
- if selected!=set(EXPECTED):print(json.dumps({'mode':'SELECTIVE_REGENERATION','chapters':sorted(selected)},ensure_ascii=False))
- client=OpenAI(); cfg=json.loads(CONFIG.read_text(encoding='utf-8')); vc=cfg['voice']; acc=cfg['acceptance']
- min_sim=float(acc['minimum_transcript_similarity']); min_wr=float(acc['minimum_word_count_ratio']); max_wr=float(acc['maximum_word_count_ratio']); min_bytes=int(acc['minimum_audio_bytes']); tail_n=int(acc.get('tail_word_count',8)); results=[]
+ if selected!=set(EXPECTED):print(json.dumps({'mode':'SELECTIVE_REGENERATION','chapters':sorted(selected),'preserved':sorted(prior)},ensure_ascii=False))
+ if not os.getenv('OPENAI_API_KEY'):print('OPENAI_API_KEY missing',file=sys.stderr); return 2
+ client=OpenAI(); min_sim=float(acc['minimum_transcript_similarity']); min_wr=float(acc['minimum_word_count_ratio']); max_wr=float(acc['maximum_word_count_ratio']); min_bytes=int(acc['minimum_audio_bytes']); tail_n=int(acc.get('tail_word_count',8)); results=[]; fatal_error=None
  for c in chapters:
   if c['id'] not in selected:
    rec=prior.get(c['id'])
    if not rec or not files_exist(rec):print(f"cannot preserve {c['id']}: accepted prior files missing",file=sys.stderr); return 6
    results.append({**rec,'preserved_from_prior_artifact':True}); continue
+  if fatal_error:
+   results.append({'id':c['id'],'title':c['title'],'automatic_acceptance':False,'pipeline_error':'not_attempted_after_fatal_error'}); continue
   base=f"{c['id'].lower()}-{slug(c['title'])}"; audio=OUT/f'{base}.mp3'; txp=OUT/f'{base}.transcript.txt'; src=OUT/f'{base}.source.txt'; src.write_text(c['text']+'\n',encoding='utf-8')
-  accepted=None; attempts=[]
+  accepted=None; attempts=[]; error=None
   for attempt in range(1,4):
-   def tts():
-    r=client.audio.speech.create(model=cfg['model'],voice=vc['voice'],input=c['text'],instructions=vc['instructions'],response_format='mp3',speed=float(vc['speed'])); r.write_to_file(audio)
-   retry_call(tts,f"tts {c['id']} attempt {attempt}")
-   text=transcribe(client,cfg,audio); txp.write_text(text+'\n',encoding='utf-8')
+   try:
+    def tts():
+     r=client.audio.speech.create(model=cfg['model'],voice=vc['voice'],input=c['text'],instructions=vc['instructions'],response_format='mp3',speed=float(vc['speed'])); r.write_to_file(audio)
+    retry_call(tts,f"tts {c['id']} attempt {attempt}")
+    text=transcribe(client,cfg,audio); txp.write_text(text+'\n',encoding='utf-8')
+   except Exception as e:
+    error='credit_balance_exhausted' if terminal_quota_error(e) else f'{type(e).__name__}: {str(e)[:240]}'
+    attempts.append({'attempt':attempt,'accepted':False,'pipeline_error':error}); fatal_error=error; break
    ratio=sim(c['text'],text); sw=norm(c['text']).split(); tw=norm(text).split(); wr=len(tw)/len(sw) if sw else 0; size=audio.stat().st_size; dur=round(MP3(audio).info.length,3); tail=tail_score(c['text'],text,tail_n)
    passed=(ratio>=min_sim and min_wr<=wr<=max_wr and size>=min_bytes and tail>=0.62)
    rec={'attempt':attempt,'duration_seconds':dur,'bytes':size,'source_words':len(sw),'transcript_words':len(tw),'word_count_ratio':round(wr,4),'transcript_similarity':round(ratio,4),'tail_score':round(tail,4),'accepted':passed}; attempts.append(rec); print(json.dumps({'id':c['id'],**rec},ensure_ascii=False))
@@ -141,9 +179,10 @@ def main():
    time.sleep(2)
   result={'id':c['id'],'title':c['title'],'audio':str(audio.relative_to(ROOT)),'source':str(src.relative_to(ROOT)),'transcript':str(txp.relative_to(ROOT)),'attempts':attempts,'automatic_acceptance':accepted is not None}
   if accepted:result.update(accepted)
+  if error:result['pipeline_error']=error
   results.append(result)
- failures=[x for x in results if x.get('automatic_acceptance') is not True]
- manifest={'version':'DC_K10_GOLDEN_AUDIO_V2','voice':vc,'chapter_count':len(results),'accepted_count':len(results)-len(failures),'failed_count':len(failures),'total_duration_seconds':round(sum(float(x.get('duration_seconds',0)) for x in results if x.get('automatic_acceptance') is True),3),'source_qa':qa,'regenerated_chapters':sorted(selected),'chapters':results}
- (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(manifest,ensure_ascii=False,indent=2)); return 1 if failures else 0
+ manifest=write_manifest(cfg,qa,selected,results)
+ if fatal_error:print(f'FATAL_PIPELINE_ERROR={fatal_error}',file=sys.stderr)
+ return 1 if manifest['failed_count'] else 0
 
 if __name__=='__main__':raise SystemExit(main())
