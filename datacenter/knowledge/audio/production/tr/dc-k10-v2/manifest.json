@@ -1,0 +1,339 @@
+{
+  "version": "DC_K10_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2543.232,
+  "source_qa": {
+    "version": "DC_K10_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 4427,
+    "chapters": [
+      {
+        "id": "K10-00",
+        "title": "Sanallaştırma nedir; VM, container ve hypervisor neden aynı şey değildir?",
+        "source_words": 527,
+        "final_char": "."
+      },
+      {
+        "id": "K10-01",
+        "title": "vCPU, memory, NUMA ve overcommit nasıl gerçekten çalışır?",
+        "source_words": 549,
+        "final_char": "."
+      },
+      {
+        "id": "K10-02",
+        "title": "Virtual network, storage, SR-IOV, passthrough ve live migration",
+        "source_words": 565,
+        "final_char": "."
+      },
+      {
+        "id": "K10-03",
+        "title": "Container internals, OCI image/runtime ve registry zinciri",
+        "source_words": 556,
+        "final_char": "."
+      },
+      {
+        "id": "K10-04",
+        "title": "Kubernetes CRI, Pod, RuntimeClass, CNI, CSI ve resource management",
+        "source_words": 554,
+        "final_char": "."
+      },
+      {
+        "id": "K10-05",
+        "title": "VM/container availability, security ve stateful workload gerçekleri",
+        "source_words": 532,
+        "final_char": "."
+      },
+      {
+        "id": "K10-06",
+        "title": "Hybrid platform: Kubernetes üzerinde VM, sandboxed containers ve operasyon",
+        "source_words": 544,
+        "final_char": "."
+      },
+      {
+        "id": "K10-07",
+        "title": "Virtualization/container platformu nasıl seçilir, test edilir ve BoQ’da freeze edilir?",
+        "source_words": 600,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K10-05",
+    "K10-06",
+    "K10-07"
+  ],
+  "chapters": [
+    {
+      "id": "K10-00",
+      "title": "Sanallaştırma nedir; VM, container ve hypervisor neden aynı şey değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-00-sanallastirma-nedir-vm-container-ve-hypervisor-neden-ayni-sey-degildir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-00-sanallastirma-nedir-vm-container-ve-hypervisor-neden-ayni-sey-degildir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-00-sanallastirma-nedir-vm-container-ve-hypervisor-neden-ayni-sey-degildir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": "recovered",
+          "duration_seconds": 298.8,
+          "bytes": 4780800,
+          "source_words": 527,
+          "transcript_words": 528,
+          "word_count_ratio": 1.0019,
+          "transcript_similarity": 0.9479,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": "recovered",
+      "duration_seconds": 298.8,
+      "bytes": 4780800,
+      "source_words": 527,
+      "transcript_words": 528,
+      "word_count_ratio": 1.0019,
+      "transcript_similarity": 0.9479,
+      "tail_score": 1.0,
+      "accepted": true,
+      "recovered_from_partial_artifact": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K10-01",
+      "title": "vCPU, memory, NUMA ve overcommit nasıl gerçekten çalışır?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-01-vcpu-memory-numa-ve-overcommit-nasil-gercekten-calisir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-01-vcpu-memory-numa-ve-overcommit-nasil-gercekten-calisir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-01-vcpu-memory-numa-ve-overcommit-nasil-gercekten-calisir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": "recovered",
+          "duration_seconds": 310.488,
+          "bytes": 4967808,
+          "source_words": 549,
+          "transcript_words": 547,
+          "word_count_ratio": 0.9964,
+          "transcript_similarity": 0.9526,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": "recovered",
+      "duration_seconds": 310.488,
+      "bytes": 4967808,
+      "source_words": 549,
+      "transcript_words": 547,
+      "word_count_ratio": 0.9964,
+      "transcript_similarity": 0.9526,
+      "tail_score": 1.0,
+      "accepted": true,
+      "recovered_from_partial_artifact": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K10-02",
+      "title": "Virtual network, storage, SR-IOV, passthrough ve live migration",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-02-virtual-network-storage-sr-iov-passthrough-ve-live-migration.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-02-virtual-network-storage-sr-iov-passthrough-ve-live-migration.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-02-virtual-network-storage-sr-iov-passthrough-ve-live-migration.transcript.txt",
+      "attempts": [
+        {
+          "attempt": "recovered",
+          "duration_seconds": 316.368,
+          "bytes": 5061888,
+          "source_words": 565,
+          "transcript_words": 566,
+          "word_count_ratio": 1.0018,
+          "transcript_similarity": 0.9531,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": "recovered",
+      "duration_seconds": 316.368,
+      "bytes": 5061888,
+      "source_words": 565,
+      "transcript_words": 566,
+      "word_count_ratio": 1.0018,
+      "transcript_similarity": 0.9531,
+      "tail_score": 0.75,
+      "accepted": true,
+      "recovered_from_partial_artifact": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K10-03",
+      "title": "Container internals, OCI image/runtime ve registry zinciri",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-03-container-internals-oci-image-runtime-ve-registry-zinciri.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-03-container-internals-oci-image-runtime-ve-registry-zinciri.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-03-container-internals-oci-image-runtime-ve-registry-zinciri.transcript.txt",
+      "attempts": [
+        {
+          "attempt": "recovered",
+          "duration_seconds": 311.832,
+          "bytes": 4989312,
+          "source_words": 556,
+          "transcript_words": 560,
+          "word_count_ratio": 1.0072,
+          "transcript_similarity": 0.9176,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": "recovered",
+      "duration_seconds": 311.832,
+      "bytes": 4989312,
+      "source_words": 556,
+      "transcript_words": 560,
+      "word_count_ratio": 1.0072,
+      "transcript_similarity": 0.9176,
+      "tail_score": 1.0,
+      "accepted": true,
+      "recovered_from_partial_artifact": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K10-04",
+      "title": "Kubernetes CRI, Pod, RuntimeClass, CNI, CSI ve resource management",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-04-kubernetes-cri-pod-runtimeclass-cni-csi-ve-resource-management.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-04-kubernetes-cri-pod-runtimeclass-cni-csi-ve-resource-management.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-04-kubernetes-cri-pod-runtimeclass-cni-csi-ve-resource-management.transcript.txt",
+      "attempts": [
+        {
+          "attempt": "recovered",
+          "duration_seconds": 329.568,
+          "bytes": 5273088,
+          "source_words": 554,
+          "transcript_words": 562,
+          "word_count_ratio": 1.0144,
+          "transcript_similarity": 0.914,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": "recovered",
+      "duration_seconds": 329.568,
+      "bytes": 5273088,
+      "source_words": 554,
+      "transcript_words": 562,
+      "word_count_ratio": 1.0144,
+      "transcript_similarity": 0.914,
+      "tail_score": 1.0,
+      "accepted": true,
+      "recovered_from_partial_artifact": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K10-05",
+      "title": "VM/container availability, security ve stateful workload gerçekleri",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-05-vm-container-availability-security-ve-stateful-workload-gercekleri.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-05-vm-container-availability-security-ve-stateful-workload-gercekleri.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-05-vm-container-availability-security-ve-stateful-workload-gercekleri.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 301.512,
+          "bytes": 4824192,
+          "source_words": 532,
+          "transcript_words": 536,
+          "word_count_ratio": 1.0075,
+          "transcript_similarity": 0.9307,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 301.512,
+      "bytes": 4824192,
+      "source_words": 532,
+      "transcript_words": 536,
+      "word_count_ratio": 1.0075,
+      "transcript_similarity": 0.9307,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K10-06",
+      "title": "Hybrid platform: Kubernetes üzerinde VM, sandboxed containers ve operasyon",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-06-hybrid-platform-kubernetes-uzerinde-vm-sandboxed-containers-ve-operasyon.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-06-hybrid-platform-kubernetes-uzerinde-vm-sandboxed-containers-ve-operasyon.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-06-hybrid-platform-kubernetes-uzerinde-vm-sandboxed-containers-ve-operasyon.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 313.392,
+          "bytes": 5014272,
+          "source_words": 544,
+          "transcript_words": 546,
+          "word_count_ratio": 1.0037,
+          "transcript_similarity": 0.8899,
+          "tail_score": 1.0,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 329.4,
+          "bytes": 5270400,
+          "source_words": 544,
+          "transcript_words": 547,
+          "word_count_ratio": 1.0055,
+          "transcript_similarity": 0.9074,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 2,
+      "duration_seconds": 329.4,
+      "bytes": 5270400,
+      "source_words": 544,
+      "transcript_words": 547,
+      "word_count_ratio": 1.0055,
+      "transcript_similarity": 0.9074,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K10-07",
+      "title": "Virtualization/container platformu nasıl seçilir, test edilir ve BoQ’da freeze edilir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-07-virtualization-container-platformu-nasil-secilir-test-edilir-ve-boqda-fr.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-07-virtualization-container-platformu-nasil-secilir-test-edilir-ve-boqda-fr.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k10-v2/k10-07-virtualization-container-platformu-nasil-secilir-test-edilir-ve-boqda-fr.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 345.264,
+          "bytes": 5524224,
+          "source_words": 600,
+          "transcript_words": 599,
+          "word_count_ratio": 0.9983,
+          "transcript_similarity": 0.9108,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 345.264,
+      "bytes": 5524224,
+      "source_words": 600,
+      "transcript_words": 599,
+      "word_count_ratio": 0.9983,
+      "transcript_similarity": 0.9108,
+      "tail_score": 0.875,
+      "accepted": true
+    }
+  ]
+}
