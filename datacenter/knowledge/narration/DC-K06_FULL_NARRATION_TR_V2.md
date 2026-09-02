@@ -88,6 +88,8 @@ Nickel-cadmium yüksek temperature tolerance ve endüstriyel dayanıklılığıy
 
 Flywheel electrochemical energy yerine rotational kinetic energy saklar. Çok yüksek power, yüksek cycle count ve kısa bridge duty için güçlü olabilir. Ancak energy duration çoğu battery system’e göre daha kısadır; bu nedenle generator start ve recovery chain çok kritik hale gelir. Supercapacitor veya ultracapacitor da çok yüksek power ve çok hızlı charge-discharge sağlar fakat kısa energy duration nedeniyle genellikle short bridge veya power smoothing rolünde değerlendirilir.
 
+Teknoloji seçiminin operasyon tarafı da en az enerji yoğunluğu kadar önemlidir. Yerel servis yetkinliği, replacement lead time, spare module stratejisi, transport restrictions, room structural load, ventilation veya cooling dependency ve disposal route baştan değerlendirilmelidir. Çok kompakt bir teknoloji, sahada uygun servis prosedürü veya güvenli replacement path yoksa lifecycle boyunca beklenenden daha yüksek operational risk yaratabilir. Aynı şekilde sıcak ve zorlu bir edge ortamında daha düşük nominal energy density’ye sahip fakat temperature tolerance’ı güçlü bir teknoloji, toplam availability açısından daha rasyonel olabilir.
+
 Hybrid yaklaşım, örneğin supercapacitor plus battery veya UPS bridge storage plus site BESS, farklı duty’leri ayırabilir. Ancak control complexity ve common-mode risk artar. Golden seçim teknoloji moda sırasına göre değil, required power, required energy, cycling duty, safety evidence, service model ve total lifecycle economics birlikte değerlendirilerek yapılır.
 
 ---
@@ -106,6 +108,8 @@ Lead-acid battery rooms electrical shock ve arc yanında hydrogen gas, electroly
 
 UL 9540A bu nedenle system behavior açısından önemlidir. Thermal runaway propagation test method’u cell, module, unit ve installation level’de gerekli evidence üretmek için kullanılır. 2026’daki altıncı edition ve NFPA 855’in 2026 yaklaşımı large-scale fire testing’in önemini güçlendirmiştir. Fakat test sonucu yalnız tested veya qualified configuration için anlamlıdır; cabinet spacing, ventilation veya module design değişirse sonucu genellemek doğru değildir.
 
+Monitoring ancak alarmın operasyona dönüştüğü yerde anlam kazanır. High temperature, cell imbalance, communication loss, insulation fault veya abnormal gas detection için yalnız threshold tanımlamak yeterli değildir; alarm severity, automatic action, operator response, escalation path ve safe shutdown kriterleri aynı runbook içinde bulunmalıdır. Bir BMS alarmı kontrol odasında görünürken kimsenin hangi sürede hangi MOP veya EOP’yi uygulayacağını bilmemesi, teknik telemetry’nin availability değerini ciddi biçimde düşürür. Commissioning sırasında alarm-to-action chain de test edilmelidir.
+
 Lifecycle de safety’nin bir parçasıdır. Calendar aging, cycle count, temperature, depth of discharge ve SOC window chemistry’ye göre degradation yaratır. Replacement trigger, spare/service availability, decommissioning, transport ve recycling daha tasarım aşamasında planlanmalıdır. Golden yaklaşım battery’yi kurulum günü kabul edilen bir consumable olarak değil, commissioning’den replacement ve disposal’a kadar yönetilen bir critical infrastructure subsystem olarak ele alır.
 
 ---
@@ -121,6 +125,8 @@ Grid-interactive use dikkat gerektirir. ISO/IEC 22237-3 mevcut kapsamında data 
 Frequent cycling battery lifetime modelini de değiştirir. Geleneksel UPS battery çoğu zaman charged standby state’inde bekler ve gerçek outage sayısı sınırlıdır. BESS ise günlük veya daha sık charge-discharge cycle görebilir. Cycle throughput, depth of discharge, thermal load ve warranty assumptions farklılaşır. Bu nedenle standby-life datasheet’i grid-service duty’sine doğrudan uygulanamaz.
 
 AI infrastructure yeni bir stored-energy kullanım alanı daha yaratıyor: power smoothing. Büyük GPU clusters hızla değişen power demand oluşturabilir. Grid, generator veya upstream distribution bu step changes’i sınırlı hızda takip ediyorsa local stored energy kısa süreli power difference’ı absorbe veya supply ederek smoothing sağlayabilir. Fakat smoothing ile backup aynı görev değildir. Sık power balancing yapan storage, outage anında gereken SOC ve cycle reserve’i etkileyebilir.
+
+Multi-service dispatch varsa reserve governance teknik bir kontrol fonksiyonuna dönüşür. Emergency autonomy için ayrılmış minimum SOC, forecast uncertainty, generator availability, expected recharge time ve market dispatch limitleri birlikte ele alınmalıdır. Kontrol sistemi ekonomik optimizasyon yaptığı için safety veya availability reserve’ini override edememeli; degraded generator veya battery-string state algılandığında grid-service envelope otomatik olarak daraltılmalıdır. Bu kurallar yalnız yazılım policy’si olarak değil, commissioning senaryolarında doğrulanmış control behavior olarak kanıtlanmalıdır.
 
 BESS’in UPS’i tamamen replace edip edemeyeceği de architecture evidence ile cevaplanmalıdır. Bir battery inverter’ın bulunması no-break transfer, power-quality conditioning, short-circuit behavior, downstream selectivity, redundant bypass, maintenance state ve critical-load availability requirements’ın otomatik karşılandığı anlamına gelmez. Eğer BESS veya PCS bu işlevleri gerçekten sağlayacaksa complete system performance test ile kanıtlanmalıdır.
 
