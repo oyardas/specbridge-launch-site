@@ -1,0 +1,19 @@
+Veri merkezlerinde battery konuşulurken üç farklı problem sık sık birbirine karışır: UPS ride-through, uzun süreli critical-load autonomy ve grid-interactive energy storage. Bunlar aynı hücre kimyasını kullanabilse bile control objective, cycling profile, protection, safety ve availability açısından aynı mimari değildir.
+
+UPS battery'nin birincil görevi kritik yükün continuity'sini korumaktır. Utility disturbance başladığında UPS stored energy devreye girer, generator start ve transfer sequence tamamlanana kadar load'u taşır veya gerektiğinde controlled shutdown için zaman sağlar. Bu nedenle battery autonomy generator architecture'dan bağımsız seçilemez. Detection, start, source qualification, transfer, mechanical recovery, IT stability ve safety margin birlikte ele alınmalıdır.
+
+VRLA uzun yıllardır kullanılan olgun bir teknolojidir. String topology, room temperature, replacement cycle, impedance monitoring, ventilation, maintenance access, footprint ve weight kritik konulardır. Yaşlanma eşit gerçekleşmeyebilir; tek bir weak block bütün string performance'ını etkileyebilir. Bu nedenle battery health yalnız nominal age ile değil, ölçüm ve maintenance programı ile yönetilmelidir.
+
+Lithium-ion daha yüksek energy density, daha küçük footprint ve farklı cycle capability sağlayabilir. Fakat chemistry, BMS architecture, cell-to-module protection, propagation risk, fire strategy, monitoring, replacement ecosystem, transport ve end-of-life considerations değerlendirilmelidir. “Lithium daha yeni, dolayısıyla otomatik olarak daha iyi” sonucu teknik değildir. Facility'nin safety concept'i ve lifecycle support modeliyle uyum aranmalıdır.
+
+Flywheel, kısa ride-through ve yüksek cycle applications için farklı bir seçenektir. Buradaki avantaj kısa süreli yüksek tekrar capability olabilir; buna karşılık generator start reliability daha kritik hale gelebilir. Mechanical maintenance ve site footprint de kararın parçasıdır.
+
+Grid-interactive BESS ise farklı bir mission taşır. Peak shaving, demand flexibility, renewable integration, grid support veya energy market interaction gibi görevler yapabilir. Böyle bir sistem facility resilience'ı da destekleyebilir, fakat grid service ile critical-load reserve arasında açık control priority olmalıdır. State of charge ekonomik dispatch nedeniyle düşürülüp aynı anda utility outage oluşursa, kağıt üzerindeki battery capacity kritik load için mevcut olmayabilir.
+
+Bu nedenle SpecBridge Golden rule basittir: resilience reserve, grid-service algorithm tarafından sessizce tüketilemez. Minimum state of charge, emergency override, islanding behavior, EMS authority ve UPS/BESS interaction açıkça tanımlanmalıdır. Grid-interactive system kritik power chain'e bağlanıyorsa failure-domain analysis daha da genişler.
+
+Rack-level battery backup units da ayrı bir katmandır. OCP benzeri rack power architectures, rack veya power-shelf seviyesinde stored energy kullanabilir. Bu yapı facility UPS'in birebir alternatifi değildir; power conversion ve ride-through boundary'lerini değiştirir. Facility electrical topology, rack power shelf ve BBU behavior birlikte modellenmelidir.
+
+Battery safety için de tek bir standart bütün problemi çözmez. Stationary installation, industrial lithium cells ve grid-integrated energy storage farklı standard families altında ele alınır. Bu nedenle product certification ile facility installation safety birbirinin yerine geçmez.
+
+Bu bölümün sonucu şudur: battery chemistry'den önce battery mission'ını tanımla. Ride-through mu, extended autonomy mi, rack-level continuity mi, yoksa grid-interactive BESS mi? Mission net değilse doğru capacity, control priority, protection, test planı ve lifecycle strategy de net olamaz.

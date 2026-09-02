@@ -1,0 +1,334 @@
+{
+  "version": "DC_K04_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2129.088,
+  "source_qa": {
+    "version": "DC_K04_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3859,
+    "chapters": [
+      {
+        "id": "K04-00",
+        "title": "Power architecture neden bir failure-domain problemidir?",
+        "source_words": 456,
+        "final_char": "."
+      },
+      {
+        "id": "K04-01",
+        "title": "Utility, MV, transformer ve LV power blocks",
+        "source_words": 471,
+        "final_char": "."
+      },
+      {
+        "id": "K04-02",
+        "title": "Generator, transfer logic ve black-start",
+        "source_words": 505,
+        "final_char": "."
+      },
+      {
+        "id": "K04-03",
+        "title": "UPS topology, modes, static bypass ve maintenance bypass",
+        "source_words": 490,
+        "final_char": "."
+      },
+      {
+        "id": "K04-04",
+        "title": "Battery, stored energy ve BESS sınırı",
+        "source_words": 469,
+        "final_char": "."
+      },
+      {
+        "id": "K04-05",
+        "title": "PDU, RPP, busway, A/B, protection ve EPMS",
+        "source_words": 492,
+        "final_char": "."
+      },
+      {
+        "id": "K04-06",
+        "title": "AI high-density power, rack DC ve future voltage",
+        "source_words": 477,
+        "final_char": "."
+      },
+      {
+        "id": "K04-07",
+        "title": "Commissioning, lifecycle ve hangi mimari ne zaman?",
+        "source_words": 499,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K04-00",
+    "K04-01",
+    "K04-02",
+    "K04-03",
+    "K04-04",
+    "K04-05",
+    "K04-06",
+    "K04-07"
+  ],
+  "chapters": [
+    {
+      "id": "K04-00",
+      "title": "Power architecture neden bir failure-domain problemidir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-00-power-architecture-neden-bir-failure-domain-problemidir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-00-power-architecture-neden-bir-failure-domain-problemidir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-00-power-architecture-neden-bir-failure-domain-problemidir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 245.736,
+          "bytes": 3931776,
+          "source_words": 456,
+          "transcript_words": 455,
+          "word_count_ratio": 0.9978,
+          "transcript_similarity": 0.9462,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 245.736,
+      "bytes": 3931776,
+      "source_words": 456,
+      "transcript_words": 455,
+      "word_count_ratio": 0.9978,
+      "transcript_similarity": 0.9462,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K04-01",
+      "title": "Utility, MV, transformer ve LV power blocks",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-01-utility-mv-transformer-ve-lv-power-blocks.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-01-utility-mv-transformer-ve-lv-power-blocks.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-01-utility-mv-transformer-ve-lv-power-blocks.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 262.848,
+          "bytes": 4205568,
+          "source_words": 471,
+          "transcript_words": 465,
+          "word_count_ratio": 0.9873,
+          "transcript_similarity": 0.9444,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 262.848,
+      "bytes": 4205568,
+      "source_words": 471,
+      "transcript_words": 465,
+      "word_count_ratio": 0.9873,
+      "transcript_similarity": 0.9444,
+      "tail_score": 0.75,
+      "accepted": true
+    },
+    {
+      "id": "K04-02",
+      "title": "Generator, transfer logic ve black-start",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-02-generator-transfer-logic-ve-black-start.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-02-generator-transfer-logic-ve-black-start.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-02-generator-transfer-logic-ve-black-start.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 270.048,
+          "bytes": 4320768,
+          "source_words": 505,
+          "transcript_words": 497,
+          "word_count_ratio": 0.9842,
+          "transcript_similarity": 0.8902,
+          "tail_score": 1.0,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 287.28,
+          "bytes": 4596480,
+          "source_words": 505,
+          "transcript_words": 500,
+          "word_count_ratio": 0.9901,
+          "transcript_similarity": 0.9075,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 2,
+      "duration_seconds": 287.28,
+      "bytes": 4596480,
+      "source_words": 505,
+      "transcript_words": 500,
+      "word_count_ratio": 0.9901,
+      "transcript_similarity": 0.9075,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K04-03",
+      "title": "UPS topology, modes, static bypass ve maintenance bypass",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-03-ups-topology-modes-static-bypass-ve-maintenance-bypass.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-03-ups-topology-modes-static-bypass-ve-maintenance-bypass.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-03-ups-topology-modes-static-bypass-ve-maintenance-bypass.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 266.592,
+          "bytes": 4265472,
+          "source_words": 490,
+          "transcript_words": 482,
+          "word_count_ratio": 0.9837,
+          "transcript_similarity": 0.9074,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 266.592,
+      "bytes": 4265472,
+      "source_words": 490,
+      "transcript_words": 482,
+      "word_count_ratio": 0.9837,
+      "transcript_similarity": 0.9074,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K04-04",
+      "title": "Battery, stored energy ve BESS sınırı",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-04-battery-stored-energy-ve-bess-siniri.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-04-battery-stored-energy-ve-bess-siniri.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-04-battery-stored-energy-ve-bess-siniri.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 248.52,
+          "bytes": 3976320,
+          "source_words": 469,
+          "transcript_words": 469,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9339,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 248.52,
+      "bytes": 3976320,
+      "source_words": 469,
+      "transcript_words": 469,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9339,
+      "tail_score": 0.75,
+      "accepted": true
+    },
+    {
+      "id": "K04-05",
+      "title": "PDU, RPP, busway, A/B, protection ve EPMS",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-05-pdu-rpp-busway-a-b-protection-ve-epms.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-05-pdu-rpp-busway-a-b-protection-ve-epms.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-05-pdu-rpp-busway-a-b-protection-ve-epms.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 271.992,
+          "bytes": 4351872,
+          "source_words": 492,
+          "transcript_words": 492,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9329,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 271.992,
+      "bytes": 4351872,
+      "source_words": 492,
+      "transcript_words": 492,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9329,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K04-06",
+      "title": "AI high-density power, rack DC ve future voltage",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-06-ai-high-density-power-rack-dc-ve-future-voltage.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-06-ai-high-density-power-rack-dc-ve-future-voltage.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-06-ai-high-density-power-rack-dc-ve-future-voltage.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 267.072,
+          "bytes": 4273152,
+          "source_words": 477,
+          "transcript_words": 479,
+          "word_count_ratio": 1.0042,
+          "transcript_similarity": 0.9561,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 267.072,
+      "bytes": 4273152,
+      "source_words": 477,
+      "transcript_words": 479,
+      "word_count_ratio": 1.0042,
+      "transcript_similarity": 0.9561,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K04-07",
+      "title": "Commissioning, lifecycle ve hangi mimari ne zaman?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-07-commissioning-lifecycle-ve-hangi-mimari-ne-zaman.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-07-commissioning-lifecycle-ve-hangi-mimari-ne-zaman.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k04-v2/k04-07-commissioning-lifecycle-ve-hangi-mimari-ne-zaman.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 279.048,
+          "bytes": 4464768,
+          "source_words": 499,
+          "transcript_words": 490,
+          "word_count_ratio": 0.982,
+          "transcript_similarity": 0.9262,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 279.048,
+      "bytes": 4464768,
+      "source_words": 499,
+      "transcript_words": 490,
+      "word_count_ratio": 0.982,
+      "transcript_similarity": 0.9262,
+      "tail_score": 0.75,
+      "accepted": true
+    }
+  ]
+}

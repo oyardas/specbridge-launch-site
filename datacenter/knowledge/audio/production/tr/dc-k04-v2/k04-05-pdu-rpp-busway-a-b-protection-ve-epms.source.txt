@@ -1,0 +1,19 @@
+UPS output'undan sonra power artık data hall ve rack seviyesine dağıtılmalıdır. Bu aşamada traditional PDU ve RPP, busway veya rack-level power architecture gibi seçenekler vardır. Doğru seçim yalnız ilk kurulum maliyetine göre değil, layout stability, growth pattern, protection, moves-adds-changes, maintenance ve vendor ecosystem'e göre yapılmalıdır.
+
+PDU ve RPP yaklaşımı olgun ve iyi anlaşılmış bir distribution modelidir. Fixed enterprise layout'larda branch circuits açık şekilde yönetilebilir. Buna karşılık rack sayısı büyüdükçe cable volume, underfloor veya overhead congestion, spare circuit granularity ve change labor artabilir. Distribution cabinet'in kendi bakım ve arc boundary'si de floor plan üzerinde yer ister.
+
+Busway, tap-off yaklaşımı sayesinde rack güç dağıtımını daha esnek hale getirebilir. Dynamic colocation veya sık moves-adds-changes olan tesislerde önemli avantaj sağlayabilir. Fakat busway kullanmak protection problemini ortadan kaldırmaz. Rated current, short-circuit withstand, tap-off protection, phase balance, mechanical support, hot-work veya hot-plug policy, spare capacity ve vendor lifecycle birlikte düşünülmelidir.
+
+Rack-level DC veya power-shelf ecosystem, AC'nin rack içinde DC'ye çevrilip busbar üzerinden dağıtıldığı farklı bir interface modelidir. Open Rack V3 gibi ekosistemlerde kırk sekiz veya elli volt sınıfı rack busbar yapıları görülebilir. Bu, her data center için DC'nin daha iyi olduğu anlamına gelmez. Equipment ecosystem compatibility, DC protection, isolation, maintenance safety ve replacement model belirleyicidir.
+
+A ve B dağıtım bu bölümün merkezindedir. Gerçek A/B independence utility'den IT PSU'ya kadar izlenmelidir. Aynı transformer, shared low-voltage bus, common static bypass, generator paralleling bus, common fuel system, cable tray veya fire zone iki path'i aynı anda etkileyebilir. Rack'te iki PDU görmek bu upstream common points'i ortadan kaldırmaz.
+
+Protection ve selectivity de distribution choice ile doğrudan bağlıdır. Downstream fault mümkün olduğunca faulted branch'te temizlenmelidir. Utility mode'da available short-circuit current yüksek olabilirken generator island mode'da daha düşük olabilir. UPS output current limiting de conventional source'tan farklı davranabilir. Bu nedenle protection study yalnız utility normal state için yapılmamalıdır; generator, bypass, maintenance ve degraded states de hesaplanmalıdır.
+
+Breaker ve relay settings burada configuration asset haline gelir. Settings'in sahibi, approved revision'ı, study reference'ı, field verification'ı ve change log'u olmalıdır. Bir teknisyenin aylar sonra tek bir trip unit setting'ini değiştirmesi, latent common-mode outage yaratabilir. Settings governance bu nedenle operations architecture'ın bir parçasıdır.
+
+EPMS bütün bu sistemin observability katmanıdır. Utility, MV, transformer, LV, generator, UPS input-bypass-output, PDU veya busway ve rack seviyesinde measurement yapılabilir. Capacity, breaker state, energy, power quality, battery state ve events aynı chronology içinde izlenebilmelidir. Incident sırasında utility sag, ATS operation, generator start, UPS transfer ve rack impact aynı time axis üzerinde korele edilemiyorsa root-cause analysis zayıflar.
+
+Commercial billing metering ile engineering metering'i ayırmak gerekir. Billing için accuracy ve tenant settlement boundary önceliklidir. Engineering telemetry için event capture, power-quality class, waveform resolution ve topology correlation daha önemli olabilir. Aynı cihaz iki rolü yapabilir, fakat acceptance criteria ayrı yazılmalıdır.
+
+Bu bölümün ana sonucu şudur: downstream distribution, A/B labels, breakers ve meters birbirinden bağımsız alt sistemler değildir. Rack continuity'nin gerçek kalitesi, distribution flexibility ile fault containment ve observability'nin aynı mimaride birleşmesine bağlıdır.
