@@ -1,0 +1,334 @@
+{
+  "version": "DC_K07_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2262.816,
+  "source_qa": {
+    "version": "DC_K07_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 4241,
+    "chapters": [
+      {
+        "id": "K07-00",
+        "title": "Veri merkezi binası neden sadece bir shell değildir?",
+        "source_words": 489,
+        "final_char": "."
+      },
+      {
+        "id": "K07-01",
+        "title": "Site risk, building form ve functional zoning",
+        "source_words": 570,
+        "final_char": "."
+      },
+      {
+        "id": "K07-02",
+        "title": "White space, structure, slab, raised floor ve equipment logistics",
+        "source_words": 566,
+        "final_char": "."
+      },
+      {
+        "id": "K07-03",
+        "title": "A/B physical diversity, MMR, risers ve failure domains",
+        "source_words": 547,
+        "final_char": "."
+      },
+      {
+        "id": "K07-04",
+        "title": "Fire, water, security ve building compartments",
+        "source_words": 515,
+        "final_char": "."
+      },
+      {
+        "id": "K07-05",
+        "title": "AI, high density ve liquid-cooling facility readiness",
+        "source_words": 543,
+        "final_char": "."
+      },
+      {
+        "id": "K07-06",
+        "title": "Retrofit, live-site expansion ve lifecycle replacement",
+        "source_words": 481,
+        "final_char": "."
+      },
+      {
+        "id": "K07-07",
+        "title": "Commissioning, risk matrix ve hangi building architecture ne zaman?",
+        "source_words": 530,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K07-00",
+    "K07-01",
+    "K07-02",
+    "K07-03",
+    "K07-04",
+    "K07-05",
+    "K07-06",
+    "K07-07"
+  ],
+  "chapters": [
+    {
+      "id": "K07-00",
+      "title": "Veri merkezi binası neden sadece bir shell değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-00-veri-merkezi-binasi-neden-sadece-bir-shell-degildir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-00-veri-merkezi-binasi-neden-sadece-bir-shell-degildir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-00-veri-merkezi-binasi-neden-sadece-bir-shell-degildir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 262.272,
+          "bytes": 4196352,
+          "source_words": 489,
+          "transcript_words": 467,
+          "word_count_ratio": 0.955,
+          "transcript_similarity": 0.9519,
+          "tail_score": 0.0,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 258.0,
+          "bytes": 4128000,
+          "source_words": 489,
+          "transcript_words": 485,
+          "word_count_ratio": 0.9918,
+          "transcript_similarity": 0.9569,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 2,
+      "duration_seconds": 258.0,
+      "bytes": 4128000,
+      "source_words": 489,
+      "transcript_words": 485,
+      "word_count_ratio": 0.9918,
+      "transcript_similarity": 0.9569,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K07-01",
+      "title": "Site risk, building form ve functional zoning",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-01-site-risk-building-form-ve-functional-zoning.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-01-site-risk-building-form-ve-functional-zoning.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-01-site-risk-building-form-ve-functional-zoning.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 313.392,
+          "bytes": 5014272,
+          "source_words": 570,
+          "transcript_words": 568,
+          "word_count_ratio": 0.9965,
+          "transcript_similarity": 0.9508,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 313.392,
+      "bytes": 5014272,
+      "source_words": 570,
+      "transcript_words": 568,
+      "word_count_ratio": 0.9965,
+      "transcript_similarity": 0.9508,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K07-02",
+      "title": "White space, structure, slab, raised floor ve equipment logistics",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-02-white-space-structure-slab-raised-floor-ve-equipment-logistics.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-02-white-space-structure-slab-raised-floor-ve-equipment-logistics.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-02-white-space-structure-slab-raised-floor-ve-equipment-logistics.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 303.144,
+          "bytes": 4850304,
+          "source_words": 566,
+          "transcript_words": 563,
+          "word_count_ratio": 0.9947,
+          "transcript_similarity": 0.9424,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 303.144,
+      "bytes": 4850304,
+      "source_words": 566,
+      "transcript_words": 563,
+      "word_count_ratio": 0.9947,
+      "transcript_similarity": 0.9424,
+      "tail_score": 0.75,
+      "accepted": true
+    },
+    {
+      "id": "K07-03",
+      "title": "A/B physical diversity, MMR, risers ve failure domains",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-03-a-b-physical-diversity-mmr-risers-ve-failure-domains.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-03-a-b-physical-diversity-mmr-risers-ve-failure-domains.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-03-a-b-physical-diversity-mmr-risers-ve-failure-domains.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 277.8,
+          "bytes": 4444800,
+          "source_words": 547,
+          "transcript_words": 547,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9324,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 277.8,
+      "bytes": 4444800,
+      "source_words": 547,
+      "transcript_words": 547,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9324,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K07-04",
+      "title": "Fire, water, security ve building compartments",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-04-fire-water-security-ve-building-compartments.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-04-fire-water-security-ve-building-compartments.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-04-fire-water-security-ve-building-compartments.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 282.84,
+          "bytes": 4525440,
+          "source_words": 515,
+          "transcript_words": 520,
+          "word_count_ratio": 1.0097,
+          "transcript_similarity": 0.9391,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 282.84,
+      "bytes": 4525440,
+      "source_words": 515,
+      "transcript_words": 520,
+      "word_count_ratio": 1.0097,
+      "transcript_similarity": 0.9391,
+      "tail_score": 0.75,
+      "accepted": true
+    },
+    {
+      "id": "K07-05",
+      "title": "AI, high density ve liquid-cooling facility readiness",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-05-ai-high-density-ve-liquid-cooling-facility-readiness.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-05-ai-high-density-ve-liquid-cooling-facility-readiness.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-05-ai-high-density-ve-liquid-cooling-facility-readiness.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 284.64,
+          "bytes": 4554240,
+          "source_words": 543,
+          "transcript_words": 542,
+          "word_count_ratio": 0.9982,
+          "transcript_similarity": 0.9512,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 284.64,
+      "bytes": 4554240,
+      "source_words": 543,
+      "transcript_words": 542,
+      "word_count_ratio": 0.9982,
+      "transcript_similarity": 0.9512,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K07-06",
+      "title": "Retrofit, live-site expansion ve lifecycle replacement",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-06-retrofit-live-site-expansion-ve-lifecycle-replacement.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-06-retrofit-live-site-expansion-ve-lifecycle-replacement.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-06-retrofit-live-site-expansion-ve-lifecycle-replacement.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 259.536,
+          "bytes": 4152576,
+          "source_words": 481,
+          "transcript_words": 479,
+          "word_count_ratio": 0.9958,
+          "transcript_similarity": 0.9375,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 259.536,
+      "bytes": 4152576,
+      "source_words": 481,
+      "transcript_words": 479,
+      "word_count_ratio": 0.9958,
+      "transcript_similarity": 0.9375,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K07-07",
+      "title": "Commissioning, risk matrix ve hangi building architecture ne zaman?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-07-commissioning-risk-matrix-ve-hangi-building-architecture-ne-zaman.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-07-commissioning-risk-matrix-ve-hangi-building-architecture-ne-zaman.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k07-v2/k07-07-commissioning-risk-matrix-ve-hangi-building-architecture-ne-zaman.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 283.464,
+          "bytes": 4535424,
+          "source_words": 530,
+          "transcript_words": 533,
+          "word_count_ratio": 1.0057,
+          "transcript_similarity": 0.9276,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 283.464,
+      "bytes": 4535424,
+      "source_words": 530,
+      "transcript_words": 533,
+      "word_count_ratio": 1.0057,
+      "transcript_similarity": 0.9276,
+      "tail_score": 1.0,
+      "accepted": true
+    }
+  ]
+}
