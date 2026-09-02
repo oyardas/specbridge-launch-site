@@ -1,0 +1,25 @@
+HCI tasarımında network yalnız VM'lerin dış dünyaya bağlandığı access layer değildir. Network aynı zamanda distributed storage'ın veri yolu, cluster control mekanizmasının iletişim katmanı, live migration yolu, rebuild/rebalance taşıyıcısı, backup source path'i ve bazı tasarımlarda replication fabric'idir. Bu nedenle HCI network'ünü geleneksel server access network'ü gibi boyutlandırmak ciddi performans ve availability sorunlarına yol açabilir.
+
+İlk konu east-west bandwidth'tir. Normal workload sırasında storage reads ve writes node'lar arasında hareket edebilir. Replica oluşturmak bir write'ı birden fazla node'a gönderebilir. Erasure coding fragment'leri network üzerinden dağıtabilir. Live migration memory page'lerini taşır. Rebuild veya rebalance yoğun bulk traffic yaratır. Aynı anda backup çalışabilir. North-south application traffic bu toplamın yalnız bir parçasıdır.
+
+Bu nedenle port speed ile delivered throughput'u eşitlememeliyiz. Yüz gigabit Ethernet NIC takmak yüz gigabit application throughput garantisi değildir. PCIe ve NUMA topology, packet processing, protocol overhead, switch oversubscription, QoS, congestion ve storage software path sonucu belirler. Interface speed bir kapasite bileşenidir, performans sonucu değildir.
+
+Redundancy için dual NIC sık kullanılır. Fakat iki NIC aynı ToR'a bağlıysa switch failure'a karşı redundant değildir. İki farklı ToR'a bağlı olsa bile ToR'lar ortak control plane veya ortak uplink bottleneck taşıyabilir. MLAG veya benzeri multi-chassis teknolojiler yararlı olabilir ama logical dual-homing'in altında hangi common-mode risklerin kaldığı bilinmelidir. Routed leaf tasarımları başka seçenekler sunabilir. Burada hedef belirli bir vendor topology değil, independent path ve deterministic failure behavior'dır.
+
+RDMA bazı HCI platformlarında önemli rol oynar. Microsoft Storage Spaces Direct örneğinde SMB Direct ve RDMA önerilen yüksek performanslı storage network mekanizmaları arasındadır. RDMA CPU overhead ve latency avantajı sağlayabilir. Ancak bu durum bütün HCI sistemlerinin RDMA gerektirdiği anlamına gelmez. Platform support matrix authoritative olmalıdır.
+
+RoCE kullanıldığında congestion ve loss engineering özel önem taşır. ECN, PFC veya platformun önerdiği queue configuration yanlışsa “RDMA enabled” olmak beklenen davranışı sağlamaz. iWARP farklı transport özelliklerine sahiptir. RDMA seçimi yalnız NIC feature checkbox'ı değildir; end-to-end fabric design kararıdır.
+
+Oversubscription konusu özellikle rebuild sırasında görünür hale gelir. Normal workload düşük traffic üretiyorsa oversubscribed uplink yeterli görünebilir. Bir node kaybında cluster terabaytlarca veriyi yeniden oluştururken aynı uplink backup, replication veya kullanıcı trafiğini de taşıyabilir. Acceptance testleri yalnız normal benchmark değil, failure ve recovery trafiğini de kapsamalıdır.
+
+MTU configuration basit ama kritik örneklerden biridir. Jumbo frame bazı workload'larda overhead'i azaltabilir. Ancak path üzerindeki bir switch veya interface farklı MTU kullanıyorsa intermittent fragmentation veya packet loss sorunları ortaya çıkabilir. End-to-end consistency, büyük MTU seçmekten daha önemlidir.
+
+QoS da benzer şekilde configuration'da bulunmasıyla tamamlanmaz. Storage, management, migration, backup ve workload traffic class'larının congestion altında nasıl davrandığı ölçülmelidir. Bir backup job'ın storage latency'yi SLA dışına çıkarıp çıkarmadığı test edilmelidir.
+
+Average latency yerine tail latency de önemlidir. Distributed storage birçok node ve path'e dokunduğu için bir slow path bütün I/O completion süresini etkileyebilir. P95, P99 ve gerektiğinde daha yüksek percentile'lar, jitter ve packet drop telemetry'si birlikte izlenmelidir. Green interface status, healthy HCI fabric kanıtı değildir.
+
+Network maintenance de HCI maintenance event'idir. ToR upgrade, routing change veya cable migration storage path'i etkileyebilir. Network MOP hazırlanırken cluster health, data resync, VM migration ve rollback trigger'ları birlikte tanımlanmalıdır. Networking ve virtualization ekiplerinin ayrı change window yürütmesi, tek distributed system üzerinde çakışan risk yaratabilir.
+
+Physical topology ile storage failure domain'leri de eşleşmelidir. Replica'lar farklı node'larda olsa da bu node'ların network bağlantıları aynı switch'e bağımlıysa gerçek failure-domain independence eksik kalabilir. Rack-aware placement, dual ToR ve upstream path design birlikte değerlendirilmelidir.
+
+Bu chapter'ın sonucu şudur: HCI network, storage architecture'ın kendisidir. Bandwidth, latency, redundancy, congestion ve maintenance davranışı cluster availability ve data durability üzerinde doğrudan etkilidir. Bir sonraki chapter'da bu altyapının VM, Kubernetes, backup ve DR servisleriyle nasıl bütünleştiğini ele alacağız.

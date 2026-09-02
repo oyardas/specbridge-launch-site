@@ -1,0 +1,323 @@
+{
+  "version": "DC_K11_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2773.944,
+  "source_qa": {
+    "version": "DC_K11_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 4880,
+    "chapters": [
+      {
+        "id": "K11-00",
+        "title": "HCI neden yalnızca server ve disk değildir?",
+        "source_words": 524,
+        "final_char": "."
+      },
+      {
+        "id": "K11-01",
+        "title": "HCI node, compute ve resource coupling",
+        "source_words": 644,
+        "final_char": "."
+      },
+      {
+        "id": "K11-02",
+        "title": "Distributed storage, replicas, erasure coding ve usable capacity",
+        "source_words": 620,
+        "final_char": "."
+      },
+      {
+        "id": "K11-03",
+        "title": "Quorum, witness ve failure domains",
+        "source_words": 587,
+        "final_char": "."
+      },
+      {
+        "id": "K11-04",
+        "title": "HCI network architecture",
+        "source_words": 595,
+        "final_char": "."
+      },
+      {
+        "id": "K11-05",
+        "title": "VM, Kubernetes, backup ve DR",
+        "source_words": 610,
+        "final_char": "."
+      },
+      {
+        "id": "K11-06",
+        "title": "Scale, lifecycle, operations ve performance under failure",
+        "source_words": 582,
+        "final_char": "."
+      },
+      {
+        "id": "K11-07",
+        "title": "Sizing, TCO, acceptance ve hangi mimari ne zaman?",
+        "source_words": 718,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K11-00",
+    "K11-01",
+    "K11-02",
+    "K11-03",
+    "K11-04",
+    "K11-05",
+    "K11-06",
+    "K11-07"
+  ],
+  "chapters": [
+    {
+      "id": "K11-00",
+      "title": "HCI neden yalnızca server ve disk değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-00-hci-neden-yalnizca-server-ve-disk-degildir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-00-hci-neden-yalnizca-server-ve-disk-degildir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-00-hci-neden-yalnizca-server-ve-disk-degildir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 291.024,
+          "bytes": 4656384,
+          "source_words": 524,
+          "transcript_words": 523,
+          "word_count_ratio": 0.9981,
+          "transcript_similarity": 0.9704,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 291.024,
+      "bytes": 4656384,
+      "source_words": 524,
+      "transcript_words": 523,
+      "word_count_ratio": 0.9981,
+      "transcript_similarity": 0.9704,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K11-01",
+      "title": "HCI node, compute ve resource coupling",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-01-hci-node-compute-ve-resource-coupling.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-01-hci-node-compute-ve-resource-coupling.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-01-hci-node-compute-ve-resource-coupling.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 354.624,
+          "bytes": 5673984,
+          "source_words": 644,
+          "transcript_words": 640,
+          "word_count_ratio": 0.9938,
+          "transcript_similarity": 0.9346,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 354.624,
+      "bytes": 5673984,
+      "source_words": 644,
+      "transcript_words": 640,
+      "word_count_ratio": 0.9938,
+      "transcript_similarity": 0.9346,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K11-02",
+      "title": "Distributed storage, replicas, erasure coding ve usable capacity",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-02-distributed-storage-replicas-erasure-coding-ve-usable-capacity.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-02-distributed-storage-replicas-erasure-coding-ve-usable-capacity.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-02-distributed-storage-replicas-erasure-coding-ve-usable-capacity.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 358.008,
+          "bytes": 5728128,
+          "source_words": 620,
+          "transcript_words": 615,
+          "word_count_ratio": 0.9919,
+          "transcript_similarity": 0.9263,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 358.008,
+      "bytes": 5728128,
+      "source_words": 620,
+      "transcript_words": 615,
+      "word_count_ratio": 0.9919,
+      "transcript_similarity": 0.9263,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K11-03",
+      "title": "Quorum, witness ve failure domains",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-03-quorum-witness-ve-failure-domains.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-03-quorum-witness-ve-failure-domains.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-03-quorum-witness-ve-failure-domains.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 343.656,
+          "bytes": 5498496,
+          "source_words": 587,
+          "transcript_words": 586,
+          "word_count_ratio": 0.9983,
+          "transcript_similarity": 0.948,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 343.656,
+      "bytes": 5498496,
+      "source_words": 587,
+      "transcript_words": 586,
+      "word_count_ratio": 0.9983,
+      "transcript_similarity": 0.948,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K11-04",
+      "title": "HCI network architecture",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-04-hci-network-architecture.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-04-hci-network-architecture.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-04-hci-network-architecture.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 333.384,
+          "bytes": 5334144,
+          "source_words": 595,
+          "transcript_words": 594,
+          "word_count_ratio": 0.9983,
+          "transcript_similarity": 0.9369,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 333.384,
+      "bytes": 5334144,
+      "source_words": 595,
+      "transcript_words": 594,
+      "word_count_ratio": 0.9983,
+      "transcript_similarity": 0.9369,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K11-05",
+      "title": "VM, Kubernetes, backup ve DR",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-05-vm-kubernetes-backup-ve-dr.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-05-vm-kubernetes-backup-ve-dr.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-05-vm-kubernetes-backup-ve-dr.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 355.872,
+          "bytes": 5693952,
+          "source_words": 610,
+          "transcript_words": 610,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9246,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 355.872,
+      "bytes": 5693952,
+      "source_words": 610,
+      "transcript_words": 610,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9246,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K11-06",
+      "title": "Scale, lifecycle, operations ve performance under failure",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-06-scale-lifecycle-operations-ve-performance-under-failure.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-06-scale-lifecycle-operations-ve-performance-under-failure.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-06-scale-lifecycle-operations-ve-performance-under-failure.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 327.552,
+          "bytes": 5240832,
+          "source_words": 582,
+          "transcript_words": 582,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9227,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 327.552,
+      "bytes": 5240832,
+      "source_words": 582,
+      "transcript_words": 582,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9227,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K11-07",
+      "title": "Sizing, TCO, acceptance ve hangi mimari ne zaman?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-07-sizing-tco-acceptance-ve-hangi-mimari-ne-zaman.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-07-sizing-tco-acceptance-ve-hangi-mimari-ne-zaman.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k11-v2/k11-07-sizing-tco-acceptance-ve-hangi-mimari-ne-zaman.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 409.824,
+          "bytes": 6557184,
+          "source_words": 718,
+          "transcript_words": 715,
+          "word_count_ratio": 0.9958,
+          "transcript_similarity": 0.9546,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 409.824,
+      "bytes": 6557184,
+      "source_words": 718,
+      "transcript_words": 715,
+      "word_count_ratio": 0.9958,
+      "transcript_similarity": 0.9546,
+      "tail_score": 1.0,
+      "accepted": true
+    }
+  ]
+}
