@@ -11,7 +11,7 @@ function renderK02(m){
  const chain=g.decisionChain.map(([a,b],i)=>`<div class="responsibility-step"><i>${i+1}</i><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('');
  const scale=g.scaleMatrix.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('');
  const maturity=g.maturity.map(([l,t,s])=>`<div class="maturity-step"><span>${esc(l)}</span><b>${esc(t)}</b><small>${esc(s)}</small></div>`).join('');
- return `<div class="golden-head">
+ return `<div class="golden-head" data-k02-golden-ui="${esc(K.updated)}">
    <div><span>DC-K02 · GOLDEN MODULE ${esc(g.version)}</span><h3>Classify the requirement before choosing the delivery form</h3><p>Modular, prefabricated, containerized, Micro DC ve Smart Cabinet aynı kavram değildir; karar proje koşulu, ölçek, density, saha, büyüme, resilience ve lojistik birlikte okunarak verilmelidir.</p></div>
    <div class="golden-metrics"><b>${g.researchSections}</b><span>Research sections</span><b>${g.sourceCount}</b><span>Authoritative sources</span><b>${g.chapters.length}</b><span>Full Brief chapters</span></div>
  </div>
@@ -33,8 +33,8 @@ function specialize(){
  if(rendering||panel.hidden)return;
  const m=activeModule();
  if(!m||m.id!=='DC-K02'||!m.golden)return;
- if(panel.dataset.specialized===`${m.id}:${K.updated}`&&panel.querySelector('[data-full-start]'))return;
- rendering=true;panel.innerHTML=renderK02(m);panel.dataset.specialized=`${m.id}:${K.updated}`;rendering=false;
+ if(panel.querySelector(`[data-k02-golden-ui="${K.updated}"]`))return;
+ rendering=true;panel.innerHTML=renderK02(m);rendering=false;
 }
 const obs=new MutationObserver(specialize);obs.observe(panel,{childList:true,attributes:true,attributeFilter:['hidden']});
 setTimeout(specialize,0);
