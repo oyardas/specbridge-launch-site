@@ -1,0 +1,17 @@
+AI altyapısındaki en büyük değişim yalnız GPU sayısının artması değildir. Compute, power, cooling ve interconnect tasarımı rack ölçeğinde tek sistem haline gelmektedir. Conventional enterprise rack'te server'lar bağımsız cihazlar gibi düşünülür; rack onları taşıyan ve besleyen altyapıdır. Rack-scale AI'da ise rack'in kendisi system architecture'ın parçasıdır.
+
+NVL72 sınıfı güncel sistemler bu dönüşümü açık biçimde gösterir. Compute trays, NVLink switch trays, high-speed cable cartridge yapıları, power shelves, DC busbar ve liquid cooling manifolds aynı rack içinde birlikte tasarlanır. Bazı konfigürasyonlarda yaklaşık yüz yirmi kilowatt rack consumption, daha yeni platform referanslarında yüz kırk iki kilowatt'a kadar full-rack power requirement yayımlanmıştır. Bu rakamlar vendor platform örneğidir; tasarım bandı seçmek için gerçek equipment release doğrulanmalıdır.
+
+Power shelf tarafında yüksek kapasiteli AC to DC conversion rack'in bir bileşenidir. Busbar üzerinden trays'e nominal elli volt sınıfı DC dağıtılır. Bu, conventional A/B rack PDU modelinden farklı failure ve service davranışı yaratır. Power shelf redundancy, busbar joint, connector temperature, current sharing ve maintenance sequence artık rack acceptance'ın parçasıdır.
+
+Thermal tarafta direct-to-chip liquid cooling GPU ve CPU heat'inin büyük bölümünü alabilir. Ancak networking, storage, memory veya power conversion gibi bileşenlerde air cooling devam edebilir. Bu yüzden AI rack için hem liquid capacity hem residual air load tasarlanmalıdır. Rack'in toplam cooling demand'ını yalnız “liquid cooled” etiketiyle ifade etmek yeterli değildir; liquid heat fraction ve remaining air kW değerleri istenmelidir.
+
+Mechanical tarafta loaded weight kritik hale gelir. Power shelves, busbar, manifold, coolant, compute trays ve dense cabling rack kütlesini artırır. Rack'in static rating'i kadar floor point load, transport path ve installation tooling de kontrol edilmelidir. Bir AI rack data hall'a sığıyor olabilir ama freight elevator'a sığmıyor veya rolling load sınırını aşıyor olabilir. Bu nedenle rack-scale procurement binaya girişten service procedure'a kadar bütün lifecycle'ı kapsar.
+
+Kablolama da klasik modelden farklıdır. Rack içi yüksek hızlı interconnect'ler büyük cable volume ve hassas bend radius yaratabilir. Rear zone yalnız server power ve Ethernet kablolarından oluşmaz; cable cartridge veya dense fabric bağlantıları service envelope'u belirleyebilir. Rack width veya rear extender ihtiyacı bu nedenle sadece mekanik tercih değildir.
+
+Open Rack V3, MGX ve daha yeni wide rack yaklaşımları bu yeni ihtiyaçlara farklı cevaplar verir. ORv3 rack-level power ve liquid interface standardizasyonuna odaklanır. MGX bazı AI rack tasarımlarında conventional pitch ile ORv3-derived infrastructure'ı birleştirir. Wide rack ise gelecekte güç, liquid distribution ve cabling ihtiyacının rack footprint'ini büyütebileceğini kabul eder.
+
+Burada procurement dili değişmelidir. “Kabinet adedi ve U yüksekliği” yeterli BoQ tanımı değildir. Rack-scale AI için equipment manifest, power envelope, liquid flow and temperature requirements, fully loaded weight, leak detection, service tooling, firmware or rack management, interconnect layout ve facility interface document birlikte talep edilmelidir.
+
+Golden karar şudur: AI rack satın almak cabinet almak değildir; rack-scale system acceptance yapmaktır. Facility, IT ve operations ekipleri aynı acceptance contract içinde çalışmadıkça yüksek yoğunluk avantajı deployment riskine dönüşebilir.
