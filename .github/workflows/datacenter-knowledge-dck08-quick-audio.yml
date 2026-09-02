@@ -1,0 +1,93 @@
+name: Data Center Knowledge DC-K08 Quick Audio
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - datacenter/knowledge/narration/DC-K08_QUICK_NARRATION_TR_V1.md
+      - datacenter/knowledge/narration/generate_dck08_quick_audio.py
+      - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
+      - datacenter/knowledge/narration/DC-K08_PUBLISH_QUICK_V1.txt
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  generate:
+    if: ${{ github.event_name == 'workflow_dispatch' || !contains(github.event.pull_request.title, '[PUBLISH QUICK]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ARTIFACT_NAME: datacenter-knowledge-dck08-quick-audio-tr-v1
+      AUDIO_DIR: datacenter/knowledge/audio/production/tr/dc-k08-quick-v1
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade openai mutagen num2words
+      - name: Validate Quick narration source contract
+        run: python datacenter/knowledge/narration/generate_dck08_quick_audio.py --validate-source
+      - name: Generate and validate Quick Brief
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python datacenter/knowledge/narration/generate_dck08_quick_audio.py
+      - name: Upload accepted Quick artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: datacenter-knowledge-dck08-quick-audio-tr-v1
+          path: datacenter/knowledge/audio/production/tr/dc-k08-quick-v1/
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.title, '[PUBLISH QUICK]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ARTIFACT_NAME: datacenter-knowledge-dck08-quick-audio-tr-v1
+      AUDIO_DIR: datacenter/knowledge/audio/production/tr/dc-k08-quick-v1
+      MARKER: datacenter/knowledge/narration/DC-K08_PUBLISH_QUICK_V1.txt
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout PR head branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Read accepted source run
+        run: |
+          SOURCE_RUN_ID="$(awk -F= '$1=="SOURCE_RUN_ID" {print $2}' "$MARKER" | tr -d '[:space:]')"
+          [[ "$SOURCE_RUN_ID" =~ ^[0-9]+$ ]] || { echo "Invalid SOURCE_RUN_ID" >&2; exit 2; }
+          echo "SOURCE_RUN_ID=$SOURCE_RUN_ID" >> "$GITHUB_ENV"
+      - name: Download accepted Quick artifact
+        run: |
+          rm -rf "$AUDIO_DIR"; mkdir -p "$AUDIO_DIR"
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$ARTIFACT_NAME" --dir "$AUDIO_DIR"
+      - name: Verify Quick manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('datacenter/knowledge/audio/production/tr/dc-k08-quick-v1/manifest.json')
+          m=json.loads(p.read_text(encoding='utf-8'))
+          assert m['version']=='DC_K08_QUICK_AUDIO_V1'
+          assert m['chapter_count']==1 and m['accepted_count']==1 and m['failed_count']==0
+          assert m.get('source_qa',{}).get('accepted') is True
+          assert len(list(p.parent.glob('*.mp3')))==1
+          assert len(list(p.parent.glob('*.source.txt')))==1
+          assert len(list(p.parent.glob('*.transcript.txt')))==1
+          print('PASS_QUICK_1_OF_1',m['total_duration_seconds'])
+          PY
+      - name: Commit accepted Quick audio to PR branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$AUDIO_DIR"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Publish accepted DC-K08 Quick Brief audio [skip ci]'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
