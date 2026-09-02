@@ -1,0 +1,25 @@
+HCI'ın en güçlü vaatlerinden biri scale-out kolaylığıdır. Yeni node eklenir, cluster capacity büyür ve platform data'yı yeniden dengeler. Bu model gerçekten operasyonel avantaj sağlayabilir. Ancak scale-out ile linear scale aynı şey değildir. Her node eklendiğinde application performance'ın tam aynı oranda artacağını varsaymak doğru değildir.
+
+Classical symmetric HCI'da node compute, memory ve storage'ı birlikte ekler. Growth pattern dengeliyse bu çok verimlidir. Fakat storage üç kat hızla büyürken compute sabit kalıyorsa stranded CPU ve RAM ortaya çıkabilir. Tam tersi durumda gereksiz storage alınabilir. Bu nedenle TCO çalışmasında kullanılmayan resource'lar da maliyettir. Disaggregated veya storage-heavy ve compute-heavy node seçenekleri bu problemi azaltabilir ama support ve placement kuralları ayrıca doğrulanmalıdır.
+
+Small cluster ile large cluster trade-off'u da önemlidir. Üç node'lu cluster'da bir node kaybı node sayısının üçte birini götürür. On iki node'lu cluster'da aynı single-node failure yüzde olarak daha küçüktür. Buna karşılık çok büyük cluster control plane, network veya software defect için daha geniş blast radius yaratabilir. Cluster federation veya birden fazla fault-contained cluster bazı ortamlarda daha dengeli olabilir.
+
+Node expansion'ın tamamlanması da join event ile ölçülmemelidir. Yeni node cluster'a katıldıktan sonra data rebalance başlayabilir. Data placement tekrar dengelenene, health normal state'e dönene ve performance stabilize olana kadar expansion technically devam eder. Change ticket ancak bu state görülünce kapanmalıdır.
+
+Lifecycle tarafında HCI, tightly validated stack'tir. Server BIOS, BMC, NIC firmware, drive firmware, hypervisor, storage software, drivers ve management components belirli compatibility set içinde kalmalıdır. Software-defined kelimesi arbitrary hardware anlamına gelmez. Hardware compatibility list operational policy'nin bir parçasıdır.
+
+Rolling upgrade, downtime azaltmak için çok değerlidir. Ancak rolling olması risksiz olduğu anlamına gelmez. Bir node maintenance moduna alınır; workloads move eder veya restart edilir; data component'leri farklı state'e geçebilir; cluster geçici mixed-version durumda olabilir. Kalan node'ların compute, memory ve storage headroom'u upgrade state'i taşıyabilmelidir.
+
+Maintenance mode seçenekleri platforma göre farklı data behavior yaratabilir. Bazı modlar data'yı tamamen evacuate eder, bazıları local data'yı yerinde bırakır, bazıları yalnız workload'u taşır. Operator MOP içinde hangi mode'un neden seçildiğini ve ikinci failure durumunda ne olacağını bilmelidir.
+
+Rollback konusu özellikle önemlidir. Software veya firmware upgrade bazı metadata veya on-disk format değişiklikleri yapabilir. “Bir önceki pakete geri döneriz” her zaman mümkün değildir. Rollback boundary upgrade öncesi belgelenmeli, backup ve recovery state doğrulanmalıdır.
+
+Operations telemetry'si de distributed system'e uygun olmalıdır. Node health, CPU ve memory pressure, drive endurance, storage latency, throughput ve IOPS, network drop ve congestion, rebuild state, capacity headroom, replication lag ve backup status birlikte izlenmelidir. Tek bir health score root cause analizi yerine geçmez.
+
+Performance acceptance normal state ile sınırlı kalmamalıdır. Synthetic benchmark yalnız cache warm durumda çalıştırılırsa media path görünmeyebilir. Average latency iyi görünürken P99 bozulabilir. Rebuild sırasında storage network ve CPU tüketimi application SLA'yı aşabilir. Bu nedenle representative workload, normal state, node failure, drive failure, rebuild, maintenance ve backup concurrency altında ölçülmelidir.
+
+Noisy neighbor etkisi HCI'da birkaç shared resource üzerinden oluşabilir. Bir workload yoğun CPU kullanırken başka bir workload storage latency'si etkilenebilir; bulk backup network queues'u doldurabilir; data reduction CPU tüketebilir. QoS ve workload policy'leri gerçek contention altında doğrulanmalıdır.
+
+Time synchronization ve logs da dağıtık troubleshooting için temel gereksinimdir. Node'lar arasında clock drift varsa aynı incident'ın event sequence'ini çıkarmak zorlaşır. Central log retention, audit ve accurate time HCI operations'ın görünmeyen ama kritik altyapısıdır.
+
+Bu chapter'ın Golden sonucu şudur: HCI lifecycle automation çok değerlidir ama automation capacity reserve ve failure-domain engineering'in yerini tutmaz. Scale, maintenance ve upgrade operasyonları production state değişiklikleridir ve her biri acceptance modeliyle yönetilmelidir. Son chapter'da bütün bu bilgiyi sizing, TCO, commissioning ve architecture selection kararına bağlayacağız.
