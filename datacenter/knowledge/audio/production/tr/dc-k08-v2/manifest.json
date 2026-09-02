@@ -1,0 +1,323 @@
+{
+  "version": "DC_K08_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2146.656,
+  "source_qa": {
+    "version": "DC_K08_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3843,
+    "chapters": [
+      {
+        "id": "K08-00",
+        "title": "x86 server gerçekte nedir?",
+        "source_words": 489,
+        "final_char": "."
+      },
+      {
+        "id": "K08-01",
+        "title": "Core, thread, socket, cache ve CPU topology",
+        "source_words": 499,
+        "final_char": "."
+      },
+      {
+        "id": "K08-02",
+        "title": "Memory channels, DIMMs, ECC, RAS ve bandwidth",
+        "source_words": 460,
+        "final_char": "."
+      },
+      {
+        "id": "K08-03",
+        "title": "NUMA ve locality",
+        "source_words": 490,
+        "final_char": "."
+      },
+      {
+        "id": "K08-04",
+        "title": "PCIe, CXL ve I/O lane budget",
+        "source_words": 491,
+        "final_char": "."
+      },
+      {
+        "id": "K08-05",
+        "title": "Boot, NVMe, local storage ve network interfaces",
+        "source_words": 450,
+        "final_char": "."
+      },
+      {
+        "id": "K08-06",
+        "title": "BMC, UEFI, Redfish, firmware ve platform security",
+        "source_words": 480,
+        "final_char": "."
+      },
+      {
+        "id": "K08-07",
+        "title": "Power, thermal, serviceability, TCO ve hangi server ne zaman?",
+        "source_words": 484,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K08-00",
+    "K08-01",
+    "K08-02",
+    "K08-03",
+    "K08-04",
+    "K08-05",
+    "K08-06",
+    "K08-07"
+  ],
+  "chapters": [
+    {
+      "id": "K08-00",
+      "title": "x86 server gerçekte nedir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-00-x86-server-gercekte-nedir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-00-x86-server-gercekte-nedir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-00-x86-server-gercekte-nedir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 279.768,
+          "bytes": 4476288,
+          "source_words": 489,
+          "transcript_words": 490,
+          "word_count_ratio": 1.002,
+          "transcript_similarity": 0.9438,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 279.768,
+      "bytes": 4476288,
+      "source_words": 489,
+      "transcript_words": 490,
+      "word_count_ratio": 1.002,
+      "transcript_similarity": 0.9438,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-01",
+      "title": "Core, thread, socket, cache ve CPU topology",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-01-core-thread-socket-cache-ve-cpu-topology.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-01-core-thread-socket-cache-ve-cpu-topology.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-01-core-thread-socket-cache-ve-cpu-topology.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 276.504,
+          "bytes": 4424064,
+          "source_words": 499,
+          "transcript_words": 499,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9359,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 276.504,
+      "bytes": 4424064,
+      "source_words": 499,
+      "transcript_words": 499,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9359,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-02",
+      "title": "Memory channels, DIMMs, ECC, RAS ve bandwidth",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-02-memory-channels-dimms-ecc-ras-ve-bandwidth.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-02-memory-channels-dimms-ecc-ras-ve-bandwidth.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-02-memory-channels-dimms-ecc-ras-ve-bandwidth.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 269.256,
+          "bytes": 4308096,
+          "source_words": 460,
+          "transcript_words": 457,
+          "word_count_ratio": 0.9935,
+          "transcript_similarity": 0.9313,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 269.256,
+      "bytes": 4308096,
+      "source_words": 460,
+      "transcript_words": 457,
+      "word_count_ratio": 0.9935,
+      "transcript_similarity": 0.9313,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-03",
+      "title": "NUMA ve locality",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-03-numa-ve-locality.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-03-numa-ve-locality.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-03-numa-ve-locality.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 269.016,
+          "bytes": 4304256,
+          "source_words": 490,
+          "transcript_words": 493,
+          "word_count_ratio": 1.0061,
+          "transcript_similarity": 0.9318,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 269.016,
+      "bytes": 4304256,
+      "source_words": 490,
+      "transcript_words": 493,
+      "word_count_ratio": 1.0061,
+      "transcript_similarity": 0.9318,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-04",
+      "title": "PCIe, CXL ve I/O lane budget",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-04-pcie-cxl-ve-i-o-lane-budget.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-04-pcie-cxl-ve-i-o-lane-budget.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-04-pcie-cxl-ve-i-o-lane-budget.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 269.112,
+          "bytes": 4305792,
+          "source_words": 491,
+          "transcript_words": 491,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9226,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 269.112,
+      "bytes": 4305792,
+      "source_words": 491,
+      "transcript_words": 491,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9226,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-05",
+      "title": "Boot, NVMe, local storage ve network interfaces",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-05-boot-nvme-local-storage-ve-network-interfaces.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-05-boot-nvme-local-storage-ve-network-interfaces.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-05-boot-nvme-local-storage-ve-network-interfaces.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 250.728,
+          "bytes": 4011648,
+          "source_words": 450,
+          "transcript_words": 441,
+          "word_count_ratio": 0.98,
+          "transcript_similarity": 0.9001,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 250.728,
+      "bytes": 4011648,
+      "source_words": 450,
+      "transcript_words": 441,
+      "word_count_ratio": 0.98,
+      "transcript_similarity": 0.9001,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-06",
+      "title": "BMC, UEFI, Redfish, firmware ve platform security",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-06-bmc-uefi-redfish-firmware-ve-platform-security.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-06-bmc-uefi-redfish-firmware-ve-platform-security.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-06-bmc-uefi-redfish-firmware-ve-platform-security.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 264.72,
+          "bytes": 4235520,
+          "source_words": 480,
+          "transcript_words": 475,
+          "word_count_ratio": 0.9896,
+          "transcript_similarity": 0.9445,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 264.72,
+      "bytes": 4235520,
+      "source_words": 480,
+      "transcript_words": 475,
+      "word_count_ratio": 0.9896,
+      "transcript_similarity": 0.9445,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K08-07",
+      "title": "Power, thermal, serviceability, TCO ve hangi server ne zaman?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-07-power-thermal-serviceability-tco-ve-hangi-server-ne-zaman.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-07-power-thermal-serviceability-tco-ve-hangi-server-ne-zaman.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k08-v2/k08-07-power-thermal-serviceability-tco-ve-hangi-server-ne-zaman.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 267.552,
+          "bytes": 4280832,
+          "source_words": 484,
+          "transcript_words": 493,
+          "word_count_ratio": 1.0186,
+          "transcript_similarity": 0.9335,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 267.552,
+      "bytes": 4280832,
+      "source_words": 484,
+      "transcript_words": 493,
+      "word_count_ratio": 1.0186,
+      "transcript_similarity": 0.9335,
+      "tail_score": 0.875,
+      "accepted": true
+    }
+  ]
+}
