@@ -1,0 +1,324 @@
+{
+  "version": "DC_K02_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2450.16,
+  "source_qa": {
+    "version": "DC_K02_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 4412,
+    "chapters": [
+      {
+        "id": "K02-00",
+        "title": "“Modüler veri merkezi” aslında ne demektir?",
+        "source_words": 469,
+        "final_char": "."
+      },
+      {
+        "id": "K02-01",
+        "title": "Greenfield, brownfield, retrofit ve traditional construction",
+        "source_words": 564,
+        "final_char": "."
+      },
+      {
+        "id": "K02-02",
+        "title": "Prefabricated, modular ve containerized mimariler",
+        "source_words": 574,
+        "final_char": "."
+      },
+      {
+        "id": "K02-03",
+        "title": "Micro DC, Smart Cabinet ve Edge",
+        "source_words": 545,
+        "final_char": "."
+      },
+      {
+        "id": "K02-04",
+        "title": "Scale, phasing, CAPEX ve stranded capacity",
+        "source_words": 578,
+        "final_char": "."
+      },
+      {
+        "id": "K02-05",
+        "title": "Tier, redundancy, commissioning ve failure domains",
+        "source_words": 478,
+        "final_char": "."
+      },
+      {
+        "id": "K02-06",
+        "title": "AI, high density ve liquid cooling",
+        "source_words": 538,
+        "final_char": "."
+      },
+      {
+        "id": "K02-07",
+        "title": "Logistics, lock-in ve hangi mimari hangi senaryo?",
+        "source_words": 666,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "chapters": [
+    {
+      "id": "K02-00",
+      "title": "“Modüler veri merkezi” aslında ne demektir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-00-moduler-veri-merkezi-aslinda-ne-demektir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-00-moduler-veri-merkezi-aslinda-ne-demektir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-00-moduler-veri-merkezi-aslinda-ne-demektir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 261.216,
+          "bytes": 4179456,
+          "source_words": 469,
+          "transcript_words": 463,
+          "word_count_ratio": 0.9872,
+          "transcript_similarity": 0.9592,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 261.216,
+      "bytes": 4179456,
+      "source_words": 469,
+      "transcript_words": 463,
+      "word_count_ratio": 0.9872,
+      "transcript_similarity": 0.9592,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-01",
+      "title": "Greenfield, brownfield, retrofit ve traditional construction",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-01-greenfield-brownfield-retrofit-ve-traditional-construction.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-01-greenfield-brownfield-retrofit-ve-traditional-construction.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-01-greenfield-brownfield-retrofit-ve-traditional-construction.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 321.168,
+          "bytes": 5138688,
+          "source_words": 564,
+          "transcript_words": 561,
+          "word_count_ratio": 0.9947,
+          "transcript_similarity": 0.9582,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 321.168,
+      "bytes": 5138688,
+      "source_words": 564,
+      "transcript_words": 561,
+      "word_count_ratio": 0.9947,
+      "transcript_similarity": 0.9582,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-02",
+      "title": "Prefabricated, modular ve containerized mimariler",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-02-prefabricated-modular-ve-containerized-mimariler.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-02-prefabricated-modular-ve-containerized-mimariler.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-02-prefabricated-modular-ve-containerized-mimariler.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 319.248,
+          "bytes": 5107968,
+          "source_words": 574,
+          "transcript_words": 575,
+          "word_count_ratio": 1.0017,
+          "transcript_similarity": 0.9643,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 319.248,
+      "bytes": 5107968,
+      "source_words": 574,
+      "transcript_words": 575,
+      "word_count_ratio": 1.0017,
+      "transcript_similarity": 0.9643,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-03",
+      "title": "Micro DC, Smart Cabinet ve Edge",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-03-micro-dc-smart-cabinet-ve-edge.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-03-micro-dc-smart-cabinet-ve-edge.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-03-micro-dc-smart-cabinet-ve-edge.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 306.792,
+          "bytes": 4908672,
+          "source_words": 545,
+          "transcript_words": 540,
+          "word_count_ratio": 0.9908,
+          "transcript_similarity": 0.953,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 306.792,
+      "bytes": 4908672,
+      "source_words": 545,
+      "transcript_words": 540,
+      "word_count_ratio": 0.9908,
+      "transcript_similarity": 0.953,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-04",
+      "title": "Scale, phasing, CAPEX ve stranded capacity",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-04-scale-phasing-capex-ve-stranded-capacity.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-04-scale-phasing-capex-ve-stranded-capacity.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-04-scale-phasing-capex-ve-stranded-capacity.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 318.336,
+          "bytes": 5093376,
+          "source_words": 578,
+          "transcript_words": 584,
+          "word_count_ratio": 1.0104,
+          "transcript_similarity": 0.5852,
+          "tail_score": 0.5,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 325.104,
+          "bytes": 5201664,
+          "source_words": 578,
+          "transcript_words": 570,
+          "word_count_ratio": 0.9862,
+          "transcript_similarity": 0.9268,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 2,
+      "duration_seconds": 325.104,
+      "bytes": 5201664,
+      "source_words": 578,
+      "transcript_words": 570,
+      "word_count_ratio": 0.9862,
+      "transcript_similarity": 0.9268,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-05",
+      "title": "Tier, redundancy, commissioning ve failure domains",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-05-tier-redundancy-commissioning-ve-failure-domains.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-05-tier-redundancy-commissioning-ve-failure-domains.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-05-tier-redundancy-commissioning-ve-failure-domains.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 269.88,
+          "bytes": 4318080,
+          "source_words": 478,
+          "transcript_words": 479,
+          "word_count_ratio": 1.0021,
+          "transcript_similarity": 0.9237,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 269.88,
+      "bytes": 4318080,
+      "source_words": 478,
+      "transcript_words": 479,
+      "word_count_ratio": 1.0021,
+      "transcript_similarity": 0.9237,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-06",
+      "title": "AI, high density ve liquid cooling",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-06-ai-high-density-ve-liquid-cooling.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-06-ai-high-density-ve-liquid-cooling.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-06-ai-high-density-ve-liquid-cooling.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 282.84,
+          "bytes": 4525440,
+          "source_words": 538,
+          "transcript_words": 534,
+          "word_count_ratio": 0.9926,
+          "transcript_similarity": 0.9179,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 282.84,
+      "bytes": 4525440,
+      "source_words": 538,
+      "transcript_words": 534,
+      "word_count_ratio": 0.9926,
+      "transcript_similarity": 0.9179,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K02-07",
+      "title": "Logistics, lock-in ve hangi mimari hangi senaryo?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-07-logistics-lock-in-ve-hangi-mimari-hangi-senaryo.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-07-logistics-lock-in-ve-hangi-mimari-hangi-senaryo.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k02-v2/k02-07-logistics-lock-in-ve-hangi-mimari-hangi-senaryo.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 363.912,
+          "bytes": 5822592,
+          "source_words": 666,
+          "transcript_words": 668,
+          "word_count_ratio": 1.003,
+          "transcript_similarity": 0.9205,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 363.912,
+      "bytes": 5822592,
+      "source_words": 666,
+      "transcript_words": 668,
+      "word_count_ratio": 1.003,
+      "transcript_similarity": 0.9205,
+      "tail_score": 0.875,
+      "accepted": true
+    }
+  ]
+}
