@@ -1,0 +1,119 @@
+name: Data Center Knowledge DC-K10 Golden Audio
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - datacenter/knowledge/narration/DC-K10_FULL_NARRATION_TR_V2.md
+      - datacenter/knowledge/narration/generate_dck10_v2_audio.py
+      - datacenter/narration/PRODUCTION_VOICE_TR_V1.json
+      - datacenter/knowledge/narration/DC-K10_PUBLISH_AUDIO_V2.txt
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  generate:
+    if: ${{ github.event_name == 'workflow_dispatch' || !contains(github.event.pull_request.title, '[PUBLISH AUDIO]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      ARTIFACT_NAME: datacenter-knowledge-dck10-golden-audio-tr-v2
+      AUDIO_DIR: datacenter/knowledge/audio/production/tr/dc-k10-v2
+      MARKER: datacenter/knowledge/narration/DC-K10_PUBLISH_AUDIO_V2.txt
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --upgrade openai mutagen num2words
+      - name: Validate DC-K10 narration source contract
+        run: python datacenter/knowledge/narration/generate_dck10_v2_audio.py --validate-source
+      - name: Prepare selective failed-chapter retry if requested
+        run: |
+          set -euo pipefail
+          RETRY_SOURCE_RUN_ID="$(awk -F= '$1=="RETRY_SOURCE_RUN_ID" {print $2}' "$MARKER" | tr -d '[:space:]')"
+          RETRY_CHAPTERS="$(awk -F= '$1=="RETRY_CHAPTERS" {print $2}' "$MARKER" | tr -d '[:space:]')"
+          if [[ "$RETRY_SOURCE_RUN_ID" =~ ^[0-9]+$ ]]; then
+            if [[ -z "$RETRY_CHAPTERS" || "$RETRY_CHAPTERS" == "ALL" ]]; then
+              echo 'Selective retry requires explicit failed chapter IDs.' >&2
+              exit 2
+            fi
+            rm -rf "$AUDIO_DIR"; mkdir -p "$AUDIO_DIR"
+            gh run download "$RETRY_SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$ARTIFACT_NAME" --dir "$AUDIO_DIR"
+            echo "RETRY_ARGS=--chapters $RETRY_CHAPTERS" >> "$GITHUB_ENV"
+            echo "SELECTIVE_RETRY_FROM=$RETRY_SOURCE_RUN_ID" >> "$GITHUB_ENV"
+          else
+            echo 'RETRY_ARGS=' >> "$GITHUB_ENV"
+            echo 'Fresh 8-chapter generation.'
+          fi
+      - name: Generate and validate DC-K10 Golden Turkish audio
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python datacenter/knowledge/narration/generate_dck10_v2_audio.py $RETRY_ARGS
+      - name: Upload DC-K10 Golden audio artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: datacenter-knowledge-dck10-golden-audio-tr-v2
+          path: datacenter/knowledge/audio/production/tr/dc-k10-v2/
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.title, '[PUBLISH AUDIO]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ARTIFACT_NAME: datacenter-knowledge-dck10-golden-audio-tr-v2
+      AUDIO_DIR: datacenter/knowledge/audio/production/tr/dc-k10-v2
+      MARKER: datacenter/knowledge/narration/DC-K10_PUBLISH_AUDIO_V2.txt
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout PR head branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Read accepted source run
+        run: |
+          set -euo pipefail
+          SOURCE_RUN_ID="$(awk -F= '$1=="SOURCE_RUN_ID" {print $2}' "$MARKER" | tr -d '[:space:]')"
+          if [[ ! "$SOURCE_RUN_ID" =~ ^[0-9]+$ ]]; then echo "Invalid SOURCE_RUN_ID: $SOURCE_RUN_ID" >&2; exit 2; fi
+          echo "SOURCE_RUN_ID=$SOURCE_RUN_ID" >> "$GITHUB_ENV"
+      - name: Download accepted 8/8 artifact
+        run: |
+          set -euo pipefail
+          rm -rf "$AUDIO_DIR"; mkdir -p "$AUDIO_DIR"
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$ARTIFACT_NAME" --dir "$AUDIO_DIR"
+      - name: Verify Golden manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('datacenter/knowledge/audio/production/tr/dc-k10-v2/manifest.json')
+          m=json.loads(p.read_text(encoding='utf-8'))
+          assert m['version']=='DC_K10_GOLDEN_AUDIO_V2'
+          assert m['chapter_count']==8 and m['accepted_count']==8 and m['failed_count']==0
+          assert m.get('source_qa',{}).get('accepted') is True
+          assert len(list(p.parent.glob('*.mp3')))==8
+          assert len(list(p.parent.glob('*.source.txt')))==8
+          assert len(list(p.parent.glob('*.transcript.txt')))==8
+          print('PASS_8_OF_8',m['total_duration_seconds'])
+          PY
+      - name: Commit accepted audio to PR branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$AUDIO_DIR"
+          if git diff --cached --quiet; then echo 'Accepted audio already present.'; exit 0; fi
+          git commit -m 'Publish accepted DC-K10 Golden v2 audio [skip ci]'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
