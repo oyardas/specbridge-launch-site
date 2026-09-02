@@ -1,0 +1,334 @@
+{
+  "version": "DC_K09_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2220.072,
+  "source_qa": {
+    "version": "DC_K09_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3911,
+    "chapters": [
+      {
+        "id": "K09-00",
+        "title": "Accelerated compute nedir; GPU, DPU, SmartNIC ve FPGA neden aynı şey değildir?",
+        "source_words": 479,
+        "final_char": "."
+      },
+      {
+        "id": "K09-01",
+        "title": "GPU compute, precision, HBM capacity ve memory bandwidth",
+        "source_words": 498,
+        "final_char": "."
+      },
+      {
+        "id": "K09-02",
+        "title": "PCIe, CXL, NUMA ve accelerator locality",
+        "source_words": 500,
+        "final_char": "."
+      },
+      {
+        "id": "K09-03",
+        "title": "Scale-up, scale-out ve multi-accelerator topology",
+        "source_words": 499,
+        "final_char": "."
+      },
+      {
+        "id": "K09-04",
+        "title": "DPU, IPU ve SmartNIC gerçekte ne yapar?",
+        "source_words": 501,
+        "final_char": "."
+      },
+      {
+        "id": "K09-05",
+        "title": "Virtualization, partitioning ve accelerator scheduling",
+        "source_words": 453,
+        "final_char": "."
+      },
+      {
+        "id": "K09-06",
+        "title": "Power, liquid cooling, rack-scale integration ve failure modes",
+        "source_words": 469,
+        "final_char": "."
+      },
+      {
+        "id": "K09-07",
+        "title": "Accelerator platformu nasıl seçilir, benchmark edilir ve BoQ’da freeze edilir?",
+        "source_words": 512,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K09-00",
+    "K09-01",
+    "K09-02",
+    "K09-03",
+    "K09-04",
+    "K09-05",
+    "K09-06",
+    "K09-07"
+  ],
+  "chapters": [
+    {
+      "id": "K09-00",
+      "title": "Accelerated compute nedir; GPU, DPU, SmartNIC ve FPGA neden aynı şey değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-00-accelerated-compute-nedir-gpu-dpu-smartnic-ve-fpga-neden-ayni-sey-degild.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-00-accelerated-compute-nedir-gpu-dpu-smartnic-ve-fpga-neden-ayni-sey-degild.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-00-accelerated-compute-nedir-gpu-dpu-smartnic-ve-fpga-neden-ayni-sey-degild.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 284.52,
+          "bytes": 4552320,
+          "source_words": 479,
+          "transcript_words": 481,
+          "word_count_ratio": 1.0042,
+          "transcript_similarity": 0.9021,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 284.52,
+      "bytes": 4552320,
+      "source_words": 479,
+      "transcript_words": 481,
+      "word_count_ratio": 1.0042,
+      "transcript_similarity": 0.9021,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K09-01",
+      "title": "GPU compute, precision, HBM capacity ve memory bandwidth",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-01-gpu-compute-precision-hbm-capacity-ve-memory-bandwidth.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-01-gpu-compute-precision-hbm-capacity-ve-memory-bandwidth.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-01-gpu-compute-precision-hbm-capacity-ve-memory-bandwidth.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 284.352,
+          "bytes": 4549632,
+          "source_words": 498,
+          "transcript_words": 496,
+          "word_count_ratio": 0.996,
+          "transcript_similarity": 0.9497,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 284.352,
+      "bytes": 4549632,
+      "source_words": 498,
+      "transcript_words": 496,
+      "word_count_ratio": 0.996,
+      "transcript_similarity": 0.9497,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K09-02",
+      "title": "PCIe, CXL, NUMA ve accelerator locality",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-02-pcie-cxl-numa-ve-accelerator-locality.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-02-pcie-cxl-numa-ve-accelerator-locality.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-02-pcie-cxl-numa-ve-accelerator-locality.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 287.52,
+          "bytes": 4600320,
+          "source_words": 500,
+          "transcript_words": 500,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.936,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 287.52,
+      "bytes": 4600320,
+      "source_words": 500,
+      "transcript_words": 500,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.936,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K09-03",
+      "title": "Scale-up, scale-out ve multi-accelerator topology",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-03-scale-up-scale-out-ve-multi-accelerator-topology.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-03-scale-up-scale-out-ve-multi-accelerator-topology.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-03-scale-up-scale-out-ve-multi-accelerator-topology.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 275.208,
+          "bytes": 4403328,
+          "source_words": 499,
+          "transcript_words": 502,
+          "word_count_ratio": 1.006,
+          "transcript_similarity": 0.9051,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 275.208,
+      "bytes": 4403328,
+      "source_words": 499,
+      "transcript_words": 502,
+      "word_count_ratio": 1.006,
+      "transcript_similarity": 0.9051,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K09-04",
+      "title": "DPU, IPU ve SmartNIC gerçekte ne yapar?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-04-dpu-ipu-ve-smartnic-gercekte-ne-yapar.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-04-dpu-ipu-ve-smartnic-gercekte-ne-yapar.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-04-dpu-ipu-ve-smartnic-gercekte-ne-yapar.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 276.312,
+          "bytes": 4420992,
+          "source_words": 501,
+          "transcript_words": 501,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9341,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 276.312,
+      "bytes": 4420992,
+      "source_words": 501,
+      "transcript_words": 501,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9341,
+      "tail_score": 0.75,
+      "accepted": true
+    },
+    {
+      "id": "K09-05",
+      "title": "Virtualization, partitioning ve accelerator scheduling",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-05-virtualization-partitioning-ve-accelerator-scheduling.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-05-virtualization-partitioning-ve-accelerator-scheduling.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-05-virtualization-partitioning-ve-accelerator-scheduling.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 275.88,
+          "bytes": 4414080,
+          "source_words": 453,
+          "transcript_words": 458,
+          "word_count_ratio": 1.011,
+          "transcript_similarity": 0.9484,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 275.88,
+      "bytes": 4414080,
+      "source_words": 453,
+      "transcript_words": 458,
+      "word_count_ratio": 1.011,
+      "transcript_similarity": 0.9484,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K09-06",
+      "title": "Power, liquid cooling, rack-scale integration ve failure modes",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-06-power-liquid-cooling-rack-scale-integration-ve-failure-modes.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-06-power-liquid-cooling-rack-scale-integration-ve-failure-modes.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-06-power-liquid-cooling-rack-scale-integration-ve-failure-modes.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 255.984,
+          "bytes": 4095744,
+          "source_words": 469,
+          "transcript_words": 467,
+          "word_count_ratio": 0.9957,
+          "transcript_similarity": 0.9338,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 255.984,
+      "bytes": 4095744,
+      "source_words": 469,
+      "transcript_words": 467,
+      "word_count_ratio": 0.9957,
+      "transcript_similarity": 0.9338,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K09-07",
+      "title": "Accelerator platformu nasıl seçilir, benchmark edilir ve BoQ’da freeze edilir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-07-accelerator-platformu-nasil-secilir-benchmark-edilir-ve-boqda-freeze-edi.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-07-accelerator-platformu-nasil-secilir-benchmark-edilir-ve-boqda-freeze-edi.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k09-v2/k09-07-accelerator-platformu-nasil-secilir-benchmark-edilir-ve-boqda-freeze-edi.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 282.84,
+          "bytes": 4525440,
+          "source_words": 512,
+          "transcript_words": 507,
+          "word_count_ratio": 0.9902,
+          "transcript_similarity": 0.8793,
+          "tail_score": 0.5,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 280.296,
+          "bytes": 4484736,
+          "source_words": 512,
+          "transcript_words": 513,
+          "word_count_ratio": 1.002,
+          "transcript_similarity": 0.9405,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 2,
+      "duration_seconds": 280.296,
+      "bytes": 4484736,
+      "source_words": 512,
+      "transcript_words": 513,
+      "word_count_ratio": 1.002,
+      "transcript_similarity": 0.9405,
+      "tail_score": 0.75,
+      "accepted": true
+    }
+  ]
+}

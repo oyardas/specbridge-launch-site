@@ -1,0 +1,19 @@
+Accelerator’ların maliyeti yükseldikçe sharing ve utilization kritik hale gelir. Ancak bir GPU’yu birden fazla tenant veya workload arasında paylaşmanın tek yöntemi yoktur. Full-device passthrough, spatial partitioning, SR-IOV virtual functions, temporal sharing ve software scheduling farklı isolation ve performance sonuçları üretir. Bu nedenle “GPU virtualization destekleniyor” cümlesi yeterli değildir.
+
+Full-device passthrough en basit performance modelidir. Bir VM veya workload fiziksel accelerator’ı doğrudan kullanır. Performance predictability yüksektir ve troubleshooting daha kolay olabilir. Buna karşılık küçük işler bütün GPU’yu işgal eder ve cluster fragmentation artabilir. Device fail olursa bütün workload kaybolur.
+
+Spatial partitioning, physical GPU’nun compute ve memory kaynaklarını hardware-level bölgelere ayırabilir. NVIDIA MIG veya AMD’nin bazı Instinct partitioning modelleri bunun vendor implementation örnekleridir. Partition’lar daha iyi isolation ve concurrent utilization sağlayabilir, ancak profile çeşitliliği scheduler fragmentation yaratır. Boş toplam memory olsa bile istenen partition shape oluşmayabilir.
+
+Temporal sharing bir GPU üzerinde workload’ların sırayla çalışmasına dayanır. Utilization artabilir fakat latency jitter ve noisy-neighbor etkisi daha yüksek olabilir. Interactive inference gibi tail-latency hassas service’lerde temporal sharing dikkatle benchmark edilmelidir.
+
+SR-IOV ise PCIe device’ın virtual functions sunmasına imkan verir. GPU veya DPU’da SR-IOV support device ve driver’a bağlıdır. IOMMU, ACS, firmware ve hypervisor configuration da önemlidir. SR-IOV virtual function yaratılması, bütün physical device failure domain’inden bağımsızlık sağlamaz. Aynı physical card’ın reset veya hardware fault’u birden fazla VF’i etkileyebilir.
+
+Kubernetes accelerator scheduling’de klasik Device Plugin framework uzun süredir kullanılır. Dynamic Resource Allocation ise daha zengin device attributes ve ResourceClaim modeli sunar. Current Kubernetes sürümlerinde DRA stable hale gelmiştir. Bu, accelerator allocation için topology, device class, health veya başka properties’i daha iyi ifade etmeye imkan verir. Ancak third-party driver ve scheduler policy yine gerçek deployment’ın parçasıdır.
+
+Scheduler’ın yalnız `gpu count` bilmesi yetersizdir. Büyük job’larda GPU model, HBM capacity, partition profile, peer topology, NUMA domain, local NIC, fabric domain ve health status placement kararını etkileyebilir. Sekiz GPU isteyen job’ın sekiz farklı düşük-bandwidth path’e yerleşmesi teknik olarak allocation success, operasyonel olarak performance failure olabilir.
+
+Multi-tenant service’te accounting de gerekir. Hangi tenant kaç device-hour veya partition-hour kullandı? Power cap ve performance class farklı mı? Failed job zamanı ücretlendirilecek mi? Reserved capacity nasıl tutulacak? GPUaaS veya accelerator-as-a-service ekonomisi bu telemetry olmadan yönetilemez.
+
+Maintenance sırasında scheduling ile hardware lifecycle birleşir. Firmware veya driver update için node drain gerekebilir. Rack-scale domain’de bir switch veya cooling maintenance onlarca GPU’yu etkileyebilir. Scheduler bu kapasite kaybını önceden absorbe edebilecek headroom’a sahip olmalıdır.
+
+Golden paylaşım modeli şu soruları kapatır: Device dedicated mı shared mı? Isolation hardware mı time-based mi? Partition profile kim yönetiyor? Reset blast radius ne? Scheduler topology-aware mı? Health degradation allocation’dan çıkarılıyor mu? Accounting ve quota nasıl yapılıyor? Bu soruların cevabı yoksa virtualization yalnız teknik bir capability’dir, production service modeli değildir.

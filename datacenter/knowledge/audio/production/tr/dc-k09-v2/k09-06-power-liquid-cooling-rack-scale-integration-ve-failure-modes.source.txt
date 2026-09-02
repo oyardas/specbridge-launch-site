@@ -1,0 +1,19 @@
+Accelerated compute platformu data hall’a geldiğinde server engineering ile facility engineering birbirinden ayrı kalamaz. GPU sayısı ve power yoğunluğu arttıkça rack power distribution, liquid cooling, structural load, cabling ve serviceability accelerator topology’nin parçası olur. Rack-scale AI sistemleri bu coupling’i en görünür hale getiren örnektir.
+
+İlk ayrım accelerator board power ile rack power arasındadır. Rack toplamında CPU, memory, NIC, DPU, scale-up switches, storage, fans, pumps ve power conversion losses bulunur. Bu nedenle accelerator sayısını device TDP ile çarpmak yeterli rack sizing değildir. Sustained workload power ve transient behavior platform validation’dan alınmalıdır.
+
+Power cap performansı doğrudan etkileyebilir. Facility belirli rack power sınırına göre tasarlandıysa accelerator power cap düşürülebilir. Bu durumda satın alınan GPU’nun katalog peak performansı değil, gerçek cap altındaki workload throughput’u kabul kriteridir. Power limit değişiklikleri benchmark kayıtlarında version-controlled olmalıdır.
+
+Cooling de benzer şekilde device label’dan daha geniştir. Direct-to-chip liquid cooling GPU ve CPU heat’in önemli kısmını yakalayabilir, fakat memory, NIC, DPU, storage, power supplies ve bazı switch components için residual air cooling devam edebilir. Liquid cooling tasarlayıp residual air load’u unutmak yeni bir bottleneck yaratır.
+
+CDU ve manifold failure domain’leri dikkatle modellenmelidir. Bir shared manifold çok sayıda compute tray’i besliyorsa leak isolation veya pump fault büyük blast radius yaratabilir. Quick disconnect, valve zoning, leak detection, drainage, recovery procedure ve workload evacuation birlikte planlanmalıdır. Cooling system’in N+1 olması tek başına her rack’in bağımsız olduğu anlamına gelmez.
+
+Rack-scale sistemlerde power shelves, busbar, liquid manifold, scale-up switch trays ve compute trays aynı product envelope içinde olabilir. Bu integration deployment’ı hızlandırabilir, fakat replacement ve maintenance prosedürünü de vendor-specific hale getirebilir. Bir switch tray değişimi için kaç compute workload etkilenir? Busbar isolation bütün rack’i kapatır mı? Manifold maintenance canlı yapılabilir mi? Bunlar acceptance sırasında test edilmelidir.
+
+Thermal throttling gizli failure mode’dur. Server çalışmaya devam ederken GPU clock düşebilir ve application throughput geriler. Bu nedenle alarm yalnız “temperature too high” olmamalıdır; clock, power, throttle reason ve application KPI korele edilmelidir. Long-duration sustained load test, kısa synthetic benchmark’tan daha değerlidir.
+
+PCIe link downtraining de benzer sessiz performans kaybı yaratır. Accelerator enumerate olur ve job çalışır, fakat x16 yerine x8 veya beklenenden düşük generation ile bağlıdır. Automated inventory, live link state’i BoQ topology ile karşılaştırmalıdır. PCIe switch veya retimer error’ları da telemetry’ye dahil edilmelidir.
+
+DPU, scale-up switch, NIC ve storage failure accelerator availability’nin parçasıdır. GPU sağlıklı olsa bile local NIC kaybı distributed job’ı durdurabilir. DPU overload network ve storage latency’yi artırıp GPU utilization’ını düşürebilir. Scale-up switch failure büyük peer domain’i etkileyebilir. FMEA bu nedenle yalnız GPU hardware fault’larına odaklanmamalıdır.
+
+Golden facility acceptance accelerator platformu gerçek rack envelope içinde test eder. Power feed, power cap, cooling supply, residual air, network, storage ve scheduler production configuration’a yakın olmalıdır. Amaç cihazın açıldığını kanıtlamak değil; platformun sustained application performance’ı güvenli, servis edilebilir ve failure-aware şekilde sağlayabildiğini kanıtlamaktır.

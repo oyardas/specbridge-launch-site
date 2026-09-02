@@ -1,0 +1,21 @@
+Accelerator projesinin sonunda alınacak karar “hangi GPU daha hızlı?” sorusundan çok daha geniştir. Doğru seçim, hedef workload’ın delivered result’ını kabul edilebilir risk ve toplam maliyetle üreten bütün platformdur. Bu nedenle procurement süreci workload definition ile başlar ve representative benchmark ile biter.
+
+Birinci adım workload ve SLA’dır. Training için model, dataset, target quality, time-to-train ve scaling hedefi; inference için model size, context, concurrency, latency ve throughput hedefi; HPC için precision ve time-to-solution; infrastructure offload için packet, flow, storage ve security requirement belirlenir. Bu bilgiler yoksa accelerator sizing yalnız spekülasyondur.
+
+İkinci adım accelerator rolünü seçmektir. Application compute için GPU, custom AI accelerator veya FPGA; infrastructure service için DPU, IPU veya SmartNIC değerlendirilebilir. Aynı platformda birden fazla accelerator rolü birlikte bulunabilir. Her birinin data path ve failure domain’i ayrı çizilmelidir.
+
+Üçüncü adım software ve precision’dır. Framework, compiler, runtime, driver, library ve container stack hedef hardware’i gerçekten destekliyor mu? Workload hangi precision ile kalite hedefini koruyor? Vendor benchmark’ı aynı software ve precision şartlarında mı? Bu sorular cevaplanmadan peak performance karşılaştırması yapılmamalıdır.
+
+Dördüncü adım memory ve topology’dir. HBM capacity, bandwidth, headroom, host memory, CPU/NUMA locality, PCI Express lanes, switches, retimers ve local NIC ilişkisi kapanmalıdır. Sonra scale-up domain tanımlanır: kaç accelerator, hangi peer topology, hangi switches ve hangi failure blast radius? Scale-out için network interface boundary tanımlanır; ayrıntılı network engineering daha sonraki modülde yapılır.
+
+Beşinci adım sharing modelidir. Dedicated device mı, passthrough mu, SR-IOV mu, spatial partition mı, temporal sharing mi? Scheduler hangi topology ve health attribute’larını biliyor? Multi-tenant reset ve firmware update blast radius ne? Utilization target ile isolation target arasında trade-off yapılır.
+
+Altıncı adım facility coupling’dir. Rack sustained power, cap strategy, cooling method, liquid interface, residual air, weight, cable management ve service routes doğrulanır. Rack-scale system seçilmişse power shelves, switches, manifolds ve compute trays tek integrated BOM ve failure model olarak ele alınır.
+
+Yedinci adım acceptance testidir. Inventory ve live link state ile başlanır. Single-device workload benchmark, multi-device peer/collective test, multi-node application test, storage feed ve NIC locality testi yapılır. DPU varsa network-storage-security simultaneous load test edilir. Thermal sustained test, power cap test ve selected failure injection senaryoları uygulanır. Sonuçlar application KPI ile correlation içinde incelenir.
+
+BoQ bundan sonra freeze edilir. BoQ accelerator model ve quantity yanında memory, form factor, host topology, PCIe/CXL requirement, scale-up components, NIC/DPU, storage interface, power/cooling, software baseline, virtualization model, HCL/support, acceptance benchmark ve spare policy içermelidir. “Sekiz GPU’lu server” engineering BoQ değildir.
+
+TCO değerlendirmesi de device fiyatından geniş olmalıdır. Host, fabric, DPU/NIC, storage, rack power, cooling, software, support, energy, operations ve stranded capacity toplam maliyete girer. En pahalı accelerator doğru utilization ile düşük cost-per-token sağlayabilir; daha ucuz accelerator network veya memory bottleneck nedeniyle pahalıya gelebilir.
+
+Golden freeze noktası nettir: Workload, software, memory, host attachment, peer topology, network/storage feed, sharing model, power/cooling, operations, failure behavior, representative benchmark ve lifecycle birlikte kabul edildiğinde platform freeze edilir. Accelerated compute yatırımında güvenilir sonuç, en büyük katalog rakamını satın almak değil; bütün data path’i ölçülebilir bir service outcome’a dönüştürmektir.
