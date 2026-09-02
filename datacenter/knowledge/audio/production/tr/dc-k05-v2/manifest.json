@@ -1,0 +1,334 @@
+{
+  "version": "DC_K05_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2060.904,
+  "source_qa": {
+    "version": "DC_K05_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3830,
+    "chapters": [
+      {
+        "id": "K05-00",
+        "title": "Cooling architecture neden klima seçimi değildir?",
+        "source_words": 480,
+        "final_char": "."
+      },
+      {
+        "id": "K05-01",
+        "title": "Airflow, containment, CRAC/CRAH ve close-coupled cooling",
+        "source_words": 476,
+        "final_char": "."
+      },
+      {
+        "id": "K05-02",
+        "title": "DX, chilled water, economization ve heat rejection",
+        "source_words": 474,
+        "final_char": "."
+      },
+      {
+        "id": "K05-03",
+        "title": "Direct-to-chip, RDHx ve immersion farkları",
+        "source_words": 484,
+        "final_char": "."
+      },
+      {
+        "id": "K05-04",
+        "title": "FWS, TCS, CDU, manifold, QD ve coolant chemistry",
+        "source_words": 463,
+        "final_char": "."
+      },
+      {
+        "id": "K05-05",
+        "title": "Density, hydraulics, dew point ve AI thermal design",
+        "source_words": 504,
+        "final_char": "."
+      },
+      {
+        "id": "K05-06",
+        "title": "Resilience, controls, thermal ride-through ve commissioning",
+        "source_words": 458,
+        "final_char": "."
+      },
+      {
+        "id": "K05-07",
+        "title": "Energy, water, retrofit, TCO ve hangi mimari ne zaman?",
+        "source_words": 491,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K05-00",
+    "K05-01",
+    "K05-02",
+    "K05-03",
+    "K05-04",
+    "K05-05",
+    "K05-06",
+    "K05-07"
+  ],
+  "chapters": [
+    {
+      "id": "K05-00",
+      "title": "Cooling architecture neden klima seçimi değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-00-cooling-architecture-neden-klima-secimi-degildir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-00-cooling-architecture-neden-klima-secimi-degildir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-00-cooling-architecture-neden-klima-secimi-degildir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 251.664,
+          "bytes": 4026624,
+          "source_words": 480,
+          "transcript_words": 480,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9146,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 251.664,
+      "bytes": 4026624,
+      "source_words": 480,
+      "transcript_words": 480,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9146,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K05-01",
+      "title": "Airflow, containment, CRAC/CRAH ve close-coupled cooling",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-01-airflow-containment-crac-crah-ve-close-coupled-cooling.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-01-airflow-containment-crac-crah-ve-close-coupled-cooling.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-01-airflow-containment-crac-crah-ve-close-coupled-cooling.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 257.616,
+          "bytes": 4121856,
+          "source_words": 476,
+          "transcript_words": 480,
+          "word_count_ratio": 1.0084,
+          "transcript_similarity": 0.9351,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 257.616,
+      "bytes": 4121856,
+      "source_words": 476,
+      "transcript_words": 480,
+      "word_count_ratio": 1.0084,
+      "transcript_similarity": 0.9351,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K05-02",
+      "title": "DX, chilled water, economization ve heat rejection",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-02-dx-chilled-water-economization-ve-heat-rejection.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-02-dx-chilled-water-economization-ve-heat-rejection.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-02-dx-chilled-water-economization-ve-heat-rejection.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 260.352,
+          "bytes": 4165632,
+          "source_words": 474,
+          "transcript_words": 468,
+          "word_count_ratio": 0.9873,
+          "transcript_similarity": 0.8938,
+          "tail_score": 0.875,
+          "accepted": false
+        },
+        {
+          "attempt": 2,
+          "duration_seconds": 255.216,
+          "bytes": 4083456,
+          "source_words": 474,
+          "transcript_words": 473,
+          "word_count_ratio": 0.9979,
+          "transcript_similarity": 0.9377,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 2,
+      "duration_seconds": 255.216,
+      "bytes": 4083456,
+      "source_words": 474,
+      "transcript_words": 473,
+      "word_count_ratio": 0.9979,
+      "transcript_similarity": 0.9377,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K05-03",
+      "title": "Direct-to-chip, RDHx ve immersion farkları",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-03-direct-to-chip-rdhx-ve-immersion-farklari.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-03-direct-to-chip-rdhx-ve-immersion-farklari.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-03-direct-to-chip-rdhx-ve-immersion-farklari.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 260.592,
+          "bytes": 4169472,
+          "source_words": 484,
+          "transcript_words": 483,
+          "word_count_ratio": 0.9979,
+          "transcript_similarity": 0.9535,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 260.592,
+      "bytes": 4169472,
+      "source_words": 484,
+      "transcript_words": 483,
+      "word_count_ratio": 0.9979,
+      "transcript_similarity": 0.9535,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K05-04",
+      "title": "FWS, TCS, CDU, manifold, QD ve coolant chemistry",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-04-fws-tcs-cdu-manifold-qd-ve-coolant-chemistry.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-04-fws-tcs-cdu-manifold-qd-ve-coolant-chemistry.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-04-fws-tcs-cdu-manifold-qd-ve-coolant-chemistry.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 257.184,
+          "bytes": 4114944,
+          "source_words": 463,
+          "transcript_words": 456,
+          "word_count_ratio": 0.9849,
+          "transcript_similarity": 0.9423,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 257.184,
+      "bytes": 4114944,
+      "source_words": 463,
+      "transcript_words": 456,
+      "word_count_ratio": 0.9849,
+      "transcript_similarity": 0.9423,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K05-05",
+      "title": "Density, hydraulics, dew point ve AI thermal design",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-05-density-hydraulics-dew-point-ve-ai-thermal-design.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-05-density-hydraulics-dew-point-ve-ai-thermal-design.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-05-density-hydraulics-dew-point-ve-ai-thermal-design.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 258.336,
+          "bytes": 4133376,
+          "source_words": 504,
+          "transcript_words": 503,
+          "word_count_ratio": 0.998,
+          "transcript_similarity": 0.9116,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 258.336,
+      "bytes": 4133376,
+      "source_words": 504,
+      "transcript_words": 503,
+      "word_count_ratio": 0.998,
+      "transcript_similarity": 0.9116,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K05-06",
+      "title": "Resilience, controls, thermal ride-through ve commissioning",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-06-resilience-controls-thermal-ride-through-ve-commissioning.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-06-resilience-controls-thermal-ride-through-ve-commissioning.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-06-resilience-controls-thermal-ride-through-ve-commissioning.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 251.496,
+          "bytes": 4023936,
+          "source_words": 458,
+          "transcript_words": 460,
+          "word_count_ratio": 1.0044,
+          "transcript_similarity": 0.9194,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 251.496,
+      "bytes": 4023936,
+      "source_words": 458,
+      "transcript_words": 460,
+      "word_count_ratio": 1.0044,
+      "transcript_similarity": 0.9194,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K05-07",
+      "title": "Energy, water, retrofit, TCO ve hangi mimari ne zaman?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-07-energy-water-retrofit-tco-ve-hangi-mimari-ne-zaman.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-07-energy-water-retrofit-tco-ve-hangi-mimari-ne-zaman.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k05-v2/k05-07-energy-water-retrofit-tco-ve-hangi-mimari-ne-zaman.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 268.8,
+          "bytes": 4300800,
+          "source_words": 491,
+          "transcript_words": 486,
+          "word_count_ratio": 0.9898,
+          "transcript_similarity": 0.9273,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 268.8,
+      "bytes": 4300800,
+      "source_words": 491,
+      "transcript_words": 486,
+      "word_count_ratio": 0.9898,
+      "transcript_similarity": 0.9273,
+      "tail_score": 0.75,
+      "accepted": true
+    }
+  ]
+}
