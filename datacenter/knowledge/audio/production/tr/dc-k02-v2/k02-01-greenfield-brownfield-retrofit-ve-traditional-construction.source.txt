@@ -1,0 +1,23 @@
+Bir veri merkezinin teslim modelini seçmeden önce projenin hangi fiziksel koşulda başladığını anlamak gerekir. Greenfield, brownfield ve retrofit kavramları burada temel ayrımı oluşturur.
+
+Greenfield projede yeni bir saha veya yeni bir yapı üzerinde çalışırız. Utility girişleri, transformer ve generator yerleşimleri, electrical rooms, mechanical plant, structural loading, fire compartments, carrier entry, loading route, security zoning ve expansion area baştan planlanabilir. Bu büyük bir tasarım özgürlüğüdür. Ancak greenfield olmak projenin otomatik olarak hızlı olduğu anlamına gelmez. Utility bağlantı takvimi, izinler, civil works, long-lead equipment ve saha altyapısı kritik yol haline gelebilir.
+
+Brownfield projede ise mevcut bina, mevcut data center veya mevcut utility altyapısı içinde kapasite ekleriz. Burada sorun yalnız alan bulmak değildir. Mevcut floor loading, shaft ve riser kapasitesi, generator ve UPS topolojisi, chilled veya facility-water kapasitesi, fire zoning, fiber route, lifting access ve en önemlisi canlı sistemlere yapılacak tie-in işlemleri kararın parçasıdır.
+
+Örneğin yeni bir power skid fiziksel olarak binanın yanına yerleşebilir. Fakat mevcut switchgear’a bağlantı için uzun bir shutdown gerekiyorsa, fiziksel uygunluk operasyonel uygunluk anlamına gelmez. Aynı şekilde yeni bir liquid-cooling zone için CDU koyacak alan bulunabilir; fakat mevcut heat-rejection sistemi gerekli sıcaklık, akış veya yedeklilik seviyesini sağlayamıyorsa gerçek constraint başka yerdedir.
+
+Retrofit ise mevcut sistemin kapasite, verimlilik, resilience veya teknoloji açısından yenilenmesidir. UPS değişimi, battery modernization, busway eklenmesi, controls veya DCIM yenilemesi, high-density rack zone, CDU skid veya liquid cooling retrofit bu kapsama girebilir. Retrofit projelerde prefabricated ve modular sistemler özellikle değerli olabilir; çünkü saha üzerindeki assembly süresini azaltabilir ve daha kontrollü bir entegrasyon sağlayabilir. Fakat burada da modülün mevcut failure domain’e nasıl bağlandığı esas konudur.
+
+Şimdi traditional construction’a bakalım. Traditional veya stick-built yaklaşımda building, electrical, mechanical ve white-space infrastructure’ın önemli kısmı proje özelinde sahada kurulup entegre edilir. Bu yaklaşımın en büyük avantajı customization’dır. Irregular bina geometrisine uyum sağlamak, çok özel routing yapmak, farklı vendor’ları bir araya getirmek veya site-specific structural ve MEP optimizasyonu yapmak daha kolay olabilir.
+
+Dezavantajı ise field integration yüküdür. Daha fazla subcontractor interface, saha işçiliği, sequence bağımlılığı, weather ve access etkisi, field wiring ve piping variation, ayrıca commissioning işinin büyük bölümünün sahada gerçekleşmesi söz konusudur. Bu nedenle traditional yaklaşımın başarısı yalnız tasarım kalitesine değil, saha yönetimi ve commissioning disiplinine de bağlıdır.
+
+Burada önemli bir yanlış algıyı düzeltmek gerekir. Traditional eşittir eski teknoloji değildir. Hyperscale bir campus bile conventional building ve civil infrastructure kullanırken power veya cooling tarafında yüksek ölçüde industrialized ve repeatable modüller kullanabilir. Tam tersine küçük bir proje de container içinde olsa bile kötü interface tasarımı nedeniyle operasyonel olarak karmaşık olabilir.
+
+Greenfield projede tüm facility’yi prefabricated yapmak mümkün olabilir; ancak site master planı ve utility altyapısı yine site-specific kalır. Brownfield projede ise çoğu zaman hybrid yaklaşım daha güçlüdür: Mevcut building korunur, yeni power veya cooling capacity prefabricated skid olarak eklenir, IT alanı conventional veya modular pod’larla büyütülür.
+
+Bir başka kritik konu, kapasiteyi baştan fazla kurma riskidir. Traditional projelerde çok büyük plant kapasitesini ilk günden kurmak bazı durumlarda mantıklı olabilir; özellikle demand kesin ve economies of scale güçlü ise. Fakat demand belirsizse stranded capacity oluşabilir. Modular phasing burada avantaj sağlayabilir; ancak bunu bir sonraki bölümlerde ekonomik olarak daha ayrıntılı ele alacağız.
+
+Bu bölümün sonucu şudur: Greenfield bize tasarım özgürlüğü verir; brownfield constraint yoğunluğunu artırır; retrofit mevcut failure domain’leri ve shutdown riskini merkeze taşır. Traditional construction ise bunlardan herhangi biriyle birlikte kullanılabilen bir delivery method’dur.
+
+Bir sonraki bölümde prefabricated, modular, containerized ve hybrid mimarilerin birbirinden hangi mühendislik sınırlarıyla ayrıldığını inceleyeceğiz.

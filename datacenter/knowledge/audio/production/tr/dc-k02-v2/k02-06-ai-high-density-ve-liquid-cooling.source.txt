@@ -1,0 +1,25 @@
+AI data center tartışmasını yalnız “kaç GPU var?” sorusuna indirgemek ciddi bir tasarım hatasıdır. GPU-centric clusters power, cooling, network ve lifecycle açısından conventional compute’tan farklı baskılar yaratır. Rack power density yükselir, current seviyesi artar, network fabric yoğunlaşır ve liquid cooling daha önemli hale gelir.
+
+Güncel engineering context’te GPU clusters için kırk ila yüz kilowatt per rack bandı sık görülür; purpose-built AI environments elli ila yüz yirmi kilowatt per rack ve üzerine çıkabilir. Bu değerler bir seçim threshold’u değildir. Bir projenin modular olması gerektiğini söylemez. Yalnız bugün karşılaşılan thermal ve electrical scale’in neden değiştiğini gösterir.
+
+High-density rack’in ilk etkisi power distribution’dadır. Feeder current, busway veya RPP sizing, breaker capacity, cable density ve A/B path tasarımı yeniden ele alınmalıdır. İkinci etki cooling’dedir. Airflow ile taşınabilecek heat load sınırlı hale geldiğinde direct-to-chip liquid cooling, rear-door heat exchanger veya başka liquid-assisted yöntemler devreye girebilir.
+
+Liquid cooling mimarisinde Technology Cooling System, yani TCS, ayrı bir engineering domain olarak düşünülmelidir. Coolant temperature, supply-return delta, flow, pressure, water quality, filtration, leak detection, CDU redundancy, bypass ve maintenance procedure belirlenmelidir. Facility Water System ile TCS arasındaki interface çoğu projede heat exchanger veya CDU üzerinden kurulur.
+
+Modularity burada değer yaratabilir. Örneğin existing air-cooled data center içinde dedicated AI zone kurulabilir. High-density rack rows A/B high-current distribution ile beslenir. Liquid-cooled servers CDU veya secondary loop’a bağlanır. CDU module facility water veya heat-rejection system’ine bağlanır. Böylece tüm facility’yi aynı anda liquid-cooled hale getirmek zorunda kalmadan kontrollü bir high-density island oluşturulabilir.
+
+Bu yaklaşım özellikle brownfield retrofit’te güçlüdür. Fakat yeniden aynı uyarıyı yapalım: Module koymak tek başına çözüm değildir. Mevcut heat-rejection system’in capacity’si, water temperatures, pump head, pipe route, structural loading ve electrical upstream kapasitesi yeterli değilse bottleneck başka yerdedir.
+
+AI architecture’da lifecycle riski de yüksektir. Accelerator generations hızla değişir. Bugün yeterli olan rack power envelope birkaç generation sonra sınırlayıcı olabilir. Bu nedenle module’un yalnız mevcut rack’e değil, gelecekteki power ve cooling roadmap’ine göre değerlendirilmesi gerekir.
+
+Burada iki zıt risk vardır. Birincisi overbuild. Gelecekte gerekebilir diye tüm facility’yi çok yüksek density’ye göre kurmak CAPEX ve stranded capacity yaratabilir. İkincisi underbuild. Expansion interfaces, busway capacity, pipe headers veya CDU connection points yetersiz bırakılırsa gelecekte pahalı retrofit gerekir.
+
+Doğru denge reserved capability ile staged deployment arasındadır. Main electrical ve mechanical backbone belirli headroom ve expansion points sağlar. High-density blocks demand geldiğinde aktive edilir. Bu şekilde technology refresh de daha yönetilebilir hale gelir.
+
+Network tarafı da unutulmamalıdır. AI clusters high-bandwidth, low-latency fabric, çok sayıda optics ve yoğun fiber routing gerektirebilir. Prefabricated IT module tasarlanırken cable bend radius, overhead pathways, service access ve future optics strategy modül envelope’una dahil edilmelidir.
+
+AI-ready ifadesini bu nedenle sorgulamak gerekir. Gerçek bir AI-ready architecture için en azından rack power envelope, cooling method, TCS interface, network fabric space, structural loading, service access ve expansion planı tanımlı olmalıdır. Yalnız “liquid cooling destekli” etiketi yeterli değildir.
+
+Bu bölümün ana mesajı şudur: AI modularity’yi zorunlu kılmaz; fakat hızlı density artışı ve kısa teknoloji çevrimi, replaceable ve expandable power/cooling blocks’ın değerini artırır.
+
+Son bölümde bütün bu teknik katmanları logistics, vendor lock-in ve scenario-based decision framework ile birleştirip hangi projede hangi mimarinin daha güçlü aday olduğunu özetleyeceğiz.

@@ -1,0 +1,25 @@
+Modular architecture’ın ekonomik değerini anlamak için önce önemli bir yanılgıyı düzeltmek gerekir: Prefabricated veya modular çözüm otomatik olarak daha ucuz değildir. Aynı system boundary ile karşılaştırıldığında equipment, factory integration, transport, site civil work, crane, field connections, commissioning ve owner engineering maliyetlerinin tamamı hesaba katılmalıdır.
+
+Bazı projelerde traditional çözüm daha düşük ilk yatırım maliyetine sahip olabilir. Özellikle local supply chain güçlü, transport pahalı ve bina geometrisi özel ise. Başka bir projede ise factory integration, daha düşük saha işçiliği, daha az rework ve daha hızlı revenue activation modular çözümü toplam ekonomik açıdan daha güçlü hale getirebilir.
+
+Burada time-to-capacity önemli bir finansal değişkendir. Bir data center block’u altı ay daha erken gelir üretmeye başlıyorsa, yalnız equipment CAPEX karşılaştırması eksik kalır. Aynı şekilde capacity ihtiyacı üç yıl sonra oluşacaksa, bugünden tüm power ve cooling plant’i kurmak finansal olarak doğru olmayabilir.
+
+Phased deployment’ın temel mantığı demand curve ile installed capacity curve’ü birbirine yaklaştırmaktır. Phase 1 gerçek başlangıç ihtiyacını karşılar. Phase 2 talep yükseldiğinde eklenir. Phase 3 daha sonra devreye girer. Bu yaklaşım forecast error’a karşı koruma sağlar ve stranded capacity riskini azaltabilir.
+
+Fakat çok küçük block size da sorun yaratabilir. Her yeni block ayrı switch, valve, controller, UPS, pump veya monitoring object gerektiriyorsa duplication artar. Dollar per kilowatt yükselebilir. Partial-load efficiency bozulabilir. Maintenance object sayısı büyüyebilir. Bu nedenle doğru block size, forecast uncertainty ile economies of scale arasındaki optimum noktadır.
+
+Ölçek tartışmasını yapılandırmak için örnek bantlar kullanabiliriz. Elli ila iki yüz kilowatt aralığında micro data center, Smart Cabinet, integrated row veya küçük conventional room güçlü adaylardır. Beş yüz kilowatt civarında prefabricated power veya cooling ile conventional IT room arasında hybrid modeller anlamlı olabilir. Bir ila iki megawatt seviyesinde repeated modular blocks, conventional building ile prefabricated MEP veya full-prefab seçenekleri karşılaştırılabilir. Beş megawatt seviyesinde hybrid campus yaklaşımı, repeatable power ve cooling blocks ile standard IT halls güçlü hale gelir. Yirmi megawatt ve üzerindeki campus projelerinde ise utility master plan, supply-chain repeatability, phased energization ve standardized halls daha kritik olur.
+
+Bu sayılar bir standart veya hard threshold değildir. Aynı kapasitedeki iki proje; climate, utility, rack density, revenue model, land, building ve resilience hedefleri nedeniyle tamamen farklı architecture seçebilir.
+
+CAPEX dışında lifecycle CAPEX de önemlidir. Bir module ilk gün hızlı kurulmuş olabilir; fakat on beş yıl sonra nasıl değiştirileceği tasarlanmadıysa lifecycle avantajı kaybolabilir. Crane erişimi kalacak mı? Replacement module aynı geometry’ye uyacak mı? Control system backward-compatible olacak mı? Manufacturer support devam edecek mi? Tie-in sırasında shutdown gerekiyor mu? Bunlar ilk procurement sırasında düşünülmelidir.
+
+OPEX tarafında da modular etiketi enerji verimliliği garantisi değildir. OPEX’i actual load profile, UPS efficiency, cooling architecture, climate, economization, airflow management, water strategy, controls, maintenance ve technician travel gibi faktörler belirler. Modularity doğru right-sizing ile unused plant’i azaltabilir. Buna karşılık çok sayıda küçük duplicated plant düşük load’da verimsiz çalışabilir.
+
+Bir başka ekonomik değişken technology refresh’tir. Özellikle AI gibi hızlı gelişen workload’larda, tüm facility’yi ilk günden gelecekteki en yüksek density’ye göre overbuild etmek yerine, reserved interfaces bırakıp high-density blocks’ı demand geldiğinde eklemek daha rasyonel olabilir. Ancak interface kapasitesi yetersiz bırakılırsa bu kez retrofit maliyeti büyür.
+
+Bu nedenle ekonomik model yalnız “traditional versus modular CAPEX” tablosu olmamalıdır. Initial CAPEX, lifecycle CAPEX, OPEX, time-to-capacity, revenue activation, stranded-capacity risk, expansion outage, replacement cost ve vendor dependency birlikte değerlendirilmelidir.
+
+Bu bölümün ana mesajı şudur: Modularity’nin ekonomik avantajı çoğu zaman ucuz bir kutu olmaktan değil, kapasiteyi doğru zamanda aktive etmekten gelir.
+
+Bir sonraki bölümde ekonomik kararın üzerine resilience katmanını ekleyip Tier, redundancy, maintainability ve commissioning ilişkisini inceleyeceğiz.

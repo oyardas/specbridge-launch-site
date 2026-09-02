@@ -1,0 +1,25 @@
+Edge computing konuşulduğunda sık yapılan hata, edge kavramını fiziksel olarak küçük bir cabinet ile eşitlemektir. Edge aslında workload placement ve latency bağlamıdır. Compute veya data processing kapasitesinin kullanıcıya, cihaza, üretim hattına, branch’e veya veri kaynağına daha yakın konumlandırılmasıdır. Fiziksel form bunun sonucu olabilir, tanımı değil.
+
+Bir edge deployment tek rack olabilir. Küçük bir prefabricated pod olabilir. Container olabilir. Küçük bir brick-and-mortar room olabilir. Regional edge ise birkaç rack’ten çok daha büyük kapasiteye çıkabilir. Bu nedenle “edge eşittir micro” demek doğru değildir.
+
+Micro data center ise küçük fiziksel ölçekte IT ve supporting infrastructure’ın entegre edildiği mimaridir. Tipik olarak rack veya birkaç rack seviyesinde compute, storage ve network yanında UPS, PDU, cooling, monitoring, physical security ve bazı durumlarda fire detection veya suppression birlikte ele alınır.
+
+Bu yaklaşım branch office, factory floor, retail, telecom edge, hospital satellite site veya uzak operasyon noktalarında anlamlı olabilir. Çünkü klasik bir data center room kurmak yerine daha kompakt, factory-integrated ve remote-manageable bir çözüm sağlanabilir.
+
+Smart Cabinet de benzer bir entegrasyon yaklaşımıdır; fakat onu tüm modular data center kavramıyla eşitlememek gerekir. Smart Cabinet genellikle cabinet seviyesinde rack, UPS, distribution, cooling, monitoring, access control ve security fonksiyonlarının bir araya getirilmesidir. Bir micro data center’ın building block’u olabilir, fakat megawatt ölçeğindeki modular power veya cooling architecture ile aynı sınıf değildir.
+
+Edge ve micro deployment’larda environmental risk daha belirgin hale gelir. Büyük data center’larda kontrollü ortam, çift giriş, fiziksel güvenlik, teknik personel ve merkezi plant olabilir. Edge site ise depo, mağaza, üretim tesisi, ofis, dış ortam enclosure’ı veya erişimi kısıtlı uzak bir noktada bulunabilir. Dust, humidity, ambient temperature, vibration, acoustics, unauthorized access ve technician response time önemli hale gelir.
+
+Bu nedenle micro data center seçerken yalnız “kaç U rack?” sorusu yeterli değildir. Şu soruları sormak gerekir: Normal ve peak heat load nedir? Cooling unit’in failure mode’u nedir? UPS runtime ve battery environment nasıl? Remote monitoring gerçek anlamda merkezi operasyona entegre mi? Door access ve camera gibi fiziksel security kontrolleri var mı? Fire strategy nedir? Network bağlantısı kesildiğinde local workload nasıl davranıyor? Spare parts ve technician erişimi ne kadar sürede sağlanıyor?
+
+Edge deployment’ların bir başka kritik özelliği standardization ihtiyacıdır. Yüzlerce branch veya edge site varsa her siteyi farklı tasarlamak operational debt üretir. Burada modularity’nin değeri yalnız fiziksel kolaylık değil, aynı configuration, aynı alarm taxonomy, aynı remote-management model ve aynı spare-parts standardının tekrar edilebilmesidir.
+
+Ancak standardization’ın da sınırı vardır. Aynı Smart Cabinet’i her sahaya zorla uygulamak doğru değildir. Bir site çok sıcak olabilir, diğerinde dust seviyesi yüksek olabilir, başka bir site seismic veya acoustic constraint taşıyabilir. Bu nedenle ürün standardizasyonu ile environmental envelope arasında kontrollü bir ilişki kurulmalıdır.
+
+Micro ve edge tasarımlarda redundancy de bağlama göre ele alınmalıdır. Küçük bir branch için tam 2N power/cooling ekonomik olmayabilir. Bunun yerine application-level redundancy, ikinci site, cloud failover veya spare-unit strategy daha rasyonel olabilir. Buna karşılık kritik industrial control veya healthcare workload farklı availability gereksinimleri taşıyabilir.
+
+Burada kararın facility etiketinden değil, business impact’ten türetilmesi gerekir. Bu yaklaşım, tüm modül boyunca kullandığımız ana prensiple aynıdır: Önce requirement, sonra architecture.
+
+Bu bölümün sonucu şudur: Edge workload placement bağlamıdır. Micro data center compact integrated infrastructure’dır. Smart Cabinet cabinet-level integration’dır. Bunlar birbiriyle ilişkili olabilir, fakat aynı kavram değildir.
+
+Bir sonraki bölümde ölçek büyüdükçe modularity’nin ekonomik tarafını, phased deployment’ı, CAPEX, OPEX ve stranded capacity riskini inceleyeceğiz.

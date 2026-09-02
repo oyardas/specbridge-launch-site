@@ -1,0 +1,35 @@
+Bir data center delivery modelini seçerken teknik performans kadar iki konu genellikle geç fark edilir: Logistics ve lifecycle dependency. Prefabrication’ın schedule avantajı ancak module sahaya zamanında ve güvenli biçimde ulaşabiliyorsa vardır. Modularity’nin lifecycle avantajı ise gelecekte farklı generation veya vendor ile genişleme ve replacement mümkünse gerçektir.
+
+Logistics tarafında module dimensions, shipping weight, center of gravity, route height, bridge limits, turning radius, port veya rail constraints, crane capacity, lifting points, laydown area ve delivery sequence design input olmalıdır. Bunları procurement sonrasında çözmeye çalışmak, schedule riskini büyütür.
+
+Vendor lock-in ise yalnız bir marka kullanmaktan ibaret değildir. Asıl lock-in proprietary geometry, özel bus connector, closed controls, kapalı DCIM API, unique cooling coupling, özel cabinet dimension veya yalnız tek manufacturer’dan sağlanabilen spare module gibi interface’lerde oluşur.
+
+Bu nedenle vendor neutrality için en etkili yaklaşım, ürün ailesini tamamen standardize etmek değil, interface’leri standardize etmektir. Electrical voltage, frequency, protection ve earthing boundary açık olmalıdır. Mechanical supply-return temperature, flow, pressure ve connection standardı tanımlanmalıdır. Controls tarafında BACnet, Modbus, SNMP veya API gibi interfaces ile alarm naming ve telemetry schema belirlenmelidir. Rack geometry, fiber demarcation, fire interface, lifting envelope ve commissioning test points de dokümante edilmelidir.
+
+Bununla birlikte her şeyi standardize etmek de doğru değildir. Geotechnical, seismic, flood, wind, ambient climate, water availability, utility fault level, permits, fire code, emissions, acoustics, transport route ve carrier entry gibi konular site-specific kalmalıdır. İyi architecture, standardization ile site reality arasındaki sınırı doğru çizer.
+
+Şimdi birkaç senaryoyu birlikte değerlendirelim.
+
+Yaklaşık yüz kilowatt’lık branch veya industrial edge için Smart Cabinet veya micro data center güçlü aday olabilir. Burada remote management, physical security, environment ve service response önemlidir.
+
+Yaklaşık beş yüz kilowatt’lık enterprise expansion’da existing building ile prefabricated power veya cooling subsystem’lerin birlikte kullanıldığı hybrid model güçlü olabilir. Burada brownfield tie-in, outage window, floor loading ve future expansion önceliklidir.
+
+Bir ila iki megawatt regional cloud deployment’ında repeated capacity blocks, prefabricated power ve cooling ile standardized IT pods değerli olabilir. Burada block-size economics, redundancy, supply chain ve commissioning repeatability önem kazanır.
+
+Beş megawatt colocation facility’de conventional building ile repeatable MEP blocks ve flexible tenant white space birlikte kullanılabilir. Tenant density farklılıkları, metering, carrier interconnection ve phased customer demand kritik hale gelir.
+
+Yirmi megawatt ve üzerindeki hyperscale veya AI campus’ta ise tek bir container veya tek bir prefab ürün düşünmek yerine industrialized hybrid architecture daha gerçekçidir. Campus utility master planı, repeated electrical ve cooling blocks, standardized halls, phased energization, liquid-ready AI zones ve network/fiber scale birlikte tasarlanır.
+
+Bu örnekler hard threshold değildir. Aynı kapasitedeki iki projenin sonucu tamamen farklı olabilir. Karar her zaman requirement, project condition, scale, density, site constraint, time-to-capacity, growth model, resilience, logistics, lifecycle ve TCO üzerinden verilmelidir.
+
+Son olarak failure-mode düşüncesini kararın içine dahil edelim. Factory-perfect ama site-wrong module olabilir. 2N etiketi altında shared upstream failure olabilir. Transport route sürprizi yaşanabilir. Future GPU density module envelope’u aşabilir. Proprietary expansion lock oluşabilir. FAT geçip IST’de problem çıkabilir. Fire veya AHJ requirement module tasarımıyla uyuşmayabilir. Phase 2 tie-in Phase 1 shutdown gerektirebilir. Module replaceable görünürken crane route sonradan kapanabilir. Çok küçük blocks OPEX fragmentation yaratabilir. Standardized design’de yapılan tek hata yüzlerce module’a kopyalanabilir.
+
+Bu risklerin tamamı bize aynı prensibi hatırlatır: Modularity standardization sağlar; fakat standardization yanlış kararı da hızla çoğaltabilir. Bu yüzden first article, Golden prototype, interface validation ve integrated testing kritik önemdedir.
+
+DC-K02’nin nihai karar çerçevesini tek cümlede özetleyebiliriz: Doğru veri merkezi tipi, tek bir kategori seçimi değildir. Project condition, delivery method, physical form, workload mission ve growth model’in; site, density, resilience, logistics ve lifecycle gereksinimleriyle birlikte optimize edilmesidir.
+
+Traditional, prefabricated, modular, containerized, micro ve hybrid seçeneklerinin hiçbiri tek başına üstün değildir. Üstün olan, iş gereksinimine en doğru şekilde bağlanan architecture’dır.
+
+Bu nedenle SpecBridge yaklaşımında karar ürünle başlamaz. Gereksinimle başlar, interface ve failure domains üzerinden doğrulanır, lifecycle ve ekonomiyle test edilir ve en sonunda BoQ’ya dönüşür.
+
+DC-K02 Full Briefing burada tamamlanıyor. Kısa Quick Brief, hızlı yönetici özeti olarak ayrı kalmaya devam edecek; bu Full Briefing ise kararın arkasındaki engineering logic’i ayrıntılı biçimde taşır.

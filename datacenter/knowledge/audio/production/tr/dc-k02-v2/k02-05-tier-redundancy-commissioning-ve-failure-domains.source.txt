@@ -1,0 +1,23 @@
+Modular veya prefabricated bir data center’ın yüksek availability hedeflerine ulaşamayacağı düşüncesi doğru değildir. Uptime Tier-Ready ve TIA-942 Ready gibi çerçeveler, pre-engineered veya modular çözümlerin de belirli resilience prensipleriyle tasarlanabileceğini gösterir. Ancak burada çok önemli bir sınır vardır: Bir module’un hazır veya prevalidated olması, final site’ın otomatik olarak certified olduğu anlamına gelmez.
+
+Availability her zaman end-to-end topology meselesidir. Bir power module kendi içinde 2N olabilir. Fakat iki path upstream’de aynı transformer, switchboard veya fuel system’e bağlanıyorsa gerçek failure domain ortak olabilir. Benzer şekilde iki cooling train ayrı görünür, fakat aynı header, pump controls veya heat-rejection system’i paylaşıyorsa tek hata noktası oluşabilir.
+
+Bu nedenle redundancy değerlendirmesini module boundary’de durdurmamak gerekir. Electrical tarafta source’tan IT load’a kadar bütün path incelenmelidir. Mechanical tarafta IT heat source’tan final heat rejection’a kadar bütün chain değerlendirilmelidir. Controls, fuel, fire, water ve network gibi supporting systems de failure domain’in parçasıdır.
+
+Concurrently maintainable tasarımın amacı, planned maintenance sırasında ICT load’un kesintiye uğramadan desteklenebilmesidir. Bunun için redundant capacity components kadar independent distribution paths, isolation, bypass ve bakım senaryoları önemlidir. “N plus one” veya “2N” etiketi tek başına yeterli değildir. Gerçek maintenance procedure üzerinde hangi breaker’ın açılacağı, hangi valve’ın kapatılacağı, hangi controller’ın service’e alınacağı simüle edilmelidir.
+
+Prefabricated architecture’ın QA avantajı burada devreye girer. Factory’de assembly ve FAT yapılması wiring, control logic veya component defect’lerini daha erken yakalayabilir. Fakat final site interfaces yalnız sahada doğrulanabilir. Bu yüzden FAT, SAT ve IST’yi birbirinin alternatifi değil, ardışık güvence katmanları olarak görmek gerekir.
+
+FAT sırasında module içindeki fonksiyonlar test edilir. Transport sonrası inspection, mekanik veya electrical hasarı kontrol eder. Site installation ve field connections tamamlandığında SAT ve start-up yapılır. System commissioning, module’un site sistemleriyle doğru çalıştığını doğrular. Integrated Systems Testing ise failure ve maintenance senaryolarında sistemlerin birlikte nasıl davrandığını gösterir.
+
+Örneğin utility kaybında generator start ediyor olabilir. UPS kendi testinde sorunsuz olabilir. Cooling module da kendi başına çalışıyor olabilir. Ancak gerçek integrated test sırasında generator transition, UPS load, pump restart, controls communication ve thermal response birlikte doğrulanmalıdır.
+
+Brownfield projelerde risk daha da büyür. Yeni module mevcut canlı sisteme bağlanırken temporary operating mode oluşabilir. Bu sırada redundancy düşebilir. Tie-in planı, rollback procedure ve maintenance window tasarımın parçası olmalıdır.
+
+Bir başka önemli konu certification scope’tur. Tier-Ready veya Ready designation belirli bir reviewed solution’a ilişkindir. Final site’ın building, site utility, upstream ve downstream integration’ı ayrıca değerlendirilir. Bu nedenle vendor brochure üzerindeki certification logosunu final facility outcome’u olarak yorumlamak doğru değildir.
+
+Risk yönetiminde interface register burada tekrar önem kazanır. Electrical fault current ve protection coordination, earthing, mechanical temperatures ve flows, controls protocol, fire shutdown logic, network dependency ve monitoring boundaries açıkça tanımlanmalıdır.
+
+Bu bölümün ana mesajı şudur: Modular form yüksek resilience ile uyumludur; fakat resilience module etiketinden değil, end-to-end topology, isolation, maintainability ve integrated testing’den doğar.
+
+Bir sonraki bölümde bu prensipleri günümüzün en hızlı değişen workload alanına, AI, high-density rack ve liquid cooling mimarisine uygulayacağız.
