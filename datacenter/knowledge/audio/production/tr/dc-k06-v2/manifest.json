@@ -1,0 +1,323 @@
+{
+  "version": "DC_K06_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2073.696,
+  "source_qa": {
+    "version": "DC_K06_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3788,
+    "chapters": [
+      {
+        "id": "K06-00",
+        "title": "UPS neden sadece bir cihaz değildir?",
+        "source_words": 452,
+        "final_char": "."
+      },
+      {
+        "id": "K06-01",
+        "title": "VFI, VI, VFD, double conversion, bypass ve operating modes",
+        "source_words": 466,
+        "final_char": "."
+      },
+      {
+        "id": "K06-02",
+        "title": "Redundancy, fault current, generator compatibility ve selectivity",
+        "source_words": 468,
+        "final_char": "."
+      },
+      {
+        "id": "K06-03",
+        "title": "Autonomy nasıl gerçekten boyutlandırılır?",
+        "source_words": 463,
+        "final_char": "."
+      },
+      {
+        "id": "K06-04",
+        "title": "VRLA, lithium-ion, NiCd, flywheel ve supercapacitor",
+        "source_words": 499,
+        "final_char": "."
+      },
+      {
+        "id": "K06-05",
+        "title": "BMS, battery safety, thermal runaway ve lifecycle",
+        "source_words": 503,
+        "final_char": "."
+      },
+      {
+        "id": "K06-06",
+        "title": "UPS battery, BESS, grid interaction ve AI power smoothing",
+        "source_words": 486,
+        "final_char": "."
+      },
+      {
+        "id": "K06-07",
+        "title": "Commissioning, maintenance, TCO ve hangi mimari ne zaman?",
+        "source_words": 451,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K06-00",
+    "K06-01",
+    "K06-02",
+    "K06-03",
+    "K06-04",
+    "K06-05",
+    "K06-06",
+    "K06-07"
+  ],
+  "chapters": [
+    {
+      "id": "K06-00",
+      "title": "UPS neden sadece bir cihaz değildir?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-00-ups-neden-sadece-bir-cihaz-degildir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-00-ups-neden-sadece-bir-cihaz-degildir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-00-ups-neden-sadece-bir-cihaz-degildir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 244.584,
+          "bytes": 3913344,
+          "source_words": 452,
+          "transcript_words": 454,
+          "word_count_ratio": 1.0044,
+          "transcript_similarity": 0.9382,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 244.584,
+      "bytes": 3913344,
+      "source_words": 452,
+      "transcript_words": 454,
+      "word_count_ratio": 1.0044,
+      "transcript_similarity": 0.9382,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K06-01",
+      "title": "VFI, VI, VFD, double conversion, bypass ve operating modes",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-01-vfi-vi-vfd-double-conversion-bypass-ve-operating-modes.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-01-vfi-vi-vfd-double-conversion-bypass-ve-operating-modes.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-01-vfi-vi-vfd-double-conversion-bypass-ve-operating-modes.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 256.56,
+          "bytes": 4104960,
+          "source_words": 466,
+          "transcript_words": 463,
+          "word_count_ratio": 0.9936,
+          "transcript_similarity": 0.9602,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 256.56,
+      "bytes": 4104960,
+      "source_words": 466,
+      "transcript_words": 463,
+      "word_count_ratio": 0.9936,
+      "transcript_similarity": 0.9602,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K06-02",
+      "title": "Redundancy, fault current, generator compatibility ve selectivity",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-02-redundancy-fault-current-generator-compatibility-ve-selectivity.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-02-redundancy-fault-current-generator-compatibility-ve-selectivity.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-02-redundancy-fault-current-generator-compatibility-ve-selectivity.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 250.2,
+          "bytes": 4003200,
+          "source_words": 468,
+          "transcript_words": 463,
+          "word_count_ratio": 0.9893,
+          "transcript_similarity": 0.9302,
+          "tail_score": 0.625,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 250.2,
+      "bytes": 4003200,
+      "source_words": 468,
+      "transcript_words": 463,
+      "word_count_ratio": 0.9893,
+      "transcript_similarity": 0.9302,
+      "tail_score": 0.625,
+      "accepted": true
+    },
+    {
+      "id": "K06-03",
+      "title": "Autonomy nasıl gerçekten boyutlandırılır?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-03-autonomy-nasil-gercekten-boyutlandirilir.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-03-autonomy-nasil-gercekten-boyutlandirilir.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-03-autonomy-nasil-gercekten-boyutlandirilir.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 244.296,
+          "bytes": 3908736,
+          "source_words": 463,
+          "transcript_words": 459,
+          "word_count_ratio": 0.9914,
+          "transcript_similarity": 0.9523,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 244.296,
+      "bytes": 3908736,
+      "source_words": 463,
+      "transcript_words": 459,
+      "word_count_ratio": 0.9914,
+      "transcript_similarity": 0.9523,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K06-04",
+      "title": "VRLA, lithium-ion, NiCd, flywheel ve supercapacitor",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-04-vrla-lithium-ion-nicd-flywheel-ve-supercapacitor.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-04-vrla-lithium-ion-nicd-flywheel-ve-supercapacitor.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-04-vrla-lithium-ion-nicd-flywheel-ve-supercapacitor.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 288.816,
+          "bytes": 4621056,
+          "source_words": 499,
+          "transcript_words": 505,
+          "word_count_ratio": 1.012,
+          "transcript_similarity": 0.9243,
+          "tail_score": 0.75,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 288.816,
+      "bytes": 4621056,
+      "source_words": 499,
+      "transcript_words": 505,
+      "word_count_ratio": 1.012,
+      "transcript_similarity": 0.9243,
+      "tail_score": 0.75,
+      "accepted": true
+    },
+    {
+      "id": "K06-05",
+      "title": "BMS, battery safety, thermal runaway ve lifecycle",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-05-bms-battery-safety-thermal-runaway-ve-lifecycle.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-05-bms-battery-safety-thermal-runaway-ve-lifecycle.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-05-bms-battery-safety-thermal-runaway-ve-lifecycle.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 287.184,
+          "bytes": 4594944,
+          "source_words": 503,
+          "transcript_words": 497,
+          "word_count_ratio": 0.9881,
+          "transcript_similarity": 0.906,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 287.184,
+      "bytes": 4594944,
+      "source_words": 503,
+      "transcript_words": 497,
+      "word_count_ratio": 0.9881,
+      "transcript_similarity": 0.906,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K06-06",
+      "title": "UPS battery, BESS, grid interaction ve AI power smoothing",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-06-ups-battery-bess-grid-interaction-ve-ai-power-smoothing.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-06-ups-battery-bess-grid-interaction-ve-ai-power-smoothing.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-06-ups-battery-bess-grid-interaction-ve-ai-power-smoothing.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 260.544,
+          "bytes": 4168704,
+          "source_words": 486,
+          "transcript_words": 484,
+          "word_count_ratio": 0.9959,
+          "transcript_similarity": 0.9505,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 260.544,
+      "bytes": 4168704,
+      "source_words": 486,
+      "transcript_words": 484,
+      "word_count_ratio": 0.9959,
+      "transcript_similarity": 0.9505,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K06-07",
+      "title": "Commissioning, maintenance, TCO ve hangi mimari ne zaman?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-07-commissioning-maintenance-tco-ve-hangi-mimari-ne-zaman.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-07-commissioning-maintenance-tco-ve-hangi-mimari-ne-zaman.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k06-v2/k06-07-commissioning-maintenance-tco-ve-hangi-mimari-ne-zaman.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 241.512,
+          "bytes": 3864192,
+          "source_words": 451,
+          "transcript_words": 451,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9157,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 241.512,
+      "bytes": 3864192,
+      "source_words": 451,
+      "transcript_words": 451,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9157,
+      "tail_score": 1.0,
+      "accepted": true
+    }
+  ]
+}
