@@ -1,0 +1,19 @@
+Bir accelerator server’a takıldığında performans yolculuğu GPU üzerinde başlamaz. İlk gerçek topology sorusu cihazın hangi CPU, root complex, PCI Express switch ve NUMA domain’e bağlı olduğudur. Bu yol yanlış tasarlanırsa accelerator kendi içinde çok hızlı olsa bile host memory, NIC veya storage ile haberleşirken gereksiz hop ve bottleneck oluşabilir.
+
+PCI Express data center accelerator’larının yaygın host interface’idir. Endüstride daha yeni PCIe specification yayımlanmış olabilir; bu, satın alınan CPU, motherboard, riser, retimer, switch ve accelerator’ın o generation’da çalışacağı anlamına gelmez. Canlı link bütün zincirin ortak desteklediği generation ve width ile negotiate olur. Fiziksel x16 slot görmek elektriksel x16 bağlantının kanıtı değildir.
+
+Bu nedenle lane budget mühendisliği yapılmalıdır. Her GPU, NIC, DPU, NVMe ve HBA root complex kaynaklarını tüketir. Çok accelerator’lı bir server’da PCIe switch kullanmak fan-out sağlayabilir, fakat oversubscription ve shared failure domain yaratabilir. Bir switch arızası aynı anda birden fazla GPU ve NIC’i kaybettirebilir. Switch’in upstream bandwidth’i downstream device toplam talebinden düşükse bütün cihazlar aynı anda yoğunken contention oluşabilir.
+
+Retimer’lar yüksek data rate’lerde signal integrity için gerekli olabilir. Retimer eklemek yanlış değildir; ancak firmware, compatibility ve failure analysis’e yeni bir eleman ekler. Golden topology diagram’ında retimer ve PCIe switch gibi görünmeyen ara elemanlar da gösterilmelidir.
+
+NUMA locality, özellikle dual-socket host’larda kritik hale gelir. Bir GPU CPU0 root complex’ine, NIC CPU1’e bağlıysa direct data movement veya application control traffic socket’lar arası geçebilir. Remote memory erişimi de aynı şekilde ek latency ve inter-socket bandwidth tüketir. Bu nedenle “server’da sekiz GPU ve sekiz NIC var” bilgisi yeterli değildir; hangi GPU’nun hangi NIC ve CPU’ya local olduğu bilinmelidir.
+
+GPU Direct benzeri vendor teknolojileri CPU bounce buffer’ı azaltarak GPU ile NIC veya storage arasında daha doğrudan data path sağlayabilir. Buradaki vendor-neutral ders, data path’i kısaltmanın ve doğru affinity kullanmanın önemli olduğudur. Direct path var diye topology önemsiz hale gelmez; tam tersine NIC’in GPU’ya en yakın PCIe path üzerinde olması daha değerli olur.
+
+CXL ise coherent memory ve heterogeneous compute için açık bir interconnect ailesidir. Yeni CXL generation’ları accelerator ve memory architecture’a önemli imkanlar getirir, ancak standardın var olması belirli bir shipping GPU’nun CXL feature setini kullandığı anlamına gelmez. RFP’de “CXL 4.0 olsun” demek yerine ihtiyaç duyulan coherent memory, pooling veya accelerator interface fonksiyonu tanımlanmalı ve platform support matrix’iyle doğrulanmalıdır.
+
+Firmware ayarları da topology’nin parçasıdır. Large BAR, Above 4G Decoding, IOMMU, ACS ve SR-IOV gibi ayarlar bazı accelerator veya virtualization senaryolarında gerekli olabilir. Fakat bütün ayarları her workload için aktif etmek doğru değildir. Vendor validated BIOS baseline ve hedef workload testleri birlikte kullanılmalıdır.
+
+Acceptance sırasında her accelerator için fiziksel pozisyon, CPU/NUMA affinity, root complex, switch path, live PCIe generation ve width, peer topology, local NIC ve storage path kaydedilmelidir. Sonra synthetic link testleriyle yetinmeden representative application çalıştırılmalıdır. Bir cihaz doğru enumerate olmuş olabilir ama link downtrain nedeniyle beklenen throughput’u vermeyebilir.
+
+Golden sonuç şudur: accelerator locality bir optimizasyon ayrıntısı değil, platform architecture’dır. CPU, memory, GPU, NIC, DPU ve storage arasındaki gerçek fiziksel data path bilinmeden multi-accelerator server freeze edilmemelidir. BoQ yalnız cihaz listesini değil, bu ilişkileri de tarif etmelidir.

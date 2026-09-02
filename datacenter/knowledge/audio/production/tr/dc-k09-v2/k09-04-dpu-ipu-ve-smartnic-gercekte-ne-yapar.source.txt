@@ -1,0 +1,19 @@
+DPU konuşmalarında en büyük risk, güçlü bir network adapter ile gerçek infrastructure processing domain arasındaki farkın kaybolmasıdır. Bir NIC packet gönderir ve alır. SmartNIC programmable offload ekleyebilir. DPU veya IPU ise network, storage, security ve management service’lerini host CPU’dan ayırarak ayrı bir execution ve trust domain oluşturmayı hedefleyebilir. Ancak ürün adları standart değildir; fonksiyonlar tek tek tanımlanmalıdır.
+
+Infrastructure offload’ın temel amacı host CPU’nun application work’e daha fazla kaynak ayırması olabilir. Virtual switch, overlay, routing, encryption, firewall, storage virtualization veya telemetry DPU üzerinde çalıştığında host CPU core’ları bu işlerden kurtulabilir. Fakat offload ücretsiz değildir. DPU’nun kendi CPU’su, memory’si, accelerator engines’i, firmware’i ve power budget’ı vardır. Aynı anda network, storage ve security service’i çalıştırılıyorsa hepsinin ortak kapasitesi test edilmelidir.
+
+İkinci değer isolation’dır. Cloud provider, infrastructure service’lerini tenant operating system’inden ayrı bir processor üzerinde çalıştırabilir. Böylece tenant host üzerindeki privileged software’den infrastructure control plane’i ayırmak mümkün olabilir. Fakat gerçek isolation secure boot, firmware trust, access control ve management network tasarımına bağlıdır. “DPU var” demek tek başına zero-trust mimari kanıtı değildir.
+
+DPU failure domain olarak da değerlendirilmelidir. Bir host’un bütün network ve storage connectivity’si tek DPU üzerinden geçiyorsa, DPU arızası CPU ve GPU sağlıklı olsa bile node’u servis dışı bırakabilir. İki port olması da redundancy kanıtı değildir; portlar aynı device ve firmware domain’indedir. Gerekiyorsa dual DPU, alternate path veya cluster-level evacuation modeli tasarlanmalıdır.
+
+AI cluster’larda DPU’nun rolü daha da belirgin olabilir. GPU’ya yüksek hızlı data taşınırken virtual networking, storage access, security ve tenant isolation host CPU üzerinde önemli overhead yaratabilir. DPU bu işlerin bir kısmını offload ederek CPU ve GPU utilization’ını artırabilir. Fakat DPU scale-up GPU fabric’in yerine geçmez. DPU’nun 400 veya 800 gigabit network portu olması, GPU peer interconnect’i veya cluster collective architecture’ı otomatik olarak çözmez.
+
+Storage acceleration da ayrı bir use case’tir. Remote NVMe, NVMe over Fabrics, encryption, compression veya storage virtualization DPU üzerinden işlenebilir. Bu durumda acceptance yalnız network packet testine dayanamaz. Network ve storage load aynı anda çalıştırılmalı; DPU CPU, memory, queue, crypto ve storage engines birlikte izlenmelidir.
+
+Management modeli önemlidir. DPU kendi operating system image’ına, firmware’e, agent’lara ve orchestration tool’larına sahip olabilir. Bu platformu kim patch edecek? BMC team mi, network team mi, virtualization team mi? DPU reset edildiğinde host ne olur? Firmware update host reboot ister mi? Rollback nasıl yapılır? Bu sorular procurement sırasında kapanmalıdır.
+
+Vendor örnekleri kavramı anlamak için yararlıdır. NVIDIA BlueField, AMD Pensando ve Intel IPU network, storage, security ve infrastructure offload alanlarında farklı implementation’lar sunar. Fakat Golden requirement vendor feature name yazmaz. Gereken packet rate, bandwidth, isolation, virtual function sayısı, storage throughput, crypto, telemetry, management ve failover sonucu tanımlar.
+
+DPU seçiminin ekonomik tarafı da vardır. Host CPU core tasarrufu, higher utilization ve security isolation değer yaratabilir; ancak DPU CAPEX, power, software ve operations complexity ekler. DPU alınması otomatik TCO avantajı değildir. Kazanım representative workload altında ölçülmelidir.
+
+Golden sonuç nettir: DPU veya IPU bir aksesuar değil, infrastructure subsystem’dir. Data path, trust boundary, capacity, failure behavior, management ownership ve lifecycle ayrı ayrı modellenmelidir. DPU’nun platformdaki görevi açık değilse BoQ’ya yalnız marka adı eklemek tasarım sayılmaz.
