@@ -1,0 +1,25 @@
+Storage projelerinde en büyük ticari ve teknik uyuşmazlıkların önemli bölümü capacity terminolojisinden çıkar. Bir teklif yüz terabayt diyebilir; başka biri yüz terabayt usable diyebilir; üçüncü ürün data reduction sonrası yüz terabayt effective capacity vaat edebilir. Bu rakamların eşit olduğunu varsaymak yanlış karşılaştırmaya ve yetersiz kapasite satın alınmasına yol açar.
+
+Raw capacity başlangıç noktasıdır. Drive'ların nominal nameplate kapasitesinin toplamıdır. Henüz RAID, replication, erasure coding, metadata, system reserve, spare, rebuild reserve veya growth reserve düşülmemiştir. Procurement açısından en kolay bulunan ama tek başına en az anlamlı sayılardan biridir.
+
+Usable capacity, platform overhead ve protection policy sonrasında application'a tahsis edilebilen alanı ifade eder. İki-way mirror raw kapasitenin önemli bölümünü copy overhead için kullanır. Parity veya erasure coding farklı oranlar sağlayabilir. Metadata, filesystem/object overhead ve internal system areas platforma göre ek kapasite tüketebilir. Bu yüzden usable capacity formülü vendor implementation ve policy ile birlikte yazılmalıdır.
+
+Resilient usable capacity, SpecBridge için daha önemli engineering sayısıdır. Sistem bir drive, node, controller veya maintenance condition yaşadığında yeniden korumalı duruma gelebilmek için yeterli free capacity ve operational headroom bırakılmalıdır. Cluster veya array yüzde doksan sekiz doluyken nominal usable kapasite yüksek görünebilir; fakat rebuild için alan ve performance reserve kalmayabilir. Bu yüzden failure reserve ile business growth reserve ayrı tutulmalıdır.
+
+Effective capacity ise deduplication ve compression gibi data-reduction etkilerini hesaba katabilir. Fakat bu oran workload'a bağlıdır. Virtual desktop images veya duplicate backup blocks yüksek reduction gösterebilirken encrypted, compressed media veya bazı database datasets düşük reduction gösterebilir. Broşürdeki “up to” oranı physical capacity multiplier olarak kullanılmamalıdır. Contractual guarantee veya representative dataset testleri yoksa conservative assumption kullanılmalıdır.
+
+Thin provisioning başka bir kapasite yanılsaması yaratır. Host'a yüz terabayt logical volume provision edilebilirken physical pool çok daha küçük olabilir. Bu operasyonel olarak verimlidir ama oversubscription riskidir. Capacity thresholds, forecasting ve emergency expansion process tanımlanmadan thin provisioning kullanmak, teknik borcu görünmez hale getirir.
+
+Snapshots da benzer biçimde başlangıçta küçük görünür. Copy-on-write veya redirect-on-write implementation'a göre snapshot capacity change rate ile büyür. Yüksek değişim oranlı workload'da retention süresi uzadıkça alan tüketimi hızlı artabilir. Snapshot reserve kapasitesi workload change rate üzerinden modellenmelidir.
+
+Decimal ve binary unit ayrımı da önemlidir. Drive manufacturer TB kullanırken operating systems veya tools farklı display conventions kullanabilir. TB ile TiB arasındaki fark proje ölçeğinde ciddi sayılara dönüşebilir. Sizing sheet'te unit convention açıkça belirtilmelidir.
+
+Spare strategy ayrıca tanımlanmalıdır. Dedicated hot spare, distributed spare space veya dynamic free-space reconstruction farklı modellerdir. “Bir spare disk var” ifadesi modern distributed storage'da doğru model olmayabilir. Asıl soru, bir failure sonrasında data placement'ın hangi kapasite üzerinde ve ne kadar sürede yeniden korumalı hale geldiğidir.
+
+Capacity plan yalnız bugünkü data size'a göre yapılmamalıdır. Dataset growth, snapshot retention, backup staging, rebuild reserve, firmware upgrade temporary needs ve expected business expansion ayrı kalemlerdir. Capacity threshold'ları da generic yüzde seksen kuralına bağlı olmamalı; recovery ve expansion lead time'a göre belirlenmelidir.
+
+Örnek olarak, raw capacity iki yüz terabayt olan bir sistem düşünelim. Protection ve metadata sonrasında yüz otuz terabayt usable kalabilir. Güvenli rebuild ve maintenance reserve için yirmi terabayt ayırıyorsak resilient usable yüz on terabayt olabilir. Workload ölçümünde ortalama bir buçuk kat verified data reduction görüyorsak effective capacity yaklaşık yüz altmış beş terabayt olarak raporlanabilir. Fakat fiziksel güvenlik sınırı hâlâ yüz on terabayt resilient usable kapasitedir.
+
+SpecBridge sizing sheet bu nedenle raw, usable, resilient usable ve effective capacity'yi ayrı kolonlarda gösterir; her dönüşümün policy ve assumption'ını yazar. Böylece satış rakamı ile engineering capacity aynı şeymiş gibi görünmez.
+
+Bu chapter'ın sonucu şudur: storage kapasitesi tek bir TB sayısı değildir. Güvenilir BoQ, protection overhead'i, technical reserve'i, growth'ü ve data reduction belirsizliğini görünür hale getirir.

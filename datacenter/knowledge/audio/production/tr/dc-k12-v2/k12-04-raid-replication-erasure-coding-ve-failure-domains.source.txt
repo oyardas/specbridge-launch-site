@@ -1,0 +1,23 @@
+Storage resilience konuşulurken RAID kelimesi çoğu zaman availability ile eş anlamlı kullanılır. Oysa RAID belirli media failure'larına karşı bir protection mechanism'dır; controller, network, enclosure, software, operator veya site failure'ını tek başına çözmez. Doğru resilience tasarımı protection method ile failure domain'i birlikte eşleştirir.
+
+Mirroring en anlaşılır yöntemdir. Data iki veya daha fazla tam copy halinde tutulur. Recovery semantics sade olabilir ve read path için esneklik sağlar. Bedeli capacity overhead ve write traffic'tir. Ancak iki copy'nin varlığı, iki bağımsız failure domain olduğu anlamına gelmez. Aynı enclosure, rack veya power feed içindeki iki copy correlated failure karşısında birlikte kaybolabilir.
+
+Parity RAID capacity efficiency'yi artırır. Data ile birlikte parity information saklanır ve belirli drive failures sonrasında missing data yeniden hesaplanabilir. Fakat write behavior daha karmaşıktır ve rebuild sırasında mevcut drives yoğun biçimde okunabilir. Büyük-capacity drive'larda rebuild süresi uzadıkça ikinci failure veya latent error exposure artabilir. Bu nedenle yalnız RAID level seçmek yetmez; degraded-state latency ve rebuild duration da acceptance criterion olmalıdır.
+
+Erasure coding distributed storage ve object systems'de yaygın bir başka protection yaklaşımıdır. Data, k adet data fragment ve m adet parity fragment gibi yapılara ayrılır. Replication'a göre daha iyi capacity efficiency sağlayabilir fakat encoding, network traffic ve reconstruction overhead getirebilir. Küçük random write ile large sequential object workload aynı sonuçları vermez. Policy workload'a göre seçilmelidir.
+
+Failure domain tasarımın merkezidir. Drive, enclosure, controller, node, rack, ToR switch, PDU, room ve site ayrı domain'ler olabilir. Protection policy'nin gerçekten bu boundaries üzerinde placement yaptığını doğrulamak gerekir. Üç replica aynı rack'te ise rack failure'ına karşı üç copy değil, tek failure domain vardır.
+
+Controller resilience de detaylı incelenmelidir. Dual-controller array failover sunabilir; fakat write cache ownership, backend paths, firmware upgrade sequence ve controller interconnect behavior önemlidir. Controller failover sırasında application I/O'nun ne kadar süre durduğu ve tail latency'nin ne kadar yükseldiği test edilmelidir.
+
+Fabric resilience de benzer bir konudur. İki host port'un aynı switch'e bağlanması cable failure'a karşı koruma sağlayabilir ama switch failure'ını çözmez. Gerçek A/B fabric hedefleniyorsa switch, power, optics ve upstream dependencies ayrıştırılmalıdır. Failover testleri cable pull seviyesinde kalmamalıdır; switch ve path failure da denenmelidir.
+
+Distributed storage sistemlerinde quorum ve data placement ek bir boyut getirir. Cluster control quorum'u ile data quorum'u aynı implementation olmayabilir. Node count tek başına safe availability kanıtı değildir. Network partition durumunda hangi side'ın service vermeye devam ettiği ve data consistency'nin nasıl korunduğu anlaşılmalıdır.
+
+Snapshot ve replication protection ladder'ın üst katmanlarıdır ama backup değildir. Snapshot aynı administrative plane ve aynı storage system içinde tutuluyorsa platform corruption veya privileged deletion'dan etkilenebilir. Replication yanlışlıkla silinen veya ransomware ile şifrelenen veriyi hızlı biçimde ikinci site'a taşıyabilir. Bağımsız backup retention ve tested restore bu nedenle ayrı bir katmandır.
+
+Site disaster recovery de storage HA'dan ayrılmalıdır. Array içindeki dual-controller veya campus içindeki stretched storage, deprem, yangın, geniş power outage veya operational isolation gibi site-level event'leri otomatik olarak çözmez. DR design bağımsız failure domain, network dependency, RPO, RTO ve orchestrated recovery testleri gerektirir.
+
+SpecBridge acceptance planında resilience şu sırayla test edilir: device failure, path failure, switch/fabric failure, controller veya node failure, rebuild veya rebalance, planned maintenance, near-capacity condition ve gerekiyorsa site failover. Her testte yalnız service up/down değil, latency, throughput, recovery duration ve final protection state ölçülür.
+
+Bu chapter'ın sonucu şudur: protection policy'nin adı değil, hangi failure domain'e karşı hangi service behavior'ı sağladığı önemlidir. Gerçek resilience ancak placement, reserve ve failure testing birlikte doğrulandığında kabul edilir.
