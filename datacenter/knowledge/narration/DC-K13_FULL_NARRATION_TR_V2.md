@@ -14,6 +14,8 @@ Bir diğer kritik konu degraded-state davranışıdır. Sistem sağlıklıyken e
 
 Golden yaklaşım şu zinciri izler: workload ve data model, erişim protokolü, performans hedefi, kapasite modeli, availability ile RPO ve RTO, storage architecture, transport ve fabric, host multipath, failure domains, data services, security, operations, degraded-state acceptance ve son olarak TCO ile BoQ freeze. Bu zincir korunursa teknoloji seçimi daha sonra yapılır ve daha doğru yapılır. Yani storage tasarımında ilk soru hangi ürünü alacağımız değil, hangi veri hizmetini hangi koşullarda garanti edeceğimizdir.
 
+Bu hizmet tanımı procurement diline de çevrilmelidir. Örneğin yalnız “yüksek erişilebilirlik” yazmak yerine hangi tekil arızaların kesintisiz tolere edileceği, planlı bakımda hangi I/O davranışının beklendiği, hangi telemetri verilerinin tutulacağı ve performans ölçümünün hangi workload profiliyle yapılacağı açıkça belirtilmelidir. Aynı şekilde kapasite hedefi yalnız terabayt olarak değil, protection ve reserve sonrası üretimde gerçekten kullanılabilecek alan olarak ifade edilmelidir. Böylece teknik tasarım, test planı ve ticari BoQ aynı varsayımları kullanır. Bu hizalama yapılmadığında güçlü bir storage platformu bile yanlış tanımlanmış gereksinim nedeniyle beklenen hizmet seviyesini veremeyebilir.
+
 ## [K13-01] Scale-up, scale-out ve controller mimarileri
 
 Enterprise storage platformlarını anlamak için ilk temel ayrımlardan biri scale-up ve scale-out mimarisidir. Scale-up tasarımda kapasite veya port sayısı çoğunlukla belirli bir controller domain arkasında büyür. Bu model operasyonel olarak sade, yönetilebilir ve öngörülebilir olabilir. Ancak controller CPU, cache, back-end bandwidth, enclosure sayısı ve toplam kapasite gibi sınırlar vardır. Bu sınırlar başlangıç BoQ’sunda görünmese bile üç ya da beş yıllık büyüme planında kritik hale gelir.
@@ -29,6 +31,8 @@ Unified ya da multiprotocol storage platformları blok, file ve object servisler
 Enterprise storage tasarımında controller sayısı, node sayısı, cache büyüklüğü ve port sayısı sadece fiziksel sayılardır. Mühendislik kararı bunların arkasındaki davranışı anlamaktır. Failover süresi, cache persistence, host path transition, upgrade süreci, rebalance davranışı ve support matrix birlikte değerlendirilmelidir. Ayrıca growth senaryosunda eklenen her enclosure veya node’un power, rack, fabric portu, lisans ve support maliyeti BoQ içine dahil edilmelidir.
 
 Doğru karar çerçevesi şöyledir: başlangıç yükü ve üç yıllık büyüme, latency ve throughput SLO, failure-domain hedefi, maintenance modeli, replication gereksinimi ve operasyon ekibinin yetkinliği belirlenir. Ardından scale-up veya scale-out mimarinin hangisinin bu gereksinimlere daha düşük riskle uyduğu ölçülür. Böylece mimari seçim bir ürün karşılaştırması olmaktan çıkar ve gerçek hizmet tasarımına dönüşür.
+
+Mimari büyüme planı ayrıca “ne zaman yeni node gerekir?” sorusunu ölçülebilir hale getirmelidir. Kapasite doluluğu, controller CPU, front-end port kullanımı, back-end bandwidth ve latency eğilimi için eşikler tanımlanırsa genişleme reaktif değil planlı yapılabilir. Scale-out sistemlerde rebalance süresinin ve bu sıradaki performans etkisinin, scale-up sistemlerde ise yeni shelf veya media eklemenin failure domain ve bakım prosedürüne etkisinin önceden bilinmesi gerekir. Bu veriler yalnız operasyon ekibine değil finans planına da girdi sağlar; çünkü doğru büyüme noktası yanlış seçildiğinde ya gereksiz erken yatırım yapılır ya da üretim sistemi kapasite ve performans sınırına yaklaşır.
 
 ## [K13-02] NVMe mimarisi, namespace ve subsystem mantığı
 
@@ -48,6 +52,8 @@ Acceptance aşamasında host driver sürümü, operating system destek seviyesi,
 
 Golden sonuç şudur: NVMe bir teknoloji etiketi değil, host, queue, namespace, subsystem, transport ve management katmanlarından oluşan bir sistemdir. Doğru enterprise storage tasarımı bu katmanların her birini görünür hale getirir ve ayrı ayrı kabul eder.
 
+Namespace tasarımında kimlik, erişim ve yaşam döngüsü birlikte yönetilmelidir. Bir namespace oluşturulduğunda hangi host grubuna sunulacağı, hangi protection politikasını kullandığı, hangi performans sınıfına ait olduğu ve silme ya da yeniden boyutlandırma işlemlerinin hangi onay sürecinden geçeceği belirlenmelidir. Özellikle otomasyon kullanılan ortamlarda API üzerinden yapılan provisioning ile storage tarafındaki gerçek kapasite tüketimi düzenli olarak reconcile edilmelidir. Aksi halde logical provisioning hızlanırken fiziksel kapasite, endurance veya controller kaynakları görünmeden tükenebilir. Bu yüzden NVMe mimarisinin avantajı yalnız düşük gecikme değil, doğru yönetildiğinde daha tutarlı ve otomasyona uygun bir hizmet modeli sağlamasıdır.
+
 ## [K13-03] NVMe over Fabrics: TCP, RDMA ve Fibre Channel
 
 NVMe over Fabrics, NVMe command modelini yerel PCIe sınırının dışına çıkararak host ile merkezi storage arasında fabric üzerinden çalıştırır. En önemli avantajı, NVMe semantiğini korurken shared enterprise storage modeline ulaşabilmesidir. Ancak NVMe-oF tek bir transport değildir. TCP, RDMA ve Fibre Channel farklı operasyon modelleri, farklı altyapı bağımlılıkları ve farklı failure davranışları getirir.
@@ -65,6 +71,8 @@ Fabric redundancy de transport’tan bağımsız bir prensiptir. Kritik storage 
 Performance acceptance sırasında yalnız healthy-state throughput değil, tek fabric kaybı sırasında kalan path’lerin yükü de test edilmelidir. Normal durumda yüzde elli yükte çalışan iki fabric, biri kaybolduğunda kalan fabric’i yüzde yüz veya daha yüksek yükte çalıştırabilir. Bu nedenle degraded-state bandwidth headroom tasarımın parçasıdır.
 
 Sonuç olarak NVMe-oF seçiminde amaç en yeni transport’u kullanmak değildir. Amaç workload, network, operations ve lifecycle açısından en öngörülebilir hizmeti sağlamaktır. Doğru seçim, teknoloji markasından değil uçtan uca tasarım zincirinden çıkar.
+
+Transport seçiminde ayrıca troubleshooting yolu açıkça tasarlanmalıdır. TCP için packet loss, retransmission, congestion ve host CPU; RDMA için congestion-control, queue ve adapter telemetry; Fibre Channel için zoning, credit, port error ve fabric state görünürlüğü birlikte ele alınmalıdır. Operasyon ekibinin arıza anında hangi metriklere, hangi loglara ve hangi sorumluluk sınırlarına bakacağı önceden tanımlanırsa problem çözme süresi ciddi biçimde azalır. Böylece transport yalnız benchmark performansına göre değil, arıza izolasyonu ve sürdürülebilir operasyon kabiliyetiyle birlikte değerlendirilir. Enterprise tasarımda en iyi fabric, yalnız hızlı olan değil, hata anında davranışı açıklanabilen ve tekrar üretilebilen fabric’tir.
 
 ## [K13-04] Discovery, multipath, ANA ve host entegrasyonu
 
@@ -84,6 +92,8 @@ Virtualization ve container ortamlarında host entegrasyonu daha da karmaşıkla
 
 Golden yaklaşım host-to-data yolunu tek bir sistem olarak ele alır. Identity, discovery, authorization, multipath, path optimization, failover, failback ve support matrix birlikte kabul edilir. Böylece gerçek availability kablo sayısıyla değil, uygulamanın hata sırasında nasıl davrandığıyla ölçülür.
 
+Host entegrasyonunda configuration drift de ayrı bir risk olarak ele alınmalıdır. Aynı cluster içindeki sunucularda farklı driver sürümü, farklı multipath policy, farklı timeout değeri veya farklı firmware bulunması, yalnız belirli bir node’da görülen karmaşık arızalara yol açabilir. Bu nedenle kabul edilen host profile sürüm kontrollü hale getirilmeli ve değişiklikler otomasyon ya da configuration-management sistemiyle izlenmelidir. Path timeout ve retry değerleri de uygulama davranışıyla uyumlu olmalıdır; çok uzun timeout kesintiyi gizleyebilir, çok kısa timeout ise geçici network olaylarını uygulama hatasına çevirebilir. Golden host entegrasyonu, yalnız bağlantının kurulmasını değil, tüm node’larda aynı ve doğrulanmış davranışın sürdürülebilmesini hedefler.
+
 ## [K13-05] Performance: IOPS, throughput, latency ve degraded state
 
 Enterprise storage performansında en sık yapılan hata, tek bir büyük IOPS değerini performansın özeti olarak kabul etmektir. Oysa gerçek performans; block size, read/write mix, random veya sequential davranış, queue depth, host count, path count, dataset size, cache durumu ve data reduction gibi çok sayıda değişkenin sonucudur. Bu nedenle katalogdaki IOPS değeri doğrudan uygulama performansına çevrilemez.
@@ -101,6 +111,8 @@ Degraded-state testleri enterprise acceptance’ın temelidir. Bir controller ka
 Performance test raporunda her sonuçla birlikte block size, read/write mix, random/sequential oranı, queue depth, host count, path count, dataset size, data reduction state, cache state, failure veya rebuild durumu, test süresi, IOPS, throughput ve percentile latency yer almalıdır. Bu bilgiler yoksa sonuç procurement-grade evidence değildir.
 
 Golden sonuç şudur: performans sayısı tek başına kabul kriteri değildir. Doğru enterprise storage performansı, gerçek workload profilinde ve hata durumlarında sürdürülebilir, ölçülebilir ve tekrarlanabilir davranıştır.
+
+Ayrıca benchmark ile production gözlemi arasında kapalı bir doğrulama döngüsü kurulmalıdır. Kabul testinde kullanılan workload profili üretimde ölçülen I/O dağılımıyla düzenli olarak karşılaştırılırsa sistemin başlangıç varsayımlarından uzaklaşıp uzaklaşmadığı görülebilir. Kapasite artışı, yeni uygulama veya backup penceresi gibi değişiklikler latency ve queue davranışını değiştirebilir. Bu nedenle performance baseline tek seferlik bir test sonucu değil, yaşam döngüsü boyunca güncellenen bir referans olmalıdır. Trend analizi sayesinde controller, fabric veya media darboğazı kullanıcı şikâyeti oluşmadan önce tespit edilebilir ve expansion kararı kanıta dayalı olarak verilebilir.
 
 ## [K13-06] Protection, replication, security ve cyber resilience
 
@@ -120,6 +132,8 @@ Cyber resilience için ideal yaklaşım katmanlıdır. Primary storage üzerinde
 
 Golden sonuç, protection ve security’yi ayrı özellik listeleri değil aynı risk mimarisinin parçaları olarak ele almaktır. Verinin yalnız bugün erişilebilir olması değil, hata, saldırı ve operasyon hatası sonrasında güvenilir biçimde geri getirilebilir olması gerekir.
 
+Kurtarılabilirlik düzenli restore kanıtıyla desteklenmelidir. Snapshot’ın mevcut görünmesi, replication’ın “healthy” raporlanması veya backup job’ının başarılı bitmesi tek başına yeterli değildir. Belirli aralıklarla seçilmiş veri setleri için restore, application consistency ve erişim doğrulaması yapılmalıdır. Cyber recovery senaryosunda ayrıca temiz kimlik altyapısı, güvenilir DNS ve gerekli anahtarların erişilebilirliği test edilmelidir. Böylece protection tasarımı kopya üretmeye değil, ihtiyaç anında güvenilir hizmet geri getirmeye odaklanır. Bu yaklaşım RPO ve RTO değerlerini gerçek operasyon kanıtına bağlar ve yanlış güven duygusunu azaltır.
+
 ## [K13-07] Acceptance, lifecycle, TCO ve BoQ freeze
 
 Enterprise storage projesi ürün teslimiyle bitmez. Gerçek kabul, sistemin production lifecycle boyunca nasıl çalışacağının doğrulanmasıyla tamamlanır. Bu nedenle acceptance planı healthy-state performanstan çok daha geniş olmalıdır. Host path failure, switch failure, controller failure, drive failure, rebuild, firmware maintenance, replication interruption, capacity pressure ve security event senaryoları test edilmelidir.
@@ -137,3 +151,5 @@ TCO yalnız acquisition cost değildir. Support renewal, software subscription, 
 Formal acceptance matrix en az şu senaryoları kapsamalıdır: healthy workload SLO, tek host path kaybı, tek fabric kaybı, controller veya node kaybı, drive failure ve rebuild, firmware maintenance, path restoration, replication interruption ve recovery, capacity reserve sınırına yaklaşma, telemetry continuity, authentication behavior ve gerekli ise backup restore handoff.
 
 Son Golden kural şudur: Enterprise storage ancak host’tan veriye kadar tüm hizmet yolu sağlıklı, failed ve maintenance state’lerinde ölçülebilir, support edilebilir ve öngörülebilir davranıyorsa kabul edilir. NVMe-oF ise yalnız daha yeni olduğu için değil, transport, host stack, fabric, operations ve lifecycle birlikte gerçek hizmeti iyileştirdiğinde seçilmelidir.
+
+Freeze sonrasında değişiklik yönetimi de tasarımın bir parçası olmalıdır. Yeni firmware, yeni host sürümü, ek fabric switch’i, kapasite genişlemesi veya yeni replication hedefi üretim mimarisini fiilen değiştirir. Bu nedenle kritik değişiklikler support matrix, risk analizi, rollback planı ve gerektiğinde tekrar acceptance testiyle ilerlemelidir. BoQ freeze bir kez yazılıp unutulan belge değil, onaylanmış baseline’dır. Yaşam döngüsü boyunca yapılan değişiklikler bu baseline’a göre izlenirse teknik borç, lisans sürprizi ve compatibility riski azaltılır. Böylece storage yatırımı yalnız satın alma anında değil, tüm kullanım süresi boyunca yönetilebilir ve denetlenebilir kalır.
