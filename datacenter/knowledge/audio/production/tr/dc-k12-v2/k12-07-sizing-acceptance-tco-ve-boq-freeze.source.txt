@@ -1,0 +1,27 @@
+Storage tasarımının son adımı ürün seçmek değil, gereksinimleri ölçülebilir bir acceptance ve procurement modeline dönüştürmektir. İyi bir BoQ yalnız drives ve controllers listesi değildir. Workload, capacity, performance, resilience, protocol, security, lifecycle ve support assumptions aynı teknik kontrat içinde görünür olmalıdır.
+
+İlk adım workload inventory'dir. Her workload için dataset size, annual growth, access model, block size veya object/file profile, read-write ratio, random-sequential mix, concurrency, IOPS, throughput, percentile latency, retention, RPO ve RTO kaydedilir. Bu bilgiler yoksa storage sizing tahmindir.
+
+İkinci adım access semantics seçimidir. Application block mu, shared file mı, object mı istiyor? Birden fazla service gerekiyorsa her biri ayrı workload profile ile değerlendirilir. Var olan bir ürüne uydurmak için application'ı yanlış semantiğe zorlamak uzun vadede daha pahalı olabilir.
+
+Üçüncü adım capacity waterfall'dır. Raw capacity'den protection overhead, metadata ve system reserve düşülür. Ardından spare veya rebuild reserve, maintenance reserve ve growth reserve ayrılır. Data reduction ayrı bir measured assumption olarak eklenir. Procurement'ın ana kapasite hedefi resilient usable capacity olmalıdır.
+
+Dördüncü adım performance modelidir. IOPS ve throughput aynı anda, belirlenmiş block size, mix ve latency percentile hedefiyle yazılır. Test duration sustained state'i gösterecek kadar uzun olmalıdır. Healthy-state yanında drive failure, path failure, controller/node failure, rebuild ve maintenance senaryoları eklenir.
+
+Beşinci adım failure-domain map'tir. Host'tan media'ya kadar HBA veya NIC, switch/fabric, controller/node, enclosure, rack, power ve site dependencies çizilir. Dual component'lerin gerçekten bağımsız olup olmadığı burada görülür. Protection policy bu topology ile eşleştirilir.
+
+Altıncı adım data protection ladder'dır. Device protection, snapshot, backup, replication, DR ve cyber recovery ayrı katmanlar olarak yazılır. Her katmanın hangi failure scenario'ya karşı koruma sağladığı ve hangi RPO/RTO hedefini desteklediği belirtilir. Restore test planı olmayan backup kabul edilmemelidir.
+
+Yedinci adım protocol ve fabric BoQ'sudur. Controller/node ports, host HBAs veya NICs, switch ports, optics, DAC/AOC veya fiber cabling, licenses, multipath software ve security requirements birlikte hesaplanır. Storage box fiyatına bakıp fabric'i sonradan eklemek TCO'yu bozar.
+
+Sekizinci adım lifecycle'dır. Support period, firmware compatibility, expansion increments, mixed-generation support, spare strategy, upgrade methodology ve end-of-life assumptions yazılır. Vendor maximum values design target olarak kullanılmaz; recommended operating range ve failure reserve esas alınır.
+
+Dokuzuncu adım acceptance test matrix'tir. Capacity acceptance, performance acceptance, failure acceptance, maintenance acceptance, protection/restore acceptance, security acceptance ve operations acceptance ayrı PASS kriterleri alır. Bir platform yalnız benchmark'ta hızlı olduğu için Golden kabul edilmez.
+
+Onuncu adım TCO ve BoQ freeze'dir. Hardware yanında protocol/data-service licenses, capacity licenses, support, implementation, migration, rack power, cooling impact, network fabric, backup integration ve expected expansion costs dahil edilir. Assumptions açıkça yazılır; özellikle data reduction veya future growth gibi belirsiz değerler sensitivity analysis ile gösterilir.
+
+Workload-to-storage kararında vendor en sona gelir. Önce service contract oluşturulur, sonra uygun architectures shortlist edilir, ardından vendors bu contract'a göre karşılaştırılır. Böylece procurement feature yarışından çıkar ve measurable engineering decision haline gelir.
+
+SpecBridge'in DC-K12 Golden kuralı şu zincirdir: workload ve data model; block, file veya object semantics; capacity layers; IOPS, throughput ve percentile latency; media; protocol ve transport; failure domains; RAID, replication veya erasure coding; snapshot, backup ve DR; security ve data services; degraded-state test; lifecycle; TCO ve son olarak BoQ freeze.
+
+Bu chapter'ın ve bütün modülün sonucu nettir: doğru storage sistemi en yüksek kapasiteyi veya en yüksek benchmark sayısını veren ürün değildir. Workload'un veri semantiğini doğru taşıyan, arıza ve bakım sırasında ölçülebilir service seviyesini koruyan, geri kazanımı kanıtlanmış ve lifecycle boyunca ekonomik olarak yönetilebilir olan mimaridir.

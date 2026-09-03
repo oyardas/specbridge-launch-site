@@ -1,0 +1,23 @@
+Storage'ın uygulamaya nasıl sunulduğu, fiziksel media kadar önemlidir. Aynı SSD pool'u block volume, file share veya object namespace olarak sunulabilir. Ancak access semantics, locking, metadata, security ve recovery behavior farklıdır. Bu chapter'da block, file ve object modellerini network protocol ve transport katmanlarından ayırarak ele alacağız.
+
+Block storage modelinde host bir logical block device görür. Host üzerindeki file system, volume manager veya database bu block device'ın nasıl kullanılacağını belirler. Shared block erişim gerekiyorsa coordination ayrıca çözülmelidir. Birden fazla host aynı block volume'a yazacaksa cluster-aware file system veya application-level coordination olmadan data corruption riski oluşabilir.
+
+iSCSI, SCSI command operations'ını IP network üzerinden taşıyan standardize bir protokoldür. Tasarımda yalnız target IP adresi yetmez. Initiator ve target identity, session davranışı, authentication, network isolation, MTU, multipathing, switch redundancy ve congestion özellikleri değerlendirilmelidir. İki iSCSI path'in aynı physical switch veya power domain'e gitmesi gerçek independent fabric değildir.
+
+Fibre Channel ise purpose-built switched fabric yaklaşımıyla block storage taşır. Host bus adapter, switch fabric ve storage target arasında zoning, name services ve multipath behavior bulunur. FC'nin yüksek olgunluğu engineering disiplinini ortadan kaldırmaz; dual fabric tasarımında gerçekten bağımsız switches, power, optics ve paths olması gerekir.
+
+NVMe over Fabrics modern NVMe command semantics'ini network üzerinden taşır. NVMe/TCP standart TCP network altyapısını kullanabilir. NVMe/RDMA ise RDMA transport üzerinden daha düşük software overhead hedefler. Ancak RDMA-capable NIC satın almak, kayıpsız veya doğru tasarlanmış bir RDMA fabric elde edildiği anlamına gelmez. Network design, congestion control, QoS ve end-to-end validation gerekir.
+
+File storage tarafında NFS ve SMB gibi protokoller öne çıkar. NFSv4.1 stateful behavior, sessions, locking ve namespace özellikleri içerir. NFS share tasarımı yalnız mount path ve throughput sayısından ibaret değildir. Metadata workload, file count, locking patterns, failover behavior, client versions ve security policy performansı etkiler.
+
+SMB de network file service sunar ancak dialect negotiation, authentication, signing, encryption, locking ve Windows-oriented enterprise integrations gibi kendi davranışları vardır. “NAS support” ifadesi tek başına NFS ve SMB gereksinimlerini tarif etmez. Hangi protocol, hangi dialect/version, hangi security ve availability behavior gerektiği açıkça yazılmalıdır.
+
+Object storage farklı bir application modelidir. Data object olarak key veya identifier ile tutulur ve metadata ile birlikte yönetilir. Object API üzerinden erişim, traditional file system'in arbitrary offset write veya POSIX namespace davranışıyla aynı değildir. S3-compatible ifadesi piyasada önemli bir de-facto interoperability beklentisidir ancak compatibility scope'unun hangi API operations ve features için geçerli olduğu test edilmelidir. Vendor-neutral standart referansı gerektiğinde CDMI gibi standardize data-management interfaces ayrıca incelenebilir.
+
+Multipathing tüm bu networked storage modellerinde farklı şekillerde karşımıza çıkar. Host'un iki NIC veya HBA üzerinden target'a erişmesi path redundancy sağlar. Fakat storage controller, fabric, enclosure ve power dependency de ayrıca incelenmelidir. Multipath software bir path arızasında I/O'yu diğer path'e çevirebilir, fakat application HA sağlamaz ve site failure'ını çözmez.
+
+Protocol seçimi workload ve operational model ile ilişkilidir. Database için block storage doğal olabilir. Shared engineering files için file service daha uygun olabilir. Large-scale archive veya analytics dataset için object model avantajlı olabilir. Kubernetes persistent volumes çoğunlukla CSI üzerinden farklı block veya file backends'e bağlanabilir. Tek platformun bütün protokolleri desteklemesi, her protokolde aynı scale veya performance verdiği anlamına gelmez.
+
+SpecBridge BoQ yaklaşımında storage erişimi beş ayrı satırda düşünülmelidir: application semantic modeli; storage protocol; network transport; physical interface ve speed; redundancy ve security policy. Bu ayrım yapıldığında “NAS”, “SAN” veya “NVMe” gibi geniş etiketlerin arkasındaki belirsizlik ortadan kalkar.
+
+Bu chapter'ın sonucu nettir: protocol bir ürün etiketi değildir. Uygulama semantiği ile network transport arasındaki kontrattır ve availability, security ve performance acceptance'ı kendi başına gerektirir.

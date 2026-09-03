@@ -1,0 +1,23 @@
+Storage tasarımında en sık yapılan kavramsal hatalardan biri media, interface, command model ve transport kavramlarını aynı şeymiş gibi konuşmaktır. HDD ve SSD media sınıflarıdır. SATA ve SAS farklı interface ve transport ekosistemleridir. SCSI bir komut ve mimari ailesidir. NVMe ise non-volatile memory için tasarlanmış modern bir komut ve protokol ailesidir. Bu kavramları ayırmadan yapılan BoQ, teknik olarak belirsiz kalır.
+
+HDD mekanik bir aygıttır. Platter, head movement ve rotational latency nedeniyle küçük random I/O davranışı büyük sequential transferden farklıdır. Yüksek kapasite ve ekonomik terabayt maliyeti hâlâ önemli avantajlardır. Ancak yüksek yoğunluklu HDD sistemlerinde rebuild süresi ve degraded-state exposure kritik hale gelir. Büyük drive kapasitesi tek başına daha iyi storage anlamına gelmez; bir drive kaybından sonra veriyi ne kadar sürede ve hangi performans etkisiyle yeniden korumalı duruma getirebildiğiniz de önemlidir.
+
+SSD mekanik seek'i ortadan kaldırır ama kendi fizik kurallarını getirir. NAND flash erase-before-write davranışı, garbage collection, wear leveling, over-provisioning ve write amplification gibi mekanizmalar sustained performance ve endurance üzerinde etkilidir. Kısa süreli benchmark burst'leri bu davranışların tamamını göstermeyebilir. Özellikle write-heavy database veya log workload'larında sustained-state latency ve endurance sınıfı test edilmelidir.
+
+SSD endurance konusu kapasiteden bağımsız değerlendirilmelidir. Aynı kapasitedeki iki SSD farklı write endurance sınıflarına sahip olabilir. Drive writes per day, total bytes written, warranty şartları ve actual write amplification birlikte düşünülmelidir. Yoğun yazma workload'una düşük endurance sınıfı seçmek, sistem performansı iyi olsa bile lifecycle riskine yol açabilir.
+
+Power-loss protection da kritik bir ayrımdır. Uygulama write işleminin tamamlandığını düşündüğünde veri gerçekten persistent media üzerinde güvenli mi, yoksa volatile cache içinde mi? Controller cache, device cache ve SSD üzerindeki koruma zinciri birlikte doğrulanmalıdır. Bir write acknowledgement yalnız en zayıf persistent katman kadar güvenilirdir.
+
+SATA ekosistemi uzun yıllardır HDD ve SSD bağlantısında kullanılır. Interface generation ve nominal link rate, application throughput garantisi değildir. Storage path içinde controller, queue davranışı, media, protocol overhead ve workload pattern bulunur. Bu yüzden bağlantı hızını doğrudan application performansına çevirmek hatalıdır.
+
+SAS, kurumsal storage dünyasında geniş kullanılan serial transport ailesidir ve SCSI command ecosystem'i ile ilişkilidir. Fakat SCSI yalnız SAS kablosu anlamına gelmez. SCSI architecture ve command sets farklı transportlar üzerinden taşınabilir. iSCSI bunun açık örneğidir; SCSI komutları IP ve TCP tabanlı network üzerinden taşınır. Bu nedenle bir teknik şartnamede SCSI, SAS ve iSCSI ayrı kavramlar olarak yazılmalıdır.
+
+NVMe, non-volatile memory için düşük overhead ve yüksek paralellik hedefleyen modern bir specification family'dir. NVMe'yi yalnız local PCIe SSD ile eşitlemek doğru değildir. NVMe over Fabrics yaklaşımında aynı command semantics farklı transportlar üzerinden network'e taşınabilir. PCIe, RDMA ve TCP transport seçenekleri güncel NVMe specification ailesinin ayrı parçalarıdır. NVMe/TCP TCP tabanlı network üzerinden çalışırken NVMe/RDMA RDMA transport kullanır.
+
+Buradaki önemli nokta, NVMe etiketi gördüğümüzde otomatik olarak düşük latency garantisi varsaymamaktır. Host CPU, PCIe topology, NUMA locality, driver stack, network transport, controller architecture, media behavior ve queue settings gerçek sonucu belirler. Aynı NVMe drive farklı sistemlerde çok farklı tail latency gösterebilir.
+
+Zoned storage gibi yeni yaklaşımlar da media ile software arasında daha açık bir işbirliği gerektirir. Host, write placement davranışını belirli zone kurallarına göre yönetebilir. Bu, uygun workload ve software stack için verimlilik sağlayabilir ama her uygulama için transparent replacement değildir.
+
+SpecBridge açısından doğru hardware tanımı şu disipline uyar: media tipi ve endurance, command/protocol modeli, physical veya network transport, logical presentation ve failure-domain placement ayrı alanlarda belirtilir. Böylece “all-flash”, “NVMe storage” veya “SAS disk” gibi tek kelimelik ifadeler yerine gerçek engineering contract oluşur.
+
+Bu chapter'ın sonucu şudur: hızlı storage seçmek, yalnız hızlı drive seçmek değildir. Media, interface, protocol, persistence ve host path birlikte değerlendirildiğinde gerçek service behavior ortaya çıkar.

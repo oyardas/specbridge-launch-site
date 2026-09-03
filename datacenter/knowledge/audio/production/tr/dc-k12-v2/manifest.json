@@ -1,0 +1,323 @@
+{
+  "version": "DC_K12_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2500.512,
+  "source_qa": {
+    "version": "DC_K12_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 4505,
+    "chapters": [
+      {
+        "id": "K12-00",
+        "title": "Storage gerçekte ne sağlar?",
+        "source_words": 549,
+        "final_char": "."
+      },
+      {
+        "id": "K12-01",
+        "title": "HDD, SSD, SATA, SAS, SCSI ve NVMe",
+        "source_words": 591,
+        "final_char": "."
+      },
+      {
+        "id": "K12-02",
+        "title": "Block, file, object ve network storage protocols",
+        "source_words": 583,
+        "final_char": "."
+      },
+      {
+        "id": "K12-03",
+        "title": "Capacity: raw, usable, resilient usable ve effective",
+        "source_words": 589,
+        "final_char": "."
+      },
+      {
+        "id": "K12-04",
+        "title": "RAID, replication, erasure coding ve failure domains",
+        "source_words": 559,
+        "final_char": "."
+      },
+      {
+        "id": "K12-05",
+        "title": "IOPS, throughput, latency ve benchmark gerçekliği",
+        "source_words": 541,
+        "final_char": "."
+      },
+      {
+        "id": "K12-06",
+        "title": "Data services, security, lifecycle ve operations",
+        "source_words": 524,
+        "final_char": "."
+      },
+      {
+        "id": "K12-07",
+        "title": "Sizing, acceptance, TCO ve BoQ freeze",
+        "source_words": 569,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K12-03"
+  ],
+  "chapters": [
+    {
+      "id": "K12-00",
+      "title": "Storage gerçekte ne sağlar?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-00-storage-gercekte-ne-saglar.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-00-storage-gercekte-ne-saglar.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-00-storage-gercekte-ne-saglar.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 289.776,
+          "bytes": 4636416,
+          "source_words": 549,
+          "transcript_words": 543,
+          "word_count_ratio": 0.9891,
+          "transcript_similarity": 0.9414,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 289.776,
+      "bytes": 4636416,
+      "source_words": 549,
+      "transcript_words": 543,
+      "word_count_ratio": 0.9891,
+      "transcript_similarity": 0.9414,
+      "tail_score": 1.0,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K12-01",
+      "title": "HDD, SSD, SATA, SAS, SCSI ve NVMe",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-01-hdd-ssd-sata-sas-scsi-ve-nvme.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-01-hdd-ssd-sata-sas-scsi-ve-nvme.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-01-hdd-ssd-sata-sas-scsi-ve-nvme.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 330.216,
+          "bytes": 5283456,
+          "source_words": 591,
+          "transcript_words": 589,
+          "word_count_ratio": 0.9966,
+          "transcript_similarity": 0.9322,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 330.216,
+      "bytes": 5283456,
+      "source_words": 591,
+      "transcript_words": 589,
+      "word_count_ratio": 0.9966,
+      "transcript_similarity": 0.9322,
+      "tail_score": 1.0,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K12-02",
+      "title": "Block, file, object ve network storage protocols",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-02-block-file-object-ve-network-storage-protocols.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-02-block-file-object-ve-network-storage-protocols.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-02-block-file-object-ve-network-storage-protocols.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 322.032,
+          "bytes": 5152512,
+          "source_words": 583,
+          "transcript_words": 582,
+          "word_count_ratio": 0.9983,
+          "transcript_similarity": 0.9579,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 322.032,
+      "bytes": 5152512,
+      "source_words": 583,
+      "transcript_words": 582,
+      "word_count_ratio": 0.9983,
+      "transcript_similarity": 0.9579,
+      "tail_score": 0.875,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K12-03",
+      "title": "Capacity: raw, usable, resilient usable ve effective",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-03-capacity-raw-usable-resilient-usable-ve-effective.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-03-capacity-raw-usable-resilient-usable-ve-effective.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-03-capacity-raw-usable-resilient-usable-ve-effective.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 320.688,
+          "bytes": 5131008,
+          "source_words": 589,
+          "transcript_words": 579,
+          "word_count_ratio": 0.983,
+          "transcript_similarity": 0.9041,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 320.688,
+      "bytes": 5131008,
+      "source_words": 589,
+      "transcript_words": 579,
+      "word_count_ratio": 0.983,
+      "transcript_similarity": 0.9041,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K12-04",
+      "title": "RAID, replication, erasure coding ve failure domains",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-04-raid-replication-erasure-coding-ve-failure-domains.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-04-raid-replication-erasure-coding-ve-failure-domains.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-04-raid-replication-erasure-coding-ve-failure-domains.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 312.552,
+          "bytes": 5000832,
+          "source_words": 559,
+          "transcript_words": 555,
+          "word_count_ratio": 0.9928,
+          "transcript_similarity": 0.9066,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 312.552,
+      "bytes": 5000832,
+      "source_words": 559,
+      "transcript_words": 555,
+      "word_count_ratio": 0.9928,
+      "transcript_similarity": 0.9066,
+      "tail_score": 1.0,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K12-05",
+      "title": "IOPS, throughput, latency ve benchmark gerçekliği",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-05-iops-throughput-latency-ve-benchmark-gercekligi.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-05-iops-throughput-latency-ve-benchmark-gercekligi.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-05-iops-throughput-latency-ve-benchmark-gercekligi.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 318.816,
+          "bytes": 5101056,
+          "source_words": 541,
+          "transcript_words": 539,
+          "word_count_ratio": 0.9963,
+          "transcript_similarity": 0.9167,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 318.816,
+      "bytes": 5101056,
+      "source_words": 541,
+      "transcript_words": 539,
+      "word_count_ratio": 0.9963,
+      "transcript_similarity": 0.9167,
+      "tail_score": 1.0,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K12-06",
+      "title": "Data services, security, lifecycle ve operations",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-06-data-services-security-lifecycle-ve-operations.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-06-data-services-security-lifecycle-ve-operations.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-06-data-services-security-lifecycle-ve-operations.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 297.288,
+          "bytes": 4756608,
+          "source_words": 524,
+          "transcript_words": 526,
+          "word_count_ratio": 1.0038,
+          "transcript_similarity": 0.9352,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 297.288,
+      "bytes": 4756608,
+      "source_words": 524,
+      "transcript_words": 526,
+      "word_count_ratio": 1.0038,
+      "transcript_similarity": 0.9352,
+      "tail_score": 1.0,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    },
+    {
+      "id": "K12-07",
+      "title": "Sizing, acceptance, TCO ve BoQ freeze",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-07-sizing-acceptance-tco-ve-boq-freeze.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-07-sizing-acceptance-tco-ve-boq-freeze.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k12-v2/k12-07-sizing-acceptance-tco-ve-boq-freeze.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 309.144,
+          "bytes": 4946304,
+          "source_words": 569,
+          "transcript_words": 568,
+          "word_count_ratio": 0.9982,
+          "transcript_similarity": 0.927,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 309.144,
+      "bytes": 4946304,
+      "source_words": 569,
+      "transcript_words": 568,
+      "word_count_ratio": 0.9982,
+      "transcript_similarity": 0.927,
+      "tail_score": 0.875,
+      "accepted": true,
+      "preserved_from_prior_artifact": true
+    }
+  ]
+}

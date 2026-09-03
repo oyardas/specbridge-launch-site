@@ -1,0 +1,25 @@
+Storage performansı genellikle tek bir headline sayı ile pazarlanır: milyon IOPS, yüz gigabayt saniye throughput veya mikro saniye latency. Bu değerler laboratuvar koşullarında anlamlı olabilir ama application sizing için bağlam olmadan kullanılamaz. IOPS, throughput ve latency birbirine bağlı fakat farklı metriklerdir.
+
+IOPS saniyedeki I/O operation sayısını ifade eder. Ancak bir operation'ın dört kilobayt mı yoksa bir megabayt mı olduğu sonucu tamamen değiştirir. Dört kilobayt random reads ile bir megabayt sequential reads aynı IOPS değerinde çok farklı bandwidth tüketir. Bu nedenle her IOPS hedefi block size ile birlikte yazılmalıdır.
+
+Throughput belirli sürede taşınan data miktarıdır. Large sequential backup, media veya analytics workloads throughput'a daha duyarlı olabilir. Küçük transactional database I/O ise düşük latency ve yüksek IOPS isteyebilir. Interface line rate throughput için üst sınırların yalnız bir parçasıdır; protocol overhead, controller path, media ve workload behavior gerçek application throughput'u belirler.
+
+Latency, I/O request ile completion arasındaki süredir. Average latency tek başına yetersizdir çünkü kritik application experience çoğu zaman tail events tarafından belirlenir. P95, P99 veya daha yüksek percentile değerleri, sistemin kötü anlarda nasıl davrandığını gösterir. Özellikle distributed database ve VM workloads'ta az sayıdaki yüksek latency event bütün transaction chain'i etkileyebilir.
+
+Read-write ratio da temel parametredir. Reads cache'den servis edilebilirken writes protection, parity, replication veya destage işlemlerini tetikleyebilir. Write-heavy workload için sustained behavior mutlaka test edilmelidir. Kısa benchmark, write cache dolmadan bitebilir ve gerçek steady-state'i hiç göstermeyebilir.
+
+Random ve sequential mix de önemlidir. HDD sistemleri random seek'ten güçlü biçimde etkilenir. SSD'ler random behavior'da çok daha güçlüdür ama garbage collection ve flash translation layer davranışları sustained write sırasında ortaya çıkabilir. Storage platformunun background tasks'i de workload ile aynı resources'u paylaşabilir.
+
+Queue depth benchmark sonuçlarını dramatik biçimde etkileyebilir. Çok yüksek queue depth ile device daha fazla paralellik kullanarak yüksek IOPS üretebilir, fakat latency de yükselebilir. Application düşük concurrency ile çalışıyorsa vendor benchmark'ındaki yüksek queue depth sonucuna ulaşamayabilir. Bu nedenle test profile production concurrency'yi temsil etmelidir.
+
+Cache state en önemli benchmark tuzaklarından biridir. Dataset controller veya host memory'ye sığıyorsa test storage media yerine RAM performansını ölçebilir. Cold-cache, warm-cache ve sustained-state conditions açıkça tanımlanmalıdır. Dataset active cache'ten daha büyük seçilmeli veya test amacı buna göre belirtilmelidir.
+
+Healthy-state benchmark da tek başına yeterli değildir. Bir drive failed olduğunda parity reconstruction, replica healing veya erasure-code recovery başlayabilir. Controller failover cache ownership'i değiştirebilir. Node maintenance sırasında traffic başka paths'e taşınabilir. Kritik SLA bu degraded states içinde de ölçülmelidir.
+
+Networked storage'da bottleneck storage box'ın dışında olabilir. NIC veya HBA queue, PCIe lanes, NUMA placement, switch buffers, packet loss, congestion, MTU inconsistency ve oversubscription latency'yi artırabilir. “Array yeterince hızlı” demek application path'in yeterli olduğu anlamına gelmez.
+
+Reproducible acceptance için test dokümanı tool ve version, dataset size, block size, read-write ratio, random-sequential mix, threads/jobs, queue depth, duration, warm-up, cache state, compression/dedupe characteristics ve system health state'i kaydetmelidir. Aynı profile tekrarlandığında benzer sonuç alınabilmelidir.
+
+SpecBridge performans acceptance'ında üç eksen birlikte değerlendirilir: minimum required throughput veya IOPS; maximum percentile latency; ve bu sınırların healthy, failure, rebuild ve maintenance states içinde korunması. Böylece yalnız en yüksek benchmark değil, application'a sunulan stabil service değerlendirilir.
+
+Bu chapter'ın sonucu şudur: Storage performansı bir yarış arabasının maksimum hızı gibi tek sayı değildir. Doğru performans kontratı workload profile, latency distribution ve degraded-state davranışını birlikte ölçer.
