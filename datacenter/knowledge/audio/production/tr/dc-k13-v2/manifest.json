@@ -1,0 +1,323 @@
+{
+  "version": "DC_K13_GOLDEN_AUDIO_V2",
+  "voice": {
+    "id": "S3F",
+    "name": "Sage Senior Adviser — Production",
+    "voice": "sage",
+    "speed": 1.04,
+    "instructions": "Speak in Turkish as a seasoned technical adviser presenting a high-value infrastructure investment to a board-level investor. Authoritative without sounding stern, mature without sounding slow. Natural human phrasing, restrained warmth and clear reasoning. Keep forward momentum and use only brief, meaningful pauses. Avoid metallic or robotic rhythm, exaggerated documentary delivery, advertising tone and podcast casualness. Target roughly 132 to 136 words per minute. Technical English terminology should be crisp but integrated naturally into Turkish speech."
+  },
+  "chapter_count": 8,
+  "accepted_count": 8,
+  "failed_count": 0,
+  "total_duration_seconds": 2209.656,
+  "source_qa": {
+    "version": "DC_K13_NARRATION_SOURCE_QA_V2",
+    "chapter_count": 8,
+    "total_source_words": 3884,
+    "chapters": [
+      {
+        "id": "K13-00",
+        "title": "Enterprise storage gerçekte ne sağlar?",
+        "source_words": 476,
+        "final_char": "."
+      },
+      {
+        "id": "K13-01",
+        "title": "Scale-up, scale-out ve controller mimarileri",
+        "source_words": 521,
+        "final_char": "."
+      },
+      {
+        "id": "K13-02",
+        "title": "NVMe mimarisi, namespace ve subsystem mantığı",
+        "source_words": 505,
+        "final_char": "."
+      },
+      {
+        "id": "K13-03",
+        "title": "NVMe over Fabrics: TCP, RDMA ve Fibre Channel",
+        "source_words": 507,
+        "final_char": "."
+      },
+      {
+        "id": "K13-04",
+        "title": "Discovery, multipath, ANA ve host entegrasyonu",
+        "source_words": 474,
+        "final_char": "."
+      },
+      {
+        "id": "K13-05",
+        "title": "Performance: IOPS, throughput, latency ve degraded state",
+        "source_words": 466,
+        "final_char": "."
+      },
+      {
+        "id": "K13-06",
+        "title": "Protection, replication, security ve cyber resilience",
+        "source_words": 461,
+        "final_char": "."
+      },
+      {
+        "id": "K13-07",
+        "title": "Acceptance, lifecycle, TCO ve BoQ freeze",
+        "source_words": 474,
+        "final_char": "."
+      }
+    ],
+    "errors": [],
+    "accepted": true
+  },
+  "regenerated_chapters": [
+    "K13-00",
+    "K13-01",
+    "K13-02",
+    "K13-03",
+    "K13-04",
+    "K13-05",
+    "K13-06",
+    "K13-07"
+  ],
+  "chapters": [
+    {
+      "id": "K13-00",
+      "title": "Enterprise storage gerçekte ne sağlar?",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-00-enterprise-storage-gercekte-ne-saglar.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-00-enterprise-storage-gercekte-ne-saglar.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-00-enterprise-storage-gercekte-ne-saglar.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 258.048,
+          "bytes": 4128768,
+          "source_words": 476,
+          "transcript_words": 474,
+          "word_count_ratio": 0.9958,
+          "transcript_similarity": 0.9621,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 258.048,
+      "bytes": 4128768,
+      "source_words": 476,
+      "transcript_words": 474,
+      "word_count_ratio": 0.9958,
+      "transcript_similarity": 0.9621,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K13-01",
+      "title": "Scale-up, scale-out ve controller mimarileri",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-01-scale-up-scale-out-ve-controller-mimarileri.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-01-scale-up-scale-out-ve-controller-mimarileri.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-01-scale-up-scale-out-ve-controller-mimarileri.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 288.384,
+          "bytes": 4614144,
+          "source_words": 521,
+          "transcript_words": 518,
+          "word_count_ratio": 0.9942,
+          "transcript_similarity": 0.9548,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 288.384,
+      "bytes": 4614144,
+      "source_words": 521,
+      "transcript_words": 518,
+      "word_count_ratio": 0.9942,
+      "transcript_similarity": 0.9548,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K13-02",
+      "title": "NVMe mimarisi, namespace ve subsystem mantığı",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-02-nvme-mimarisi-namespace-ve-subsystem-mantigi.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-02-nvme-mimarisi-namespace-ve-subsystem-mantigi.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-02-nvme-mimarisi-namespace-ve-subsystem-mantigi.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 293.28,
+          "bytes": 4692480,
+          "source_words": 505,
+          "transcript_words": 505,
+          "word_count_ratio": 1.0,
+          "transcript_similarity": 0.9465,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 293.28,
+      "bytes": 4692480,
+      "source_words": 505,
+      "transcript_words": 505,
+      "word_count_ratio": 1.0,
+      "transcript_similarity": 0.9465,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K13-03",
+      "title": "NVMe over Fabrics: TCP, RDMA ve Fibre Channel",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-03-nvme-over-fabrics-tcp-rdma-ve-fibre-channel.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-03-nvme-over-fabrics-tcp-rdma-ve-fibre-channel.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-03-nvme-over-fabrics-tcp-rdma-ve-fibre-channel.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 298.656,
+          "bytes": 4778496,
+          "source_words": 507,
+          "transcript_words": 506,
+          "word_count_ratio": 0.998,
+          "transcript_similarity": 0.9654,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 298.656,
+      "bytes": 4778496,
+      "source_words": 507,
+      "transcript_words": 506,
+      "word_count_ratio": 0.998,
+      "transcript_similarity": 0.9654,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K13-04",
+      "title": "Discovery, multipath, ANA ve host entegrasyonu",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-04-discovery-multipath-ana-ve-host-entegrasyonu.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-04-discovery-multipath-ana-ve-host-entegrasyonu.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-04-discovery-multipath-ana-ve-host-entegrasyonu.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 263.808,
+          "bytes": 4220928,
+          "source_words": 474,
+          "transcript_words": 473,
+          "word_count_ratio": 0.9979,
+          "transcript_similarity": 0.963,
+          "tail_score": 0.875,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 263.808,
+      "bytes": 4220928,
+      "source_words": 474,
+      "transcript_words": 473,
+      "word_count_ratio": 0.9979,
+      "transcript_similarity": 0.963,
+      "tail_score": 0.875,
+      "accepted": true
+    },
+    {
+      "id": "K13-05",
+      "title": "Performance: IOPS, throughput, latency ve degraded state",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-05-performance-iops-throughput-latency-ve-degraded-state.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-05-performance-iops-throughput-latency-ve-degraded-state.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-05-performance-iops-throughput-latency-ve-degraded-state.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 269.04,
+          "bytes": 4304640,
+          "source_words": 466,
+          "transcript_words": 462,
+          "word_count_ratio": 0.9914,
+          "transcript_similarity": 0.9375,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 269.04,
+      "bytes": 4304640,
+      "source_words": 466,
+      "transcript_words": 462,
+      "word_count_ratio": 0.9914,
+      "transcript_similarity": 0.9375,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K13-06",
+      "title": "Protection, replication, security ve cyber resilience",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-06-protection-replication-security-ve-cyber-resilience.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-06-protection-replication-security-ve-cyber-resilience.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-06-protection-replication-security-ve-cyber-resilience.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 274.872,
+          "bytes": 4397952,
+          "source_words": 461,
+          "transcript_words": 462,
+          "word_count_ratio": 1.0022,
+          "transcript_similarity": 0.9599,
+          "tail_score": 1.0,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 274.872,
+      "bytes": 4397952,
+      "source_words": 461,
+      "transcript_words": 462,
+      "word_count_ratio": 1.0022,
+      "transcript_similarity": 0.9599,
+      "tail_score": 1.0,
+      "accepted": true
+    },
+    {
+      "id": "K13-07",
+      "title": "Acceptance, lifecycle, TCO ve BoQ freeze",
+      "audio": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-07-acceptance-lifecycle-tco-ve-boq-freeze.mp3",
+      "source": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-07-acceptance-lifecycle-tco-ve-boq-freeze.source.txt",
+      "transcript": "datacenter/knowledge/audio/production/tr/dc-k13-v2/k13-07-acceptance-lifecycle-tco-ve-boq-freeze.transcript.txt",
+      "attempts": [
+        {
+          "attempt": 1,
+          "duration_seconds": 263.568,
+          "bytes": 4217088,
+          "source_words": 474,
+          "transcript_words": 467,
+          "word_count_ratio": 0.9852,
+          "transcript_similarity": 0.9501,
+          "tail_score": 0.625,
+          "accepted": true
+        }
+      ],
+      "automatic_acceptance": true,
+      "attempt": 1,
+      "duration_seconds": 263.568,
+      "bytes": 4217088,
+      "source_words": 474,
+      "transcript_words": 467,
+      "word_count_ratio": 0.9852,
+      "transcript_similarity": 0.9501,
+      "tail_score": 0.625,
+      "accepted": true
+    }
+  ]
+}
